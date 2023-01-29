@@ -22,7 +22,7 @@ item.tool/nickel/nickel_war_hammer.name=镍战锤
 
 item.door/nickel.name=镍门
 item.chain/nickel.name=镍锁链
-item.coin/nickel=镍币
+item.coin/nickel.name=镍币
 item.arrows/nickel_arrow.name=镍箭
 
 tile.ore/nickel_ore.name=镍矿

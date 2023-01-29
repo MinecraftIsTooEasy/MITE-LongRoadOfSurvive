@@ -13,7 +13,7 @@ public class BiomeTaigaMixin extends BiomeBase {
     protected BiomeTaigaMixin(int par1) {
         super(par1);
     }
-    @Overwrite
+
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
         super.decorate(par1World, par2Random, par3, par4);
         int var5 = 3 + par2Random.nextInt(6);
