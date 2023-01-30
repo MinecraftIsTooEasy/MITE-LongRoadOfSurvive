@@ -146,7 +146,7 @@ public class Blocks extends Block {
 //                "XX ",
 //                'X',Items.tungstenIngot);
         
-        RecipesFurnace.smelting().addSmelting(blockTungstenOre.blockID, new ItemStack(Items.));
+        RecipesFurnace.smelting().addSmelting(blockTungstenOre.blockID, new ItemStack(Items.tungstenIngot));
         RecipesFurnace.smelting().addSmelting(blockNickelOre.blockID, new ItemStack(Items.nickelIngot));
     }
 
