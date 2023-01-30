@@ -29,7 +29,10 @@ public class ItemMixin {
                 return Item.adamantiumNugget;
             } else if (material_for_repairs == Materials.nickel) {
                 return Items.nickelNugget;
-            }else {
+            } else if (material_for_repairs == Materials.tungsten) {
+                return Items.tungstenNugget;
+            }
+            else {
                 return material_for_repairs == Material.ancient_metal ? Item.ancientMetalNugget : null;
             }
         } else {

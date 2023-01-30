@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.oilcake.mitelros.item.Items.arrowTungsten;
+
 @Mixin(ItemArrow.class)
 public class ItemArrowMixin extends Item{
     @Shadow
@@ -40,7 +42,10 @@ public class ItemArrowMixin extends Item{
             return 0.5F;
         } else if (itemArrow == arrowIron) {
             return 0.7F;
-        }  else if (itemArrow == Items.arrowNickel) {
+        } else if (itemArrow == arrowTungsten){
+            return 0.7F;
+        }
+        else if (itemArrow == Items.arrowNickel) {
             return 0.7F;
         } else if (itemArrow != arrowMithril && itemArrow != arrowAncientMetal) {
             return itemArrow == arrowAdamantium ? 0.9F : 0.3F;

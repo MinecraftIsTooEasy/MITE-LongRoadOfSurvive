@@ -7,7 +7,7 @@ import net.minecraft.Minecraft;
 
 public class Materials extends Material {
     public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setMetal(true).setMinHarvestLevel(3);
-
+    public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setMetal(true).setMinHarvestLevel(5);
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);
@@ -55,7 +55,10 @@ public class Materials extends Material {
             return 4.0F;
         } else if (this == nickel) {
             return 4.0F;
-        } else {
+        } else if (this == tungsten){
+            return 5.0F;
+        }
+        else {
             Minecraft.setErrorMessage("getDamageVsEntity: unhandled material " + this.name);
             return 0.0F;
         }

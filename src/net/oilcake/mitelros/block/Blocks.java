@@ -35,6 +35,11 @@ public class Blocks extends Block {
             , getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
 
     public static final Block blockNickelOre = new BlockOre(getNextBlockID(), Materials.nickel, 3);
+    public static final Block blockTungstenOre = new BlockOre(getNextBlockID(), Materials.nickel, 3);
+    public static final BlockOreBlock blockTungsten = new BlockOreBlock(getNextBlockID(),Materials.tungsten);
+    public static final Block fenceTungsten = new NewBlockThinFence(getNextBlockID(), Materials.tungsten);
+    public static final Block doorTungsten = ReflectHelper.createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
+            , getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
 
 
 
@@ -73,10 +78,14 @@ public class Blocks extends Block {
         registerItemBlock("door/door_nickel", doorNickel);
         registerItemBlock("block_smoker_idle", blockSmokerIdle);
         registerItemBlock("block_smoker_burning", blockSmokerBurning);
+        registerItemBlock("ore/tungsten_ore", blockTungstenOre);
+        registerItemBlock("block/tungsten_block", blockTungsten);
+        registerItemBlock("bars/tungsten_bars", fenceTungsten);
+        registerItemBlock("door/door_tungsten", doorTungsten);
     }
 
     public static void registerRecipes(RecipeRegister register) {
-        register.registerShapedRecipe(new ItemStack(blockSmokerBurning), false,
+        register.registerShapedRecipe(new ItemStack(blockSmokerIdle), false,
                 "CDC",
                 "AEA",
                 "BBB",
@@ -121,6 +130,21 @@ public class Blocks extends Block {
                 "III",
                 'A', blockNickel,
                 'I', Items.nickelIngot);
+        register.registerShapedRecipe(new ItemStack(blockTungsten),false,
+                "XXX",
+                "XXX",
+                "XXX",
+                'X',Items.tungstenIngot);
+        register.registerShapedRecipe(new ItemStack(fenceTungsten),false,
+                "XXX",
+                "XXX",
+                "   ",
+                'X',Items.tungstenIngot);
+//        register.registerShapedRecipe(new ItemStack(doorTungsten),false,
+//                "XX ",
+//                "XX ",
+//                "XX ",
+//                'X',Items.tungstenIngot);
 
         RecipesFurnace.smelting().addSmelting(blockNickelOre.blockID, new ItemStack(Items.nickelIngot));
     }

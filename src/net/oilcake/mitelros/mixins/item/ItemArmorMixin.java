@@ -30,7 +30,7 @@ public class ItemArmorMixin {
         } else if (this.effective_material == Material.gold) {
             protection = 6;
         } else if (this.effective_material != Material.iron && this.effective_material != Material.ancient_metal && this.effective_material != Materials.nickel) {
-            if (this.effective_material == Material.mithril) {
+            if (this.effective_material == Material.mithril || this.effective_material == Materials.tungsten) {
                 protection = 9;
             } else {
                 if (this.effective_material != Material.adamantium) {

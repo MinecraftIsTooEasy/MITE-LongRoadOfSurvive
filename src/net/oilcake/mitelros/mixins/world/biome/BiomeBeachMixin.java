@@ -20,8 +20,8 @@ public class BiomeBeachMixin extends BiomeBase {
         super.decorate(par1World, par2Random, par3, par4);
 
         WorldGenMinable genMinable = (new WorldGenMinable(Blocks.blockNickelOre.blockID, 8 , Block.stone.blockID)).setMinableBlockMetadata(0);
-        int count = par2Random.nextInt(Constant.nickelNUM) + 1;
-        for(int temp = 0; temp < count; ++temp) {
+        int countNickel = par2Random.nextInt(Constant.nickelNUM) + 1;
+        for(int temp = 0; temp < countNickel; ++temp) {
             int x = par3 + par2Random.nextInt(16);
             int y = par2Random.nextInt(255);
             int z = par4 + par2Random.nextInt(16);

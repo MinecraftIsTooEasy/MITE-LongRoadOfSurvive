@@ -24,7 +24,10 @@ public class ItemCoinMixin extends Item {
             return 10000;
         }
         if (material == Materials.nickel) {
-            return 250;
+            return 50;
+        }
+        if (material == Materials.tungsten){
+            return 5000;
         }
         return material == Material.copper ? 5 : (material == Material.silver ? 25 : (material == Material.gold ? 100 : 0));
     }
@@ -43,6 +46,9 @@ public class ItemCoinMixin extends Item {
         if (material == Materials.nickel) {
             return Items.nickelCoin;
         }
+        if (material == Materials.tungsten){
+            return Items.tungstenCoin;
+        }
         return material == Material.copper ? coinCopper : (material == Material.silver ? coinSilver : (material == Material.gold ? coinGold : null));
     }
 
@@ -59,6 +65,9 @@ public class ItemCoinMixin extends Item {
             return adamantiumNugget;
         }
         if (material == Materials.nickel) {
+            return Items.nickelNugget;
+        }
+        if (material == Materials.tungsten){
             return Items.nickelNugget;
         }
         return material == Material.copper ? Item.copperNugget : (material == Material.silver ? Item.silverNugget : (material == Material.gold ? Item.goldNugget : null));

@@ -54,7 +54,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                     }
                 }
             }
-            if (this.getEXP() >= 500) {
+            if (this.getEXP() > 2000) {
                 ItemStack outputStack = this.slots.getOutPutStack();
                 if (outputStack != null) {
                     int size = outputStack.stackSize;
@@ -64,7 +64,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                         this.slots.updateInfo();
                     }
                     if (outputStack.itemID == Items.nickelNugget.itemID) {
-                        this.EXP -= 250 * size;
+                        this.EXP -= 50 * size;
                         this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
                         this.slots.updateInfo();
                     }

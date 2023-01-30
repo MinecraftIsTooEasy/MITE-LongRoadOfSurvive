@@ -31,7 +31,10 @@ public class ItemDoorMixin {
             return Block.doorAdamantium;
         } else if (this.door_material == Materials.nickel) {
             return Blocks.doorNickel;
-        } else {
+        } else if (this.door_material == Materials.tungsten) {
+            return Blocks.doorTungsten;
+        }
+        else {
             return this.door_material == Material.ancient_metal ? Block.doorAncientMetal : null;
         }
     }

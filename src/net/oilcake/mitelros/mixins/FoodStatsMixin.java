@@ -63,7 +63,7 @@ public class FoodStatsMixin {
                     }
                 } else {
                     this.heal_progress += (4.0E-4F + (float)this.nutrition * 2.0E-5F)
-                           * (par1EntityPlayer.isMalnourishedLv1() ? 0.5F : (par1EntityPlayer.isMalnourishedLv2() ? 0.25F : (par1EntityPlayer.isMalnourishedLv3() ? 0.0F : 1.0F)))
+                           * (par1EntityPlayer.isMalnourishedLv1() ? 0.25F : (par1EntityPlayer.isMalnourishedLv2() ? 0.0F : (par1EntityPlayer.isMalnourishedLv3() ? 0.0F : 1.0F)))
                             * (par1EntityPlayer.inBed() ? 4.0F : 1.0F) * EnchantmentManager.getRegenerationModifier(this.player);
                     this.heal_progress += (4.0E-4F + (float)this.nutrition * 2.0E-5F) * (par1EntityPlayer.isMalnourished() ? 0.25F : 1.0F) * (par1EntityPlayer.inBed() ? 4.0F : 1.0F) * EnchantmentManager.getRegenerationModifier(this.player);
                     this.starve_progress = 0.0F;

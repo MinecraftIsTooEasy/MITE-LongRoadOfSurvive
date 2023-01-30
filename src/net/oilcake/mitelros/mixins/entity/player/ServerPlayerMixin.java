@@ -81,6 +81,12 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         }else
             return this.phytonutrients < 160000 && this.phytonutrients >= 0;
     }
+    public boolean isMalnourishedFin() {
+        if(this.protein == 0){
+            return true;
+        }else
+            return this.phytonutrients==0;
+    }
 
     @Overwrite
     public float getWetnessAndMalnourishmentHungerMultiplier() {
@@ -101,7 +107,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         }
 
         //float malnourishment_factor = this.isMalnourishedLv1() ? 0.5F : 0.0F;
-        float malnourishment_factor = this.isMalnourishedLv1() ? 0.5F : (this.isMalnourishedLv2() ? 1.0F : (this.isMalnourishedLv3() ? 1.5F : 0.0F));
+        float malnourishment_factor = this.isMalnourishedLv1() ? 0.5F : (this.isMalnourishedLv2() ? 1.0F : (this.isMalnourishedLv3() ? 3.0F : (this.isMalnourishedFin() ? 31.0F : 0.0F)));
         return 1.0F + wetness_factor + malnourishment_factor;
     }
 

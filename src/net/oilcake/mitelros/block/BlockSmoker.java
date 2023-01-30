@@ -21,7 +21,7 @@ public class BlockSmoker extends BlockFurnace{
 
     @Override
     public int getMaxHeatLevel() {
-        return 3;
+        return 2;
     }
     @Override
     public int getIdleBlockID() {

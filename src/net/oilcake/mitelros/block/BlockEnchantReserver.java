@@ -14,8 +14,8 @@ public class BlockEnchantReserver extends Block implements IContainer {
         super(par1, Material.anvil, new BlockConstants());
         this.setCreativeTab(CreativeModeTab.tabDecorations);
         this.setMaxStackSize(1);
-        //this.setLightOpacity(0);
-        this.setLightValue(3.0F);
+        this.setLightOpacity(0);
+        this.setLightValue(0.75F);
     }
 
     @Override
