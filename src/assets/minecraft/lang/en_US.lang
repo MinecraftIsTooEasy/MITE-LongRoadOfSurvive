@@ -42,6 +42,8 @@ tile.nickel_anvil.veryDamaged.name=Very Damaged Nickel Anvil
 tile.block_enchant_reserver.name=Enchant Reserver
 tile.bars/nickel_bars.name=Nickel Bars
 tile.toolbench.nickel.name=Nickel Toolbench
+tile.block_smoker_idle.name=Smoker
+tile.block_smoker_burning.name=Smoker
 
 item.armor/tungsten_helmet.name=Tungsten Helmet
 item.armor/tungsten_chestplate.name=Tungsten Chestplate
@@ -80,3 +82,16 @@ tile.tungsten_anvil.slightlyDamaged.name=Slightly Damaged Tungsten Anvil
 tile.tungsten_anvil.veryDamaged.name=Very Damaged Tungsten Anvil
 tile.bars/tungsten_bars.name=Tungsten Bars
 tile.toolbench.tungsten.name=Tungsten Toolbench
+
+item.bowls/lampchop_stew.name=Chestnut Soup
+item.bowls/porkchop_stew.name=Porkchop Stew
+
+item.pieces/copper.name=Copper Orepiece
+item.pieces/silver.name=Silver Orepiece
+item.pieces/gold.name=Gold Orepiece
+item.pieces/gold_nether.name=Nether Gold Orepiece
+item.pieces/iron.name=Iron Orepiece
+item.pieces/nickel.name=Nickel Orepiece
+item.pieces/mithril.name=Mithril Orepiece
+item.pieces/tungsten.name=Tungsten Orepiece
+item.pieces/adamantium.name=Adamantium Orepiece

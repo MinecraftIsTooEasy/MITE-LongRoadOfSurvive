@@ -29,7 +29,7 @@ item.chain/nickel.name=镍锁链
 item.coin/nickel.name=镍币
 item.arrows/nickel_arrow.name=镍箭
 
-tile.ore/nickel_ore.name=镍矿
+tile.ore/nickel_ore.name=镍矿石
 tile.block/nickel_block.name=镍块
 tile.blastfurnace_stone_idle.name=石高炉
 tile.blastfurnace_obsidian_idle.name=熔岩高炉
@@ -43,6 +43,8 @@ tile.nickel_anvil.veryDamaged.name=严重受损的镍砧
 tile.block_enchant_reserver.name=附魔回流底座
 tile.bars/nickel_bars.name=镍栅栏
 tile.toolbench.nickel.name=镍工作台
+tile.block_smoker_idle.name=烟熏炉
+tile.block_smoker_burning.name=烟熏炉
 
 item.armor/tungsten_helmet.name=钨头盔
 item.armor/tungsten_chestplate.name=钨胸甲
@@ -75,11 +77,24 @@ item.chain/tungsten.name=钨锁链
 item.coin/tungsten.name=钨币
 item.arrows/tungsten_arrow.name=钨箭
 
-tile.ore/tungsten_ore.name=钨矿
+tile.ore/tungsten_ore.name=钨矿石
 tile.block/tungsten_block.name=钨块
 tile.tungsten_anvil.intact.name=钨砧
 tile.tungsten_anvil.slightlyDamaged.name=轻微受损的钨砧
 tile.tungsten_anvil.veryDamaged.name=严重受损的钨砧
 tile.bars/tungsten_bars.name=钨栅栏
 tile.toolbench.tungsten.name=钨工作台
+
+item.bowls/lampchop_stew.name=栗羊羹
+item.bowls/porkchop_stew.name=猪肉煲
+
+item.pieces/copper.name=铜矿石碎块
+item.pieces/silver.name=银矿石碎块
+item.pieces/gold.name=金矿石碎块
+item.pieces/gold_nether.name=下界金矿石碎块
+item.pieces/iron.name=铁矿石碎块
+item.pieces/nickel.name=镍矿石碎块
+item.pieces/mithril.name=秘银矿石碎块
+item.pieces/tungsten.name=钨矿石碎块
+item.pieces/adamantium.name=艾德曼合金矿石碎块
 

@@ -1,13 +1,14 @@
 package net.oilcake.mitelros.item;
 
-import net.minecraft.EnumEquipmentMaterial;
-import net.minecraft.Material;
-import net.minecraft.MaterialMapColor;
-import net.minecraft.Minecraft;
+import net.minecraft.*;
 
 public class Materials extends Material {
     public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setMetal(true).setMinHarvestLevel(3);
     public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setMetal(true).setMinHarvestLevel(5);
+    public static final Material porkchop_stew = (new MaterialFood("porkchop_stew")).setHarmedByPepsin();
+    public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
+
+    public static final Material orePieces = (new Material("Pieces"));
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);

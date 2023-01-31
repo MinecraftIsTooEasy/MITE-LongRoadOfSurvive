@@ -6,7 +6,6 @@ import net.oilcake.mitelros.util.RecipeRegister;
 import net.oilcake.mitelros.util.ReflectHelper;
 import net.minecraft.*;
 
-
 public class Items extends Item {
     public static final ItemArmor nickelHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.nickel,false);
     public static final ItemArmor nickelChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.nickel,false);
@@ -63,6 +62,18 @@ public class Items extends Item {
     public static final ItemCoin tungstenCoin = ReflectHelper.createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.tungsten);
     public static final ItemArrow arrowTungsten = new ItemArrow(Constant.getNextItemID(), Materials.tungsten);
 
+    public static final ItemBowl porkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
+        public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
+
+    public static final ItemPieces pieceCopper = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceCopper"));
+    public static final ItemPieces pieceSilver = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceSilver"));
+    public static final ItemPieces pieceGold = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGold"));
+    public static final ItemPieces pieceGoldNether = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGoldNether"));
+    public static final ItemPieces pieceIron = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceIron"));
+    public static final ItemPieces pieceNickel = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceNickel"));
+    public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril"));
+    public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten"));
+    public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium"));
 
 
 
@@ -123,6 +134,18 @@ public class Items extends Item {
         register("chain/tungsten", tungstenChain);
         register("coin/tungsten", tungstenCoin);
         register("arrows/tungsten_arrow", arrowTungsten);
+        register("bowls/porkchop_stew",porkchopStew);
+        register("bowls/lampchop_stew",chestnutSoup);
+        register("pieces/copper",pieceCopper);
+        register("pieces/silver",pieceSilver);
+        register("pieces/gold",pieceGold);
+        register("pieces/gold_nether",pieceGoldNether);
+        register("pieces/iron",pieceIron);
+        register("pieces/nickel",pieceNickel);
+        register("pieces/tungsten",pieceTungsten);
+        register("pieces/mithril",pieceMithril);
+        register("pieces/adamantium",pieceAdamantium);
+
 
 
         Constant.initItemArray();
@@ -443,6 +466,13 @@ public class Items extends Item {
                 " AA",
                 'A', tungstenIngot);
 
+        register.registerShapelessRecipe(new ItemStack(porkchopStew,1),false,
+                Item.bowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
+                );
+        register.registerShapelessRecipe(new ItemStack(chestnutSoup,1),false,
+                Item.bowlWater,Item.lambchopCooked,Item.onion,Item.potato
+        );
+
         ItemCoin[] coins = new ItemCoin[]{Item.coinCopper, Item.coinSilver, Item.coinGold, Item.coinAncientMetal, Item.coinMithril, Item.coinAdamantium, nickelCoin, tungstenCoin};
         for (ItemCoin coin : coins) {
             for (int plank_subtype = 1; plank_subtype <= 9; ++plank_subtype) {
@@ -451,6 +481,27 @@ public class Items extends Item {
             register.registerShapelessRecipe(new ItemStack(coin), true, new ItemStack(coin.getNuggetPeer()));
         }
 
+        //RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.),1);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceAdamantium),4);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceCopper),2);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceGold),2);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceIron),2);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceNickel),2);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceGoldNether),2);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceSilver),2);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceTungsten),4);
+        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceMithril),3);
+
+        //RecipesFurnace.smelting().addSmelting(???.itemID, new ItemStack(Items.));
+        RecipesFurnace.smelting().addSmelting(pieceAdamantium.itemID, new ItemStack(Items.adamantiumNugget));
+        RecipesFurnace.smelting().addSmelting(pieceCopper.itemID, new ItemStack(Items.copperNugget));
+        RecipesFurnace.smelting().addSmelting(pieceGold.itemID, new ItemStack(Items.goldNugget));
+        RecipesFurnace.smelting().addSmelting(pieceGoldNether.itemID, new ItemStack(Items.goldNugget));
+        RecipesFurnace.smelting().addSmelting(pieceSilver.itemID, new ItemStack(Items.silverNugget));
+        RecipesFurnace.smelting().addSmelting(pieceIron.itemID, new ItemStack(Items.ironNugget));
+        RecipesFurnace.smelting().addSmelting(pieceNickel.itemID, new ItemStack(Items.nickelNugget));
+        RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
+        RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(Items.tungstenNugget));
     }
     private static Item register(String resourceLocation, Item item, CreativeModeTab tab) {
         item.setResourceLocation(item.getResourceLocationPrefix() + resourceLocation);
