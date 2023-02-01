@@ -23,7 +23,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public static int getHeatLevelRequired(int item_id) {
         if (item_id == Block.oreAdamantium.blockID) {
             return 4;
-        } else if (item_id == Block.oreMithril.blockID) {
+        } else if (item_id == Block.oreMithril.blockID || item_id == Blocks.blockTungstenOre.blockID){
             return 3;
         } else if (item_id != Block.oreCopper.blockID && item_id != Block.oreSilver.blockID && item_id != Block.oreGold.blockID && item_id != Block.oreIron.blockID && item_id != Blocks.blockNickelOre.blockID) {
             if (item_id != Block.oreNetherQuartz.blockID && item_id != Block.oreEmerald.blockID && item_id != Block.oreDiamond.blockID && item_id != Block.oreRedstone.blockID) {

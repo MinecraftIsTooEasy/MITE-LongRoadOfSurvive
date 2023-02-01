@@ -79,7 +79,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                 }
                 else{}
             }
-            if (this.getEXP() > 2000) {
+            if (this.getEXP() >= 200) {
                 ItemStack outputStack = this.slots.getOutPutStack();
                 if (outputStack != null) {
                     int size = outputStack.stackSize;
@@ -149,7 +149,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
 
     @Override
     public int getInventoryStackLimit() {
-        return 64;
+        return 1;
     }
 
     @Override

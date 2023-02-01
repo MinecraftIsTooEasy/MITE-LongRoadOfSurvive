@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.Item;
 import net.minecraft.ItemArrow;
+import net.minecraft.ItemBow;
 import net.minecraft.Material;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
@@ -9,8 +10,6 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.oilcake.mitelros.item.Items.arrowTungsten;
 
 @Mixin(ItemArrow.class)
 public class ItemArrowMixin extends Item{
@@ -22,7 +21,7 @@ public class ItemArrowMixin extends Item{
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback){
         material_types = new Material[]{Material.flint, Material.obsidian, Material.copper, Material.silver, Material.rusted_iron, Material.gold, Material.iron, Material.mithril, Material.adamantium, Material.ancient_metal,
-        Materials.nickel};
+        Materials.nickel, Materials.tungsten};
     }
 
 
@@ -42,10 +41,9 @@ public class ItemArrowMixin extends Item{
             return 0.5F;
         } else if (itemArrow == arrowIron) {
             return 0.7F;
-        } else if (itemArrow == arrowTungsten){
+        } else if (itemArrow == Items.arrowTungsten){
             return 0.7F;
-        }
-        else if (itemArrow == Items.arrowNickel) {
+        } else if (itemArrow == Items.arrowNickel) {
             return 0.7F;
         } else if (itemArrow != arrowMithril && itemArrow != arrowAncientMetal) {
             return itemArrow == arrowAdamantium ? 0.9F : 0.3F;
