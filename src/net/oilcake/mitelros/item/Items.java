@@ -65,15 +65,15 @@ public class Items extends Item {
     public static final ItemBowl porkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
         public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
 
-    public static final ItemPieces pieceCopper = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceCopper"));
-    public static final ItemPieces pieceSilver = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceSilver"));
-    public static final ItemPieces pieceGold = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGold"));
-    public static final ItemPieces pieceGoldNether = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGoldNether"));
-    public static final ItemPieces pieceIron = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceIron"));
-    public static final ItemPieces pieceNickel = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceNickel"));
-    public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril"));
-    public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten"));
-    public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium"));
+    public static final ItemPieces pieceCopper = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceCopper").setXPReward(1));
+    public static final ItemPieces pieceSilver = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceSilver").setXPReward(1));
+    public static final ItemPieces pieceGold = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGold").setXPReward(2));
+    public static final ItemPieces pieceGoldNether = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGoldNether").setXPReward(2));
+    public static final ItemPieces pieceIron = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceIron").setXPReward(1));
+    public static final ItemPieces pieceNickel = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceNickel").setXPReward(1));
+    public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril").setXPReward(4));
+    public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten").setXPReward(7));
+    public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(10));
 
 
 
@@ -481,16 +481,6 @@ public class Items extends Item {
             register.registerShapelessRecipe(new ItemStack(coin), true, new ItemStack(coin.getNuggetPeer()));
         }
 
-        //RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.),1);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceAdamantium),4);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceCopper),2);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceGold),2);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceIron),2);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceNickel),2);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceGoldNether),2);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceSilver),2);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceTungsten),4);
-        RecipesFurnace.smelting().getSmeltingResult(new ItemStack(Items.pieceMithril),3);
 
         //RecipesFurnace.smelting().addSmelting(???.itemID, new ItemStack(Items.));
         RecipesFurnace.smelting().addSmelting(pieceAdamantium.itemID, new ItemStack(Items.adamantiumNugget));

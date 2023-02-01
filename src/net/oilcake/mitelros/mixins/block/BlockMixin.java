@@ -62,6 +62,8 @@ public class BlockMixin{
 //            return block == coalBlock ? this.dropBlockAsEntityItem(info, Item.coal.itemID, 0, 9, info.wasExploded() ? 0.5F : 1.0F) : this.dropBlockAsEntityItem(info, this.createStackedBlock(info.getMetadata()));
 //        }
 //    }
+
+
     @Shadow
     public ItemStack createStackedBlock(int metadata) {
         return null;
@@ -115,4 +117,5 @@ public class BlockMixin{
     protected Block setTextureName(String par1Str) {
         return null;
     }
+
 }

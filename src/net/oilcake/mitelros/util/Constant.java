@@ -5,7 +5,7 @@ import net.minecraft.Item;
 import net.minecraft.ItemArmor;
 
 public class Constant {
-    public static final String VERSION = " BEAT+Build.11 ";
+    public static final String VERSION = " 23w06 Test3 ";
     public static final int VER_NUM = 114514;
     public static int nextItemID = 2000;
     public static int nextBlockID = 180;

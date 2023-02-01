@@ -45,7 +45,7 @@ public class LROSEvent {
     public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
         EntityPlayer player = event.getPlayer();
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
-                .appendComponent(ChatMessage.createFromTranslationKey("MITE-LROS已加载,当前版本:").setColor(EnumChatFormat.DARK_GREEN))
+                .appendComponent(ChatMessage.createFromTranslationKey("MITE-LROS挂载成功,当前版本:").setColor(EnumChatFormat.DARK_GREEN))
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.DARK_RED)));
 
     }
