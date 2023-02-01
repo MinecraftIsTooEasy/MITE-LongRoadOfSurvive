@@ -86,14 +86,11 @@ public class Blocks extends Block {
 
     public static void registerRecipes(RecipeRegister register) {
         register.registerShapedRecipe(new ItemStack(blockSmokerIdle), false,
-                "CDC",
-                "AEA",
-                "BBB",
+                " A ",
+                "ABA",
+                " A ",
                 'A', Block.wood,
-                'B', Block.cobblestone,
-                'C', Item.stick,
-                'D', Block.blockIron,
-                'E', Block.furnaceIdle);
+                'B', Block.furnaceIdle);
         register.registerShapedRecipe(new ItemStack(fenceNickel), false,
                 "   ",
                 "AAA",

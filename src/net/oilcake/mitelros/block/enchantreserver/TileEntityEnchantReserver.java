@@ -44,28 +44,58 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
         if (!this.getWorldObj().isRemote) {
             ItemStack inputStack = this.slots.getInPutStack();
             if (inputStack != null) {
-                if (inputStack.itemID == Item.diamond.itemID || inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 ||
-                        inputStack.itemID == Item.emerald.itemID || inputStack.itemID == Item.netherQuartz.itemID) {
-                    if (this.getEXP() < this.getMAXEXP()) {
-                        int size = inputStack.stackSize;
-                        this.EXP += ItemRock.getExperienceValueWhenSacrificed(inputStack) * size;
+//                if (inputStack.itemID == Item.diamond.itemID || inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 ||
+//                        inputStack.itemID == Item.emerald.itemID || inputStack.itemID == Item.netherQuartz.itemID) {
+//                    if (this.getEXP() < this.getMAXEXP()) {
+//                        int size = inputStack.stackSize;
+//                        this.EXP += ItemRock.getExperienceValueWhenSacrificed(inputStack) * size;
+//                        this.slots.getInPut().putStack(null);
+//                        this.slots.updateInfo();
+//                    }
+//                }
+                if (inputStack.itemID == Item.diamond.itemID && inputStack.stackSize * 500 + this.getEXP() <= this.getMAXEXP()){
+                    int size = inputStack.stackSize;
+                        this.EXP += 500 * size;
                         this.slots.getInPut().putStack(null);
                         this.slots.updateInfo();
-                    }
                 }
+                else if (inputStack.itemID == Item.emerald.itemID && inputStack.stackSize * 250 + this.getEXP() <= this.getMAXEXP()){
+                    int size = inputStack.stackSize;
+                    this.EXP += 250 * size;
+                    this.slots.getInPut().putStack(null);
+                    this.slots.updateInfo();
+                }
+                else if (inputStack.itemID == Item.netherQuartz.itemID && inputStack.stackSize * 50 + this.getEXP() <= this.getMAXEXP()){
+                    int size = inputStack.stackSize;
+                    this.EXP += 50 * size;
+                    this.slots.getInPut().putStack(null);
+                    this.slots.updateInfo();
+                }
+                else if (inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 && inputStack.stackSize * 25 + this.getEXP() <= this.getMAXEXP()){
+                    int size = inputStack.stackSize;
+                    this.EXP += 25 * size;
+                    this.slots.getInPut().putStack(null);
+                    this.slots.updateInfo();
+                }
+                else{}
             }
             if (this.getEXP() > 2000) {
                 ItemStack outputStack = this.slots.getOutPutStack();
                 if (outputStack != null) {
                     int size = outputStack.stackSize;
-                    if (outputStack.itemID == Item.potion.itemID) {
+                    if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() + 2000) {
                         this.EXP -= 200;
                         this.slots.getOutPut().putStack(Item.expBottle.getItemStackForStatsIcon());
                         this.slots.updateInfo();
                     }
-                    if (outputStack.itemID == Items.nickelNugget.itemID) {
+                    if (outputStack.itemID == Items.nickelNugget.itemID && outputStack.stackSize * 50 <= this.getEXP() + 2000) {
                         this.EXP -= 50 * size;
                         this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
+                        this.slots.updateInfo();
+                    }
+                    if (outputStack.itemID == Items.tungstenNugget.itemID && outputStack.stackSize * 5000 <= this.getEXP() + 2000) {
+                        this.EXP -= 5000 * size;
+                        this.slots.getOutPut().putStack(Items.tungstenCoin.getItemStackForStatsIcon());
                         this.slots.updateInfo();
                     }
                 }
