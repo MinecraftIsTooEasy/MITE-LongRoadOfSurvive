@@ -9,11 +9,13 @@ public class Constant {
     public static final int VER_NUM = 114514;
     public static int nextItemID = 2000;
     public static int nextBlockID = 180;
+    public static int nextEnchantmentID = 97;
     public static int nickelNUM = 4;
 
     public static int getNextItemID(){
         return nextItemID++;
     }
+
 
     public static ItemArmor[] HELMETS = null;
     public static ItemArmor[] CHESTPLATES = null;

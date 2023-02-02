@@ -141,12 +141,12 @@ public class BlockOreMixin extends Block {
             float chance = suppress_fortune ? 1.0F : 1.0F + (float) info.getHarvesterFortune() * 0.1F;
             return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);
         }
-        @Shadow
-    public void addItemBlockMaterials(ItemBlock item_block) {
-        item_block.addMaterial(new Material[]{this.blockMaterial, this.vein_material});
-    }
+
+    @Shadow
+    public void addItemBlockMaterials(ItemBlock item_block) {}
+
     @Shadow
     public int getMetadataForPlacement(World world, int x, int y, int z, ItemStack item_stack, Entity entity, EnumFace face, float offset_x, float offset_y, float offset_z) {
         return 1;
     }
-    }
+}
