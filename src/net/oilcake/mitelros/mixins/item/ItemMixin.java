@@ -10,6 +10,15 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Item.class)
 public class ItemMixin {
     @Shadow
+    private String potionEffect;
+    public Item item;
+
+    public Item setPotionEffectC(String par1Str) {
+        this.potionEffect = par1Str;
+        return item;
+    }
+
+    @Shadow
     public Material getMaterialForRepairs() {
         return null;
     }
