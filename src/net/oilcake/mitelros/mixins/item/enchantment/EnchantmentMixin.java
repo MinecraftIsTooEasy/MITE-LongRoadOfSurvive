@@ -26,7 +26,7 @@ public class EnchantmentMixin {
 //            }
 //        }
 //    }
-//    public boolean enchantIndividually(){
-//        return false;
-//    }
+    public boolean enchantIndividually(){
+        return false;
+    }
 }
