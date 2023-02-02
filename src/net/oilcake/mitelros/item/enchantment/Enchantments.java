@@ -11,8 +11,6 @@ import java.util.List;
 import static net.minecraft.Enchantment.enchantmentsList;
 
 public class Enchantments {
-    public String PUSH;
-
 
 
     public static List<Enchantment> individualEnchantments = new ArrayList<>();
