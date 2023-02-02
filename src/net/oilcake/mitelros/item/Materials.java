@@ -7,7 +7,6 @@ public class Materials extends Material {
     public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setMetal(true).setMinHarvestLevel(5);
     public static final Material porkchop_stew = (new MaterialFood("porkchop_stew")).setHarmedByPepsin();
     public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
-
     public static final Material orePieces = (new Material("Pieces"));
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {

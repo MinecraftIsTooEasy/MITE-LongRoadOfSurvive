@@ -7,6 +7,13 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Material.class)
 public class MaterialMixin {
     @Shadow
+    private boolean requires_tool;
+    public Material material;
+    public Material setRequiresToolC() {
+        this.requires_tool = true;
+        return material;
+    }
+    @Shadow
     protected float durability;
     @Shadow
     protected int min_harvest_level;

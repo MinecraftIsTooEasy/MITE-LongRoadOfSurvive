@@ -6,6 +6,8 @@ import net.oilcake.mitelros.util.RecipeRegister;
 import net.oilcake.mitelros.util.ReflectHelper;
 import net.minecraft.*;
 
+import static net.xiaoyu233.fml.util.ReflectHelper.createInstance;
+
 public class Items extends Item {
     public static final ItemArmor nickelHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.nickel,false);
     public static final ItemArmor nickelChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.nickel,false);
@@ -15,25 +17,25 @@ public class Items extends Item {
     public static final ItemArmor nickelChestplateChain = new ItemCuirass(Constant.getNextItemID(),Materials.nickel,true);
     public static final ItemArmor nickelLeggingsChain = new ItemLeggings(Constant.getNextItemID(),Materials.nickel,true);
     public static final ItemArmor nickelBootsChain = new ItemBoots(Constant.getNextItemID(),Materials.nickel,true);
-    public static final ItemNugget nickelNugget = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemAxe nickelAxe = ReflectHelper.createInstance(ItemAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemBattleAxe nickelBattleAxe = ReflectHelper.createInstance(ItemBattleAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemDagger nickelDagger = ReflectHelper.createInstance(ItemDagger.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final Item nickelIngot = ReflectHelper.createInstance(ItemIngot.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel).setXPReward(15);
-    public static final ItemPickaxe nickelPickaxe = ReflectHelper.createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemShovel nickelShovel = ReflectHelper.createInstance(ItemShovel.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemSword nickelSword = ReflectHelper.createInstance(ItemSword.class,new Class[]{int.class,Material.class},Constant.getNextItemID(), Materials.nickel);
-    public static final ItemWarHammer nickelWarHammer = ReflectHelper.createInstance(ItemWarHammer.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemHatchet nickelHatchet = ReflectHelper.createInstance(ItemHatchet.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemHoe nickelHoe = ReflectHelper.createInstance(ItemHoe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemKnife nickelKnife = ReflectHelper.createInstance(ItemKnife.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemMattock nickelMattock = ReflectHelper.createInstance(ItemMattock.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemScythe nickelScythe = ReflectHelper.createInstance(ItemScythe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemShears nickelShears = ReflectHelper.createInstance(ItemShears.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemNugget nickelNugget = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemAxe nickelAxe = createInstance(ItemAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemBattleAxe nickelBattleAxe = createInstance(ItemBattleAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemDagger nickelDagger = createInstance(ItemDagger.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final Item nickelIngot = createInstance(ItemIngot.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel).setXPReward(15);
+    public static final ItemPickaxe nickelPickaxe = createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemShovel nickelShovel = createInstance(ItemShovel.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemSword nickelSword = createInstance(ItemSword.class,new Class[]{int.class,Material.class},Constant.getNextItemID(), Materials.nickel);
+    public static final ItemWarHammer nickelWarHammer = createInstance(ItemWarHammer.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemHatchet nickelHatchet = createInstance(ItemHatchet.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemHoe nickelHoe = createInstance(ItemHoe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemKnife nickelKnife = createInstance(ItemKnife.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemMattock nickelMattock = createInstance(ItemMattock.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemScythe nickelScythe = createInstance(ItemScythe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemShears nickelShears = createInstance(ItemShears.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
     public static final Item doorNickel= new ItemDoor(Constant.getNextItemID(), Materials.nickel);
-    public static final ItemChain nickelChain = ReflectHelper.createInstance(ItemChain.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
-    public static final ItemCoin nickelCoin = ReflectHelper.createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.nickel);
-    public static final ItemArrow arrowNickel = new ItemArrow(Constant.getNextItemID(), Materials.nickel);
+    public static final ItemChain nickelChain = createInstance(ItemChain.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
+    public static final ItemCoin nickelCoin = createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.nickel);
+    //public static final ItemArrow arrowNickel = new ItemArrow(Constant.getNextItemID(), Materials.nickel);
     public static final ItemArmor tungstenHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.tungsten,false);
     public static final ItemArmor tungstenChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.tungsten,false);
     public static final ItemArmor tungstenLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.tungsten,false);
@@ -42,28 +44,28 @@ public class Items extends Item {
     public static final ItemArmor tungstenChestplateChain = new ItemCuirass(Constant.getNextItemID(),Materials.tungsten,true);
     public static final ItemArmor tungstenLeggingsChain = new ItemLeggings(Constant.getNextItemID(),Materials.tungsten,true);
     public static final ItemArmor tungstenBootsChain = new ItemBoots(Constant.getNextItemID(),Materials.tungsten,true);
-    public static final ItemNugget tungstenNugget = ReflectHelper.createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemAxe tungstenAxe = ReflectHelper.createInstance(ItemAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemBattleAxe tungstenBattleAxe = ReflectHelper.createInstance(ItemBattleAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemDagger tungstenDagger = ReflectHelper.createInstance(ItemDagger.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final Item tungstenIngot = ReflectHelper.createInstance(ItemIngot.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten).setXPReward(75);
-    public static final ItemPickaxe tungstenPickaxe = ReflectHelper.createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemShovel tungstenShovel = ReflectHelper.createInstance(ItemShovel.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemSword tungstenSword = ReflectHelper.createInstance(ItemSword.class,new Class[]{int.class,Material.class},Constant.getNextItemID(), Materials.tungsten);
-    public static final ItemWarHammer tungstenWarHammer = ReflectHelper.createInstance(ItemWarHammer.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemHatchet tungstenHatchet = ReflectHelper.createInstance(ItemHatchet.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemHoe tungstenHoe = ReflectHelper.createInstance(ItemHoe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemKnife tungstenKnife = ReflectHelper.createInstance(ItemKnife.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemMattock tungstenMattock = ReflectHelper.createInstance(ItemMattock.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemScythe tungstenScythe = ReflectHelper.createInstance(ItemScythe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemShears tungstenShears = ReflectHelper.createInstance(ItemShears.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemNugget tungstenNugget = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemAxe tungstenAxe = createInstance(ItemAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemBattleAxe tungstenBattleAxe = createInstance(ItemBattleAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemDagger tungstenDagger = createInstance(ItemDagger.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final Item tungstenIngot = createInstance(ItemIngot.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten).setXPReward(75);
+    public static final ItemPickaxe tungstenPickaxe = createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemShovel tungstenShovel = createInstance(ItemShovel.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemSword tungstenSword = createInstance(ItemSword.class,new Class[]{int.class,Material.class},Constant.getNextItemID(), Materials.tungsten);
+    public static final ItemWarHammer tungstenWarHammer = createInstance(ItemWarHammer.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemHatchet tungstenHatchet = createInstance(ItemHatchet.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemHoe tungstenHoe = createInstance(ItemHoe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemKnife tungstenKnife = createInstance(ItemKnife.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemMattock tungstenMattock = createInstance(ItemMattock.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemScythe tungstenScythe = createInstance(ItemScythe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemShears tungstenShears = createInstance(ItemShears.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
     public static final Item doorTungsten= new ItemDoor(Constant.getNextItemID(), Materials.tungsten);
-    public static final ItemChain tungstenChain = ReflectHelper.createInstance(ItemChain.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
-    public static final ItemCoin tungstenCoin = ReflectHelper.createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.tungsten);
-    public static final ItemArrow arrowTungsten = new ItemArrow(Constant.getNextItemID(), Materials.tungsten);
+    public static final ItemChain tungstenChain = createInstance(ItemChain.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemCoin tungstenCoin = createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.tungsten);
+    //public static final ItemArrow arrowTungsten = new ItemArrow(Constant.getNextItemID(), Materials.tungsten);
 
     public static final ItemBowl porkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
-        public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
+    public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
 
     public static final ItemPieces pieceCopper = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceCopper").setXPReward(1));
     public static final ItemPieces pieceSilver = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceSilver").setXPReward(1));
@@ -106,7 +108,7 @@ public class Items extends Item {
         register("door/nickel", doorNickel);
         register("chain/nickel", nickelChain);
         register("coin/nickel", nickelCoin);
-        register("arrows/nickel_arrow", arrowNickel);
+        //register("arrows/nickel_arrow", arrowNickel);
         register("armor/tungsten_helmet", tungstenHelmet);
         register("armor/tungsten_chestplate", tungstenChestplate);
         register("armor/tungsten_leggings", tungstenLeggings);
@@ -133,7 +135,7 @@ public class Items extends Item {
         register("door/tungsten", doorTungsten);
         register("chain/tungsten", tungstenChain);
         register("coin/tungsten", tungstenCoin);
-        register("arrows/tungsten_arrow", arrowTungsten);
+        //register("arrows/tungsten_arrow", arrowTungsten);
         register("bowls/porkchop_stew",porkchopStew);
         register("bowls/lampchop_stew",chestnutSoup);
         register("pieces/copper",pieceCopper);
@@ -152,13 +154,13 @@ public class Items extends Item {
     }
 
     public static void registerRecipes(RecipeRegister register) {
-        register.registerShapedRecipe(new ItemStack(arrowNickel), false,
-                " C ",
-                " B ",
-                " A ",
-                'A', Item.feather,
-                'B', Item.stick,
-                'C', nickelNugget);
+//        register.registerShapedRecipe(new ItemStack(arrowNickel), false,
+//                " C ",
+//                " B ",
+//                " A ",
+//                'A', Item.feather,
+//                'B', Item.stick,
+//                'C', nickelNugget);
         register.registerShapedRecipe(new ItemStack(nickelChain), false,
                 " A ",
                 "A A",
@@ -333,13 +335,13 @@ public class Items extends Item {
                 " AA",
                 " AA",
                 'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(arrowTungsten), false,
-                " C ",
-                " B ",
-                " A ",
-                'A', Item.feather,
-                'B', Item.stick,
-                'C', tungstenNugget);
+//        register.registerShapedRecipe(new ItemStack(arrowTungsten), false,
+//                " C ",
+//                " B ",
+//                " A ",
+//                'A', Item.feather,
+//                'B', Item.stick,
+//                'C', tungstenNugget);
         register.registerShapedRecipe(new ItemStack(tungstenChain), false,
                 " A ",
                 "A A",
