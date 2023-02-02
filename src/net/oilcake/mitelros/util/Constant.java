@@ -1,8 +1,7 @@
 package net.oilcake.mitelros.util;
 
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
-import net.minecraft.Item;
-import net.minecraft.ItemArmor;
 
 public class Constant {
     public static final String VERSION = " 23w06 Test4 ";
@@ -23,7 +22,6 @@ public class Constant {
     public static ItemArmor[] BOOTS = null;
     public static Item[] SWORDS = null;
     public static ItemArmor[][] ARMORS = null;
-
     public static void initItemArray() {
         HELMETS = new ItemArmor[]{Item.helmetLeather, Item.helmetChainCopper, Item.helmetCopper, Item.helmetRustedIron, Item.helmetChainIron, Item.helmetIron, Item.helmetChainAncientMetal, Item.helmetAncientMetal, Item.helmetChainMithril, Item.helmetMithril, Item.helmetAdamantium,
                 Items.nickelHelmet, Items.nickelHelmetChain,Items.tungstenHelmet,Items.tungstenHelmetChain};

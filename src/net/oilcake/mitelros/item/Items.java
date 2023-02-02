@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.item;
 
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.mixins.util.PotionBrewerMixin;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.RecipeRegister;
 import net.oilcake.mitelros.util.ReflectHelper;
@@ -76,12 +77,14 @@ public class Items extends Item {
     public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril").setXPReward(4));
     public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten").setXPReward(7));
     public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(10));
+//    public static PotionBrewer potionBrewer;
+//    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
 
 
 
 
-    public static void registerItems() {
+        public static void registerItems() {
         register("armor/nickel_helmet", nickelHelmet);
         register("armor/nickel_chestplate", nickelChestplate);
         register("armor/nickel_leggings", nickelLeggings);
