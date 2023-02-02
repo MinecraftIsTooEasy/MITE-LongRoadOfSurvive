@@ -22,7 +22,7 @@ public class WorldGenNetherMixin extends StructureGenerator {
         this.spawnList.add(new BiomeMeta(EntityPigZombie.class, 50, 4, 4));
         this.spawnList.add(new BiomeMeta(EntitySkeleton.class, 100, 4, 4));
         this.spawnList.add(new BiomeMeta(EntityMagmaCube.class, 30, 4, 4));
-        this.spawnList.add(new BiomeMeta(EntityWitherBoneLord.class,1000,1,1));
+        this.spawnList.add(new BiomeMeta(EntityWitherBoneLord.class,6,1,1));
     }
     @Shadow
     public String func_143025_a() {
