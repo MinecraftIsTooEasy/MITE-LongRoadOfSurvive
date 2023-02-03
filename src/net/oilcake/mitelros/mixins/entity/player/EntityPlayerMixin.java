@@ -9,6 +9,25 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntityPlayer.class)
 public class EntityPlayerMixin extends EntityLiving{
+
+//    public static int getWaterLimit(int level) {
+//        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
+//    }
+//
+//    public float getWaterLimit() {
+//        return (float)getWaterLimit(this.getExperienceLevel());
+//    }
+    @Shadow
+    public final int getExperienceLevel() {
+        return 1;
+    }
+
+    @Shadow
+    protected FoodMetaData foodStats;
+    public FoodMetaData getFoodStats(){
+        return foodStats;
+    }
+
     public EntityPlayerMixin(World par1World) {
         super(par1World);
     }
