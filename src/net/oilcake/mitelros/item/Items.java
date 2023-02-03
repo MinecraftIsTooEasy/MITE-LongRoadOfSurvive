@@ -1,10 +1,8 @@
 package net.oilcake.mitelros.item;
 
 import net.oilcake.mitelros.block.Blocks;
-import net.oilcake.mitelros.mixins.util.PotionBrewerMixin;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.RecipeRegister;
-import net.oilcake.mitelros.util.ReflectHelper;
 import net.minecraft.*;
 
 import static net.xiaoyu233.fml.util.ReflectHelper.createInstance;
@@ -36,7 +34,7 @@ public class Items extends Item {
     public static final Item doorNickel= new ItemDoor(Constant.getNextItemID(), Materials.nickel);
     public static final ItemChain nickelChain = createInstance(ItemChain.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.nickel);
     public static final ItemCoin nickelCoin = createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.nickel);
-    //public static final ItemArrow arrowNickel = new ItemArrow(Constant.getNextItemID(), Materials.nickel);
+    public static final ItemArrow arrowNickel = new ItemArrow(Constant.getNextItemID(), Materials.nickel);
     public static final ItemArmor tungstenHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.tungsten,false);
     public static final ItemArmor tungstenChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.tungsten,false);
     public static final ItemArmor tungstenLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.tungsten,false);
@@ -63,7 +61,7 @@ public class Items extends Item {
     public static final Item doorTungsten= new ItemDoor(Constant.getNextItemID(), Materials.tungsten);
     public static final ItemChain tungstenChain = createInstance(ItemChain.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.tungsten);
     public static final ItemCoin tungstenCoin = createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.tungsten);
-    //public static final ItemArrow arrowTungsten = new ItemArrow(Constant.getNextItemID(), Materials.tungsten);
+    public static final ItemArrow arrowTungsten = new ItemArrow(Constant.getNextItemID(), Materials.tungsten);
 
     public static final ItemBowl porkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
     public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
@@ -111,7 +109,7 @@ public class Items extends Item {
         register("door/nickel", doorNickel);
         register("chain/nickel", nickelChain);
         register("coin/nickel", nickelCoin);
-        //register("arrows/nickel_arrow", arrowNickel);
+        register("arrows/nickel_arrow", arrowNickel);
         register("armor/tungsten_helmet", tungstenHelmet);
         register("armor/tungsten_chestplate", tungstenChestplate);
         register("armor/tungsten_leggings", tungstenLeggings);
@@ -138,7 +136,7 @@ public class Items extends Item {
         register("door/tungsten", doorTungsten);
         register("chain/tungsten", tungstenChain);
         register("coin/tungsten", tungstenCoin);
-        //register("arrows/tungsten_arrow", arrowTungsten);
+        register("arrows/tungsten_arrow", arrowTungsten);
         register("bowls/porkchop_stew",porkchopStew);
         register("bowls/lampchop_stew",chestnutSoup);
         register("pieces/copper",pieceCopper);
@@ -157,13 +155,13 @@ public class Items extends Item {
     }
 
     public static void registerRecipes(RecipeRegister register) {
-//        register.registerShapedRecipe(new ItemStack(arrowNickel), false,
-//                " C ",
-//                " B ",
-//                " A ",
-//                'A', Item.feather,
-//                'B', Item.stick,
-//                'C', nickelNugget);
+        register.registerShapedRecipe(new ItemStack(arrowNickel), false,
+                " C ",
+                " B ",
+                " A ",
+                'A', Item.feather,
+                'B', Item.stick,
+                'C', nickelNugget);
         register.registerShapedRecipe(new ItemStack(nickelChain), false,
                 " A ",
                 "A A",
@@ -338,13 +336,13 @@ public class Items extends Item {
                 " AA",
                 " AA",
                 'A', nickelIngot);
-//        register.registerShapedRecipe(new ItemStack(arrowTungsten), false,
-//                " C ",
-//                " B ",
-//                " A ",
-//                'A', Item.feather,
-//                'B', Item.stick,
-//                'C', tungstenNugget);
+        register.registerShapedRecipe(new ItemStack(arrowTungsten), false,
+                " C ",
+                " B ",
+                " A ",
+                'A', Item.feather,
+                'B', Item.stick,
+                'C', tungstenNugget);
         register.registerShapedRecipe(new ItemStack(tungstenChain), false,
                 " A ",
                 "A A",

@@ -1,55 +1,62 @@
-//package net.oilcake.mitelros.mixins.item;
-//
-//import net.minecraft.Item;
-//import net.minecraft.ItemArrow;
-//import net.minecraft.ItemBow;
-//import net.minecraft.Material;
-//import net.oilcake.mitelros.item.Items;
-//import net.oilcake.mitelros.item.Materials;
-//import org.spongepowered.asm.mixin.*;
-//import org.spongepowered.asm.mixin.injection.At;
-//import org.spongepowered.asm.mixin.injection.Inject;
-//import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//
-//@Mixin(ItemArrow.class)
-//public class ItemArrowMixin extends Item{
-//    @Shadow
-//    @Final
-//    @Mutable
-//    public static Material[] material_types;
-//    public ItemArrow itemArrow;
-//    @Inject(method = "<clinit>",at = @At("RETURN"))
-//    private static void injectClinit(CallbackInfo callback){
-//        material_types = new Material[]{Material.flint, Material.obsidian, Material.copper, Material.silver, Material.rusted_iron, Material.gold, Material.iron, Material.mithril, Material.adamantium, Material.ancient_metal,
-//        Materials.nickel, Materials.tungsten};
-//    }
-//
-//
-//    @Overwrite
-//    public float getChanceOfRecovery() {
-//        if (itemArrow == arrowFlint) {
-//            return 0.3F;
-//        } else if (itemArrow == arrowObsidian) {
-//            return 0.4F;
-//        } else if (itemArrow == arrowCopper) {
-//            return 0.6F;
-//        } else if (itemArrow == arrowSilver) {
-//            return 0.6F;
-//        } else if (itemArrow == arrowRustedIron) {
-//            return 0.5F;
-//        } else if (itemArrow == arrowGold) {
-//            return 0.5F;
-//        } else if (itemArrow == arrowIron) {
-//            return 0.7F;
-//        } else if (itemArrow == Items.arrowTungsten){
-//            return 0.7F;
-//        } else if (itemArrow == Items.arrowNickel) {
-//            return 0.7F;
-//        } else if (itemArrow != arrowMithril && itemArrow != arrowAncientMetal) {
-//            return itemArrow == arrowAdamantium ? 0.9F : 0.3F;
-//        } else {
-//            return 0.8F;
-//        }
-//    }
-//
-//}
+package net.oilcake.mitelros.mixins.item;
+
+import net.minecraft.*;
+import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.Materials;
+import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
+
+@Mixin(ItemArrow.class)
+public class ItemArrowMixin extends Item{
+    @Shadow
+    @Final
+    @Mutable
+    public static Material[] material_types;
+    @Shadow
+    @Final
+    public Material arrowhead_material;
+    public ItemArrow itemArrow;
+    @Inject(method = "<clinit>",at = @At("RETURN"))
+    private static void injectClinit(CallbackInfo callback){
+        material_types = new Material[]{Material.rusted_iron, Material.ancient_metal, Materials.nickel, Materials.tungsten};
+    }
+    @Overwrite
+    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
+        if (extended_info) {
+            info.add("");
+            info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.missileDamage", new Object[]{(int)this.getMaterialDamageVsEntity()}));
+            if (this.arrowhead_material == Materials.nickel) {
+                //info.add(EnumChatFormat.WHITE + Translator.get("item.tooltip.bonusVsUndead"));
+                info.add(EnumChatFormat.LIGHT_GRAY + Translator.get("史莱姆杀手"));
+            }
+            if(this.arrowhead_material != Material.rusted_iron && this.arrowhead_material != Material.ancient_metal
+            &&this.arrowhead_material != Materials.nickel && this.arrowhead_material != Materials.tungsten){
+                info.add(EnumChatFormat.RED + Translator.getFormatted("请勿制作与使用", new Object[0]));
+            }
+            info.add(EnumChatFormat.GRAY + Translator.getFormatted("item.tooltip.missileRecovery", new Object[]{(int)(this.getChanceOfRecovery() * 100.0F)}));
+        }
+    }
+
+
+    @Overwrite
+    public float getChanceOfRecovery() {
+         if (itemArrow == arrowRustedIron) {
+            return 0.5F;
+        }else if (itemArrow == Items.arrowNickel) {
+            return 0.7F;
+        } else if (itemArrow != arrowAncientMetal) {
+            return itemArrow == Items.arrowTungsten ? 0.9F : 0.3F;
+        } else {
+            return 0.8F;
+        }
+    }
+    @Shadow
+    public float getMaterialDamageVsEntity() {
+        return 1F;
+    }
+
+}

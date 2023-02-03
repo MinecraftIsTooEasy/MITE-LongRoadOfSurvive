@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Item.class)
-public class ItemMixin {
+public class ItemMixin{
     @Shadow
     private String potionEffect;
     public Item item;

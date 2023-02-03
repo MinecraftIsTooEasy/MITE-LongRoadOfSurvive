@@ -1,20 +1,38 @@
 package net.oilcake.mitelros.mixins.item;
 
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
-import net.minecraft.ItemArmor;
-import net.minecraft.Material;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.List;
+
 @Mixin(ItemArmor.class)
-public class ItemArmorMixin {
+public class ItemArmorMixin extends Item {
     @Shadow
     private Material effective_material;
     @Shadow
     @Final
     private boolean is_chain_mail;
+    @Overwrite
+    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
+        if (extended_info) {
+            info.add("");
+            float protection = this.getProtectionAfterDamageFactor(item_stack, player);
+            int decimal_places = protection < 1.0F ? 2 : 1;
+            info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.protectionBonus", new Object[]{StringHelper.formatFloat(protection, decimal_places, decimal_places)}));
+//            if(item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel){
+//                info.add("反抗史莱姆");
+//            }
+        }
+
+    }
+    @Shadow
+    public final float getProtectionAfterDamageFactor(ItemStack item_stack, EntityLiving owner) {
+        return 1F;
+    }
 
     @Overwrite
     public int getMaterialProtection() {

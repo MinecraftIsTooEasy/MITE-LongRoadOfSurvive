@@ -26,50 +26,47 @@ public class PotionBrewerMixin {
     //        spiderEyeEffect = "-0-1+2-3&   4   -4+13";
     //                                    地狱疣
     @Inject(method = "<clinit>", at = @At("RETURN"))
-    private static void injectClinit(CallbackInfo callback) {
-        //potionRequirements.put(MobEffectList.regeneration.getId(), "0 & !1 & !2 & !3 & 0+6");
-        sugarEffect = "-0+1-2-3&4-4+13";
-        //potionRequirements.put(MobEffectList.moveSpeed.getId(), "!0 & 1 & !2 & !3 & 1+6");
-        magmaCreamEffect = "+0+1-2-3&4-4+13";
-        //potionRequirements.put(MobEffectList.fireResistance.getId(), "0 & 1 & !2 & !3 & 0+6");
-        speckledMelonEffect = "+0-1+2-3&4-4+13";
-        potionRequirements.put(MobEffectList.heal.getId(), "0 & !1 & 2 & !3");
+    private static void injectClinit(CallbackInfo callbackInfo) {
 
+    //地狱疣+8min
+        potionRequirements.put(Integer.valueOf(MobEffectList.resistance.getId()), "0 & 1 & 2 & 3 & 4+6");
+
+        potionRequirements.put(Integer.valueOf(MobEffectList.regeneration.getId()), "0 & !1 & !2 & !3 & 0+6");
+        sugarEffect = "-0+1-2-3&4-4+13";
+        potionRequirements.put(Integer.valueOf(MobEffectList.moveSpeed.getId()), "!0 & 1 & !2 & !3 & 1+6");
+        magmaCreamEffect = "+0+1-2-3&4-4+13";
+        potionRequirements.put(Integer.valueOf(MobEffectList.fireResistance.getId()), "0 & 1 & !2 & !3 & 0+6");
+        speckledMelonEffect = "+0-1+2-3&4-4+13";
+        potionRequirements.put(Integer.valueOf(MobEffectList.heal.getId()), "0 & !1 & 2 & !3");
         spiderEyeEffect = "-0-1+2-3&4-4+13";
-        //potionRequirements.put(MobEffectList.poison.getId(), "!0 & !1 & 2 & !3 & 2+6");
+        potionRequirements.put(Integer.valueOf(MobEffectList.poison.getId()), "!0 & !1 & 2 & !3 & 2+6");
         fermentedSpiderEyeEffect = "-0+3-4+13";
-        //potionRequirements.put(MobEffectList.weakness.getId(), "!0 & !1 & !2 & 3 & 3+6");
-        //potionRequirements.put(MobEffectList.harm.getId(), "!0 & !1 & 2 & 3");
-        //potionRequirements.put(MobEffectList.moveSlowdown.getId(), "!0 & 1 & !2 & 3 & 3+6");
+        potionRequirements.put(Integer.valueOf(MobEffectList.weakness.getId()), "!0 & !1 & !2 & 3 & 3+6");
+        potionRequirements.put(Integer.valueOf(MobEffectList.harm.getId()), "!0 & !1 & 2 & 3");
+        potionRequirements.put(Integer.valueOf(MobEffectList.moveSlowdown.getId()), "!0 & 1 & !2 & 3 & 3+6");
         blazePowderEffect = "+0-1-2+3&4-4+13";
-        //potionRequirements.put(MobEffectList.damageBoost.getId(), "0 & !1 & !2 & 3 & 3+6");
-        goldenCarrotEffect = "-0+1+2-3+13&&4-4";
-        potionRequirements.put(MobEffectList.nightVision.getId(), "!0 & 1 & 2 & !3 & 2+6");
-        //potionRequirements.put(MobEffectList.invisibility.getId(), "!0 & 1 & 2 & 3 & 2+6");
-        //                                                                       3为合成隐身
-        potionRequirements.put(MobEffectList.resistance.getId(), "0 & !1 & !2 & 3 & 2+6");
+        potionRequirements.put(Integer.valueOf(MobEffectList.damageBoost.getId()), "0 & !1 & !2 & 3 & 3+6");
+        goldenCarrotEffect = "-0+1+2-3+13&4-4";
+        potionRequirements.put(Integer.valueOf(MobEffectList.nightVision.getId()), "!0 & 1 & 2 & !3 & 2+6");
+        potionRequirements.put(Integer.valueOf(MobEffectList.invisibility.getId()), "!0 & 1 & 2 & 3 & 2+6");
         glowstoneEffect = "+5-6-7";
-//        potionAmplifiers.put(MobEffectList.moveSpeed.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.digSpeed.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.damageBoost.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.regeneration.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.harm.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.heal.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.resistance.getId(), "5");
-//        potionAmplifiers.put(MobEffectList.poison.getId(), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.moveSpeed.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.digSpeed.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.damageBoost.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.regeneration.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.harm.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.heal.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.resistance.getId()), "5");
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.poison.getId()), "5");
         redstoneEffect = "-5+6-7";
         gunpowderEffect = "+14&13-13";
         field_77925_n = new HashMap();
         potionPrefixes = new String[]{"potion.prefix.mundane", "potion.prefix.uninteresting", "potion.prefix.bland", "potion.prefix.clear", "potion.prefix.milky", "potion.prefix.diffuse", "potion.prefix.artless", "potion.prefix.thin", "potion.prefix.awkward", "potion.prefix.flat", "potion.prefix.bulky", "potion.prefix.bungling", "potion.prefix.buttered", "potion.prefix.smooth", "potion.prefix.suave", "potion.prefix.debonair", "potion.prefix.thick", "potion.prefix.elegant", "potion.prefix.fancy", "potion.prefix.charming", "potion.prefix.dashing", "potion.prefix.refined", "potion.prefix.cordial", "potion.prefix.sparkling", "potion.prefix.potent", "potion.prefix.foul", "potion.prefix.odorless", "potion.prefix.rank", "potion.prefix.harsh", "potion.prefix.acrid", "potion.prefix.gross", "potion.prefix.stinky"};
     }
     @Shadow
-    public static final String field_77924_a = null;
-    @Shadow
     @Final
     @Mutable
     public static String sugarEffect;
-    @Shadow
-    public static final String ghastTearEffect = "+0-1-2-3&4-4+13";
     @Shadow
     @Final
     @Mutable

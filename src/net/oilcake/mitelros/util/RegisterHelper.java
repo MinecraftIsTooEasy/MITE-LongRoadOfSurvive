@@ -16,6 +16,7 @@ public class RegisterHelper {
     public static void registerAllItems(){
         Items.registerItems();
         Blocks.registerBlocks();
+
         //Achievements.registerAchievements();
     }
 
@@ -23,6 +24,7 @@ public class RegisterHelper {
         RecipeRegister recipeRegister = new RecipeRegister();
         Blocks.registerRecipes(recipeRegister);
         Items.registerRecipes(recipeRegister);
+        RecipeOther.registerRecipes(recipeRegister);
 
         RecipesArgs recipesArgs;
         for (RecipesArgs shapedRecipe : shapedRecipes) {

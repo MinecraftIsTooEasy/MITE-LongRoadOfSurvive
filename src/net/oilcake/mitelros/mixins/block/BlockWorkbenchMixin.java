@@ -76,8 +76,8 @@ public class BlockWorkbenchMixin extends Block{
     }
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback) {
-        tool_materials = new Material[]{Material.flint, Material.copper, Material.silver, Material.gold, Material.iron, Material.ancient_metal, Material.mithril, Material.adamantium,
-                Materials.nickel, Material.obsidian};
+        tool_materials = new Material[]{Material.flint, Material.silver, Material.gold, Material.ancient_metal, Material.mithril, Material.adamantium,
+                Materials.nickel, Materials.tungsten, Material.obsidian};
     }
 
     @Overwrite

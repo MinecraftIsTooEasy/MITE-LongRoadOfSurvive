@@ -4,8 +4,10 @@ import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.RecipeRegister;
-import net.oilcake.mitelros.util.ReflectHelper;
 import net.minecraft.*;
+import net.xiaoyu233.fml.util.ReflectHelper;
+
+import static net.xiaoyu233.fml.util.ReflectHelper.createInstance;
 
 
 public class Blocks extends Block {
@@ -26,19 +28,19 @@ public class Blocks extends Block {
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockSmokerBurning = new BlockSmoker(getNextBlockID(), true)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final BlockAnvil anvilNickel = ReflectHelper.createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.nickel);
+    public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.nickel);
     public static final Block blockEnchantReserver = new BlockEnchantReserver(getNextBlockID())
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final BlockOreBlock blockNickel = new BlockOreBlock(getNextBlockID(), Materials.nickel);
     public static final Block fenceNickel = new NewBlockThinFence(getNextBlockID(), Materials.nickel).setExplosionResistance(24.0f).setBlockHardness(6.4F);;
-    public static final Block doorNickel = ReflectHelper.createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
+    public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
             , getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
 
     public static final Block blockNickelOre = new BlockOre(getNextBlockID(), Materials.nickel, 3).setBlockHardness(3.0F).setExplosionResistance(20.0f);
     public static final Block blockTungstenOre = new BlockOre(getNextBlockID(), Materials.nickel, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);;
     public static final BlockOreBlock blockTungsten = new BlockOreBlock(getNextBlockID(),Materials.tungsten);
     public static final Block fenceTungsten = new NewBlockThinFence(getNextBlockID(), Materials.tungsten).setExplosionResistance(96.0f).setBlockHardness(51.2F);
-    public static final Block doorTungsten = ReflectHelper.createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
+    public static final Block doorTungsten = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
             , getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
 
 

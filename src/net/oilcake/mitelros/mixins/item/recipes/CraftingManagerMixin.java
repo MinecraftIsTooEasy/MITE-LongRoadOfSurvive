@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.item.recipes;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.util.RecipeOther;
 import net.oilcake.mitelros.util.RegisterHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;

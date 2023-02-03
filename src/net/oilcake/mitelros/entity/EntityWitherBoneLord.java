@@ -42,7 +42,7 @@ public class EntityWitherBoneLord extends EntityBoneLord {
     public EntityDamageResult attackEntityAsMob(Entity target) {
         EntityDamageResult result = super.attackEntityAsMob(target);
         if (result != null && !result.entityWasDestroyed()) {
-            if (result.entityLostHealth() && target instanceof EntityLiving) {
+            if (result.entityLostHealth() && target instanceof EntityPlayer) {
                 target.getAsEntityLivingBase().addPotionEffect(new MobEffect(MobEffectList.wither.id, 850));
             }
             return result;

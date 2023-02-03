@@ -4,7 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " 23w06 Test4 ";
+    public static final String VERSION = " BEAT+Build.12 ";
     public static final int VER_NUM = 114514;
     public static int nextItemID = 2000;
     public static int nextBlockID = 180;
