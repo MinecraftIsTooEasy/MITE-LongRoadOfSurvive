@@ -2,6 +2,7 @@
 ### BEAT+Build.13-pre1
 ### 其他
 * 添加了水的显示(实际为饱和度)材质来自Kalsey
+* 需更新DumpClass
 
 ---
 
