@@ -3,14 +3,75 @@ package net.oilcake.mitelros.mixins.item;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.minecraft.*;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(Item.class)
 public class ItemMixin{
-    public Item item;
+
     private int water;
+
+//    @Inject(method = "<init>", at = @At("RETURN"))
+//    protected void injectInit(CallbackInfo callbackInfo){
+//        this.setWater(1);
+//    }
+    public Item item;
+
+    public final Item setFoodValueForWather(int satiation, int nutrition, int sugar_content, boolean has_protein, boolean has_essential_fats, boolean has_phytonutrients, int water) {
+        this.satiation = satiation;
+        this.nutrition = nutrition;
+        this.sugar_content = sugar_content;
+        this.has_protein = has_protein;
+        this.has_essential_fats = has_essential_fats;
+        this.has_phytonutrients = has_phytonutrients;
+
+        this.water = water;
+        if (satiation > 0 || nutrition > 0) {
+            this.setCreativeTab(CreativeModeTab.tabFood);
+        }
+
+        return item;
+    }
+
+    @Overwrite
+    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
+        if (extended_info) {
+            int satiation = this.getSatiation(player);
+            int nutrition = this.getNutrition();
+            int water = this.getWater();
+            if (this.satiation > 0 || nutrition > 0) {
+                info.add("");
+                if (item instanceof ItemBlock) {
+                    ItemBlock item_block = (ItemBlock)item;
+                    if (item_block.getBlock() == Block.mushroomRed) {
+                        info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
+                        info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
+                        info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "item.tooltip.water", new Object[]{water}));
+                        return;
+                    }
+                }
+
+                if (this.satiation > 0) {
+                    info.add((this.sugar_content > 0 && player.isInsulinResistant() ? player.getInsulinResistanceLevel().getColorC() : EnumChatFormat.BROWN) + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
+                }
+
+                if (nutrition > 0) {
+                    info.add(EnumChatFormat.BROWN + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
+                }
+                if (water > 0) {
+                    info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "item.tooltip.water", new Object[]{water}));
+                }
+            }
+        }
+    }
+
     public final int getWater() {
         return this.water;
     }
@@ -106,5 +167,14 @@ public class ItemMixin{
     @Shadow
     public Item setTextureName(String location) {
         return null;
+    }
+    @Shadow
+    @Final
+    public int getSatiation(EntityPlayer player) {
+        return 1;
+    }
+    @Shadow
+    public int getNutrition() {
+        return 1;
     }
 }

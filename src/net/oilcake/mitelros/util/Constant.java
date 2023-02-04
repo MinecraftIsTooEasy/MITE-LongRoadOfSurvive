@@ -4,7 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " BEAT+Build.13-pre3 ";
+    public static final String VERSION = " BEAT+Build.13-pre4 ";
     public static final bjo icons = new bjo("textures/gui/icons_lros.png");
     public static final int VER_NUM = 114514;
     public static int nextItemID = 2000;

@@ -27,6 +27,7 @@ public class NetClientHandlerMixin extends ConnectionMixin{
 //        }
 //    }
 
+
     @Shadow
     private static int class_hash_sum = 0;
     @Shadow

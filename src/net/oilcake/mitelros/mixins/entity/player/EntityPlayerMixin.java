@@ -20,14 +20,16 @@ public class EntityPlayerMixin extends EntityLiving{
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //    }
 
-//    public int getWater()
-//    {
-//        return this.foodStats.getWater();
-//    }
-//    public int addWater()
-//    {
-//        return this.foodStats.addWater(10);
-//    }
+    public int getWater() {
+        return this.foodStats.getWater();
+    }
+    public int addWater() {
+        return this.foodStats.addWater(10);
+    }
+    public int removeWater() {
+        return this.foodStats.addWater(-10);
+    }
+
     public void decreaseWaterServerSide(float water)
     {
         if (!this.capabilities.isCreativeMode && !this.capabilities.disableDamage)

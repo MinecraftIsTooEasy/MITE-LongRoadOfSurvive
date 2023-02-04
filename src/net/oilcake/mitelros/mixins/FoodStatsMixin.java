@@ -91,24 +91,29 @@ public class FoodStatsMixin {
         this.setSatiationWater(this.water + water, true);
         return this.water;
     }
+//    public int removeWater(int water)
+//    {
+//        this.setSatiationWater(this.water - water, true);
+//        return this.water;
+//    }
 
     @Shadow
     private float global_hunger_rate = 1.0F;
 
-//    private void decreaseWater(float water)
-//    {
-//        if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament())
-//        {
-//            water *= this.global_hunger_rate;
-//            this.water = Math.min(this.water + water, 40);
-//
-//            if (this.player.worldObj.isRemote && this.water > 0.2F) {
-//                Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
-//                System.out.println("OM");
-//                this.water = 0.0F;
-//            }
-//        }
-//    }
+    private void decreaseWater(float water)
+    {
+        if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament())
+        {
+            water *= this.global_hunger_rate;
+            this.water = (int) Math.min(this.water + water, 40);
+
+            if (this.player.worldObj.isRemote && this.water > 0.2F) {
+                Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
+                //System.out.println("OM");
+                this.water = 0;
+            }
+        }
+    }
 
     @Overwrite
     private void addHunger(float hunger) {
@@ -117,7 +122,7 @@ public class FoodStatsMixin {
             this.hunger = Math.min(this.hunger + hunger, 40.0F);
             if (this.player.worldObj.isRemote && this.hunger > 0.2F) {
                 Minecraft.w().h.netClientHandler.c(new Packet82AddHunger(this.hunger));
-                Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
+                //Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
                 //System.out.println("OMHunger");
                 this.hunger = 0.0F;
             }
@@ -167,7 +172,7 @@ public class FoodStatsMixin {
                 float hunger_factor = par1EntityPlayer.getWetnessAndMalnourishmentHungerMultiplier();
                 this.addHungerServerSide(getHungerPerTick() * hunger_factor);
 
-                //this.decreaseWaterServerSide(getHungerPerTick() * hunger_factor);
+                this.decreaseWaterServerSide(getHungerPerTick());
 
                 if (!par1EntityPlayer.inCreativeMode()) {
                     this.hunger_for_nutrition_only += getHungerPerTick() * 0.25F;
@@ -185,7 +190,7 @@ public class FoodStatsMixin {
                         }
                     }
                 }
-                if(this.water < 0){
+                if(this.water < 0 || this.water > 20){
                     this.water = 0;
                 }
 

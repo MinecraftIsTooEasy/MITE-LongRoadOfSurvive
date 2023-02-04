@@ -8,6 +8,8 @@ item.armor/nickel_chainmail_leggings.name=镍锁链护腿
 item.armor/nickel_chainmail_boots.name=镍锁链靴子
 
 
+item.tooltip.water=含水量
+
 item.ingot/nickel.name=镍锭
 item.ingot/nugget/nickel.name=镍粒
 item.tool/nickel/nickel_axe.name=镍斧
