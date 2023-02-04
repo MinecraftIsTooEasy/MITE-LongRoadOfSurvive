@@ -9,19 +9,36 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Item.class)
 public class ItemMixin{
-    @Shadow
-    private String potionEffect;
     public Item item;
+    private int water;
+    public final int getWater() {
+        return this.water;
+    }
+    public Item setWater(int water)
+    {
+        this.water = water;
+        return item;
+    }
 
     public Item setPotionEffectC(String par1Str) {
         this.potionEffect = par1Str;
         return item;
     }
-
-    @Shadow
-    public Material getMaterialForRepairs() {
-        return null;
-    }
+    // must not to do this
+//    public final Item setFoodValue(int satiation, int nutrition, int sugar_content, boolean has_protein, boolean has_essential_fats, boolean has_phytonutrients) {
+//        this.satiation = satiation;
+//        this.nutrition = nutrition;
+//        this.sugar_content = sugar_content;
+//        this.has_protein = has_protein;
+//        this.has_essential_fats = has_essential_fats;
+//        this.has_phytonutrients = has_phytonutrients;
+//        this.water = nutrition;
+//        if (satiation > 0 || nutrition > 0) {
+//            this.setCreativeTab(CreativeModeTab.tabFood);
+//        }
+//
+//        return item;
+//    }
     @Overwrite
     public Item getRepairItem() {
         Material material_for_repairs = this.getMaterialForRepairs();
@@ -48,8 +65,24 @@ public class ItemMixin{
             return Item.ironNugget;
         }
     }
-
-
+    @Shadow
+    private int satiation;
+    @Shadow
+    private int nutrition;
+    @Shadow
+    private int sugar_content;
+    @Shadow
+    private boolean has_protein;
+    @Shadow
+    private boolean has_essential_fats;
+    @Shadow
+    private boolean has_phytonutrients;
+    @Shadow
+    public Material getMaterialForRepairs() {
+        return null;
+    }
+    @Shadow
+    private String potionEffect;
     public String getResourceLocationPrefix() {
         return "";
     }

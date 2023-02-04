@@ -31,12 +31,12 @@ public class GuiIngameMixin extends avk {
         int var5 = MathHelper.ceiling_float_int(this.g.h.prevHealth);
         this.f.setSeed((long)(this.i * 312871));
         FoodMetaData foodStats = this.g.h.getFoodStats();
-        int var8 = foodStats.getNutrition();
-        AttributeInstance var10 = this.g.h.getEntityAttribute(GenericAttributes.maxHealth);
+        int nutrition = foodStats.getNutrition();
+        AttributeInstance maxHealth = this.g.h.getEntityAttribute(GenericAttributes.maxHealth);
         int var11 = par1 / 2 - 91;
         int var12 = par1 / 2 + 91;
         int var13 = par2 - 39;
-        float var14 = (float)var10.getAttributeValue();
+        float var14 = (float)maxHealth.getAttributeValue();
         float var15 = this.g.h.getAbsorptionAmount();
         int var16 = MathHelper.ceiling_float_int((var14 + var15) / 2.0F / 10.0F);
         int var17 = Math.max(10 - (var16 - 2), 3);
@@ -49,7 +49,6 @@ public class GuiIngameMixin extends avk {
             var21 = this.i % MathHelper.ceiling_float_int(var14 + 5.0F);
         }
 
-        this.g.J().a(Constant.icons);
         this.g.C.startSection("armor");
 
         int var23;
@@ -71,7 +70,7 @@ public class GuiIngameMixin extends avk {
             }
         }
 
-        this.g.J().a(Constant.icons);
+
         this.g.C.endStartSection("health");
 
         int var25;
@@ -189,7 +188,7 @@ public class GuiIngameMixin extends avk {
                     var36 = 13;
                 }
 
-                if (this.g.h.isHungry() && this.i % (var8 * 3 + 1) == 0) {
+                if (this.g.h.isHungry() && this.i % (nutrition * 3 + 1) == 0) {
                     var28 = var13 + (this.f.nextInt(3) - 1);
                 }
 
@@ -198,11 +197,11 @@ public class GuiIngameMixin extends avk {
                     this.b(var27, var28, 16 + var36 * 9, 27, 9, 9);
                 }
 
-                if (var23 * 2 + 1 < var8) {
+                if (var23 * 2 + 1 < nutrition) {
                     this.b(var27, var28, var25 + 36, 27, 9, 9);
                 }
 
-                if (var23 * 2 + 1 == var8) {
+                if (var23 * 2 + 1 == nutrition) {
                     this.b(var27, var28, var25 + 45, 27, 9, 9);
                 }
             }
@@ -210,7 +209,7 @@ public class GuiIngameMixin extends avk {
 
         this.g.J().a(Constant.icons);
         this.g.C.endStartSection("water");
-        int water = foodStats.getSatiation();
+        int water = foodStats.getWater();
         for(int temp = 0; temp < 10; ++temp) {
             var28 = var13 - 9;
             var25 = 16;

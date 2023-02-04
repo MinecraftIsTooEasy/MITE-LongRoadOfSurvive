@@ -1,22 +1,106 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
+import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.Items;
 import net.minecraft.*;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntityPlayer.class)
 public class EntityPlayerMixin extends EntityLiving{
+    public EntityPlayer entityPlayer;
 
-//    public static int getWaterLimit(int level) {
+//    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
 //    }
-//
 //    public float getWaterLimit() {
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //    }
+
+//    public int getWater()
+//    {
+//        return this.foodStats.getWater();
+//    }
+//    public int addWater()
+//    {
+//        return this.foodStats.addWater(10);
+//    }
+    public void decreaseWaterServerSide(float water)
+    {
+        if (!this.capabilities.isCreativeMode && !this.capabilities.disableDamage)
+        {
+            this.foodStats.decreaseWaterServerSide(water);
+        }
+    }
+
+//    @Overwrite
+//    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {
+//        suppress_healing = true;
+//        if (amount < 0) {
+//            if (!suppress_sound) {
+//                this.worldObj.playSoundAtEntity(this, "imported.random.level_drain");
+//            }
+//        } else if (amount > 0) {
+//            this.addScore(amount);
+//            if (!suppress_sound) {
+//                this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
+//            }
+//        }
+//
+//        float health_limit_before = this.getHealthLimit();
+//        int level_before = this.getExperienceLevel();
+//        this.experience += amount;
+//        if (this.experience < getExperienceRequired(-40)) {
+//            this.experience = getExperienceRequired(-40);
+//        }
+//
+//        int level_after = this.getExperienceLevel();
+//        int level_change = level_after - level_before;
+//        if (level_change < 0) {
+//            this.setHealth(this.getHealth());
+//            this.foodStats.setSatiation(this.foodStats.getSatiation(), true);
+//            this.foodStats.setNutrition(this.foodStats.getNutrition(), true);
+//        } else if (level_change > 0) {
+//            if (this.getHealthLimit() > health_limit_before && (float)this.field_82249_h < (float)this.ticksExisted - 100.0F) {
+//                float volume = level_after > 30 ? 1.0F : (float)level_after / 30.0F;
+//                if (!suppress_sound) {
+//                    this.worldObj.playSoundAtEntity(this, "random.levelup", volume * 0.75F, 1.0F);
+//                }
+//
+//                this.field_82249_h = this.ticksExisted;
+//            }
+//
+//            if (!suppress_healing) {
+//                this.setHealth(this.getHealth() + this.getHealthLimit() - health_limit_before);
+//            }
+//        }
+//
+//        if (level_change != 0 && !this.worldObj.isRemote) {
+//            MinecraftServer.a(MinecraftServer.F()).sendPlayerInfoToAllPlayers(true);
+//        }
+//
+//        if (entityPlayer instanceof ServerPlayer && DedicatedServer.tournament_type == EnumTournamentType.score) {
+//            DedicatedServer.getOrCreateTournamentStanding(entityPlayer).experience = this.experience;
+//            DedicatedServer.updateTournamentScoreOnClient(entityPlayer, true);
+//        }
+//    }
+    @Shadow
+    public float getHealthLimit() {
+        return 1.0F;
+    }
+
+    @Shadow
+    @Final
+    public static int getHighestPossibleLevel() {
+        return 0;
+    }
+    @Shadow
+    @Final
+    private static int[] experience_for_level;
+
     @Shadow
     public final int getExperienceLevel() {
         return 1;

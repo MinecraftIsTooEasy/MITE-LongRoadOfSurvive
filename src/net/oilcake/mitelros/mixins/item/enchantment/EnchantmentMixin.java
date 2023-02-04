@@ -15,17 +15,17 @@ public class EnchantmentMixin {
     @Final
     public static Enchantment[] enchantmentsList;
 
-//    @Inject(method = "<clinit>",at = @At("RETURN"))
-//    private static void injectClinit(CallbackInfo callbackInfo){
-//        Enchantments.registerEnchantments();
-//        for (Enchantment enchantment : enchantmentsList) {
-//            if (enchantment != null && !Enchantments.individualEnchantments.contains(enchantment)){
-//                if (enchantment.enchantIndividually()){
-//                    Enchantments.individualEnchantments.add(enchantment);
-//                }
-//            }
-//        }
-//    }
+    @Inject(method = "<clinit>",at = @At("RETURN"))
+    private static void injectClinit(CallbackInfo callbackInfo){
+        Enchantments.registerEnchantments();
+        for (Enchantment enchantment : enchantmentsList) {
+            if (enchantment != null && !Enchantments.individualEnchantments.contains(enchantment)){
+                if (enchantment.enchantIndividually()){
+                    Enchantments.individualEnchantments.add(enchantment);
+                }
+            }
+        }
+    }
     public boolean enchantIndividually(){
         return false;
     }

@@ -5,8 +5,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ItemStack.class)
-public class ItemStackMixin {
+public class ItemStackMixin{
     private ItemStack itemStack;
+
+
+    public int getWater() {
+        return this.getItem().getWater();
+    }
+
 
     public boolean isItemStackEqualC(ItemStack par1ItemStack, boolean ignore_stack_size, boolean ignore_quality, boolean ignore_damage_but_not_subtype, boolean ignore_tag_compound) {
         if (par1ItemStack == itemStack) {
@@ -40,6 +46,10 @@ public class ItemStackMixin {
                 return ignore_tag_compound || areItemStackTagsEqual(itemStack, par1ItemStack);
             }
         }
+    }
+    @Shadow
+    public Item getItem() {
+        return null;
     }
     @Shadow
     public boolean isItemStackDamageable() {

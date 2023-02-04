@@ -6,19 +6,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.minecraft.Block.*;
 
 @Mixin(Block.class)
 public class BlockMixin{
-    @Shadow
-    @Final
-    public Material blockMaterial;
-
-    public Block block;
-    @Shadow
-    private EntityItem dropBlockAsItem_do(BlockBreakInfo info, ItemStack item_stack) {
-        return null;
-    }
 
     @Overwrite
     public int dropBlockAsItself(BlockBreakInfo info) {
@@ -52,6 +46,335 @@ public class BlockMixin{
             return this.dropBlockAsEntityItem(info, item_stack.itemID, item_stack.getItemSubtype(), item_stack.stackSize, 1.0F);
         }
     }
+    @Overwrite
+    @Final
+    private void validate() {
+        if (this.is_always_solid && this.is_never_solid) {
+            Minecraft.setErrorMessage("validate: is_always_solid and is_never_solid");
+        }
+
+        if (this.is_always_standard_form_cube && this.is_never_standard_form_cube) {
+            Minecraft.setErrorMessage("validate: is_always_standard_form_cube and is_never_standard_form_cube");
+        }
+
+        if (this.is_always_solid_standard_form_cube && !this.is_always_solid) {
+            Minecraft.setErrorMessage("validate: is_always_solid_standard_form_cube and !is_always_solid " + this);
+        }
+
+        if (this.is_always_solid_standard_form_cube && !this.is_always_standard_form_cube) {
+            Minecraft.setErrorMessage("validate: is_always_solid_standard_form_cube and !is_always_standard_form_cube " + this);
+        }
+
+        if (this.is_always_solid_opaque_standard_form_cube && !this.is_always_solid) {
+            Minecraft.setErrorMessage("validate: is_always_solid_opaque_standard_form_cube and !is_always_solid");
+        }
+
+        if (this.is_always_solid_opaque_standard_form_cube && !this.is_always_standard_form_cube) {
+            Minecraft.setErrorMessage("validate: is_always_solid_opaque_standard_form_cube and !is_always_standard_form_cube");
+        }
+
+        if (this.is_always_solid_opaque_standard_form_cube && !this.is_always_solid_standard_form_cube) {
+            Minecraft.setErrorMessage("validate: is_always_solid_opaque_standard_form_cube and !is_always_solid_standard_form_cube");
+        }
+
+        if (this.num_item_subtypes != this.item_subtypes.length) {
+            Debug.setErrorMessage("validate: num_item_subtypes=" + this.num_item_subtypes + " vs item_subtypes.length=" + this.item_subtypes.length + " for " + this + " (id=" + this.blockID + ")");
+        }
+
+        if (this.num_item_subtypes != this.getItemStacks().size()) {
+            Debug.setErrorMessage("validate: num_item_subtypes=" + this.num_item_subtypes + " vs " + this.getItemStacks().size() + " for " + this + " (id=" + this.blockID + ")");
+        }
+
+        if (this.num_item_subtypes < 1) {
+            Debug.setErrorMessage("validate: num_item_subtypes==" + this.num_item_subtypes + " for " + this + "?");
+        } else {
+            List list = this.getItemStacks();
+
+            for(int i = 0; i < this.item_subtypes.length; ++i) {
+                ItemStack item_stack = (ItemStack)list.get(i);
+                if (item_stack.getItemSubtype() != this.item_subtypes[i]) {
+                    Debug.setErrorMessage("validate: subtype value mismatch, " + item_stack.getItemSubtype() + " vs " + this.item_subtypes[i]);
+                }
+            }
+        }
+
+        int metadata;
+        if (this.has_item_subtypes) {
+            for(metadata = 0; metadata < this.item_subtypes.length; ++metadata) {
+                if (!this.isValidMetadata(this.item_subtypes[metadata])) {
+                    Debug.setErrorMessage("validate: " + this + " has a subtype metadata of " + this.item_subtypes[metadata] + " but isValidMetadata() returns false for it");
+                }
+            }
+        }
+
+        if (this.canBeCarried()) {
+            if (this.D() == null) {
+                //Minecraft.setErrorMessage("No creative tab for [" + this.blockID + "] " + this);
+            }
+        } else if (block != bedrock && block != mobSpawner && block != dragonEgg && block != endPortalFrame && block != mantleOrCore && this.D() != null) {
+            //Minecraft.setErrorMessage("Creative tab for [" + this.blockID + "] " + this);
+        }
+
+        for(metadata = 0; metadata < 16; ++metadata) {
+            if (this.isValidMetadata(metadata)) {
+                ItemStack item_stack = this.createStackedBlock(metadata);
+                if (item_stack == null) {
+                    if (this.canBeCarried()) {
+                        Minecraft.setErrorMessage("validate: " + this + " can be carried but createStackedBlock() returns null");
+                        break;
+                    }
+                } else if (item_stack.isBlock() && !item_stack.getItemAsBlock().getBlock().canBeCarried()) {
+                    Minecraft.setErrorMessage("validate: createStackedBlock() returns a block that cannot be carried for " + this);
+                    break;
+                }
+
+                if (this.canSilkHarvest(metadata) && !this.canBeCarried()) {
+                    Minecraft.setErrorMessage("validate: " + this + " canSilkHarvest but cannot be carried");
+                }
+            }
+        }
+
+        boolean can_be_solid = false;
+        boolean can_be_not_solid = false;
+
+        for(metadata = 0; metadata < 16; ++metadata) {
+            if (this.isValidMetadata(metadata)) {
+                if (this.isSolid(metadata)) {
+                    can_be_solid = true;
+                } else {
+                    can_be_not_solid = true;
+                }
+            }
+        }
+
+        if (!can_be_solid && !can_be_not_solid) {
+            Minecraft.setErrorMessage("validate: " + this + " can neither be solid or not solid?");
+        } else if (can_be_solid && can_be_not_solid) {
+            if (this.is_always_solid) {
+                Minecraft.setErrorMessage("validate: " + this + " can be solid or not solid but is_always_solid==true");
+            } else if (this.is_never_solid) {
+                Minecraft.setErrorMessage("validate: " + this + " can be solid or not solid but is_never_solid==true");
+            }
+        } else if (can_be_solid) {
+            if (this.is_never_solid) {
+                Minecraft.setErrorMessage("validate: " + this + " can only be solid but is_never_solid==true");
+            } else if (!this.is_always_solid) {
+                Minecraft.setErrorMessage("validate: " + this + " can only be solid but is_always_solid==false");
+            }
+        } else if (this.is_always_solid) {
+            Minecraft.setErrorMessage("validate: " + this + " can only be not solid but is_always_solid==true");
+        } else if (!this.is_never_solid) {
+            Minecraft.setErrorMessage("validate: " + this + " can only be not solid but is_never_solid==false");
+        }
+
+        if (this.getRenderType() == 1) {
+            if (!this.neverHidesAdjacentFaces()) {
+                Minecraft.setErrorMessage("validate: " + this + " has render type " + this.getRenderType() + " but never_hides_adjacent_faces==false");
+            }
+
+            if (!this.is_never_standard_form_cube) {
+                Minecraft.setErrorMessage("validate: " + this + " has render type " + this.getRenderType() + " but is_never_standard_form_cube==false");
+            }
+        }
+
+        if (!this.is_always_standard_form_cube && this.renderAsNormalBlock()) {
+            Minecraft.setErrorMessage("validate: " + this + " renders as normal block but is_always_standard_form_cube==false");
+        }
+
+        if (is_normal_cube_lookup[this.blockID] != this.is_normal_cube) {
+            Minecraft.setErrorMessage("validate: " + this + " normal cube lookup discrepency");
+        }
+
+        if (!this.is_always_opaque_standard_form_cube && !this.is_never_opaque_standard_form_cube) {
+            Minecraft.setErrorMessage("validate: " + this + " is neither always opaque standard form cube or never opaque standard form cube");
+        }
+
+        if (this.renderAsNormalBlock() != this.isAlwaysStandardFormCube()) {
+            Debug.println("validate: " + this + ", renderAsNormalBlock=" + this.renderAsNormalBlock() + " vs isAlwaysStandardFormCube=" + this.isAlwaysStandardFormCube());
+        }
+
+        if (lightOpacity[this.blockID] == 0 && !canHaveLightValue[this.blockID]) {
+            Debug.println("validate: " + this + " has light opacity 0 but canBlockGrass==false");
+        }
+
+        if (lightOpacity[this.blockID] >= 15 && canHaveLightValue[this.blockID]) {
+            Debug.println("validate: " + this + " has light opacity 255 but canBlockGrass==true");
+        }
+
+        if (lightOpacity[this.blockID] >= 15 && this.isAlwaysStandardFormCube() && !this.isAlwaysOpaqueStandardFormCube()) {
+            Debug.println("validate: " + this + " has light opacity >= 15 and is always standard form but is_always_opaque_standard_form_cube==false");
+        }
+
+        if (lightOpacity[this.blockID] >= 15 && !this.isAlwaysStandardFormCube() && !useNeighborBrightness[this.blockID]) {
+            Debug.println("validate: " + this + " has light opacity 255 and is not always standard form but useNeighborBrightness==false");
+        }
+
+        if (lightOpacity[this.blockID] >= 15 && this.isAlwaysStandardFormCube() && useNeighborBrightness[this.blockID]) {
+            Debug.println("validate: " + this + " has light opacity 255 and is always standard form but useNeighborBrightness==true");
+        }
+
+        if (canHaveLightValue[this.blockID] && useNeighborBrightness[this.blockID]) {
+            Debug.println("validate: " + this + " canHaveLightValue and useNeighborBrightness are mutually exclusive");
+        }
+
+        if (useNeighborBrightness[this.blockID] && this.neverHidesAdjacentFaces()) {
+            Debug.println("validate: " + this + " uses neighbor brightness but neverHidesAdjacentFaces");
+        }
+
+        boolean uses_neighbor_brightness = false;
+        boolean always_uses_neighbor_brightness = true;
+
+        for(int i = 0; i < 96; ++i) {
+            if (this.use_neighbor_brightness[i]) {
+                uses_neighbor_brightness = true;
+            } else {
+                always_uses_neighbor_brightness = false;
+            }
+        }
+
+        if (useNeighborBrightness[this.blockID] != uses_neighbor_brightness) {
+            Debug.println("validate: " + this + " useNeighborBrightness mismatch");
+        }
+
+        if (always_uses_neighbor_brightness) {
+            Debug.println("validate: " + this + " always uses neighbor brightness");
+        }
+
+    }
+    @Shadow
+    @Final
+    public Material blockMaterial;
+
+    public Block block;
+    @Shadow
+    private EntityItem dropBlockAsItem_do(BlockBreakInfo info, ItemStack item_stack) {
+        return null;
+    }
+    @Shadow
+    @Final
+    private boolean has_item_subtypes;
+    @Shadow
+    @Final
+    private int num_item_subtypes;
+    @Shadow
+    @Final
+    private int[] item_subtypes;
+    @Shadow
+    @Final
+    public List getItemStacks() {
+        return null;
+    }
+    @Shadow
+    public boolean isSolid(boolean[] is_solid, int metadata) {
+        return true;
+    }
+    @Shadow
+    @Final
+    public boolean isSolid(int metadata) {
+        return this.is_solid[metadata];
+    }
+    @Shadow
+    public CreativeModeTab D() {
+        return null;
+    }
+    @Shadow
+    public boolean canSilkHarvest(int metadata) {
+        return false;
+    }
+    @Shadow
+    public boolean canBeCarried() {
+        return true;
+    }
+    @Shadow
+    public int getRenderType() {
+        return 0;
+    }
+
+    @Shadow
+    @Final
+    public boolean is_normal_cube;
+    @Shadow
+    @Final
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+    @Shadow
+    public boolean isValidMetadata(int metadata) {
+        return false;
+    }
+    @Shadow
+    @Final
+    public boolean isAlwaysOpaqueStandardFormCube() {
+        return false;
+    }
+    @Shadow
+    @Final
+    public boolean neverHidesAdjacentFaces() {
+        return false;
+    }
+    @Shadow
+    @Final
+    public final boolean isAlwaysStandardFormCube() {
+        return false;
+    }
+    @Shadow
+    @Final
+    public int blockID;
+    @Shadow
+    @Final
+    private boolean[] use_neighbor_brightness;
+    @Shadow
+    private int max_stack_size = 4;
+    @Shadow
+    public boolean has_grass_top_icon;
+    @Shadow
+    private final boolean[] is_solid = new boolean[16];
+    @Shadow
+    @Final
+    public boolean is_always_solid;
+    @Shadow
+    @Final
+    public boolean is_never_solid;
+    @Shadow
+    @Final
+    private boolean[] is_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_always_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_never_standard_form_cube;
+    @Shadow
+    @Final
+    private boolean[] is_solid_and_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_always_solid_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_never_solid_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_always_opaque_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_never_opaque_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_always_solid_opaque_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean is_never_solid_opaque_standard_form_cube;
+    @Shadow
+    @Final
+    public boolean never_hides_adjacent_faces;
+    @Shadow
+    @Final
+    public boolean is_always_legal;
+    @Shadow
+    @Final
+    public boolean is_always_immutable;
+
     @Overwrite
     public final int dropBlockAsEntityItem(BlockBreakInfo info, int id_dropped, int subtype, int quantity, float chance) {
         if (info.world.isRemote) {

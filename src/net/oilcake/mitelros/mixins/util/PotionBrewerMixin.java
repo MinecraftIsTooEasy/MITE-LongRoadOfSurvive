@@ -17,11 +17,11 @@ import java.util.HashMap;
 
 @Mixin(PotionBrewer.class)
 public class PotionBrewerMixin {
-    private static final String attackEffect = "-0+1+2+3+5";
-
-    public String getAttackEffect(){
-        return attackEffect;
-    }
+//    private static final String attackEffect = "-0+1+2+3+5";
+//
+//    public String getAttackEffect(){
+//        return attackEffect;
+//    }
 
     //        spiderEyeEffect = "-0-1+2-3&   4   -4+13";
     //                                    地狱疣

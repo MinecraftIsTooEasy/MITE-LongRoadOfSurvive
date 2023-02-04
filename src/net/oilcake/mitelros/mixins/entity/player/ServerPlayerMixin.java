@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 @Mixin(ServerPlayer.class)
@@ -36,6 +39,67 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     private int last_satiation;
     @Shadow
     public PlayerConnection playerNetServerHandler;
+    private int last_water = -99999999;
+
+    //private int water;
+
+    @Overwrite
+    public void onUpdateEntity() {
+        try {
+            super.onUpdate();
+
+            for(int var1 = 0; var1 < this.inventory.getSizeInventory(); ++var1) {
+                ItemStack var6 = this.inventory.getStackInSlot(var1);
+                if (var6 != null && Item.itemsList[var6.itemID].isMap() && this.playerNetServerHandler.getNumChunkDataPackets() <= 5) {
+                    Packet var8 = ((ItemWorldMapBase)Item.itemsList[var6.itemID]).getUpdatePacket(var6, this.worldObj, this);
+                    if (var8 != null) {
+                        this.playerNetServerHandler.sendPacket(var8);
+                    }
+                }
+            }
+
+            float health = this.getHealth();
+            int satiation = this.getSatiation();
+            int nutrition = this.getNutrition();
+            int water = this.getWater();
+            //float hunger = this.foodStats.getHunger();
+            if (health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F) {
+                this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
+                Packet8UpdateHealth par1Packet = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
+                par1Packet.setWater(water);
+                this.playerNetServerHandler.sendPacket(par1Packet);
+                this.last_water = water;
+
+                this.lastHealth = health;
+                this.last_satiation = satiation;
+                this.last_nutrition = nutrition;
+                this.vision_dimming = 0.0F;
+            }
+
+            if (this.getHealth() + this.getAbsorptionAmount() != this.field_130068_bO) {
+                this.field_130068_bO = this.getHealth() + this.getAbsorptionAmount();
+                Collection var5 = this.getWorldScoreboard().func_96520_a(IScoreboardCriteria.health);
+                Iterator var7 = var5.iterator();
+
+                while(var7.hasNext()) {
+                    ScoreboardObjective var9 = (ScoreboardObjective)var7.next();
+                    this.getWorldScoreboard().func_96529_a(this.getEntityName(), var9).func_96651_a(Arrays.asList(this));
+                }
+            }
+
+            if (this.experience != this.last_experience) {
+                this.last_experience = this.experience;
+                this.playerNetServerHandler.sendPacket(new Packet43SetExperience(this.experience));
+            }
+
+        } catch (Throwable var8) {
+            CrashReport var2 = CrashReport.makeCrashReport(var8, "Ticking player");
+            CrashReportSystemDetails var3 = var2.makeCategory("Player being ticked");
+            this.addEntityCrashInfo(var3);
+            throw new ReportedException(var2);
+        }
+    }
+
     public ServerPlayerMixin(World par1World, String par2Str) {
         super(par1World, par2Str);
     }
