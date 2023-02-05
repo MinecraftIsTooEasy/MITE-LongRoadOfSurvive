@@ -17,7 +17,7 @@ public class ItemToolMixin extends Item{
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         super.addInformation(item_stack, player, info, extended_info, slot);
         if(item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel){
-            info.add(EnumChatFormat.LIGHT_GRAY + Translator.get("史莱姆杀手"));
+            info.add(EnumChatFormat.LIGHT_GRAY + Translator.get("腐蚀抗性"));
         }
     }
 

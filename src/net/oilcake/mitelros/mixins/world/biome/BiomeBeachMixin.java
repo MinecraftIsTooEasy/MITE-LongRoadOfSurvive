@@ -21,7 +21,7 @@ public class BiomeBeachMixin extends BiomeBase {
         int countNickel = par2Random.nextInt(Constant.nickelNUM) + 1;
         for(int temp = 0; temp < countNickel; ++temp) {
             int x = par3 + par2Random.nextInt(16);
-            int y = par2Random.nextInt(255);
+            int y = par2Random.nextInt(36)+12;
             int z = par4 + par2Random.nextInt(16);
             genMinable.generate(par1World, par2Random, x, y, z);
         }

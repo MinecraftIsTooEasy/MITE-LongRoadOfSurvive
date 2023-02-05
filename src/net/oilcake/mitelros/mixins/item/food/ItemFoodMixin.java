@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.item.food;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -11,7 +12,7 @@ public class ItemFoodMixin extends Item {
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
-            if (this.hasMaterial(Material.cheese)) {
+            if (this.hasMaterial(Material.cheese) || this.hasMaterial(Materials.mashedCactus) ) {
                 this.setWater(4);
             }else if (this.hasMaterial(Material.fruit) && !(item instanceof ItemGoldenApple)) {
                 this.setWater(3);

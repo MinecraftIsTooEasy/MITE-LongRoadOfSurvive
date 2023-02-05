@@ -28,6 +28,14 @@ public class EntityPlayerMixin extends EntityLiving{
             //System.out.println("发送buff数据 player");
         }
     }
+    @Shadow
+    public int getNutrition() {
+        return this.foodStats.getNutrition();
+    }
+    @Overwrite
+    public boolean isStarving() {
+        return this.getNutrition() == 0 || this.foodStats.getWater() == 0;
+    }
 
 //    @Overwrite
 //    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {

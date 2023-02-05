@@ -7,6 +7,8 @@ item.armor/nickel_chainmail_chestplate.name=Nickel Chainmail Chestplate
 item.armor/nickel_chainmail_leggings.name=Nickel Chainmail Leggings
 item.armor/nickel_chainmail_boots.name=Nickel Chainmail Boots
 
+potion.dehydration=Dehydration
+
 item.ingot/nickel.name=Nickel Ingot
 item.ingot/nugget/nickel.name=Nickel Nugget
 item.tool/nickel/nickel_axe.name=Nickel Axe
@@ -95,3 +97,5 @@ item.pieces/nickel.name=Nickel Orepiece
 item.pieces/mithril.name=Mithril Orepiece
 item.pieces/tungsten.name=Tungsten Orepiece
 item.pieces/adamantium.name=Adamantium Orepiece
+
+item.food/mashed_cactus.name=Mashed Cactus

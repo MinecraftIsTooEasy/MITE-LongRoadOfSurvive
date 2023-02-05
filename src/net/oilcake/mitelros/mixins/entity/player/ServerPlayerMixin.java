@@ -102,6 +102,17 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     public ServerPlayerMixin(World par1World, String par2Str) {
         super(par1World, par2Str);
     }
+    @Overwrite
+    public void setProtein(int protein) {
+        this.protein = MathHelper.clamp_int(protein, 0, 960000);
+    }
+    @Overwrite
+    public void setEssentialFats(int essential_fats) {
+        this.essential_fats = MathHelper.clamp_int(essential_fats, 0, 960000);
+    }@Overwrite
+    public void setPhytonutrients(int phytonutrients) {
+        this.phytonutrients = MathHelper.clamp_int(phytonutrients, 0, 960000);
+    }
     @Inject(method = "<init>",at = @At("RETURN"))
     private void injectInit(MinecraftServer par1MinecraftServer, World par2World, String par3Str,
                                      PlayerInteractManager par4ItemInWorldManager, CallbackInfo callback){

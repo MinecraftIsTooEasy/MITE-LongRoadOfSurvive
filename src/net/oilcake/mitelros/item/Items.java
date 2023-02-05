@@ -75,7 +75,8 @@ public class Items extends Item {
     public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril").setXPReward(4));
     public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten").setXPReward(7));
     public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(10));
-//    public static PotionBrewer potionBrewer;
+    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(),Materials.mashedCactus,2,0,false,true,false,"mashedCactus")).setMaxStackSize(4);
+    //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
 
@@ -148,6 +149,7 @@ public class Items extends Item {
         register("pieces/tungsten",pieceTungsten);
         register("pieces/mithril",pieceMithril);
         register("pieces/adamantium",pieceAdamantium);
+        register("food/mashed_cactus",mashedCactus);
 
 
 
@@ -474,6 +476,9 @@ public class Items extends Item {
                 );
         register.registerShapelessRecipe(new ItemStack(chestnutSoup,1),false,
                 Item.bowlWater,Item.lambchopCooked,Item.onion,Item.potato
+        );
+        register.registerShapelessRecipe(new ItemStack(mashedCactus,1),false,
+                Block.cactus
         );
 
         ItemCoin[] coins = new ItemCoin[]{Item.coinCopper, Item.coinSilver, Item.coinGold, Item.coinAncientMetal, Item.coinMithril, Item.coinAdamantium, nickelCoin, tungstenCoin};

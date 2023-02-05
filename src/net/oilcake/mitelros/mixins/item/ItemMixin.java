@@ -62,7 +62,7 @@ public class ItemMixin{
                 if (nutrition > 0) {
                     info.add(EnumChatFormat.BROWN + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
                 }
-                if (water > 0) {
+                if (water != 0) {
                     info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "含水量", new Object[]{water}));
                 }
             }
