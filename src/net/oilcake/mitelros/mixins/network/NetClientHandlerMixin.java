@@ -16,16 +16,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(NetClientHandler.class)
 public class NetClientHandlerMixin extends ConnectionMixin{
 
-//    private static Class[] classes = new Class[]{ContainerPlayer.class, ContainerWorkbench.class, MITEConstant.class, MITEContainerCrafting.class, ClientPlayer.class, EntityPlayer.class, bex.class,
-//            FoodMetaData.class, Minecraft.class, bew.class, NetClientHandler.class, ClientPlayerController.class, Packet13PlayerLookMove.class, Packet27PlayerInput.class, Packet82AddHunger.class,
-//            Packet85SimpleSignal.class, Packet202Abilities.class, PlayerAbilities.class, NetworkManager.class, PacketDecreaseWater.class};
-//
-//    @Inject(method = "<clinit>", at = @At("RETURN"))
-//    private static void injectClinit(CallbackInfo callbackInfo) {
-//        for (int i = 0; i < classes.length; ++i) {
-//            class_hash_sum += getHash(classes[i]);
-//        }
-//    }
+    private static Class[] classes = new Class[]{ContainerPlayer.class, ContainerWorkbench.class, MITEConstant.class, MITEContainerCrafting.class, ClientPlayer.class, EntityPlayer.class, bex.class,
+            FoodMetaData.class, Minecraft.class, bew.class, NetClientHandler.class, ClientPlayerController.class, Packet13PlayerLookMove.class, Packet27PlayerInput.class, Packet82AddHunger.class,
+            Packet85SimpleSignal.class, Packet202Abilities.class, PlayerAbilities.class, NetworkManager.class, PacketDecreaseWater.class};
+
+    @Inject(method = "<clinit>", at = @At("RETURN"))
+    private static void injectClinit(CallbackInfo callbackInfo) {
+        for (Class aClass : classes) {
+            class_hash_sum += getHash(aClass);
+        }
+    }
 
 
     @Shadow

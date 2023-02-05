@@ -1,9 +1,9 @@
 package net.oilcake.mitelros.block;
 
-import net.minecraft.*;
-import net.oilcake.mitelros.block.enchantreserver.TileEntityEnchantReserver;
-
-import java.util.List;
+import net.minecraft.BlockFurnace;
+import net.minecraft.CreativeModeTab;
+import net.minecraft.Material;
+import net.minecraft.mt;
 
 public class BlockSmoker extends BlockFurnace{
     protected BlockSmoker(int par1, boolean par2) {

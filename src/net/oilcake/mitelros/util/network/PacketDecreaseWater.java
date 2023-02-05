@@ -8,18 +8,18 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class PacketDecreaseWater extends Packet {
-    public int water;
+    public float hungerWater;
 
-    public PacketDecreaseWater(int hunger) {
-        this.water = hunger;
+    public PacketDecreaseWater(float hungerWater) {
+        this.hungerWater = hungerWater;
     }
 
     public void readPacketData(DataInput par1DataInput) throws IOException {
-        this.water = par1DataInput.readInt();
+        this.hungerWater = par1DataInput.readFloat();
     }
 
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
-        par1DataOutput.writeFloat(this.water);
+        par1DataOutput.writeFloat(this.hungerWater);
     }
 
     public void processPacket(Connection net_handler) {

@@ -34,15 +34,8 @@ public class Packet8UpdateHealthMixin extends Packet {
         this.nutrition = nutrition;
         this.vision_dimming = vision_dimming;
     }
-
-    @Shadow
-    public boolean containsSameEntityIDAs(Packet par1Packet) {
-        return true;
-    }
-
-    @Shadow
-    public int getPacketSize() {
-        return 10;
+    public int setWater(int water) {
+        return this.water = water;
     }
 
     @Inject(method = "readPacketData",
@@ -56,6 +49,17 @@ public class Packet8UpdateHealthMixin extends Packet {
     private void injectWritePacketData(DataOutput par1DataOutput, CallbackInfo c) throws IOException {
         par1DataOutput.writeInt(this.water);
     }
+
+    @Shadow
+    public boolean containsSameEntityIDAs(Packet par1Packet) {
+        return true;
+    }
+
+    @Shadow
+    public int getPacketSize() {
+        return 10;
+    }
+
 
     @Shadow
     public boolean isRealPacket() {
@@ -72,11 +76,6 @@ public class Packet8UpdateHealthMixin extends Packet {
     public void readPacketData(DataInput dataInput) throws IOException {
 
     }
-
-    public void setWater(int water) {
-        this.water = water;
-    }
-
 
     @Override
     @Shadow

@@ -1,10 +1,10 @@
 package net.oilcake.mitelros.mixins.item;
 
-import net.oilcake.mitelros.item.Items;
-import net.oilcake.mitelros.item.Materials;
 import net.minecraft.Item;
 import net.minecraft.ItemNugget;
 import net.minecraft.Material;
+import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 

@@ -15,7 +15,7 @@ public class NetServerHandlerMixin extends Connection {
 
     public void handleDecreaseWater(PacketDecreaseWater packet)
     {
-        this.playerEntity.decreaseWaterServerSide(packet.water);
+        this.playerEntity.decreaseWaterServerSide(packet.hungerWater);
     }
 
     @Shadow

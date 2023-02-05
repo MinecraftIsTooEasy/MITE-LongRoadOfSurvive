@@ -1,7 +1,7 @@
 package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.*;
+import net.oilcake.mitelros.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;

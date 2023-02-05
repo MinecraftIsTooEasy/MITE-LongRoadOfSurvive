@@ -1,15 +1,12 @@
 package net.oilcake.mitelros.mixins.item;
 
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
-import net.minecraft.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
@@ -53,7 +50,7 @@ public class ItemMixin{
                     if (item_block.getBlock() == Block.mushroomRed) {
                         info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
                         info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
-                        info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "item.tooltip.water", new Object[]{water}));
+                        info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "含水量", new Object[]{water}));
                         return;
                     }
                 }
@@ -66,7 +63,7 @@ public class ItemMixin{
                     info.add(EnumChatFormat.BROWN + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
                 }
                 if (water > 0) {
-                    info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "item.tooltip.water", new Object[]{water}));
+                    info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "含水量", new Object[]{water}));
                 }
             }
         }

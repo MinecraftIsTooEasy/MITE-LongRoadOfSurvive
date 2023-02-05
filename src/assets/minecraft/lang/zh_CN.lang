@@ -8,7 +8,7 @@ item.armor/nickel_chainmail_leggings.name=镍锁链护腿
 item.armor/nickel_chainmail_boots.name=镍锁链靴子
 
 
-item.tooltip.water=含水量
+potion.dehydration=脱水
 
 item.ingot/nickel.name=镍锭
 item.ingot/nugget/nickel.name=镍粒

@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.render;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.potion.Potions;
 import net.oilcake.mitelros.util.Constant;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +22,6 @@ public class GuiIngameMixin extends avk {
 
     @Overwrite
     private void a(int par1, int par2) {
-        this.g.J().a(Constant.icons);
         boolean var3 = this.g.h.hurtResistantTime / 3 % 2 == 1;
         if (this.g.h.hurtResistantTime < 10) {
             var3 = false;
@@ -142,7 +142,6 @@ public class GuiIngameMixin extends avk {
         Entity var34 = this.g.h.ridingEntity;
         if (var34 != null && !(var34 instanceof EntityBoat)) {
             if (var34 instanceof EntityLiving) {
-                this.g.J().a(Constant.icons);
                 this.g.C.endStartSection("mountHealth");
                 EntityLiving var38 = (EntityLiving)var34;
                 var28 = (int)Math.ceil((double)var38.getHealth());
@@ -176,7 +175,6 @@ public class GuiIngameMixin extends avk {
                 }
             }
         } else {
-            this.g.J().a(Constant.icons);
             this.g.C.endStartSection("food");
 
             for(var23 = 0; var23 < 10; ++var23) {
@@ -207,7 +205,7 @@ public class GuiIngameMixin extends avk {
             }
         }
 
-        this.g.J().a(Constant.icons);
+        this.g.J().a(Constant.icons_lros);
         this.g.C.endStartSection("water");
         int water = foodStats.getWater();
         for(int temp = 0; temp < 10; ++temp) {
@@ -215,10 +213,17 @@ public class GuiIngameMixin extends avk {
             var25 = 16;
             int var36 = 0;
 
+            if (this.g.h.isPotionActive(Potions.dehydration)) {
+                var25 += 27;
+                var36 = 3;
+            }
+
+
             var27 = var12 - temp * 8 - 9;
             if (temp < this.g.h.getFoodStats().getSatiationLimit() / 2) {
                 this.b(var27, var28, 16 + var36 * 9, 54, 9, 9);
             }
+
 
             if (temp * 2 + 1 < water) {
                 this.b(var27, var28, var25 + 9, 54, 9, 9);
@@ -229,7 +234,7 @@ public class GuiIngameMixin extends avk {
             }
         }
 
-        this.g.J().a(Constant.icons);
+
         this.g.C.endStartSection("air");
         if (this.g.h.isInsideOfMaterial(Material.water)) {
             var23 = this.g.h.getAir();

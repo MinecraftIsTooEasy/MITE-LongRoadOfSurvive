@@ -1,8 +1,9 @@
 package net.oilcake.mitelros.mixins.util;
 
-import net.minecraft.*;
+import net.minecraft.EntityPlayer;
+import net.minecraft.Item;
+import net.minecraft.ReferenceFileWriter;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.io.File;

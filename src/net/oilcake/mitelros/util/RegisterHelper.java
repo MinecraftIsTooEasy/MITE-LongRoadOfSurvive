@@ -1,11 +1,11 @@
 package net.oilcake.mitelros.util;
 
-import net.oilcake.mitelros.item.Items;
-import net.oilcake.mitelros.mixins.item.recipes.CraftingManagerInvoker;
 import net.minecraft.CraftingManager;
 import net.minecraft.ShapedRecipes;
 import net.minecraft.ShapelessRecipes;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.mixins.item.recipes.CraftingManagerInvoker;
 
 import java.util.ArrayList;
 

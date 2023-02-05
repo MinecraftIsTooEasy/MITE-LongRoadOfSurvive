@@ -1,8 +1,8 @@
 package net.oilcake.mitelros.mixins.entity;
 
-import net.oilcake.mitelros.item.Materials;
 import net.minecraft.DamageSource;
 import net.minecraft.EntityShadow;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 

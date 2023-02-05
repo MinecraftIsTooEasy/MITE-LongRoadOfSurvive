@@ -1,9 +1,9 @@
 package net.oilcake.mitelros.mixins;
 
-import net.oilcake.mitelros.util.Constant;
 import net.minecraft.EnumChatFormat;
 import net.minecraft.Minecraft;
 import net.minecraft.client.main.Main;
+import net.oilcake.mitelros.util.Constant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 

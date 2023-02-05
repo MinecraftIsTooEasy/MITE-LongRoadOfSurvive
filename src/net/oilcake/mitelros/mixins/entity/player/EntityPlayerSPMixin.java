@@ -1,9 +1,9 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
-import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
-import net.oilcake.mitelros.block.enchantreserver.GuiEnchantReserver;
 import net.minecraft.Minecraft;
 import net.minecraft.bex;
+import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
+import net.oilcake.mitelros.block.enchantreserver.GuiEnchantReserver;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

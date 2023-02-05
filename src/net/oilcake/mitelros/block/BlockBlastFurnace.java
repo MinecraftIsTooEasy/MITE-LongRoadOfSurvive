@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.block;
 
-import net.minecraft.*;
+import net.minecraft.BlockFurnace;
+import net.minecraft.Material;
+import net.minecraft.mt;
 
 public class BlockBlastFurnace extends BlockFurnace {
     private Material material;

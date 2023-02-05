@@ -1,10 +1,8 @@
 package net.oilcake.mitelros.mixins.util;
 
 
-import net.minecraft.Material;
 import net.minecraft.MobEffectList;
 import net.minecraft.PotionBrewer;
-import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;

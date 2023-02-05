@@ -61,13 +61,12 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
             float health = this.getHealth();
             int satiation = this.getSatiation();
             int nutrition = this.getNutrition();
-            int water = this.getWater();
-            //float hunger = this.foodStats.getHunger();
-            if (health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F) {
+            int water = this.foodStats.getWater();
+            if (water != this.last_water || health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F) {
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
-                Packet8UpdateHealth par1Packet = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
-                par1Packet.setWater(water);
-                this.playerNetServerHandler.sendPacket(par1Packet);
+                Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
+                updateWater.setWater(water);
+                this.playerNetServerHandler.sendPacket(updateWater);
                 this.last_water = water;
 
                 this.lastHealth = health;

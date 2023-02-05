@@ -2,7 +2,6 @@ package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.Item;
 import net.minecraft.ItemCoin;
-
 import net.minecraft.Material;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;

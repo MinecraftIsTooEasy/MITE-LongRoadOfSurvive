@@ -1,7 +1,6 @@
 package net.oilcake.mitelros.mixins;
 
 import net.minecraft.*;
-import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -12,10 +11,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FoodMetaData.class)
 public class FoodStatsMixin {
-    @Shadow
-    private EntityPlayer player;
+
+    private float water_for_nutrition_only;
 
     private int water;
+    private float hungerWater;
     @Inject(method = "<init>",at = @At("RETURN"))
     private void injectInit(CallbackInfo callbackInfo){
         this.water = getWaterLimit();
@@ -40,9 +40,13 @@ public class FoodStatsMixin {
             this.starve_progress = par1NBTTagCompound.getFloat("starve_progress");
             this.hunger = par1NBTTagCompound.getFloat("hunger");
             this.hunger_for_nutrition_only = par1NBTTagCompound.getFloat("hunger_for_nutrition_only");
-            this.water = par1NBTTagCompound.getInteger("water");
 
         }
+        //else if (par1NBTTagCompound.hasKey("water")){
+            this.water_for_nutrition_only = par1NBTTagCompound.getFloat("water_for_nutrition_only");
+            this.hungerWater = par1NBTTagCompound.getFloat("hungerWater");
+            this.water = par1NBTTagCompound.getInteger("water");
+      //  }
     }
     @Overwrite
     public void writeNBT(NBTTagCompound par1NBTTagCompound)
@@ -55,6 +59,8 @@ public class FoodStatsMixin {
         par1NBTTagCompound.setFloat("hunger_for_nutrition_only", this.hunger_for_nutrition_only);
 
         par1NBTTagCompound.setInteger("water", this.water);
+        par1NBTTagCompound.setFloat("hungerwater", this.hungerWater);
+        par1NBTTagCompound.setFloat("water_for_nutrition_only", this.water_for_nutrition_only);
 
     }
 
@@ -100,17 +106,33 @@ public class FoodStatsMixin {
     @Shadow
     private float global_hunger_rate = 1.0F;
 
+    private float global_water_rate = 1.0F;
+    private static float getWaterPerTick() {
+        return 0.002F;
+    }
+
+    private static float getWaterPerFoodUnit() {
+        return 4.0F;
+    }
+
     private void decreaseWater(float water)
     {
+    //System.out.println("OM");
+
         if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament())
         {
-            water *= this.global_hunger_rate;
-            this.water = (int) Math.min(this.water + water, 40);
+            water *= this.global_water_rate;
+            this.hungerWater = Math.min(this.hungerWater + water, 40);
 
-            if (this.player.worldObj.isRemote && this.water > 0.2F) {
-                Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
-                //System.out.println("OM");
-                this.water = 0;
+
+             if(this.hungerWater > 20){
+                 System.out.println("hungerWater" + hungerWater);
+             }
+
+            if (this.player.worldObj.isRemote && this.hungerWater > 0.2F) {
+                Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.hungerWater));
+                //System.out.println("O2M");
+                this.hungerWater = 0;
             }
         }
     }
@@ -120,6 +142,11 @@ public class FoodStatsMixin {
         if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament()) {
             hunger *= this.global_hunger_rate;
             this.hunger = Math.min(this.hunger + hunger, 40.0F);
+
+            if(this.hunger > 20){
+                System.out.println("hunger: " + this.hunger);
+            }
+
             if (this.player.worldObj.isRemote && this.hunger > 0.2F) {
                 Minecraft.w().h.netClientHandler.c(new Packet82AddHunger(this.hunger));
                 //Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
@@ -129,19 +156,19 @@ public class FoodStatsMixin {
 
         }
     }
-//    public void decreaseWaterClientSide(float water)
-//    {
-//        if (!this.player.worldObj.isRemote)
-//        {
-//            Minecraft.setErrorMessage("addHungerClientSide: cannot decrease Water to client if not remote");
-//        }
-//        else
-//        {
-//            this.decreaseWater(water);
-//        }
-//    }
+    public void decreaseWaterClientSide(float water)
+    {
+        if (!this.player.worldObj.isRemote)
+        {
+            Minecraft.setErrorMessage("addHungerClientSide: cannot decrease Water to client if not remote");
+        }
+        else
+        {
+            this.decreaseWater(water);
+        }
+    }
 
-    public void decreaseWaterServerSide(float water)
+    public void decreaseWaterServerSide(float hungerWater)
     {
         //System.out.println("packet OK");
         if (this.player.worldObj.isRemote)
@@ -150,7 +177,8 @@ public class FoodStatsMixin {
         }
         else
         {
-            this.addHunger(water);
+            this.decreaseWater(hungerWater);
+            //System.out.println("发送buff数据 food");
         }
     }
 
@@ -169,52 +197,47 @@ public class FoodStatsMixin {
             if (!par1EntityPlayer.isDead && !(par1EntityPlayer.getHealth() <= 0.0F)) {
                 par1EntityPlayer.decrementNutrients();
                 par1EntityPlayer.decrementInsulinResistance();
+
+                this.decreaseWaterServerSide(getWaterPerTick());
+                if (!par1EntityPlayer.inCreativeMode()) {
+                    this.water_for_nutrition_only += getWaterPerTick() * 0.3F;
+                }
+
                 float hunger_factor = par1EntityPlayer.getWetnessAndMalnourishmentHungerMultiplier();
                 this.addHungerServerSide(getHungerPerTick() * hunger_factor);
-
-                this.decreaseWaterServerSide(getHungerPerTick());
-
                 if (!par1EntityPlayer.inCreativeMode()) {
                     this.hunger_for_nutrition_only += getHungerPerTick() * 0.25F;
                 }
 
                 if (this.hunger >= getHungerPerFoodUnit()) {
                     this.hunger -= getHungerPerFoodUnit();
-                    if (this.satiation > 0 || this.nutrition > 0 || this.water > 0) {
+                    if (this.satiation > 0 || this.nutrition > 0) {
                         if (this.satiation < 1 || this.hunger_for_nutrition_only + 0.001F >= getHungerPerFoodUnit() && this.nutrition > 0) {
                             --this.nutrition;
-                            --this.water;
                             this.hunger_for_nutrition_only = 0.0F;
                         } else {
-                            --this.satiation;
+                            this.satiation -= 2;
                         }
                     }
                 }
-                if(this.water < 0 || this.water > 20){
+
+                if(this.hungerWater >= getWaterPerFoodUnit()) {
+                    this.hungerWater -= getWaterPerFoodUnit();
+                    //System.out.println("hungerWater: " + hungerWater);
+                    if (this.water > 0) {
+                        if (this.satiation < 1 || this.water_for_nutrition_only + 0.001F >= getWaterPerFoodUnit()) {
+                            --this.water;
+                            this.water_for_nutrition_only = 0.0F;
+                        }
+                    }
+                }
+                if(this.water < 0){
                     this.water = 0;
                 }
 
-//                if (this.water >= getHungerPerFoodUnit()) {
-//                    this.water -= getHungerPerFoodUnit();
-//                    if (this.water > 0) {
-//                        if (this.hunger_for_nutrition_only + 0.001F >= getHungerPerFoodUnit()) {
-//                            --this.water;
-//                            this.hunger_for_nutrition_only = 0.0F;
-//                        }
-//                    }
-//                }
-//                if (this.water >= getWaterPerFoodUnit()) {
-//                    this.water -= getWaterPerFoodUnit();
-//                    if (this.water > 0) {
-////                        if (this.water < 1 || this.hunger_for_nutrition_only + 0.001F >= getwaterPerFoodUnit() && this.water > 0) {
-//                            --this.water;
-//                            //this.hunger_for_nutrition_only = 0.0F;
-//                       // }
-//                    }
-//                }
-
                 if (par1EntityPlayer.inBed() && par1EntityPlayer.isOnHitList()) {
                     par1EntityPlayer.addHungerServerSide(getHungerPerTick() * 20.0F);
+                    par1EntityPlayer.decreaseWaterServerSide(getWaterPerTick() * 20.0F);
                 }
 
                 if (this.player.isStarving()) {
@@ -238,6 +261,7 @@ public class FoodStatsMixin {
                         if (this.heal_progress >= 1.0F) {
                             par1EntityPlayer.heal(1.0F);
                             this.addHungerServerSide(1.0F);
+                            this.decreaseWaterServerSide(1.0F);
                             --this.heal_progress;
                         }
                     } else {
@@ -282,5 +306,6 @@ public class FoodStatsMixin {
     public int getNutritionLimit() {
         return 1;
     }
-
+    @Shadow
+    private EntityPlayer player;
 }

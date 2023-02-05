@@ -1,9 +1,8 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.*;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.Items;
-import net.minecraft.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -13,6 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 public class EntityPlayerMixin extends EntityLiving{
     public EntityPlayer entityPlayer;
 
+
 //    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
 //    }
@@ -20,21 +20,12 @@ public class EntityPlayerMixin extends EntityLiving{
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //    }
 
-    public int getWater() {
-        return this.foodStats.getWater();
-    }
-    public int addWater() {
-        return this.foodStats.addWater(10);
-    }
-    public int removeWater() {
-        return this.foodStats.addWater(-10);
-    }
-
-    public void decreaseWaterServerSide(float water)
+    public void decreaseWaterServerSide(float hungerWater)
     {
         if (!this.capabilities.isCreativeMode && !this.capabilities.disableDamage)
         {
-            this.foodStats.decreaseWaterServerSide(water);
+            this.foodStats.decreaseWaterServerSide(hungerWater);
+            //System.out.println("发送buff数据 player");
         }
     }
 

@@ -1,11 +1,12 @@
 package net.oilcake.mitelros.util.events;
 
 import com.google.common.eventbus.Subscribe;
+import net.minecraft.ChatMessage;
+import net.minecraft.EntityPlayer;
+import net.minecraft.EnumChatFormat;
 import net.oilcake.mitelros.util.Constant;
-import net.minecraft.*;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
-import net.xiaoyu233.fml.reload.event.HandleChatCommandEvent;
 import net.xiaoyu233.fml.reload.event.PacketRegisterEvent;
 import net.xiaoyu233.fml.reload.event.PlayerLoggedInEvent;
 
@@ -48,8 +49,8 @@ public class LROSEvent {
 //    }
     @Subscribe
     public void onPacketRegister(PacketRegisterEvent event){
-        event.register(142, true, false, PacketEnchantReserverInfo.class);
-        event.register(143, false, true, PacketDecreaseWater.class);
+        event.register(256, true, false, PacketEnchantReserverInfo.class);
+        event.register(257, false, true, PacketDecreaseWater.class);
     }
 
     @Subscribe

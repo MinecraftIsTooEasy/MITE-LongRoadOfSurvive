@@ -14,4 +14,16 @@ public class EnumInsulinResistanceLevelMixin {
     public EnumChatFormat getColorC() {
         return this.color;
     }
+    public float getRedAsFloatC() {
+        return this.color.getRedAsFloat();
+    }
+
+    public  float getGreenAsFloatC() {
+        return this.color.getGreenAsFloat();
+    }
+
+    public float getBlueAsFloatC() {
+        return this.color.getBlueAsFloat();
+    }
+
 }

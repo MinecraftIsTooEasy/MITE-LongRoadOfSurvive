@@ -2,7 +2,6 @@ package net.oilcake.mitelros.mixins.network;
 
 import net.minecraft.Connection;
 import net.minecraft.Packet;
-import net.minecraft.Packet82AddHunger;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
 import org.spongepowered.asm.mixin.Mixin;

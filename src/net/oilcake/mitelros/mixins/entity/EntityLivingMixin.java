@@ -1,8 +1,6 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.EntityLiving;
-import net.minecraft.EntityPlayer;
-import net.minecraft.GenericAttributes;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(EntityLiving.class)
