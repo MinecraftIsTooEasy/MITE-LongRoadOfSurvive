@@ -11,23 +11,11 @@ import java.util.Random;
 
 @Mixin(BlockWorkbench.class)
 public class BlockWorkbenchMixin extends Block{
-    @Shadow
-    @Mutable
-    @Final
-    private static Material[] tool_materials;
-    @Shadow
-    protected IIcon[] side_icons;
-    @Shadow
-    private IIcon displayOnCreativeTab;
-    @Shadow
-    private IIcon[] front_icons;
-    @Shadow
-    private IIcon icon_flint_top;
-    @Shadow
-    private IIcon icon_obsidian_top;
-    protected BlockWorkbenchMixin(int par1, BlockConstants constants) {
-        super(par1, Materials.copper, constants);
+
+    protected BlockWorkbenchMixin(int par1, Material par2Material, BlockConstants constants) {
+        super(par1, par2Material, constants);
     }
+
 
 //    @Inject(method = "<init>", at = @At("INVOKE"))
 //    private void injectInit(int par1, CallbackInfo callback) {
@@ -101,7 +89,20 @@ public class BlockWorkbenchMixin extends Block{
             this.front_icons[i] = par1IconRegister.a("crafting_table/" + BlockWorkbench.getToolMaterial(i).toString() + "/front");
             this.side_icons[i] = par1IconRegister.a("crafting_table/" + BlockWorkbench.getToolMaterial(i).toString() + "/side");
         }
-
     }
+    @Shadow
+    @Mutable
+    @Final
+    private static Material[] tool_materials;
+    @Shadow
+    protected IIcon[] side_icons;
+    @Shadow
+    private IIcon displayOnCreativeTab;
+    @Shadow
+    private IIcon[] front_icons;
+    @Shadow
+    private IIcon icon_flint_top;
+    @Shadow
+    private IIcon icon_obsidian_top;
 }
 

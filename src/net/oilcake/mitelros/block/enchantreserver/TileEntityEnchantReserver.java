@@ -77,33 +77,37 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                     this.slots.getInPut().putStack(null);
                     this.slots.updateInfo();
                 }
-                else{}
             }
-            if (this.getEXP() >= 200) {
+
                 ItemStack outputStack = this.slots.getOutPutStack();
                 if (outputStack != null) {
-                    int size = outputStack.stackSize;
-                    if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() + 2000) {
-                        this.EXP -= 200;
-                        this.slots.getOutPut().putStack(Item.expBottle.getItemStackForStatsIcon());
-                        this.slots.updateInfo();
+                   // int size = outputStack.stackSize;
+                    if (this.getEXP() >= 200) {
+                        if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() + 2000) {
+                            this.EXP -= 200;
+                            this.slots.getOutPut().putStack(Item.expBottle.getItemStackForStatsIcon());
+                            this.slots.updateInfo();
+                        }
                     }
-                    if (outputStack.itemID == Items.nickelNugget.itemID && outputStack.stackSize * 50 <= this.getEXP() + 2000) {
-                        this.EXP -= 50 * size;
-                        this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
-                        this.slots.updateInfo();
+                    if (this.getEXP() >= 50) {
+                        if (outputStack.itemID == Items.nickelNugget.itemID && outputStack.stackSize * 50 <= this.getEXP() + 2000) {
+                            this.EXP -= 50;
+                                    //* size;
+                            this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
+                            this.slots.updateInfo();
+                        }
                     }
-                    if (outputStack.itemID == Items.tungstenNugget.itemID && outputStack.stackSize * 5000 <= this.getEXP() + 2000) {
-                        this.EXP -= 5000 * size;
-                        this.slots.getOutPut().putStack(Items.tungstenCoin.getItemStackForStatsIcon());
-                        this.slots.updateInfo();
+                    if (this.getEXP() >= 5000) {
+                        if (outputStack.itemID == Items.tungstenNugget.itemID && outputStack.stackSize * 5000 <= this.getEXP() + 2000) {
+                            this.EXP -= 5000;
+                                    //* size;
+                            this.slots.getOutPut().putStack(Items.tungstenCoin.getItemStackForStatsIcon());
+                            this.slots.updateInfo();
+                        }
                     }
                 }
             }
-
         }
-    }
-
 
 
 
