@@ -10,10 +10,6 @@ import java.util.List;
 
 @Mixin(ItemTool.class)
 public class ItemToolMixin extends Item{
-    @Shadow
-    private float damageVsEntity;
-    @Shadow
-    private Material effective_material;
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         super.addInformation(item_stack, player, info, extended_info, slot);
         if(item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel){
@@ -50,11 +46,15 @@ public class ItemToolMixin extends Item{
         } else if (this.effective_material == Materials.nickel) {
             return 2.0F;
         } else if (this.effective_material == Materials.tungsten) {
-            return 2.5F;
+            return 2.7F;
         }else {
             Minecraft.setErrorMessage("getMaterialHarvestEfficiency: tool material not handled");
             return 0.0F;
         }
     }
+    @Shadow
+    private float damageVsEntity;
+    @Shadow
+    private Material effective_material;
 
 }

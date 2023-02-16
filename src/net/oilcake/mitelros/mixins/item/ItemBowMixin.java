@@ -13,14 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemBow.class)
 public class ItemBowMixin {
-    @Final
-    @Shadow
-    @Mutable
-    private static Material[] possible_arrow_materials;
-
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback) {
         possible_arrow_materials = new Material[]{Material.flint, Material.obsidian, Material.copper, Material.silver, Material.rusted_iron, Material.gold, Material.iron, Material.mithril, Material.adamantium, Material.ancient_metal,
         Materials.nickel, Materials.tungsten};
     }
+    @Final
+    @Shadow
+    @Mutable
+    private static Material[] possible_arrow_materials;
 }

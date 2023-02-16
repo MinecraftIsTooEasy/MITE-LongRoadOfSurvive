@@ -8,10 +8,12 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Damage.class)
 public class DamageMixin {
-    @Shadow
-    private DamageSource source;
 
     public Entity getResponsibleEntityC() {
-        return this.source.getResponsibleEntity();
+        return this.getResponsibleEntity();
+    }
+    @Shadow
+    Entity getResponsibleEntity() {
+        return null;
     }
 }

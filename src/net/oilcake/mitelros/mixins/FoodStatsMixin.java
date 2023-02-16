@@ -13,10 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FoodStatsMixin {
 
     private float water_for_nutrition_only;
-
     private int water;
     private float hungerWater;
-    @Inject(method = "<init>",at = @At("RETURN"))
+
+    @Inject(method = "<init>", at = @At("RETURN"))
     private void injectInit(CallbackInfo callbackInfo){
         this.water = getWaterLimit();
     }
@@ -30,38 +30,19 @@ public class FoodStatsMixin {
 //    {
 //        return 4.0F;
 //    }
-    @Overwrite
-    public void readNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        if (par1NBTTagCompound.hasKey("nutrition")) {
-            this.satiation = par1NBTTagCompound.getInteger("fullness");
-            this.nutrition = par1NBTTagCompound.getInteger("nutrition");
-            this.heal_progress = par1NBTTagCompound.getFloat("heal_progress");
-            this.starve_progress = par1NBTTagCompound.getFloat("starve_progress");
-            this.hunger = par1NBTTagCompound.getFloat("hunger");
-            this.hunger_for_nutrition_only = par1NBTTagCompound.getFloat("hunger_for_nutrition_only");
-
-        }
+    @Inject(method = "readNBT", at = @At("RETURN"))
+    public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
         //else if (par1NBTTagCompound.hasKey("water")){
             this.water_for_nutrition_only = par1NBTTagCompound.getFloat("water_for_nutrition_only");
             this.hungerWater = par1NBTTagCompound.getFloat("hungerWater");
             this.water = par1NBTTagCompound.getInteger("water");
       //  }
     }
-    @Overwrite
-    public void writeNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        par1NBTTagCompound.setInteger("fullness", this.satiation);
-        par1NBTTagCompound.setInteger("nutrition", this.nutrition);
-        par1NBTTagCompound.setFloat("heal_progress", this.heal_progress);
-        par1NBTTagCompound.setFloat("starve_progress", this.starve_progress);
-        par1NBTTagCompound.setFloat("hunger", this.hunger);
-        par1NBTTagCompound.setFloat("hunger_for_nutrition_only", this.hunger_for_nutrition_only);
-
+    @Inject(method = "readNBT", at = @At("RETURN"))
+    public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
         par1NBTTagCompound.setInteger("water", this.water);
         par1NBTTagCompound.setFloat("hungerwater", this.hungerWater);
         par1NBTTagCompound.setFloat("water_for_nutrition_only", this.water_for_nutrition_only);
-
     }
 
     public int getWater() {
@@ -77,18 +58,13 @@ public class FoodStatsMixin {
             this.player.getAsEntityPlayerMP().addInsulinResistance(item.getInsulinResponse());
             this.player.getAsEntityPlayerMP().addNutrients(item);
         }
-
     }
 
 
-    public void setSatiationWater(int water, boolean check_limit)
-    {
-        if (check_limit)
-        {
+    public void setSatiationWater(int water, boolean check_limit) {
+        if (check_limit) {
             this.water = Math.min(water, this.getWaterValueLimit());
-        }
-        else
-        {
+        } else {
             this.water = water;
         }
     }
@@ -103,8 +79,6 @@ public class FoodStatsMixin {
 //        return this.water;
 //    }
 
-    @Shadow
-    private float global_hunger_rate = 1.0F;
 
     private float global_water_rate = 1.0F;
     private static float getWaterPerTick() {
@@ -137,25 +111,25 @@ public class FoodStatsMixin {
         }
     }
 
-    @Overwrite
-    private void addHunger(float hunger) {
-        if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament()) {
-            hunger *= this.global_hunger_rate;
-            this.hunger = Math.min(this.hunger + hunger, 40.0F);
-
-            if(this.hunger > 20){
-                System.out.println("hunger: " + this.hunger);
-            }
-
-            if (this.player.worldObj.isRemote && this.hunger > 0.2F) {
-                Minecraft.w().h.netClientHandler.c(new Packet82AddHunger(this.hunger));
-                //Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
-                //System.out.println("OMHunger");
-                this.hunger = 0.0F;
-            }
-
-        }
-    }
+//    @Overwrite
+//    private void addHunger(float hunger) {
+//        if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament()) {
+//            hunger *= this.global_hunger_rate;
+//            this.hunger = Math.min(this.hunger + hunger, 40.0F);
+//
+//            if(this.hunger > 20){
+//                System.out.println("hunger: " + this.hunger);
+//            }
+//
+//            if (this.player.worldObj.isRemote && this.hunger > 0.2F) {
+//                Minecraft.w().h.netClientHandler.c(new Packet82AddHunger(this.hunger));
+//                //Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
+//                //System.out.println("OMHunger");
+//                this.hunger = 0.0F;
+//            }
+//
+//        }
+//    }
     public void decreaseWaterClientSide(float water)
     {
         if (!this.player.worldObj.isRemote)
@@ -275,6 +249,8 @@ public class FoodStatsMixin {
             }
         }
     }
+    @Shadow
+    private float global_hunger_rate = 1.0F;
     @Shadow
     private int satiation;
     @Shadow

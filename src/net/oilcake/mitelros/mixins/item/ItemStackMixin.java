@@ -8,11 +8,9 @@ import org.spongepowered.asm.mixin.Shadow;
 public class ItemStackMixin{
     private ItemStack itemStack;
 
-
     public int getWater() {
         return this.getItem().getWater();
     }
-
 
     public boolean isItemStackEqualC(ItemStack par1ItemStack, boolean ignore_stack_size, boolean ignore_quality, boolean ignore_damage_but_not_subtype, boolean ignore_tag_compound) {
         if (par1ItemStack == itemStack) {

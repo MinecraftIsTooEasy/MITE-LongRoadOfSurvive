@@ -36,13 +36,13 @@ public class EntityPlayerMixin extends EntityLiving{
             //System.out.println("发送buff数据 player");
         }
     }
-    @Shadow
-    public int getNutrition() {
-        return this.foodStats.getNutrition();
-    }
     @Overwrite
     public boolean isStarving() {
         return this.getNutrition() == 0 || this.getWater() == 0;
+    }
+    @Overwrite
+    public boolean hasFoodEnergy() {
+        return this.getSatiation() + this.getNutrition() != 0 && this.getWater() != 0;
     }
 
 //    @Overwrite
@@ -103,10 +103,32 @@ public class EntityPlayerMixin extends EntityLiving{
         super(par1World);
     }
 
-
     public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
     }
+    @Overwrite
+    public EnumQuality getMaxCraftingQuality(float unadjusted_crafting_difficulty_to_produce, Item item, int[] applicable_skillsets) {
+        if (!this.worldObj.areSkillsEnabled()) {
+            applicable_skillsets = null;
+        }
 
+        if (this.experience <= 0) {
+            return this.getMinCraftingQuality(item, applicable_skillsets);
+        } else if (applicable_skillsets != null && !this.hasAnyOfTheseSkillsets(applicable_skillsets)) {
+            return this.getMinCraftingQuality(item, applicable_skillsets);
+        } else {
+            if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
+                //Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
+            }
+
+            for(int i = item.getMaxQuality().ordinal(); i > EnumQuality.average.ordinal(); --i) {
+                if (this.getCraftingExperienceCost(CraftingResult.getQualityAdjustedDifficulty(unadjusted_crafting_difficulty_to_produce, EnumQuality.values()[i])) <= this.experience) {
+                    return EnumQuality.values()[i];
+                }
+            }
+
+            return this.getMinCraftingQuality(item, applicable_skillsets);
+        }
+    }
 
     @Overwrite
     public EntityDamageResult attackEntityFrom(Damage damage) {
@@ -136,67 +158,40 @@ public class EntityPlayerMixin extends EntityLiving{
             return result;
         }
     }
-
     @Shadow
-    public float getHealthLimit() {
-        return 1.0F;
-    }
+    public int getNutrition() {return 1;}
     @Shadow
-    @Final
-    public static int getHighestPossibleLevel() {
-        return 0;
-    }
-    @Shadow
-    @Final
-    private static int[] experience_for_level;
-    @Shadow
-    public final int getExperienceLevel() {
-        return 1;
-    }
-
+    public int getSatiation() {return 1;}
     @Shadow
     protected FoodMetaData foodStats;
-
     @Shadow
     public ItemStack[] getWornItems() {
         return new ItemStack[0];
     }
-
     @Shadow
     public boolean isWearing(ItemStack itemStack) {
         return false;
     }
-
     @Shadow
     public boolean setWornItem(int i, ItemStack itemStack) {
         return false;
     }
-
     @Shadow
-    public void setHeldItemStack(ItemStack itemStack) {
-
-    }
-
+    public void setHeldItemStack(ItemStack itemStack) {}
     @Shadow
     public ItemStack getHeldItemStack() {
         return null;
     }
-
     @Shadow
     public ItemStack getEquipmentInSlot(int i) {
         return null;
     }
-
     @Shadow
-    public void setCurrentItemOrArmor(int i, ItemStack itemStack) {
-
-    }
-
+    public void setCurrentItemOrArmor(int i, ItemStack itemStack) {}
     @Shadow
     public ItemStack[] getInventory() {
         return new ItemStack[0];
     }
-
     @Shadow
     public PlayerAbilities capabilities;
     @Shadow
@@ -215,29 +210,4 @@ public class EntityPlayerMixin extends EntityLiving{
     public int getCraftingExperienceCost(float quality_adjusted_crafting_difficulty) {
         return 1;
     }
-    @Overwrite
-    public EnumQuality getMaxCraftingQuality(float unadjusted_crafting_difficulty_to_produce, Item item, int[] applicable_skillsets) {
-        if (!this.worldObj.areSkillsEnabled()) {
-            applicable_skillsets = null;
-        }
-
-        if (this.experience <= 0) {
-            return this.getMinCraftingQuality(item, applicable_skillsets);
-        } else if (applicable_skillsets != null && !this.hasAnyOfTheseSkillsets(applicable_skillsets)) {
-            return this.getMinCraftingQuality(item, applicable_skillsets);
-        } else {
-            if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
-                //Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
-            }
-
-            for(int i = item.getMaxQuality().ordinal(); i > EnumQuality.average.ordinal(); --i) {
-                if (this.getCraftingExperienceCost(CraftingResult.getQualityAdjustedDifficulty(unadjusted_crafting_difficulty_to_produce, EnumQuality.values()[i])) <= this.experience) {
-                    return EnumQuality.values()[i];
-                }
-            }
-
-            return this.getMinCraftingQuality(item, applicable_skillsets);
-        }
-    }
-
 }

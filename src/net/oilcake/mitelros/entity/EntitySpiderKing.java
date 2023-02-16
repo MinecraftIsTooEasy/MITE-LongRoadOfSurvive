@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class EntitySpiderKing extends EntityArachnid {
-    int num_webs;
+    private final int num_webs;
     public EntitySpiderKing(World par1World) {
         super(par1World, 1.45F);
         this.num_webs = 4;

@@ -1,48 +1,48 @@
-package net.oilcake.mitelros.mixins.util;
-
-import net.minecraft.EntityPlayer;
-import net.minecraft.Item;
-import net.minecraft.ReferenceFileWriter;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-
-import java.io.File;
-import java.io.FileWriter;
-
-@Mixin(ReferenceFileWriter.class)
-public class ReferenceFileWriterMixin {
-    private static void writeFoodValueFile(File dir) throws Exception
-    {
-        FileWriter fw = new FileWriter(dir.getPath() + "/food_value.txt");
-        StringBuffer sb = new StringBuffer();
-        sb.append("Food Value (satiation, nutrition, protein, phytonutrients, IR=Insulin Response)" + newline);
-        sb.append("----------" + newline);
-
-        for (int i = 0; i < Item.itemsList.length; ++i)
-        {
-            Item item = Item.getItem(i);
-
-            if (item != null && item.isIngestable(0))
-            {
-                sb.append("Item[" + i + "] ");
-                sb.append(item.getNameForReferenceFile() + ": " + item.getSatiation((EntityPlayer)null) + ", " + item.getNutrition() + "," + item.getWater());
-                sb.append(", " + item.getProtein() + ", " + item.getPhytonutrients());
-                int insulin_response = item.getInsulinResponse();
-
-                if (insulin_response > 0)
-                {
-                    sb.append(" IR=" + insulin_response);
-                }
-
-                sb.append(newline);
-            }
-        }
-
-        fw.write(sb.toString());
-        fw.close();
-    }
-    @Shadow
-    private static String newline;
+//package net.oilcake.mitelros.mixins.util;
+//
+//import net.minecraft.EntityPlayer;
+//import net.minecraft.Item;
+//import net.minecraft.ReferenceFileWriter;
+//import org.spongepowered.asm.mixin.Mixin;
+//import org.spongepowered.asm.mixin.Shadow;
+//
+//import java.io.File;
+//import java.io.FileWriter;
+//
+//@Mixin(ReferenceFileWriter.class)
+//public class ReferenceFileWriterMixin {
+//    private static void writeFoodValueFile(File dir) throws Exception
+//    {
+//        FileWriter fw = new FileWriter(dir.getPath() + "/food_value.txt");
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("Food Value (satiation, nutrition, protein, phytonutrients, IR=Insulin Response)" + newline);
+//        sb.append("----------" + newline);
+//
+//        for (int i = 0; i < Item.itemsList.length; ++i)
+//        {
+//            Item item = Item.getItem(i);
+//
+//            if (item != null && item.isIngestable(0))
+//            {
+//                sb.append("Item[" + i + "] ");
+//                sb.append(item.getNameForReferenceFile() + ": " + item.getSatiation((EntityPlayer)null) + ", " + item.getNutrition() + "," + item.getWater());
+//                sb.append(", " + item.getProtein() + ", " + item.getPhytonutrients());
+//                int insulin_response = item.getInsulinResponse();
+//
+//                if (insulin_response > 0)
+//                {
+//                    sb.append(" IR=" + insulin_response);
+//                }
+//
+//                sb.append(newline);
+//            }
+//        }
+//
+//        fw.write(sb.toString());
+//        fw.close();
+//    }
+//    @Shadow
+//    private static String newline;
 //    @Overwrite
 //    private static void writePlayerLevelsFile(File dir) throws Exception {
 //        FileWriter fw = new FileWriter(dir.getPath() + "/player_levels.txt");
@@ -88,4 +88,4 @@ public class ReferenceFileWriterMixin {
 //        fw.write(sb.toString());
 //        fw.close();
 //    }
-}
+//}

@@ -17,16 +17,7 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(Packet8UpdateHealth.class)
 public class Packet8UpdateHealthMixin extends Packet {
-    @Shadow
-    public float healthMP;
-    @Shadow
-    public int nutrition;
     public int water;
-    @Shadow
-    public int satiation;
-    @Shadow
-    public float vision_dimming;
-
 
     public Packet8UpdateHealthMixin(float health, int satiation, int nutrition, float vision_dimming) {
         this.healthMP = health;
@@ -51,35 +42,33 @@ public class Packet8UpdateHealthMixin extends Packet {
     }
 
     @Shadow
+    public float healthMP;
+    @Shadow
+    public int nutrition;
+    @Shadow
+    public int satiation;
+    @Shadow
+    public float vision_dimming;
+    @Shadow
     public boolean containsSameEntityIDAs(Packet par1Packet) {
         return true;
     }
-
     @Shadow
     public int getPacketSize() {
-        return 10;
+        return 1;
     }
-
-
     @Shadow
     public boolean isRealPacket() {
         return true;
     }
-
     @Shadow
     public void processPacket(Connection par1NetHandler) {
         par1NetHandler.handleUpdateHealth(dyCast(this));
     }
-
-    @Override
     @Shadow
     public void readPacketData(DataInput dataInput) throws IOException {
-
     }
-
-    @Override
     @Shadow
     public void writePacketData(DataOutput dataOutput) throws IOException {
-
     }
 }

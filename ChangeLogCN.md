@@ -1,5 +1,12 @@
 
+## BEAT+Build.14-pre3
+### 其他
+* 含水量为0时,拥有和饱食度为0一样的debuff
+### 其他
+* 闲来无事,再次优化代码
+* 添加/stoneair指令,删除以玩家自身为中点体积为X * Y * Z的方块,用法/stoneair X Y Z (DEV)
 
+---
 
 ## BEAT+Build.14-pre2
 ### 其他

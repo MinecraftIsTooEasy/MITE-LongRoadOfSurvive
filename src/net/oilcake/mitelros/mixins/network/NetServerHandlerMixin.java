@@ -10,14 +10,13 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(PlayerConnection.class)
 public class NetServerHandlerMixin extends Connection {
-    @Shadow
-    public ServerPlayer playerEntity;
 
     public void handleDecreaseWater(PacketDecreaseWater packet)
     {
         this.playerEntity.decreaseWaterServerSide(packet.hungerWater);
     }
-
+    @Shadow
+    public ServerPlayer playerEntity;
     @Shadow
     public boolean isServerHandler() {
         return false;

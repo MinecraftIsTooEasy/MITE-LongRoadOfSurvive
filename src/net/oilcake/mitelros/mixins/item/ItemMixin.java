@@ -80,18 +80,13 @@ public class ItemMixin{
     public final int getWater() {
         return this.water;
     }
-    public Item setWater(int water)
-    {
+    public Item setWater(int water) {
         this.water = water;
         return item;
     }
 
     public Item setPotionEffectC(String par1Str) {
         this.setPotionEffect(par1Str);
-        return item;
-    }
-    @Shadow
-    protected Item setPotionEffect(String par1Str) {
         return item;
     }
     // must not to do this
@@ -109,6 +104,7 @@ public class ItemMixin{
 //
 //        return item;
 //    }
+
     @Overwrite
     public Item getRepairItem() {
         Material material_for_repairs = this.getMaterialForRepairs();
@@ -134,6 +130,10 @@ public class ItemMixin{
         } else {
             return Item.ironNugget;
         }
+    }
+    @Shadow
+    protected Item setPotionEffect(String par1Str) {
+        return item;
     }
     @Shadow
     private int satiation;

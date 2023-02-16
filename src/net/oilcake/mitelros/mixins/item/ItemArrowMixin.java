@@ -12,13 +12,6 @@ import java.util.List;
 
 @Mixin(ItemArrow.class)
 public class ItemArrowMixin extends Item{
-    @Shadow
-    @Final
-    @Mutable
-    public static Material[] material_types;
-    @Shadow
-    @Final
-    public Material arrowhead_material;
     public ItemArrow itemArrow;
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback){
@@ -29,15 +22,15 @@ public class ItemArrowMixin extends Item{
         if (extended_info) {
             info.add("");
             info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.missileDamage", new Object[]{(int)this.getMaterialDamageVsEntity()}));
+            info.add(EnumChatFormat.GRAY + Translator.getFormatted("item.tooltip.missileRecovery", new Object[]{(int)(this.getChanceOfRecovery() * 100.0F)}));
             if (this.arrowhead_material == Materials.nickel) {
                 //info.add(EnumChatFormat.WHITE + Translator.get("item.tooltip.bonusVsUndead"));
-                info.add(EnumChatFormat.LIGHT_GRAY + Translator.get("腐蚀抗性"));
+                info.add(EnumChatFormat.LIGHT_GRAY + Translator.get("史莱姆杀手"));
             }
             if(this.arrowhead_material != Material.rusted_iron && this.arrowhead_material != Material.ancient_metal
             &&this.arrowhead_material != Materials.nickel && this.arrowhead_material != Materials.tungsten){
                 info.add(EnumChatFormat.RED + Translator.getFormatted("出现崩溃bug中，请勿制作/食用", new Object[0]));
             }
-            info.add(EnumChatFormat.GRAY + Translator.getFormatted("item.tooltip.missileRecovery", new Object[]{(int)(this.getChanceOfRecovery() * 100.0F)}));
         }
     }
 
@@ -58,5 +51,12 @@ public class ItemArrowMixin extends Item{
     public float getMaterialDamageVsEntity() {
         return 1F;
     }
+    @Shadow
+    @Final
+    @Mutable
+    public static Material[] material_types;
+    @Shadow
+    @Final
+    public Material arrowhead_material;
 
 }

@@ -11,11 +11,6 @@ import java.util.List;
 
 @Mixin(ItemArmor.class)
 public class ItemArmorMixin extends Item {
-    @Shadow
-    private Material effective_material;
-    @Shadow
-    @Final
-    private boolean is_chain_mail;
     @Overwrite
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         if (extended_info) {
@@ -28,10 +23,6 @@ public class ItemArmorMixin extends Item {
 //            }
         }
 
-    }
-    @Shadow
-    public final float getProtectionAfterDamageFactor(ItemStack item_stack, EntityLiving owner) {
-        return 1F;
     }
 
     @Overwrite
@@ -67,4 +58,13 @@ public class ItemArmorMixin extends Item {
 
         return protection;
     }
+    @Shadow
+    public final float getProtectionAfterDamageFactor(ItemStack item_stack, EntityLiving owner) {
+        return 1F;
+    }
+    @Shadow
+    private Material effective_material;
+    @Shadow
+    @Final
+    private boolean is_chain_mail;
 }

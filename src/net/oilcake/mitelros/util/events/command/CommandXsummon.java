@@ -22,7 +22,7 @@ public class CommandXsummon extends CommandAbstract {
         EntityPlayer player = getCommandSenderAsPlayer(iCommandListener);
         World world = iCommandListener.getEntityWorld();
 
-        Entity entity = EntityTypes.createEntityByID(Integer.valueOf(strings[0]), world);
+        Entity entity = EntityTypes.createEntityByID(Integer.parseInt(strings[0]), world);
 
         if (entity != null) {
             entity.setPosition(player.posX, player.posY, player.posZ);

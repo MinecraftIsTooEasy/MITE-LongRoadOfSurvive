@@ -12,31 +12,25 @@ import java.io.IOException;
 
 @Mixin(Packet100OpenWindow.class)
 public class Packet100OpenWindowMixin {
-    @Shadow
-    public int field_111008_f;
-    @Shadow
-    public boolean has_set_coords;
-    @Shadow
-    public int inventoryType;
-    @Shadow
-    public int slotsCount;
-    @Shadow
-    public boolean useProvidedWindowTitle;
-    @Shadow
-    public int windowId;
-    @Shadow
-    public String windowTitle;
-    @Shadow
-    public int x;
-    @Shadow
-    public int y;
-    @Shadow
-    public int z;
 
-    @Shadow
-    private Entity getEntityByID(EntityPlayer player, int id) {
-        return null;
-    }
+//    @Overwrite
+//    public void readPacketData(DataInput par1DataInput) throws IOException {
+//        this.windowId = par1DataInput.readByte() & 255;
+//        this.inventoryType = par1DataInput.readByte() & 255;
+//        this.windowTitle = Packet.readString(par1DataInput, 32767);
+//        this.slotsCount = par1DataInput.readByte() & 255;
+//        this.useProvidedWindowTitle = par1DataInput.readBoolean();
+//        if (this.inventoryType == 11) {
+//            this.field_111008_f = par1DataInput.readInt();
+//        }
+//
+//        if (this.hasCoords()) {
+//            this.x = par1DataInput.readInt();
+//            this.y = par1DataInput.readInt();
+//            this.z = par1DataInput.readInt();
+//        }
+//
+//    }
 
     @Overwrite
     public void handleOpenWindow(ClientPlayer player) {
@@ -139,33 +133,36 @@ public class Packet100OpenWindowMixin {
         }
 
     }
-
+    @Shadow
+    public int field_111008_f;
+    @Shadow
+    public boolean has_set_coords;
+    @Shadow
+    public int inventoryType;
+    @Shadow
+    public int slotsCount;
+    @Shadow
+    public boolean useProvidedWindowTitle;
+    @Shadow
+    public int windowId;
+    @Shadow
+    public String windowTitle;
+    @Shadow
+    public int x;
+    @Shadow
+    public int y;
+    @Shadow
+    public int z;
+    @Shadow
+    private Entity getEntityByID(EntityPlayer player, int id) {
+        return null;
+    }
     @Shadow
     public boolean hasCoords() {
         return false;
     }
-
     @Shadow
     public boolean hasTileEntity() {
         return false;
-    }
-
-    @Overwrite
-    public void readPacketData(DataInput par1DataInput) throws IOException {
-        this.windowId = par1DataInput.readByte() & 255;
-        this.inventoryType = par1DataInput.readByte() & 255;
-        this.windowTitle = Packet.readString(par1DataInput, 32767);
-        this.slotsCount = par1DataInput.readByte() & 255;
-        this.useProvidedWindowTitle = par1DataInput.readBoolean();
-        if (this.inventoryType == 11) {
-            this.field_111008_f = par1DataInput.readInt();
-        }
-
-        if (this.hasCoords()) {
-            this.x = par1DataInput.readInt();
-            this.y = par1DataInput.readInt();
-            this.z = par1DataInput.readInt();
-        }
-
     }
 }

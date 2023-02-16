@@ -26,16 +26,6 @@ public class NetClientHandlerMixin extends ConnectionMixin{
 //        }
 //    }
 
-    @Shadow
-    private static int class_hash_sum = 0;
-    @Shadow
-    private static int getHash(Class _class) {
-        return 1;
-    }
-
-    @Shadow
-    private Minecraft h;
-
     @Overwrite
     public void handleUpdateHealth(Packet8UpdateHealth par1Packet8UpdateHealth) {
         this.h.h.n(par1Packet8UpdateHealth.healthMP);
@@ -55,4 +45,13 @@ public class NetClientHandlerMixin extends ConnectionMixin{
             ((GuiEnchantReserver)openingGUI).setEnchantInfo(packet.getEXP());
         }
     }
+    @Shadow
+    private static int class_hash_sum = 0;
+    @Shadow
+    private static int getHash(Class _class) {
+        return 1;
+    }
+
+    @Shadow
+    private Minecraft h;
 }

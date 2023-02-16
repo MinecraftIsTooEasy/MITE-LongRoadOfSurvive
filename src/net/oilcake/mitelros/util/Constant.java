@@ -2,11 +2,10 @@ package net.oilcake.mitelros.util;
 
 import net.minecraft.Item;
 import net.minecraft.ItemArmor;
-import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = "BEAT+Build.14-pre2";
+    public static final String VERSION = "BEAT+Build.14-pre3";
 //    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
 //    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -15,7 +14,6 @@ public class Constant {
     public static int nextBlockID = 174;
     public static int nextPotionID = 24;
     public static int nextEnchantmentID = 97;
-
     public static int nextAchievementID = 136;
 
     public static int nickelNUM = 4;
