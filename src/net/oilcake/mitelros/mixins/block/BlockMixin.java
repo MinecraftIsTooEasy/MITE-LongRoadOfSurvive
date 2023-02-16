@@ -240,6 +240,93 @@ public class BlockMixin{
         }
 
     }
+    @Overwrite
+    public final int dropBlockAsEntityItem(BlockBreakInfo info, int id_dropped, int subtype, int quantity, float chance) {
+        if (info.world.isRemote) {
+            Minecraft.setErrorMessage("dropBlockAsEntityItem: not meant to be called on client " + info.x + "," + info.y + "," + info.z);
+            return 0;
+        } else {
+            if (info.block != block) {
+                //Minecraft.setErrorMessage("dropBlockAsEntityItem: info.block!=this");
+            }
+
+            if (id_dropped >= 1 && quantity >= 1 && !(chance <= 0.0F)) {
+                if (info.wasExploded()) {
+                    if (this.blockMaterial != Material.snow && this.blockMaterial != Material.craftedSnow && this.blockMaterial != Material.glass) {
+                        if (this.blockMaterial != Material.plants && this.blockMaterial != Material.cactus && this.blockMaterial != Material.vine) {
+                            if (this.blockMaterial == Material.cake) {
+                                chance = 0.0F;
+                            }
+                        } else {
+                            chance = 0.0F;
+                        }
+                    } else {
+                        chance *= 0.4F;
+                    }
+                }
+
+                if (chance <= 0.0F) {
+                    return 0;
+                } else {
+                    int damage = info.damage;
+                    int num_drops = 0;
+
+                    int xp_reward_per_unit;
+                    for(xp_reward_per_unit = 0; xp_reward_per_unit < quantity; ++xp_reward_per_unit) {
+                        if (info.world.rand.nextFloat() < chance) {
+                            ItemStack item_stack = new ItemStack(id_dropped, 1, subtype);
+                            if (item_stack.isBlock() && !item_stack.getItemAsBlock().getBlock().canBeCarried()) {
+                                ItemStack substitute = item_stack.getItemAsBlock().getBlock().createStackedBlock(subtype);
+                                Minecraft.setErrorMessage("dropBlockAsEntityItem: " + item_stack + " can not be carried, substituting with " + substitute);
+                                if (substitute == null) {
+                                    Minecraft.setErrorMessage("dropBlockAsEntityItem: createStackedBlock returned null for " + item_stack);
+                                    return num_drops;
+                                }
+
+                                if (substitute.isBlock() && !substitute.getItemAsBlock().getBlock().canBeCarried()) {
+                                    Minecraft.setErrorMessage("dropBlockAsEntityItem: substitute " + substitute + " can not be carried either. Aborting");
+                                    return num_drops;
+                                }
+
+                                item_stack = substitute;
+                            }
+
+                            if (id_dropped > 0) {
+                                EntityItem entity_item = this.dropBlockAsItem_do(info, item_stack.copy());
+                                if (damage != 0) {
+                                    entity_item.getEntityItem().setItemDamage(damage);
+                                }
+
+                                if (quantity == 1 && chance <= 1.0F && info.tile_entity != null && info.tile_entity.getCustomInvName() != null) {
+                                    entity_item.getEntityItem().setItemName(info.tile_entity.getCustomInvName());
+                                }
+
+                                if (chance > 1.0F && info.world.rand.nextFloat() < chance - 1.0F) {
+                                    entity_item = this.dropBlockAsItem_do(info, item_stack.copy());
+                                    if (damage != 0) {
+                                        entity_item.getEntityItem().setItemDamage(damage);
+                                    }
+                                }
+
+                                ++num_drops;
+                            }
+                        }
+                    }
+
+                    if (this.canDropExperienceOrbs() && !(block instanceof BlockAnvil)) {
+                        xp_reward_per_unit = Item.getItem(id_dropped).getExperienceReward(subtype);
+                        if (xp_reward_per_unit > 0) {
+                            this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, xp_reward_per_unit * num_drops);
+                        }
+                    }
+
+                    return num_drops;
+                }
+            } else {
+                return 0;
+            }
+        }
+    }
     @Shadow
     @Final
     public Material blockMaterial;
@@ -373,94 +460,6 @@ public class BlockMixin{
     @Shadow
     @Final
     public boolean is_always_immutable;
-
-    @Overwrite
-    public final int dropBlockAsEntityItem(BlockBreakInfo info, int id_dropped, int subtype, int quantity, float chance) {
-        if (info.world.isRemote) {
-            Minecraft.setErrorMessage("dropBlockAsEntityItem: not meant to be called on client " + info.x + "," + info.y + "," + info.z);
-            return 0;
-        } else {
-            if (info.block != block) {
-                //Minecraft.setErrorMessage("dropBlockAsEntityItem: info.block!=this");
-            }
-
-            if (id_dropped >= 1 && quantity >= 1 && !(chance <= 0.0F)) {
-                if (info.wasExploded()) {
-                    if (this.blockMaterial != Material.snow && this.blockMaterial != Material.craftedSnow && this.blockMaterial != Material.glass) {
-                        if (this.blockMaterial != Material.plants && this.blockMaterial != Material.cactus && this.blockMaterial != Material.vine) {
-                            if (this.blockMaterial == Material.cake) {
-                                chance = 0.0F;
-                            }
-                        } else {
-                            chance = 0.0F;
-                        }
-                    } else {
-                        chance *= 0.4F;
-                    }
-                }
-
-                if (chance <= 0.0F) {
-                    return 0;
-                } else {
-                    int damage = info.damage;
-                    int num_drops = 0;
-
-                    int xp_reward_per_unit;
-                    for(xp_reward_per_unit = 0; xp_reward_per_unit < quantity; ++xp_reward_per_unit) {
-                        if (info.world.rand.nextFloat() < chance) {
-                            ItemStack item_stack = new ItemStack(id_dropped, 1, subtype);
-                            if (item_stack.isBlock() && !item_stack.getItemAsBlock().getBlock().canBeCarried()) {
-                                ItemStack substitute = item_stack.getItemAsBlock().getBlock().createStackedBlock(subtype);
-                                Minecraft.setErrorMessage("dropBlockAsEntityItem: " + item_stack + " can not be carried, substituting with " + substitute);
-                                if (substitute == null) {
-                                    Minecraft.setErrorMessage("dropBlockAsEntityItem: createStackedBlock returned null for " + item_stack);
-                                    return num_drops;
-                                }
-
-                                if (substitute.isBlock() && !substitute.getItemAsBlock().getBlock().canBeCarried()) {
-                                    Minecraft.setErrorMessage("dropBlockAsEntityItem: substitute " + substitute + " can not be carried either. Aborting");
-                                    return num_drops;
-                                }
-
-                                item_stack = substitute;
-                            }
-
-                            if (id_dropped > 0) {
-                                EntityItem entity_item = this.dropBlockAsItem_do(info, item_stack.copy());
-                                if (damage != 0) {
-                                    entity_item.getEntityItem().setItemDamage(damage);
-                                }
-
-                                if (quantity == 1 && chance <= 1.0F && info.tile_entity != null && info.tile_entity.getCustomInvName() != null) {
-                                    entity_item.getEntityItem().setItemName(info.tile_entity.getCustomInvName());
-                                }
-
-                                if (chance > 1.0F && info.world.rand.nextFloat() < chance - 1.0F) {
-                                    entity_item = this.dropBlockAsItem_do(info, item_stack.copy());
-                                    if (damage != 0) {
-                                        entity_item.getEntityItem().setItemDamage(damage);
-                                    }
-                                }
-
-                                ++num_drops;
-                            }
-                        }
-                    }
-
-                    if (this.canDropExperienceOrbs() && !(block instanceof BlockAnvil)) {
-                        xp_reward_per_unit = Item.getItem(id_dropped).getExperienceReward(subtype);
-                        if (xp_reward_per_unit > 0) {
-                            this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, xp_reward_per_unit * num_drops);
-                        }
-                    }
-
-                    return num_drops;
-                }
-            } else {
-                return 0;
-            }
-        }
-    }
 
     @Shadow
     protected void dropXpOnBlockBreak(World par1World, int par2, int par3, int par4, int par5) {

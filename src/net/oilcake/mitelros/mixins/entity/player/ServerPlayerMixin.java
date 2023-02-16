@@ -19,26 +19,6 @@ import java.util.List;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends EntityPlayer implements ICrafting {
-    @Shadow
-    private int protein;
-    @Shadow
-    private int essential_fats;
-    @Shadow
-    private int phytonutrients;
-    @Shadow
-    private float field_130068_bO;
-    @Shadow
-    private float lastHealth;
-    @Shadow
-    private int last_experience;
-    @Shadow
-    private int last_nutrition;
-    private int last_phytonutrients;
-    private int last_protein;
-    @Shadow
-    private int last_satiation;
-    @Shadow
-    public PlayerConnection playerNetServerHandler;
     private int last_water = -99999999;
 
     //private int water;
@@ -61,7 +41,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
             float health = this.getHealth();
             int satiation = this.getSatiation();
             int nutrition = this.getNutrition();
-            int water = this.foodStats.getWater();
+            int water = this.getWater();
             if (water != this.last_water || health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F) {
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
                 Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
@@ -109,7 +89,8 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     @Overwrite
     public void setEssentialFats(int essential_fats) {
         this.essential_fats = MathHelper.clamp_int(essential_fats, 0, 960000);
-    }@Overwrite
+    }
+    @Overwrite
     public void setPhytonutrients(int phytonutrients) {
         this.phytonutrients = MathHelper.clamp_int(phytonutrients, 0, 960000);
     }
@@ -123,6 +104,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
 
     @Shadow
     protected abstract void getNextWindowId();
+
     public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
         this.getNextWindowId();
         TileEntity tile_entity = this.worldObj.getBlockTileEntity(x, y, z);
@@ -132,8 +114,6 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         ReflectHelper.dyCast(ServerPlayer.class, this).updateCraftingInventory(this.openContainer, ((ContainerEnchantReserver)this.openContainer).getInventory());
         this.openContainer.onCraftGuiOpened(this);
     }
-
-
 
 
     public boolean isMalnourishedLv1() {
@@ -221,4 +201,23 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     public void sendProgressBarUpdate(Container container, int i, int i1) {
 
     }
+    @Shadow
+    private int protein;
+    @Shadow
+    private int essential_fats;
+    @Shadow
+    private int phytonutrients;
+    @Shadow
+    private float field_130068_bO;
+    @Shadow
+    private float lastHealth;
+    @Shadow
+    private int last_experience;
+    @Shadow
+    private int last_nutrition;
+    @Shadow
+    private int last_satiation;
+    @Shadow
+    public PlayerConnection playerNetServerHandler;
+
 }

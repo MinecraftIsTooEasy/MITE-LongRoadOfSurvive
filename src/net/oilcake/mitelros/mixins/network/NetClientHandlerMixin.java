@@ -15,18 +15,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(NetClientHandler.class)
 public class NetClientHandlerMixin extends ConnectionMixin{
-
-    private static Class[] classes = new Class[]{ContainerPlayer.class, ContainerWorkbench.class, MITEConstant.class, MITEContainerCrafting.class, ClientPlayer.class, EntityPlayer.class, bex.class,
-            FoodMetaData.class, Minecraft.class, bew.class, NetClientHandler.class, ClientPlayerController.class, Packet13PlayerLookMove.class, Packet27PlayerInput.class, Packet82AddHunger.class,
-            Packet85SimpleSignal.class, Packet202Abilities.class, PlayerAbilities.class, NetworkManager.class, PacketDecreaseWater.class};
-
-    @Inject(method = "<clinit>", at = @At("RETURN"))
-    private static void injectClinit(CallbackInfo callbackInfo) {
-        for (Class aClass : classes) {
-            class_hash_sum += getHash(aClass);
-        }
-    }
-
+//    private static Class[] classes = new Class[]{ContainerPlayer.class, ContainerWorkbench.class, MITEConstant.class, MITEContainerCrafting.class, ClientPlayer.class, EntityPlayer.class, bex.class,
+//            FoodMetaData.class, Minecraft.class, bew.class, NetClientHandler.class, ClientPlayerController.class, Packet13PlayerLookMove.class, Packet27PlayerInput.class, Packet82AddHunger.class,
+//            Packet85SimpleSignal.class, Packet202Abilities.class, PlayerAbilities.class, NetworkManager.class, PacketDecreaseWater.class, PacketEnchantReserverInfo.class};
+//
+//    @Inject(method = "<clinit>", at = @At("RETURN"))
+//    private static void injectClinit(CallbackInfo callbackInfo) {
+//        for (Class aClass : classes) {
+//            class_hash_sum += getHash(aClass);
+//        }
+//    }
 
     @Shadow
     private static int class_hash_sum = 0;
@@ -34,6 +32,7 @@ public class NetClientHandlerMixin extends ConnectionMixin{
     private static int getHash(Class _class) {
         return 1;
     }
+
     @Shadow
     private Minecraft h;
 
@@ -53,13 +52,7 @@ public class NetClientHandlerMixin extends ConnectionMixin{
     public void processEnchantReserverInfo(PacketEnchantReserverInfo packet) {
         awe openingGUI = this.h.n;
         if (openingGUI instanceof GuiEnchantReserver) {
-            if (packet.getInfo() instanceof PacketEnchantReserverInfo.EnchantInfo) {
-                PacketEnchantReserverInfo.EnchantInfo info = (PacketEnchantReserverInfo.EnchantInfo)packet.getInfo();
-                ((GuiEnchantReserver)openingGUI).setEnchantInfo(info.getEXP());
-            } else {
-                ((GuiEnchantReserver)openingGUI).setInfo(packet.getInfo().getColor());
-            }
+            ((GuiEnchantReserver)openingGUI).setEnchantInfo(packet.getEXP());
         }
-
     }
 }

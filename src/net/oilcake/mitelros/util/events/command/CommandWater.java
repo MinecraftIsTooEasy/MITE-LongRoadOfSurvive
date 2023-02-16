@@ -26,15 +26,14 @@ public class CommandWater extends CommandAbstract {
     @Override
     public void processCommand(ICommandListener iCommandListener, String[] strings) {
         EntityPlayer player = getCommandSenderAsPlayer(iCommandListener);
-        FoodMetaData food = player.getFoodStats();
         //World world = iCommandListener.getEntityWorld();
         switch (strings[0]) {
             case "get":
-                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值为" + food.getWater()).setColor(EnumChatFormat.LIGHT_GRAY));
+                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值为" + player.getWater()).setColor(EnumChatFormat.LIGHT_GRAY));
                 break;
             case "add":
-                food.addWater(Integer.parseInt(strings[1]));
-                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值现在为" + food.getWater()).setColor(EnumChatFormat.LIGHT_GRAY));
+                player.addWater(Integer.parseInt(strings[1]));
+                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值现在为" + player.getWater()).setColor(EnumChatFormat.LIGHT_GRAY));
                 break;
             default:
                 iCommandListener.sendChatToPlayer(ChatMessage.createFromText("请使用get或add").setColor(EnumChatFormat.LIGHT_GRAY));

@@ -3,6 +3,7 @@ package net.oilcake.mitelros.block.enchantreserver;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.BlockEnchantReserver;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
 
 import java.util.Arrays;
 
@@ -10,6 +11,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
 
     private final EnchantReserverSlots slots = new EnchantReserverSlots(this);
     private final ItemStack[] items = new ItemStack[EnchantReserverSlots.slotSize];
+    public EntityPlayer player;
 
     private boolean isUsing;
     public void setItem(int index,ItemStack itemStack) {
@@ -30,9 +32,13 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
     }
 
     private final int MAX_EXP = 32000;
-    public int EXP;
+    private int EXP;
+    private int last_EXP = -999999;
     public int getEXP() {
         return this.EXP;
+    }
+    public int setEXP(int exp) {
+        return this.EXP = exp;
     }
 
     public int getMAXEXP() {
@@ -40,8 +46,19 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
     }
 
 
+//    @Override
+//    public void onInventoryChanged() {
+//        super.onInventoryChanged();
+//        if(this.getEXP() != this.last_EXP){
+//            this.slots.updateInfo();
+//        }
+//    }
     public void updateEntity() {
         if (!this.getWorldObj().isRemote) {
+            if(this.getEXP() != this.last_EXP){
+                this.slots.updateInfo();
+                this.last_EXP = EXP;
+            }
             ItemStack inputStack = this.slots.getInPutStack();
             if (inputStack != null) {
 //                if (inputStack.itemID == Item.diamond.itemID || inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 ||
@@ -57,25 +74,25 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                     int size = inputStack.stackSize;
                         this.EXP += 500 * size;
                         this.slots.getInPut().putStack(null);
-                        this.slots.updateInfo();
+//                        this.slots.updateInfo();
                 }
                 else if (inputStack.itemID == Item.emerald.itemID && inputStack.stackSize * 250 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 250 * size;
                     this.slots.getInPut().putStack(null);
-                    this.slots.updateInfo();
+//                    this.slots.updateInfo();
                 }
                 else if (inputStack.itemID == Item.netherQuartz.itemID && inputStack.stackSize * 50 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 50 * size;
                     this.slots.getInPut().putStack(null);
-                    this.slots.updateInfo();
+//                    this.slots.updateInfo();
                 }
                 else if (inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 && inputStack.stackSize * 25 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 25 * size;
                     this.slots.getInPut().putStack(null);
-                    this.slots.updateInfo();
+//                    this.slots.updateInfo();
                 }
             }
 
@@ -86,7 +103,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                         if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() + 2000) {
                             this.EXP -= 200;
                             this.slots.getOutPut().putStack(Item.expBottle.getItemStackForStatsIcon());
-                            this.slots.updateInfo();
+//                            this.slots.updateInfo();
                         }
                     }
                     if (this.getEXP() >= 50) {
@@ -94,7 +111,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                             this.EXP -= 50;
                                     //* size;
                             this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
-                            this.slots.updateInfo();
+//                            this.slots.updateInfo();
                         }
                     }
                     if (this.getEXP() >= 5000) {
@@ -102,7 +119,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                             this.EXP -= 5000;
                                     //* size;
                             this.slots.getOutPut().putStack(Items.tungstenCoin.getItemStackForStatsIcon());
-                            this.slots.updateInfo();
+//                            this.slots.updateInfo();
                         }
                     }
                 }
@@ -165,13 +182,6 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
         }
     }
 
-    private String customName;
-    public boolean b() {
-        return this.customName != null && this.customName.length() > 0;
-    }
-
-
-
     public void openChest() {
         this.slots.updateInfo();
         this.isUsing = true;
@@ -186,10 +196,6 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("EXP", this.EXP);
-        if (this.b()) {
-            par1NBTTagCompound.setString("CustomName", this.customName);
-        }
-
         this.slots.writeToNBT(par1NBTTagCompound);
     }
 

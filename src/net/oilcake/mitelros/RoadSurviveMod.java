@@ -16,8 +16,8 @@ public class RoadSurviveMod extends AbstractMod {
 
     @Override
     public void preInit() {
-
     }
+
     public static void registerAllEvents() {
         MITEEvents.MITE_EVENT_BUS.register(new LROSEvent());
     }

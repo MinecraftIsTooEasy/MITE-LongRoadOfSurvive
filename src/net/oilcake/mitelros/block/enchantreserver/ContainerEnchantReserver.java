@@ -113,7 +113,8 @@ public class ContainerEnchantReserver extends Container {
 
     void updateInfo() {
         if (!this.world.isRemote) {
-            this.player.sendPacket(new PacketEnchantReserverInfo(PacketEnchantReserverInfo.EnchantInfo.getInstance(this.tileEntityEnchantReserver.getEXP())));
+            this.player.sendPacket(new PacketEnchantReserverInfo(this.tileEntityEnchantReserver.getEXP()));
+            //System.out.println("发包, EXP=" + this.tileEntityEnchantReserver.getEXP());
         }
     }
 

@@ -18,10 +18,10 @@ public class DedicatedServerMixin {
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("MITE-LROS挂载成功,当前版本:").setColor(EnumChatFormat.DARK_GREEN))
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.DARK_RED)));
-        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[MITE-LROS]")
-                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee,NoRegrets,Kalsey 特别感谢:Wensc,XiaoYu").setColor(EnumChatFormat.LIGHT_PURPLE)));
-        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[MITE-LROS]")
-                .appendComponent(ChatMessage.createFromTranslationKey("企鹅群:706242091  更新日志链接:lucklong.cn").setColor(EnumChatFormat.LIGHT_GRAY)));
+        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[LROS]")
+                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee,NoRegrets,Kalsey").setColor(EnumChatFormat.RED)));
+        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[LROS]")
+                .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         this.updatePlayersFile();
     }
     @Shadow

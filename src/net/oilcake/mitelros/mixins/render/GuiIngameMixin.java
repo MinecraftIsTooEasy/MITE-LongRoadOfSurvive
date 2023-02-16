@@ -15,15 +15,7 @@ import java.util.Random;
 
 @Mixin(GuiIngame.class)
 public class GuiIngameMixin extends avk {
-    @Shadow
-    @Final
-    private Minecraft g;
-    @Shadow
-    private final Random f = new Random();
-    @Shadow
-    private int i;
 
-    @Overwrite
     private void a(int par1, int par2) {
         boolean var3 = this.g.h.hurtResistantTime / 3 % 2 == 1;
         if (this.g.h.hurtResistantTime < 10) {
@@ -32,20 +24,20 @@ public class GuiIngameMixin extends avk {
 
         int var4 = MathHelper.ceiling_float_int(this.g.h.getHealth());
         int var5 = MathHelper.ceiling_float_int(this.g.h.prevHealth);
-        this.f.setSeed((long)(this.i * 312871));
+        this.f.setSeed((long) (this.i * 312871));
         FoodMetaData foodStats = this.g.h.getFoodStats();
-        int nutrition = foodStats.getNutrition();
-        AttributeInstance maxHealth = this.g.h.getEntityAttribute(GenericAttributes.maxHealth);
+        int var8 = foodStats.getNutrition();
+        AttributeInstance var10 = this.g.h.getEntityAttribute(GenericAttributes.maxHealth);
         int var11 = par1 / 2 - 91;
         int var12 = par1 / 2 + 91;
         int var13 = par2 - 39;
-        float var14 = (float)maxHealth.getAttributeValue();
+        float var14 = (float) var10.getAttributeValue();
         float var15 = this.g.h.getAbsorptionAmount();
         int var16 = MathHelper.ceiling_float_int((var14 + var15) / 2.0F / 10.0F);
         int var17 = Math.max(10 - (var16 - 2), 3);
         int var18 = var13 - (var16 - 1) * var17 - 10;
         float var19 = var15;
-        float total_protection = this.g.h.getTotalProtection((DamageSource)null);
+        float total_protection = this.g.h.getTotalProtection((DamageSource) null);
         int var20 = MathHelper.ceiling_float_int(total_protection);
         int var21 = -1;
         if (this.g.h.isPotionActive(MobEffectList.regeneration)) {
@@ -56,7 +48,7 @@ public class GuiIngameMixin extends avk {
 
         int var23;
         int var22;
-        for(var22 = 0; var22 < 10; ++var22) {
+        for (var22 = 0; var22 < 10; ++var22) {
             if (total_protection > 0.0F || this.g.h.isWearingArmor()) {
                 var23 = var11 + var22 * 8;
                 if (var22 * 2 + 1 < var20) {
@@ -73,14 +65,13 @@ public class GuiIngameMixin extends avk {
             }
         }
 
-
         this.g.C.endStartSection("health");
 
         int var25;
         int var27;
         int var26;
         int var28;
-        for(var22 = MathHelper.ceiling_float_int((var14 + var15) / 2.0F) - 1; var22 >= 0; --var22) {
+        for (var22 = MathHelper.ceiling_float_int((var14 + var15) / 2.0F) - 1; var22 >= 0; --var22) {
             var23 = 16;
             if (this.g.h.isPotionActive(MobEffectList.poison)) {
                 var23 += 36;
@@ -93,7 +84,7 @@ public class GuiIngameMixin extends avk {
                 var24 = 1;
             }
 
-            var25 = MathHelper.ceiling_float_int((float)(var22 + 1) / 10.0F) - 1;
+            var25 = MathHelper.ceiling_float_int((float) (var22 + 1) / 10.0F) - 1;
             var26 = var11 + var22 % 10 * 8;
             var27 = var13 - var25 * var17;
             if (var4 <= 4) {
@@ -109,7 +100,7 @@ public class GuiIngameMixin extends avk {
                 var28 = 5;
             }
 
-            if ((float)var22 < this.g.h.getMaxHealth() / 2.0F) {
+            if ((float) var22 < this.g.h.getMaxHealth() / 2.0F) {
                 this.b(var26, var27, 16 + var24 * 9, 9 * var28, 9, 9);
             }
 
@@ -146,21 +137,21 @@ public class GuiIngameMixin extends avk {
         if (var34 != null && !(var34 instanceof EntityBoat)) {
             if (var34 instanceof EntityLiving) {
                 this.g.C.endStartSection("mountHealth");
-                EntityLiving var38 = (EntityLiving)var34;
-                var28 = (int)Math.ceil((double)var38.getHealth());
+                EntityLiving var38 = (EntityLiving) var34;
+                var28 = (int) Math.ceil((double) var38.getHealth());
                 float var37 = var38.getMaxHealth();
-                var26 = (int)(var37 + 0.5F) / 2;
+                var26 = (int) (var37 + 0.5F) / 2;
                 if (var26 > 30) {
                     var26 = 30;
                 }
 
                 var27 = var13;
 
-                for(int var39 = 0; var26 > 0; var39 += 20) {
+                for (int var39 = 0; var26 > 0; var39 += 20) {
                     int var29 = Math.min(var26, 10);
                     var26 -= var29;
 
-                    for(int var30 = 0; var30 < var29; ++var30) {
+                    for (int var30 = 0; var30 < var29; ++var30) {
                         byte var31 = 52;
                         byte var32 = 0;
                         int var33 = var12 - var30 * 8 - 9;
@@ -180,7 +171,7 @@ public class GuiIngameMixin extends avk {
         } else {
             this.g.C.endStartSection("food");
 
-            for(var23 = 0; var23 < 10; ++var23) {
+            for (var23 = 0; var23 < 10; ++var23) {
                 var28 = var13;
                 var25 = 16;
                 byte var36 = 0;
@@ -189,7 +180,7 @@ public class GuiIngameMixin extends avk {
                     var36 = 13;
                 }
 
-                if (this.g.h.isHungry() && this.i % (nutrition * 3 + 1) == 0) {
+                if (this.g.h.isHungry() && this.i % (var8 * 3 + 1) == 0) {
                     var28 = var13 + (this.f.nextInt(3) - 1);
                 }
 
@@ -198,45 +189,43 @@ public class GuiIngameMixin extends avk {
                     this.b(var27, var28, 16 + var36 * 9, 27, 9, 9);
                 }
 
-                if (var23 * 2 + 1 < nutrition) {
+                if (var23 * 2 + 1 < var8) {
                     this.b(var27, var28, var25 + 36, 27, 9, 9);
                 }
 
-                if (var23 * 2 + 1 == nutrition) {
+                if (var23 * 2 + 1 == var8) {
                     this.b(var27, var28, var25 + 45, 27, 9, 9);
                 }
             }
         }
-
-        this.g.J().a(Constant.icons_lros);
-        this.g.C.endStartSection("water");
-        int water = foodStats.getWater();
+    //this.g.J().a(Constant.icons_lros);
+    this.g.C.endStartSection("water");
+    int water = foodStats.getWater();
         for(int temp = 0; temp < 10; ++temp) {
-            var28 = var13 - 9;
-            var25 = 16;
-            int var36 = 0;
+        var28 = var13 - 9;
+        var25 = 16;
+        int var36 = 0;
 
-//            if (this.g.h.isPotionActive(Potions.dehydration)) {
-//                var25 += 27;
-//                var36 = 3;
-//            }
-
-
-            var27 = var12 - temp * 8 - 9;
-            if (temp < this.g.h.getFoodStats().getSatiationLimit() / 2) {
-                this.b(var27, var28, 16 + var36 * 9, 54, 9, 9);
-            }
+//        if (this.g.h.isPotionActive(Potions.dehydration)) {
+//            var25 += 27;
+//            var36 = 3;
+//        }
 
 
-            if (temp * 2 + 1 < water) {
-                this.b(var27, var28, var25 + 9, 54, 9, 9);
-            }
-
-            if (temp * 2 + 1 == water) {
-                this.b(var27, var28, var25 + 18, 54, 9, 9);
-            }
+        var27 = var12 - temp * 8 - 9;
+        if (temp < this.g.h.getFoodStats().getWaterLimit() / 2) {
+            this.b(var27, var28, 16 + var36 * 9, 54, 9, 9);
         }
 
+
+        if (temp * 2 + 1 < water) {
+            this.b(var27, var28, var25 + 9, 54, 9, 9);
+        }
+
+        if (temp * 2 + 1 == water) {
+            this.b(var27, var28, var25 + 18, 54, 9, 9);
+        }
+    }
 
         this.g.C.endStartSection("air");
         if (this.g.h.isInsideOfMaterial(Material.water)) {
@@ -246,7 +235,7 @@ public class GuiIngameMixin extends avk {
 
             for(var26 = 0; var26 < var28 + var25; ++var26) {
                 if (var26 < var28) {
-                    this.b(var12 - var26 * 8 - 9, var18 - 9, 16, 18, 9, 9);
+                    this.b(var12 - var26 * 8 - 9, var18 - 9 , 16, 18, 9, 9);
                 } else {
                     this.b(var12 - var26 * 8 - 9, var18 - 9, 25, 18, 9, 9);
                 }
@@ -255,14 +244,9 @@ public class GuiIngameMixin extends avk {
 
         this.g.C.endSection();
     }
-    @Inject(
-            method = {"a(FZII)V"},
-            at = {@At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/Minecraft;inDevMode()Z",
-                    shift = At.Shift.BEFORE
-            )}
-    )
+
+
+    @Inject(method = "a(FZII)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/Minecraft;inDevMode()Z", shift = At.Shift.BEFORE))
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
         if (!Minecraft.inDevMode()) {
             if (GuiIngame.server_load >= 0) {
@@ -277,4 +261,11 @@ public class GuiIngameMixin extends avk {
         }
 
     }
+    @Shadow
+    @Final
+    private Minecraft g;
+    @Shadow
+    private final Random f = new Random();
+    @Shadow
+    private int i;
 }

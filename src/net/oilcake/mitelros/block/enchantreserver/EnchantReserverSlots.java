@@ -19,6 +19,12 @@ public class EnchantReserverSlots extends InventorySubcontainer {
     public int getOutputIndex(){
         return 1;
     }
+
+    public void updateInfo(){
+        if (this.container != null) {
+            this.container.updateInfo();
+        }
+    }
     public EnchantReserverSlots(IInventory iInventory) {
         super("EnchantReserver",true,slotSize);
         if (iInventory instanceof TileEntityEnchantReserver){
@@ -63,11 +69,6 @@ public class EnchantReserverSlots extends InventorySubcontainer {
 //            }
 //        }
 //    }
-    public void updateInfo(){
-        if (this.container != null) {
-            this.container.updateInfo();
-        }
-    }
 //    public void addExpBottle(){
 //        ItemStack outputStack = this.output.getStack();
 //        if(tileEntityEnchantReserver.getEXP() >= 500) {

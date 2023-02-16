@@ -87,7 +87,11 @@ public class ItemMixin{
     }
 
     public Item setPotionEffectC(String par1Str) {
-        this.potionEffect = par1Str;
+        this.setPotionEffect(par1Str);
+        return item;
+    }
+    @Shadow
+    protected Item setPotionEffect(String par1Str) {
         return item;
     }
     // must not to do this

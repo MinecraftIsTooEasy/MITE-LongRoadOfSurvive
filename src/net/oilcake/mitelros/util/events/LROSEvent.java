@@ -49,8 +49,8 @@ public class LROSEvent {
 //    }
     @Subscribe
     public void onPacketRegister(PacketRegisterEvent event){
-        event.register(256, true, false, PacketEnchantReserverInfo.class);
-        event.register(257, false, true, PacketDecreaseWater.class);
+        event.register(180, true, false, PacketEnchantReserverInfo.class);
+        event.register(181, false, true, PacketDecreaseWater.class);
     }
 
     @Subscribe

@@ -14,7 +14,6 @@ public class GuiEnchantReserver extends awy implements ICrafting {
     private final int z;
     private final PlayerInventory inventory;
     private final EntityPlayer player;
-    private int currentInfoColor;
 
 
     public GuiEnchantReserver(EntityPlayer player, int x, int y, int z,EnchantReserverSlots slots) {
@@ -68,11 +67,8 @@ public class GuiEnchantReserver extends awy implements ICrafting {
        // this.player.sendPacket(new PacketEnchantReserverInfo());
     }
 
-    public void setInfo(int color) {
-        this.currentInfoColor = color;
-    }
 
     public void setEnchantInfo(int exp){
-        tileEntityEnchantReserver.EXP = exp;
+        tileEntityEnchantReserver.setEXP(exp);
     }
 }

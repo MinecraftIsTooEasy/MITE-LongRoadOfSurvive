@@ -6,10 +6,10 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " 23w08 Test 2 ";
-    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
-    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
-    public static final bjo inventory = new bjo("textures/gui/inventory.png");
+    public static final String VERSION = "BEAT+Build.14-pre1";
+//    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
+//    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
+//    public static final bjo inventory = new bjo("textures/gui/inventory.png");
     public static final int VER_NUM = 114514;
     public static int nextItemID = 1284;
     public static int nextBlockID = 174;

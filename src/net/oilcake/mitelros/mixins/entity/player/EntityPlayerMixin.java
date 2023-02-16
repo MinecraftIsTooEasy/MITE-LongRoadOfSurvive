@@ -20,6 +20,14 @@ public class EntityPlayerMixin extends EntityLiving{
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //    }
 
+
+    public int getWater() {
+        return this.getFoodStats().getWater();
+    }
+    public int addWater(int water){
+        return this.getFoodStats().addWater(water);
+    }
+
     public void decreaseWaterServerSide(float hungerWater)
     {
         if (!this.capabilities.isCreativeMode && !this.capabilities.disableDamage)
@@ -34,7 +42,7 @@ public class EntityPlayerMixin extends EntityLiving{
     }
     @Overwrite
     public boolean isStarving() {
-        return this.getNutrition() == 0 || this.foodStats.getWater() == 0;
+        return this.getNutrition() == 0 || this.getWater() == 0;
     }
 
 //    @Overwrite
@@ -88,6 +96,12 @@ public class EntityPlayerMixin extends EntityLiving{
 //            DedicatedServer.updateTournamentScoreOnClient(entityPlayer, true);
 //        }
 //    }
+    public FoodMetaData getFoodStats(){
+    return foodStats;
+}
+    public EntityPlayerMixin(World par1World) {
+        super(par1World);
+    }
     @Shadow
     public float getHealthLimit() {
         return 1.0F;
@@ -109,13 +123,6 @@ public class EntityPlayerMixin extends EntityLiving{
 
     @Shadow
     protected FoodMetaData foodStats;
-    public FoodMetaData getFoodStats(){
-        return foodStats;
-    }
-
-    public EntityPlayerMixin(World par1World) {
-        super(par1World);
-    }
 
     @Shadow
     public ItemStack[] getWornItems() {
