@@ -125,9 +125,9 @@ public class FoodStatsMixin {
             this.hungerWater = Math.min(this.hungerWater + water, 40);
 
 
-             if(this.hungerWater > 20){
-                 System.out.println("hungerWater" + hungerWater);
-             }
+//             if(this.hungerWater > 20){
+//                 System.out.println("hungerWater" + hungerWater);
+//             }
 
             if (this.player.worldObj.isRemote && this.hungerWater > 0.2F) {
                 Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.hungerWater));

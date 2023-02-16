@@ -102,11 +102,45 @@ public class EntityPlayerMixin extends EntityLiving{
     public EntityPlayerMixin(World par1World) {
         super(par1World);
     }
+
+
+    public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
+    }
+
+
+    @Overwrite
+    public EntityDamageResult attackEntityFrom(Damage damage) {
+        if(this.getHelmet()!= null && this.getHelmet().itemID == Items.nickelHelmet.itemID &&
+            this.getCuirass()!= null && this.getCuirass().itemID == Items.nickelChestplate.itemID &&
+                this.getLeggings()!= null && this.getLeggings().itemID == Items.nickelLeggings.itemID &&
+                    this.getBoots()!= null && this.getBoots().itemID == Items.nickelBoots.itemID &&
+                        damage.getResponsibleEntityC() instanceof EntityGelatinousCube ){
+            return null;
+        }
+        if (this.ticksExisted < 1000 && Damage.wasCausedByPlayer(damage) && this.isWithinTournamentSafeZone()) {
+            return null;
+        } else if (this.capabilities.disableDamage && !damage.canHarmInCreative()) {
+            return null;
+        } else {
+            if (this.inBed()) {
+                this.wakeUpPlayer(true, damage.getResponsibleEntityC());
+            }
+            if (damage.isExplosion()) {
+                damage.scaleAmount(1.5F);
+            }
+
+            EntityDamageResult result = super.attackEntityFrom(damage);
+            if (result != null) {
+            }
+
+            return result;
+        }
+    }
+
     @Shadow
     public float getHealthLimit() {
         return 1.0F;
     }
-
     @Shadow
     @Final
     public static int getHighestPossibleLevel() {
@@ -115,7 +149,6 @@ public class EntityPlayerMixin extends EntityLiving{
     @Shadow
     @Final
     private static int[] experience_for_level;
-
     @Shadow
     public final int getExperienceLevel() {
         return 1;
@@ -168,38 +201,6 @@ public class EntityPlayerMixin extends EntityLiving{
     public PlayerAbilities capabilities;
     @Shadow
     public void wakeUpPlayer(boolean get_out_of_bed, Entity entity_to_look_at) {}
-    public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
-    }
-
-
-    @Overwrite
-    public EntityDamageResult attackEntityFrom(Damage damage) {
-        if(this.getHelmet()!= null && this.getHelmet().itemID == Items.nickelHelmet.itemID &&
-            this.getCuirass()!= null && this.getCuirass().itemID == Items.nickelChestplate.itemID &&
-                this.getLeggings()!= null && this.getLeggings().itemID == Items.nickelLeggings.itemID &&
-                    this.getBoots()!= null && this.getBoots().itemID == Items.nickelBoots.itemID &&
-                        damage.getResponsibleEntityC() instanceof EntityGelatinousCube ){
-            return null;
-        }
-        if (this.ticksExisted < 1000 && Damage.wasCausedByPlayer(damage) && this.isWithinTournamentSafeZone()) {
-            return null;
-        } else if (this.capabilities.disableDamage && !damage.canHarmInCreative()) {
-            return null;
-        } else {
-            if (this.inBed()) {
-                this.wakeUpPlayer(true, damage.getResponsibleEntityC());
-            }
-            if (damage.isExplosion()) {
-                damage.scaleAmount(1.5F);
-            }
-
-            EntityDamageResult result = super.attackEntityFrom(damage);
-            if (result != null) {
-            }
-
-            return result;
-        }
-    }
     @Shadow
     public int experience;
     @Shadow
