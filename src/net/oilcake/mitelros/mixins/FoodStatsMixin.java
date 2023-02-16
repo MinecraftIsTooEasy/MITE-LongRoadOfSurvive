@@ -224,16 +224,16 @@ public class FoodStatsMixin {
                     this.satiation = 0;
                 }
 
-                if(this.hungerWater >= getWaterPerFoodUnit()) {
-                    this.hungerWater -= getWaterPerFoodUnit();
-                    //System.out.println("hungerWater: " + hungerWater);
-                    if (this.water > 0) {
-                        if (this.satiation < 1 || this.water_for_nutrition_only + 0.001F >= getWaterPerFoodUnit()) {
-                            --this.water;
-                            this.water_for_nutrition_only = 0.0F;
-                        }
-                    }
-                }
+//                if(this.hungerWater >= getWaterPerFoodUnit()) {
+//                    this.hungerWater -= getWaterPerFoodUnit();
+//                    //System.out.println("hungerWater: " + hungerWater);
+//                    if (this.water > 0) {
+//                        if (this.satiation < 1 || this.water_for_nutrition_only + 0.001F >= getWaterPerFoodUnit()) {
+//                            --this.water;
+//                            this.water_for_nutrition_only = 0.0F;
+//                        }
+//                    }
+//                }
                 if(this.water < 0){
                     this.water = 0;
                 }

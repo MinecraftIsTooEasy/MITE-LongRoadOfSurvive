@@ -13,8 +13,6 @@ public class ItemGoldenAppleMixin extends ItemFood {
 //    }
     @Overwrite
     protected void onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        if (!par2World.isRemote) {
-        }
         if (par1ItemStack.getItemSubtype() == 0) {
             if (!par2World.isRemote) {
                 par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 600, 0));
@@ -32,7 +30,7 @@ public class ItemGoldenAppleMixin extends ItemFood {
     }
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
-            player.getFoodStats().addWater(-5);
+            player.getFoodStats().addWater(-8);
         }
         super.onItemUseFinish(item_stack, world, player);
     }

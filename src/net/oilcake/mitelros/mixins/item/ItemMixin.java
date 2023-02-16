@@ -41,37 +41,41 @@ public class ItemMixin{
         return item;
     }
 
-    @Overwrite
-    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
-        if (extended_info) {
-            int satiation = this.getSatiation(player);
-            int nutrition = this.getNutrition();
-            int water = this.getWater();
-            if (this.satiation > 0 || nutrition > 0) {
-                info.add("");
-                if (item instanceof ItemBlock) {
-                    ItemBlock item_block = (ItemBlock)item;
-                    if (item_block.getBlock() == Block.mushroomRed) {
-                        info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
-                        info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
-                        info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "含水量", new Object[]{water}));
-                        return;
-                    }
-                }
-
-                if (this.satiation > 0) {
-                    info.add((this.sugar_content > 0 && player.isInsulinResistant() ? player.getInsulinResistanceLevel().getColorC() : EnumChatFormat.BROWN) + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
-                }
-
-                if (nutrition > 0) {
-                    info.add(EnumChatFormat.BROWN + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
-                }
-                if (water != 0) {
-                    info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "含水量", new Object[]{water}));
-                }
-            }
-        }
-    }
+//    @Overwrite
+//    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
+//        if (extended_info) {
+//            int satiation = this.getSatiation(player);
+//            int nutrition = this.getNutrition();
+//            int water = this.getWater();
+//            if (this.satiation > 0 || nutrition > 0) {
+//                info.add("");
+//                if (item instanceof ItemBlock) {
+//                    ItemBlock item_block = (ItemBlock) item;
+//                    if (item_block.getBlock() == Block.mushroomRed) {
+//                        info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
+//                        info.add(EnumChatFormat.RED + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
+//                        info.add(EnumChatFormat.BLUE + Translator.getFormatted(water + "的" + "含水量", new Object[]{water}));
+//                        return;
+//                    }
+//                }
+//
+//                if (this.satiation > 0) {
+//                    info.add((this.sugar_content > 0 && player.isInsulinResistant() ? player.getInsulinResistanceLevel().getColorC() : EnumChatFormat.BROWN) + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
+//                }
+//
+//                if (nutrition > 0) {
+//                    info.add(EnumChatFormat.BROWN + Translator.getFormatted("item.tooltip.nutrition", new Object[]{nutrition}));
+//                }
+//                if (water > 0) {
+//                    info.add(EnumChatFormat.BLUE + Translator.getFormatted("+" + water + "的" + "含水量", new Object[]{water}));
+//                }
+//                if (water < 0) {
+//                    info.add(EnumChatFormat.BLUE + Translator.getFormatted("-" + water + "的" + "含水量", new Object[]{water}));
+//
+//                }
+//            }
+//        }
+//    }
 
     public final int getWater() {
         return this.water;
