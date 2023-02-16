@@ -3,6 +3,9 @@ package net.oilcake.mitelros.mixins.util;
 import net.minecraft.Entity;
 import net.minecraft.EntityTypes;
 import net.minecraft.World;
+import net.oilcake.mitelros.entity.EntityClusterSpider;
+import net.oilcake.mitelros.entity.EntitySpiderKing;
+import net.oilcake.mitelros.entity.EntityWitherBodyguard;
 import net.oilcake.mitelros.entity.EntityWitherBoneLord;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -22,7 +25,10 @@ public class EntityTypesMixin {
     }
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callbackInfo) {
-        addMapping(EntityWitherBoneLord.class, "EntityWitherBoneLord", 201);
+        addMapping(EntityWitherBoneLord.class, "EntityWitherBoneLord", 541);
+        addMapping(EntityClusterSpider.class, "EntityClusterSpider", 542);
+        addMapping(EntityWitherBodyguard.class,"EntityWitherBodyguard",543);
+        addMapping(EntitySpiderKing.class,"EntitySpiderKing",544);
     }
 
 }

@@ -7,6 +7,9 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -251,5 +254,27 @@ public class GuiIngameMixin extends avk {
         }
 
         this.g.C.endSection();
+    }
+    @Inject(
+            method = {"a(FZII)V"},
+            at = {@At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/Minecraft;inDevMode()Z",
+                    shift = At.Shift.BEFORE
+            )}
+    )
+    private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
+        if (!Minecraft.inDevMode()) {
+            if (GuiIngame.server_load >= 0) {
+                awf sr = new awf(this.g.u, this.g.d, this.g.e);
+                String text = GuiIngame.server_load + "%";
+                this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
+            }
+
+            StringBuilder var68 = (new StringBuilder()).append("平面位置(").append(MathHelper.floor_double(this.g.h.posX)).append(", ").append(MathHelper.floor_double(this.g.h.posZ)).append(")").append("   FPS=");
+            var68.append(Minecraft.last_fps).append(" (");
+            this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
+        }
+
     }
 }

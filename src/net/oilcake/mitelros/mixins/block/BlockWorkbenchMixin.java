@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,13 +38,13 @@ public class BlockWorkbenchMixin extends Block{
 
 
 
-    public void breakBlock(World world, int x, int y, int z, int block_id, int metadata) {
-        super.breakBlock(world, x, y, z, block_id, metadata);
-        Random random = new Random();
-        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
-        if (random.nextInt(2) == 0) {
-            this.dropBlockAsEntityItem(info, Item.silk.itemID, 0, 4, 0.5F);
-        }
+//    public void breakBlock(World world, int x, int y, int z, int block_id, int metadata) {
+//        super.breakBlock(world, x, y, z, block_id, metadata);
+//        Random random = new Random();
+//        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
+//        if (random.nextInt(2) == 0) {
+//            this.dropBlockAsEntityItem(info, Item.silk.itemID, 0, 1, 0.01F);
+//        }
 //        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
 //        this.dropBlockAsEntityItem(info, Item.silk.itemID, 0, 2, 1.0F);
 //        for(int i = 0; i < Block.workbench.getNumSubBlocks(); ++i) {
@@ -64,11 +66,11 @@ public class BlockWorkbenchMixin extends Block{
 //                this.dropBlockAsEntityItem(info, Block.stone.blockID, 0, 3, 3.0F);
 //            }
 //        }
-        world.removeBlockTileEntity(x, y, z);
-    }
+//        world.removeBlockTileEntity(x, y, z);
+//    }
 
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        return this.dropBlockAsEntityItem(info, Block.planks.blockID, 0, 4, 0.5F);
+        return super.dropBlockAsEntityItem(info);
     }
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback) {
@@ -80,7 +82,7 @@ public class BlockWorkbenchMixin extends Block{
     public IIcon a(int side, int metadata) {
         if (metadata < 4) {
             return side == 1 ? this.icon_flint_top : Block.wood.a(side, metadata);
-        } else if (metadata > 11) {
+        } else if (metadata >= 11) {
             return side == 1 ? this.icon_obsidian_top : Block.wood.a(side, metadata - 11);
         } else if (side == 0) {
             return Block.planks.m(side);

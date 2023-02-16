@@ -77,7 +77,6 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                     this.slots.getInPut().putStack(null);
                     this.slots.updateInfo();
                 }
-                else{}
             }
             if (this.getEXP() >= 200) {
                 ItemStack outputStack = this.slots.getOutPutStack();

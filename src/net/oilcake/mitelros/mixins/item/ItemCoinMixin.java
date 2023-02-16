@@ -67,7 +67,7 @@ public class ItemCoinMixin extends Item {
             return Items.nickelNugget;
         }
         if (material == Materials.tungsten){
-            return Items.nickelNugget;
+            return Items.tungstenNugget;
         }
         return material == Material.copper ? Item.copperNugget : (material == Material.silver ? Item.silverNugget : (material == Material.gold ? Item.goldNugget : null));
     }

@@ -1,9 +1,7 @@
 package net.oilcake.mitelros.block;
 
-import net.minecraft.BlockFurnace;
-import net.minecraft.CreativeModeTab;
-import net.minecraft.Material;
-import net.minecraft.mt;
+import net.minecraft.*;
+import org.spongepowered.asm.mixin.Overwrite;
 
 public class BlockSmoker extends BlockFurnace{
     protected BlockSmoker(int par1, boolean par2) {
@@ -32,7 +30,11 @@ public class BlockSmoker extends BlockFurnace{
     public int getActiveBlockID() {
         return Blocks.blockSmokerBurning.blockID;
     }
+
+
 }
+
+
 
 
 

@@ -447,12 +447,12 @@ public class BlockMixin{
                         }
                     }
 
-//                    if (this.canDropExperienceOrbs() && !(block instanceof BlockAnvil)) {
-//                        xp_reward_per_unit = Item.getItem(id_dropped).getExperienceReward(subtype);
-//                        if (xp_reward_per_unit > 0) {
-//                            this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, xp_reward_per_unit * num_drops);
-//                        }
-//                    }
+                    if (this.canDropExperienceOrbs() && !(block instanceof BlockAnvil)) {
+                        xp_reward_per_unit = Item.getItem(id_dropped).getExperienceReward(subtype);
+                        if (xp_reward_per_unit > 0) {
+                            this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, xp_reward_per_unit * num_drops);
+                        }
+                    }
 
                     return num_drops;
                 }

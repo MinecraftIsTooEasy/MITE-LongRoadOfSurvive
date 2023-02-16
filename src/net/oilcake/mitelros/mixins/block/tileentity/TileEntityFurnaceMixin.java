@@ -23,26 +23,17 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public int heat_level = 0;
     @Overwrite
     public static int getHeatLevelRequired(int item_id) {
-        if (item_id == Block.oreAdamantium.blockID || item_id == Items.pieceAdamantium.itemID ) {
+        if (item_id == Block.oreAdamantium.blockID || item_id == Items.pieceAdamantium.itemID) {
             return 4;
-        } else if (item_id == Block.oreMithril.blockID || item_id == Blocks.blockTungstenOre.blockID || item_id == Items.pieceMithril.itemID || item_id == Items.pieceTungsten.itemID){
+        } else if (item_id == Block.oreMithril.blockID || item_id == Blocks.blockTungstenOre.blockID || item_id == Items.pieceMithril.itemID || item_id == Items.pieceTungsten.itemID) {
             return 3;
-        } else if (item_id != Block.oreCopper.blockID && item_id != Block.oreSilver.blockID && item_id != Block.oreGold.blockID && item_id != Block.oreIron.blockID &&
-                item_id != Blocks.blockNickelOre.blockID && item_id == Items.pieceSilver.itemID && item_id == Items.pieceGold.itemID && item_id == Items.pieceGoldNether.itemID &&
-                item_id == Items.pieceIron.itemID && item_id == Items.pieceNickel.itemID) {
-            if (item_id != Block.oreNetherQuartz.blockID && item_id != Block.oreEmerald.blockID && item_id != Block.oreDiamond.blockID && item_id != Block.oreRedstone.blockID) {
-                if (item_id == Block.oreLapis.blockID) {
-                    return 2;
-                } else if (item_id == Block.sandStone.blockID) {
-                    return 2;
-                } else {
-                    return item_id == Block.sand.blockID ? 1 : 1;
-                }
-            } else {
-                return 2;
-            }
-        } else {
+        } else if (item_id == Block.oreCopper.blockID || item_id == Block.oreSilver.blockID || item_id == Block.oreGold.blockID || item_id == Block.oreIron.blockID ||
+                item_id == Blocks.blockNickelOre.blockID || item_id == Items.pieceSilver.itemID || item_id == Items.pieceGold.itemID || item_id == Items.pieceGoldNether.itemID ||
+                item_id == Items.pieceIron.itemID || item_id == Items.pieceNickel.itemID || item_id == Block.oreNetherQuartz.blockID || item_id == Block.oreEmerald.blockID ||
+                item_id == Block.oreDiamond.blockID || item_id == Block.oreRedstone.blockID || item_id == Block.oreLapis.blockID || item_id == Block.sandStone.blockID) {
             return 2;
+        } else {
+            return 1;
         }
     }
 
@@ -52,9 +43,9 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
             return false;
         } else if(this.getInputItemStack().getItem() instanceof ItemFood && this.getFurnaceBlock() instanceof BlockBlastFurnace){
             return false;
-        }else if(this.getInputItemStack().isBlock() && this.getFurnaceBlock() instanceof BlockSmoker){
+        } else if(!(this.getInputItemStack().getItem() instanceof ItemFood) && this.getFurnaceBlock() instanceof BlockSmoker){
             return false;
-        }else {
+        } else {
             BlockFurnace furnace = this.getFurnaceBlock();
             if (furnace == null || !this.acceptsLargeItems() && Slot.isLargeItem(this.getInputItemStack().getItem())) {
                 return false;
@@ -94,11 +85,11 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                 float temp = 1F;
                 if (this.getFurnaceBlock() instanceof BlockBlastFurnace) {
                     if (this.getFurnaceBlock().blockMaterial == Material.stone) {
-                        temp = 1.5F;
+                        temp = 2.0F;
                     } else if (this.getFurnaceBlock().blockMaterial == Material.obsidian) {
                         temp = 2.0F;
                     } else if (this.getFurnaceBlock().blockMaterial == Material.netherrack) {
-                        temp = 2.5F;
+                        temp = 2.0F;
                     }
                 } else if (this.getFurnaceBlock() instanceof BlockSmoker) {
                     temp = 2.0F;
@@ -128,15 +119,11 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                     ++this.furnaceCookTime;
                     int temp = 200;
                     if (this.getFurnaceBlock() instanceof BlockBlastFurnace) {
-                        if (this.getFurnaceBlock().blockMaterial == Material.stone) {
-                            temp = 150;
-                        } else if (this.getFurnaceBlock().blockMaterial == Material.obsidian) {
-                            temp = 100;
-                        } else if (this.getFurnaceBlock().blockMaterial == Material.netherrack) {
-                            temp = 50;
-                        }
+                        ++this.furnaceCookTime;
                     } else if (this.getFurnaceBlock() instanceof BlockSmoker) {
-                        temp = 100;
+                        ++this.furnaceCookTime;
+                    }
+                    else {
                     }
                     if (this.furnaceCookTime == temp) {
                         this.furnaceCookTime = 0;

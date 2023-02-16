@@ -216,9 +216,12 @@ public class FoodStatsMixin {
                             --this.nutrition;
                             this.hunger_for_nutrition_only = 0.0F;
                         } else {
-                            this.satiation -= 2;
+                            this.satiation -= 1;
                         }
                     }
+                }
+                if(this.satiation < 0){
+                    this.satiation = 0;
                 }
 
                 if(this.hungerWater >= getWaterPerFoodUnit()) {

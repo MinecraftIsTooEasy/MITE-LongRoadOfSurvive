@@ -31,16 +31,18 @@ public class Blocks extends Block {
     public static final Block blockEnchantReserver = new BlockEnchantReserver(getNextBlockID())
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final BlockOreBlock blockNickel = new BlockOreBlock(getNextBlockID(), Materials.nickel);
-    public static final Block fenceNickel = new NewBlockThinFence(getNextBlockID(), Materials.nickel).setExplosionResistance(24.0f).setBlockHardness(6.4F);;
+    public static final Block fenceNickel = new NewBlockThinFence(getNextBlockID(), Materials.nickel).setExplosionResistance(24.0f).setBlockHardness(6.4F);
     public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
             , getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
 
-    public static final Block blockNickelOre = new BlockOre(getNextBlockID(), Materials.nickel, 3).setBlockHardness(3.0F).setExplosionResistance(20.0f);
-    public static final Block blockTungstenOre = new BlockOre(getNextBlockID(), Materials.nickel, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);;
+    public static final Block blockNickelOre = new BlockOre(getNextBlockID(), Materials.nickel, 1).setBlockHardness(3.0F).setExplosionResistance(20.0f);
+    public static final Block blockTungstenOre = new BlockOre(getNextBlockID(), Materials.tungsten, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);
     public static final BlockOreBlock blockTungsten = new BlockOreBlock(getNextBlockID(),Materials.tungsten);
     public static final Block fenceTungsten = new NewBlockThinFence(getNextBlockID(), Materials.tungsten).setExplosionResistance(96.0f).setBlockHardness(51.2F);
     public static final Block doorTungsten = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
             , getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
+
+    public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.tungsten);
 
 
 
@@ -66,6 +68,8 @@ public class Blocks extends Block {
     public static void registerBlocks() {
         registerAnvil("nickel_anvil", anvilNickel);
         anvilNickel.stepSound = Block.soundAnvilFootstep;
+        registerAnvil("tungsten_anvil", anvilTungsten);
+        anvilTungsten.stepSound = Block.soundAnvilFootstep;
         registerItemBlock("blastfurnace_stone_idle", blastFurnaceStoneIdle);
         registerItemBlock("blastfurnace_obsidian_idle", blastFurnaceObsidianIdle);
         registerItemBlock("blastfurnace_netherrack_idle", blastFurnaceNetherrackIdle);
@@ -83,6 +87,7 @@ public class Blocks extends Block {
         registerItemBlock("block/tungsten_block", blockTungsten);
         registerItemBlock("bars/tungsten_bars", fenceTungsten);
         registerItemBlock("door/door_tungsten", doorTungsten);
+
     }
 
     public static void registerRecipes(RecipeRegister register) {
@@ -128,6 +133,12 @@ public class Blocks extends Block {
                 "III",
                 'A', blockNickel,
                 'I', Items.nickelIngot);
+        register.registerShapedRecipe(new ItemStack(anvilTungsten),false,
+                "AAA",
+                " I ",
+                "III",
+                'A', blockTungsten,
+                'I', Items.tungstenIngot);
         register.registerShapedRecipe(new ItemStack(blockTungsten),false,
                 "XXX",
                 "XXX",

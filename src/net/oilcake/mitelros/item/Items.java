@@ -480,6 +480,16 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(mashedCactus,1),false,
                 Block.cactus
         );
+        register.registerShapelessRecipe(new ItemStack(nickelIngot,1),false,
+                Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
+                Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
+                Items.nickelNugget,Items.nickelNugget,Items.nickelNugget
+        );
+        register.registerShapelessRecipe(new ItemStack(tungstenIngot,1),false,
+                Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
+                Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
+                Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget
+        );
 
         ItemCoin[] coins = new ItemCoin[]{Item.coinCopper, Item.coinSilver, Item.coinGold, Item.coinAncientMetal, Item.coinMithril, Item.coinAdamantium, nickelCoin, tungstenCoin};
         for (ItemCoin coin : coins) {

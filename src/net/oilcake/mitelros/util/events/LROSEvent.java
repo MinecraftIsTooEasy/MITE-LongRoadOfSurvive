@@ -61,6 +61,9 @@ public class LROSEvent {
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.DARK_RED)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[LROS]")
                 .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee,NoRegrets,Kalsey").setColor(EnumChatFormat.RED)));
+        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[LROS]")
+                .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
+
 
     }
 }

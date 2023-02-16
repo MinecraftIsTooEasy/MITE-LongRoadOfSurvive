@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import static net.minecraft.BlockGoldOre.isGoldOreNetherrack;
 import static net.oilcake.mitelros.block.Blocks.blockNickelOre;
 import static net.oilcake.mitelros.block.Blocks.blockTungstenOre;
 @Mixin(BlockOre.class)
@@ -53,7 +54,7 @@ public class BlockOreMixin extends Block {
                     id_dropped = Items.pieceSilver.itemID;
                     quantity_dropped = 1 + info.world.rand.nextInt(2);
                 } else if (this == Block.oreGold) {
-                    id_dropped = Items.pieceGold.itemID;
+                    id_dropped = isGoldOreNetherrack(this,1) ? Items.pieceGoldNether.itemID : Items.pieceGold.itemID;
                     quantity_dropped = 1 + info.world.rand.nextInt(2);
                 }
 //            else if (block == Block.oreGold && Block.oreGold.isValidMetadata(2)){

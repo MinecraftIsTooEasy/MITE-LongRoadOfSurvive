@@ -2,8 +2,13 @@ package net.oilcake.mitelros.mixins.world.biome;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.entity.EntitySpiderKing;
+import net.oilcake.mitelros.entity.EntityWitherBoneLord;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -12,6 +17,20 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
     protected BiomeGenUnderworldMixin(int par1) {
         super(par1);
     }
+    @Inject(method = "<init>",at = @At("RETURN"))
+    public void injectCtor(CallbackInfo callbackInfo) {
+        this.removeEntityFromSpawnableLists(EntitySkeleton.class);
+        this.removeEntityFromSpawnableLists(EntityZombie.class);
+        this.removeEntityFromSpawnableLists(EntityGhoul.class);
+        this.removeEntityFromSpawnableLists(EntityRevenant.class);
+        this.removeEntityFromSpawnableLists(EntityBoneLord.class);
+        this.spawnableMonsterList.add(new BiomeMeta(EntityCaveSpider.class, 40, 1, 2));
+        this.spawnableMonsterList.add(new BiomeMeta(EntityLongdead.class, 40, 1, 2));
+        this.spawnableMonsterList.add(new BiomeMeta(EntityAncientBoneLord.class, 5, 1, 1));
+        this.spawnableMonsterList.add(new BiomeMeta(EntityWitherBoneLord.class,5,1,1));
+        this.spawnableMonsterList.add(new BiomeMeta(EntitySpiderKing.class,5,1,1));
+    }
+
     @Shadow
     private void placeMycelium(World world, int chunk_origin_x, int chunk_origin_z) {
     }

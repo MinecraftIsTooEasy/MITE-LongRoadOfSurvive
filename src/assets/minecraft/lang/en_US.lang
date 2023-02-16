@@ -99,3 +99,8 @@ item.pieces/tungsten.name=Tungsten Orepiece
 item.pieces/adamantium.name=Adamantium Orepiece
 
 item.food/mashed_cactus.name=Mashed Cactus
+
+entity.EntityWitherBoneLord.name=Wither Bonelord
+entity.EntityWitherBodyguard.name=Wither Bodyguard
+entity.EntityClusterSpider.name=Cluster Spider
+entity.EntitySpiderKing=Spider King
