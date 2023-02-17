@@ -75,7 +75,9 @@ public class Items extends Item {
     public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril").setXPReward(4));
     public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten").setXPReward(7));
     public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(10));
-    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(),Materials.mashedCactus,2,0,false,true,false,"mashedCactus")).setMaxStackSize(4);
+    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(), Materials.mashedCactus,2,0,false,true,false,"mashedCactus")).setMaxStackSize(4);
+    public static final ItemFood lemon = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "lemon")).setPlantProduct();
+    public static final Item lemonPie = (new ItemFood(Constant.getNextItemID(), Material.pie, 10, 6, 1000, true, true, true, "lemon_pie")).setMaxStackSize(8).setPlantProduct().setAnimalProduct();
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -150,13 +152,15 @@ public class Items extends Item {
         register("pieces/mithril",pieceMithril);
         register("pieces/adamantium",pieceAdamantium);
         register("food/mashed_cactus",mashedCactus);
-
-
+        register("food/lemon",lemon);
+        register("food/lemon_pie",lemonPie);
 
         Constant.initItemArray();
     }
 
     public static void registerRecipes(RecipeRegister register) {
+        register.registerShapelessRecipe(new ItemStack(lemonPie), false,
+                Item.sugar, Item.egg, Item.flour, lemon);
         register.registerShapedRecipe(new ItemStack(arrowNickel), false,
                 " C ",
                 " B ",

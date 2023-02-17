@@ -38,7 +38,7 @@ public class FoodStatsMixin {
             this.water = par1NBTTagCompound.getInteger("water");
       //  }
     }
-    @Inject(method = "readNBT", at = @At("RETURN"))
+    @Inject(method = "writeNBT", at = @At("RETURN"))
     public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
         par1NBTTagCompound.setInteger("water", this.water);
         par1NBTTagCompound.setFloat("hungerwater", this.hungerWater);

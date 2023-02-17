@@ -5,7 +5,7 @@ import net.minecraft.ItemArmor;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = "BEAT+Build.14-pre3";
+    public static final String VERSION = "BEAT+Build.14-pre4";
 //    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
 //    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
