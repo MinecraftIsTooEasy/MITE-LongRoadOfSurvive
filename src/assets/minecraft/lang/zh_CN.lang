@@ -107,7 +107,7 @@ item.food/lemon.name=柠檬
 item.food/lemon_pie.name=柠檬派
 
 
-itemarrow.tooltip.disable=此箭苗已被禁用，请勿制作/食用
+itemarrow.tooltip.disable=因技术原因请勿制作/使用
 itemtool.tooltip.slimeresistance=史莱姆杀手
 itemarmor.tooltip.slimeresistance=腐蚀抗性
 

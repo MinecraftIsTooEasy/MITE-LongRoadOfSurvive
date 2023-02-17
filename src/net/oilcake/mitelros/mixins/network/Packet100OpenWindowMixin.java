@@ -13,24 +13,24 @@ import java.io.IOException;
 @Mixin(Packet100OpenWindow.class)
 public class Packet100OpenWindowMixin {
 
-//    @Overwrite
-//    public void readPacketData(DataInput par1DataInput) throws IOException {
-//        this.windowId = par1DataInput.readByte() & 255;
-//        this.inventoryType = par1DataInput.readByte() & 255;
-//        this.windowTitle = Packet.readString(par1DataInput, 32767);
-//        this.slotsCount = par1DataInput.readByte() & 255;
-//        this.useProvidedWindowTitle = par1DataInput.readBoolean();
-//        if (this.inventoryType == 11) {
-//            this.field_111008_f = par1DataInput.readInt();
-//        }
-//
-//        if (this.hasCoords()) {
-//            this.x = par1DataInput.readInt();
-//            this.y = par1DataInput.readInt();
-//            this.z = par1DataInput.readInt();
-//        }
-//
-//    }
+    @Overwrite
+    public void readPacketData(DataInput par1DataInput) throws IOException {
+        this.windowId = par1DataInput.readByte() & 255;
+        this.inventoryType = par1DataInput.readByte() & 255;
+        this.windowTitle = Packet.readString(par1DataInput, 1023);
+        this.slotsCount = par1DataInput.readByte() & 255;
+        this.useProvidedWindowTitle = par1DataInput.readBoolean();
+        if (this.inventoryType == 11) {
+            this.field_111008_f = par1DataInput.readInt();
+        }
+
+        if (this.hasCoords()) {
+            this.x = par1DataInput.readInt();
+            this.y = par1DataInput.readInt();
+            this.z = par1DataInput.readInt();
+        }
+
+    }
 
     @Overwrite
     public void handleOpenWindow(ClientPlayer player) {

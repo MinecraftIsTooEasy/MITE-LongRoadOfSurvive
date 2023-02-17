@@ -57,15 +57,14 @@ public class LROSEvent {
     public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
         EntityPlayer player = event.getPlayer();
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
-                .appendComponent(ChatMessage.createFromTranslationKey("MITE-LROS挂载成功,当前版本:").setColor(EnumChatFormat.DARK_GREEN))
-                .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.DARK_RED)));
-        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[LROS]")
-                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee,NoRegrets,Kalsey  更新日志:lucklong.cn").setColor(EnumChatFormat.RED)));
-        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[LROS]")
+                .appendComponent(ChatMessage.createFromTranslationKey("MITE-ITF挂载成功,当前版本:").setColor(EnumChatFormat.AQUA))
+                .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.BLUE)));
+        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
+                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.AQUA)));
+        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
-
-
     }
+
 }
 
 

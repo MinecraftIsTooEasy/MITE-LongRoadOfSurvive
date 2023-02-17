@@ -1,10 +1,10 @@
 package net.oilcake.mitelros.util.events.command;
 
 import net.minecraft.*;
-
 import java.util.List;
 
 public class CommandWater extends CommandAbstract {
+
     @Override
     public String getCommandName() {
         return "water";
@@ -29,14 +29,14 @@ public class CommandWater extends CommandAbstract {
         //World world = iCommandListener.getEntityWorld();
         switch (strings[0]) {
             case "get":
-                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值为" + player.getWater()).setColor(EnumChatFormat.LIGHT_GRAY));
+                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值为" + player.getWater()).setColor(EnumChatFormat.WHITE));
                 break;
             case "add":
                 player.addWater(Integer.parseInt(strings[1]));
-                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值现在为" + player.getWater()).setColor(EnumChatFormat.LIGHT_GRAY));
+                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("水数值现在为" + player.getWater()).setColor(EnumChatFormat.WHITE));
                 break;
             default:
-                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("请使用get或add").setColor(EnumChatFormat.LIGHT_GRAY));
+                iCommandListener.sendChatToPlayer(ChatMessage.createFromText("用法:/water <get|add>").setColor(EnumChatFormat.RED));
                 break;
         }
     }

@@ -35,9 +35,26 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
     private void placeMycelium(World world, int chunk_origin_x, int chunk_origin_z) {
     }
 
-//    public void decorate(World par1World, Random par2Random, int par3, int par4) {
-//        this.placeMycelium(par1World, par3, par4);
-//        super.decorate(par1World, par2Random, par3, par4);
+    public void decorate(World par1World, Random par2Random, int par3, int par4) {
+        this.placeMycelium(par1World, par3, par4);
+        super.decorate(par1World, par2Random, par3, par4);
+        int var5 = 8 + par2Random.nextInt(24);
+        for (int var6 = 0; var6 < var5; ++var6) {
+            int var7 = par3 + par2Random.nextInt(16);
+            int var8 = par2Random.nextInt(60) + 4;
+            int var9 = par4 + par2Random.nextInt(16);
+            int var10 = par1World.getBlockId(var7, var8, var9);
+            if (var10 == Block.stone.blockID) {
+                par1World.setBlock(var7, var8, var9, Block.lavaStill.blockID, 0, 2);
+            }
+            if(var8 < 32){
+                var7 = par3 + par2Random.nextInt(16);
+                var9 = par4 + par2Random.nextInt(16);
+                if (var10 == Block.stone.blockID) {
+                    par1World.setBlock(var7, var8, var9, Block.lavaStill.blockID, 0, 2);
+                }
+            }
+        }
 //
 //        WorldGenMinable genMinableNickel = (new WorldGenMinable(Blocks.blockNickelOre.blockID, par2Random.nextInt(5) + 3 , Block.stone.blockID)).setMinableBlockMetadata(0);
 //        int countNickel = par2Random.nextInt(14) + 1;
@@ -55,5 +72,5 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
 //            int z = par4 + par2Random.nextInt(16);
 //            genMinable.generate(par1World, par2Random, x, y, z);
 //        }
-//    }
+    }
 }

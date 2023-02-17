@@ -7,6 +7,9 @@ item.armor/nickel_chainmail_chestplate.name=Nickel Chainmail Chestplate
 item.armor/nickel_chainmail_leggings.name=Nickel Chainmail Leggings
 item.armor/nickel_chainmail_boots.name=Nickel Chainmail Boots
 
+enchantment.restore=Restore
+enchantment.absorb=Absorb
+
 potion.dehydration=Dehydration
 
 item.ingot/nickel.name=Nickel Ingot
@@ -99,6 +102,12 @@ item.pieces/tungsten.name=Tungsten Orepiece
 item.pieces/adamantium.name=Adamantium Orepiece
 
 item.food/mashed_cactus.name=Mashed Cactus
+item.food/lemon.name=Lemon
+item.food/lemon_pie.name=Lemon Pie
+
+itemarrow.tooltip.disable=Disabled by technical issue...
+itemtool.tooltip.slimeresistance=Bonus vs slime
+itemarmor.tooltip.slimeresistance=Bonus vs slime
 
 entity.EntityWitherBoneLord.name=Wither Bonelord
 entity.EntityWitherBodyguard.name=Wither Bodyguard

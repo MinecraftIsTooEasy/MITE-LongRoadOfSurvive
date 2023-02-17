@@ -31,7 +31,7 @@ public class CommandStoneAir extends CommandAbstract {
         //决定Z
         int Z = Integer.parseInt(strings[2]);
 
-        iCommandListener.sendChatToPlayer(ChatMessage.createFromText("您删除的方块体积为:" + X*Y*Z).setColor(EnumChatFormat.LIGHT_GRAY));
+        iCommandListener.sendChatToPlayer(ChatMessage.createFromText("清除了" + X*Y*Z + "个方块").setColor(EnumChatFormat.WHITE));
 
         for (int tempX =- X; tempX <= X; ++tempX) {
             for (int tempY =- Y; tempY <= Y; ++tempY) {

@@ -1,8 +1,6 @@
 package net.oilcake.mitelros.world.biome;
 
-import net.minecraft.BiomeBase;
-import net.minecraft.Block;
-import net.minecraft.World;
+import net.minecraft.*;
 
 import java.util.Random;
 
@@ -10,8 +8,12 @@ public class BiomeAlps extends BiomeBase{
     public BiomeAlps(int par1) {
         super(par1);
         this.spawnableCreatureList.clear();
-        this.topBlock = (byte)Block.stone.blockID;
-        this.fillerBlock = (byte)Block.stone.blockID;
+        this.topBlock = (byte)Block.cobblestoneMossy.blockID;
+        this.fillerBlock = (byte)Block.cobblestone.blockID;
+    }
+
+    public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
+        return par1Random.nextInt(3) == 0 ? new WorldGenTaiga1() : new WorldGenTaiga2(false);
     }
 
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
@@ -32,5 +34,6 @@ public class BiomeAlps extends BiomeBase{
             }
         }
     }
+
 
 }

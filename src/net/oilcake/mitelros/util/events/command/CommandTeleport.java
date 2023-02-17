@@ -23,7 +23,7 @@ public class CommandTeleport extends CommandAbstract {
 
         player.setPositionAndUpdate(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
 
-        iCommandListener.sendChatToPlayer(ChatMessage.createFromText("您已传送至" + Integer.parseInt(strings[0]) + Integer.parseInt(strings[1]) + Integer.parseInt(strings[2]) ).setColor(EnumChatFormat.LIGHT_GRAY));
+        iCommandListener.sendChatToPlayer(ChatMessage.createFromText("已传送至" + Integer.parseInt(strings[0]) + Integer.parseInt(strings[1]) + Integer.parseInt(strings[2]) ).setColor(EnumChatFormat.WHITE));
 
     }
 }

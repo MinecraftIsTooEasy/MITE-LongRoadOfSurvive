@@ -31,9 +31,9 @@ public class CommandXsummon extends CommandAbstract {
             }
 
             world.spawnEntityInWorld(entity);
-            iCommandListener.sendChatToPlayer(ChatMessage.createFromText("已生成实体 " + entity).setColor(EnumChatFormat.LIGHT_GRAY));
+            iCommandListener.sendChatToPlayer(ChatMessage.createFromText("已生成实体 " + entity).setColor(EnumChatFormat.WHITE));
         } else {
-            iCommandListener.sendChatToPlayer(ChatMessage.createFromText("无法生成实体:ID为 " + Integer.valueOf(strings[0]) + " 的实体不存在!").setColor(EnumChatFormat.DARK_RED));
+            iCommandListener.sendChatToPlayer(ChatMessage.createFromText("无法生成实体:ID为 " + Integer.valueOf(strings[0]) + " 的实体不存在!").setColor(EnumChatFormat.RED));
         }
     }
 }
