@@ -18,12 +18,13 @@ public class ItemArmorMixin extends Item {
             float protection = this.getProtectionAfterDamageFactor(item_stack, player);
             int decimal_places = protection < 1.0F ? 2 : 1;
             info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.protectionBonus", new Object[]{StringHelper.formatFloat(protection, decimal_places, decimal_places)}));
-//            if(item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel){
-//                info.add("反抗史莱姆");
-//            }
-        }
 
+            if (item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel) {
+                info.add(EnumChatFormat.LIGHT_GRAY + Translator.getFormatted("itemarmor.tooltip.slimeresistance"));
+            }
+        }
     }
+
 
     @Overwrite
     public int getMaterialProtection() {

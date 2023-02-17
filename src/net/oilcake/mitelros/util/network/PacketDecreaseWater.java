@@ -10,6 +10,9 @@ import java.io.IOException;
 public class PacketDecreaseWater extends Packet {
     public float hungerWater;
 
+    public PacketDecreaseWater(){
+
+    }
     public PacketDecreaseWater(float hungerWater) {
         this.hungerWater = hungerWater;
     }

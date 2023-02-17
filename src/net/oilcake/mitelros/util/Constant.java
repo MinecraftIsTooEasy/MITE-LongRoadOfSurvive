@@ -5,7 +5,7 @@ import net.minecraft.ItemArmor;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = "BEAT+Build.14-pre4";
+    public static final String VERSION = "BEAT+Build.14-pre5";
 //    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
 //    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -13,7 +13,7 @@ public class Constant {
     public static int nextItemID = 1284;
     public static int nextBlockID = 174;
     public static int nextPotionID = 24;
-    public static int nextEnchantmentID = 97;
+    public static int nextEnchantmentID = 96;
     public static int nextAchievementID = 136;
 
     public static int nickelNUM = 4;

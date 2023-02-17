@@ -2,135 +2,150 @@ package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import static net.minecraft.BlockGoldOre.isGoldOreNetherrack;
-import static net.oilcake.mitelros.block.Blocks.blockNickelOre;
-import static net.oilcake.mitelros.block.Blocks.blockTungstenOre;
+import static net.oilcake.mitelros.block.Blocks.oreNickel;
+import static net.oilcake.mitelros.block.Blocks.oreTungsten;
 @Mixin(BlockOre.class)
 public class BlockOreMixin extends Block {
-        @Shadow
-        public Material vein_material;
-        public BlockOreMixin(int par1, Material vein_material, int min_harvest_level) {
-            super(par1, Material.stone, new BlockConstants());
-            this.vein_material = vein_material;
-            this.setCreativeTab(CreativeModeTab.tabBlock);
-            this.setMinHarvestLevel(min_harvest_level);
-        }
-        @Shadow
-        public String getMetadataNotes() {
-            return "0=Natural, 1=Placed";
-        }
-        @Shadow
-        public boolean isValidMetadata(int metadata) {
-            return metadata >= 0 && metadata < 2;
-        }
-        @Overwrite
-        public int dropBlockAsEntityItem(BlockBreakInfo info) {
-            int metadata_dropped = -1;
-            int quantity_dropped = 1;
-            int id_dropped;
-            if (info.wasExploded()) {
-                if (this == Block.oreEmerald) {
-                    id_dropped = -1;
-                } else if (this == Block.oreDiamond) {
-                    id_dropped = -1;
-                } else if (this == Block.oreLapis) {
-                    id_dropped = Item.dyePowder.itemID;
-                    metadata_dropped = 4;
-                    quantity_dropped = 1 + info.world.rand.nextInt(1);
-                } else if (this == Block.oreNetherQuartz) {
-                    id_dropped = -1;
-                } else if (this == Block.oreCoal) {
-                    id_dropped = -1;
-                }  else if (this == Block.oreRedstone) {
-                    id_dropped = -1;
-                } else if (this == Block.oreCopper) {
-                    id_dropped = Items.pieceCopper.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                } else if (this == Block.oreSilver) {
-                    id_dropped = Items.pieceSilver.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                } else if (this == Block.oreGold) {
-                    id_dropped = isGoldOreNetherrack(this,1) ? Items.pieceGoldNether.itemID : Items.pieceGold.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                }
+    protected BlockOreMixin(int par1, Material par2Material, BlockConstants constants) {
+        super(par1, par2Material, constants);
+    }
+    @Overwrite
+    public int dropBlockAsEntityItem(BlockBreakInfo info) {
+        int metadata_dropped = -1;
+        int quantity_dropped = 1;
+        int id_dropped = 0;
+        if (info.wasExploded()) {
+            if (this == Block.oreEmerald) {
+                id_dropped = -1;
+            } else if (this == Block.oreDiamond) {
+                id_dropped = -1;
+            } else if (this == Block.oreLapis) {
+                id_dropped = Item.dyePowder.itemID;
+                metadata_dropped = 4;
+                quantity_dropped = 1 + info.world.rand.nextInt(1);
+            } else if (this == Block.oreNetherQuartz) {
+                id_dropped = -1;
+            } else if (this == Block.oreCoal) {
+                id_dropped = -1;
+            }  else if (this == Block.oreRedstone) {
+                id_dropped = -1;
+            } else if (this == Block.oreCopper) {
+                id_dropped = Items.pieceCopper.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else if (this == Block.oreSilver) {
+                id_dropped = Items.pieceSilver.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else if (this == Block.oreGold) {
+                id_dropped = isGoldOreNetherrack(this,1) ? Items.pieceGoldNether.itemID : Items.pieceGold.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            }
 //            else if (block == Block.oreGold && Block.oreGold.isValidMetadata(2)){
 //                id_dropped = Items.pieceGoldNether.itemID;
 //                quantity_dropped = 1 + info.world.rand.nextInt(2);
 //            }
-                else if (this == Block.oreIron) {
-                    id_dropped = Items.pieceIron.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                } else if (this == blockNickelOre) {
-                    id_dropped = Items.pieceNickel.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                } else if (this == Block.oreMithril) {
-                    id_dropped = Items.pieceMithril.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                } else if (this == blockTungstenOre) {
-                    id_dropped = Items.pieceTungsten.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
-                } else if (this == Block.oreAdamantium) {
-                    id_dropped = Items.pieceAdamantium.itemID;
-                    quantity_dropped = 1 + info.world.rand.nextInt(2);
+            else if (this == Block.oreIron) {
+                id_dropped = Items.pieceIron.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else if (this == oreNickel) {
+                id_dropped = Items.pieceNickel.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else if (this == Block.oreMithril) {
+                id_dropped = Items.pieceMithril.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else if (this == oreTungsten) {
+                id_dropped = Items.pieceTungsten.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else if (this == Block.oreAdamantium) {
+                id_dropped = Items.pieceAdamantium.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
+            } else {
+                id_dropped = this.blockID;
+            }
+        } else {
+            if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentRestore)) {
+                if (info.wasHarvestedByPlayer() && info.getResponsiblePlayer().worldObj.areSkillsEnabled() && !info.getResponsiblePlayer().hasSkill(Skill.MINING)) {
+                    return super.dropBlockAsEntityItem(info);
+                }
+                if (this == oreCoal) {
+                    id_dropped = Item.coal.itemID;
+                } else if (this == oreDiamond) {
+                    id_dropped = Item.diamond.itemID;
+                } else if (this == oreLapis) {
+                    id_dropped = Item.dyePowder.itemID;
+                    metadata_dropped = 4;
+                    quantity_dropped = 3 + info.world.rand.nextInt(3);
+                } else if (this == oreEmerald) {
+                    id_dropped = Item.emerald.itemID;
+                } else if (this == oreNetherQuartz) {
+                    id_dropped = Item.netherQuartz.itemID;
                 } else {
                     id_dropped = this.blockID;
                 }
             } else {
-                if (this == Block.oreCoal) {
-                    id_dropped = Item.coal.itemID;
-                } else if (this == Block.oreDiamond) {
-                    id_dropped = Item.shardDiamond.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreLapis) {
-                    id_dropped = Item.dyePowder.itemID;
-                    metadata_dropped = 4;
-                    quantity_dropped = 2 + info.world.rand.nextInt(2);
-                } else if (this == Block.oreRedstone) {
-                    id_dropped = Item.redstone.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(2);
-                } else if (this == Block.oreEmerald) {
-                    id_dropped = Item.shardEmerald.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreNetherQuartz) {
-                    id_dropped = Item.shardNetherQuartz.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreCopper) {
-                    id_dropped = Items.pieceCopper.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreSilver) {
-                    id_dropped = Items.pieceSilver.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreGold) {
-                    id_dropped = Items.pieceGold.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                }
+                if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
+                    if (this == Block.oreEmerald || this == Block.oreNetherQuartz || this == Block.oreDiamond || this == Block.oreLapis) {
+                        id_dropped = 0;
+                    }
+                } else {
+                    if (this == Block.oreEmerald) {
+                        id_dropped = Item.shardEmerald.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreNetherQuartz) {
+                        id_dropped = Item.shardNetherQuartz.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreDiamond) {
+                        id_dropped = Item.shardDiamond.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreLapis) {
+                        id_dropped = Item.dyePowder.itemID;
+                        metadata_dropped = 4;
+                        quantity_dropped = 2 + info.world.rand.nextInt(2);
+                    } else if (this == Block.oreCoal) {
+                        id_dropped = Item.coal.itemID;
+                    } else if (this == Block.oreRedstone) {
+                        id_dropped = Item.redstone.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(2);
+                    } else if (this == Block.oreCopper) {
+                        id_dropped = Items.pieceCopper.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreSilver) {
+                        id_dropped = Items.pieceSilver.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreGold) {
+                        id_dropped = Items.pieceGold.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    }
 //            else if (block  == Block.oreGold) {
 //                id_dropped = Items.pieceGoldNether.itemID;
 //                quantity_dropped = 3 + info.world.rand.nextInt(4);
 //            }
-                else if (this == Block.oreIron) {
-                    id_dropped = Items.pieceIron.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == blockNickelOre) {
-                    id_dropped = Items.pieceNickel.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreMithril) {
-                    id_dropped = Items.pieceMithril.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == blockTungstenOre) {
-                    id_dropped = Items.pieceTungsten.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else if (this == Block.oreAdamantium) {
-                    id_dropped = Items.pieceAdamantium.itemID;
-                    quantity_dropped = 3 + info.world.rand.nextInt(4);
-                } else {
-                    id_dropped = this.blockID;
+                    else if (this == Block.oreIron) {
+                        id_dropped = Items.pieceIron.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == oreNickel) {
+                        id_dropped = Items.pieceNickel.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreMithril) {
+                        id_dropped = Items.pieceMithril.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == oreTungsten) {
+                        id_dropped = Items.pieceTungsten.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else if (this == Block.oreAdamantium) {
+                        id_dropped = Items.pieceAdamantium.itemID;
+                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                    } else {
+                        id_dropped = this.blockID;
+                    }
                 }
             }
+        }
 
             if (metadata_dropped == -1) {
                 metadata_dropped = id_dropped == this.blockID ? this.getItemSubtype(info.getMetadata()) : 0;
@@ -140,11 +155,29 @@ public class BlockOreMixin extends Block {
             if (id_dropped != -1 && info.getMetadata() == 0) {
                 DedicatedServer.incrementTournamentScoringCounter(info.getResponsiblePlayer(), Item.getItem(id_dropped));
             }
+            float chance = suppress_fortune ? 1.0F : 1.0F + (float) info.getHarvesterFortune() * 0.2F;
 
-            float chance = suppress_fortune ? 1.0F : 1.0F + (float) info.getHarvesterFortune() * 0.1F;
+            if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
+                if (this == Block.oreDiamond) {
+                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 500);
+                } else if (this == Block.oreEmerald) {
+                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 250);
+                }else if (this == Block.oreNetherQuartz) {
+                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 50);
+                }else if (this == Block.oreLapis) {
+                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (2 + info.world.rand.nextInt(2)) * 25);
+                }
+            }
             return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);
-        }
-
+    }
+    @Shadow
+    public String getMetadataNotes() {
+        return "1";
+    }
+    @Shadow
+    public boolean isValidMetadata(int metadata) {
+        return metadata >= 0 && metadata < 2;
+    }
     @Shadow
     public void addItemBlockMaterials(ItemBlock item_block) {}
 

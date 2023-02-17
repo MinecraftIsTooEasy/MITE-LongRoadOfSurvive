@@ -26,14 +26,14 @@ public class BiomeForestMixin extends BiomeBase {
                 par1World.setBlock(var7, var8, var9, Block.oreEmerald.blockID, 0, 2);
             }
         }
-        WorldGenMinable genMinable = (new WorldGenMinable(Blocks.blockNickelOre.blockID, 8 , Block.stone.blockID)).setMinableBlockMetadata(0);
-        int count = par2Random.nextInt(Constant.nickelNUM) + 1;
-        for(int temp = 0; temp < count; ++temp) {
-            int x = par3 + par2Random.nextInt(16);
-            int y = par2Random.nextInt(36)+12;
-            int z = par4 + par2Random.nextInt(16);
-            genMinable.generate(par1World, par2Random, x, y, z);
-        }
+//        WorldGenMinable genMinable = (new WorldGenMinable(Blocks.blockNickelOre.blockID, 8 , Block.stone.blockID)).setMinableBlockMetadata(0);
+//        int count = par2Random.nextInt(Constant.nickelNUM) + 1;
+//        for(int temp = 0; temp < count; ++temp) {
+//            int x = par3 + par2Random.nextInt(16);
+//            int y = par2Random.nextInt(36)+12;
+//            int z = par4 + par2Random.nextInt(16);
+//            genMinable.generate(par1World, par2Random, x, y, z);
+//        }
     }
 
 }

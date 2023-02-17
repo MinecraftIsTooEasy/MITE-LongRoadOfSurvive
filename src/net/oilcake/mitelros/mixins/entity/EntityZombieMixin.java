@@ -13,12 +13,6 @@ public class EntityZombieMixin extends EntityAnimalWatcher{
     public EntityZombieMixin(World par1World) {
         super(par1World);
     }
-    @Shadow
-    Item[] rare_drops_standard;
-    @Shadow
-    Item[] rare_drops_villager;
-    @Shadow
-    private boolean is_smart;
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
         this.rare_drops_standard = new Item[]{Item.copperNugget, Item.silverNugget, Item.goldNugget, Item.ironNugget};
@@ -42,5 +36,11 @@ public class EntityZombieMixin extends EntityAnimalWatcher{
         this.tasks.addTask(3, new EntityAIMoveToTree(this, 1.0F));
         this.is_smart = true;
     }
+    @Shadow
+    Item[] rare_drops_standard;
+    @Shadow
+    Item[] rare_drops_villager;
+    @Shadow
+    private boolean is_smart;
 }
 

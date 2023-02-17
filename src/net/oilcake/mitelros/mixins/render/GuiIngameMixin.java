@@ -259,7 +259,6 @@ public class GuiIngameMixin extends avk {
             var68.append(Minecraft.last_fps).append(" (");
             this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }
-
     }
     @Shadow
     @Final

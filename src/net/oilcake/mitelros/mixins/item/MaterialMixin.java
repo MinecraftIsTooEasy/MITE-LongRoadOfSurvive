@@ -8,8 +8,11 @@ import org.spongepowered.asm.mixin.Shadow;
 public class MaterialMixin {
     public Material material;
     public Material setRequiresToolC() {
-        this.requires_tool = true;
-        return material;
+        return this.setRequiresTool();
+    }
+    @Shadow
+    protected Material setRequiresTool() {
+        return null;
     }
     @Shadow
     protected float durability;

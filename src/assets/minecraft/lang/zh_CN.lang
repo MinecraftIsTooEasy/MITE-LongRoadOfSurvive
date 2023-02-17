@@ -7,6 +7,8 @@ item.armor/nickel_chainmail_chestplate.name=镍锁链胸甲
 item.armor/nickel_chainmail_leggings.name=镍锁链护腿
 item.armor/nickel_chainmail_boots.name=镍锁链靴子
 
+enchantment.restore=还原
+enchantment.absorb=汲取
 
 potion.dehydration=脱水
 
@@ -101,6 +103,13 @@ item.pieces/tungsten.name=钨矿石碎块
 item.pieces/adamantium.name=艾德曼合金矿石碎块
 
 item.food/mashed_cactus.name=碎仙人掌
+item.food/lemon.name=柠檬
+item.food/lemon_pie.name=柠檬派
+
+
+itemarrow.tooltip.disable=此箭苗已被禁用，请勿制作/食用
+itemtool.tooltip.slimeresistance=史莱姆杀手
+itemarmor.tooltip.slimeresistance=腐蚀抗性
 
 entity.EntityWitherBoneLord.name=凋零骷髅领主
 entity.EntityWitherBodyguard.name=衰败侍卫

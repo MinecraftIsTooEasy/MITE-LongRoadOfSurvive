@@ -1,4 +1,4 @@
-package net.oilcake.mitelros.render;
+package net.oilcake.mitelros.util.render;
 
 import net.minecraft.EntityLiving;
 import net.minecraft.ModelArachnid;

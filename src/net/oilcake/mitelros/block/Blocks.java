@@ -36,8 +36,8 @@ public class Blocks extends Block {
     public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class, Material.class}
             , getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
 
-    public static final Block blockNickelOre = new BlockOre(getNextBlockID(), Materials.nickel, 1).setBlockHardness(3.0F).setExplosionResistance(20.0f);
-    public static final Block blockTungstenOre = new BlockOre(getNextBlockID(), Materials.tungsten, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);
+    public static final Block oreNickel = new BlockOre(getNextBlockID(), Materials.nickel, 1).setBlockHardness(3.0F).setExplosionResistance(20.0f);
+    public static final Block oreTungsten = new BlockOre(getNextBlockID(), Materials.tungsten, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);
     public static final BlockOreBlock blockTungsten = new BlockOreBlock(getNextBlockID(),Materials.tungsten);
     public static final Block fenceTungsten = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
             , getNextBlockID(), "bars/tungsten_bars", "bars/tungsten_bars", Materials.tungsten, false).setStepSound_(soundMetalFootstep).setExplosionResistance(96.0f).setBlockHardness(51.2F);
@@ -79,13 +79,13 @@ public class Blocks extends Block {
         registerItemBlock("blastfurnace_obsidian_burning", blastFurnaceObsidianBurning);
         registerItemBlock("blastfurnace_netherrack_burning", blastFurnaceNetherrackBurning);
         registerItemBlock("block_enchant_reserver", blockEnchantReserver);
-        registerItemBlock("ore/nickel_ore", blockNickelOre);
+        registerItemBlock("ore/nickel_ore", oreNickel);
         registerItemBlock("block/nickel_block", blockNickel);
         registerItemBlock("bars/nickel_bars", fenceNickel);
         registerItemBlock("door/door_nickel", doorNickel);
         registerItemBlock("block_smoker_idle", blockSmokerIdle);
         registerItemBlock("block_smoker_burning", blockSmokerBurning);
-        registerItemBlock("ore/tungsten_ore", blockTungstenOre);
+        registerItemBlock("ore/tungsten_ore", oreTungsten);
         registerItemBlock("block/tungsten_block", blockTungsten);
         registerItemBlock("bars/tungsten_bars", fenceTungsten);
         registerItemBlock("door/door_tungsten", doorTungsten);
@@ -159,8 +159,8 @@ public class Blocks extends Block {
 
 
 
-        RecipesFurnace.smelting().addSmelting(blockTungstenOre.blockID, new ItemStack(Items.tungstenIngot));
-        RecipesFurnace.smelting().addSmelting(blockNickelOre.blockID, new ItemStack(Items.nickelIngot));
+        RecipesFurnace.smelting().addSmelting(oreTungsten.blockID, new ItemStack(Items.tungstenIngot));
+        RecipesFurnace.smelting().addSmelting(oreNickel.blockID, new ItemStack(Items.nickelIngot));
     }
 
     public static int getNextBlockID() {

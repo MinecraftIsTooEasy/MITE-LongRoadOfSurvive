@@ -24,4 +24,7 @@ public class EnchantmentMixin {
             }
         }
     }
+    public boolean isReverse(){
+        return false;
+    }
 }

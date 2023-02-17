@@ -1,4 +1,4 @@
-package net.oilcake.mitelros.biome;
+package net.oilcake.mitelros.world.biome;
 
 import net.minecraft.BiomeBase;
 import net.minecraft.Block;

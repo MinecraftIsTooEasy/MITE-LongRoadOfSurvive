@@ -55,7 +55,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
 //    }
     public void updateEntity() {
         if (!this.getWorldObj().isRemote) {
-            if(this.getEXP() != this.last_EXP){
+            if(this.getEXP() != this.last_EXP && this.getEXP() != 0){
                 this.slots.updateInfo();
                 this.last_EXP = EXP;
             }
@@ -74,36 +74,28 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                     int size = inputStack.stackSize;
                         this.EXP += 500 * size;
                         this.slots.getInPut().putStack(null);
-//                        this.slots.updateInfo();
-                }
-                else if (inputStack.itemID == Item.emerald.itemID && inputStack.stackSize * 250 + this.getEXP() <= this.getMAXEXP()){
+                } else if (inputStack.itemID == Item.emerald.itemID && inputStack.stackSize * 250 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 250 * size;
                     this.slots.getInPut().putStack(null);
-//                    this.slots.updateInfo();
-                }
-                else if (inputStack.itemID == Item.netherQuartz.itemID && inputStack.stackSize * 50 + this.getEXP() <= this.getMAXEXP()){
+                } else if (inputStack.itemID == Item.netherQuartz.itemID && inputStack.stackSize * 50 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 50 * size;
                     this.slots.getInPut().putStack(null);
-//                    this.slots.updateInfo();
                 }
                 else if (inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 && inputStack.stackSize * 25 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 25 * size;
                     this.slots.getInPut().putStack(null);
-//                    this.slots.updateInfo();
                 }
             }
 
                 ItemStack outputStack = this.slots.getOutPutStack();
                 if (outputStack != null) {
-                   // int size = outputStack.stackSize;
                     if (this.getEXP() >= 200) {
                         if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() + 2000) {
                             this.EXP -= 200;
                             this.slots.getOutPut().putStack(Item.expBottle.getItemStackForStatsIcon());
-//                            this.slots.updateInfo();
                         }
                     }
                     if (this.getEXP() >= 50) {
@@ -111,15 +103,12 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                             this.EXP -= 50;
                                     //* size;
                             this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
-//                            this.slots.updateInfo();
                         }
                     }
                     if (this.getEXP() >= 5000) {
                         if (outputStack.itemID == Items.tungstenNugget.itemID && outputStack.stackSize * 5000 <= this.getEXP() + 2000) {
                             this.EXP -= 5000;
-                                    //* size;
                             this.slots.getOutPut().putStack(Items.tungstenCoin.getItemStackForStatsIcon());
-//                            this.slots.updateInfo();
                         }
                     }
                 }

@@ -10,10 +10,13 @@ import java.util.List;
 
 @Mixin(ItemTool.class)
 public class ItemToolMixin extends Item{
+
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         super.addInformation(item_stack, player, info, extended_info, slot);
-        if(item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel){
-            info.add(EnumChatFormat.LIGHT_GRAY + Translator.get("腐蚀抗性"));
+        if(extended_info) {
+            if (item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel) {
+                info.add(EnumChatFormat.LIGHT_GRAY + Translator.getFormatted("itemtool.tooltip.slimeresistance"));
+            }
         }
     }
 

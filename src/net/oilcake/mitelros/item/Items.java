@@ -511,9 +511,9 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(pieceGoldNether.itemID, new ItemStack(Items.goldNugget));
         RecipesFurnace.smelting().addSmelting(pieceSilver.itemID, new ItemStack(Items.silverNugget));
         RecipesFurnace.smelting().addSmelting(pieceIron.itemID, new ItemStack(Items.ironNugget));
-        RecipesFurnace.smelting().addSmelting(pieceNickel.itemID, new ItemStack(Items.nickelNugget));
+        RecipesFurnace.smelting().addSmelting(pieceNickel.itemID, new ItemStack(nickelNugget));
         RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
-        RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(Items.tungstenNugget));
+        RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(tungstenNugget));
     }
     private static Item register(String resourceLocation, Item item, CreativeModeTab tab) {
         item.setResourceLocation(item.getResourceLocationPrefix() + resourceLocation);

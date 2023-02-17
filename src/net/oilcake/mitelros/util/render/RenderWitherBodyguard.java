@@ -1,17 +1,13 @@
-package net.oilcake.mitelros.render;
+package net.oilcake.mitelros.util.render;
 import net.minecraft.*;
-public class RenderWitherBoneLord extends bgu {
-    public RenderWitherBoneLord() {
+public class RenderWitherBodyguard extends bgu {
+    public RenderWitherBodyguard() {
         super(new bbz(), 0.5F);
-    }
-
-    protected boolean forceGlowOverride(){
-        return true;
     }
 
     @Override
     protected void setTextures() {
-        this.setTexture(0, "textures/entity/skeleton/wither_bone_lord");
+        this.setTexture(0, "textures/entity/skeleton/wither_skeleton");
     }
     protected bjo a(EntityInsentient par1EntityLiving) {
         return this.textures[0];
