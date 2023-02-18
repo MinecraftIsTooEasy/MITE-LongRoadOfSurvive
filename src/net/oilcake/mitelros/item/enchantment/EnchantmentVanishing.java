@@ -2,10 +2,10 @@ package net.oilcake.mitelros.item.enchantment;
 
 import net.minecraft.*;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.*;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
 
-public class EnchantmentRestore extends Enchantment {
-    protected EnchantmentRestore(int id, yq rarity, int difficulty) {
+public class EnchantmentVanishing extends Enchantment {
+    protected EnchantmentVanishing(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);
     }
 
@@ -15,16 +15,21 @@ public class EnchantmentRestore extends Enchantment {
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentAbsorb.effectId && par1Enchantment.effectId != enchantmentVanishing.effectId;
+        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentAbsorb.effectId;
     }
     @Override
     public String getNameSuffix() {
-        return "restore";
+        return "vanishing";
     }
 
     @Override
     public boolean canEnchantItem(Item item) {
-        return item instanceof ItemPickaxe;
+        return true;
+    }
+
+    @Override
+    public boolean isReverse() {
+        return true;
     }
 
     @Override

@@ -3,14 +3,17 @@ package net.oilcake.mitelros.mixins.entity.player;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.Items;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityPlayer.class)
 public class EntityPlayerMixin extends EntityLiving{
     public EntityPlayer entityPlayer;
-
 
 //    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
@@ -18,8 +21,16 @@ public class EntityPlayerMixin extends EntityLiving{
 //    public float getWaterLimit() {
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //    }
+    @Inject(method = "onDeath", at = @At(value = "INVOKE"))
+    public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
+        if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+            this.inventory.vanishingItems();
+        }
+    }
 
-
+    public InventoryEnderChest getTheInventoryEnderChest(){
+        return this.theInventoryEnderChest;
+    }
     public int getWater() {
         return this.getFoodStats().getWater();
     }
@@ -209,4 +220,21 @@ public class EntityPlayerMixin extends EntityLiving{
     public int getCraftingExperienceCost(float quality_adjusted_crafting_difficulty) {
         return 1;
     }
+    @Shadow
+    public void setSizeNormal() {}
+    @Shadow
+    public void setSizeProne() {}
+    @Shadow
+    public EntityItem dropPlayerItemWithRandomChoice(ItemStack par1ItemStack, boolean par2) {return null;}
+    @Shadow
+    @Final
+    protected String username;
+    @Shadow
+    public PlayerInventory inventory;
+    @Shadow
+    public void addStat(Statistic par1StatBase, int par2) {}
+    @Shadow
+    private InventoryEnderChest theInventoryEnderChest;
+    @Shadow
+    public void setScore(int par1) {}
 }

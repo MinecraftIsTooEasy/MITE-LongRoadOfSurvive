@@ -7,6 +7,7 @@ item.armor/nickel_chainmail_chestplate.name=镍锁链胸甲
 item.armor/nickel_chainmail_leggings.name=镍锁链护腿
 item.armor/nickel_chainmail_boots.name=镍锁链靴子
 
+enchantment.vanishing=消失诅咒
 enchantment.restore=还原
 enchantment.absorb=汲取
 
@@ -102,12 +103,22 @@ item.pieces/mithril.name=秘银矿石碎块
 item.pieces/tungsten.name=钨矿石碎块
 item.pieces/adamantium.name=艾德曼合金矿石碎块
 
+item.buckets/nickel/empty.name=镍桶
+item.buckets/nickel/lava.name=装满岩浆的镍桶
+item.buckets/nickel/milk.name=装满牛奶的镍桶
+item.buckets/nickel/stone.name=装满石头的镍桶
+item.buckets/nickel/water.name=装满水的镍桶
+item.buckets/tungsten/empty.name=钨桶
+item.buckets/tungsten/lava.name=装满岩浆的钨桶
+item.buckets/tungsten/milk.name=装满牛奶的钨桶
+item.buckets/tungsten/stone.name=装满石头的钨桶
+item.buckets/tungsten/water.name=装满水的钨桶
+
 item.food/mashed_cactus.name=碎仙人掌
 item.food/lemon.name=柠檬
 item.food/lemon_pie.name=柠檬派
 
-
-itemarrow.tooltip.disable=因技术原因请勿制作/使用
+itemarrow.tooltip.disable=此箭苗已被禁用，请勿制作/食用
 itemtool.tooltip.slimeresistance=史莱姆杀手
 itemarmor.tooltip.slimeresistance=腐蚀抗性
 

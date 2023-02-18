@@ -113,7 +113,7 @@ public class WorldGenMinableMixin {
         Block block = Block.blocksList[this.minableBlockId];
         if (world.isUnderworld()) {
             if (world.underworld_y_offset != 0) {
-                if (block == Block.oreAdamantium) {
+                if (block == Block.oreAdamantium || block == Blocks.oreTungsten) {
                     return rand.nextInt(16 + world.underworld_y_offset);
                 }
 

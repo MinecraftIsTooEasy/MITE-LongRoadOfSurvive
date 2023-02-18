@@ -10,9 +10,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
+import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
+
 @Mixin(ItemArrow.class)
 public class ItemArrowMixin extends Item{
-    public ItemArrow itemArrow;
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback){
         material_types = new Material[]{Material.rusted_iron, Material.ancient_metal, Materials.nickel, Materials.tungsten};
@@ -36,12 +37,12 @@ public class ItemArrowMixin extends Item{
 
     @Overwrite
     public float getChanceOfRecovery() {
-         if (itemArrow == arrowRustedIron) {
+         if (dyCast(this) == arrowRustedIron) {
             return 0.5F;
-        }else if (itemArrow == Items.arrowNickel) {
+        }else if (dyCast(this) == Items.arrowNickel) {
             return 0.7F;
-        } else if (itemArrow != arrowAncientMetal) {
-            return itemArrow == Items.arrowTungsten ? 0.9F : 0.3F;
+        } else if (dyCast(this) != arrowAncientMetal) {
+            return dyCast(this) == Items.arrowTungsten ? 0.9F : 0.3F;
         } else {
             return 0.8F;
         }

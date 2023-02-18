@@ -198,7 +198,7 @@ public class GuiIngameMixin extends avk {
                 }
             }
         }
-    //this.g.J().a(Constant.icons_lros);
+    this.g.J().a(Constant.icons_lros);
     this.g.C.endStartSection("water");
     int water = foodStats.getWater();
         for(int temp = 0; temp < 10; ++temp) {

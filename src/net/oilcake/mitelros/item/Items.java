@@ -75,9 +75,20 @@ public class Items extends Item {
     public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril").setXPReward(4));
     public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten").setXPReward(7));
     public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(10));
-    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(), Materials.mashedCactus,2,0,false,true,false,"mashedCactus")).setMaxStackSize(4);
+    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(), Materials.mashedCactus,2, 0,false,true,false,"mashedCactus")).setMaxStackSize(4);
     public static final ItemFood lemon = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "lemon")).setPlantProduct();
     public static final Item lemonPie = (new ItemFood(Constant.getNextItemID(), Material.pie, 10, 6, 1000, true, true, true, "lemon_pie")).setMaxStackSize(8).setPlantProduct().setAnimalProduct();
+    public static final ItemBucket nickelBucket = new ItemBucket(Constant.getNextItemID(), Materials.nickel, null);
+    public static final ItemBucket nickelBucketWater = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.nickel, Material.water).setContainerItem(nickelBucket);
+    public static final ItemBucket nickelBucketLava = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.nickel, Material.lava).setContainerItem(nickelBucket);
+    public static final ItemBucket nickelBucketStone = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.nickel, Material.stone).setContainerItem(nickelBucket);
+    public static final yi nickelBucketMilk = (yi)(new yi(Constant.getNextItemID(), Materials.nickel)).setContainerItem(nickelBucket);
+    public static final ItemBucket tungstenBucket = new ItemBucket(Constant.getNextItemID(), Materials.tungsten, null);
+    public static final ItemBucket tungstenBucketWater = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Material.water).setContainerItem(tungstenBucket);
+    public static final ItemBucket tungstenBucketLava = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Material.lava).setContainerItem(tungstenBucket);
+    public static final ItemBucket tungstenBucketStone = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Material.stone).setContainerItem(tungstenBucket);
+    public static final yi tungstenBucketMilk = (yi)(new yi(Constant.getNextItemID(), Materials.tungsten)).setContainerItem(tungstenBucket);
+
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -154,6 +165,16 @@ public class Items extends Item {
         register("food/mashed_cactus",mashedCactus);
         register("food/lemon",lemon);
         register("food/lemon_pie",lemonPie);
+        register("buckets/nickel/empty",nickelBucket);
+        register("buckets/nickel/lava",nickelBucketLava);
+        register("buckets/nickel/milk",nickelBucketMilk);
+        register("buckets/nickel/stone",nickelBucketStone);
+        register("buckets/nickel/water",nickelBucketWater);
+        register("buckets/tungsten/empty",tungstenBucket);
+        register("buckets/tungsten/lava",tungstenBucketLava);
+        register("buckets/tungsten/milk",tungstenBucketMilk);
+        register("buckets/tungsten/stone",tungstenBucketStone);
+        register("buckets/tungsten/water",tungstenBucketWater);
 
         Constant.initItemArray();
     }
@@ -495,10 +516,11 @@ public class Items extends Item {
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget
         );
 
-        ItemCoin[] coins = new ItemCoin[]{Item.coinCopper, Item.coinSilver, Item.coinGold, Item.coinAncientMetal, Item.coinMithril, Item.coinAdamantium, nickelCoin, tungstenCoin};
+        ItemCoin[] coins = new ItemCoin[]{
+                nickelCoin, tungstenCoin};
         for (ItemCoin coin : coins) {
             for (int plank_subtype = 1; plank_subtype <= 9; ++plank_subtype) {
-                register.registerShapelessRecipe(new ItemStack(coin.getNuggetPeer(), plank_subtype), true, new Object[]{new ItemStack(coin, plank_subtype)});
+                register.registerShapelessRecipe(new ItemStack(coin.getNuggetPeer(), plank_subtype), true, new ItemStack(coin, plank_subtype));
             }
             register.registerShapelessRecipe(new ItemStack(coin), true, new ItemStack(coin.getNuggetPeer()));
         }

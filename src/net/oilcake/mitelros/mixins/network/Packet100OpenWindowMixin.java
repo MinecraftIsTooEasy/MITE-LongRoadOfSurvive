@@ -17,7 +17,7 @@ public class Packet100OpenWindowMixin {
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.windowId = par1DataInput.readByte() & 255;
         this.inventoryType = par1DataInput.readByte() & 255;
-        this.windowTitle = Packet.readString(par1DataInput, 1023);
+        this.windowTitle = Packet.readString(par1DataInput, 32767);
         this.slotsCount = par1DataInput.readByte() & 255;
         this.useProvidedWindowTitle = par1DataInput.readBoolean();
         if (this.inventoryType == 11) {

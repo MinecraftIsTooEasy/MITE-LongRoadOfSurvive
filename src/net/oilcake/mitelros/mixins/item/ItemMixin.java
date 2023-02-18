@@ -32,8 +32,8 @@ public class ItemMixin{
         this.has_protein = has_protein;
         this.has_essential_fats = has_essential_fats;
         this.has_phytonutrients = has_phytonutrients;
-
         this.water = water;
+
         if (satiation > 0 || nutrition > 0) {
             this.setCreativeTab(CreativeModeTab.tabFood);
         }

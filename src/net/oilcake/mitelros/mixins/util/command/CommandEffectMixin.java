@@ -1,4 +1,4 @@
-package net.oilcake.mitelros.mixins.util;
+package net.oilcake.mitelros.mixins.util.command;
 
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;

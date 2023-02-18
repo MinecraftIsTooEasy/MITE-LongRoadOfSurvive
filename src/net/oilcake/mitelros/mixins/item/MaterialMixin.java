@@ -6,10 +6,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(Material.class)
 public class MaterialMixin {
-    public Material material;
     public Material setRequiresToolC() {
         return this.setRequiresTool();
     }
+
     @Shadow
     protected Material setRequiresTool() {
         return null;

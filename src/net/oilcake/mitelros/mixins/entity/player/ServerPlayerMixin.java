@@ -21,7 +21,13 @@ import java.util.List;
 public abstract class ServerPlayerMixin extends EntityPlayer implements ICrafting {
     private int last_water = -99999999;
 
-    //private int water;
+    @Inject(method = "onDeath", at = @At("INVOKE"))
+    public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
+        if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+            this.inventory.vanishingItems();
+        }
+    }
+
 
     @Overwrite
     public void onUpdateEntity() {
@@ -219,5 +225,11 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     private int last_satiation;
     @Shadow
     public PlayerConnection playerNetServerHandler;
+    @Shadow
+    public MinecraftServer mcServer;
+    @Shadow
+    public short respawn_countdown;
+    @Shadow
+    protected int respawn_experience;
 
 }

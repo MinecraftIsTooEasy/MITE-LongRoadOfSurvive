@@ -16,11 +16,12 @@ public class Enchantments {
 
     public static final Enchantment enchantmentRestore = new EnchantmentRestore(getNextEnchantmentID(), yq.d,20);
     public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(getNextEnchantmentID(), yq.d,15);
+    public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(getNextEnchantmentID(), yq.b,15);
 
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){
-        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb);
+        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing);
     }
     public static void registerEnchantmentsUnsafe(Enchantment... enchantments) {
         for (int i = 0, bLength = enchantmentsList.length; i < bLength; i++) {

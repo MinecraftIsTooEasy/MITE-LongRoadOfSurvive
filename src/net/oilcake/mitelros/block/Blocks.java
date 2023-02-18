@@ -10,41 +10,41 @@ import static net.xiaoyu233.fml.util.ReflectHelper.createInstance;
 
 
 public class Blocks extends Block {
-    public static final Block blastFurnaceStoneIdle = new BlockBlastFurnace(getNextBlockID(), Material.stone, false).setCreativeTab(CreativeModeTab.tabDecorations)
+    public static final Block blastFurnaceStoneIdle = new BlockBlastFurnace(Constant.getNextBlockID(), Material.stone, false).setCreativeTab(CreativeModeTab.tabDecorations)
             .setBlockHardness(4.8F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceObsidianIdle = new BlockBlastFurnace(getNextBlockID(), Material.obsidian, false).setCreativeTab(CreativeModeTab.tabDecorations)
+    public static final Block blastFurnaceObsidianIdle = new BlockBlastFurnace(Constant.getNextBlockID(), Material.obsidian, false).setCreativeTab(CreativeModeTab.tabDecorations)
             .setBlockHardness(38.4F).setExplosionResistance(40.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceNetherrackIdle = new BlockBlastFurnace(getNextBlockID(), Material.netherrack, false).setCreativeTab(CreativeModeTab.tabDecorations)
+    public static final Block blastFurnaceNetherrackIdle = new BlockBlastFurnace(Constant.getNextBlockID(), Material.netherrack, false).setCreativeTab(CreativeModeTab.tabDecorations)
             .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep);
 
-    public static final Block blastFurnaceStoneBurning = new BlockBlastFurnace(getNextBlockID(), Material.stone, true)
+    public static final Block blastFurnaceStoneBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.stone, true)
             .setBlockHardness(4.8F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceObsidianBurning = new BlockBlastFurnace(getNextBlockID(), Material.obsidian, true)
+    public static final Block blastFurnaceObsidianBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.obsidian, true)
             .setBlockHardness(38.4F).setExplosionResistance(40.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceNetherrackBurning = new BlockBlastFurnace(getNextBlockID(), Material.netherrack, true)
+    public static final Block blastFurnaceNetherrackBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.netherrack, true)
             .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blockSmokerIdle = new BlockSmoker(getNextBlockID(), false)
+    public static final Block blockSmokerIdle = new BlockSmoker(Constant.getNextBlockID(), false)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blockSmokerBurning = new BlockSmoker(getNextBlockID(), true)
+    public static final Block blockSmokerBurning = new BlockSmoker(Constant.getNextBlockID(), true)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.nickel);
-    public static final Block blockEnchantReserver = new BlockEnchantReserver(getNextBlockID())
+    public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.nickel);
+    public static final Block blockEnchantReserver = new BlockEnchantReserver(Constant.getNextBlockID())
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final BlockOreBlock blockNickel = new BlockOreBlock(getNextBlockID(), Materials.nickel);
+    public static final BlockOreBlock blockNickel = new BlockOreBlock(Constant.getNextBlockID(), Materials.nickel);
     public static final Block fenceNickel = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
-            , getNextBlockID(), "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep);
+            , Constant.getNextBlockID(), "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep);
     public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class, Material.class}
-            , getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
+            , Constant.getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
 
-    public static final Block oreNickel = new BlockOre(getNextBlockID(), Materials.nickel, 1).setBlockHardness(3.0F).setExplosionResistance(20.0f);
-    public static final Block oreTungsten = new BlockOre(getNextBlockID(), Materials.tungsten, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);
-    public static final BlockOreBlock blockTungsten = new BlockOreBlock(getNextBlockID(),Materials.tungsten);
+    public static final Block oreNickel = new BlockOre(Constant.getNextBlockID(), Materials.nickel, 1).setBlockHardness(3.0F).setExplosionResistance(20.0f);
+    public static final Block oreTungsten = new BlockOre(Constant.getNextBlockID(), Materials.tungsten, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);
+    public static final BlockOreBlock blockTungsten = new BlockOreBlock(Constant.getNextBlockID(),Materials.tungsten);
     public static final Block fenceTungsten = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
-            , getNextBlockID(), "bars/tungsten_bars", "bars/tungsten_bars", Materials.tungsten, false).setStepSound_(soundMetalFootstep).setExplosionResistance(96.0f).setBlockHardness(51.2F);
+            , Constant.getNextBlockID(), "bars/tungsten_bars", "bars/tungsten_bars", Materials.tungsten, false).setStepSound_(soundMetalFootstep).setExplosionResistance(96.0f).setBlockHardness(51.2F);
     public static final Block doorTungsten = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
-            , getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
+            , Constant.getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
 
-    public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, getNextBlockID(), Materials.tungsten);
+    public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
 
 
 
@@ -163,7 +163,4 @@ public class Blocks extends Block {
         RecipesFurnace.smelting().addSmelting(oreNickel.blockID, new ItemStack(Items.nickelIngot));
     }
 
-    public static int getNextBlockID() {
-        return Constant.nextBlockID++;
-    }
 }

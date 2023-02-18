@@ -2,11 +2,12 @@ package net.oilcake.mitelros.util;
 
 import net.minecraft.Item;
 import net.minecraft.ItemArmor;
+import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " 23w08 Test4 ";
-//    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
+    public static final String VERSION = "BEAT+Build.14-pre7";
+    public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
 //    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
     public static final int VER_NUM = 114514;
@@ -15,12 +16,14 @@ public class Constant {
     public static int nextPotionID = 24;
     public static int nextEnchantmentID = 96;
     public static int nextAchievementID = 136;
-
-    public static int nickelNUM = 4;
-
+    public static int nextBiomeID = 26;
     public static int getNextItemID(){
         return nextItemID++;
     }
+    public static int getNextBiomeID(){
+        return nextBiomeID++;
+    }
+    public static int getNextBlockID() {return nextBlockID++;}
 
 
     public static ItemArmor[] HELMETS = null;
