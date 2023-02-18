@@ -14,14 +14,15 @@ import static net.minecraft.Enchantment.enchantmentsList;
 public class Enchantments {
 
 
-    public static final Enchantment enchantmentRestore = new EnchantmentRestore(getNextEnchantmentID(), yq.d,20);
-    public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(getNextEnchantmentID(), yq.d,15);
-    public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(getNextEnchantmentID(), yq.b,15);
+    public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.d,20);
+    public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.d,15);
+    public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.b,15);
+    public static final Enchantment enchantmentDestorying = new EnchantmentDestorying(Constant.getNextEnchantmentID(), yq.d,20);
 
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){
-        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing);
+        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing, enchantmentDestorying);
     }
     public static void registerEnchantmentsUnsafe(Enchantment... enchantments) {
         for (int i = 0, bLength = enchantmentsList.length; i < bLength; i++) {
@@ -47,7 +48,5 @@ public class Enchantments {
             e.printStackTrace();
         }
     }
-    private static int getNextEnchantmentID(){
-        return Constant.nextEnchantmentID++;
-    }
+
 }

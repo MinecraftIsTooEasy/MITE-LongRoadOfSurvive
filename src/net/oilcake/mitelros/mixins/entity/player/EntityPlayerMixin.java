@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.entity.player;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -11,16 +12,134 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
+
 @Mixin(EntityPlayer.class)
 public class EntityPlayerMixin extends EntityLiving{
-    public EntityPlayer entityPlayer;
-
 //    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
 //    }
 //    public float getWaterLimit() {
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //    }
+
+    @Overwrite
+    public void attackTargetEntityWithCurrentItem(Entity target) {
+        if (!this.isImmuneByGrace()) {
+            if (target.canAttackWithItem()) {
+                boolean critical = this.willDeliverCriticalStrike();
+                float damage = this.calcRawMeleeDamageVs(target, critical, this.isSuspendedInLiquid());
+                if (damage <= 0.0F) {
+                    return;
+                }
+                ItemStack heldItemStack = this.getHeldItemStack();
+                if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestorying)){
+                    int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestorying, heldItemStack);
+                    target.worldObj.createExplosionC(target, target.posX, target.posY, target.posZ, destorying, destorying);
+                    //System.out.println("判断为enchantmentDestorying player");
+                    //target.setFire(120);
+                }
+
+                int knockback = 0;
+                if (target instanceof EntityLiving) {
+                    knockback += EnchantmentManager.getKnockbackModifier(this, (EntityLiving)target);
+                }
+
+                if (this.isSprinting()) {
+                    ++knockback;
+                }
+
+                boolean was_set_on_fire = false;
+                int fire_aspect = EnchantmentManager.getFireAspectModifier(this);
+                if (target instanceof EntityLiving && fire_aspect > 0 && !target.isBurning()) {
+                    was_set_on_fire = true;
+                    target.setFire(1);
+                }
+
+                if (this.onServer() && target instanceof EntityLiving) {
+                    EntityLiving entity_living_base = (EntityLiving)target;
+                    ItemStack item_stack_to_drop = entity_living_base.getHeldItemStack();
+                    if (item_stack_to_drop != null && this.rand.nextFloat() < EnchantmentManager.getEnchantmentLevelFraction(Enchantment.disarming, this.getHeldItemStack()) && entity_living_base instanceof EntityInsentient) {
+                        EntityInsentient entity_living = (EntityInsentient)entity_living_base;
+                        entity_living.dropItemStack(item_stack_to_drop, entity_living.height / 2.0F);
+                        entity_living.clearMatchingEquipmentSlot(item_stack_to_drop);
+                        entity_living.ticks_disarmed = 40;
+                    }
+                }
+
+                EntityDamageResult result = target.attackEntityFrom(new Damage(DamageSource.causePlayerDamage(dyCast(this)).setFireAspectC(fire_aspect > 0), damage));
+                boolean target_was_harmed = result != null && result.entityWasNegativelyAffected();
+                target.onMeleeAttacked(this, result);
+                if (target_was_harmed) {
+                    if (target instanceof EntityLiving) {
+                        int stunning = EnchantmentManager.getStunModifier(this, (EntityLiving)target);
+                        if ((double)stunning > Math.random() * 10.0) {
+                            ((EntityLiving)target).addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, stunning * 50, stunning * 5));
+                        }
+
+                        this.heal((float)EnchantmentManager.getVampiricTransfer(this, (EntityLiving)target, damage), EnumEntityFX.vampiric_gain);
+                    }
+
+                    if (knockback > 0) {
+                        target.addVelocity((double)(-MathHelper.sin(this.rotationYaw * 3.1415927F / 180.0F) * (float)knockback * 0.5F), 0.1, (double)(MathHelper.cos(this.rotationYaw * 3.1415927F / 180.0F) * (float)knockback * 0.5F));
+                        this.motionX *= 0.6;
+                        this.motionZ *= 0.6;
+                        this.setSprinting(false);
+                    }
+
+                    if (critical) {
+                        this.onCriticalHit(target);
+                    }
+
+                    if (target instanceof EntityLiving && EnchantmentWeaponDamage.getDamageModifiers(this.getHeldItemStack(), (EntityLiving)target) > 0.0F) {
+                        this.onEnchantmentCritical(target);
+                    }
+
+                    if (damage >= 18.0F) {
+                        this.triggerAchievement(AchievementList.overkill);
+                    }
+
+                    this.setLastAttackTarget(target);
+                    if (target instanceof EntityLiving) {
+                        if (this.worldObj.isRemote) {
+                            System.out.println("EntityPlayer.attackTargetEntityWithCurrentItem() is calling EnchantmentThorns.func_92096_a() on client");
+                            Minecraft.temp_debug = "player";
+                        }
+
+                        EnchantmentThorns.func_92096_a(this, (EntityLiving)target, this.rand);
+                    }
+                }
+
+                ItemStack held_item_stack = this.getHeldItemStack();
+                Object var10 = target;
+                if (target instanceof EntityComplexPart) {
+                    IComplex var11 = ((EntityComplexPart)target).entityDragonObj;
+                    if (var11 != null && var11 instanceof EntityLiving) {
+                        var10 = (EntityLiving)var11;
+                    }
+                }
+
+                if (target_was_harmed && held_item_stack != null && var10 instanceof EntityLiving) {
+                    held_item_stack.hitEntity((EntityLiving)var10, dyCast(this));
+                }
+
+                if (target instanceof EntityLiving) {
+                    this.addStat(StatisticList.damageDealtStat, Math.round(damage * 10.0F));
+                    if (fire_aspect > 0 && target_was_harmed) {
+                        target.setFire(fire_aspect * 4);
+                    } else if (was_set_on_fire) {
+                        target.extinguish();
+                    }
+                }
+
+                if (this.onServer()) {
+                    this.addHungerServerSide(0.3F * EnchantmentManager.getEnduranceModifier(this));
+                }
+            }
+
+        }
+    }
+
     @Inject(method = "onDeath", at = @At(value = "INVOKE"))
     public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
@@ -237,4 +356,22 @@ public class EntityPlayerMixin extends EntityLiving{
     private InventoryEnderChest theInventoryEnderChest;
     @Shadow
     public void setScore(int par1) {}
+    @Shadow
+    public boolean isImmuneByGrace() {
+        return false;
+    }
+    @Shadow
+    public boolean willDeliverCriticalStrike() {return false;}
+    @Shadow
+    public float calcRawMeleeDamageVs(Entity target, boolean critical, boolean suspended_in_liquid) {
+        return 0;
+    }
+    @Shadow
+    public void onCriticalHit(Entity par1Entity) {}
+    @Shadow
+    public void onEnchantmentCritical(Entity par1Entity) {}
+    @Shadow
+    public void addHungerServerSide(float hunger) {}
+    @Shadow
+    public void triggerAchievement(Statistic par1StatBase) {}
 }

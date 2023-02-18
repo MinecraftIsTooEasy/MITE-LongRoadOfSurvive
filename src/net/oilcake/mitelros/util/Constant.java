@@ -24,6 +24,9 @@ public class Constant {
         return nextBiomeID++;
     }
     public static int getNextBlockID() {return nextBlockID++;}
+    public static int getNextEnchantmentID(){
+        return nextEnchantmentID++;
+    }
 
 
     public static ItemArmor[] HELMETS = null;
