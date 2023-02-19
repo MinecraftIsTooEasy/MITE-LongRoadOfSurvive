@@ -10,15 +10,58 @@ import org.spongepowered.asm.mixin.Shadow;
 import java.util.Calendar;
 
 @Mixin(EntitySkeleton.class)
-
 public class EntitySkeletonMixin extends EntityMonster{
     public EntitySkeletonMixin(World par1World) {
         super(par1World);
     }
-    @Shadow
-    private PathfinderGoalArrowAttack aiArrowAttack = new PathfinderGoalArrowAttack((IRangedEntity) this, 1.0, 20, 60, 15.0F);
-    @Shadow
-    private PathfinderGoalMeleeAttack aiAttackOnCollide = new PathfinderGoalMeleeAttack(this, EntityPlayer.class, 1.2, false);
+
+//    @Overwrite
+//    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+//        int looting = damage_source.getLootingModifier();
+//        int num_drops;
+//        int i;
+//        if (this.getSkeletonType() == 1) {
+//            num_drops = this.rand.nextInt(3 + looting) - 1;
+//            if (num_drops > 0 && !recently_hit_by_player) {
+//                num_drops -= this.rand.nextInt(num_drops + 1);
+//            }
+//
+//            if(Item.getItem(num_drops) instanceof ItemArmor || Item.getItem(num_drops) instanceof ItemTool){
+//                num_drops = 0;
+//            }
+//
+//            for(i = 0; i < num_drops; ++i) {
+//                this.dropItem(Item.coal.itemID, 1);
+//            }
+//
+//            if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
+//                this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
+//            }
+//        } else if (this.getSkeletonType() != 2) {
+//            num_drops = this.rand.nextInt(2 + looting);
+//            if (num_drops > 0 && !recently_hit_by_player) {
+//                num_drops -= this.rand.nextInt(num_drops + 1);
+//            }
+//
+//            if (this.isLongdead() && num_drops > 0) {
+//                num_drops = this.rand.nextInt(3) == 0 ? 1 : 0;
+//            }
+//
+//            for(i = 0; i < num_drops; ++i) {
+//                this.dropItem(this.isLongdead() ? Item.arrowAncientMetal.itemID : Item.arrowRustedIron.itemID, 1);
+//            }
+//        }
+//
+//        num_drops = this.rand.nextInt(3);
+//        if (num_drops > 0 && !recently_hit_by_player) {
+//            num_drops -= this.rand.nextInt(num_drops + 1);
+//        }
+//
+//        for(i = 0; i < num_drops; ++i) {
+//            this.dropItem(Item.bone.itemID, 1);
+//        }
+//    }
+
     @Overwrite
     public GroupDataEntity onSpawnWithEgg(GroupDataEntity par1EntityLivingData) {
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
@@ -57,37 +100,26 @@ public class EntitySkeletonMixin extends EntityMonster{
         return par1EntityLivingData;
     }
     @Shadow
-    public void setSkeletonType(int par1) {
-        this.dataWatcher.updateObject(13, (byte)par1);
-        if (par1 == 1) {
-            this.setSize(0.72F, 2.34F);
-        } else {
-            this.setSize(0.6F, 1.8F);
-        }
-
+    public boolean isLongdead() {
+        return false;
     }
     @Shadow
-    public int forced_skeleton_type = -1;
+    public void setSkeletonType(int par1) {}
+    @Shadow
+    private PathfinderGoalArrowAttack aiArrowAttack;
+    @Shadow
+    private PathfinderGoalMeleeAttack aiAttackOnCollide;
+    @Shadow
+    public int forced_skeleton_type;
     @Shadow
     public int getRandomSkeletonType(World world) {
     return -1;
     }
     @Shadow
     protected void addRandomEquipment() {
-        this.addRandomWeapon();
-        this.addRandomArmor();
     }
     @Shadow
     public void addRandomWeapon() {
-        if (this.getSkeletonType() == 2 && this.rand.nextInt(20) == 0) {
-            int day_of_world = MinecraftServer.F().getOverworld().getDayOfWorld();
-            if (day_of_world >= 10) {
-                this.setCurrentItemOrArmor(0, (new ItemStack(day_of_world >= 20 && !this.rand.nextBoolean() ? Item.swordRustedIron : Item.daggerRustedIron)).randomizeForMob(this, false));
-                return;
-            }
-        }
-
-        this.setCurrentItemOrArmor(0, (new ItemStack((Item)(this.getSkeletonType() == 2 ? Item.clubWood : Item.bow))).randomizeForMob(this, true));
     }
     @Shadow
     public int getSkeletonType() {

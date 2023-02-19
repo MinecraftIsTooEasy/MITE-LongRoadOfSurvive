@@ -20,6 +20,20 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         this.setEntityAttribute(GenericAttributes.attackDamage, 6.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 12.0);
     }
+//    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+//        if (recently_hit_by_player){
+//            super.dropFewItems(recently_hit_by_player, damage_source);
+//        }
+//    }
+    @Override
+    public void dropContainedItems() {
+
+    }
+
+    @Override
+    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
+
+    }
     public void addRandomWeapon() {
         List items = new ArrayList();
         items.add(new RandomItemListEntry(Items.tungstenDagger, 2));

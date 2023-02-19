@@ -6,7 +6,7 @@ import net.oilcake.mitelros.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityWitherBoneLord extends EntityBoneLord {
+public class EntityWitherBoneLord extends EntitySkeleton {
 
     public EntityWitherBoneLord(World par1World) {
         super(par1World);
@@ -18,7 +18,20 @@ public class EntityWitherBoneLord extends EntityBoneLord {
         this.setEntityAttribute(GenericAttributes.attackDamage, 8.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 20.0);
     }
+//    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+//        if (recently_hit_by_player){
+//            super.dropFewItems(recently_hit_by_player, damage_source);
+//        }
+//    }
+    @Override
+    public void dropContainedItems() {
 
+    }
+
+    @Override
+    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
+
+    }
     public void addRandomWeapon() {
         List items = new ArrayList();
         items.add(new RandomItemListEntry(Items.tungstenSword, 2));
