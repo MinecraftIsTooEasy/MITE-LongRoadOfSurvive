@@ -32,7 +32,7 @@ public class Blocks extends Block {
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final BlockOreBlock blockNickel = new BlockOreBlock(Constant.getNextBlockID(), Materials.nickel);
     public static final Block fenceNickel = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
-            , Constant.getNextBlockID(), "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep);
+            , Constant.getNextBlockID(), "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep).setExplosionResistance(6.0f).setBlockHardness(3.2F);
     public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class, Material.class}
             , Constant.getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep);
 

@@ -10,6 +10,8 @@ import java.io.FileWriter;
 
 @Mixin(ReferenceFileWriter.class)
 public class ReferenceFileWriterMixin {
+    @Shadow
+    private static String newline;
     @Overwrite
     private static void writeFoodValueFile(File dir) throws Exception
     {
@@ -38,6 +40,30 @@ public class ReferenceFileWriterMixin {
             }
         }
 
+        fw.write(sb.toString());
+        fw.close();
+    }
+    @Overwrite
+    private static void writeItemReachFile(File dir) throws Exception
+    {
+        FileWriter fw = new FileWriter(dir.getPath() + "/item_reach.txt");
+        StringBuffer sb = new StringBuffer();
+        sb.append("The player has a base reach of 2.75 vs blocks and 1.5 vs entities.").append(newline).append(newline);
+        sb.append("Only items that have a reach bonus are listed.").append(newline).append(newline);
+        sb.append("Reach Bonus").append(newline);
+        sb.append("-----------").append(newline);
+        for (int i = 0; i < Item.itemsList.length; ++i) {
+            Item item = Item.getItem(i);
+            if (item != null) {
+                String name = item.getNameForReferenceFile();
+                float reach_bonus = item.getReachBonus();
+                if (reach_bonus > 0.0F) {
+                    sb.append("Item[").append(i).append("] ");
+                    sb.append(name).append(": +").append(StringHelper.formatFloat(reach_bonus, 1, 3));
+                    sb.append(newline);
+                }
+            }
+        }
         fw.write(sb.toString());
         fw.close();
     }
@@ -85,6 +111,4 @@ public class ReferenceFileWriterMixin {
 //    }
     @Shadow
     private static String getToolHarvestEfficiencyString(ItemTool item_tool, ItemStack item_stack, boolean as_subtype) {return null;}
-    @Shadow
-    private static String newline;
 }

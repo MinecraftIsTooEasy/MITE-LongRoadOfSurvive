@@ -112,4 +112,4 @@ itemarmor.tooltip.slimeresistance=Bonus vs slime
 entity.EntityWitherBoneLord.name=Wither Bonelord
 entity.EntityWitherBodyguard.name=Wither Bodyguard
 entity.EntityClusterSpider.name=Cluster Spider
-entity.EntitySpiderKing=Spider King
+entity.EntitySpiderKing.name=Spider King

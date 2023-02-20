@@ -1,10 +1,11 @@
 package net.oilcake.mitelros.world.biome;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.world.BiomeBases;
 
 import java.util.Random;
 
-public class BiomeAlps extends BiomeBase{
+public class BiomeAlps extends BiomeBase {
     public BiomeAlps(int par1) {
         super(par1);
         this.spawnableCreatureList.clear();

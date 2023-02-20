@@ -1,6 +1,13 @@
 
 
 可能会遇到一些渲染bug,内存最好大于1024M可尽量避免;遇到F3+A重新加载区块即可
+## ITF 23w08 Test5
+### 外置显示
+* 解决了Reference Writer报错的问题
+* .mincraft/MITE/reference/item_reach.txt将正常输出
+### 方块
+* 修复了新金属栅栏爆炸抗性和硬度错误的问题
+
 
 ## BEAT+Build.14-pre9
 ### bug
