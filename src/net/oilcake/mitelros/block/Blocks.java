@@ -45,7 +45,7 @@ public class Blocks extends Block {
             , Constant.getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
 
     public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
-
+    public static final BlockFlowerExtend flowerextend = (BlockFlowerExtend) (new BlockFlowerExtend(Constant.getNextBlockID())).setBlockHardness(0.0F).setStepSound_(soundGrassFootstep).setUnlocalizedName("flower");
 
 
 
@@ -89,7 +89,7 @@ public class Blocks extends Block {
         registerItemBlock("block/tungsten_block", blockTungsten);
         registerItemBlock("bars/tungsten_bars", fenceTungsten);
         registerItemBlock("door/door_tungsten", doorTungsten);
-
+        registerItemBlock("flowers/" , flowerextend);
     }
 
     public static void registerRecipes(RecipeRegister register) {

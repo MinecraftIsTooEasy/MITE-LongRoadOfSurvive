@@ -10,6 +10,8 @@ public class Materials extends Material {
     public static final Material mashedCactus = (new MaterialFood("mashed_cactus"));
     public static final Material orePieces = (new Material("Pieces"));
 
+    public static final Material lemonade = (new MaterialFood("lemonade"));
+
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);

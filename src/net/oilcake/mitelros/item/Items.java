@@ -89,6 +89,7 @@ public class Items extends Item {
     public static final ItemBucket tungstenBucketStone = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Material.stone).setContainerItem(tungstenBucket);
     public static final yi tungstenBucketMilk = (yi)(new yi(Constant.getNextItemID(), Materials.tungsten)).setContainerItem(tungstenBucket);
 
+    public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");;
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -165,6 +166,7 @@ public class Items extends Item {
         register("food/mashed_cactus",mashedCactus);
         register("food/lemon",lemon);
         register("food/lemon_pie",lemonPie);
+        register("bowls/lemonade",lemonade);
         register("buckets/nickel/empty",nickelBucket);
         register("buckets/nickel/lava",nickelBucketLava);
         register("buckets/nickel/milk",nickelBucketMilk);
@@ -505,6 +507,8 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(mashedCactus,1),false,
                 Block.cactus
         );
+        register.registerShapelessRecipe(new ItemStack(lemonade,1),false,
+                Item.sugar,Items.lemon,Item.bowlWater);
         register.registerShapelessRecipe(new ItemStack(nickelIngot,1),false,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,

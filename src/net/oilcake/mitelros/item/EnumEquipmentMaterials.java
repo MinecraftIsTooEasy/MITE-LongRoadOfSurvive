@@ -26,8 +26,8 @@ public class EnumEquipmentMaterials {
             e.printStackTrace();
         }
     }
-    public static final EnumEquipmentMaterial nickel = newEnumEquipmentMaterial(8.0f, 30,EnumQuality.masterwork, "nickel");
-    public static final EnumEquipmentMaterial tungsten = newEnumEquipmentMaterial(128.0f,50,EnumQuality.legendary,"tungsten");
+    public static final EnumEquipmentMaterial nickel = newEnumEquipmentMaterial(8.0F, 30,EnumQuality.masterwork, "nickel");
+    public static final EnumEquipmentMaterial tungsten = newEnumEquipmentMaterial(128.0F,50,EnumQuality.legendary,"tungsten");
     private static final EnumEquipmentMaterial newEnumEquipmentMaterial(float durability, int enchantability, EnumQuality max_quality, String name){
         try {
             return (EnumEquipmentMaterial) constructorAccessor.newInstance(new Object[]{name,ordinary++,durability,enchantability,max_quality,name});
