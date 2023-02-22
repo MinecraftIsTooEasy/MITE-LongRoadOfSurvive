@@ -5,6 +5,7 @@ import net.minecraft.*;
 import java.util.Random;
 
 public class BlockFlowerExtend extends BlockFlower {
+    private BlockSubtypes subtypes;
     protected BlockFlowerExtend(int id, Material material) {
         super(id, material);
     }

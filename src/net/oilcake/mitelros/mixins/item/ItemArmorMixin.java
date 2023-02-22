@@ -25,12 +25,13 @@ public class ItemArmorMixin extends Item {
         }
     }
 
-
     @Overwrite
     public int getMaterialProtection() {
         int protection;
         if (this.effective_material == Material.leather) {
             protection = 2;
+        } else if(this.effective_material == Materials.wolf_fur){
+            protection = 5;
         } else if (this.effective_material == Material.rusted_iron) {
             protection = 6;
         } else if (this.effective_material == Material.copper) {

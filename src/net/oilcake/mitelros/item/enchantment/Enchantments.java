@@ -17,7 +17,7 @@ public class Enchantments {
     public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.d,20);
     public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.d,15);
     public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.b,15);
-    public static final Enchantment enchantmentDestorying = new EnchantmentDestorying(Constant.getNextEnchantmentID(), yq.d,20);
+    public static final Enchantment enchantmentDestorying = new EnchantmentDestorying(Constant.getNextEnchantmentID(), yq.d,50);
 
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();

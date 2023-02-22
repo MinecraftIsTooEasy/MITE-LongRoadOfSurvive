@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -152,6 +153,44 @@ public abstract class EntityItemMixin extends Entity{
         } else {
             return result;
         }
+    }
+
+    @Overwrite
+    public void spentTickInWater() {
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        Item item = this.getEntityItem().getItem();
+        if (item instanceof ItemVessel) {
+            ItemVessel vessel = (ItemVessel)item;
+            if (vessel.contains(Material.lava)) {
+                if (!this.worldObj.isRemote) {
+                    this.entityFX(EnumEntityFX.steam_with_hiss);
+                    this.convertItem(vessel.getPeerForContents(Material.stone));
+                }
+
+                return;
+            }
+
+            if (!this.worldObj.isRemote && !vessel.contains(Material.stone) && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)) {
+                this.convertItem(vessel.getPeerForContents(Material.water));
+            }
+            else if (!this.worldObj.isRemote && !vessel.contains(Material.stone) && (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland)) {
+                this.convertItem(vessel.getPeerForContents(Materials.dangerous_water));
+            }
+            else if (!this.worldObj.isRemote && !vessel.contains(Material.stone)){
+                this.convertItem(vessel.getPeerForContents(Materials.unsafe_water));
+            }
+        } else if (this.onServer() && item.hasMaterial(Material.water, true)) {
+            if (!this.isDead) {
+                this.setDead();
+            }
+        } else if (this.onServer() && item.isDissolvedByWater() && !this.isDead && this.ticksExisted % 20 == 0) {
+            this.attackEntityFrom(new Damage(DamageSource.melt, 1.0F));
+            if (this.isDead) {
+                this.entityFX(EnumEntityFX.item_vanish);
+            }
+        }
+
+        super.spentTickInWater();
     }
 
 //    @Inject(method = {"<init>(Lnet/minecraft/World;)V","<init>(Lnet/minecraft/World;DDD)V","<init>(Lnet/minecraft/World;DDDLnet/minecraft/ItemStack;)V"},at = @At("RETURN"))

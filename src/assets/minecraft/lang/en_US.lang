@@ -7,8 +7,15 @@ item.armor/nickel_chainmail_chestplate.name=Nickel Chainmail Chestplate
 item.armor/nickel_chainmail_leggings.name=Nickel Chainmail Leggings
 item.armor/nickel_chainmail_boots.name=Nickel Chainmail Boots
 
+item.armor/wolf_helmet.name=Wolf Boarder Helmet
+item.armor/wolf_jacket.name=Wolf Boarder Coat
+item.armor/wolf_leggings.name=Wolf Boarder Leggings
+item.armor/wolf_boots.name=Wolf Boarder Boots
+
+enchantment.vanishing=Curse Of Vanishing
 enchantment.restore=Restore
 enchantment.absorb=Absorb
+enchantment.destroying=Destroying
 
 potion.dehydration=Dehydration
 
@@ -90,6 +97,9 @@ tile.toolbench.tungsten.name=Tungsten Toolbench
 
 item.bowls/lampchop_stew.name=Chestnut Soup
 item.bowls/porkchop_stew.name=Porkchop Stew
+item.bowls/lemonade.name=Lemonade
+item.bowls/bowl_water_suspicious.name=A Bowl Of Suspicious Water
+item.bowls/bowl_water_swampland.name=A Bowl Of Swampland Water
 
 item.pieces/copper.name=Copper Orepiece
 item.pieces/silver.name=Silver Orepiece
@@ -101,9 +111,40 @@ item.pieces/mithril.name=Mithril Orepiece
 item.pieces/tungsten.name=Tungsten Orepiece
 item.pieces/adamantium.name=Adamantium Orepiece
 
+item.buckets/nickel/empty.name=Nickel Bucket
+item.buckets/nickel/lava.name=Lava Bucket
+item.buckets/nickel/milk.name=Milk Bucket
+item.buckets/nickel/stone.name=Stone Bucket
+item.buckets/nickel/water.name=Water Bucket
+item.buckets/nickel/water_suspicious.name=Suspicious Water Bucket
+item.buckets/nickel/water_swampland.name=Swampland Water Bucket
+item.buckets/tungsten/empty.name=Tungsten Bucket
+item.buckets/tungsten/lava.name=Lava Bucket
+item.buckets/tungsten/milk.name=Milk Bucket
+item.buckets/tungsten/stone.name=Stone Bucket
+item.buckets/tungsten/water.name=Water Bucket
+item.buckets/tungsten/water_suspicious.name=Suspicious Water Bucket
+item.buckets/tungsten/water_swampland.name=Swampland Water Bucket
+item.buckets/copper/water_suspicious.name=Suspicious Water Bucket
+item.buckets/copper/water_swampland.name=Swampland Water Bucket
+item.buckets/silver/water_suspicious.name=Suspicious Water Bucket
+item.buckets/silver/water_swampland.name=Swampland Water Bucket
+item.buckets/gold/water_suspicious.name=Suspicious Water Bucket
+item.buckets/gold/water_swampland.name=Swampland Water Bucket
+item.buckets/iron/water_suspicious.name=Suspicious Water Bucket
+item.buckets/iron/water_swampland.name=Swampland Water Bucket
+item.buckets/mithril/water_suspicious.name=Suspicious Water Bucket
+item.buckets/mithril/water_swampland.name=Swampland Water Bucket
+item.buckets/ancient_metal/water_suspicious.name=Suspicious Water Bucket
+item.buckets/ancient_metal/water_swampland.name=Swampland Water Bucket
+item.buckets/adamantium/water_suspicious.name=Suspicious Water Bucket
+item.buckets/adamantium/water_swampland.name=Swampland Water Bucket
+
 item.food/mashed_cactus.name=Mashed Cactus
 item.food/lemon.name=Lemon
 item.food/lemon_pie.name=Lemon Pie
+item.food/horse_meat.name=Raw Horse Meat
+item.food/horse_meat_cooked.name=Cooked Horse Meat
 
 itemarrow.tooltip.disable=Disabled by technical issue...
 itemtool.tooltip.slimeresistance=Bonus vs slime

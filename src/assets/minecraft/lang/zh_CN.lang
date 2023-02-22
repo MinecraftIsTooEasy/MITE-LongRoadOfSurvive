@@ -7,9 +7,15 @@ item.armor/nickel_chainmail_chestplate.name=镍锁链胸甲
 item.armor/nickel_chainmail_leggings.name=镍锁链护腿
 item.armor/nickel_chainmail_boots.name=镍锁链靴子
 
+item.armor/wolf_helmet.name=北地狼皮盔
+item.armor/wolf_jacket.name=北地狼皮甲
+item.armor/wolf_leggings.name=北地狼护腿
+item.armor/wolf_boots.name=北地狼皮靴
+
 enchantment.vanishing=消失诅咒
 enchantment.restore=还原
 enchantment.absorb=汲取
+enchantment.destroying=毁灭
 
 potion.dehydration=脱水
 
@@ -92,6 +98,9 @@ tile.toolbench.tungsten.name=钨工作台
 
 item.bowls/lampchop_stew.name=栗羊羹
 item.bowls/porkchop_stew.name=猪肉煲
+item.bowls/lemonade.name=柠檬汁
+item.bowls/bowl_water_suspicious.name=一碗可疑的水
+item.bowls/bowl_water_swampland.name=一碗沼泽水
 
 item.pieces/copper.name=铜矿石碎块
 item.pieces/silver.name=银矿石碎块
@@ -108,15 +117,37 @@ item.buckets/nickel/lava.name=装满岩浆的镍桶
 item.buckets/nickel/milk.name=装满牛奶的镍桶
 item.buckets/nickel/stone.name=装满石头的镍桶
 item.buckets/nickel/water.name=装满水的镍桶
+item.buckets/nickel/water_suspicious.name=装满可疑的水的镍桶
+item.buckets/nickel/water_swampland.name=装满沼泽水的镍桶
 item.buckets/tungsten/empty.name=钨桶
 item.buckets/tungsten/lava.name=装满岩浆的钨桶
 item.buckets/tungsten/milk.name=装满牛奶的钨桶
 item.buckets/tungsten/stone.name=装满石头的钨桶
 item.buckets/tungsten/water.name=装满水的钨桶
+item.buckets/tungsten/water_suspicious.name=装满可疑的水的钨桶
+item.buckets/tungsten/water_swampland.name=装满沼泽水的钨桶
+item.buckets/copper/water_suspicious.name=装满可疑的水的铜桶
+item.buckets/copper/water_swampland.name=装满沼泽水的铜桶
+item.buckets/silver/water_suspicious.name=装满可疑的水的银桶
+item.buckets/silver/water_swampland.name=装满沼泽水的银桶
+item.buckets/gold/water_suspicious.name=装满可疑的水的金桶
+item.buckets/gold/water_swampland.name=装满沼泽水的金桶
+item.buckets/iron/water_suspicious.name=装满可疑的水的铁桶
+item.buckets/iron/water_swampland.name=装满沼泽水的铁桶
+item.buckets/mithril/water_suspicious.name=装满可疑的水的秘银桶
+item.buckets/mithril/water_swampland.name=装满沼泽水的秘银桶
+item.buckets/ancient_metal/water_suspicious.name=装满可疑的水的远古金属桶
+item.buckets/ancient_metal/water_swampland.name=装满沼泽水的远古金属桶
+item.buckets/adamantium/water_suspicious.name=装满可疑的水的艾德曼合金桶
+item.buckets/adamantium/water_swampland.name=装满沼泽水的艾德曼合金桶
 
 item.food/mashed_cactus.name=碎仙人掌
 item.food/lemon.name=柠檬
 item.food/lemon_pie.name=柠檬派
+item.food/horse_meat.name=马肉
+item.food/horse_meat_cooked.name=熟马肉
+
+item.wolf_fur.name=狼的毛皮
 
 itemarrow.tooltip.disable=此箭苗已被禁用，请勿制作/食用
 itemtool.tooltip.slimeresistance=史莱姆杀手

@@ -28,6 +28,7 @@ public class EnumEquipmentMaterials {
     }
     public static final EnumEquipmentMaterial nickel = newEnumEquipmentMaterial(8.0F, 30,EnumQuality.masterwork, "nickel");
     public static final EnumEquipmentMaterial tungsten = newEnumEquipmentMaterial(128.0F,50,EnumQuality.legendary,"tungsten");
+    public static final EnumEquipmentMaterial wolf_fur = newEnumEquipmentMaterial(2.0F,20,EnumQuality.excellent,"wolf_fur");
     private static final EnumEquipmentMaterial newEnumEquipmentMaterial(float durability, int enchantability, EnumQuality max_quality, String name){
         try {
             return (EnumEquipmentMaterial) constructorAccessor.newInstance(new Object[]{name,ordinary++,durability,enchantability,max_quality,name});

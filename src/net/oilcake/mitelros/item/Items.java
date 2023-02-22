@@ -65,7 +65,8 @@ public class Items extends Item {
 
     public static final ItemBowl porkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
     public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
-
+    public static final ItemBowl watersuspicious = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.unsafe_water, "suspicious_water")).setUnlocalizedName("SuspiciousWater");
+    public static final ItemBowl waterswampland = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.dangerous_water, "swampland_water")).setUnlocalizedName("SwamplandWater");
     public static final ItemPieces pieceCopper = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceCopper").setXPReward(1));
     public static final ItemPieces pieceSilver = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceSilver").setXPReward(1));
     public static final ItemPieces pieceGold = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGold").setXPReward(2));
@@ -88,6 +89,32 @@ public class Items extends Item {
     public static final ItemBucket tungstenBucketLava = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Material.lava).setContainerItem(tungstenBucket);
     public static final ItemBucket tungstenBucketStone = (ItemBucket)new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Material.stone).setContainerItem(tungstenBucket);
     public static final yi tungstenBucketMilk = (yi)(new yi(Constant.getNextItemID(), Materials.tungsten)).setContainerItem(tungstenBucket);
+    public static final ItemBucket copperBucketWaterSuspicious = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.copper,Materials.unsafe_water).setContainerItem(bucketCopperEmpty);
+    public static final ItemBucket silverBucketWaterSuspicious = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.silver,Materials.unsafe_water).setContainerItem(bucketSilverEmpty);
+    public static final ItemBucket goldBucketWaterSuspicious = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.gold,Materials.unsafe_water).setContainerItem(bucketGoldEmpty);
+    public static final ItemBucket ironBucketWaterSuspicious = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.iron,Materials.unsafe_water).setContainerItem(bucketIronEmpty);
+    public static final ItemBucket nickelBucketWaterSuspicious = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Materials.nickel,Materials.unsafe_water).setContainerItem(nickelBucket);
+    public static final ItemBucket ancientmetalBucketWaterSuspicious = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.ancient_metal,Materials.unsafe_water).setContainerItem(bucketAncientMetalEmpty);
+    public static final ItemBucket mithrilBucketWaterSuspicious = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.mithril,Materials.unsafe_water).setContainerItem(bucketMithrilEmpty);
+    public static final ItemBucket tungstenBucketWaterSuspicious = (ItemBucket) new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Materials.unsafe_water).setContainerItem(tungstenBucket);
+    public static final ItemBucket adamantiumBucketWaterSuspicious = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.adamantium,Materials.unsafe_water).setContainerItem(bucketAdamantiumEmpty);
+    public static final ItemBucket copperBucketWaterSwampland = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.copper,Materials.dangerous_water).setContainerItem(bucketCopperEmpty);
+    public static final ItemBucket silverBucketWaterSwampland = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.silver,Materials.dangerous_water).setContainerItem(bucketSilverEmpty);
+    public static final ItemBucket goldBucketWaterSwampland = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.gold,Materials.dangerous_water).setContainerItem(bucketGoldEmpty);
+    public static final ItemBucket ironBucketWaterSwampland = (ItemBucket)new ItemBucket(Constant.getNextItemID(),Material.iron,Materials.dangerous_water).setContainerItem(bucketIronEmpty);
+    public static final ItemBucket nickelBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Materials.nickel,Materials.dangerous_water).setContainerItem(nickelBucket);
+    public static final ItemBucket ancientmetalBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.ancient_metal,Materials.dangerous_water).setContainerItem(bucketAncientMetalEmpty);
+    public static final ItemBucket mithrilBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.mithril,Materials.dangerous_water).setContainerItem(bucketMithrilEmpty);
+    public static final ItemBucket tungstenBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Materials.dangerous_water).setContainerItem(tungstenBucket);
+    public static final ItemBucket adamantiumBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.adamantium,Materials.dangerous_water).setContainerItem(bucketAdamantiumEmpty);
+    public static final Item Wolf_fur = (new ItemStandard(Constant.getNextItemID(), Material.leather, "leather")).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials);
+    public static final Item horse_meat = (new ItemMeat(Constant.getNextItemID(),6,6,true,false,"horse_meat"));
+    public static final Item horse_meat_cooked = (new ItemMeat(Constant.getNextItemID(),12,12,true,true,"horse_meat_cooked"));
+
+    public static final ItemArmor WolfHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor WolfChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor WolfLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
 
     public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");;
     //    public static PotionBrewer potionBrewer;
@@ -177,7 +204,33 @@ public class Items extends Item {
         register("buckets/tungsten/milk",tungstenBucketMilk);
         register("buckets/tungsten/stone",tungstenBucketStone);
         register("buckets/tungsten/water",tungstenBucketWater);
-
+        register("bowls/bowl_water_suspicious",watersuspicious);
+        register("bowls/bowl_water_swampland",waterswampland);
+        register("buckets/copper/water_suspicious",copperBucketWaterSuspicious);
+        register("buckets/silver/water_suspicious",silverBucketWaterSuspicious);
+        register("buckets/gold/water_suspicious",goldBucketWaterSuspicious);
+        register("buckets/iron/water_suspicious",ironBucketWaterSuspicious);
+        register("buckets/nickel/water_suspicious",nickelBucketWaterSuspicious);
+        register("buckets/mithril/water_suspicious",mithrilBucketWaterSuspicious);
+        register("buckets/tungsten/water_suspicious",tungstenBucketWaterSuspicious);
+        register("buckets/adamantium/water_suspicious",adamantiumBucketWaterSuspicious);
+        register("buckets/ancient_metal/water_suspicious",ancientmetalBucketWaterSuspicious);
+        register("buckets/copper/water_swampland",copperBucketWaterSwampland);
+        register("buckets/silver/water_swampland",silverBucketWaterSwampland);
+        register("buckets/gold/water_swampland",goldBucketWaterSwampland);
+        register("buckets/iron/water_swampland",ironBucketWaterSwampland);
+        register("buckets/nickel/water_swampland",nickelBucketWaterSwampland);
+        register("buckets/mithril/water_swampland",mithrilBucketWaterSwampland);
+        register("buckets/tungsten/water_swampland",tungstenBucketWaterSwampland);
+        register("buckets/adamantium/water_swampland",adamantiumBucketWaterSwampland);
+        register("buckets/ancient_metal/water_swampland",ancientmetalBucketWaterSwampland);
+        register("wolf_fur",Wolf_fur);
+        register("food/horse_meat",horse_meat);
+        register("food/horse_meat_cooked",horse_meat_cooked);
+        register("armor/wolf_helmet", WolfHelmet);
+        register("armor/wolf_jacket", WolfChestplate);
+        register("armor/wolf_leggings", WolfLeggings);
+        register("armor/wolf_boots", WolfBoots);
         Constant.initItemArray();
     }
 
@@ -497,6 +550,32 @@ public class Items extends Item {
                 " AA",
                 " AA",
                 'A', tungstenIngot);
+        register.registerShapedRecipe(new ItemStack(WolfHelmet),false,
+                "AAA",
+                "ABA",
+                "   ",
+                'A',Wolf_fur,
+                'B',helmetLeather);
+        register.registerShapedRecipe(new ItemStack(WolfChestplate),false,
+                "A A",
+                "ABA",
+                "AAA",
+                'A',Wolf_fur,
+                'B',plateLeather);
+        register.registerShapedRecipe(new ItemStack(WolfLeggings),false,
+                "AAA",
+                "ABA",
+                "A A",
+                'A',Wolf_fur,
+                'B',legsLeather);
+
+        register.registerShapedRecipe(new ItemStack(WolfBoots),false,
+                "ABA",
+                "A A",
+                "   ",
+                'A',Wolf_fur,
+                'B',bootsLeather);
+
 
         register.registerShapelessRecipe(new ItemStack(porkchopStew,1),false,
                 Item.bowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
@@ -519,6 +598,9 @@ public class Items extends Item {
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget
         );
+        register.registerShapelessRecipe(new ItemStack(Item.leather,1),false,
+                Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur
+        );
 
         ItemCoin[] coins = new ItemCoin[]{
                 nickelCoin, tungstenCoin};
@@ -540,6 +622,11 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(pieceNickel.itemID, new ItemStack(nickelNugget));
         RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
         RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(tungstenNugget));
+        RecipesFurnace.smelting().addSmelting(watersuspicious.itemID, new ItemStack(bowlWater));
+        RecipesFurnace.smelting().addSmelting(waterswampland.itemID, new ItemStack(bowlWater));
+        RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));
+
+        ItemFood.setCookingResult((ItemFood) horse_meat, (ItemFood) horse_meat_cooked, 6);
     }
     private static Item register(String resourceLocation, Item item, CreativeModeTab tab) {
         item.setResourceLocation(item.getResourceLocationPrefix() + resourceLocation);

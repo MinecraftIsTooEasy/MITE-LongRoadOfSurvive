@@ -9,8 +9,10 @@ public class Materials extends Material {
     public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
     public static final Material mashedCactus = (new MaterialFood("mashed_cactus"));
     public static final Material orePieces = (new Material("Pieces"));
-
-    public static final Material lemonade = (new MaterialFood("lemonade"));
+    public static final Materials wolf_fur = (Materials) new Materials(EnumEquipmentMaterials.wolf_fur).setMetal(false).setMinHarvestLevel(0);
+    public static final Material lemonade = (new MaterialFood("lemonade")).setDrinkable();
+    public static final Material unsafe_water = (new MaterialLiquid("suspicious_water", MaterialMapColor.waterColor)).setDrinkable();
+    public static final Material dangerous_water = (new MaterialLiquid("swampland_water", MaterialMapColor.waterColor)).setDrinkable();
 
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {

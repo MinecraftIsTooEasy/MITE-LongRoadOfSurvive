@@ -162,5 +162,10 @@ public class Blocks extends Block {
         RecipesFurnace.smelting().addSmelting(oreTungsten.blockID, new ItemStack(Items.tungstenIngot));
         RecipesFurnace.smelting().addSmelting(oreNickel.blockID, new ItemStack(Items.nickelIngot));
     }
+    protected Block setTextureName(String par1Str)
+    {
+        this.textureName = par1Str;
+        return this;
+    }
 
 }
