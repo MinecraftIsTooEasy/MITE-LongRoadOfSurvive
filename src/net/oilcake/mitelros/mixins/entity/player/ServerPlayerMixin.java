@@ -77,6 +77,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.playerNetServerHandler.sendPacket(new Packet43SetExperience(this.experience));
             }
 
+
         } catch (Throwable var8) {
             CrashReport var2 = CrashReport.makeCrashReport(var8, "Ticking player");
             CrashReportSystemDetails var3 = var2.makeCategory("Player being ticked");
@@ -84,6 +85,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
             throw new ReportedException(var2);
         }
     }
+
 
     public ServerPlayerMixin(World par1World, String par2Str) {
         super(par1World, par2Str);
@@ -170,6 +172,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         float malnourishment_factor = this.isMalnourishedLv1() ? 0.5F : (this.isMalnourishedLv2() ? 1.0F : (this.isMalnourishedLv3() ? 3.0F : (this.isMalnourishedFin() ? 31.0F : 0.0F)));
         return 1.0F + wetness_factor + malnourishment_factor;
     }
+
 
 
 

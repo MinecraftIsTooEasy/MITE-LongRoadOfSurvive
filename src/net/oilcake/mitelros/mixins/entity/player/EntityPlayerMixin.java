@@ -12,10 +12,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Iterator;
+
 import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(EntityPlayer.class)
 public class EntityPlayerMixin extends EntityLiving{
+
 //    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
 //    }
@@ -173,6 +176,60 @@ public class EntityPlayerMixin extends EntityLiving{
     public boolean hasFoodEnergy() {
         return this.getSatiation() + this.getNutrition() != 0 && this.getWater() != 0;
     }
+
+    public boolean InFreeze(){
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        if (biome.temperature <= 0.16F){
+            if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
+                    this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
+                    this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
+                    this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID){
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private int FreezingCooldown = 0;
+    @Inject(method = "onLivingUpdate",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/EntityLiving;onLivingUpdate()V",
+                    shift = At.Shift.AFTER))
+    private void injectTick(CallbackInfo c){
+        if (!this.worldObj.isRemote) {
+            if(this.FreezingCooldown > 7200){
+                if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
+                        this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
+                        this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
+                        this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID){
+                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 20 , this.isInRain() ? 1 : 0));
+                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, 20 , this.isInRain() ? 1 : 0));
+                } else if(this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID &&
+                        this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID &&
+                        this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID &&
+                        this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID){
+                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 20 , this.isInRain() ? 1 : 0));
+                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, 20 , this.isInRain() ? 1 : 0));
+                } else {
+                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 20 , this.isInRain() ? 2 : 1));
+                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, 20 , this.isInRain() ? 2 : 1));
+                }
+            }
+            if(this.InFreeze()){
+                ++FreezingCooldown;
+            }
+            else{
+                if(FreezingCooldown > 0){
+                    --FreezingCooldown;
+                }
+            }
+        }
+    }
+    public int getFreezingCooldown(){
+        return FreezingCooldown;
+    }
+
 
 //    @Overwrite
 //    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {

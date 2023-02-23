@@ -7,10 +7,10 @@ item.armor/nickel_chainmail_chestplate.name=镍锁链胸甲
 item.armor/nickel_chainmail_leggings.name=镍锁链护腿
 item.armor/nickel_chainmail_boots.name=镍锁链靴子
 
-item.armor/wolf_helmet.name=北地狼皮盔
-item.armor/wolf_jacket.name=北地狼皮甲
-item.armor/wolf_leggings.name=北地狼护腿
-item.armor/wolf_boots.name=北地狼皮靴
+item.armor/wolf_helmet.name=极地皮盔
+item.armor/wolf_jacket.name=极地皮甲
+item.armor/wolf_leggings.name=极地护腿
+item.armor/wolf_boots.name=极地皮靴
 
 enchantment.vanishing=消失诅咒
 enchantment.restore=还原

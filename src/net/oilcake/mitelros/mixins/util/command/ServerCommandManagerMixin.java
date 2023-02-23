@@ -2,10 +2,7 @@ package net.oilcake.mitelros.mixins.util.command;
 
 import net.minecraft.CommandDispatcher;
 import net.minecraft.CommandHandler;
-import net.oilcake.mitelros.util.events.command.CommandWater;
-import net.oilcake.mitelros.util.events.command.CommandXsummon;
-import net.oilcake.mitelros.util.events.command.CommandStoneAir;
-import net.oilcake.mitelros.util.events.command.CommandTeleport;
+import net.oilcake.mitelros.util.events.command.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,5 +17,6 @@ public class ServerCommandManagerMixin extends CommandHandler {
         this.registerCommand(new CommandWater());
         this.registerCommand(new CommandStoneAir());
         this.registerCommand(new CommandTeleport());
+        this.registerCommand(new CommandTestFreeze());
     }
 }

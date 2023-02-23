@@ -37,6 +37,16 @@ public class ItemBucketMixin extends ItemVessel {
             int y;
             int z;
             if (this.isEmpty()) {
+                if (rc.getBlockHitMaterial() == Material.water || rc.getNeighborOfBlockHitMaterial() == Material.water) {
+                    if (player.onServer() && (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland)) {
+                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.dangerous_water)));
+                    } else if(player.onServer() && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)){
+                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Material.water)));
+                    } else if(player.onServer()){
+                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.unsafe_water)));
+                    }
+                    return true;
+                }
                 Material material;
                 if (rc.getBlockHitMaterial().isLiquid()) {
                     x = rc.block_hit_x;
