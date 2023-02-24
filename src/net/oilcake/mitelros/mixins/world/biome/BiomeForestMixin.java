@@ -14,9 +14,8 @@ public class BiomeForestMixin extends BiomeBase {
     }
 
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
-//        super.decorate(par1World, par2Random, par3, par4);
+        super.decorate(par1World, par2Random, par3, par4);
 //        int var5 = 3 + par2Random.nextInt(6);
-//
 //        for (int var6 = 0; var6 < var5; ++var6) {
 //            int var7 = par3 + par2Random.nextInt(16);
 //            int var8 = par2Random.nextInt(28) + 4;
