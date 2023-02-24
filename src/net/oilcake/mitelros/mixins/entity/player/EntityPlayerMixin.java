@@ -36,8 +36,8 @@ public class EntityPlayerMixin extends EntityLiving{
                     return;
                 }
                 ItemStack heldItemStack = this.getHeldItemStack();
-                if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestorying)){
-                    int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestorying, heldItemStack);
+                if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestroying)){
+                    int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, heldItemStack);
                     target.worldObj.createExplosionC(target, target.posX, target.posY, target.posZ, destorying, destorying);
                     //System.out.println("判断为enchantmentDestorying player");
                     //target.setFire(120);

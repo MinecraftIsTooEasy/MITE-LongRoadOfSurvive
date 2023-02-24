@@ -157,3 +157,6 @@ entity.EntityWitherBoneLord.name=凋零骷髅领主
 entity.EntityWitherBodyguard.name=衰败侍卫
 entity.EntityClusterSpider.name=集群蜘蛛
 entity.EntitySpiderKing.name=国王蜘蛛
+entity.EntityPigmanLord.name=猪人领主
+entity.EntityStray.name=流髑
+entity.EntityHusk.name=尸壳

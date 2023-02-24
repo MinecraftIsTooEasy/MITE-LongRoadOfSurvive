@@ -38,7 +38,9 @@ public class ItemBowlMixin extends ItemVessel {
             if (this.contains(Material.water) || this.contains(Material.milk)) {
                 player.getFoodStats().addWater(2);
             }else{
-                player.getFoodStats().addWater(4);
+                if(!this.contains(Material.salad)){
+                    player.getFoodStats().addWater(4);
+                }
             }
 
             player.addFoodValue(this);

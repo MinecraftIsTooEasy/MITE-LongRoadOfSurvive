@@ -40,8 +40,8 @@ public class EntityMonsterMixin extends EntityCreature {
             if (attacker.isFrenzied()) {
                 damage.addAmount((float)attacker.getEntityAttributeBaseValue(GenericAttributes.attackDamage) * 0.5F);
             }
-            if(EnchantmentManager.hasEnchantment(held_item, Enchantments.enchantmentDestorying)){
-                int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestorying, held_item);
+            if(EnchantmentManager.hasEnchantment(held_item, Enchantments.enchantmentDestroying)){
+                int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, held_item);
                 target.worldObj.createExplosionC(target, target.posX, target.posY, target.posZ, destorying, destorying);
                 //System.out.println("判断为enchantmentDestorying");
                 //target.setFire(120);

@@ -3,14 +3,8 @@ package net.oilcake.mitelros.mixins.render;
 import net.minecraft.Entity;
 import net.minecraft.bgl;
 import net.minecraft.bgm;
-import net.oilcake.mitelros.entity.EntityClusterSpider;
-import net.oilcake.mitelros.entity.EntitySpiderKing;
-import net.oilcake.mitelros.entity.EntityWitherBodyguard;
-import net.oilcake.mitelros.entity.EntityWitherBoneLord;
-import net.oilcake.mitelros.util.render.RenderClusterSpider;
-import net.oilcake.mitelros.util.render.RenderSpiderKing;
-import net.oilcake.mitelros.util.render.RenderWitherBodyguard;
-import net.oilcake.mitelros.util.render.RenderWitherBoneLord;
+import net.oilcake.mitelros.entity.*;
+import net.oilcake.mitelros.util.render.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,6 +28,9 @@ public class RenderManagerMixin {
         this.q.put(EntityClusterSpider.class, new RenderClusterSpider(0.4F));
         this.q.put(EntityWitherBodyguard.class, new RenderWitherBodyguard());
         this.q.put(EntitySpiderKing.class, new RenderSpiderKing(1.45F));
+        this.q.put(EntityPigmanLord.class, new RenderPigmanLord());
+        this.q.put(EntityStray.class,new RenderStray());
+        this.q.put(EntityHusk.class,new RenderHusk());
         for (bgm o : this.q.values()) {
             o.a(dyCast(bgl.class, this));
         }
