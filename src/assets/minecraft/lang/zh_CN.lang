@@ -16,6 +16,7 @@ enchantment.vanishing=消失诅咒
 enchantment.restore=还原
 enchantment.absorb=汲取
 enchantment.destroying=毁灭
+enchantment.callofnether=下界呼唤
 
 potion.dehydration=脱水
 
@@ -146,6 +147,9 @@ item.food/lemon.name=柠檬
 item.food/lemon_pie.name=柠檬派
 item.food/horse_meat.name=马肉
 item.food/horse_meat_cooked.name=熟马肉
+item.apple_golden.name=§b金苹果
+item.apple_golden_legend.name=§d金苹果
+
 
 item.wolf_fur.name=狼的毛皮
 
@@ -160,3 +164,6 @@ entity.EntitySpiderKing.name=国王蜘蛛
 entity.EntityPigmanLord.name=猪人领主
 entity.EntityStray.name=流髑
 entity.EntityHusk.name=尸壳
+
+death.attack.thirsty = %1$s 渴死了
+death.attack.freeze = %1$s 冻死了

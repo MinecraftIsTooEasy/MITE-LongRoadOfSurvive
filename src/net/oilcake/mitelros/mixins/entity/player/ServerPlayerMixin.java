@@ -20,6 +20,7 @@ import java.util.List;
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends EntityPlayer implements ICrafting {
     private int last_water = -99999999;
+    private int last_FreezingCooldown = -99999999;
 
     @Inject(method = "onDeath", at = @At("INVOKE"))
     public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
@@ -47,14 +48,16 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
             float health = this.getHealth();
             int satiation = this.getSatiation();
             int nutrition = this.getNutrition();
+            int FreezingCooldown = this.getFreezingCooldown();
             int water = this.getWater();
-            if (water != this.last_water || health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F) {
+            if (water != this.last_water || FreezingCooldown != this.last_FreezingCooldown || health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F) {
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
                 Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
                 updateWater.setWater(water);
+                updateWater.setFreezingCooldown(FreezingCooldown);
                 this.playerNetServerHandler.sendPacket(updateWater);
                 this.last_water = water;
-
+                this.last_FreezingCooldown = FreezingCooldown;
                 this.lastHealth = health;
                 this.last_satiation = satiation;
                 this.last_nutrition = nutrition;

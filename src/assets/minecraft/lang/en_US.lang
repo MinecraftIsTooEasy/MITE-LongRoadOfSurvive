@@ -145,6 +145,8 @@ item.food/lemon.name=Lemon
 item.food/lemon_pie.name=Lemon Pie
 item.food/horse_meat.name=Raw Horse Meat
 item.food/horse_meat_cooked.name=Cooked Horse Meat
+item.apple_golden.name=§bGolden Apple
+item.apple_golden_legend.name=§dGolden Apple
 
 itemarrow.tooltip.disable=Disabled by technical issue...
 itemtool.tooltip.slimeresistance=Bonus vs slime

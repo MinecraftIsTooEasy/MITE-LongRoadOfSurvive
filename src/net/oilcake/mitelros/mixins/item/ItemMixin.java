@@ -106,6 +106,8 @@ public class ItemMixin{
             return Item.copperNugget;
         } else if (material_for_repairs == Material.silver) {
             return Item.silverNugget;
+        }  else if (material_for_repairs == Materials.wolf_fur) {
+            return Items.Wolf_fur;
         } else if (material_for_repairs == Material.gold) {
             return Item.goldNugget;
         } else if (material_for_repairs != Material.iron && material_for_repairs != Material.rusted_iron) {

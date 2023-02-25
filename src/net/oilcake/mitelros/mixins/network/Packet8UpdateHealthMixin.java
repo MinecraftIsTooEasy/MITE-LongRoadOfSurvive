@@ -18,6 +18,7 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 @Mixin(Packet8UpdateHealth.class)
 public class Packet8UpdateHealthMixin extends Packet {
     public int water;
+    public int FreezingCooldown;
 
     public Packet8UpdateHealthMixin(float health, int satiation, int nutrition, float vision_dimming) {
         this.healthMP = health;
@@ -28,18 +29,24 @@ public class Packet8UpdateHealthMixin extends Packet {
     public int setWater(int water) {
         return this.water = water;
     }
+    public int setFreezingCooldown(int FreezingCooldown) {
+        return this.FreezingCooldown = FreezingCooldown;
+    }
 
     @Inject(method = "readPacketData",
             at = @At("RETURN"))
     private void injectReadPacketData(DataInput par1DataInput, CallbackInfo c) throws IOException {
         this.water = par1DataInput.readInt();
+        this.FreezingCooldown = par1DataInput.readInt();
     }
 
     @Inject(method = "writePacketData",
             at = @At("RETURN"))
     private void injectWritePacketData(DataOutput par1DataOutput, CallbackInfo c) throws IOException {
         par1DataOutput.writeInt(this.water);
+        par1DataOutput.writeInt(this.FreezingCooldown);
     }
+
 
     @Shadow
     public float healthMP;

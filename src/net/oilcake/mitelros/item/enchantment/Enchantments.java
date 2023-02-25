@@ -17,12 +17,13 @@ public class Enchantments {
     public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.d,20);
     public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.d,15);
     public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.b,15);
+    public static final Enchantment enchantmentCallofNether = new EnchantmentCallofNether(Constant.getNextEnchantmentID(), yq.b,15);
     public static final Enchantment enchantmentDestroying = new EnchantmentDestroying(Constant.getNextEnchantmentID(), yq.d,50);
 
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){
-        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying);
+        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether);
     }
     public static void registerEnchantmentsUnsafe(Enchantment... enchantments) {
         for (int i = 0, bLength = enchantmentsList.length; i < bLength; i++) {

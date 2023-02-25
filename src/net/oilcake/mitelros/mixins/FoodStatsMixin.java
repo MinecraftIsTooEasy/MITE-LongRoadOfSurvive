@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.util.DamageSourceExtend;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -228,6 +229,15 @@ public class FoodStatsMixin {
                         --this.starve_progress;
                         this.hunger_for_nutrition_only = 0.0F;
                     }
+                } else if (this.player.DuringDehydration()) {
+                    this.heal_progress = 0.0F;
+                    this.dehydration_progress += 0.005F;
+                    if (this.dehydration_progress >= 1.0F) {
+                            par1EntityPlayer.attackEntityFrom(new Damage(DamageSourceExtend.thirsty, 2.0F));
+
+                        --this.dehydration_progress;
+                        this.water_for_nutrition_only = 0.0F;
+                    }
                 } else {
                     this.heal_progress += (4.0E-4F + (float)this.nutrition * 2.0E-5F)
                            * (par1EntityPlayer.isMalnourishedLv1() ? 0.25F : (par1EntityPlayer.isMalnourishedLv2() ? 0.0F : (par1EntityPlayer.isMalnourishedLv3() ? 0.0F : 1.0F)))
@@ -263,6 +273,7 @@ public class FoodStatsMixin {
     private float heal_progress;
     @Shadow
     private float starve_progress;
+    private float dehydration_progress;
     @Shadow
     public int addNutrition(int nutrition) {
         return this.nutrition;

@@ -93,65 +93,65 @@ public class Blocks extends Block {
     }
 
     public static void registerRecipes(RecipeRegister register) {
-        register.registerShapedRecipe(new ItemStack(blockSmokerIdle), false,
+        register.registerShapedRecipe(new ItemStack(blockSmokerIdle), true,
                 " A ",
                 "ABA",
                 " A ",
                 'A', Block.wood,
                 'B', Block.furnaceIdle);
-        register.registerShapedRecipe(new ItemStack(fenceNickel, 16), false,
+        register.registerShapedRecipe(new ItemStack(fenceNickel, 16), true,
                 "   ",
                 "AAA",
                 "AAA",
                 'A', Items.nickelIngot);
-        register.registerShapelessRecipe(new ItemStack(blockNickel), false,
+        register.registerShapelessRecipe(new ItemStack(blockNickel), true,
                 Items.nickelIngot, Items.nickelIngot, Items.nickelIngot,
                 Items.nickelIngot, Items.nickelIngot, Items.nickelIngot,
                 Items.nickelIngot, Items.nickelIngot, Items.nickelIngot);
 
-        register.registerShapedRecipe(new ItemStack(blockEnchantReserver), false,
+        register.registerShapedRecipe(new ItemStack(blockEnchantReserver), true,
                 "CBC",
                 "ABA",
                 "CAC",
                 'A', Block.obsidian, 'B', Item.diamond, 'C', Item.ingotAncientMetal);
-        register.registerShapedRecipe(new ItemStack(blastFurnaceStoneIdle), false,
+        register.registerShapedRecipe(new ItemStack(blastFurnaceStoneIdle), true,
                 "AAA",
                 "ABA",
                 "CCC",
                 'A', Block.stone, 'B', Block.furnaceIdle, 'C', Item.ingotIron);
-        register.registerShapedRecipe(new ItemStack(blastFurnaceObsidianIdle), false,
+        register.registerShapedRecipe(new ItemStack(blastFurnaceObsidianIdle), true,
                 "AAA",
                 "ABA",
                 "CCC",
                 'A', Block.obsidian, 'B', Block.furnaceObsidianIdle, 'C', Item.ingotMithril);
-        register.registerShapedRecipe(new ItemStack(blastFurnaceNetherrackIdle), false,
+        register.registerShapedRecipe(new ItemStack(blastFurnaceNetherrackIdle), true,
                 "AAA",
                 "ABA",
                 "CCC",
                 'A', Block.netherrack, 'B', Block.furnaceNetherrackIdle, 'C', Item.ingotAdamantium);
-        register.registerShapedRecipe(new ItemStack(anvilNickel),false,
+        register.registerShapedRecipe(new ItemStack(anvilNickel),true,
                 "AAA",
                 " I ",
                 "III",
                 'A', blockNickel,
                 'I', Items.nickelIngot);
-        register.registerShapedRecipe(new ItemStack(anvilTungsten),false,
+        register.registerShapedRecipe(new ItemStack(anvilTungsten),true,
                 "AAA",
                 " I ",
                 "III",
                 'A', blockTungsten,
                 'I', Items.tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(blockTungsten),false,
+        register.registerShapedRecipe(new ItemStack(blockTungsten),true,
                 "XXX",
                 "XXX",
                 "XXX",
                 'X',Items.tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(fenceTungsten, 16),false,
+        register.registerShapedRecipe(new ItemStack(fenceTungsten, 16),true,
                 "XXX",
                 "XXX",
                 "   ",
                 'X',Items.tungstenIngot);
-//        register.registerShapedRecipe(new ItemStack(doorTungsten),false,
+//        register.registerShapedRecipe(new ItemStack(doorTungsten),true,
 //                "XX ",
 //                "XX ",
 //                "XX ",

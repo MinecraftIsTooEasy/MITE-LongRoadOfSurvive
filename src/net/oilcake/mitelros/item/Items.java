@@ -107,7 +107,7 @@ public class Items extends Item {
     public static final ItemBucket mithrilBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.mithril,Materials.dangerous_water).setContainerItem(bucketMithrilEmpty);
     public static final ItemBucket tungstenBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Materials.dangerous_water).setContainerItem(tungstenBucket);
     public static final ItemBucket adamantiumBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.adamantium,Materials.dangerous_water).setContainerItem(bucketAdamantiumEmpty);
-    public static final Item Wolf_fur = (new ItemStandard(Constant.getNextItemID(), Material.leather, "leather")).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials);
+    public static final Item Wolf_fur = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.wolf_fur).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
     public static final Item horse_meat = (new ItemMeat(Constant.getNextItemID(),6,6,true,false,"horse_meat"));
     public static final Item horse_meat_cooked = (new ItemMeat(Constant.getNextItemID(),12,12,true,true,"horse_meat_cooked"));
 
@@ -115,7 +115,8 @@ public class Items extends Item {
     public static final ItemArmor WolfChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor WolfLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
-
+    public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden");
+    public static final Item Goldenapplelegend = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
     public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");;
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
@@ -231,374 +232,370 @@ public class Items extends Item {
         register("armor/wolf_jacket", WolfChestplate);
         register("armor/wolf_leggings", WolfLeggings);
         register("armor/wolf_boots", WolfBoots);
+        register("apple_golden",Goldenapple);
+        register("apple_golden",Goldenapplelegend);
         Constant.initItemArray();
     }
 
     public static void registerRecipes(RecipeRegister register) {
-        register.registerShapelessRecipe(new ItemStack(lemonPie), false,
+        register.registerShapelessRecipe(new ItemStack(lemonPie), true,
                 Item.sugar, Item.egg, Item.flour, lemon);
-        register.registerShapedRecipe(new ItemStack(arrowNickel), false,
+        register.registerShapedRecipe(new ItemStack(arrowNickel), true,
                 " C ",
                 " B ",
                 " A ",
                 'A', Item.feather,
                 'B', Item.stick,
                 'C', nickelNugget);
-        register.registerShapedRecipe(new ItemStack(nickelChain), false,
+        register.registerShapedRecipe(new ItemStack(nickelChain), true,
                 " A ",
                 "A A",
                 " A ",
                 'A', nickelNugget);
-        register.registerShapedRecipe(new ItemStack(nickelShears), false,
+        register.registerShapedRecipe(new ItemStack(nickelShears), true,
                 " A ",
                 "  A",
-                "   ",
                 'A', nickelIngot);
-//        register.registerShapedRecipe(new ItemStack(nickelShears), false,
+        register.registerShapedRecipe(new ItemStack(nickelBucket), true,
+                "A A",
+                " A ",
+                'A', nickelIngot);
+//        register.registerShapedRecipe(new ItemStack(nickelShears), true,
 //                "  ",
 //                "  A",
 //                " A ",
 //                'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(nickelScythe), false,
+        register.registerShapedRecipe(new ItemStack(nickelScythe), true,
                 "BA ",
                 "B A",
                 "B  ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelMattock), false,
+        register.registerShapedRecipe(new ItemStack(nickelMattock), true,
                 "AAA",
                 " BA",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-//        register.registerShapedRecipe(new ItemStack(nickelKnife), false,
+//        register.registerShapedRecipe(new ItemStack(nickelKnife), true,
 //                "AA",
 //                " B ",
 //                " B ",
 //                'A', nickelIngot,
 //                'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelHoe), false,
+        register.registerShapedRecipe(new ItemStack(nickelHoe), true,
                 "AA ",
                 " B ",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-//        register.registerShapedRecipe(new ItemStack(nickelHoe), false,
+//        register.registerShapedRecipe(new ItemStack(nickelHoe), true,
 //                " AA",
 //                " B ",
 //                " B ",
 //                'A', nickelIngot,
 //                'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelHatchet), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(nickelHatchet), true,
                 " BA",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelWarHammer), false,
+        register.registerShapedRecipe(new ItemStack(nickelWarHammer), true,
                 "AAA",
                 "ABA",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelSword), false,
+        register.registerShapedRecipe(new ItemStack(nickelSword), true,
                 " A ",
                 " A ",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelShovel), false,
+        register.registerShapedRecipe(new ItemStack(nickelShovel), true,
                 " A ",
                 " B ",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelPickaxe), false,
+        register.registerShapedRecipe(new ItemStack(nickelPickaxe), true,
                 "AAA",
                 " B ",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelDagger), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(nickelDagger), true,
                 " A ",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-//        register.registerShapedRecipe(new ItemStack(nickelDagger), false,
+//        register.registerShapedRecipe(new ItemStack(nickelDagger), true,
 //                "   ",
 //                " A ",
 //                " B ",
 //                'A', nickelIngot,
 //                'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelBattleAxe), false,
+        register.registerShapedRecipe(new ItemStack(nickelBattleAxe), true,
                 "A A",
                 "ABA",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(nickelAxe), false,
+        register.registerShapedRecipe(new ItemStack(nickelAxe), true,
                 "AA ",
                 "AB ",
                 " B ",
                 'A', nickelIngot,
                 'B', Item.stick);
-//        register.registerShapedRecipe(new ItemStack(nickelAxe), false,
+//        register.registerShapedRecipe(new ItemStack(nickelAxe), true,
 //                " AA",
 //                " BA",
 //                " B ",
 //                'A', nickelIngot,
 //                'B', Item.stick);
-        register.registerShapelessRecipe(new ItemStack(nickelIngot, 9), false,
+        register.registerShapelessRecipe(new ItemStack(nickelIngot, 9), true,
                 Blocks.blockNickel);
-        register.registerShapelessRecipe(new ItemStack(nickelNugget, 9), false,
+        register.registerShapelessRecipe(new ItemStack(nickelNugget, 9), true,
                 nickelIngot);
-//        register.registerShapedRecipe(new ItemStack(nickelBootsChain), false,
+//        register.registerShapedRecipe(new ItemStack(nickelBootsChain), true,
 //                "A A",
 //                "A A",
 //                "   ",
 //                'A', nickelChain);
-        register.registerShapedRecipe(new ItemStack(nickelBootsChain), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(nickelBootsChain), true,
                 "A A",
                 "A A",
                 'A', nickelChain);
-        register.registerShapedRecipe(new ItemStack(nickelLeggingsChain), false,
+        register.registerShapedRecipe(new ItemStack(nickelLeggingsChain), true,
                 "AAA",
                 "A A",
                 "A A",
                 'A', nickelChain);
-        register.registerShapedRecipe(new ItemStack(nickelChestplateChain), false,
+        register.registerShapedRecipe(new ItemStack(nickelChestplateChain), true,
                 "A A",
                 "AAA",
                 "AAA",
                 'A', nickelChain);
-        register.registerShapedRecipe(new ItemStack(nickelHelmetChain), false,
+        register.registerShapedRecipe(new ItemStack(nickelHelmetChain), true,
                 "AAA",
                 "A A",
-                "   ",
                 'A', nickelChain);
-//        register.registerShapedRecipe(new ItemStack(nickelHelmetChain), false,
+//        register.registerShapedRecipe(new ItemStack(nickelHelmetChain), true,
 //                "   ",
 //                "AAA",
 //                "A A",
 //                'A', nickelChain);
-//        register.registerShapedRecipe(new ItemStack(nickelBoots), false,
+//        register.registerShapedRecipe(new ItemStack(nickelBoots), true,
 //                "A A",
 //                "A A",
 //                "   ",
 //                'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(nickelBoots), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(nickelBoots), true,
                 "A A",
                 "A A",
                 'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(nickelLeggings), false,
+        register.registerShapedRecipe(new ItemStack(nickelLeggings), true,
                 "AAA",
                 "A A",
                 "A A",
                 'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(nickelChestplate), false,
+        register.registerShapedRecipe(new ItemStack(nickelChestplate), true,
                 "A A",
                 "AAA",
                 "AAA",
                 'A', nickelIngot);
-//        register.registerShapedRecipe(new ItemStack(nickelHelmet), false,
+//        register.registerShapedRecipe(new ItemStack(nickelHelmet), true,
 //                "AAA",
 //                "A A",
 //                "   ",
 //                'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(nickelHelmet), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(nickelHelmet), true,
                 "AAA",
                 "A A",
                 'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(doorNickel), false,
+        register.registerShapedRecipe(new ItemStack(doorNickel), true,
                 " AA",
                 " AA",
                 " AA",
                 'A', nickelIngot);
-        register.registerShapedRecipe(new ItemStack(arrowTungsten), false,
+        register.registerShapedRecipe(new ItemStack(arrowTungsten), true,
                 " C ",
                 " B ",
                 " A ",
                 'A', Item.feather,
                 'B', Item.stick,
                 'C', tungstenNugget);
-        register.registerShapedRecipe(new ItemStack(tungstenChain), false,
+        register.registerShapedRecipe(new ItemStack(tungstenChain), true,
                 " A ",
                 "A A",
                 " A ",
                 'A', tungstenNugget);
-        register.registerShapedRecipe(new ItemStack(tungstenShears), false,
+        register.registerShapedRecipe(new ItemStack(tungstenShears), true,
                 " A ",
                 "  A",
-                "   ",
                 'A', tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(tungstenScythe), false,
+        register.registerShapedRecipe(new ItemStack(tungstenScythe), true,
                 "BA ",
                 "B A",
                 "B  ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenMattock), false,
+        register.registerShapedRecipe(new ItemStack(tungstenMattock), true,
                 "AAA",
                 " BA",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenHoe), false,
+        register.registerShapedRecipe(new ItemStack(tungstenHoe), true,
                 "AA ",
                 " B ",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenHatchet), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(tungstenHatchet), true,
                 " BA",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenWarHammer), false,
+        register.registerShapedRecipe(new ItemStack(tungstenWarHammer), true,
                 "AAA",
                 "ABA",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenSword), false,
+        register.registerShapedRecipe(new ItemStack(tungstenSword), true,
                 " A ",
                 " A ",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenShovel), false,
+        register.registerShapedRecipe(new ItemStack(tungstenShovel), true,
                 " A ",
                 " B ",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenPickaxe), false,
+        register.registerShapedRecipe(new ItemStack(tungstenPickaxe), true,
                 "AAA",
                 " B ",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenDagger), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(tungstenDagger), true,
                 " A ",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenBattleAxe), false,
+        register.registerShapedRecipe(new ItemStack(tungstenBattleAxe), true,
                 "A A",
                 "ABA",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapedRecipe(new ItemStack(tungstenAxe), false,
+        register.registerShapedRecipe(new ItemStack(tungstenAxe), true,
                 "AA ",
                 "AB ",
                 " B ",
                 'A', tungstenIngot,
                 'B', Item.stick);
-        register.registerShapelessRecipe(new ItemStack(tungstenIngot, 9), false,
+        register.registerShapelessRecipe(new ItemStack(tungstenIngot, 9), true,
                 Blocks.blockTungsten);
-        register.registerShapelessRecipe(new ItemStack(tungstenNugget, 9), false,
+        register.registerShapelessRecipe(new ItemStack(tungstenNugget, 9), true,
                 tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(tungstenBootsChain), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(tungstenBootsChain), true,
                 "A A",
                 "A A",
                 'A', tungstenChain);
-        register.registerShapedRecipe(new ItemStack(tungstenLeggingsChain), false,
+        register.registerShapedRecipe(new ItemStack(tungstenLeggingsChain), true,
                 "AAA",
                 "A A",
                 "A A",
                 'A', tungstenChain);
-        register.registerShapedRecipe(new ItemStack(tungstenChestplateChain), false,
+        register.registerShapedRecipe(new ItemStack(tungstenChestplateChain), true,
                 "A A",
                 "AAA",
                 "AAA",
                 'A', tungstenChain);
-        register.registerShapedRecipe(new ItemStack(tungstenHelmetChain), false,
+        register.registerShapedRecipe(new ItemStack(tungstenHelmetChain), true,
                 "AAA",
                 "A A",
-                "   ",
                 'A', tungstenChain);
-        register.registerShapedRecipe(new ItemStack(tungstenBoots), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(tungstenBoots), true,
                 "A A",
                 "A A",
                 'A', tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(tungstenLeggings), false,
+        register.registerShapedRecipe(new ItemStack(tungstenLeggings), true,
                 "AAA",
                 "A A",
                 "A A",
                 'A', tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(tungstenChestplate), false,
+        register.registerShapedRecipe(new ItemStack(tungstenChestplate), true,
                 "A A",
                 "AAA",
                 "AAA",
                 'A', tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(tungstenHelmet), false,
-                "   ",
+        register.registerShapedRecipe(new ItemStack(tungstenHelmet), true,
                 "AAA",
                 "A A",
                 'A', tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(doorTungsten), false,
+        register.registerShapedRecipe(new ItemStack(doorTungsten), true,
                 " AA",
                 " AA",
                 " AA",
                 'A', tungstenIngot);
-        register.registerShapedRecipe(new ItemStack(WolfHelmet),false,
+        register.registerShapedRecipe(new ItemStack(WolfHelmet),true,
                 "AAA",
                 "ABA",
-                "   ",
                 'A',Wolf_fur,
                 'B',helmetLeather);
-        register.registerShapedRecipe(new ItemStack(WolfChestplate),false,
+        register.registerShapedRecipe(new ItemStack(WolfChestplate),true,
                 "A A",
                 "ABA",
                 "AAA",
                 'A',Wolf_fur,
                 'B',plateLeather);
-        register.registerShapedRecipe(new ItemStack(WolfLeggings),false,
+        register.registerShapedRecipe(new ItemStack(WolfLeggings),true,
                 "AAA",
                 "ABA",
                 "A A",
                 'A',Wolf_fur,
                 'B',legsLeather);
 
-        register.registerShapedRecipe(new ItemStack(WolfBoots),false,
+        register.registerShapedRecipe(new ItemStack(WolfBoots),true,
                 "ABA",
                 "A A",
-                "   ",
                 'A',Wolf_fur,
                 'B',bootsLeather);
+        register.registerShapedRecipe(new ItemStack(Goldenapplelegend),true,
+                "AAA",
+                "ASA",
+                "AAA",
+                'A',Block.blockGold,
+                'S',Item.appleRed);
 
 
-        register.registerShapelessRecipe(new ItemStack(porkchopStew,1),false,
+        register.registerShapelessRecipe(new ItemStack(porkchopStew,1),true,
                 Item.bowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
-                );
-        register.registerShapelessRecipe(new ItemStack(chestnutSoup,1),false,
+        );
+        register.registerShapelessRecipe(new ItemStack(chestnutSoup,1),true,
                 Item.bowlWater,Item.lambchopCooked,Item.onion,Item.potato
         );
-        register.registerShapelessRecipe(new ItemStack(mashedCactus,1),false,
+        register.registerShapelessRecipe(new ItemStack(mashedCactus,1),true,
                 Block.cactus
         );
-        register.registerShapelessRecipe(new ItemStack(lemonade,1),false,
+        register.registerShapelessRecipe(new ItemStack(lemonade,1),true,
                 Item.sugar,Items.lemon,Item.bowlWater);
-        register.registerShapelessRecipe(new ItemStack(nickelIngot,1),false,
+        register.registerShapelessRecipe(new ItemStack(nickelIngot,1),true,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget
         );
-        register.registerShapelessRecipe(new ItemStack(tungstenIngot,1),false,
+        register.registerShapelessRecipe(new ItemStack(tungstenIngot,1),true,
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget
         );
-        register.registerShapelessRecipe(new ItemStack(Item.leather,1),false,
+        register.registerShapelessRecipe(new ItemStack(Item.leather,1),true,
                 Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur
         );
 

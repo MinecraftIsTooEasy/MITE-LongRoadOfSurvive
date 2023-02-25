@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.util.DamageSourceExtend;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -170,7 +171,11 @@ public class EntityPlayerMixin extends EntityLiving{
     }
     @Overwrite
     public boolean isStarving() {
-        return this.getNutrition() == 0 || this.getWater() == 0;
+        return this.getNutrition() == 0;
+    }
+
+    public boolean DuringDehydration() {
+        return this.getWater() == 0;
     }
     @Overwrite
     public boolean hasFoodEnergy() {
@@ -179,11 +184,12 @@ public class EntityPlayerMixin extends EntityLiving{
 
     public boolean InFreeze(){
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        ItemStack wearingItemStack = this.getCuirass();
         if (biome.temperature <= 0.16F){
-            if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
+            if((this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
                     this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
                     this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
-                    this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID){
+                    this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID )|| EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether) ){
                 return false;
             }
             return true;
@@ -191,29 +197,43 @@ public class EntityPlayerMixin extends EntityLiving{
         return false;
     }
 
-    private int FreezingCooldown = 0;
+    private int FreezingCooldown;
+    private int FreezingWarning;
+    private int reduce_weight;
+    public int getReduce_weight(){
+        if((this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
+                this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
+                this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
+                this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID )){
+            return 8;
+        }else if((this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID &&
+                this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID &&
+                this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID &&
+                this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID )){
+            return 3;
+        }else if((this.getHelmet()!= null && this.getCuirass()!= null && this.getLeggings()!= null && this.getBoots()!= null)){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
     @Inject(method = "onLivingUpdate",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/EntityLiving;onLivingUpdate()V",
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
-            if(this.FreezingCooldown > 7200){
-                if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
-                        this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
-                        this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
-                        this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID){
-                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 20 , this.isInRain() ? 1 : 0));
-                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, 20 , this.isInRain() ? 1 : 0));
-                } else if(this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID &&
-                        this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID &&
-                        this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID &&
-                        this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID){
-                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 20 , this.isInRain() ? 1 : 0));
-                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, 20 , this.isInRain() ? 1 : 0));
-                } else {
-                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 20 , this.isInRain() ? 2 : 1));
-                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, 20 , this.isInRain() ? 2 : 1));
+            int freezelevel = Math.max(((FreezingCooldown - (12000 * getReduce_weight())) / 12000), 0);
+            if(this.FreezingCooldown > 12000 * getReduce_weight()){
+                if(freezelevel >= 1){
+                    if (freezelevel >= 4) {
+                        ++FreezingWarning;
+                    }
+                    if (FreezingWarning > 500) {
+                        this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 1.0F));
+                    }
+                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
+                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
                 }
             }
             if(this.InFreeze()){
