@@ -29,6 +29,8 @@ public class EntityTypesMixin {
         addMapping(EntityStray.class,"EntityStray",545);
         addMapping(EntityHusk.class,"EntityHusk",546);
         addMapping(EntityPigmanLord.class,"PigManlord",547);
+        addMapping(EntityLich.class,"Lich",548);
+        addMapping(EntityLichShadow.class,"LichShadow",549);
     }
 
 }

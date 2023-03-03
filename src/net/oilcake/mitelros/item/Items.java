@@ -117,7 +117,19 @@ public class Items extends Item {
     public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden");
     public static final Item Goldenapplelegend = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
-    public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");;
+    public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
+
+    public static final ItemBowl bowlEmpty = (ItemBowl)(new ItemBowl(25, (Material)null, "VANILLA")).setUnlocalizedName("bowl").useVanillaTexture("bowl").setMaxStackSize(4);
+
+    public static final ItemMorningStar morningStarCopper = new ItemMorningStar(Constant.getNextItemID(), Material.copper);
+    public static final ItemMorningStar morningStarSilver = new ItemMorningStar(Constant.getNextItemID(), Material.silver);
+    public static final ItemMorningStar morningStarGold = new ItemMorningStar(Constant.getNextItemID(), Material.gold);
+    public static final ItemMorningStar morningStarIron = new ItemMorningStar(Constant.getNextItemID(), Material.iron);
+    public static final ItemMorningStar morningStarNickel = new ItemMorningStar(Constant.getNextItemID(), Materials.nickel);
+    public static final ItemMorningStar morningStarAncientMetal = new ItemMorningStar(Constant.getNextItemID(), Material.ancient_metal);
+    public static final ItemMorningStar morningStarMithril = new ItemMorningStar(Constant.getNextItemID(), Material.mithril);
+    public static final ItemMorningStar morningStarTungsten = new ItemMorningStar(Constant.getNextItemID(), Materials.tungsten);
+    public static final ItemMorningStar morningStarAdamantium = new ItemMorningStar(Constant.getNextItemID(), Material.adamantium);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -234,6 +246,16 @@ public class Items extends Item {
         register("armor/wolf_boots", WolfBoots);
         register("apple_golden",Goldenapple);
         register("apple_golden",Goldenapplelegend);
+        register("bowl",bowlEmpty);
+        register("tool/copper/copper_club",morningStarCopper);
+        register("tool/silver/silver_club",morningStarSilver);
+        register("tool/gold/gold_club",morningStarGold);
+        register("tool/iron/iron_club",morningStarIron);
+        register("tool/nickel/nickel_club",morningStarNickel);
+        register("tool/ancient_metal/ancient_metal_club",morningStarAncientMetal);
+        register("tool/mithril/mithril_club",morningStarMithril);
+        register("tool/tungsten/tungsten_club",morningStarTungsten);
+        register("tool/adamantium/adamantium_club",morningStarAdamantium);
         Constant.initItemArray();
     }
 
@@ -571,7 +593,62 @@ public class Items extends Item {
                 "ASA",
                 "AAA",
                 'A',Block.blockGold,
-                'S',Item.appleRed);
+                'S',Item.appleRed
+        );
+        register.registerShapedRecipe(new ItemStack(morningStarCopper, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', copperNugget,
+                '*', ingotCopper);
+        register.registerShapedRecipe(new ItemStack(morningStarSilver, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', silverNugget,
+                '*', ingotSilver);
+        register.registerShapedRecipe(new ItemStack(morningStarGold, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', goldNugget,
+                '*', ingotGold);
+        register.registerShapedRecipe(new ItemStack(morningStarIron, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', ironNugget,
+                '*', ingotIron);
+        register.registerShapedRecipe(new ItemStack(morningStarNickel, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', nickelNugget,
+                '*', nickelIngot);
+        register.registerShapedRecipe(new ItemStack(morningStarAncientMetal, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', ancientMetalNugget,
+                '*', ingotAncientMetal);
+        register.registerShapedRecipe(new ItemStack(morningStarMithril, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', mithrilNugget,
+                '*', ingotMithril);
+        register.registerShapedRecipe(new ItemStack(morningStarTungsten, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', tungstenNugget,
+                '*', tungstenIngot);
+        register.registerShapedRecipe(new ItemStack(morningStarAdamantium, 1), true,
+                "###",
+                "#*#",
+                " # ",
+                '#', adamantiumNugget,
+                '*', ingotAdamantium);
 
 
         register.registerShapelessRecipe(new ItemStack(porkchopStew,1),true,

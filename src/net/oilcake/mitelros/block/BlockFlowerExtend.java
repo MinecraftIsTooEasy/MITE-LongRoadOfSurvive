@@ -5,7 +5,7 @@ import net.minecraft.*;
 import java.util.Random;
 
 public class BlockFlowerExtend extends BlockFlower {
-    private BlockSubtypes subtypes;
+    private BlockSubtypes subtypes = new BlockSubtypes(new String[]{"luminescent_herb","azure_bluet","cornflower","lily_of_the_valley","pink_tulip","white_tulip","red_tulip"});;
     protected BlockFlowerExtend(int id, Material material) {
         super(id, material);
     }
@@ -18,6 +18,7 @@ public class BlockFlowerExtend extends BlockFlower {
     public static final int TULIP_RED = 7;
 
     public static final String[] types = new String[]{"luminescent_herb","azure_bluet","cornflower","lily_of_the_valley","pink_tulip","white_tulip","red_tulip"};
+
     private IIcon[] icons;
     private static int[] candidates;
 
@@ -26,11 +27,14 @@ public class BlockFlowerExtend extends BlockFlower {
     }
 
     public void a(mt par1IconRegister) {
-        this.icons = this.registerIcons(par1IconRegister, types, this.E());
+        this.subtypes.setIcons(this.registerIcons(par1IconRegister, this.getTextures(), "flowers/"));
     }
 
     public IIcon a(int side, int metadata) {
-        return this.icons[this.getBlockSubtype(metadata)];
+        return this.subtypes.getIcon(this.getBlockSubtype(metadata));
+    }
+    public String[] getTextures() {
+        return this.subtypes.getTextures();
     }
 
     public String getMetadataNotes() {

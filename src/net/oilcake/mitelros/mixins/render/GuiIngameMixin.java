@@ -249,13 +249,26 @@ public class GuiIngameMixin extends avk {
     @Inject(method = "a(FZII)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/Minecraft;inDevMode()Z", shift = At.Shift.BEFORE))
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
         if (!Minecraft.inDevMode()) {
+            WeatherEvent event = this.g.f.getCurrentWeatherEvent(true, false);
+            String s;
+            if (event != null) {
+                s = "风暴已经抵达";
+            } else {
+                event = this.g.f.getNextWeatherEvent(true);
+                if (event != null) {
+                    s = "乌云滚滚";
+                } else {
+                    event = this.g.f.getPreviousWeatherEvent(true);
+                    s = event == null ? "现在风平浪静" : "风暴已经结束";
+                }
+            }
             if (GuiIngame.server_load >= 0) {
                 awf sr = new awf(this.g.u, this.g.d, this.g.e);
                 String text = GuiIngame.server_load + "%";
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
 
-            StringBuilder var68 = (new StringBuilder()).append("平面位置(").append(MathHelper.floor_double(this.g.h.posX)).append(", ").append(MathHelper.floor_double(this.g.h.posZ)).append(")").append("   FPS=");
+            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ").append(s).append("   FPS=");
             var68.append(Minecraft.last_fps).append(" (");
             this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }

@@ -1,6 +1,11 @@
 package net.oilcake.mitelros.util;
 
+import net.minecraft.ChatMessage;
 import net.minecraft.DamageSource;
+import net.minecraft.EntityLiving;
+import net.minecraft.LocaleI18n;
+
+import java.util.Objects;
 
 public class DamageSourceExtend extends DamageSource{
     private boolean is_unblockable;
@@ -26,4 +31,20 @@ public class DamageSourceExtend extends DamageSource{
     public boolean bypassesMundaneArmor() {
         return this.bypasses_mundane_armor || this.is_unblockable || this.is_absolute;
     }
+    public ChatMessage getDeathMessage(EntityLiving par1EntityLivingBase) {
+        EntityLiving var2 = par1EntityLivingBase.func_94060_bK();
+        String var3 = "death.null_reason";
+        if(Objects.equals(this.damageType, freeze.damageType)){
+            var3 = par1EntityLivingBase.getEntityName() +" 冻死了";
+        }
+        if(Objects.equals(this.damageType, thirsty.damageType)){
+            var3 = par1EntityLivingBase.getEntityName() +" 渴死了";
+        }
+        return ChatMessage.createFromTranslationWithSubstitutions(var3);
+    }
+
+    public boolean isFreezing() {
+        return this == freeze;
+    }
+    public boolean isDehydration() {return this == thirsty; }
 }

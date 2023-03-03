@@ -35,6 +35,7 @@ item.tool/nickel/nickel_shears.name=镍剪刀
 item.tool/nickel/nickel_shovel.name=镍铲
 item.tool/nickel/nickel_sword.name=镍剑
 item.tool/nickel/nickel_war_hammer.name=镍战锤
+item.tool/nickel/nickel_club.name=镍杖
 
 item.door/nickel.name=镍门
 item.chain/nickel.name=镍锁链
@@ -83,6 +84,7 @@ item.tool/tungsten/tungsten_shears.name=钨剪刀
 item.tool/tungsten/tungsten_shovel.name=钨铲
 item.tool/tungsten/tungsten_sword.name=钨剑
 item.tool/tungsten/tungsten_war_hammer.name=钨战锤
+item.tool/tungsten/tungsten_club.name=钨杖
 
 item.door/tungsten.name=钨门
 item.chain/tungsten.name=钨锁链
@@ -96,6 +98,14 @@ tile.tungsten_anvil.slightlyDamaged.name=轻微受损的钨砧
 tile.tungsten_anvil.veryDamaged.name=严重受损的钨砧
 tile.bars/tungsten_bars.name=钨栅栏
 tile.toolbench.tungsten.name=钨工作台
+
+item.tool/copper/copper_club.name=铜杖
+item.tool/silver/silver_club.name=银杖
+item.tool/gold/gold_club.name=金杖
+item.tool/iron/iron_club.name=铁杖
+item.tool/ancient_metal/ancient_metal_club.name=远古金属杖
+item.tool/mithril/mithril_club.name=秘银杖
+item.tool/adamantium/adamantium_club.name=艾德曼合金杖
 
 item.bowls/lampchop_stew.name=栗羊羹
 item.bowls/porkchop_stew.name=猪肉煲
@@ -161,9 +171,13 @@ entity.EntityWitherBoneLord.name=凋零骷髅领主
 entity.EntityWitherBodyguard.name=衰败侍卫
 entity.EntityClusterSpider.name=集群蜘蛛
 entity.EntitySpiderKing.name=国王蜘蛛
-entity.EntityPigmanLord.name=猪人领主
+entity.EntityPigManLord.name=猪人领主
 entity.EntityStray.name=流髑
 entity.EntityHusk.name=尸壳
+entity.EntityLichShadow.name=巫妖的幻影
+entity.EntityLich.name=巫妖
 
-death.attack.thirsty = %1$s 渴死了
-death.attack.freeze = %1$s 冻死了
+
+
+death.extend.attack.thirsty = %1$s 脱水而亡
+death.extend.attack.freeze = %1$s 冻死了

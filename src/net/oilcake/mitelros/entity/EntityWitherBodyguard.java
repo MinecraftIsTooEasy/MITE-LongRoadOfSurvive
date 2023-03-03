@@ -63,4 +63,12 @@ public class EntityWitherBodyguard extends EntitySkeleton {
             return result;
         }
     }
+
+    public boolean isHarmedByFire() {
+        return false;
+    }
+
+    public boolean isHarmedByLava() {
+        return false;
+    }
 }

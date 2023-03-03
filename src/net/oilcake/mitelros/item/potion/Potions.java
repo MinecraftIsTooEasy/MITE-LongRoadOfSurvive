@@ -1,5 +1,7 @@
 //package net.oilcake.mitelros.item.potion;
 //
+//import net.minecraft.EntityLiving;
+//import net.minecraft.EntityPlayer;
 //import net.minecraft.MobEffectList;
 //import net.oilcake.mitelros.util.Constant;
 //
@@ -28,6 +30,13 @@
 //                    potionTypes[i + h] = potionTypes[h];
 //                }
 //                break;
+//            }
+//        }
+//    }
+//    public void performEffect(EntityLiving par1EntityLivingBase, int par2) {
+//        if (this.id == dehydration.id && par1EntityLivingBase instanceof EntityPlayer) {
+//            if (!par1EntityLivingBase.worldObj.isRemote) {
+//                ((EntityPlayer)par1EntityLivingBase).decreaseWaterServerSide(0.025F * (float)(par2 + 1));
 //            }
 //        }
 //    }

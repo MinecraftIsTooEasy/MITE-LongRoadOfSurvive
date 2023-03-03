@@ -65,6 +65,7 @@ public class LROSEvent {
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
     }
 
+
 }
 
 

@@ -6,7 +6,7 @@ import net.oilcake.mitelros.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityWitherBoneLord extends EntitySkeleton {
+public class EntityWitherBoneLord extends EntityBoneLord {
 
     public EntityWitherBoneLord(World par1World) {
         super(par1World);
@@ -69,5 +69,12 @@ public class EntityWitherBoneLord extends EntitySkeleton {
 
     public int getExperienceValue() {
         return super.getExperienceValue() * 2;
+    }
+    public boolean isHarmedByFire() {
+        return false;
+    }
+
+    public boolean isHarmedByLava() {
+        return false;
     }
 }

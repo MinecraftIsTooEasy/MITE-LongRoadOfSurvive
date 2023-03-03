@@ -156,6 +156,11 @@ entity.EntityWitherBoneLord.name=Wither Bonelord
 entity.EntityWitherBodyguard.name=Wither Bodyguard
 entity.EntityClusterSpider.name=Cluster Spider
 entity.EntitySpiderKing.name=Spider King
-entity.EntityPigmanLord.name=Pigman Lord
+entity.EntityPigManLord.name=Pigman Lord
 entity.EntityStray.name=Stray
 entity.EntityHusk.name=Husk
+entity.EntityLichShadow.name=Shadow of Lich
+entity.EntityLich.name=Lich
+
+death.attack.thirsty = %1$s dead because of dehydration
+death.attack.freeze = %1$s Freezed Fully

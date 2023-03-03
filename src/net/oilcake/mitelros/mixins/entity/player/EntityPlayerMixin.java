@@ -1,8 +1,10 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
 import net.oilcake.mitelros.util.DamageSourceExtend;
 import org.spongepowered.asm.mixin.Final;
@@ -200,6 +202,7 @@ public class EntityPlayerMixin extends EntityLiving{
     private int FreezingCooldown;
     private int FreezingWarning;
     private int reduce_weight;
+    private float dry_resist;
     public int getReduce_weight(){
         if((this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
                 this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
@@ -223,6 +226,12 @@ public class EntityPlayerMixin extends EntityLiving{
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
+            BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+            dry_resist += 1.0f + biome.getFloatTemperature();
+            if(dry_resist > 14400) {
+                this.getFoodStats().addWater(-1);
+                dry_resist = 0;
+            }
             int freezelevel = Math.max(((FreezingCooldown - (12000 * getReduce_weight())) / 12000), 0);
             if(this.FreezingCooldown > 12000 * getReduce_weight()){
                 if(freezelevel >= 1){
@@ -231,6 +240,7 @@ public class EntityPlayerMixin extends EntityLiving{
                     }
                     if (FreezingWarning > 500) {
                         this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 1.0F));
+                        FreezingWarning = 0;
                     }
                     this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
                     this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
@@ -248,6 +258,11 @@ public class EntityPlayerMixin extends EntityLiving{
     }
     public int getFreezingCooldown(){
         return FreezingCooldown;
+    }
+
+    public float getCurrentBiomeTemperature(){
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        return biome.getFloatTemperature();
     }
 
 
@@ -334,6 +349,58 @@ public class EntityPlayerMixin extends EntityLiving{
 
             return this.getMinCraftingQuality(item, applicable_skillsets);
         }
+    }
+
+    @Overwrite
+    private void checkForArmorAchievements() {
+        boolean wearing_leather = false;
+        boolean wearing_full_suit_plate = true;
+        boolean wearing_full_suit_adamantium_plate = true;
+        boolean wearing_full_suit_wolf_fur = true;
+
+        for(int i = 0; i < 4; ++i) {
+            if (this.inventory.armorInventory[i] != null && this.inventory.armorInventory[i].getItem() instanceof ItemArmor) {
+                ItemArmor armor = (ItemArmor)this.inventory.armorInventory[i].getItem();
+                Material material = armor.getArmorMaterial();
+                if (material == Material.leather) {
+                    wearing_leather = true;
+                }
+
+                if (material != Material.copper && material != Material.silver && material != Material.gold && material != Material.iron && material != Material.mithril && material != Material.adamantium && material != Material.ancient_metal) {
+                    wearing_full_suit_plate = false;
+                }
+
+                if (material != Material.adamantium) {
+                    wearing_full_suit_adamantium_plate = false;
+                }
+
+                if (material != Materials.wolf_fur) {
+                    wearing_full_suit_wolf_fur = false;
+                }
+
+            } else {
+                wearing_full_suit_plate = false;
+                wearing_full_suit_adamantium_plate = false;
+                wearing_full_suit_wolf_fur = false;
+            }
+        }
+
+        if (wearing_leather) {
+            this.triggerAchievement(AchievementList.wearLeather);
+        }
+
+        if (wearing_full_suit_plate) {
+            this.triggerAchievement(AchievementList.wearAllPlateArmor);
+        }
+
+        if (wearing_full_suit_adamantium_plate) {
+            this.triggerAchievement(AchievementList.wearAllAdamantiumPlateArmor);
+        }
+
+        if (wearing_full_suit_wolf_fur) {
+            this.triggerAchievement(AchievementExtend.BravetheCold);
+        }
+
     }
 
     @Overwrite

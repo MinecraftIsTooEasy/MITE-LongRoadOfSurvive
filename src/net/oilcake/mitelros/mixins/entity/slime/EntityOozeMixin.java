@@ -1,16 +1,27 @@
 package net.oilcake.mitelros.mixins.entity.slime;
 
-import net.minecraft.DamageSource;
-import net.minecraft.EntityOoze;
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntityOoze.class)
-public class EntityOozeMixin {
+public abstract class EntityOozeMixin extends EntityCubic{
+    public EntityOozeMixin(World par1World) {
+        super(par1World);
+    }
+
     @Overwrite
     public boolean isImmuneTo(DamageSource damage_source) {
         boolean temp = !damage_source.hasFireAspect() && !damage_source.isLavaDamage() && !damage_source.hasMagicAspect() && !damage_source.isSnowball();
         return damage_source.getItemAttackedWith() != null ? temp && !(damage_source.getItemAttackedWith().getMaterialForRepairs() == Materials.nickel) : temp;
     }
+
+    @Overwrite
+    protected void setSize(int size) {
+        super.setSize(Math.min(size, 4));
+    }
+
+
 }

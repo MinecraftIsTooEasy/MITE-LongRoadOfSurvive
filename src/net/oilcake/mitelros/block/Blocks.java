@@ -89,7 +89,7 @@ public class Blocks extends Block {
         registerItemBlock("block/tungsten_block", blockTungsten);
         registerItemBlock("bars/tungsten_bars", fenceTungsten);
         registerItemBlock("door/door_tungsten", doorTungsten);
-        registerItemBlock("flowers/" , flowerextend);
+        registerItemBlock("flowers" , flowerextend);
     }
 
     public static void registerRecipes(RecipeRegister register) {

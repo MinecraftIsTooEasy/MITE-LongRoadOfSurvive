@@ -31,6 +31,8 @@ public class RenderManagerMixin {
         this.q.put(EntityPigmanLord.class, new RenderPigmanLord());
         this.q.put(EntityStray.class,new RenderStray());
         this.q.put(EntityHusk.class,new RenderHusk());
+        this.q.put(EntityLich.class,new RenderLich());
+        this.q.put(EntityLichShadow.class,new RenderLichShadow());
         for (bgm o : this.q.values()) {
             o.a(dyCast(bgl.class, this));
         }

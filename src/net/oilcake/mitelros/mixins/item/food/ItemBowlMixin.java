@@ -25,11 +25,11 @@ public class ItemBowlMixin extends ItemVessel {
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
             if (this.contains(Materials.dangerous_water)) {
-                player.getFoodStats().addWater(2);
+                player.getFoodStats().addWater(-2);
                 player.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
             }
             if (this.contains(Materials.unsafe_water)) {
-                player.getFoodStats().addWater(2);
+                player.getFoodStats().addWater(-2);
                 player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
             }
             if (this.contains(Material.milk)) {
@@ -63,11 +63,11 @@ public class ItemBowlMixin extends ItemVessel {
             if (this.isEmpty()) {
                 if (rc.getBlockHitMaterial() == Material.water || rc.getNeighborOfBlockHitMaterial() == Material.water) {
                     if (player.onServer() && (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland)) {
-                        player.convertOneOfHeldItem(new ItemStack(Items.waterswampland));
+                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.dangerous_water)));
                     } else if(player.onServer() && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)){
                         player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Material.water)));
                     } else if(player.onServer()){
-                        player.convertOneOfHeldItem(new ItemStack(Items.watersuspicious));
+                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.unsafe_water)));
                     }
                     return true;
                 }
@@ -164,6 +164,18 @@ public class ItemBowlMixin extends ItemVessel {
 
             if (contents == Material.cereal) {
                 return bowlCereal;
+            }
+            if (contents == Materials.chestnut_soup) {
+                return Items.chestnutSoup;
+            }
+            if (contents == Materials.porkchop_stew) {
+                return Items.porkchopStew;
+            }
+            if (contents == Materials.unsafe_water) {
+                return Items.watersuspicious;
+            }
+            if (contents == Materials.dangerous_water){
+                return Items.waterswampland;
             }
         }
 

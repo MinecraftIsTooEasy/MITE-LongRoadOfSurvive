@@ -7,6 +7,7 @@ public class EntityStray extends EntitySkeleton {
 
     public EntityStray(World par1World) {
         super(par1World);
+        this.tasks.addTask(3, new PathfinderGoalLeapAtTarget(this, 0.35F));
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -16,7 +17,7 @@ public class EntityStray extends EntitySkeleton {
         this.setEntityAttribute(GenericAttributes.attackDamage, 5.0);
     }
     public void addRandomWeapon() {
-        this.setHeldItemStack((new ItemStack((Item)(this.getSkeletonType() == 2 ? Item.daggerRustedIron : Item.bow))).randomizeForMob(this, true));
+        this.setHeldItemStack((new ItemStack((Item)(this.getSkeletonType() == 2 ? (this.rand.nextInt(20) == 0 ? Item.battleAxeRustedIron :Item.daggerRustedIron) : Item.bow))).randomizeForMob(this, true));
     }
 
     protected void addRandomEquipment() {
