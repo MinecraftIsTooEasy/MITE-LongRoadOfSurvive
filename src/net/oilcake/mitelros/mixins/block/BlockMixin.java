@@ -1,10 +1,16 @@
 package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockFlowerExtend;
+import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
@@ -12,6 +18,11 @@ import static net.minecraft.Block.*;
 
 @Mixin(Block.class)
 public class BlockMixin{
+
+    @Inject(method = "<clinit>", at = @At("RETURN"))
+    private static void injectClinit(CallbackInfo callback) {
+        Item.itemsList[Blocks.flowerextend.blockID] = (new ItemMultiTexture(Blocks.flowerextend, BlockFlowerExtend.types)).setUnlocalizedName("flowers");
+    }
 
     @Overwrite
     public int dropBlockAsItself(BlockBreakInfo info) {

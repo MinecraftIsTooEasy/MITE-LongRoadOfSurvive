@@ -28,7 +28,7 @@ public class ItemArrowMixin extends Item{
                 info.add(EnumChatFormat.LIGHT_GRAY + Translator.getFormatted("itemtool.tooltip.slimeresistance"));
             }
             if(this.arrowhead_material != Material.rusted_iron && this.arrowhead_material != Material.ancient_metal
-            &&this.arrowhead_material != Materials.nickel && this.arrowhead_material != Materials.tungsten){
+            && this.arrowhead_material != Materials.nickel && this.arrowhead_material != Materials.tungsten){
                 info.add(EnumChatFormat.RED + Translator.getFormatted("itemarrow.tooltip.disable", new Object[0]));
             }
         }

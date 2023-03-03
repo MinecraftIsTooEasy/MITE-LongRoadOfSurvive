@@ -110,7 +110,6 @@ public class Items extends Item {
     public static final Item Wolf_fur = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.wolf_fur).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
     public static final Item horse_meat = (new ItemMeat(Constant.getNextItemID(),6,6,true,false,"horse_meat"));
     public static final Item horse_meat_cooked = (new ItemMeat(Constant.getNextItemID(),12,12,true,true,"horse_meat_cooked"));
-
     public static final ItemArmor WolfHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor WolfChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor WolfLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
@@ -118,9 +117,7 @@ public class Items extends Item {
     public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden");
     public static final Item Goldenapplelegend = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
     public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
-
     public static final ItemBowl bowlEmpty = (ItemBowl)(new ItemBowl(25, (Material)null, "VANILLA")).setUnlocalizedName("bowl").useVanillaTexture("bowl").setMaxStackSize(4);
-
     public static final ItemMorningStar morningStarCopper = new ItemMorningStar(Constant.getNextItemID(), Material.copper);
     public static final ItemMorningStar morningStarSilver = new ItemMorningStar(Constant.getNextItemID(), Material.silver);
     public static final ItemMorningStar morningStarGold = new ItemMorningStar(Constant.getNextItemID(), Material.gold);

@@ -30,11 +30,9 @@ public class EnumChatFormats {
     }
 
     private EnumChatFormats(){}
-    /**
-     * Enums
-     * */
     public static final List<EnumChatFormat> VALUES = Lists.newArrayList(EnumChatFormat.values());
     public static final EnumChatFormat GLODC = newEnumChatFormat("GOLDC",'s',255,170,0);
+
     private static EnumChatFormat newEnumChatFormat(String name,char c, int r, int g, int b){
         try {
             EnumChatFormat format =  (EnumChatFormat) constructorAccessor.newInstance(new Object[]{name,ordinary++,c,r,g,b});

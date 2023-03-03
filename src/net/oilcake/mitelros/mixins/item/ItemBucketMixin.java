@@ -12,10 +12,9 @@ public class ItemBucketMixin extends ItemVessel {
     public ItemBucketMixin(int id, Material vessel_material, Material contents_material, int standard_volume, int max_stack_size_empty, int max_stack_size_full, String texture) {
         super(id, vessel_material, contents_material, standard_volume, max_stack_size_empty, max_stack_size_full, texture);
     }
-    @Overwrite
+    @Shadow
     public float getChanceOfMeltingWhenFilledWithLava() {
-        Material material = this.getVesselMaterial();
-        return material == Material.adamantium ? 0.0F : (material == Material.gold ? 0.5F : 0.025F * (Material.mithril.getDurability() / material.getDurability()));
+        return 1;
     }
     @Overwrite
     public Block getBlockForContents() {
