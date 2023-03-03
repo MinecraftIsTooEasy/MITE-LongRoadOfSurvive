@@ -2,6 +2,9 @@
 
 可能会遇到一些渲染bug,内存最好大于1024M可尽量避免;遇到F3+A重新加载区块即可  
 不要尝试滥用spreadplayers指令以免造成坏档等严重后果
+## ITF Aleph-0x000000ce-failed
+### 杂项
+* 删除了写入配置和tp传送的代码
 ## ITF Aleph-0x000000ce
 ### 机制
 * 现在无论如何都会为Minecraft写入特定的MITETPA的配置文件（即便您未添加miteTPA）  
