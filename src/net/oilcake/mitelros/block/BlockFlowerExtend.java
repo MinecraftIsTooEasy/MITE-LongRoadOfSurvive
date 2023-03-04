@@ -89,20 +89,14 @@ public class BlockFlowerExtend extends BlockFlower {
 
     }
 
-    public int getRandomSubtypeForBiome(Random random, BiomeBase biome)
-    {
-        if (biome == BiomeBase.plains && random.nextInt(2) == 0)
-        {
-            return 8;
-        }
-        else
-        {
+    public int getRandomSubtypeForBiome(Random random, BiomeBase biome) {
+        if (biome == BiomeBase.plains && random.nextInt(2) == 0) {
+            return 1;
+        } else {
             int num_candidates = 0;
 
-            for (int i = 0; i < types.length; ++i)
-            {
-                if (types[i] != null && this.isBiomeSuitable(biome, i))
-                {
+            for(int i = 0; i < types.length; ++i) {
+                if (types[i] != null && this.isBiomeSuitable(biome, i)) {
                     candidates[num_candidates++] = i;
                 }
             }
@@ -111,19 +105,13 @@ public class BlockFlowerExtend extends BlockFlower {
         }
     }
 
-    public int getRandomSubtypeThatCanOccurAt(World world, int x, int y, int z)
-    {
+    public int getRandomSubtypeThatCanOccurAt(World world, int x, int y, int z) {
         BiomeBase biome = world.getBiomeGenForCoords(x, z);
         int subtype = this.getRandomSubtypeForBiome(world.rand, biome);
-
-        if (subtype < 0)
-        {
+        if (subtype < 0) {
             return -1;
-        }
-        else
-        {
-            while (!this.canOccurAt(world, x, y, z, subtype))
-            {
+        } else {
+            while(!this.canOccurAt(world, x, y, z, subtype)) {
                 subtype = this.getRandomSubtypeForBiome(world.rand, biome);
             }
 
@@ -131,47 +119,45 @@ public class BlockFlowerExtend extends BlockFlower {
         }
     }
 
-    public boolean isBiomeSuitable(BiomeBase biome, int metadata)
-    {
-        if (!this.isValidMetadata(metadata))
-        {
+    public boolean isBiomeSuitable(BiomeBase biome, int metadata) {
+        if (!this.isValidMetadata(metadata)) {
             Minecraft.setErrorMessage("isBiomeSuitable: invalid metadata " + metadata);
             return false;
-        }
-        else
-        {
+        } else {
             int subtype = this.getBlockSubtype(metadata);
-
-            if (types[subtype] == null)
-            {
+            if (types[subtype] == null) {
                 Minecraft.setErrorMessage("isBiomeSuitable: invalid subtype " + subtype);
                 return false;
-            }
-            else
-            {
-                return subtype == 2 && !biome.isSwampBiome() ? false : (biome.isSwampBiome() && subtype != 2 ? false : (subtype == 1 && biome.temperature <= BiomeBase.plains.temperature ? false : ((subtype == 5 || subtype == 7) && biome.temperature < BiomeBase.forestHills.temperature ? false : !biome.isJungleBiome() || subtype != 8)));
+            }else if (biome.isSwampBiome()) {
+                return false;
+            } else if (subtype == 1 && biome.temperature < BiomeBase.plains.temperature) {
+                return false;
+            } else if (subtype != 1 && biome.temperature < BiomeBase.forestHills.temperature) {
+                return false;
+            } else {
+                return !biome.isJungleBiome();
             }
         }
     }
 
-    public boolean canOccurAt(World world, int x, int y, int z, int metadata)
-    {
+    public boolean canOccurAt(World world, int x, int y, int z, int metadata) {
         return this.isBiomeSuitable(world.getBiomeGenForCoords(x, z), metadata) && super.canOccurAt(world, x, y, z, metadata);
     }
 
-    public int getPatchSize(int metadata, BiomeBase biome)
-    {
-        if (!this.isValidMetadata(metadata))
-        {
+    public int getPatchSize(int metadata, BiomeBase biome) {
+        if (!this.isValidMetadata(metadata)) {
             Minecraft.setErrorMessage("getPatchSize: invalid metadata " + metadata);
         }
 
         int subtype = this.getBlockSubtype(metadata);
-        return subtype == 2 ? 8 : (biome != BiomeBase.plains && !biome.isJungleBiome() ? 16 : 64);
+        if (subtype == 1) {
+            return 8;
+        } else {
+            return biome != BiomeBase.plains && !biome.isJungleBiome() ? 16 : 64;
+        }
     }
 
-    public boolean isLegalAt(World world, int x, int y, int z, int metadata)
-    {
+    public boolean isLegalAt(World world, int x, int y, int z, int metadata) {
         return this.isBiomeSuitable(world.getBiomeGenForCoords(x, z), metadata) && super.isLegalAt(world, x, y, z, metadata);
     }
 }
