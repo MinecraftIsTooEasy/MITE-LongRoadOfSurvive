@@ -1,8 +1,6 @@
 package net.oilcake.mitelros.world.biome;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.world.BiomeBases;
-
 import java.util.Random;
 
 public class BiomeAlps extends BiomeBase {
@@ -11,6 +9,11 @@ public class BiomeAlps extends BiomeBase {
         this.spawnableCreatureList.clear();
         this.topBlock = (byte)Block.cobblestoneMossy.blockID;
         this.fillerBlock = (byte)Block.cobblestone.blockID;
+        this.setColor(10526880);
+        this.setBiomeName("Alps");
+        this.setEnableSnow();
+        this.setMinMaxHeight(1.4F, 2.5F);
+        this.setTemperatureRainfall(0.0F, 0.5F);
     }
 
     public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
@@ -31,6 +34,21 @@ public class BiomeAlps extends BiomeBase {
             }
         }
     }
+    private BiomeBase setMinMaxHeight(float par1, float par2) {
+        this.minHeight = par1;
+        this.maxHeight = par2;
+        return this;
+    }
+    private BiomeBase setTemperatureRainfall(float par1, float par2) {
+        if (par1 > 0.1F && par1 < 0.2F) {
+            throw new IllegalArgumentException("Please avoid temperatures in the range 0.1 - 0.2 because of snow");
+        } else {
+            this.temperature = par1;
+            this.rainfall = par2;
+            return this;
+        }
+    }
+
 
 
 }

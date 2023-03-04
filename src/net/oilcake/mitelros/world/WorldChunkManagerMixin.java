@@ -16,6 +16,6 @@ public class WorldChunkManagerMixin {
     private List biomesToSpawnIn;
     @Inject(method = "<init>", at = @At("RETURN"))
     private void inject(CallbackInfo callbackInfo){
-        this.biomesToSpawnIn.add(BiomeBases.Alps);
+        this.biomesToSpawnIn.add(BiomeBases.alps);
     }
 }

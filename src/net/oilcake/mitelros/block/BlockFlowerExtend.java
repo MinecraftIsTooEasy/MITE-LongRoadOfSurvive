@@ -5,13 +5,13 @@ import net.minecraft.*;
 import java.util.Random;
 
 public class BlockFlowerExtend extends BlockFlower {
-    public static final int LUMINESCENT_HERB = 1;
-    public static final int AZURE_BLUET = 2;
-    public static final int CORNFLOWER = 3;
-    public static final int LILY_OF_THE_VALLEY = 4;
-    public static final int TULIP_PINK = 5;
-    public static final int TULIP_WHITE = 6;
-    public static final int TULIP_RED = 7;
+    public static final int LUMINESCENT_HERB = 0;
+    public static final int AZURE_BLUET = 1;
+    public static final int CORNFLOWER = 2;
+    public static final int LILY_OF_THE_VALLEY = 3;
+    public static final int TULIP_PINK = 4;
+    public static final int TULIP_WHITE = 5;
+    public static final int TULIP_RED = 6;
 
     public static final String[] types = new String[]{"luminescent_herb","azure_bluet","cornflower","lily_of_the_valley","pink_tulip","white_tulip","red_tulip"};
 
@@ -26,6 +26,9 @@ public class BlockFlowerExtend extends BlockFlower {
     protected BlockFlowerExtend(int id) {
         this(id, Material.plants);
         this.setBlockHardness(0.0f);
+        this.setStepSound(soundGrassFootstep);
+        this.setUnlocalizedName("flower");
+        this.setTextureName("flowers/");
     }
 
     public void a(mt par1IconRegister) {
@@ -68,7 +71,8 @@ public class BlockFlowerExtend extends BlockFlower {
         int metadata = block_access.getBlockMetadata(x, y, z);
         float width = 0.2F;
         if (metadata == 0) {
-            this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));;
+            this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
+            this.setLightValue(0.125F);
         } else if (metadata == 1) {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
         } else if (metadata == 2) {
@@ -81,8 +85,6 @@ public class BlockFlowerExtend extends BlockFlower {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
         } else if (metadata == 6) {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
-        } else if (metadata == 7) {
-            this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
         } else {
             Minecraft.setErrorMessage("setBlockBoundsBasedOnStateAndNeighbors: unhandled case");
         }
@@ -91,7 +93,7 @@ public class BlockFlowerExtend extends BlockFlower {
 
     public int getRandomSubtypeForBiome(Random random, BiomeBase biome) {
         if (biome == BiomeBase.plains && random.nextInt(2) == 0) {
-            return 1;
+            return 0;
         } else {
             int num_candidates = 0;
 
@@ -130,9 +132,9 @@ public class BlockFlowerExtend extends BlockFlower {
                 return false;
             }else if (biome.isSwampBiome()) {
                 return false;
-            } else if (subtype == 1 && biome.temperature < BiomeBase.plains.temperature) {
+            } else if (subtype == 0 && biome.temperature < BiomeBase.plains.temperature) {
                 return false;
-            } else if (subtype != 1 && biome.temperature < BiomeBase.forestHills.temperature) {
+            } else if (subtype != 0 && biome.temperature < BiomeBase.forestHills.temperature) {
                 return false;
             } else {
                 return !biome.isJungleBiome();
@@ -150,8 +152,8 @@ public class BlockFlowerExtend extends BlockFlower {
         }
 
         int subtype = this.getBlockSubtype(metadata);
-        if (subtype == 1) {
-            return 8;
+        if (subtype == 7) {
+            return 0;
         } else {
             return biome != BiomeBase.plains && !biome.isJungleBiome() ? 16 : 64;
         }

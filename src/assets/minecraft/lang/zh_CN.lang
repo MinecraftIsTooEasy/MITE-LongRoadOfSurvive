@@ -59,6 +59,14 @@ tile.toolbench.nickel.name=镍工作台
 tile.block_smoker_idle.name=烟熏炉
 tile.block_smoker_burning.name=烟熏炉
 
+tile.flowers/.luminescent_herb.name=荧光草
+tile.flowers/.azure_bluet.name=茜草花
+tile.flowers/.cornflower.name=矢车菊
+tile.flowers/.lily_of_the_valley.name=铃兰
+tile.flowers/.pink_tulip.name=郁金香
+tile.flowers/.white_tulip.name=郁金香
+tile.flowers/.red_tulip.name=郁金香
+
 item.armor/tungsten_helmet.name=钨头盔
 item.armor/tungsten_chestplate.name=钨胸甲
 item.armor/tungsten_leggings.name=钨护腿

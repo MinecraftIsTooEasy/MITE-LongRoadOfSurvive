@@ -57,6 +57,14 @@ tile.toolbench.nickel.name=Nickel Toolbench
 tile.block_smoker_idle.name=Smoker
 tile.block_smoker_burning.name=Smoker
 
+tile.flowers/.luminescent_herb.name=Luminescent Herb
+tile.flowers/.azure_bluet.name=Azure Bluet
+tile.flowers/.cornflower.name=Cornflower
+tile.flowers/.lily_of_the_valley.name=Lily of the Valley
+tile.flowers/.pink_tulip.name=Tulip
+tile.flowers/.white_tulip.name=Tulip
+tile.flowers/.red_tulip.name=Tulip
+
 item.armor/tungsten_helmet.name=Tungsten Helmet
 item.armor/tungsten_chestplate.name=Tungsten Chestplate
 item.armor/tungsten_leggings.name=Tungsten Leggings

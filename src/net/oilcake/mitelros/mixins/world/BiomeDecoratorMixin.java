@@ -1,7 +1,9 @@
 package net.oilcake.mitelros.mixins.world;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockFlowerExtend;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.world.WorldGenFlowersExtend;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,14 +14,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Random;
 
 @Mixin(BiomeDecorator.class)
-public class BiomeDecoratorMixin {
+public class BiomeDecoratorMixin{
 
     private WorldGenMinable nickelGen;
     private WorldGenMinable tungstenGen;
+    protected WorldGenFlowersExtend flowerExtendGen;
+    protected int flowersExtendPerChunk;
+
+
     @Inject(method = "<init>", at = @At("RETURN"))
     public void BiomeDecorator(CallbackInfo callbackInfo) {
         this.nickelGen = new WorldGenMinable(Blocks.oreNickel.blockID, 6);
         this.tungstenGen = new WorldGenMinable(Blocks.oreTungsten.blockID, 3);
+        this.flowerExtendGen = new WorldGenFlowersExtend(Blocks.flowerextend.blockID);
+        this.flowersExtendPerChunk = 2;
     }
 
 
@@ -118,12 +126,28 @@ public class BiomeDecoratorMixin {
     protected WorldGenMinable silverGen;
     @Shadow
     protected WorldGenMinable silverfishGen;
+    @Shadow
+    protected void genMinable(int frequency, WorldGenMinable world_gen_minable) {}
 
 
 //    public void genMinableC(int frequency, WorldGenMinable world_gen_minable, boolean vein_size_increases_with_depth) {
 //        this.genMinable(frequency, world_gen_minable, vein_size_increases_with_depth);
 //    }
-    @Shadow
-    protected void genMinable(int frequency, WorldGenMinable world_gen_minable) {}
+
+
+    @Inject(method = "decorate",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/BiomeDecorator;decorate()V",
+                    shift = At.Shift.AFTER))
+    private void Injector_world_decorate(CallbackInfo c) {
+        Random random_test = new Random();
+        for(int var2 = 0; var2 < this.flowersExtendPerChunk; ++var2) {
+            int var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
+            int var4 = this.randomGenerator.nextInt(128);
+            int var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
+            this.flowerExtendGen.setMetadata(random_test.nextInt(7));
+            this.flowerExtendGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
+        }
+    }
 
 }

@@ -6,6 +6,8 @@ import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.RecipeRegister;
 
+import java.util.Random;
+
 import static net.xiaoyu233.fml.util.ReflectHelper.createInstance;
 
 
@@ -45,8 +47,7 @@ public class Blocks extends Block {
             , Constant.getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
 
     public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
-    public static final Block flowerextend = createInstance(BlockFlowerExtend.class, new Class[] {int.class, Material.class}
-            , Constant.getNextBlockID(), Materials.plants).setStepSound_(soundGrassFootstep);
+    public static final Block flowerextend = new BlockFlowerExtend(Constant.getNextBlockID());
 
 
 
@@ -157,12 +158,27 @@ public class Blocks extends Block {
 //                "XX ",
 //                "XX ",
 //                'X',Items.tungstenIngot);
-
-
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,14),false,
+                new ItemStack(Blocks.flowerextend,1,0));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),false,
+                new ItemStack(Blocks.flowerextend,1,1));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,12),false,
+                new ItemStack(Blocks.flowerextend,1,2));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),false,
+                new ItemStack(Blocks.flowerextend,1,3));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,9),false,
+                new ItemStack(Blocks.flowerextend,1,4));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),false,
+                new ItemStack(Blocks.flowerextend,1,5));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),false,
+                new ItemStack(Blocks.flowerextend,1,6));
 
         RecipesFurnace.smelting().addSmelting(oreTungsten.blockID, new ItemStack(Items.tungstenIngot));
         RecipesFurnace.smelting().addSmelting(oreNickel.blockID, new ItemStack(Items.nickelIngot));
     }
+
+
+
     protected Block setTextureName(String par1Str)
     {
         this.textureName = par1Str;
