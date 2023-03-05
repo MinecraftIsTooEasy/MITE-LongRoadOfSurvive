@@ -1,9 +1,7 @@
 package net.oilcake.mitelros.util.events;
 
 import com.google.common.eventbus.Subscribe;
-import net.minecraft.ChatMessage;
-import net.minecraft.EntityPlayer;
-import net.minecraft.EnumChatFormat;
+import net.minecraft.*;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
@@ -63,6 +61,8 @@ public class LROSEvent {
                 .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
+        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
+        player.vision_dimming += 3.0F;
     }
 
 

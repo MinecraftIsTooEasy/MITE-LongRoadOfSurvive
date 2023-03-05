@@ -38,7 +38,66 @@ public class ItemBowlMixin extends ItemVessel {
             if (this.contains(Material.water) || this.contains(Material.milk)) {
                 player.getFoodStats().addWater(2);
             }else{
-                if(!this.contains(Material.salad)){
+                if(this.contains(Material.beef_stew)){
+                    player.Feast_trigger_beef_stew = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.chicken_soup)){
+                    player.Feast_trigger_chicken_soup = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.cereal)){
+                    player.Feast_trigger_cereal = true;
+                    player.getFoodStats().addWater(2);
+                }
+                if(this.contains(Materials.chestnut_soup)){
+                    player.Feast_trigger_chestnut_soup = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.ice_cream)){
+                    player.Feast_trigger_ice_cream = true;
+                    player.getFoodStats().addWater(2);
+                }
+                if(this.contains(Materials.lemonade)){
+                    player.Feast_trigger_lemonade = true;
+                    player.getFoodStats().addWater(2);
+                }
+                if(this.contains(Material.mashed_potato)){
+                    player.Feast_trigger_mashed_potatoes = true;
+                }
+                if(this.contains(Material.mushroom_stew)){
+                    player.Feast_trigger_mushroom_soup = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.cream_of_mushroom_soup)){
+                    player.Feast_trigger_cream_mushroom_soup = true;
+                    player.getFoodStats().addWater(2);
+                }
+                if(this.contains(Material.cream_of_vegetable_soup)){
+                    player.Feast_trigger_cream_vegetable_soup = true;
+                    player.getFoodStats().addWater(2);
+                }
+                if(this.contains(Material.porridge)){
+                    player.Feast_trigger_porridge = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Materials.porkchop_stew)){
+                    player.Feast_trigger_porkchop_stew = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.pumpkin_soup)){
+                    player.Feast_trigger_pumpkin_soup = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.sorbet)){
+                    player.Feast_trigger_sorbet = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Material.salad)){
+                    player.Feast_trigger_salad = true;
+                }
+                if(this.contains(Material.vegetable_soup)){
+                    player.Feast_trigger_vegetable_soup = true;
                     player.getFoodStats().addWater(4);
                 }
             }

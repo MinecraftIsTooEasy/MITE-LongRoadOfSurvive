@@ -1,3 +1,20 @@
+achievement.MinePieces=用力过猛
+achievement.MinePieces.desc=敲碎矿物
+achievement.WearAllWolfArmor=追逐潮流
+achievement.WearAllWolfArmor.desc=穿上全套的极地护甲
+achievement.BuildMithrilBow=毁灭之弓
+achievement.BuildMithrilBow.desc=制造一把更大威力的秘银弓
+achievement.getWitherSkull=怪癖收藏
+achievement.getWitherSkull.desc=获得生物的头颅
+achievement.getBeacon=带信标回家
+achievement.getBeacon.desc=启动它或许是个问题
+achievement.mashedCactus=紧急避险
+achievement.mashedCactus.desc=捣碎仙人掌
+achievement.Hypothermia=冷冰冰的
+achievement.Hypothermia.desc=获得4级以上的寒冷惩罚
+achievement.Feast=盛宴
+achievement.Feast.desc=吃下所有碗类食物
+
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
 item.armor/nickel_leggings.name=镍护腿
@@ -184,8 +201,6 @@ entity.EntityStray.name=流髑
 entity.EntityHusk.name=尸壳
 entity.EntityLichShadow.name=巫妖的幻影
 entity.EntityLich.name=巫妖
-
-
 
 death.extend.attack.thirsty = %1$s 脱水而亡
 death.extend.attack.freeze = %1$s 冻死了

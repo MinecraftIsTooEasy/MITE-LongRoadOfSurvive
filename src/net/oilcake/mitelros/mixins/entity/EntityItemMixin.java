@@ -201,7 +201,7 @@ public abstract class EntityItemMixin extends Entity{
                         if (var2.itemID == Items.pieceCopper.itemID || var2.itemID == Items.pieceGold.itemID || var2.itemID == Items.pieceSilver.itemID || var2.itemID == Items.pieceIron.itemID) {
                             par1EntityPlayer.triggerAchievement(AchievementExtend.FragofMine);
                         }
-                        if (var2.itemID == Block.skull.blockID){
+                        if (var2.itemID == Item.skull.itemID){
                             par1EntityPlayer.triggerAchievement(AchievementExtend.getWitherSkull);
                         }
 

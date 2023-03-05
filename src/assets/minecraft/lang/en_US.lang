@@ -1,3 +1,20 @@
+achievement.MinePieces=Punch too hard
+achievement.MinePieces.desc=Smash the ore block.
+achievement.WearAllWolfArmor=Famous brand
+achievement.WearAllWolfArmor.desc=Get leather wolf fur covered
+achievement.BuildMithrilBow=Arbalistic
+achievement.BuildMithrilBow.desc=Get the mithril bow.
+achievement.getWitherSkull=SPOOKYYYYY
+achievement.getWitherSkull.desc=Get skull of the mob.
+achievement.getBeacon=Beacon!
+achievement.getBeacon.desc=Now, Launch it.
+achievement.mashedCactus=Emergency hedging
+achievement.mashedCactus.desc=Get water for survive!
+achievement.Hypothermia=Hypothermia
+achievement.Hypothermia.desc=Staying in cold area without any protection
+achievement.Feast=Feast
+achievement.Feast.desc=Become a gourmet in MITE!!!
+
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
 item.armor/nickel_leggings.name=Nickel Leggings

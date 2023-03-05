@@ -237,6 +237,7 @@ public class EntityPlayerMixin extends EntityLiving{
                 if(freezelevel >= 1){
                     if (freezelevel >= 4) {
                         ++FreezingWarning;
+                        this.triggerAchievement(AchievementExtend.hypothermia);
                     }
                     if (FreezingWarning > 500) {
                         this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 1.0F));
@@ -254,6 +255,9 @@ public class EntityPlayerMixin extends EntityLiving{
                     --FreezingCooldown;
                 }
             }
+        }
+        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup){
+            this.triggerAchievement(AchievementExtend.feast);
         }
     }
     public int getFreezingCooldown(){
@@ -518,4 +522,24 @@ public class EntityPlayerMixin extends EntityLiving{
     public void addHungerServerSide(float hunger) {}
     @Shadow
     public void triggerAchievement(Statistic par1StatBase) {}
+
+    //try to trigger Achievement - Feast
+    public boolean Feast_trigger_salad = false;
+    public boolean Feast_trigger_porridge = false;
+    public boolean Feast_trigger_beef_stew = false;
+    public boolean Feast_trigger_cereal = false;
+    public boolean Feast_trigger_chicken_soup = false;
+    public boolean Feast_trigger_mushroom_soup = false;
+    public boolean Feast_trigger_cream_mushroom_soup = false;
+    public boolean Feast_trigger_vegetable_soup = false;
+    public boolean Feast_trigger_cream_vegetable_soup = false;
+    public boolean Feast_trigger_ice_cream = false;
+    public boolean Feast_trigger_chestnut_soup = false;
+    public boolean Feast_trigger_lemonade = false;
+    public boolean Feast_trigger_mashed_potatoes = false;
+    public boolean Feast_trigger_porkchop_stew = false;
+    public boolean Feast_trigger_pumpkin_soup = false;
+    public boolean Feast_trigger_sorbet = false;
+
+
 }
