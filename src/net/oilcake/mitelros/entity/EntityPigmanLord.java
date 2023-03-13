@@ -13,7 +13,6 @@ public class EntityPigmanLord extends EntityPigZombie {
         this.setEntityAttribute(GenericAttributes.maxHealth, 30.0);
         this.setEntityAttribute(GenericAttributes.followRange, 32.0);
         this.setEntityAttribute(GenericAttributes.attackDamage, 9.0);
-        this.setEntityAttribute(GenericAttributes.movementSpeed, 0.25999999046325684);
     }
 
     public EntityPigmanLord(World par1World) {

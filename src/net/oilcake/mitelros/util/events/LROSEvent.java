@@ -61,7 +61,7 @@ public class LROSEvent {
                 .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
-        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
+        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,150,0)));
         player.vision_dimming += 3.0F;
     }
 

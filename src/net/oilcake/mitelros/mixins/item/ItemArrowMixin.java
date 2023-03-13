@@ -16,7 +16,7 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 public class ItemArrowMixin extends Item{
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback){
-        material_types = new Material[]{Material.rusted_iron, Material.ancient_metal, Materials.nickel, Materials.tungsten};
+        material_types = new Material[]{Material.flint,Material.obsidian,Material.copper,Material.silver,Material.gold,Material.iron,Material.rusted_iron, Material.ancient_metal,Material.mithril,Material.adamantium,Materials.nickel,Materials.tungsten};
     }
     @Overwrite
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
@@ -27,24 +27,38 @@ public class ItemArrowMixin extends Item{
             if (this.arrowhead_material == Materials.nickel) {
                 info.add(EnumChatFormat.LIGHT_GRAY + Translator.getFormatted("itemtool.tooltip.slimeresistance"));
             }
-            if(this.arrowhead_material != Material.rusted_iron && this.arrowhead_material != Material.ancient_metal
-            && this.arrowhead_material != Materials.nickel && this.arrowhead_material != Materials.tungsten){
-                info.add(EnumChatFormat.RED + Translator.getFormatted("itemarrow.tooltip.disable", new Object[0]));
-            }
         }
     }
 
 
     @Overwrite
     public float getChanceOfRecovery() {
-         if (dyCast(this) == arrowRustedIron) {
+        if (dyCast(this) == arrowFlint) {
+            return 0.3F;
+        }else if (dyCast(this) == Item.arrowObsidian) {
+            return 0.4F;
+        }else if (dyCast(this) == Item.arrowCopper) {
+            return 0.6F;
+        }else if (dyCast(this) == Item.arrowSilver) {
+            return 0.6F;
+        }else if (dyCast(this) == Item.arrowGold) {
             return 0.5F;
+        }else if (dyCast(this) == Item.arrowRustedIron) {
+            return 0.5F;
+        }else if (dyCast(this) == Item.arrowIron) {
+            return 0.7F;
         }else if (dyCast(this) == Items.arrowNickel) {
             return 0.7F;
-        } else if (dyCast(this) != arrowAncientMetal) {
-            return dyCast(this) == Items.arrowTungsten ? 0.9F : 0.3F;
-        } else {
+        }else if (dyCast(this) == Item.arrowMithril) {
             return 0.8F;
+        }else if (dyCast(this) == Items.arrowAncientMetal) {
+            return 0.8F;
+        }else if (dyCast(this) == Items.arrowTungsten) {
+            return 0.9F;
+        }else if (dyCast(this) == Items.arrowAdamantium) {
+            return 0.9F;
+        }else {
+            return 0.7F;
         }
     }
     @Shadow

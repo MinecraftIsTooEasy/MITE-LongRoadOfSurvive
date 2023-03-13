@@ -9,11 +9,14 @@ achievement.getWitherSkull.desc=获得生物的头颅
 achievement.getBeacon=带信标回家
 achievement.getBeacon.desc=启动它或许是个问题
 achievement.mashedCactus=紧急避险
-achievement.mashedCactus.desc=捣碎仙人掌
+achievement.mashedCactus.desc=找到些能让你补充水分的东西
 achievement.Hypothermia=冷冰冰的
 achievement.Hypothermia.desc=获得4级以上的寒冷惩罚
 achievement.Feast=盛宴
 achievement.Feast.desc=吃下所有碗类食物
+achievement.overkill.desc=制造一击20颗心的伤害
+achievement.SoundofUnder=地下之声
+achievement.SoundofUnder.desc=获得地下世界的任一种唱片
 
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
@@ -184,6 +187,7 @@ item.food/horse_meat.name=马肉
 item.food/horse_meat_cooked.name=熟马肉
 item.apple_golden.name=§b金苹果
 item.apple_golden_legend.name=§d金苹果
+item.food/glow_berries.name=发光浆果
 
 
 item.wolf_fur.name=狼的毛皮
@@ -196,11 +200,12 @@ entity.EntityWitherBoneLord.name=凋零骷髅领主
 entity.EntityWitherBodyguard.name=衰败侍卫
 entity.EntityClusterSpider.name=集群蜘蛛
 entity.EntitySpiderKing.name=国王蜘蛛
-entity.EntityPigManLord.name=猪人领主
+entity.EntityPigManlord.name=猪人领主
 entity.EntityStray.name=流髑
 entity.EntityHusk.name=尸壳
 entity.EntityLichShadow.name=巫妖的幻影
 entity.EntityLich.name=巫妖
+entity.EntityStalkerCreeper.name=潜伏爬行者
 
 death.extend.attack.thirsty = %1$s 脱水而亡
 death.extend.attack.freeze = %1$s 冻死了

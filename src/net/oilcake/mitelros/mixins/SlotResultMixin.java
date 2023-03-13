@@ -30,7 +30,7 @@ public class SlotResultMixin extends Slot {
         if (block == Block.beacon){
             this.thePlayer.addStat(AchievementExtend.getBeacon,1);
         }
-        if (item == Items.mashedCactus){
+        if (item == Items.mashedCactus || item == Items.glowberries){
             this.thePlayer.addStat(AchievementExtend.mashedCactus,1);
         }
 

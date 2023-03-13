@@ -8,6 +8,7 @@ public class Materials extends Material {
     public static final Material porkchop_stew = (new MaterialFood("porkchop_stew")).setHarmedByPepsin();
     public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
     public static final Material mashedCactus = (new MaterialFood("mashed_cactus"));
+    public static final Material glowberries = (new MaterialFood("glowberries"));
     public static final Material orePieces = (new Material("Pieces"));
     public static final Materials wolf_fur = (Materials) new Materials(EnumEquipmentMaterials.wolf_fur).setMetal(false).setMinHarvestLevel(0);
     public static final Material lemonade = (new MaterialFood("lemonade")).setDrinkable();

@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.List;
 import java.util.Random;
 
 
@@ -25,11 +26,11 @@ public class ItemBowlMixin extends ItemVessel {
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
             if (this.contains(Materials.dangerous_water)) {
-                player.getFoodStats().addWater(-2);
+                player.getFoodStats().addWater(1);
                 player.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
             }
             if (this.contains(Materials.unsafe_water)) {
-                player.getFoodStats().addWater(-2);
+                player.getFoodStats().addWater(1);
                 player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
             }
             if (this.contains(Material.milk)) {
@@ -110,6 +111,8 @@ public class ItemBowlMixin extends ItemVessel {
 
         super.onItemUseFinish(item_stack, world, player);
     }
+
+
     public ItemBowlMixin(int id, Material vessel_material, Material contents_material, int standard_volume, int max_stack_size_empty, int max_stack_size_full, String texture) {
         super(id, vessel_material, contents_material, standard_volume, max_stack_size_empty, max_stack_size_full, texture);
     }

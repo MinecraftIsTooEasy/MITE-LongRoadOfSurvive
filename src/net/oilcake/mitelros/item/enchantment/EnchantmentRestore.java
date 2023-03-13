@@ -15,7 +15,7 @@ public class EnchantmentRestore extends Enchantment {
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentAbsorb.effectId && par1Enchantment.effectId != enchantmentVanishing.effectId;
+        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentAbsorb.effectId && par1Enchantment.effectId != silkTouch.effectId;
     }
     @Override
     public String getNameSuffix() {

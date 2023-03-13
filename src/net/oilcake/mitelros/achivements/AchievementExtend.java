@@ -14,8 +14,9 @@ public class AchievementExtend {
     public static Achievement getBeacon;
     public static Achievement mashedCactus;
     public static Achievement hypothermia;
-
     public static Achievement feast;
+
+    public static Achievement SoundofUnder;
 
 
     public AchievementExtend() {
@@ -30,7 +31,7 @@ public class AchievementExtend {
         mashedCactus = (new Achievement(getNextAchievementID(), "mashedCactus", -3, -3, Items.mashedCactus, AchievementList.seeds)).registerAchievement();
         hypothermia = (new Achievement(getNextAchievementID(),"Hypothermia",-4,2, Block.ice,AchievementList.openInventory)).registerAchievement();
         feast = (new Achievement(getNextAchievementID(),"Feast",1,-3, Item.bowlBeefStew,AchievementList.fineDining)).setSpecial().registerAchievement();
-
+        SoundofUnder = (new Achievement(getNextAchievementID(),"SoundofUnder",0,11,Item.recordUnderworld,AchievementList.portal)).setSpecial().registerAchievement();
     }
 
     private static int getNextAchievementID() {

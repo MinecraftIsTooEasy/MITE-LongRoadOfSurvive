@@ -101,7 +101,7 @@ public class EntityPlayerMixin extends EntityLiving{
                         this.onEnchantmentCritical(target);
                     }
 
-                    if (damage >= 18.0F) {
+                    if (damage >= 40.0F) {
                         this.triggerAchievement(AchievementList.overkill);
                     }
 
@@ -202,7 +202,7 @@ public class EntityPlayerMixin extends EntityLiving{
     private int FreezingCooldown;
     private int FreezingWarning;
     private int reduce_weight;
-    private float dry_resist;
+    private double dry_resist;
     public int getReduce_weight(){
         if((this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
                 this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
@@ -227,8 +227,8 @@ public class EntityPlayerMixin extends EntityLiving{
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
-            dry_resist += 1.0f + biome.getFloatTemperature();
-            if(dry_resist > 14400) {
+            dry_resist += 1.0D + (double) biome.getFloatTemperature();
+            if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
             }

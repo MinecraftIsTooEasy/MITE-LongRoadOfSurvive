@@ -18,8 +18,8 @@ public abstract class EntityItemMixin extends Entity{
     public EntityItemMixin(World par1World) {
         super(par1World);
     }
-//    private boolean isExploded;
-//    private boolean canBePickUpByPlayer;
+    private boolean isExploded;
+    private boolean canBePickUpByPlayer;
     @Overwrite
     public EntityDamageResult attackEntityFrom(Damage damage) {
         EntityDamageResult result = super.attackEntityFrom(damage);
@@ -201,6 +201,12 @@ public abstract class EntityItemMixin extends Entity{
                         if (var2.itemID == Items.pieceCopper.itemID || var2.itemID == Items.pieceGold.itemID || var2.itemID == Items.pieceSilver.itemID || var2.itemID == Items.pieceIron.itemID) {
                             par1EntityPlayer.triggerAchievement(AchievementExtend.FragofMine);
                         }
+                        if (var2.itemID == Items.pieceCopper.itemID || var2.itemID == Items.pieceGold.itemID || var2.itemID == Items.pieceSilver.itemID || var2.itemID == Items.pieceIron.itemID) {
+                            par1EntityPlayer.triggerAchievement(AchievementExtend.FragofMine);
+                        }
+                        if (var2.itemID == Item.recordUnderworld.itemID || var2.itemID == Item.recordDescent.itemID || var2.itemID == Item.recordWanderer.itemID ||var2.itemID == Item.recordLegends.itemID){
+                            par1EntityPlayer.triggerAchievement(AchievementExtend.SoundofUnder);
+                        }
                         if (var2.itemID == Item.skull.itemID){
                             par1EntityPlayer.triggerAchievement(AchievementExtend.getWitherSkull);
                         }
@@ -278,6 +284,26 @@ public abstract class EntityItemMixin extends Entity{
         }
 
         super.spentTickInWater();
+    }
+    @Inject(method = "handleExplosion",
+            cancellable = true,
+            at = @At(value = "INVOKE",
+                    shift = At.Shift.AFTER,
+                    target = "Lnet/minecraft/EntityItem;calcExplosionForce(FD)F"))
+    private void injectCancelExplosionCopy(CallbackInfoReturnable<Boolean> callback){
+        if (this.isExploded) {
+            this.setDead();
+            this.tryRemoveFromWorldUniques();
+            callback.setReturnValue(true);
+            callback.cancel();
+        }
+    }
+    @Redirect(method = "handleExplosion",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/EntityItem;tryRemoveFromWorldUniques()V"))
+    private void injectUpdateExploded(EntityItem caller){
+        this.isExploded = true;
+        this.tryRemoveFromWorldUniques();
     }
 
 //    @Inject(method = {"<init>(Lnet/minecraft/World;)V","<init>(Lnet/minecraft/World;DDD)V","<init>(Lnet/minecraft/World;DDDLnet/minecraft/ItemStack;)V"},at = @At("RETURN"))

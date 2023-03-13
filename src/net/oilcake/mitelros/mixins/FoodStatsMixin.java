@@ -231,10 +231,9 @@ public class FoodStatsMixin {
                     }
                 } else if (this.player.DuringDehydration()) {
                     this.heal_progress = 0.0F;
-                    this.dehydration_progress += 0.005F;
+                    this.dehydration_progress += 0.002F;
                     if (this.dehydration_progress >= 1.0F) {
-                            par1EntityPlayer.attackEntityFrom(new Damage(DamageSourceExtend.thirsty, 2.0F));
-
+                            par1EntityPlayer.attackEntityFrom(new Damage(DamageSourceExtend.thirsty, 1.0F));
                         --this.dehydration_progress;
                         this.water_for_nutrition_only = 0.0F;
                     }

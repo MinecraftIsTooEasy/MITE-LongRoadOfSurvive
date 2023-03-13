@@ -28,9 +28,10 @@ public class EntityTypesMixin {
         addMapping(EntitySpiderKing.class,"EntitySpiderKing",544);
         addMapping(EntityStray.class,"EntityStray",545);
         addMapping(EntityHusk.class,"EntityHusk",546);
-        addMapping(EntityPigmanLord.class,"PigManlord",547);
-        addMapping(EntityLich.class,"Lich",548);
-        addMapping(EntityLichShadow.class,"LichShadow",549);
+        addMapping(EntityPigmanLord.class,"EntityPigManlord",547);
+        addMapping(EntityLich.class,"EntityLich",548);
+        addMapping(EntityLichShadow.class,"EntityLichShadow",549);
+        addMapping(EntityStalkerCreeper.class,"EntityStalkerCreeper",550);
     }
 
 }

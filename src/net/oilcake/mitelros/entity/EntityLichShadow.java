@@ -165,7 +165,7 @@ public class EntityLichShadow extends EntitySkeleton{
         boolean can_evade = !damage.isFallDamage() && !damage.isFireDamage() && !damage.isPoison();
         if (can_evade && this.num_evasions > 0) {
             --this.num_evasions;
-            if (this.tryTeleportAwayFrom(this.getTarget(), 6.0)) {
+            if (this.tryTeleportAwayFrom(this.getTarget(), 8.0)) {
                 return null;
             }
         }

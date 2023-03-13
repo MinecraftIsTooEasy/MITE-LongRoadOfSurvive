@@ -18,19 +18,32 @@ public class EntityWitherBoneLord extends EntityBoneLord {
         this.setEntityAttribute(GenericAttributes.attackDamage, 8.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 20.0);
     }
-//    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
-//        if (recently_hit_by_player){
-//            super.dropFewItems(recently_hit_by_player, damage_source);
-//        }
+//    @Override
+//    public void dropContainedItems() {
+//
+//    }
+//
+//    @Override
+//    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
+//
 //    }
     @Override
-    public void dropContainedItems() {
+    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+        int looting = damage_source.getLootingModifier();
+        int num_drops;
+        int i;
+        num_drops = this.rand.nextInt(3 + looting) - 1;
+        if (num_drops > 0 && !recently_hit_by_player) {
+            num_drops -= this.rand.nextInt(num_drops + 1);
+        }
 
-    }
+        for(i = 0; i < num_drops; ++i) {
+            this.dropItem(Item.coal.itemID, 1);
+        }
 
-    @Override
-    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
-
+        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
+            this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
+        }
     }
     public void addRandomWeapon() {
         List items = new ArrayList();

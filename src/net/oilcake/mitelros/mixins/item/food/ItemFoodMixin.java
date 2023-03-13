@@ -5,8 +5,11 @@ import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.List;
+
 @Mixin(ItemFood.class)
 public class ItemFoodMixin extends Item {
+
     @Shadow
     protected void onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {}
 
@@ -14,7 +17,7 @@ public class ItemFoodMixin extends Item {
         if (player.onServer()) {
             if (this.hasMaterial(Material.fruit) && item_stack != Item.appleGold.getItemStackForStatsIcon() || this.hasMaterial(Materials.mashedCactus)) {
                 this.setWater(3);
-            }else if (this.hasMaterial(Material.vegetable)) {
+            }else if (this.hasMaterial(Material.vegetable) || this.hasMaterial(Materials.glowberries)) {
                 this.setWater(2);
             }else if(this.hasMaterial(Material.meat) || this.hasMaterial(Material.cheese)){
                 this.setWater(-1);

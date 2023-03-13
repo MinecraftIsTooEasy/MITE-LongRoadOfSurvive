@@ -14,6 +14,7 @@ achievement.Hypothermia=Hypothermia
 achievement.Hypothermia.desc=Staying in cold area without any protection
 achievement.Feast=Feast
 achievement.Feast.desc=Become a gourmet in MITE!!!
+achievement.overkill.desc=Deal twenty hearts of damage in a single hit
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -172,6 +173,7 @@ item.food/horse_meat.name=Raw Horse Meat
 item.food/horse_meat_cooked.name=Cooked Horse Meat
 item.apple_golden.name=§bGolden Apple
 item.apple_golden_legend.name=§dGolden Apple
+item.food/glow_berries.name=Glow Berries
 
 itemarrow.tooltip.disable=Disabled by technical issue...
 itemtool.tooltip.slimeresistance=Bonus vs slime
@@ -181,11 +183,12 @@ entity.EntityWitherBoneLord.name=Wither Bonelord
 entity.EntityWitherBodyguard.name=Wither Bodyguard
 entity.EntityClusterSpider.name=Cluster Spider
 entity.EntitySpiderKing.name=Spider King
-entity.EntityPigManLord.name=Pigman Lord
+entity.EntityPigManlord.name=Pigman Lord
 entity.EntityStray.name=Stray
 entity.EntityHusk.name=Husk
 entity.EntityLichShadow.name=Shadow of Lich
 entity.EntityLich.name=Lich
+entity.EntityStalkerCreeper.name=Stalker Creeper
 
 death.attack.thirsty = %1$s dead because of dehydration
 death.attack.freeze = %1$s Freezed Fully

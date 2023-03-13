@@ -29,6 +29,7 @@ public class BlockFlowerExtend extends BlockFlower {
         this.setStepSound(soundGrassFootstep);
         this.setUnlocalizedName("flower");
         this.setTextureName("flowers/");
+        this.setMaxStackSize(32);
     }
 
     public void a(mt par1IconRegister) {

@@ -15,7 +15,7 @@ public class EnchantmentVanishing extends Enchantment {
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentAbsorb.effectId;
+        return super.canApplyTogether(par1Enchantment);
     }
     @Override
     public String getNameSuffix() {

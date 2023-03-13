@@ -1,14 +1,23 @@
 package net.oilcake.mitelros.mixins;
 
-import net.minecraft.EnumChatFormat;
-import net.minecraft.Minecraft;
+import net.minecraft.*;
 import net.minecraft.client.main.Main;
-import net.oilcake.mitelros.util.Constant;
+import net.minecraft.server.MinecraftServer;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.io.File;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
+    public aul u;
 
     @Overwrite
     public static String getVersionDescriptor(boolean include_formatting) {

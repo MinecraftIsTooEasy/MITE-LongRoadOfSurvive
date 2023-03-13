@@ -47,7 +47,7 @@ public class Blocks extends Block {
             , Constant.getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep);
 
     public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
-    public static final Block flowerextend = new BlockFlowerExtend(Constant.getNextBlockID());
+    public static final Block flowerextend = new BlockFlowerExtend(Constant.getNextBlockID()).setMaxStackSize(32);
 
 
 
@@ -158,7 +158,7 @@ public class Blocks extends Block {
 //                "XX ",
 //                "XX ",
 //                'X',Items.tungstenIngot);
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,14),true,
+        register.registerShapelessRecipe(new ItemStack(Items.glowberries,1),true,
                 new ItemStack(Blocks.flowerextend,1,0));
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
                 new ItemStack(Blocks.flowerextend,1,1));

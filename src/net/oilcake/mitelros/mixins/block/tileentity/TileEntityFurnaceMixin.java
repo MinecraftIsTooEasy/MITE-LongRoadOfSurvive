@@ -5,6 +5,7 @@ import net.oilcake.mitelros.block.BlockBlastFurnace;
 import net.oilcake.mitelros.block.BlockSmoker;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -28,7 +29,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
         } else if (item_id == Block.oreMithril.blockID || item_id == Blocks.oreTungsten.blockID || item_id == Items.pieceMithril.itemID || item_id == Items.pieceTungsten.itemID) {
             return 3;
         } else if (item_id == Block.oreCopper.blockID || item_id == Block.oreSilver.blockID || item_id == Block.oreGold.blockID || item_id == Block.oreIron.blockID ||
-                item_id == Blocks.oreNickel.blockID || item_id == Items.pieceSilver.itemID || item_id == Items.pieceGold.itemID || item_id == Items.pieceGoldNether.itemID ||
+                item_id == Blocks.oreNickel.blockID || item_id == Items.pieceCopper.itemID || item_id == Items.pieceSilver.itemID || item_id == Items.pieceGold.itemID || item_id == Items.pieceGoldNether.itemID ||
                 item_id == Items.pieceIron.itemID || item_id == Items.pieceNickel.itemID || item_id == Block.oreNetherQuartz.blockID || item_id == Block.oreEmerald.blockID ||
                 item_id == Block.oreDiamond.blockID || item_id == Block.oreRedstone.blockID || item_id == Block.oreLapis.blockID || item_id == Block.sandStone.blockID) {
             return 2;
@@ -108,14 +109,20 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                 }
 
                 if (this.isBurning() && this.canSmelt(this.heat_level)) {
-                    ++this.furnaceCookTime;
                     int temp = 200;
-                    if (this.getFurnaceBlock() instanceof BlockBlastFurnace) {
-                        ++this.furnaceCookTime;
-                    } else if (this.getFurnaceBlock() instanceof BlockSmoker) {
-                        ++this.furnaceCookTime;
+                    int item_id = this.getInputItemStack().itemID;
+                    int speed_bonus = 1;
+                    if(item_id == Items.pieceCopper.itemID || item_id == Items.pieceSilver.itemID || item_id == Items.pieceGold.itemID || item_id == Items.pieceGoldNether.itemID ||
+                            item_id == Items.pieceIron.itemID || item_id == Items.pieceNickel.itemID){
+                        speed_bonus = 4;
                     }
-                    if (this.furnaceCookTime == temp) {
+                    this.furnaceCookTime += speed_bonus;
+                    if (this.getFurnaceBlock() instanceof BlockBlastFurnace) {
+                        this.furnaceCookTime += speed_bonus;
+                    } else if (this.getFurnaceBlock() instanceof BlockSmoker) {
+                        this.furnaceCookTime += speed_bonus;
+                    }
+                    if (this.furnaceCookTime >= temp) {
                         this.furnaceCookTime = 0;
                         this.smeltItem(this.heat_level);
                         var2 = true;

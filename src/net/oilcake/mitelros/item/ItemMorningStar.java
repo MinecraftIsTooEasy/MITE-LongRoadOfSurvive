@@ -27,8 +27,7 @@ public class ItemMorningStar extends ItemClub {
 
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         if (extended_info) {
-            info.add(EnumChatFormat.AQUA + Translator.getFormatted("你是真油盐不进", new Object[0]));
+            info.add(EnumChatFormat.AQUA + Translator.getFormatted("油盐不进", new Object[0]));
         }
-
     }
 }
