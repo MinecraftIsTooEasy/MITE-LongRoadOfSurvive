@@ -129,7 +129,7 @@ public class Items extends Item {
     public static final ItemMorningStar morningStarAdamantium = new ItemMorningStar(Constant.getNextItemID(), Material.adamantium);
     public static final Item fragStalkerCreeper = new ItemStandard(Constant.getNextItemID(),Material.frags,"fragStalkerCreeper");
     public static final ItemFood glowberries = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.glowberries,1,0,false,false,false,"glow_berries").setMaxStackSize(64).setAlwaysEdible();
-
+    public static final ItemArrow arrowMagical = new ItemArrow(Constant.getNextItemID(), Materials.magical);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -258,6 +258,7 @@ public class Items extends Item {
         register("tool/adamantium/adamantium_club",morningStarAdamantium);
         register("frag/stalker_creeper",fragStalkerCreeper);
         register("food/glow_berries",glowberries);
+        register("arrows/magical_arrow", arrowMagical);
         Constant.initItemArray();
     }
 

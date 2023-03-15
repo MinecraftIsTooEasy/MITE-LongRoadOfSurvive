@@ -116,6 +116,9 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                             item_id == Items.pieceIron.itemID || item_id == Items.pieceNickel.itemID){
                         speed_bonus = 4;
                     }
+                    if(item_id == Items.pieceMithril.itemID || item_id == Items.pieceTungsten.itemID || item_id == Items.pieceAdamantium.itemID){
+                        speed_bonus = 2;
+                    }
                     this.furnaceCookTime += speed_bonus;
                     if (this.getFurnaceBlock() instanceof BlockBlastFurnace) {
                         this.furnaceCookTime += speed_bonus;

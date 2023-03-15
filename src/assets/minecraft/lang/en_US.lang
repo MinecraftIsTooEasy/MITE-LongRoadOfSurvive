@@ -34,6 +34,8 @@ enchantment.vanishing=Curse Of Vanishing
 enchantment.restore=Restore
 enchantment.absorb=Absorb
 enchantment.destroying=Destroying
+enchantment.callofnether=Call of Nether
+enchantment.infinity=Infinity
 
 potion.dehydration=Dehydration
 
@@ -174,6 +176,8 @@ item.food/horse_meat_cooked.name=Cooked Horse Meat
 item.apple_golden.name=§bGolden Apple
 item.apple_golden_legend.name=§dGolden Apple
 item.food/glow_berries.name=Glow Berries
+
+item.arrows/magical_arrow.name=Magical Arrow
 
 itemarrow.tooltip.disable=Disabled by technical issue...
 itemtool.tooltip.slimeresistance=Bonus vs slime

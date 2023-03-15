@@ -37,6 +37,7 @@ enchantment.restore=还原
 enchantment.absorb=汲取
 enchantment.destroying=毁灭
 enchantment.callofnether=下界呼唤
+enchantment.infinity=无限
 
 potion.dehydration=脱水
 
@@ -192,9 +193,11 @@ item.food/glow_berries.name=发光浆果
 
 item.wolf_fur.name=狼的毛皮
 
-itemarrow.tooltip.disable=此箭苗已被禁用，请勿制作/食用
+itemarrow.tooltip.disable=因为技术原因被禁用
 itemtool.tooltip.slimeresistance=史莱姆杀手
 itemarmor.tooltip.slimeresistance=腐蚀抗性
+
+item.arrows/magical_arrow.name=魔法箭
 
 entity.EntityWitherBoneLord.name=凋零骷髅领主
 entity.EntityWitherBodyguard.name=衰败侍卫

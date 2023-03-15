@@ -14,6 +14,7 @@ public class Materials extends Material {
     public static final Material lemonade = (new MaterialFood("lemonade")).setDrinkable();
     public static final Material unsafe_water = (new MaterialLiquid("suspicious_water", MaterialMapColor.waterColor)).setDrinkable();
     public static final Material dangerous_water = (new MaterialLiquid("swampland_water", MaterialMapColor.waterColor)).setDrinkable();
+    public static final Materials magical = (Materials) new  Materials(EnumEquipmentMaterials.magical).setMetal(false).setMinHarvestLevel(0);
 
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
@@ -64,6 +65,8 @@ public class Materials extends Material {
             return 4.0F;
         } else if (this == tungsten){
             return 5.0F;
+        } else if (this == magical){
+            return 0.0F;
         }
         else {
             Minecraft.setErrorMessage("getDamageVsEntity: unhandled material " + this.name);

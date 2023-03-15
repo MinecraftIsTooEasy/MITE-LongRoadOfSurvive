@@ -16,7 +16,7 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 public class ItemArrowMixin extends Item{
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback){
-        material_types = new Material[]{Material.flint,Material.obsidian,Material.copper,Material.silver,Material.gold,Material.iron,Material.rusted_iron, Material.ancient_metal,Material.mithril,Material.adamantium,Materials.nickel,Materials.tungsten};
+        material_types = new Material[]{Material.flint,Material.obsidian,Material.copper,Material.silver,Material.gold,Material.iron,Material.rusted_iron, Material.ancient_metal,Material.mithril,Material.adamantium,Materials.nickel,Materials.tungsten,Materials.magical};
     }
     @Overwrite
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
@@ -55,8 +55,10 @@ public class ItemArrowMixin extends Item{
             return 0.8F;
         }else if (dyCast(this) == Items.arrowTungsten) {
             return 0.9F;
-        }else if (dyCast(this) == Items.arrowAdamantium) {
+        }else if (dyCast(this) == Item.arrowAdamantium) {
             return 0.9F;
+        }else if (dyCast(this) == Items.arrowMagical) {
+            return 0.0F;
         }else {
             return 0.7F;
         }
