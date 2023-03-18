@@ -19,7 +19,8 @@ public class BiomeIcePlainsMixin extends BiomeBase {
     }
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 200, 1, 4));
+        this.removeEntityFromSpawnableLists(EntitySkeleton.class);
+        this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 100, 1, 4));
     }
 
 

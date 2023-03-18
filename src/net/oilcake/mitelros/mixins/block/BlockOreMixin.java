@@ -95,13 +95,13 @@ public class BlockOreMixin extends Block {
                 } else {
                     if (this == Block.oreEmerald) {
                         id_dropped = Item.shardEmerald.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreNetherQuartz) {
                         id_dropped = Item.shardNetherQuartz.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreDiamond) {
                         id_dropped = Item.shardDiamond.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreLapis) {
                         id_dropped = Item.dyePowder.itemID;
                         metadata_dropped = 4;
@@ -113,13 +113,13 @@ public class BlockOreMixin extends Block {
                         quantity_dropped = 3 + info.world.rand.nextInt(2);
                     } else if (this == Block.oreCopper) {
                         id_dropped = Items.pieceCopper.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreSilver) {
                         id_dropped = Items.pieceSilver.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreGold) {
                         id_dropped = Items.pieceGold.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     }
 //            else if (block  == Block.oreGold) {
 //                id_dropped = Items.pieceGoldNether.itemID;
@@ -127,19 +127,19 @@ public class BlockOreMixin extends Block {
 //            }
                     else if (this == Block.oreIron) {
                         id_dropped = Items.pieceIron.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == oreNickel) {
                         id_dropped = Items.pieceNickel.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreMithril) {
                         id_dropped = Items.pieceMithril.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == oreTungsten) {
                         id_dropped = Items.pieceTungsten.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreAdamantium) {
                         id_dropped = Items.pieceAdamantium.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(4);
+                        quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else {
                         id_dropped = this.blockID;
                     }

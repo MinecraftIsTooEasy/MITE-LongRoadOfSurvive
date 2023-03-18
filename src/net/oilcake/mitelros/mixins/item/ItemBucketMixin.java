@@ -37,16 +37,6 @@ public class ItemBucketMixin extends ItemVessel {
             int y;
             int z;
             if (this.isEmpty()) {
-                if (rc.getBlockHitMaterial() == Material.water || rc.getNeighborOfBlockHitMaterial() == Material.water) {
-                    if (player.onServer() && (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland)) {
-                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.dangerous_water)));
-                    } else if(player.onServer() && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)){
-                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Material.water)));
-                    } else if(player.onServer()){
-                        player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.unsafe_water)));
-                    }
-                    return true;
-                }
                 Material material;
                 if (rc.getBlockHitMaterial().isLiquid()) {
                     x = rc.block_hit_x;
@@ -83,6 +73,16 @@ public class ItemBucketMixin extends ItemVessel {
                                         player.getAsEntityPlayerMP().prevent_item_pickup_due_to_held_item_breaking_until = System.currentTimeMillis() + 1500L;
                                     }
                                 } else {
+                                    if (rc.getBlockHitMaterial() == Material.water || rc.getNeighborOfBlockHitMaterial() == Material.water) {
+                                        if (player.onServer() && (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland)) {
+                                            player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.dangerous_water)));
+                                        } else if(player.onServer() && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)){
+                                            player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Material.water)));
+                                        } else if(player.onServer()){
+                                            player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.unsafe_water)));
+                                        }
+                                        return true;
+                                    }
                                     player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(material)));
                                 }
                             }
@@ -305,7 +305,7 @@ public class ItemBucketMixin extends ItemVessel {
             }  else if (vessel_material == Materials.tungsten) {
                 return Items.tungstenBucketWaterSuspicious;
             } else {
-                return vessel_material == Material.ancient_metal ? Items.adamantiumBucketWaterSuspicious : null;
+                return vessel_material == Material.ancient_metal ? Items.ancientmetalBucketWaterSuspicious : null;
             }
         }  else if (contents == Materials.dangerous_water) {
             if (vessel_material == Material.copper) {

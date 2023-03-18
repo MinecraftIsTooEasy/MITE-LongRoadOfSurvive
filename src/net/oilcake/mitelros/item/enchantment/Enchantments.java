@@ -14,8 +14,8 @@ import static net.minecraft.Enchantment.enchantmentsList;
 public class Enchantments {
 
 
-    public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.d,20);
-    public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.d,15);
+    public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.c,20);
+    public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.b,15);
     public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.b,15);
     public static final Enchantment enchantmentCallofNether = new EnchantmentCallofNether(Constant.getNextEnchantmentID(), yq.b,15);
     public static final Enchantment enchantmentDestroying = new EnchantmentDestroying(Constant.getNextEnchantmentID(), yq.d,50);

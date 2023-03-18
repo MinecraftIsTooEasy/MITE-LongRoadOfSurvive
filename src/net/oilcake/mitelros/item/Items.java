@@ -130,6 +130,7 @@ public class Items extends Item {
     public static final Item fragStalkerCreeper = new ItemStandard(Constant.getNextItemID(),Material.frags,"fragStalkerCreeper");
     public static final ItemFood glowberries = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.glowberries,1,0,false,false,false,"glow_berries").setMaxStackSize(64).setAlwaysEdible();
     public static final ItemArrow arrowMagical = new ItemArrow(Constant.getNextItemID(), Materials.magical);
+    public static final ItemWand LavaWand = new ItemWand(Constant.getNextItemID(),Materials.tungsten);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -259,6 +260,7 @@ public class Items extends Item {
         register("frag/stalker_creeper",fragStalkerCreeper);
         register("food/glow_berries",glowberries);
         register("arrows/magical_arrow", arrowMagical);
+        register("wand/lava", LavaWand);
         Constant.initItemArray();
     }
 
@@ -653,7 +655,12 @@ public class Items extends Item {
                 '#', adamantiumNugget,
                 '*', ingotAdamantium);
 
-
+        register.registerShapelessRecipe(new ItemStack(tungstenNugget,1),false,
+                Items.arrowTungsten
+        );
+        register.registerShapelessRecipe(new ItemStack(nickelNugget,1),false,
+                Items.arrowNickel
+        );
         register.registerShapelessRecipe(new ItemStack(porkchopStew,1),true,
                 Item.bowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
         );

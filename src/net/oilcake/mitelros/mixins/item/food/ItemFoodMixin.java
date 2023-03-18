@@ -15,10 +15,12 @@ public class ItemFoodMixin extends Item {
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
-            if (this.hasMaterial(Material.fruit) && item_stack != Item.appleGold.getItemStackForStatsIcon() || this.hasMaterial(Materials.mashedCactus)) {
+            if (this.hasMaterial(Material.fruit) && item_stack != Item.appleGold.getItemStackForStatsIcon()) {
                 this.setWater(3);
-            }else if (this.hasMaterial(Material.vegetable) || this.hasMaterial(Materials.glowberries)) {
+            }else if (this.hasMaterial(Material.vegetable) || this.hasMaterial(Materials.mashedCactus)) {
                 this.setWater(2);
+            }else if (this.hasMaterial(Materials.glowberries)) {
+                this.setWater(1);
             }else if(this.hasMaterial(Material.meat) || this.hasMaterial(Material.cheese)){
                 this.setWater(-1);
             }else if(this.hasMaterial(Material.bread) || this.hasMaterial(Material.desert)){

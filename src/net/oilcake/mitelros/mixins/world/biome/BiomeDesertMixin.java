@@ -20,7 +20,8 @@ public class BiomeDesertMixin extends BiomeBase {
     }
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.spawnableMonsterList.add(new BiomeMeta(EntityHusk.class, 200, 1, 4));
+        this.removeEntityFromSpawnableLists(EntityZombie.class);
+        this.spawnableMonsterList.add(new BiomeMeta(EntityHusk.class, 100, 1, 4));
     }
 
 //    @Overwrite
