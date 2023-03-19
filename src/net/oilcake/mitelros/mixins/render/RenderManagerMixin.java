@@ -1,9 +1,8 @@
 package net.oilcake.mitelros.mixins.render;
 
-import net.minecraft.Entity;
-import net.minecraft.bgl;
-import net.minecraft.bgm;
+import net.minecraft.*;
 import net.oilcake.mitelros.entity.*;
+import net.oilcake.mitelros.entity.EntityWandFireball;
 import net.oilcake.mitelros.util.render.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,6 +33,7 @@ public class RenderManagerMixin {
         this.q.put(EntityLich.class,new RenderLich());
         this.q.put(EntityLichShadow.class,new RenderLichShadow());
         this.q.put(EntityStalkerCreeper.class,new RenderStalkerCreeper());
+        this.q.put(EntityWandFireball.class, new bgx(Item.fireballCharge));
         for (bgm o : this.q.values()) {
             o.a(dyCast(bgl.class, this));
         }

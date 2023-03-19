@@ -1,13 +1,15 @@
 package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.entity.EntityWandFireball;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
 
 import java.util.Random;
 
 public class ItemWand extends Item implements IDamageableItem{
     private Material reinforcement_material;
-    public ItemWand(int id, Material material) {
+    public ItemWand(int id, Material material, String texture) {
+        super(id, material, texture);
         this.setMaxStackSize(1);
         this.setMaxDamage(192);
         this.setCreativeTab(CreativeModeTab.tabCombat);
@@ -58,26 +60,18 @@ public class ItemWand extends Item implements IDamageableItem{
         if (!world.isRemote) {
             float fraction_pulled = getFractionPulled(item_stack, item_in_use_count);
             fraction_pulled = (fraction_pulled * fraction_pulled + fraction_pulled * 2.0F) / 3.0F;
-            if (!(fraction_pulled < 0.1F)) {
+            if (!(fraction_pulled < 0.75F)) {
                 if (fraction_pulled > 1.0F) {
                     fraction_pulled = 1.0F;
                 }
-                EntitySmallFireball fireball = new EntitySmallFireball(player.worldObj, player, player.posX,player.posY, player.posZ) {
-                    @Override
-                    protected void onImpact(RaycastCollision raycastCollision) {
-
-                    }
-
-                    @Override
-                    public void setCollisionPolicies(Raycast raycast) {
-
-                    }
-                };
+                world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
                 if (!world.isRemote) {
-                    world.spawnEntityInWorld(fireball);
+                    if(this.itemID == Items.LavaWand.itemID){
+                        world.spawnEntityInWorld(new EntityWandFireball(world, player));
+                    }
                 }
             }
+            player.tryDamageHeldItem(DamageSource.generic, 1);
         }
-
     }
 }

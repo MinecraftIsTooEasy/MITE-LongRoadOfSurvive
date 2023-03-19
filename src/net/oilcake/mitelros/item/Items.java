@@ -130,7 +130,7 @@ public class Items extends Item {
     public static final Item fragStalkerCreeper = new ItemStandard(Constant.getNextItemID(),Material.frags,"fragStalkerCreeper");
     public static final ItemFood glowberries = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.glowberries,1,0,false,false,false,"glow_berries").setMaxStackSize(64).setAlwaysEdible();
     public static final ItemArrow arrowMagical = new ItemArrow(Constant.getNextItemID(), Materials.magical);
-    public static final ItemWand LavaWand = new ItemWand(Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemWand LavaWand = new ItemWand(Constant.getNextItemID(),Materials.tungsten,"wandlava");
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
