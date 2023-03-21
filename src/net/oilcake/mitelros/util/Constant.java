@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " ITF Aleph-0x000000f5 ";
+    public static final String VERSION = " ITF Aleph-0x00000113 ";
     public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -17,6 +17,7 @@ public class Constant {
     public static int nextEnchantmentID = 96;
     public static int nextAchievementID = 136;
     public static int nextBiomeID = 27;
+    public static int nextPacketID = 109;
     public static int getNextItemID(){
         return nextItemID++;
     }
@@ -29,6 +30,7 @@ public class Constant {
     }
 
     public static int getNextAchievementID() {return nextAchievementID++;}
+    public static int getNextPacketID() {return nextPacketID++;}
 
 
     public static ItemArmor[] HELMETS = null;

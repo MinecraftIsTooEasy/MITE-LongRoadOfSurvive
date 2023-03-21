@@ -131,6 +131,9 @@ public class Items extends Item {
     public static final ItemFood glowberries = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.glowberries,1,0,false,false,false,"glow_berries").setMaxStackSize(64).setAlwaysEdible();
     public static final ItemArrow arrowMagical = new ItemArrow(Constant.getNextItemID(), Materials.magical);
     public static final ItemWand LavaWand = new ItemWand(Constant.getNextItemID(),Materials.tungsten,"wandlava");
+    public static final ItemWand FreezeWand = new ItemWand(Constant.getNextItemID(),Materials.nickel,"wandfreeze");
+    public static final ItemWand ShockWand = new ItemWand(Constant.getNextItemID(),Material.ancient_metal,"wandshock");
+    public static final Item ExperimentalPotion = (new ItemPotionExperimental(Constant.getNextItemID())).setUnlocalizedName("experimentalPotion").setCreativeTab(CreativeModeTab.tabMisc);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -261,6 +264,9 @@ public class Items extends Item {
         register("food/glow_berries",glowberries);
         register("arrows/magical_arrow", arrowMagical);
         register("wand/lava", LavaWand);
+        register("wand/ice", FreezeWand);
+        register("wand/thunder", ShockWand);
+        register("experimental_potion",ExperimentalPotion);
         Constant.initItemArray();
     }
 

@@ -19,10 +19,10 @@ public class GenLayerBiomeMixin extends GenLayer {
     }
     @Inject(method = "<init>", at = @At(value = "RETURN"), cancellable = true)
     private void inject(long par1,GenLayer par3GenLayer, WorldType par4WorldType,CallbackInfo callbackInfo){
-        this.allowedBiomes = new BiomeBase[]{BiomeBase.desert, BiomeBase.forest, BiomeBase.extremeHills, BiomeBase.swampland, BiomeBase.plains, BiomeBase.taiga, BiomeBase.jungle, BiomeBases.alps};
+        this.allowedBiomes = new BiomeBase[]{BiomeBase.desert, BiomeBase.forest, BiomeBase.extremeHills, BiomeBase.swampland, BiomeBase.plains, BiomeBase.taiga, BiomeBase.jungle, BiomeBases.windsweptpleatu};
         this.parent = par3GenLayer;
         if (par4WorldType == WorldType.DEFAULT_1_1) {
-            this.allowedBiomes = new BiomeBase[]{BiomeBase.desert, BiomeBase.forest, BiomeBase.extremeHills, BiomeBase.swampland, BiomeBase.plains, BiomeBase.taiga, BiomeBases.alps};
+            this.allowedBiomes = new BiomeBase[]{BiomeBase.desert, BiomeBase.forest, BiomeBase.extremeHills, BiomeBase.swampland, BiomeBase.plains, BiomeBase.taiga, BiomeBases.windsweptpleatu};
         }
     }
 

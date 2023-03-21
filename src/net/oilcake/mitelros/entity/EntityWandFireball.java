@@ -22,6 +22,12 @@ public class EntityWandFireball extends EntityProjectileNoGravity{
     protected void onImpact(RaycastCollision rc) {
         if (!this.worldObj.isRemote)
         {
+            if(this.onServer() && rc.isBlock()){
+                this.setDead();
+                {
+                    this.worldObj.spawnParticle(EnumParticle.flame, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+                }
+            }
             if (rc.isEntity())
             {
                 Entity var3 = rc.getEntityHit();
@@ -31,13 +37,13 @@ public class EntityWandFireball extends EntityProjectileNoGravity{
                     damage = 6.0F;
                     var3.setFire(10);
                 }
-                var3.attackEntityFrom(new Damage(DamageSource.causeThrownDamage(this, this.getThrower()), damage));
+                var3.attackEntityFrom(new Damage(DamageSource.inFire, damage));
+                this.setDead();
+                for (int var5 = 0; var5 < 8; ++var5)
+                {
+                    this.worldObj.spawnParticle(EnumParticle.flame, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+                }
             }
-        }
-
-        for (int var5 = 0; var5 < 8; ++var5)
-        {
-            this.worldObj.spawnParticle(EnumParticle.flame, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
         }
         if (this.worldObj.isRemote)
         {

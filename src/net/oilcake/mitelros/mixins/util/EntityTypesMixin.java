@@ -33,6 +33,8 @@ public class EntityTypesMixin {
         addMapping(EntityLichShadow.class,"EntityLichShadow",549);
         addMapping(EntityStalkerCreeper.class,"EntityStalkerCreeper",550);
         addMapping(EntityWandFireball.class,"EntityWandFireball",551);
+        addMapping(EntityWandIceBall.class,"EntityWandIceball",552);
+        addMapping(EntityWandShockWave.class,"EntityWandShockWave",553);
     }
 
 }

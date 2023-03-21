@@ -5,18 +5,20 @@ import net.oilcake.mitelros.entity.EntityStray;
 
 import java.util.Random;
 
-public class BiomeAlps extends BiomeBase {
-    public BiomeAlps(int par1) {
+public class BiomeWindsweptPleatu extends BiomeBase {
+    public BiomeWindsweptPleatu(int par1) {
         super(par1);
         this.spawnableCreatureList.clear();
         this.removeEntityFromSpawnableLists(EntitySkeleton.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 100, 1, 4));
+        this.spawnableCreatureList.add(new BiomeMeta(EntitySheep.class, 5, 2, 3));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityDireWolf.class, 30, 4, 4));
         this.topBlock = (byte)Block.grass.blockID;
         this.fillerBlock = (byte)Block.cobblestone.blockID;
         this.setColor(10526880);
-        this.setBiomeName("Alps");
+        this.setBiomeName("WindsweptPleatu");
         this.setEnableSnow();
-        this.setMinMaxHeight(0.9F, 4.2F);
+        this.setMinMaxHeight(0.9F, 4.0F);
         this.setTemperatureRainfall(0.0F, 0.5F);
     }
 
@@ -53,6 +55,14 @@ public class BiomeAlps extends BiomeBase {
             if (y == Block.stone.blockID) {
                 par1World.setBlock(count, temp, x, Block.oreEmerald.blockID, 0, 2);
             }
+        }
+        WorldGenMinable genMinable = (new WorldGenMinable(Block.cobblestone.blockID, 40, Block.stone.blockID)).setMinableBlockMetadata(0);
+        int count = par2Random.nextInt(6) + 15;
+        for (int temp = 0; temp < count; ++temp) {
+            int x = par3 + par2Random.nextInt(16);
+            int y = par2Random.nextInt(128);
+            int z = par4 + par2Random.nextInt(16);
+            genMinable.generate(par1World, par2Random, x, y, z);
         }
     }
     private BiomeBase setMinMaxHeight(float par1, float par2) {

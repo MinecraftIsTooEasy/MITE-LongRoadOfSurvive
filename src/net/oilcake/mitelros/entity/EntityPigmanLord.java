@@ -13,6 +13,7 @@ public class EntityPigmanLord extends EntityPigZombie {
         this.setEntityAttribute(GenericAttributes.maxHealth, 30.0);
         this.setEntityAttribute(GenericAttributes.followRange, 32.0);
         this.setEntityAttribute(GenericAttributes.attackDamage, 9.0);
+        this.setEntityAttribute(GenericAttributes.movementSpeed, 0.2);
     }
 
     public EntityPigmanLord(World par1World) {
@@ -64,4 +65,5 @@ public class EntityPigmanLord extends EntityPigZombie {
     public int getExperienceValue() {
         return super.getExperienceValue() * 2;
     }
+
 }

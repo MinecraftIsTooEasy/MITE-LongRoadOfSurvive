@@ -17,6 +17,9 @@ achievement.Feast.desc=吃下所有碗类食物
 achievement.overkill.desc=制造一击20颗心的伤害
 achievement.SoundofUnder=地下之声
 achievement.SoundofUnder.desc=获得地下世界的任一种唱片
+achievement.NoChoice=别无选择
+achievement.NoChoice.desc=请在使用之前备好牛奶
+
 
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
@@ -190,6 +193,7 @@ item.apple_golden.name=§b金苹果
 item.apple_golden_legend.name=§d金苹果
 item.food/glow_berries.name=发光浆果
 
+item.experimental_potion.name=实验的药水
 
 item.wolf_fur.name=狼的毛皮
 
@@ -198,6 +202,10 @@ itemtool.tooltip.slimeresistance=史莱姆杀手
 itemarmor.tooltip.slimeresistance=腐蚀抗性
 
 item.arrows/magical_arrow.name=魔法箭
+
+item.wand/lava.name=熔岩法杖
+item.wand/ice.name=寒霜法杖
+item.wand/thunder.name=轰击法杖
 
 entity.EntityWitherBoneLord.name=凋零骷髅领主
 entity.EntityWitherBodyguard.name=衰败侍卫

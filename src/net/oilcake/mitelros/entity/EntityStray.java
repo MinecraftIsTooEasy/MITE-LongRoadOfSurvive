@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 
 public class EntityStray extends EntitySkeleton {
+    private int spawnCounter;
 
     public EntityStray(World par1World) {
         super(par1World);
@@ -16,8 +17,24 @@ public class EntityStray extends EntitySkeleton {
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.28999999165534973);
         this.setEntityAttribute(GenericAttributes.attackDamage, 5.0);
     }
+    public void onUpdate(){
+        super.onUpdate();
+        if(!getWorld().isRemote){
+            spawnCounter++;
+            if (spawnCounter > 300) {
+                if(this.getTarget()!=null){
+                    this.getTarget().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 350, 0));
+                }
+                spawnCounter = 0;
+            }
+        }
+    }
     public void addRandomWeapon() {
-        this.setHeldItemStack((new ItemStack((Item)(this.getSkeletonType() == 2 ? (this.rand.nextInt(20) == 0 ? Item.battleAxeRustedIron :Item.daggerRustedIron) : Item.bow))).randomizeForMob(this, true));
+        if(this.getSkeletonType() == 2 && this.rand.nextInt(24)==0){
+            this.setHeldItemStack(new ItemStack((Item)(Items.FreezeWand)));
+        }else{
+            this.setHeldItemStack((new ItemStack((Item)(this.getSkeletonType() == 2 ? (this.rand.nextInt(20) == 0 ? Item.battleAxeRustedIron :Item.daggerRustedIron) : Item.bow))).randomizeForMob(this, true));
+        }
     }
     public void attackEntityWithRangedAttack(EntityLiving par1EntityLivingBase, float par2) {
         EntityArrow var3 = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4), Item.arrowIron, false);

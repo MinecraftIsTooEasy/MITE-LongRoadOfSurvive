@@ -2,14 +2,16 @@ package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityWandFireball;
+import net.oilcake.mitelros.entity.EntityWandIceBall;
+import net.oilcake.mitelros.entity.EntityWandShockWave;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
 
 import java.util.Random;
 
-public class ItemWand extends Item implements IDamageableItem{
+public class ItemWand extends ItemTool implements IDamageableItem{
     private Material reinforcement_material;
     public ItemWand(int id, Material material, String texture) {
-        super(id, material, texture);
+        super(id, material);
         this.setMaxStackSize(1);
         this.setMaxDamage(192);
         this.setCreativeTab(CreativeModeTab.tabCombat);
@@ -18,10 +20,6 @@ public class ItemWand extends Item implements IDamageableItem{
     public int getNumComponentsForDurability() {
         return 3;
     }
-    @Override
-    public int getRepairCost() {
-        return 2;
-    };
     public Material getMaterialForDurability()
     {
         return Material.diamond;
@@ -48,12 +46,16 @@ public class ItemWand extends Item implements IDamageableItem{
     public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 72000;
     }
+
     public EnumItemInUseAction getItemInUseAction(ItemStack par1ItemStack, EntityPlayer player) {
         return EnumItemInUseAction.BOW;
     }
     public int getItemEnchantability() {
         return 0;
     }
+
+
+
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
     }
     public void onPlayerStoppedUsing(ItemStack item_stack, World world, EntityPlayer player, int item_in_use_count) {
@@ -64,14 +66,47 @@ public class ItemWand extends Item implements IDamageableItem{
                 if (fraction_pulled > 1.0F) {
                     fraction_pulled = 1.0F;
                 }
-                world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
                 if (!world.isRemote) {
                     if(this.itemID == Items.LavaWand.itemID){
+                        world.playSoundAtEntity(player, "mob.ghast.fireball", 1.0F, 1.0F);
                         world.spawnEntityInWorld(new EntityWandFireball(world, player));
+                    }
+                    if(this.itemID == Items.FreezeWand.itemID){
+                        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+                        world.spawnEntityInWorld(new EntityWandIceBall(world,player));
+                    }
+                    if(this.itemID == Items.ShockWand.itemID){
+                        world.playSoundAtEntity(player, "ambient.weather.thunder", 100.0F, 1.0F);
+                        world.spawnEntityInWorld(new EntityWandShockWave(world,player));
                     }
                 }
             }
-            player.tryDamageHeldItem(DamageSource.generic, 1);
+            if(!player.isPlayerInCreative()) {
+                player.tryDamageHeldItem(DamageSource.generic, 1);
+            }
         }
+    }
+
+    @Override
+    public float getBaseDamageVsEntity() {
+        return 0;
+    }
+
+    @Override
+    public float getBaseDecayRateForBreakingBlock(Block block) {
+        return 0;
+    }
+
+    @Override
+    public float getBaseDecayRateForAttackingEntity(ItemStack itemStack) {
+        return 0;
+    }
+    @Override
+    public String getToolType() {
+        return "wand";
+    }
+    public boolean canBlock() {
+        return false;
     }
 }

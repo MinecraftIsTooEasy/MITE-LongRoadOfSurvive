@@ -36,7 +36,11 @@ public class CommandStoneAir extends CommandAbstract {
         for (int tempX =- X; tempX <= X; ++tempX) {
             for (int tempY =- Y; tempY <= Y; ++tempY) {
                 for (int tempZ =- Z; tempZ <= Z; ++tempZ) {
-                    world.setBlockToAir(player.getBlockPosX() + tempX, player.getBlockPosY() + tempY, player.getBlockPosZ() + tempZ);
+                    int block_id = world.getBlockId(player.getBlockPosX() + tempX, player.getBlockPosY() + tempY, player.getBlockPosZ() + tempZ);
+                    if(block_id == Block.stone.blockID || block_id == Block.grass.blockID || block_id == Block.gravel.blockID || block_id == Block.dirt.blockID ||
+                    block_id == Block.lavaMoving.blockID ||block_id == Block.lavaStill.blockID ||block_id == Block.waterMoving.blockID ||block_id == Block.waterStill.blockID){
+                        world.setBlockToAir(player.getBlockPosX() + tempX, player.getBlockPosY() + tempY, player.getBlockPosZ() + tempZ);
+                    }
                 }
             }
         }

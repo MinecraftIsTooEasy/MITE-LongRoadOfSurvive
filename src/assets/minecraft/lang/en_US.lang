@@ -15,6 +15,8 @@ achievement.Hypothermia.desc=Staying in cold area without any protection
 achievement.Feast=Feast
 achievement.Feast.desc=Become a gourmet in MITE!!!
 achievement.overkill.desc=Deal twenty hearts of damage in a single hit
+achievement.NoChoice=No way to go
+achievement.NoChoice.desc=Get milk before you use this
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -177,7 +179,13 @@ item.apple_golden.name=§bGolden Apple
 item.apple_golden_legend.name=§dGolden Apple
 item.food/glow_berries.name=Glow Berries
 
+item.experimental_potion.name=Experimental Potion
+
 item.arrows/magical_arrow.name=Magical Arrow
+
+item.wand/lava.name=Wand of Lava
+item.wand/ice.name=Wand of Ice
+item.wand/thunder.name=Wand of Thunder
 
 itemarrow.tooltip.disable=Disabled by technical issue...
 itemtool.tooltip.slimeresistance=Bonus vs slime

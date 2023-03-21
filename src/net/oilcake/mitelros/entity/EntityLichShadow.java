@@ -9,6 +9,16 @@ import java.util.List;
 public class EntityLichShadow extends EntitySkeleton{
     private int max_num_evasions;
     private int num_evasions;
+    @Override
+    public void dropContainedItems() {
+    }
+
+    @Override
+    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
+    }
+    @Override
+    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+    }
     public void addRandomWeapon() {
         List items = new ArrayList();
         items.add(new RandomItemListEntry(Item.swordGold, 2));

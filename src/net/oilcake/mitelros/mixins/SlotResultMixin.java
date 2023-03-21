@@ -17,6 +17,14 @@ public class SlotResultMixin extends Slot {
     public SlotResultMixin(IInventory inventory, int slot_index, int display_x, int display_y) {
         super(inventory, slot_index, display_x, display_y);
     }
+    public int getNumCraftingResultsC(EntityPlayer player) {
+        return this.getNumCraftingResults(player);
+    }
+    @Shadow
+    private int getNumCraftingResults(EntityPlayer player) {
+        return 0;
+    }
+
     @Overwrite
     protected void onCrafting(ItemStack par1ItemStack) {
         par1ItemStack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.amountCrafted);
@@ -32,6 +40,9 @@ public class SlotResultMixin extends Slot {
         }
         if (item == Items.mashedCactus || item == Items.glowberries){
             this.thePlayer.addStat(AchievementExtend.mashedCactus,1);
+        }
+        if (item == Items.ExperimentalPotion){
+            this.thePlayer.addStat(AchievementExtend.nochoice,1);
         }
 
         if (block instanceof BlockFurnace && ((BlockFurnace)block).isOven()) {

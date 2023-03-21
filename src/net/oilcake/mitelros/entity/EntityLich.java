@@ -15,7 +15,7 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
     public void addRandomWeapon() {
         List items = new ArrayList();
         items.add(new RandomItemListEntry(Item.swordGold, 2));
-        this.stowed_item_stack = (new ItemStack(Item.diamond)).randomizeForMob(this, true);
+        this.stowed_item_stack = (new ItemStack(Items.ShockWand)).randomizeForMob(this, true);
         RandomItemListEntry entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, items);
         this.setHeldItemStack((new ItemStack(entry.item)).randomizeForMob(this, true));
     }
@@ -104,7 +104,7 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
                 Entity target = this.getTarget();
                 if (target != null && this.canSeeTarget(true)) {
                     double distance = (double)this.getDistanceToEntity(target);
-                    if (this.getHeldItemStack().itemID == Items.diamond.itemID) {
+                    if (this.getHeldItemStack().itemID == Items.ShockWand.itemID) {
                         if (distance < 5.0) {
                             this.swapHeldItemStackWithStowed();
                             attack_mode = true;

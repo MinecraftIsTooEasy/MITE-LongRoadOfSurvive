@@ -5,7 +5,7 @@
 
 package net.oilcake.mitelros.mixins.world.biome;
 
-import net.oilcake.mitelros.world.biome.BiomeAlps;
+import net.oilcake.mitelros.world.biome.BiomeWindsweptPleatu;
 import org.spongepowered.asm.mixin.Mixin;
 
 import java.awt.Color;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static net.oilcake.mitelros.world.BiomeBases.alps;
+import static net.oilcake.mitelros.world.BiomeBases.windsweptpleatu;
 
 @Mixin(BiomeBase.class)
 public class BiomeBaseMixin extends BiomeBase {
@@ -28,7 +28,7 @@ public class BiomeBaseMixin extends BiomeBase {
     }
     @Overwrite
     public boolean isHillyOrMountainous() {
-        return this == extremeHills || this == iceMountains || this == desertHills || this == forestHills || this == taigaHills || this == extremeHillsEdge || this == jungleHills || this == alps;
+        return this == extremeHills || this == iceMountains || this == desertHills || this == forestHills || this == taigaHills || this == extremeHillsEdge || this == jungleHills || this == windsweptpleatu;
     }
 
 }

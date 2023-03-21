@@ -54,9 +54,9 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
 //        }
 //    }
     public void updateEntity() {
+        this.slots.updateInfo();
         if (!this.getWorldObj().isRemote) {
-            if(this.getEXP() != this.last_EXP && this.getEXP() != 0){
-                this.slots.updateInfo();
+            if(this.getEXP() != this.last_EXP){
                 this.last_EXP = EXP;
             }
             ItemStack inputStack = this.slots.getInPutStack();
