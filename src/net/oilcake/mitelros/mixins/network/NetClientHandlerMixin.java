@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.block.enchantreserver.GuiEnchantReserver;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,6 +38,9 @@ public class NetClientHandlerMixin extends ConnectionMixin{
         }
 
     }
+//    public void handleReadFreezingCoolDown(PacketReadFreezeCooldown par1PacketReadFreezeCooldown){
+//        this.h.h.setFreezingCooldown(par1PacketReadFreezeCooldown.GetFreezingCooldown());
+//    }
 
     @SoftOverride
     public void processEnchantReserverInfo(PacketEnchantReserverInfo packet) {

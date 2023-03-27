@@ -179,6 +179,12 @@ item.apple_golden.name=§bGolden Apple
 item.apple_golden_legend.name=§dGolden Apple
 item.food/glow_berries.name=Glow Berries
 
+item.shards/diamond.name=Diamond Shard
+item.shards/emerald.name=Emerald Shard
+item.shards/quartz.name=Nether Quartz Shard
+
+item.records/record_division.name=Music Disc
+
 item.experimental_potion.name=Experimental Potion
 
 item.arrows/magical_arrow.name=Magical Arrow

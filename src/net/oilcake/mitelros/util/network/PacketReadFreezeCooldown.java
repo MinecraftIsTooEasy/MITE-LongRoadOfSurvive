@@ -14,18 +14,26 @@
 //        this.FreezingCooldown = dataInput.readInt();
 //    }
 //
+//    public int setFreezingCooldown(int FreezingCooldownT){
+//        return this.FreezingCooldown = FreezingCooldownT;
+//    }
+//
 //    @Override
 //    public void writePacketData(DataOutput dataOutput) throws IOException {
-//        dataOutput.writeInt(FreezingCooldown);
+//        dataOutput.writeInt(this.FreezingCooldown);
 //    }
 //
 //    @Override
 //    public void processPacket(Connection connection) {
+//        connection.handleReadFreezeCooldown(this);
+//    }
 //
+//    public int GetFreezingCooldown(){
+//        return this.FreezingCooldown;
 //    }
 //
 //    @Override
 //    public int getPacketSize() {
-//        return 4;
+//        return 2;
 //    }
 //}

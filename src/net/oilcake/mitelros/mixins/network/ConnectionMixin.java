@@ -18,4 +18,6 @@ public class ConnectionMixin {
     public void handleDecreaseWater(PacketDecreaseWater packet) {
         this.unexpectedPacket(packet);
     }
+//    public void handleReadFreezeCooldown(PacketReadFreezeCooldown packet){
+//    }
 }

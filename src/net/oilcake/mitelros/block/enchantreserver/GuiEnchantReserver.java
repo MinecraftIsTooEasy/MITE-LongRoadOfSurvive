@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.block.enchantreserver;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class GuiEnchantReserver extends awy implements ICrafting {
 
     @Override
     public void sendProgressBarUpdate(Container container, int i, int i1) {
-       // this.player.sendPacket(new PacketEnchantReserverInfo());
+        this.player.sendPacket(new PacketEnchantReserverInfo());
     }
 
 

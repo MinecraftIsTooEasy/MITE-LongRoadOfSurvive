@@ -11,20 +11,16 @@ public class EntityPigmanLord extends EntityPigZombie {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.maxHealth, 30.0);
-        this.setEntityAttribute(GenericAttributes.followRange, 32.0);
+        this.setEntityAttribute(GenericAttributes.followRange, 128.0);
         this.setEntityAttribute(GenericAttributes.attackDamage, 9.0);
-        this.setEntityAttribute(GenericAttributes.movementSpeed, 0.2);
     }
 
     public EntityPigmanLord(World par1World) {
         super(par1World);
     }
-    protected boolean isAIEnabled() {
-        return true;
-    }
     protected EntityPlayer findPlayerToAttack(float max_distance) {
         if (this.angerLevel < 1) {
-            max_distance /= 4.0F;
+            max_distance /= 256.0F;
         }
 
         Entity previous_target = this.getEntityToAttack();
@@ -65,5 +61,6 @@ public class EntityPigmanLord extends EntityPigZombie {
     public int getExperienceValue() {
         return super.getExperienceValue() * 2;
     }
+
 
 }

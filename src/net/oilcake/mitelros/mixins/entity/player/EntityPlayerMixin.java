@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.entity.player;
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
+import net.oilcake.mitelros.entity.EntityClusterSpider;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
@@ -20,14 +21,14 @@ import java.util.Iterator;
 import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(EntityPlayer.class)
-public class EntityPlayerMixin extends EntityLiving{
+public abstract class EntityPlayerMixin extends EntityLiving{
 
 //    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
 //    }
 //    public float getWaterLimit() {
 //        return (float)getWaterLimit(this.getExperienceLevel());
-//    }
+//
 
     @Overwrite
     public void attackTargetEntityWithCurrentItem(Entity target) {
@@ -204,21 +205,44 @@ public class EntityPlayerMixin extends EntityLiving{
     private int reduce_weight;
     private double dry_resist;
     public int getReduce_weight(){
-        if((this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
-                this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
-                this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
-                this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID )){
-            return 8;
-        }else if((this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID &&
-                this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID &&
-                this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID &&
-                this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID )){
-            return 3;
-        }else if((this.getHelmet()!= null && this.getCuirass()!= null && this.getLeggings()!= null && this.getBoots()!= null)){
-            return 1;
-        }else {
-            return 0;
+        int Weight = 0;
+        if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID){
+            Weight += 7;
         }
+        if(this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID){
+            Weight += 7;
+        }
+        if(this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID){
+            Weight += 7;
+        }
+        if(this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID ){
+            Weight += 7;
+        }
+        if(this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID){
+            Weight += 2;
+        }
+        if(this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID){
+            Weight += 2;
+        }
+        if(this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID){
+            Weight += 2;
+        }
+        if(this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID ){
+            Weight += 2;
+        }
+        if(this.getHelmet()!= null){
+            Weight += 1;
+        }
+        if(this.getCuirass()!= null){
+            Weight += 1;
+        }
+        if(this.getLeggings()!= null){
+            Weight += 1;
+        }
+        if(this.getBoots()!= null){
+            Weight += 1;
+        }
+        return Weight;
     }
     @Inject(method = "onLivingUpdate",
             at = @At(value = "INVOKE",
@@ -232,8 +256,8 @@ public class EntityPlayerMixin extends EntityLiving{
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
             }
-            int freezelevel = Math.max(((FreezingCooldown - (12000 * getReduce_weight())) / 12000), 0);
-            if(this.FreezingCooldown > 12000 * getReduce_weight()){
+            int freezelevel = Math.max(((FreezingCooldown - (3000 * getReduce_weight())) / 12000), 0);
+            if(this.FreezingCooldown > 3000 * getReduce_weight()){
                 if(freezelevel >= 1){
                     if (freezelevel >= 4) {
                         ++FreezingWarning;
@@ -256,12 +280,22 @@ public class EntityPlayerMixin extends EntityLiving{
                 }
             }
         }
-        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup){
+
+        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup&&!rewarded_disc){
             this.triggerAchievement(AchievementExtend.feast);
+            this.addExperience(2500);
+            this.rewarded_disc = true;
+            EntityItem RewardingRecord = new EntityItem(worldObj,posX,posY,posZ,new ItemStack(Items.recordDivision.itemID,1));
+            worldObj.spawnEntityInWorld(RewardingRecord);
+            RewardingRecord.entityFX(EnumEntityFX.summoned);
         }
     }
-    public int getFreezingCooldown(){
+
+    public int getFreezingCooldown() {
         return FreezingCooldown;
+    }
+    public void setFreezingCooldown(int iptfreezingCooldown) {
+            this.FreezingCooldown = iptfreezingCooldown;
     }
 
     public float getCurrentBiomeTemperature(){
@@ -523,6 +557,8 @@ public class EntityPlayerMixin extends EntityLiving{
     @Shadow
     public void triggerAchievement(Statistic par1StatBase) {}
 
+    @Shadow public abstract void addExperience(int amount);
+
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;
     public boolean Feast_trigger_porridge = false;
@@ -540,6 +576,6 @@ public class EntityPlayerMixin extends EntityLiving{
     public boolean Feast_trigger_porkchop_stew = false;
     public boolean Feast_trigger_pumpkin_soup = false;
     public boolean Feast_trigger_sorbet = false;
-
+    private boolean rewarded_disc = false;
 
 }

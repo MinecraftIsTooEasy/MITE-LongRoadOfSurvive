@@ -62,7 +62,7 @@ public class ItemWand extends ItemTool implements IDamageableItem{
         if (!world.isRemote) {
             float fraction_pulled = getFractionPulled(item_stack, item_in_use_count);
             fraction_pulled = (fraction_pulled * fraction_pulled + fraction_pulled * 2.0F) / 3.0F;
-            if (!(fraction_pulled < 0.75F)) {
+            if (!(fraction_pulled < 0.25F)) {
                 if (fraction_pulled > 1.0F) {
                     fraction_pulled = 1.0F;
                 }

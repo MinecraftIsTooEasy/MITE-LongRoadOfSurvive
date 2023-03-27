@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " ITF Aleph-0x00000113 ";
+    public static final String VERSION = " ITF Aleph-0x0000011f ";
     public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");

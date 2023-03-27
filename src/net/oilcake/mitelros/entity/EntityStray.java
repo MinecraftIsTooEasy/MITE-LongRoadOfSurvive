@@ -22,10 +22,13 @@ public class EntityStray extends EntitySkeleton {
         if(!getWorld().isRemote){
             spawnCounter++;
             if (spawnCounter > 300) {
-                if(this.getTarget()!=null){
-                    this.getTarget().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 350, 0));
+                if(this.getHeldItemStack()!=null){
+                    if(this.getTarget()!=null && this.getHeldItemStack().itemID==Items.FreezeWand.itemID){
+                        this.getTarget().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 350, 0));
+                    }
+                    spawnCounter = 0;
                 }
-                spawnCounter = 0;
+
             }
         }
     }

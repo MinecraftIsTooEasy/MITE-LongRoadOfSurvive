@@ -47,8 +47,9 @@ public class LROSEvent {
 //    }
     @Subscribe
     public void onPacketRegister(PacketRegisterEvent event){
-        event.register(180, true, false, PacketEnchantReserverInfo.class);
+        event.register(180, true, true, PacketEnchantReserverInfo.class);
         event.register(181, false, true, PacketDecreaseWater.class);
+//        event.register(182,true,true, PacketReadFreezeCooldown.class);
     }
 
     @Subscribe
@@ -62,7 +63,7 @@ public class LROSEvent {
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,150,0)));
-        player.vision_dimming += 3.0F;
+        player.vision_dimming += 2.0F;
     }
 
 

@@ -134,6 +134,11 @@ public class Items extends Item {
     public static final ItemWand FreezeWand = new ItemWand(Constant.getNextItemID(),Materials.nickel,"wandfreeze");
     public static final ItemWand ShockWand = new ItemWand(Constant.getNextItemID(),Material.ancient_metal,"wandshock");
     public static final Item ExperimentalPotion = (new ItemPotionExperimental(Constant.getNextItemID())).setUnlocalizedName("experimentalPotion").setCreativeTab(CreativeModeTab.tabMisc);
+
+    public static final ItemShardAT shardDiamond = (ItemShardAT) new ItemShardAT(862, Material.diamond).setUnlocalizedName("shardDiamond").setXPReward(4);
+    public static final ItemShardAT shardEmerald = (ItemShardAT) (new ItemShardAT(861, Material.emerald)).setUnlocalizedName("shardEmerald").setXPReward(3);
+    public static final ItemShardAT shardNetherQuartz = (ItemShardAT) (new ItemShardAT(863, Material.quartz)).setUnlocalizedName("shardNetherQuartz").setXPReward(2);
+    public static final ItemRecordExtend recordDivision = (ItemRecordExtend) new ItemRecordExtend(2024, "imported.division", "record_division", "Division", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -267,6 +272,10 @@ public class Items extends Item {
         register("wand/ice", FreezeWand);
         register("wand/thunder", ShockWand);
         register("experimental_potion",ExperimentalPotion);
+        register("shards/diamond",shardDiamond);
+        register("shards/emerald",shardEmerald);
+        register("shards/quartz",shardNetherQuartz);
+        register("records/record_division",recordDivision);
         Constant.initItemArray();
     }
 
@@ -544,6 +553,10 @@ public class Items extends Item {
                 "A A",
                 "A A",
                 'A', tungstenChain);
+        register.registerShapedRecipe(new ItemStack(tungstenBucket), true,
+                "A A",
+                " A ",
+                'A', tungstenIngot);
         register.registerShapedRecipe(new ItemStack(tungstenChestplateChain), true,
                 "A A",
                 "AAA",

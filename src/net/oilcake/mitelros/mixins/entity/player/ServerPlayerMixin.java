@@ -54,7 +54,9 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
                 Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
                 updateWater.setWater(water);
-                updateWater.setFreezingCooldown(FreezingCooldown);
+//                PacketReadFreezeCooldown updateFreezingCooldown = new PacketReadFreezeCooldown();
+//                updateFreezingCooldown.setFreezingCooldown(FreezingCooldown);
+//                this.playerNetServerHandler.sendPacket(updateFreezingCooldown);
                 this.playerNetServerHandler.sendPacket(updateWater);
                 this.last_water = water;
                 this.last_FreezingCooldown = FreezingCooldown;

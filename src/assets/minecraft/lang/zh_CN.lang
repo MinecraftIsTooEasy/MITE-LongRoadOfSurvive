@@ -193,6 +193,12 @@ item.apple_golden.name=§b金苹果
 item.apple_golden_legend.name=§d金苹果
 item.food/glow_berries.name=发光浆果
 
+item.shards/diamond.name=钻石碎片
+item.shards/emerald.name=绿宝石碎片
+item.shards/quartz.name=下界石英碎片
+
+item.records/record_division.name=音乐唱片
+
 item.experimental_potion.name=实验的药水
 
 item.wolf_fur.name=狼的毛皮

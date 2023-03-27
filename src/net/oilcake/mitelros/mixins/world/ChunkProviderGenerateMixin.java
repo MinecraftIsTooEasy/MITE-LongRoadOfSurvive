@@ -68,7 +68,7 @@ public abstract class ChunkProviderGenerateMixin implements IChunkProvider{
             }
         }
 
-        double var44 = 171.103;
+        double var44 = 513.309;
         double var45 = 684.412;
         this.noise5 = this.noiseGen5.generateNoiseOctaves(this.noise5, par2, par4, par5, par7, 1.121, 1.121, 0.5);
         this.noise6 = this.noiseGen6.generateNoiseOctaves(this.noise6, par2, par4, par5, par7, 120.0, 120.0, 0.25);
