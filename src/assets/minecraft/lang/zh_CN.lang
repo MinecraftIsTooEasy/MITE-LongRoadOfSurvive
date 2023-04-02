@@ -20,7 +20,6 @@ achievement.SoundofUnder.desc=获得地下世界的任一种唱片
 achievement.NoChoice=别无选择
 achievement.NoChoice.desc=请在使用之前备好牛奶
 
-
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
 item.armor/nickel_leggings.name=镍护腿
@@ -100,7 +99,6 @@ item.armor/tungsten_chainmail_chestplate.name=钨锁链胸甲
 item.armor/tungsten_chainmail_leggings.name=钨锁链护腿
 item.armor/tungsten_chainmail_boots.name=钨锁链靴子
 
-
 item.ingot/tungsten.name=钨锭
 item.ingot/nugget/tungsten.name=钨粒
 item.tool/tungsten/tungsten_axe.name=钨斧
@@ -130,6 +128,17 @@ tile.tungsten_anvil.slightlyDamaged.name=轻微受损的钨砧
 tile.tungsten_anvil.veryDamaged.name=严重受损的钨砧
 tile.bars/tungsten_bars.name=钨栅栏
 tile.toolbench.tungsten.name=钨工作台
+
+item.armor/vibranium_helmet.name=假吸音钢头盔
+item.armor/vibranium_chestplate.name=假吸音钢胸甲
+item.armor/vibranium_leggings.name=假吸音钢护腿
+item.armor/vibranium_boots.name=假吸音钢靴子
+item.tool/vibranium/vibranium_sword.name=假吸音钢剑
+
+item.armor/maid_helmet.name=不可名状头盔
+item.armor/maid_chestplate.name=不可名状胸甲
+item.armor/maid_leggings.name=不可名状护腿
+item.armor/maid_boots.name=不可名状靴子
 
 item.tool/copper/copper_club.name=铜杖
 item.tool/silver/silver_club.name=银杖
@@ -196,8 +205,10 @@ item.food/glow_berries.name=发光浆果
 item.shards/diamond.name=钻石碎片
 item.shards/emerald.name=绿宝石碎片
 item.shards/quartz.name=下界石英碎片
+item.lapis_lazuli.name=青金石
+item.dyePowder.blue.name=蓝色染料
 
-item.records/record_division.name=音乐唱片
+item.records/record_damnation.name=音乐唱片
 
 item.experimental_potion.name=实验的药水
 
@@ -223,6 +234,7 @@ entity.EntityHusk.name=尸壳
 entity.EntityLichShadow.name=巫妖的幻影
 entity.EntityLich.name=巫妖
 entity.EntityStalkerCreeper.name=潜伏爬行者
+entity.EntityZombieLord?.name=僵尸领主!?
 
 death.extend.attack.thirsty = %1$s 脱水而亡
 death.extend.attack.freeze = %1$s 冻死了

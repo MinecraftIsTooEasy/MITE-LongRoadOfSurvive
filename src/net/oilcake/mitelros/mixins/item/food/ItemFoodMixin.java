@@ -17,7 +17,7 @@ public class ItemFoodMixin extends Item {
         if (player.onServer()) {
             if (this.hasMaterial(Material.fruit) && item_stack != Item.appleGold.getItemStackForStatsIcon()) {
                 this.setWater(3);
-            }else if (this.hasMaterial(Material.vegetable) || this.hasMaterial(Materials.mashedCactus)) {
+            }else if (this.hasMaterial(Material.vegetable) && item_stack!=Item.bakedPotato.getItemStackForStatsIcon() && item_stack!=Item.poisonousPotato.getItemStackForStatsIcon() || this.hasMaterial(Materials.mashedCactus)) {
                 this.setWater(2);
             }else if (this.hasMaterial(Materials.glowberries)) {
                 this.setWater(1);

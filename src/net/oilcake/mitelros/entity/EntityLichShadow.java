@@ -10,13 +10,6 @@ public class EntityLichShadow extends EntitySkeleton{
     private int max_num_evasions;
     private int num_evasions;
     @Override
-    public void dropContainedItems() {
-    }
-
-    @Override
-    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
-    }
-    @Override
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
     }
     public void addRandomWeapon() {
@@ -30,6 +23,7 @@ public class EntityLichShadow extends EntitySkeleton{
         if (par1World != null && this.onServer()) {
             this.max_num_evasions = this.num_evasions = 6;
         }
+        this.setCanPickUpLoot(false);
     }
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
@@ -181,4 +175,5 @@ public class EntityLichShadow extends EntitySkeleton{
         }
         return super.attackEntityFrom(damage);
     }
+
 }

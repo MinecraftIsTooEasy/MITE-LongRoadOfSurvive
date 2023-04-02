@@ -138,7 +138,17 @@ public class Items extends Item {
     public static final ItemShardAT shardDiamond = (ItemShardAT) new ItemShardAT(862, Material.diamond).setUnlocalizedName("shardDiamond").setXPReward(4);
     public static final ItemShardAT shardEmerald = (ItemShardAT) (new ItemShardAT(861, Material.emerald)).setUnlocalizedName("shardEmerald").setXPReward(3);
     public static final ItemShardAT shardNetherQuartz = (ItemShardAT) (new ItemShardAT(863, Material.quartz)).setUnlocalizedName("shardNetherQuartz").setXPReward(2);
-    public static final ItemRecordExtend recordDivision = (ItemRecordExtend) new ItemRecordExtend(2024, "imported.division", "record_division", "Division", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
+    public static final ItemRecordExtend recordDamnation = (ItemRecordExtend) new ItemRecordExtend(2024, "imported.damnation", "record_damnation", "Damnation", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
+    public static final ItemArmor VibraniumHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.vibranium,false);
+    public static final ItemArmor VibraniumChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.vibranium,false);
+    public static final ItemArmor VibraniumLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.vibranium,false);
+    public static final ItemArmor VibraniumBoots = new ItemBoots(Constant.getNextItemID(),Materials.vibranium,false);
+    public static final ItemSword VibraniumSword = createInstance(ItemSword.class,new Class[]{int.class,Material.class},Constant.getNextItemID(), Materials.vibranium);
+    public static final ItemRockExtend lapis = (ItemRockExtend) new ItemRockExtend(Constant.getNextItemID(),Material.lapis_lazuli,"lapis_lazuli").setXPReward(5);
+    public static final ItemArmor MaidHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.maid,false);
+    public static final ItemArmor MaidChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.maid,false);
+    public static final ItemArmor MaidLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.maid,false);
+    public static final ItemArmor MaidBoots = new ItemBoots(Constant.getNextItemID(),Materials.maid,false);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -275,7 +285,17 @@ public class Items extends Item {
         register("shards/diamond",shardDiamond);
         register("shards/emerald",shardEmerald);
         register("shards/quartz",shardNetherQuartz);
-        register("records/record_division",recordDivision);
+        register("records/record_damnation",recordDamnation);
+        register("lapis_lazuli",lapis);
+        register("tool/vibranium/vibranium_sword",VibraniumSword);
+        register("armor/vibranium_helmet",VibraniumHelmet);
+        register("armor/vibranium_chestplate",VibraniumChestplate);
+        register("armor/vibranium_leggings",VibraniumLeggings);
+        register("armor/vibranium_boots",VibraniumBoots);
+        register("armor/maid_helmet",MaidHelmet);
+        register("armor/maid_chestplate",MaidChestplate);
+        register("armor/maid_leggings",MaidLeggings);
+        register("armor/maid_boots",MaidBoots);
         Constant.initItemArray();
     }
 
@@ -704,6 +724,8 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(Item.leather,1),true,
                 Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur
         );
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,4),false,
+                Items.lapis);
 
         ItemCoin[] coins = new ItemCoin[]{
                 nickelCoin, tungstenCoin};

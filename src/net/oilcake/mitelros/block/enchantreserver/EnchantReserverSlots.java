@@ -35,9 +35,6 @@ public class EnchantReserverSlots extends InventorySubcontainer {
         this.input = new Slot(iInventory, this.getInputIndex(), 63, 19)
         {
             public boolean isItemValid(ItemStack par1ItemStack) {
-                if(par1ItemStack.itemID == Item.dyePowder.itemID && par1ItemStack.getItemSubtype()==4){
-                    return true;
-                }
                 return par1ItemStack.getItem() instanceof ItemRock;
             }
         };

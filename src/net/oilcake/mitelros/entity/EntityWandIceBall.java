@@ -21,7 +21,7 @@ public class EntityWandIceBall extends EntityProjectileNoGravity{
             if (this.onServer() && rc.isBlock()){
                 this.setDead();
             }
-            if (rc.isEntity())
+            if (rc.isEntity() && rc.getEntityHit() instanceof EntityLiving)
             {
                 Entity var3 = rc.getEntityHit();
                 float damage = 1.0F;
@@ -31,6 +31,9 @@ public class EntityWandIceBall extends EntityProjectileNoGravity{
                 }
                 var3.attackEntityFrom(new Damage(DamageSourceExtend.freeze, damage));
                 this.setDead();
+            }
+            else{
+                this.setDead();;
             }
         }
         if (this.worldObj.isRemote)

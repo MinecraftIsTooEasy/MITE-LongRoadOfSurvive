@@ -162,7 +162,7 @@ public class Blocks extends Block {
                 new ItemStack(Blocks.flowerextend,1,0));
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
                 new ItemStack(Blocks.flowerextend,1,1));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,12),true,
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,4),true,
                 new ItemStack(Blocks.flowerextend,1,2));
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
                 new ItemStack(Blocks.flowerextend,1,3));

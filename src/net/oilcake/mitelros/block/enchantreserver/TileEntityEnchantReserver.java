@@ -83,7 +83,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                     this.EXP += 50 * size;
                     this.slots.getInPut().putStack(null);
                 }
-                else if (inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 && inputStack.stackSize * 25 + this.getEXP() <= this.getMAXEXP()){
+                else if (inputStack.itemID == Items.lapis.itemID && inputStack.stackSize * 25 + this.getEXP() <= this.getMAXEXP()){
                     int size = inputStack.stackSize;
                     this.EXP += 25 * size;
                     this.slots.getInPut().putStack(null);

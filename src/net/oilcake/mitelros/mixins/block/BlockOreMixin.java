@@ -26,7 +26,7 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreDiamond) {
                 id_dropped = -1;
             } else if (this == Block.oreLapis) {
-                id_dropped = Item.dyePowder.itemID;
+                id_dropped = Items.lapis.itemID;
                 metadata_dropped = 4;
                 quantity_dropped = 1 + info.world.rand.nextInt(1);
             } else if (this == Block.oreNetherQuartz) {
@@ -77,7 +77,7 @@ public class BlockOreMixin extends Block {
                 } else if (this == oreDiamond) {
                     id_dropped = Item.diamond.itemID;
                 } else if (this == oreLapis) {
-                    id_dropped = Item.dyePowder.itemID;
+                    id_dropped = Items.lapis.itemID;
                     metadata_dropped = 4;
                     quantity_dropped = 3 + info.world.rand.nextInt(3);
                 } else if (this == oreEmerald) {
@@ -103,7 +103,7 @@ public class BlockOreMixin extends Block {
                         id_dropped = Item.shardDiamond.itemID;
                         quantity_dropped = 3 + info.world.rand.nextInt(5);
                     } else if (this == Block.oreLapis) {
-                        id_dropped = Item.dyePowder.itemID;
+                        id_dropped = Items.lapis.itemID;
                         metadata_dropped = 4;
                         quantity_dropped = 2 + info.world.rand.nextInt(2);
                     } else if (this == Block.oreCoal) {

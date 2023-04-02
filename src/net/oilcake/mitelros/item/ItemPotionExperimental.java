@@ -16,13 +16,13 @@ public class ItemPotionExperimental extends Item{
             double rand = Math.random();
             if (player.onServer()) {
                 if(rand<0.25){
-                    player.addPotionEffect((new MobEffect(MobEffectList.regeneration.id, 400, 0)));
+                    player.addPotionEffect((new MobEffect(MobEffectList.regeneration.id, 800, 0)));
                 }
                 if(rand>0.15&&rand<0.7){
-                    player.addPotionEffect((new MobEffect(MobEffectList.fireResistance.id, 400, 0)));
+                    player.addPotionEffect((new MobEffect(MobEffectList.fireResistance.id, 800, 0)));
                 }
                 if(rand>0.4&&rand<0.95){
-                    player.addPotionEffect((new MobEffect(MobEffectList.resistance.id, 400, 0)));
+                    player.addPotionEffect((new MobEffect(MobEffectList.resistance.id, 800, 0)));
                 }
                 if(rand>0.9){
                     player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 400, 0)));

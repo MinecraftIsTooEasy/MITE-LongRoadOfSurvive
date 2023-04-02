@@ -3,16 +3,20 @@ package net.oilcake.mitelros.mixins.world;
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.entity.EntityClusterSpider;
+import net.oilcake.mitelros.entity.EntityZombieLord;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TimeZone;
 
 @Mixin(WorldServer.class)
 public class WorldServerMixin extends World {
+    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
     public WorldServerMixin(IDataManager par1ISaveHandler, String par2Str, WorldProvider par3WorldProvider, WorldSettings par4WorldSettings, MethodProfiler par5Profiler, IConsoleLogManager par6ILogAgent, long world_creation_time, long total_world_time) {
         super(par1ISaveHandler, par2Str, par3WorldProvider, par4WorldSettings, par5Profiler, par6ILogAgent, world_creation_time, total_world_time);
     }
@@ -67,7 +71,11 @@ public class WorldServerMixin extends World {
                 }
             } else if (entity_class == EntityRevenant.class) {
                 if (!check_depth || y <= 44 || can_spawn_revenants_on_surface) {
-                    return entity_class;
+                    if((calendar.get(Calendar.MONTH) + 1) == 4 && calendar.get(Calendar.DATE) == 1){
+                        return EntityZombieLord.class;
+                    }else{
+                        return entity_class;
+                    }
                 }
             }
             //new

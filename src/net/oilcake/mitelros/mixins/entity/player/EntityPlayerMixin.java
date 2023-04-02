@@ -285,7 +285,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             this.triggerAchievement(AchievementExtend.feast);
             this.addExperience(2500);
             this.rewarded_disc = true;
-            EntityItem RewardingRecord = new EntityItem(worldObj,posX,posY,posZ,new ItemStack(Items.recordDivision.itemID,1));
+            EntityItem RewardingRecord = new EntityItem(worldObj,posX,posY,posZ,new ItemStack(Items.recordDamnation.itemID,1));
             worldObj.spawnEntityInWorld(RewardingRecord);
             RewardingRecord.entityFX(EnumEntityFX.summoned);
         }

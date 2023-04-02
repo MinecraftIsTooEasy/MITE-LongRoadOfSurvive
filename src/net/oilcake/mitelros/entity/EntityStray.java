@@ -3,7 +3,11 @@ package net.oilcake.mitelros.entity;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 public class EntityStray extends EntitySkeleton {
+    private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
     private int spawnCounter;
 
     public EntityStray(World par1World) {
@@ -35,6 +39,7 @@ public class EntityStray extends EntitySkeleton {
     public void addRandomWeapon() {
         if(this.getSkeletonType() == 2 && this.rand.nextInt(24)==0){
             this.setHeldItemStack(new ItemStack((Item)(Items.FreezeWand)));
+            this.Is_Wizard = true;
         }else{
             this.setHeldItemStack((new ItemStack((Item)(this.getSkeletonType() == 2 ? (this.rand.nextInt(20) == 0 ? Item.battleAxeRustedIron :Item.daggerRustedIron) : Item.bow))).randomizeForMob(this, true));
         }
@@ -63,9 +68,18 @@ public class EntityStray extends EntitySkeleton {
 
     protected void addRandomEquipment() {
         this.addRandomWeapon();
-        this.setBoots((new ItemStack(Items.WolfBoots)).randomizeForMob(this, false));
-        this.setLeggings((new ItemStack(Items.WolfLeggings)).randomizeForMob(this, false));
-        this.setCuirass((new ItemStack(Items.WolfChestplate)).randomizeForMob(this, false));
-        this.setHelmet((new ItemStack(Items.WolfHelmet)).randomizeForMob(this, false));
+        Calendar var5 = this.worldObj.getCurrentDate();
+        if (var5.get(2) + 1 == 4 && var5.get(5) == 1){
+            this.setBoots((new ItemStack(Items.MaidBoots)).randomizeForMob(this, false));
+            this.setLeggings((new ItemStack(Items.MaidLeggings)).randomizeForMob(this, false));
+            this.setCuirass((new ItemStack(Items.MaidChestplate)).randomizeForMob(this, false));
+            this.setHelmet((new ItemStack(Items.MaidHelmet)).randomizeForMob(this, false));
+        } else{
+            this.setBoots((new ItemStack(Items.WolfBoots)).randomizeForMob(this, false));
+            this.setLeggings((new ItemStack(Items.WolfLeggings)).randomizeForMob(this, false));
+            this.setCuirass((new ItemStack(Items.WolfChestplate)).randomizeForMob(this, false));
+            this.setHelmet((new ItemStack(Items.WolfHelmet)).randomizeForMob(this, false));
+        }
+
     }
 }

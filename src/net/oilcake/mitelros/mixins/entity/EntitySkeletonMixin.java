@@ -83,6 +83,7 @@ public class EntitySkeletonMixin extends EntityMonster{
             this.setCurrentItemOrArmor(4, (new ItemStack(Items.tungstenHelmetChain)).randomizeForMob(this, false));
             this.getEntityAttribute(GenericAttributes.attackDamage).setAttribute(6.0);
             if(this.rand.nextInt(24)==0){
+                this.Is_Wizard = true;
                 this.setCurrentItemOrArmor(0, (new ItemStack(Items.LavaWand)).randomizeForMob(this, false));
                 this.tasks.addTask(3, new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 9.0F, 1.0, 1.0));
                 this.tasks.addTask(4, this.aiArrowAttack);
@@ -164,23 +165,22 @@ public class EntitySkeletonMixin extends EntityMonster{
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var3);
     }
+    protected boolean Is_Wizard = false;
     @Overwrite
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
         int looting = damage_source.getLootingModifier();
         int num_drops;
         int i;
-        if(this.getHeldItemStack()!=null){
-            if(this.getHeldItemStack().itemID == Items.FreezeWand.itemID || this.getHeldItemStack().itemID == Items.LavaWand.itemID){
-                num_drops = this.rand.nextInt(2);
-                if (!recently_hit_by_player) {
-                    num_drops = 0;
-                }
-                for(i = 0; i < num_drops; ++i) {
-                    this.dropItem(Item.blazePowder.itemID, 1);
-                }
-                for(i = 0; i < num_drops; ++i) {
-                    this.dropItem(Item.netherStalkSeeds.itemID, 1);
-                }
+        if(Is_Wizard){
+            num_drops = 1 + this.rand.nextInt(2);
+            if (!recently_hit_by_player) {
+                num_drops = 0;
+            }
+            for(i = 0; i < num_drops; ++i) {
+                this.dropItem(Item.blazePowder.itemID, 1);
+            }
+            for(i = 0; i < num_drops; ++i) {
+                this.dropItem(Item.netherStalkSeeds.itemID, 1);
             }
         }
         if (this.getSkeletonType() == 1) {

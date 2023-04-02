@@ -33,7 +33,7 @@ public class EntityPigmanLord extends EntityPigZombie {
     }
     private void becomeAngryAt(Entity par1Entity) {
         this.entityToAttack = par1Entity;
-        this.angerLevel = 400 + this.rand.nextInt(400);
+        this.angerLevel = 4000;
         this.randomSoundDelay = this.rand.nextInt(40);
     }
     public void addRandomWeapon() {

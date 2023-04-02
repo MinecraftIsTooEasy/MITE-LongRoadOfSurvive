@@ -19,13 +19,19 @@ public class EntityWandShockWave extends EntityProjectileNoGravity{
     protected void onImpact(RaycastCollision rc) {
         if (!this.worldObj.isRemote)
         {
-            if (rc.isEntity())
+            if (rc.isEntity() && rc.getEntityHit() instanceof EntityLiving)
             {
                 this.setDead();
                 Entity var3 = rc.getEntityHit();
                 float damage = 10.0F;
                 var3.attackEntityFrom(new Damage(DamageSource.divine_lightning, damage));
                 EntityLightning lightingbolt = new EntityLightning(worldObj,var3.posX,var3.posY,var3.posZ);
+                worldObj.spawnEntityInWorld(lightingbolt);
+                lightingbolt.entityFX(EnumEntityFX.summoned);
+            }
+            else{
+                this.setDead();;
+                EntityLightning lightingbolt = new EntityLightning(worldObj,rc.block_hit_x, rc.block_hit_y, rc.block_hit_z);
                 worldObj.spawnEntityInWorld(lightingbolt);
                 lightingbolt.entityFX(EnumEntityFX.summoned);
             }

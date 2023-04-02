@@ -11,10 +11,12 @@ achievement.getBeacon.desc=Now, Launch it.
 achievement.mashedCactus=Emergency hedging
 achievement.mashedCactus.desc=Get water for survive!
 achievement.Hypothermia=Hypothermia
-achievement.Hypothermia.desc=Staying in cold area without any protection
+achievement.Hypothermia.desc=Stay in cold area without any protection
 achievement.Feast=Feast
 achievement.Feast.desc=Become a gourmet in MITE!!!
 achievement.overkill.desc=Deal twenty hearts of damage in a single hit
+achievement.SoundofUnder=Sound of Under
+achievement.SoundofUnder.desc=Got the underworld disc.
 achievement.NoChoice=No way to go
 achievement.NoChoice.desc=Get milk before you use this
 
@@ -56,6 +58,7 @@ item.tool/nickel/nickel_shears.name=Nickel Shears
 item.tool/nickel/nickel_shovel.name=Nickel Shovel
 item.tool/nickel/nickel_sword.name=Nickel Sword
 item.tool/nickel/nickel_war_hammer.name=Nickel War Hammer
+item.tool/nickel/nickel_club.name=Nickel Morningstar
 
 item.door/nickel.name=Nickel Door
 item.chain/nickel.name=Nickel Chain
@@ -111,6 +114,7 @@ item.tool/tungsten/tungsten_shears.name=Tungsten Shears
 item.tool/tungsten/tungsten_shovel.name=Tungsten Shovel
 item.tool/tungsten/tungsten_sword.name=Tungsten Sword
 item.tool/tungsten/tungsten_war_hammer.name=Tungsten War Hammer
+item.tool/tungsten/tungsten_club.name=Tungsten Morningstar
 
 item.door/tungsten.name=Tungsten Door
 item.chain/tungsten.name=Tungsten Chain
@@ -124,6 +128,25 @@ tile.tungsten_anvil.slightlyDamaged.name=Slightly Damaged Tungsten Anvil
 tile.tungsten_anvil.veryDamaged.name=Very Damaged Tungsten Anvil
 tile.bars/tungsten_bars.name=Tungsten Bars
 tile.toolbench.tungsten.name=Tungsten Toolbench
+
+item.armor/vibranium_helmet.name=Fake Vibranium Helmet
+item.armor/vibranium_chestplate.name=Fake Vibranium Chestplate
+item.armor/vibranium_leggings.name=Fake Vibranium Leggings
+item.armor/vibranium_boots.name=Fake Vibranium Boots
+item.tool/vibranium/vibranium_sword.name=Fake Vibranium Sword
+
+item.armor/maid_helmet.name=Unknown Helmet
+item.armor/maid_chestplate.name=Unknown Chestplate
+item.armor/maid_leggings.name=Unknown Leggings
+item.armor/maid_boots.name=Unknown Sword
+
+item.tool/copper/copper_club.name=Copper Morningstar
+item.tool/silver/silver_club.name=Silver Morningstar
+item.tool/gold/gold_club.name=Golden Morningstar
+item.tool/iron/iron_club.name=Iron Morningstar
+item.tool/ancient_metal/ancient_metal_club.name=Ancient Metal Morningstar
+item.tool/mithril/mithril_club.name=Mithril Morningstar
+item.tool/adamantium/adamantium_club.name=Adamantium Morningstar
 
 item.bowls/lampchop_stew.name=Chestnut Soup
 item.bowls/porkchop_stew.name=Porkchop Stew
@@ -142,33 +165,33 @@ item.pieces/tungsten.name=Tungsten Orepiece
 item.pieces/adamantium.name=Adamantium Orepiece
 
 item.buckets/nickel/empty.name=Nickel Bucket
-item.buckets/nickel/lava.name=Lava Bucket
-item.buckets/nickel/milk.name=Milk Bucket
-item.buckets/nickel/stone.name=Stone Bucket
-item.buckets/nickel/water.name=Water Bucket
-item.buckets/nickel/water_suspicious.name=Suspicious Water Bucket
-item.buckets/nickel/water_swampland.name=Swampland Water Bucket
+item.buckets/nickel/lava.name=Nickel Bucket of Lava
+item.buckets/nickel/milk.name=Nickel Bucket of Milk
+item.buckets/nickel/stone.name=Nickel Bucket of Stone
+item.buckets/nickel/water.name=Nickel Bucket of Water
+item.buckets/nickel/water_suspicious.name=Nickel Bucket of Suspicious Water
+item.buckets/nickel/water_swampland.name=Nickel Bucket of Swampland Water
 item.buckets/tungsten/empty.name=Tungsten Bucket
-item.buckets/tungsten/lava.name=Lava Bucket
-item.buckets/tungsten/milk.name=Milk Bucket
-item.buckets/tungsten/stone.name=Stone Bucket
-item.buckets/tungsten/water.name=Water Bucket
-item.buckets/tungsten/water_suspicious.name=Suspicious Water Bucket
-item.buckets/tungsten/water_swampland.name=Swampland Water Bucket
-item.buckets/copper/water_suspicious.name=Suspicious Water Bucket
-item.buckets/copper/water_swampland.name=Swampland Water Bucket
-item.buckets/silver/water_suspicious.name=Suspicious Water Bucket
-item.buckets/silver/water_swampland.name=Swampland Water Bucket
-item.buckets/gold/water_suspicious.name=Suspicious Water Bucket
-item.buckets/gold/water_swampland.name=Swampland Water Bucket
-item.buckets/iron/water_suspicious.name=Suspicious Water Bucket
-item.buckets/iron/water_swampland.name=Swampland Water Bucket
-item.buckets/mithril/water_suspicious.name=Suspicious Water Bucket
-item.buckets/mithril/water_swampland.name=Swampland Water Bucket
-item.buckets/ancient_metal/water_suspicious.name=Suspicious Water Bucket
-item.buckets/ancient_metal/water_swampland.name=Swampland Water Bucket
-item.buckets/adamantium/water_suspicious.name=Suspicious Water Bucket
-item.buckets/adamantium/water_swampland.name=Swampland Water Bucket
+item.buckets/tungsten/lava.name=Tungsten Bucket of Lava
+item.buckets/tungsten/milk.name=Tungsten Bucket of Milk
+item.buckets/tungsten/stone.name=Tungsten Bucket of Stone
+item.buckets/tungsten/water.name=Tungsten Bucket of Water
+item.buckets/tungsten/water_suspicious.name=Tungsten Bucket of Suspicious Water
+item.buckets/tungsten/water_swampland.name=Tungsten Bucket of Swampland Water
+item.buckets/copper/water_suspicious.name=Copper Bucket of Suspicious Water
+item.buckets/copper/water_swampland.name=Copper Bucket of Swampland Water
+item.buckets/silver/water_suspicious.name=Silver Bucket of Suspicious Water
+item.buckets/silver/water_swampland.name=Silver Bucket of Swampland Water
+item.buckets/gold/water_suspicious.name=Golden Bucket of Suspicious Water
+item.buckets/gold/water_swampland.name=Golden Bucket of Swampland Water
+item.buckets/iron/water_suspicious.name=Iron Bucket of Suspicious Water
+item.buckets/iron/water_swampland.name=Iron Bucket of Swampland Water
+item.buckets/mithril/water_suspicious.name=Mithril Bucket of Suspicious Water
+item.buckets/mithril/water_swampland.name=Mithril Bucket of Swampland Water
+item.buckets/ancient_metal/water_suspicious.name=Ancient Metal Bucket of Suspicious Water
+item.buckets/ancient_metal/water_swampland.name=Ancient Metal Bucket of Swampland Water
+item.buckets/adamantium/water_suspicious.name=Adamantium Bucket of Suspicious Water
+item.buckets/adamantium/water_swampland.name=Adamantium Bucket of Swampland Water
 
 item.food/mashed_cactus.name=Mashed Cactus
 item.food/lemon.name=Lemon
@@ -182,10 +205,14 @@ item.food/glow_berries.name=Glow Berries
 item.shards/diamond.name=Diamond Shard
 item.shards/emerald.name=Emerald Shard
 item.shards/quartz.name=Nether Quartz Shard
+item.lapis_lazuli.name=Lapis Lazuli
+item.dyePowder.blue.name=Blue Dye
 
-item.records/record_division.name=Music Disc
+item.records/record_damnation.name=Music Disc
 
 item.experimental_potion.name=Experimental Potion
+
+item.wolf_fur.name=Wolf Fur
 
 item.arrows/magical_arrow.name=Magical Arrow
 
@@ -207,6 +234,7 @@ entity.EntityHusk.name=Husk
 entity.EntityLichShadow.name=Shadow of Lich
 entity.EntityLich.name=Lich
 entity.EntityStalkerCreeper.name=Stalker Creeper
+entity.EntityZombieLord?.name=Fake Zombie Lord
 
 death.attack.thirsty = %1$s dead because of dehydration
 death.attack.freeze = %1$s Freezed Fully

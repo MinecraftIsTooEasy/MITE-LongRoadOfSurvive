@@ -9,6 +9,7 @@ import java.util.List;
 public class EntityWitherBodyguard extends EntitySkeleton {
     public EntityWitherBodyguard(World par1World) {
         super(par1World);
+        this.setCanPickUpLoot(false);
     }
     public int getRandomSkeletonType(World world) {
         return 2;
@@ -19,15 +20,6 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.27000001072883606);
         this.setEntityAttribute(GenericAttributes.attackDamage, 6.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 12.0);
-    }
-    @Override
-    public void dropContainedItems() {
-
-    }
-
-    @Override
-    protected void dropEquipment(boolean recently_hit_by_player, int par2) {
-
     }
     @Override
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {

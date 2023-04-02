@@ -30,6 +30,8 @@ public class ItemToolMixin extends Item{
             return 1.5F;
         } else if (this.effective_material == Material.rusted_iron) {
             return 1.25F;
+        } else if (this.effective_material == Materials.vibranium) {
+            return 1.25F;
         } else if (this.effective_material == Material.copper) {
             return 1.75F;
         } else if (this.effective_material == Material.silver) {

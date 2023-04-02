@@ -28,7 +28,7 @@ public class EntityWandFireball extends EntityProjectileNoGravity{
                     this.worldObj.spawnParticle(EnumParticle.flame, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
                 }
             }
-            if (rc.isEntity())
+            if (rc.isEntity() && rc.getEntityHit() instanceof EntityLiving)
             {
                 Entity var3 = rc.getEntityHit();
                 float damage = 0.0F;
@@ -43,6 +43,9 @@ public class EntityWandFireball extends EntityProjectileNoGravity{
                 {
                     this.worldObj.spawnParticle(EnumParticle.flame, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
                 }
+            }
+            else{
+                this.setDead();;
             }
         }
         if (this.worldObj.isRemote)

@@ -13,8 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(ItemArmor.class)
-public class ItemArmorMixin extends Item {
-
+public abstract class ItemArmorMixin extends Item implements IDamageableItem {
     @Overwrite
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         if (extended_info) {
@@ -30,13 +29,25 @@ public class ItemArmorMixin extends Item {
     }
 
     @Overwrite
+    public final int getMultipliedDurability() {
+        float durability = (float)this.getNumComponentsForDurability() * this.effective_material.getDurability();
+        if (!this.is_chain_mail) {
+            durability *= 2.0F;
+        }
+        if(durability<1.0F){
+            durability = 1.0F;
+        }
+        return (int)durability;
+    }
+
+    @Overwrite
     public int getMaterialProtection() {
         int protection;
         if (this.effective_material == Material.leather) {
             protection = 2;
-        } else if(this.effective_material == Materials.wolf_fur){
-            protection = 5;
-        } else if (this.effective_material == Material.rusted_iron) {
+        } else if(this.effective_material == Materials.wolf_fur || this.effective_material == Materials.maid){
+            protection = 4;
+        } else if (this.effective_material == Material.rusted_iron || this.effective_material == Materials.vibranium) {
             protection = 6;
         } else if (this.effective_material == Material.copper) {
             protection = 7;
@@ -73,4 +84,6 @@ public class ItemArmorMixin extends Item {
     @Shadow
     @Final
     private boolean is_chain_mail;
+
+
 }
