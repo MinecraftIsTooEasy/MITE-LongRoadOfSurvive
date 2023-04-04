@@ -71,14 +71,17 @@ public class ItemWand extends ItemTool implements IDamageableItem{
                     if(this.itemID == Items.LavaWand.itemID){
                         world.playSoundAtEntity(player, "mob.ghast.fireball", 1.0F, 1.0F);
                         world.spawnEntityInWorld(new EntityWandFireball(world, player));
+                        System.out.println("Player tried to spawn Fireball of Wand.");
                     }
                     if(this.itemID == Items.FreezeWand.itemID){
                         world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
                         world.spawnEntityInWorld(new EntityWandIceBall(world,player));
+                        System.out.println("Player tried to spawn Iceball of Wand.");
                     }
                     if(this.itemID == Items.ShockWand.itemID){
-                        world.playSoundAtEntity(player, "ambient.weather.thunder", 100.0F, 1.0F);
+                        world.playSoundAtEntity(player, "ambient.weather.thunder", 1.0F, 100.0F);
                         world.spawnEntityInWorld(new EntityWandShockWave(world,player));
+                        System.out.println("Player tried to spawn Shockwave of Wand.");
                     }
                 }
             }
