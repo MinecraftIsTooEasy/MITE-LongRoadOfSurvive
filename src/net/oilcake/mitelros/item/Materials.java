@@ -16,8 +16,8 @@ public class Materials extends Material {
     public static final Material lemonade = (new MaterialFood("lemonade")).setDrinkable();
     public static final Material unsafe_water = (new MaterialLiquid("suspicious_water", MaterialMapColor.waterColor)).setDrinkable();
     public static final Material dangerous_water = (new MaterialLiquid("swampland_water", MaterialMapColor.waterColor)).setDrinkable();
-    public static final Materials magical = (Materials) new  Materials(EnumEquipmentMaterials.magical).setMetal(false).setMinHarvestLevel(0);
-
+    public static final Materials magical = (Materials) new Materials(EnumEquipmentMaterials.magical).setMetal(false).setMinHarvestLevel(0);
+    public static final Materials ancient_metal_sacred = (Materials) new Materials(EnumEquipmentMaterials.ancient_metal_sacred).setMetal(true).setMinHarvestLevel(3);
 
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);

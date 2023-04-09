@@ -44,12 +44,7 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreGold) {
                 id_dropped = isGoldOreNetherrack(this,1) ? Items.pieceGoldNether.itemID : Items.pieceGold.itemID;
                 quantity_dropped = 1 + info.world.rand.nextInt(2);
-            }
-//            else if (block == Block.oreGold && Block.oreGold.isValidMetadata(2)){
-//                id_dropped = Items.pieceGoldNether.itemID;
-//                quantity_dropped = 1 + info.world.rand.nextInt(2);
-//            }
-            else if (this == Block.oreIron) {
+            } else if (this == Block.oreIron) {
                 id_dropped = Items.pieceIron.itemID;
                 quantity_dropped = 1 + info.world.rand.nextInt(2);
             } else if (this == oreNickel) {
@@ -67,108 +62,73 @@ public class BlockOreMixin extends Block {
             } else {
                 id_dropped = this.blockID;
             }
-        } else {
-            if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentRestore)) {
-                if (info.wasHarvestedByPlayer() && info.getResponsiblePlayer().worldObj.areSkillsEnabled() && !info.getResponsiblePlayer().hasSkill(Skill.MINING)) {
-                    return super.dropBlockAsEntityItem(info);
-                }
-                if (this == oreCoal) {
-                    id_dropped = Item.coal.itemID;
-                } else if (this == oreDiamond) {
-                    id_dropped = Item.diamond.itemID;
-                } else if (this == oreLapis) {
-                    id_dropped = Items.lapis.itemID;
-                    metadata_dropped = 4;
-                    quantity_dropped = 3 + info.world.rand.nextInt(3);
-                } else if (this == oreEmerald) {
-                    id_dropped = Item.emerald.itemID;
-                } else if (this == oreNetherQuartz) {
-                    id_dropped = Item.netherQuartz.itemID;
-                } else {
-                    id_dropped = this.blockID;
-                }
+        }
+        else {
+            boolean HasAbsorb = EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb);
+            boolean HasRestore = EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentRestore);
+            if (this == Block.oreEmerald) {
+                id_dropped = HasAbsorb ? 0 : HasRestore ? Item.emerald.itemID : Item.shardEmerald.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreNetherQuartz) {
+                id_dropped = HasAbsorb ? 0 : HasRestore ? Item.netherQuartz.itemID : Item.shardNetherQuartz.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreDiamond) {
+                id_dropped = HasAbsorb ? 0 : HasRestore ? Item.diamond.itemID : Item.shardDiamond.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreLapis) {
+                id_dropped = HasAbsorb ? 0 : Items.lapis.itemID;
+                metadata_dropped = 4;
+                quantity_dropped = HasRestore ? 3 + info.world.rand.nextInt(3) : 2 + info.world.rand.nextInt(2);
+            } else if (this == Block.oreCoal) {
+                id_dropped = Item.coal.itemID;
+            } else if (this == Block.oreRedstone) {
+                id_dropped = Item.redstone.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(2);
+            } else if (this == Block.oreCopper) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceCopper.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreSilver) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceSilver.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreGold) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceGold.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreIron) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceIron.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == oreNickel) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceNickel.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreMithril) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceMithril.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == oreTungsten) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceTungsten.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            } else if (this == Block.oreAdamantium) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceAdamantium.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
             } else {
-                if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
-                    if (this == Block.oreEmerald || this == Block.oreNetherQuartz || this == Block.oreDiamond || this == Block.oreLapis) {
-                        id_dropped = 0;
-                    }
-                } else {
-                    if (this == Block.oreEmerald) {
-                        id_dropped = Item.shardEmerald.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreNetherQuartz) {
-                        id_dropped = Item.shardNetherQuartz.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreDiamond) {
-                        id_dropped = Item.shardDiamond.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreLapis) {
-                        id_dropped = Items.lapis.itemID;
-                        metadata_dropped = 4;
-                        quantity_dropped = 2 + info.world.rand.nextInt(2);
-                    } else if (this == Block.oreCoal) {
-                        id_dropped = Item.coal.itemID;
-                    } else if (this == Block.oreRedstone) {
-                        id_dropped = Item.redstone.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(2);
-                    } else if (this == Block.oreCopper) {
-                        id_dropped = Items.pieceCopper.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreSilver) {
-                        id_dropped = Items.pieceSilver.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreGold) {
-                        id_dropped = Items.pieceGold.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    }
-//            else if (block  == Block.oreGold) {
-//                id_dropped = Items.pieceGoldNether.itemID;
-//                quantity_dropped = 3 + info.world.rand.nextInt(4);
-//            }
-                    else if (this == Block.oreIron) {
-                        id_dropped = Items.pieceIron.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == oreNickel) {
-                        id_dropped = Items.pieceNickel.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreMithril) {
-                        id_dropped = Items.pieceMithril.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == oreTungsten) {
-                        id_dropped = Items.pieceTungsten.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else if (this == Block.oreAdamantium) {
-                        id_dropped = Items.pieceAdamantium.itemID;
-                        quantity_dropped = 3 + info.world.rand.nextInt(5);
-                    } else {
-                        id_dropped = this.blockID;
-                    }
-                }
+                id_dropped = this.blockID;
             }
         }
-
-            if (metadata_dropped == -1) {
-                metadata_dropped = id_dropped == this.blockID ? this.getItemSubtype(info.getMetadata()) : 0;
+        boolean suppress_fortune = id_dropped == this.blockID && BitHelper.isBitSet(info.getMetadata(), 1);
+        if (id_dropped != -1 && info.getMetadata() == 0) {
+            DedicatedServer.incrementTournamentScoringCounter(info.getResponsiblePlayer(), Item.getItem(id_dropped));
+        }
+        float chance = suppress_fortune ? 1.0F : 1.0F + (float) info.getHarvesterFortune() * 0.2F;
+        if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
+            if (this == Block.oreDiamond) {
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(500*chance));
+            } else if (this == Block.oreEmerald) {
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(250*chance));
+            } else if (this == Block.oreNetherQuartz) {
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(50*chance));
+            } else if (this == Block.oreLapis) {
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((2 + info.world.rand.nextInt(2)) * 25)*chance));
             }
-
-            boolean suppress_fortune = id_dropped == this.blockID && BitHelper.isBitSet(info.getMetadata(), 1);
-            if (id_dropped != -1 && info.getMetadata() == 0) {
-                DedicatedServer.incrementTournamentScoringCounter(info.getResponsiblePlayer(), Item.getItem(id_dropped));
-            }
-            float chance = suppress_fortune ? 1.0F : 1.0F + (float) info.getHarvesterFortune() * 0.2F;
-
-            if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
-                if (this == Block.oreDiamond) {
-                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 500);
-                } else if (this == Block.oreEmerald) {
-                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 250);
-                }else if (this == Block.oreNetherQuartz) {
-                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 50);
-                }else if (this == Block.oreLapis) {
-                    this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (2 + info.world.rand.nextInt(2)) * 25);
-                }
-            }
-            return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);
+        }
+        return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);
     }
     @Shadow
     public String getMetadataNotes() {

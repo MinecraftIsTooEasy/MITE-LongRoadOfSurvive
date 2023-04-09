@@ -8,10 +8,11 @@ import java.util.Random;
 public class BiomeWindsweptPleatu extends BiomeBase {
     public BiomeWindsweptPleatu(int par1) {
         super(par1);
-        this.spawnableCreatureList.clear();
         this.removeEntityFromSpawnableLists(EntitySkeleton.class);
+        this.removeEntityFromSpawnableLists(EntityCow.class);
+        this.removeEntityFromSpawnableLists(EntityChicken.class);
+        this.removeEntityFromSpawnableLists(EntityPig.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 100, 1, 4));
-        this.spawnableCreatureList.add(new BiomeMeta(EntitySheep.class, 5, 2, 3));
         this.spawnableCreatureList.add(new BiomeMeta(EntityDireWolf.class, 30, 4, 4));
         this.topBlock = (byte)Block.grass.blockID;
         this.fillerBlock = (byte)Block.cobblestone.blockID;

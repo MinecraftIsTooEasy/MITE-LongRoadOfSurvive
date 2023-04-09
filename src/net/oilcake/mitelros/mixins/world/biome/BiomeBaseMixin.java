@@ -5,6 +5,7 @@
 
 package net.oilcake.mitelros.mixins.world.biome;
 
+import net.oilcake.mitelros.util.StuckTagConfig;
 import net.oilcake.mitelros.world.biome.BiomeWindsweptPleatu;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -26,6 +27,12 @@ public class BiomeBaseMixin extends BiomeBase {
     public BiomeBaseMixin() {
         super(1562);
     }
+//    @Inject(method = "<init>",at = @At("RETURN"))
+//    public void injectCtor(CallbackInfo callbackInfo) {
+//        if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue){
+//            this.spawnableCreatureList.clear();
+//        }
+//    }
     @Overwrite
     public boolean isHillyOrMountainous() {
         return this == extremeHills || this == iceMountains || this == desertHills || this == forestHills || this == taigaHills || this == extremeHillsEdge || this == jungleHills || this == windsweptpleatu;

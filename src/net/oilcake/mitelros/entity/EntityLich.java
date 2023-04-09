@@ -48,10 +48,10 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
     }
     protected void addRandomEquipment() {
         this.addRandomWeapon();
-        this.setBoots((new ItemStack(Item.bootsGold)).randomizeForMob(this, true));
-        this.setLeggings((new ItemStack(Item.legsGold)).randomizeForMob(this, true));
-        this.setCuirass((new ItemStack(Item.plateGold)).randomizeForMob(this, true));
-        this.setHelmet((new ItemStack(Item.helmetGold)).randomizeForMob(this, true));
+        this.setBoots((new ItemStack(Items.BootsAncientmetalsacred)).randomizeForMob(this, true));
+        this.setLeggings((new ItemStack(Items.LeggingsAncientmetalsacred)).randomizeForMob(this, true));
+        this.setCuirass((new ItemStack(Items.ChestplateAncientmetalsacred)).randomizeForMob(this, true));
+        this.setHelmet((new ItemStack(Items.HelmetAncientmetalsacred)).randomizeForMob(this, true));
     }
 
     public void onUpdate(){

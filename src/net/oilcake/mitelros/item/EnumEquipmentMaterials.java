@@ -34,6 +34,7 @@ public class EnumEquipmentMaterials {
 
     public static final EnumEquipmentMaterial vibranium = newEnumEquipmentMaterial(4.0F,0,EnumQuality.poor,"vibranium");
     public static final EnumEquipmentMaterial magical = newEnumEquipmentMaterial(0.125F,100,EnumQuality.wretched,"magical");
+    public static final EnumEquipmentMaterial ancient_metal_sacred = newEnumEquipmentMaterial(16.0F,60,EnumQuality.masterwork,"ancient_metal_sacred");
     private static final EnumEquipmentMaterial newEnumEquipmentMaterial(float durability, int enchantability, EnumQuality max_quality, String name){
         try {
             return (EnumEquipmentMaterial) constructorAccessor.newInstance(new Object[]{name,ordinary++,durability,enchantability,max_quality,name});

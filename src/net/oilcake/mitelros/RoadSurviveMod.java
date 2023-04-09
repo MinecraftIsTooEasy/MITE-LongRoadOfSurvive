@@ -2,14 +2,18 @@ package net.oilcake.mitelros;
 
 import net.oilcake.mitelros.mixins.MinecraftMixin;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import net.oilcake.mitelros.util.events.LROSEvent;
 import net.xiaoyu233.fml.AbstractMod;
+import net.xiaoyu233.fml.FishModLoader;
 import net.xiaoyu233.fml.classloading.Mod;
 import net.xiaoyu233.fml.config.InjectionConfig;
 import net.xiaoyu233.fml.reload.event.MITEEvents;
+import net.xiaoyu233.fml.util.ModInfo;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 import javax.annotation.Nonnull;
+import javax.swing.*;
 
 @Mod
 public class RoadSurviveMod extends AbstractMod {
@@ -41,5 +45,8 @@ public class RoadSurviveMod extends AbstractMod {
     public String modVerStr() {
         return Constant.VERSION;
     }
-
+    @Override
+    public void postInit() {
+        StuckTagConfig.loadConfigs();
+    }
 }

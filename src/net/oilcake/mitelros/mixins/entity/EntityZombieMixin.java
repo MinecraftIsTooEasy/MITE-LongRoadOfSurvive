@@ -2,14 +2,18 @@ package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityWitherBoneLord;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityZombie.class)
-public class EntityZombieMixin extends EntityAnimalWatcher{
+public class EntityZombieMixin extends EntityZombie{
+    @Shadow
+    private int conversionTime;
     public EntityZombieMixin(World par1World) {
         super(par1World);
     }

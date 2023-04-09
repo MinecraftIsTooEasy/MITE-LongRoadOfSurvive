@@ -20,7 +20,7 @@ public class EntityPigmanLord extends EntityPigZombie {
     }
     protected EntityPlayer findPlayerToAttack(float max_distance) {
         if (this.angerLevel < 1) {
-            max_distance /= 256.0F;
+            max_distance /= 1.25F;
         }
 
         Entity previous_target = this.getEntityToAttack();

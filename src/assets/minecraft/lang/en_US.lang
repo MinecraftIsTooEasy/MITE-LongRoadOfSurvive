@@ -138,7 +138,12 @@ item.tool/vibranium/vibranium_sword.name=Fake Vibranium Sword
 item.armor/maid_helmet.name=Unknown Helmet
 item.armor/maid_chestplate.name=Unknown Chestplate
 item.armor/maid_leggings.name=Unknown Leggings
-item.armor/maid_boots.name=Unknown Sword
+item.armor/maid_boots.name=Unknown Boots
+
+item.armor/ancient_metal_sacred_helmet.name=Gilding Ancient Metal Helmet
+item.armor/ancient_metal_sacred_chestplate.name=Gilding Ancient Metal Chestplate
+item.armor/ancient_metal_sacred_leggings.name=Gilding Ancient Metal Leggings
+item.armor/ancient_metal_sacred_boots.name=Gilding Ancient Metal Boots
 
 item.tool/copper/copper_club.name=Copper Morningstar
 item.tool/silver/silver_club.name=Silver Morningstar
@@ -235,6 +240,8 @@ entity.EntityLichShadow.name=Shadow of Lich
 entity.EntityLich.name=Lich
 entity.EntityStalkerCreeper.name=Stalker Creeper
 entity.EntityZombieLord?.name=Fake Zombie Lord
+entity.EntityZombieMiner.name=Fallen Miner
+entity.EntityBoneBodyguard.name=Skeleton Bodyguard
 
-death.attack.thirsty = %1$s dead because of dehydration
-death.attack.freeze = %1$s Freezed Fully
+death.extend.attack.thirsty=%1$s dead because of dehydration
+death.extend.attack.freeze=%1$s Freezed Fully

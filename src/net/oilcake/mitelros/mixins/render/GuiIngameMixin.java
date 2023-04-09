@@ -3,6 +3,8 @@ package net.oilcake.mitelros.mixins.render;
 import net.minecraft.*;
 //import net.oilcake.mitelros.item.potion.Potions;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.StuckTagConfig;
+import net.xiaoyu233.fml.config.Configs;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -251,15 +253,19 @@ public class GuiIngameMixin extends avk {
         if (!Minecraft.inDevMode()) {
             WeatherEvent event = this.g.f.getCurrentWeatherEvent(true, false);
             String s;
-            if (event != null) {
-                s = "风暴已经抵达";
-            } else {
-                event = this.g.f.getNextWeatherEvent(true);
+            if(StuckTagConfig.TagConfig.TagNoWeatherPredict.ConfigValue){
+                s = "阴晴无定";
+            } else{
                 if (event != null) {
-                    s = "乌云滚滚";
+                    s = "风暴已经抵达";
                 } else {
-                    event = this.g.f.getPreviousWeatherEvent(true);
-                    s = event == null ? "现在风平浪静" : "风暴已经结束";
+                    event = this.g.f.getNextWeatherEvent(true);
+                    if (event != null) {
+                        s = "乌云滚滚";
+                    } else {
+                        event = this.g.f.getPreviousWeatherEvent(true);
+                        s = event == null ? "现在风平浪静" : "风暴已经结束";
+                    }
                 }
             }
             if (GuiIngame.server_load >= 0) {
@@ -267,8 +273,9 @@ public class GuiIngameMixin extends avk {
                 String text = GuiIngame.server_load + "%";
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
-
-            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ").append(s).append("   FPS=");
+            String t;
+            t = " 挑战难度: " + Constant.CalculateCurrentDiff() + " ";
+            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ").append(s).append(t).append("   FPS=");
             var68.append(Minecraft.last_fps).append(" (");
             this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }

@@ -80,6 +80,8 @@ public class EntityStray extends EntitySkeleton {
             this.setCuirass((new ItemStack(Items.WolfChestplate)).randomizeForMob(this, false));
             this.setHelmet((new ItemStack(Items.WolfHelmet)).randomizeForMob(this, false));
         }
-
+    }
+    public float getNaturalDefense(DamageSource damage_source) {
+        return super.getNaturalDefense(damage_source) + (damage_source.bypassesMundaneArmor() ? 0.0F : 1.0F);
     }
 }

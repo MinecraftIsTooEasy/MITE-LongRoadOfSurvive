@@ -46,10 +46,10 @@ public class EntityLichShadow extends EntitySkeleton{
     }
     protected void addRandomEquipment() {
         this.addRandomWeapon();
-        this.setBoots((new ItemStack(Item.bootsGold)).randomizeForMob(this, true));
-        this.setLeggings((new ItemStack(Item.legsGold)).randomizeForMob(this, true));
-        this.setCuirass((new ItemStack(Item.plateGold)).randomizeForMob(this, true));
-        this.setHelmet((new ItemStack(Item.helmetGold)).randomizeForMob(this, true));
+        this.setBoots((new ItemStack(Item.bootsAncientMetal)).randomizeForMob(this, true));
+        this.setLeggings((new ItemStack(Item.legsAncientMetal)).randomizeForMob(this, true));
+        this.setCuirass((new ItemStack(Item.plateAncientMetal)).randomizeForMob(this, true));
+        this.setHelmet((new ItemStack(Item.helmetAncientMetal)).randomizeForMob(this, true));
     }
     public void onLivingUpdate() {
         super.onLivingUpdate();

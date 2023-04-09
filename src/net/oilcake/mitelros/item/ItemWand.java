@@ -79,7 +79,7 @@ public class ItemWand extends ItemTool implements IDamageableItem{
                         System.out.println("Player tried to spawn Iceball of Wand.");
                     }
                     if(this.itemID == Items.ShockWand.itemID){
-                        world.playSoundAtEntity(player, "ambient.weather.thunder", 1.0F, 100.0F);
+                        world.playSoundAtEntity(player, "ambient.weather.thunder", 1.0F, 1.0F);
                         world.spawnEntityInWorld(new EntityWandShockWave(world,player));
                         System.out.println("Player tried to spawn Shockwave of Wand.");
                     }

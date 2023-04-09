@@ -149,6 +149,10 @@ public class Items extends Item {
     public static final ItemArmor MaidChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.maid,false);
     public static final ItemArmor MaidLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.maid,false);
     public static final ItemArmor MaidBoots = new ItemBoots(Constant.getNextItemID(),Materials.maid,false);
+    public static final ItemArmor HelmetAncientmetalsacred = new ItemHelmet(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
+    public static final ItemArmor ChestplateAncientmetalsacred = new ItemCuirass(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
+    public static final ItemArmor LeggingsAncientmetalsacred = new ItemLeggings(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
+    public static final ItemArmor BootsAncientmetalsacred = new ItemBoots(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -296,6 +300,10 @@ public class Items extends Item {
         register("armor/maid_chestplate",MaidChestplate);
         register("armor/maid_leggings",MaidLeggings);
         register("armor/maid_boots",MaidBoots);
+        register("armor/ancient_metal_sacred_helmet",HelmetAncientmetalsacred);
+        register("armor/ancient_metal_sacred_chestplate",ChestplateAncientmetalsacred);
+        register("armor/ancient_metal_sacred_leggings",LeggingsAncientmetalsacred);
+        register("armor/ancient_metal_sacred_boots",BootsAncientmetalsacred);
         Constant.initItemArray();
     }
 

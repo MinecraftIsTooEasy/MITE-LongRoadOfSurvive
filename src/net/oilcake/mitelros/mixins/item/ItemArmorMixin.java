@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -46,7 +47,7 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
         if (this.effective_material == Material.leather) {
             protection = 2;
         } else if(this.effective_material == Materials.wolf_fur || this.effective_material == Materials.maid){
-            protection = 4;
+            protection = 3;
         } else if (this.effective_material == Material.rusted_iron || this.effective_material == Materials.vibranium) {
             protection = 6;
         } else if (this.effective_material == Material.copper) {
@@ -56,7 +57,7 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
         } else if (this.effective_material == Material.gold) {
             protection = 6;
         } else if (this.effective_material != Material.iron && this.effective_material != Material.ancient_metal && this.effective_material != Materials.nickel) {
-            if (this.effective_material == Material.mithril || this.effective_material == Materials.tungsten) {
+            if (this.effective_material == Material.mithril || this.effective_material == Materials.tungsten || this.effective_material == Materials.ancient_metal_sacred) {
                 protection = 9;
             } else {
                 if (this.effective_material != Material.adamantium) {
@@ -75,15 +76,27 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
 
         return protection;
     }
-    @Shadow
-    public final float getProtectionAfterDamageFactor(ItemStack item_stack, EntityLiving owner) {
-        return 1F;
+    @Overwrite
+    public final float getDamageFactor(ItemStack item_stack, EntityLiving owner) {
+        if (owner != null && !owner.isEntityPlayer()) {
+            return StuckTagConfig.TagConfig.TagInstinctSurvival.ConfigValue ? 0.75F : 0.5F;
+        } else if (owner instanceof EntityPlayer && item_stack.getMaxDamage() > 1 && item_stack.getItemDamage() >= item_stack.getMaxDamage() - 1) {
+            return 0.0F;
+        } else {
+            float armor_damage_factor = 2.0F - (float)item_stack.getItemDamage() / (float)item_stack.getItem().getMaxDamage(item_stack) * 2.0F;
+            if (armor_damage_factor > 1.0F) {
+                armor_damage_factor = 1.0F;
+            }
+            return armor_damage_factor;
+        }
     }
     @Shadow
     private Material effective_material;
     @Shadow
     @Final
     private boolean is_chain_mail;
-
-
+    @Shadow
+    public final float getProtectionAfterDamageFactor(ItemStack item_stack, EntityLiving owner) {
+        return 1.0F;
+    }
 }

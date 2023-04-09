@@ -18,5 +18,6 @@ public class ServerCommandManagerMixin extends CommandHandler {
         this.registerCommand(new CommandStoneAir());
         this.registerCommand(new CommandTeleport());
         this.registerCommand(new CommandTestFreeze());
+        this.registerCommand(new CommandFullyAir());
     }
 }

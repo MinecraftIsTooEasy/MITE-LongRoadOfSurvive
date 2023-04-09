@@ -36,6 +36,8 @@ public class EntityTypesMixin {
         addMapping(EntityWandIceBall.class,"EntityWandIceball",552);
         addMapping(EntityWandShockWave.class,"EntityWandShockWave",553);
         addMapping(EntityZombieLord.class,"EntityZombieLord?",554);
+        addMapping(EntityMinerZombie.class,"EntityZombieMiner",555);
+        addMapping(EntityBoneBodyguard.class,"EntityBoneBodyguard",556);
     }
 
 }

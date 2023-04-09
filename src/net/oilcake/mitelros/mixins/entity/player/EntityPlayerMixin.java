@@ -8,6 +8,7 @@ import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
 import net.oilcake.mitelros.util.DamageSourceExtend;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -252,6 +253,9 @@ public abstract class EntityPlayerMixin extends EntityLiving{
         if (!this.worldObj.isRemote) {
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
             dry_resist += 1.0D + (double) biome.getFloatTemperature();
+            if(StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue){
+                dry_resist *= 3;
+            }
             if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
@@ -272,7 +276,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
                 }
             }
             if(this.InFreeze()){
-                ++FreezingCooldown;
+                FreezingCooldown += StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1;
             }
             else{
                 if(FreezingCooldown > 0){

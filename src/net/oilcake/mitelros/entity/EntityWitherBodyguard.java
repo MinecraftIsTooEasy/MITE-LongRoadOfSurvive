@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityWitherBodyguard extends EntitySkeleton {
+    ItemStack stowed_item_stack;
     public EntityWitherBodyguard(World par1World) {
         super(par1World);
         this.setCanPickUpLoot(false);
@@ -20,6 +21,29 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.27000001072883606);
         this.setEntityAttribute(GenericAttributes.attackDamage, 6.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 12.0);
+    }
+    public boolean isHoldingRangedWeapon() {
+        return this.getHeldItem() instanceof ItemBow;
+    }
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        if (this.stowed_item_stack != null && (this.getHeldItemStack() == null || this.getTicksExistedWithOffset() % 10 == 0)) {
+            if (this.getHeldItemStack() == null) {
+                this.swapHeldItemStackWithStowed();
+            } else {
+                Entity target = this.getTarget();
+                if (target != null && this.canSeeTarget(true)) {
+                    double distance = (double)this.getDistanceToEntity(target);
+                    if (this.isHoldingRangedWeapon()) {
+                        if (distance < 5.0) {
+                            this.swapHeldItemStackWithStowed();
+                        }
+                    } else if (distance > 6.0 && this.rand.nextBoolean()) {
+                        this.swapHeldItemStackWithStowed();
+                    }
+                }
+            }
+        }
     }
     @Override
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
@@ -44,9 +68,9 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         items.add(new RandomItemListEntry(Items.tungstenDagger, 2));
         if (!Minecraft.isInTournamentMode()) {
             items.add(new RandomItemListEntry(Items.tungstenSword, 1));
-            items.add(new RandomItemListEntry(Items.tungstenWarHammer, 1));
+            items.add(new RandomItemListEntry(Items.tungstenBattleAxe, 1));
         }
-
+        this.stowed_item_stack = (new ItemStack(Item.bowAncientMetal)).randomizeForMob(this, true);
         RandomItemListEntry entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, items);
         this.setHeldItemStack((new ItemStack(entry.item)).randomizeForMob(this, true));
     }
@@ -67,6 +91,11 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         } else {
             return result;
         }
+    }
+    public void swapHeldItemStackWithStowed() {
+        ItemStack item_stack = this.stowed_item_stack;
+        this.stowed_item_stack = this.getHeldItemStack();
+        this.setHeldItemStack(item_stack);
     }
 
     public boolean isHarmedByFire() {
