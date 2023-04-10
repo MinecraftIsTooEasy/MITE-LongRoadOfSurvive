@@ -252,10 +252,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
-            dry_resist += 1.0D + (double) biome.getFloatTemperature();
-            if(StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue){
-                dry_resist *= 3;
-            }
+            dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 3.0D : 1.0D) + (double) biome.getFloatTemperature();
             if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;

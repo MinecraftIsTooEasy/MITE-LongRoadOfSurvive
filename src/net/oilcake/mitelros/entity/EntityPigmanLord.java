@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,6 @@ public class EntityPigmanLord extends EntityPigZombie {
         super(par1World);
     }
     protected EntityPlayer findPlayerToAttack(float max_distance) {
-        if (this.angerLevel < 1) {
-            max_distance /= 1.25F;
-        }
-
         Entity previous_target = this.getEntityToAttack();
         EntityPlayer target = super.findPlayerToAttack(max_distance);
         if (target != null && target != previous_target) {
@@ -38,25 +35,21 @@ public class EntityPigmanLord extends EntityPigZombie {
     }
     public void addRandomWeapon() {
         List items = new ArrayList();
-        items.add(new RandomItemListEntry(Item.swordGold, 2));
-        if (this.worldObj.getDayOfWorld() >= 10 && !Minecraft.isInTournamentMode()) {
-            items.add(new RandomItemListEntry(Item.battleAxeGold, 1));
+        items.add(new RandomItemListEntry(Items.tungstenSword, 2));
+        if (!Minecraft.isInTournamentMode()) {
+            items.add(new RandomItemListEntry(Items.tungstenBattleAxe, 1));
+            items.add(new RandomItemListEntry(Items.tungstenWarHammer, 1));
         }
-
-        if (this.worldObj.getDayOfWorld() >= 20 && !Minecraft.isInTournamentMode()) {
-            items.add(new RandomItemListEntry(Item.warHammerGold, 1));
-        }
-
         RandomItemListEntry entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, items);
         this.setHeldItemStack((new ItemStack(entry.item)).randomizeForMob(this, true));
     }
 
     public void addRandomEquipment() {
         this.addRandomWeapon();
-        this.setBoots((new ItemStack(Item.bootsGold)).randomizeForMob(this, true));
-        this.setLeggings((new ItemStack(Item.legsGold)).randomizeForMob(this, true));
-        this.setCuirass((new ItemStack(Item.plateGold)).randomizeForMob(this, true));
-        this.setHelmet((new ItemStack(Item.helmetGold)).randomizeForMob(this, true));
+        this.setBoots((new ItemStack(Items.tungstenBoots)).randomizeForMob(this, true));
+        this.setLeggings((new ItemStack(Items.tungstenLeggings)).randomizeForMob(this, true));
+        this.setCuirass((new ItemStack(Items.tungstenChestplate)).randomizeForMob(this, true));
+        this.setHelmet((new ItemStack(Items.tungstenHelmet)).randomizeForMob(this, true));
     }
     public int getExperienceValue() {
         return super.getExperienceValue() * 2;

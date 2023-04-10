@@ -3,6 +3,12 @@
 可能会遇到一些渲染bug,内存最好大于1024M可尽量避免;遇到F3+A重新加载区块即可  
 不要尝试滥用spreadplayers指令以免造成坏档等严重后果
 ---
+## ITF Aleph 0x00000140
+### bug
+* 修复了酷暑代价错误的含水量减少速度
+### 生物
+* 强化了猪人领主的装备
+---
 ## MITE-ITF OSC Season1(ITF Aleph 0x0000013e/Stable 0.0.2)
 OSC - Overworld Survival Challenge
 ### 杂项
