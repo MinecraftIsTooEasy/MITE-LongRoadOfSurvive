@@ -12,8 +12,8 @@ public class BlockFlowerExtend extends BlockFlower {
     public static final int TULIP_PINK = 4;
     public static final int TULIP_WHITE = 5;
     public static final int TULIP_RED = 6;
-
-    public static final String[] types = new String[]{"luminescent_herb","azure_bluet","cornflower","lily_of_the_valley","pink_tulip","white_tulip","red_tulip"};
+    public static final int AGAVE = 7;
+    public static final String[] types = new String[]{"luminescent_herb","azure_bluet","cornflower","lily_of_the_valley","pink_tulip","white_tulip","red_tulip","agave"};
 
     private IIcon[] icons;
     private static int[] candidates = new int[types.length];
@@ -86,6 +86,8 @@ public class BlockFlowerExtend extends BlockFlower {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
         } else if (metadata == 6) {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
+        } else if (metadata == 7) {
+            this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
         } else {
             Minecraft.setErrorMessage("setBlockBoundsBasedOnStateAndNeighbors: unhandled case");
         }
@@ -93,8 +95,8 @@ public class BlockFlowerExtend extends BlockFlower {
     }
 
     public int getRandomSubtypeForBiome(Random random, BiomeBase biome) {
-        if (biome == BiomeBase.plains && random.nextInt(2) == 0) {
-            return 0;
+        if (random.nextInt(2) == 0) {
+            return 7;
         } else {
             int num_candidates = 0;
 
@@ -133,11 +135,11 @@ public class BlockFlowerExtend extends BlockFlower {
                 return false;
             }else if (biome.isSwampBiome()) {
                 return false;
-            } else if (subtype == 0 && biome.temperature < BiomeBase.plains.temperature) {
+            }else if (subtype == 0 && biome.temperature < BiomeBase.plains.temperature) {
                 return false;
-            } else if (subtype != 0 && biome.temperature < BiomeBase.forestHills.temperature) {
+            }else if (subtype != 0 && biome.temperature < BiomeBase.extremeHills.temperature) {
                 return false;
-            } else {
+            }else {
                 return !biome.isJungleBiome();
             }
         }
@@ -153,7 +155,7 @@ public class BlockFlowerExtend extends BlockFlower {
         }
 
         int subtype = this.getBlockSubtype(metadata);
-        if (subtype == 7) {
+        if (subtype > 8) {
             return 0;
         } else {
             return biome != BiomeBase.plains && !biome.isJungleBiome() ? 16 : 64;

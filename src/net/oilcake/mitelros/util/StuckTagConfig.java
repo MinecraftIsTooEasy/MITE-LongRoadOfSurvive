@@ -56,15 +56,18 @@ public class StuckTagConfig {
 
     public static void loadConfigs(){
         System.out.println("Tags Was put in HASHMAP");
+        //常驻
         Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
         Tags.put("HeatStroke",TagConfig.TagHeatStroke);
         Tags.put("InstinctSurvival",TagConfig.TagInstinctSurvival);
-        Tags.put("FallenInMine",TagConfig.TagFallenInMine);
-        Tags.put("BattleSuffer",TagConfig.TagBattleSuffer);
-        Tags.put("InvisibleFollower",TagConfig.TagInvisibleFollower);
         Tags.put("LegendFreeze",TagConfig.TagLegendFreeze);
-        Tags.put("UnstableConvection",TagConfig.TagUnstableConvection);
-        Tags.put("EternalRaining",TagConfig.TagEternalRaining);
+        //临时
+//        Tags.put("FallenInMine",TagConfig.TagFallenInMine);
+//        Tags.put("BattleSuffer",TagConfig.TagBattleSuffer);
+//        Tags.put("InvisibleFollower",TagConfig.TagInvisibleFollower);
+//        Tags.put("UnstableConvection",TagConfig.TagUnstableConvection);
+//        Tags.put("EternalRaining",TagConfig.TagEternalRaining);
+
 //      Tags.put("WorshipDark",TagConfig.TagWorshipDark);
 //      Tags.put("Apocalypse",TagConfig.TagApocalypse);
         String filePth = "StuckChallenge.cfg";

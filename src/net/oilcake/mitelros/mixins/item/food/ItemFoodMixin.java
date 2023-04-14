@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
+import java.util.Random;
 
 @Mixin(ItemFood.class)
 public class ItemFoodMixin extends Item {
@@ -25,6 +26,13 @@ public class ItemFoodMixin extends Item {
                 this.setWater(-1);
             }else if(this.hasMaterial(Material.bread) || this.hasMaterial(Material.desert)){
                 this.setWater(-2);
+            }else if(this.hasMaterial(Materials.agave)){
+                Random rand = new Random();
+                if(rand.nextDouble()<0.4){
+                    this.setWater(1);
+                } else{
+                    this.setWater(0);
+                }
             }else{
                 this.setWater(0);
             }

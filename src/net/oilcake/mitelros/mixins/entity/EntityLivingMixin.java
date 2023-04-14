@@ -79,4 +79,10 @@ public class EntityLivingMixin extends Entity{
     protected void writeEntityToNBT(NBTTagCompound nbtTagCompound) {
 
     }
+    @Shadow
+    protected void tryDamageArmor(DamageSource damage_source, float amount, EntityDamageResult result) {
+    }
+    public void tryDamageArmorC(DamageSource damage_source, float amount, EntityDamageResult result) {
+        tryDamageArmor(damage_source, amount, result);
+    }
 }

@@ -128,7 +128,7 @@ public class Items extends Item {
     public static final ItemMorningStar morningStarTungsten = new ItemMorningStar(Constant.getNextItemID(), Materials.tungsten);
     public static final ItemMorningStar morningStarAdamantium = new ItemMorningStar(Constant.getNextItemID(), Material.adamantium);
     public static final Item fragStalkerCreeper = new ItemStandard(Constant.getNextItemID(),Material.frags,"fragStalkerCreeper");
-    public static final ItemFood glowberries = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.glowberries,1,0,false,false,false,"glow_berries").setMaxStackSize(64).setAlwaysEdible();
+    public static final ItemFood glowberries = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.glowberries,1,0,false,false,false,"glow_berries").setMaxStackSize(16).setAlwaysEdible();
     public static final ItemArrow arrowMagical = new ItemArrow(Constant.getNextItemID(), Materials.magical);
     public static final ItemWand LavaWand = new ItemWand(Constant.getNextItemID(),Materials.tungsten,"wandlava");
     public static final ItemWand FreezeWand = new ItemWand(Constant.getNextItemID(),Materials.nickel,"wandfreeze");
@@ -153,6 +153,8 @@ public class Items extends Item {
     public static final ItemArmor ChestplateAncientmetalsacred = new ItemCuirass(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
     public static final ItemArmor LeggingsAncientmetalsacred = new ItemLeggings(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
     public static final ItemArmor BootsAncientmetalsacred = new ItemBoots(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
+    public static final Item AncientmetalArmorPiece = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.ancient_metal_sacred).setCraftingDifficultyAsComponent(800.0F).setUnlocalizedName("ancient_metal_sacred_piece").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
+    public static final ItemFood Agave = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.agave,1,0,false,false,false,"agave").setMaxStackSize(16).setAlwaysEdible();
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -304,6 +306,8 @@ public class Items extends Item {
         register("armor/ancient_metal_sacred_chestplate",ChestplateAncientmetalsacred);
         register("armor/ancient_metal_sacred_leggings",LeggingsAncientmetalsacred);
         register("armor/ancient_metal_sacred_boots",BootsAncientmetalsacred);
+        register("ancient_metal_armor_piece",AncientmetalArmorPiece);
+        register("food/agave",Agave);
         Constant.initItemArray();
     }
 

@@ -38,7 +38,7 @@ public class SlotResultMixin extends Slot {
         if (block == Block.beacon){
             this.thePlayer.addStat(AchievementExtend.getBeacon,1);
         }
-        if (item == Items.mashedCactus || item == Items.glowberries){
+        if (item == Items.mashedCactus || item == Items.glowberries || item == Items.Agave){
             this.thePlayer.addStat(AchievementExtend.mashedCactus,1);
         }
         if (item == Items.ExperimentalPotion){

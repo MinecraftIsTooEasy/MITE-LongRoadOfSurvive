@@ -49,8 +49,13 @@ public class EntityWitherBoneLord extends EntityBoneLord {
         List items = new ArrayList();
         items.add(new RandomItemListEntry(Items.tungstenSword, 2));
         if (!Minecraft.isInTournamentMode()) {
-            items.add(new RandomItemListEntry(Items.tungstenBattleAxe, 1));
-            items.add(new RandomItemListEntry(Items.tungstenWarHammer, 1));
+            if (this.worldObj.getDayOfWorld() >= 25 && !Minecraft.isInTournamentMode()) {
+                items.add(new RandomItemListEntry(Items.tungstenBattleAxe, 1));
+            }
+
+            if (this.worldObj.getDayOfWorld() >= 50 && !Minecraft.isInTournamentMode()) {
+                items.add(new RandomItemListEntry(Items.tungstenWarHammer, 1));
+            }
         }
 
         RandomItemListEntry entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, items);

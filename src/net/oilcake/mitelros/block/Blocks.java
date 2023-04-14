@@ -32,7 +32,7 @@ public class Blocks extends Block {
     public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.nickel);
     public static final Block blockEnchantReserver = new BlockEnchantReserver(Constant.getNextBlockID())
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final BlockOreBlock blockNickel = new BlockOreBlock(Constant.getNextBlockID(), Materials.nickel);
+    public static final BlockOreBlock blockNickel = (BlockOreBlock) new BlockOreBlock(Constant.getNextBlockID(), Materials.nickel).setBlockHardness(9.6F).setExplosionResistance(40.0f);
     public static final Block fenceNickel = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
             , Constant.getNextBlockID(), "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep).setExplosionResistance(6.0f).setBlockHardness(3.2F).setMinHarvestLevel(3);
     public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class, Material.class}
@@ -40,7 +40,7 @@ public class Blocks extends Block {
 
     public static final Block oreNickel = new BlockOre(Constant.getNextBlockID(), Materials.nickel, 1).setBlockHardness(3.0F).setExplosionResistance(20.0f);
     public static final Block oreTungsten = new BlockOre(Constant.getNextBlockID(), Materials.tungsten, 3).setBlockHardness(3.5F).setExplosionResistance(30.0f);
-    public static final BlockOreBlock blockTungsten = new BlockOreBlock(Constant.getNextBlockID(),Materials.tungsten);
+    public static final BlockOreBlock blockTungsten = (BlockOreBlock) new BlockOreBlock(Constant.getNextBlockID(),Materials.tungsten).setBlockHardness(153.6F).setExplosionResistance(640.0f);
     public static final Block fenceTungsten = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
             , Constant.getNextBlockID(), "bars/tungsten_bars", "bars/tungsten_bars", Materials.tungsten, false).setStepSound_(soundMetalFootstep).setExplosionResistance(96.0f).setBlockHardness(51.2F).setMinHarvestLevel(5);
     public static final Block doorTungsten = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
@@ -48,7 +48,7 @@ public class Blocks extends Block {
 
     public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
     public static final Block flowerextend = new BlockFlowerExtend(Constant.getNextBlockID()).setMaxStackSize(32);
-
+    public static final Block blockEnchantEnhancer = new BlockEnchantEnhancer(Constant.getNextBlockID()).setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
 
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
@@ -92,6 +92,7 @@ public class Blocks extends Block {
         registerItemBlock("bars/tungsten_bars", fenceTungsten);
         registerItemBlock("door/door_tungsten", doorTungsten);
         registerItemBlock("flowers/" , flowerextend);
+        registerItemBlock("block_enchant_enhancer",blockEnchantEnhancer);
     }
 
     public static void registerRecipes(RecipeRegister register) {
@@ -116,6 +117,11 @@ public class Blocks extends Block {
                 "ABA",
                 "CAC",
                 'A', Block.obsidian, 'B', Item.diamond, 'C', Item.ingotAncientMetal);
+        register.registerShapedRecipe(new ItemStack(blockEnchantEnhancer), true,
+                "CAC",
+                "DBD",
+                "AAA",
+                'A', Block.obsidian, 'B', Item.diamond, 'C', Item.ingotAncientMetal,'D',Item.expBottle);
         register.registerShapedRecipe(new ItemStack(blastFurnaceStoneIdle), true,
                 "AAA",
                 "ABA",
@@ -172,6 +178,9 @@ public class Blocks extends Block {
                 new ItemStack(Blocks.flowerextend,1,5));
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),true,
                 new ItemStack(Blocks.flowerextend,1,6));
+        register.registerShapelessRecipe(new ItemStack(Items.Agave,1,1),true,
+                new ItemStack(Blocks.flowerextend,1,7));
+
 
         RecipesFurnace.smelting().addSmelting(oreTungsten.blockID, new ItemStack(Items.tungstenIngot));
         RecipesFurnace.smelting().addSmelting(oreNickel.blockID, new ItemStack(Items.nickelIngot));
