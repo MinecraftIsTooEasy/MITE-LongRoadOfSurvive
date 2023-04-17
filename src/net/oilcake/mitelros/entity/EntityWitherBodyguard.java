@@ -45,6 +45,23 @@ public class EntityWitherBodyguard extends EntitySkeleton {
             }
         }
     }
+
+    public void attackEntityWithRangedAttack(EntityLiving par1EntityLivingBase, float par2) {
+        EntityArrow var3 = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4), Items.arrowTungsten, false);
+        int var4 = EnchantmentManager.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItemStack());
+        int var5 = EnchantmentManager.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItemStack());
+        double damage = (double)(par2 * 2.0F) + this.rand.nextGaussian() * 0.25 + (double)((float)this.worldObj.difficultySetting * 0.11F);
+        var3.setDamage(damage);
+        if (var4 > 0) {
+            var3.setDamage(var3.getDamage() + (double)var4 * 0.5 + 0.5);
+        }
+        if (var5 > 0) {
+            var3.setKnockbackStrength(var5);
+        }
+        var3.setFire(100);
+        this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
+        this.worldObj.spawnEntityInWorld(var3);
+    }
     @Override
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
         int looting = damage_source.getLootingModifier();

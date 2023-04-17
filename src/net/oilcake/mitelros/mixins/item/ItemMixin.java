@@ -121,6 +121,8 @@ public class ItemMixin{
                 return Items.nickelNugget;
             } else if (material_for_repairs == Materials.tungsten) {
                 return Items.tungstenNugget;
+            } else if (material_for_repairs == Materials.ancient_metal_sacred){
+                return Items.AncientmetalArmorPiece;
             }
             else {
                 return material_for_repairs == Material.ancient_metal ? Item.ancientMetalNugget : null;

@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.block.enchantreserver.ContainerEnchantReserver;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
+import net.oilcake.mitelros.mixins.util.EnumInsulinResistanceLevelMixin;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -27,6 +28,10 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
             this.inventory.vanishingItems();
         }
+    }
+    @Inject(method = "onUpdate", at = @At(value = "INVOKE"))
+    public void onUpdate(CallbackInfo callbackInfo) {
+        this.sendPacket((new Packet85SimpleSignal(EnumSignal.malnourished)).setInteger((this.protein <= 800000 ? 1 : 0) | (this.phytonutrients <= 800000 ? 4 : 0) | this.getCurrent_insulin_resistance_lvl() << 3 | this.getInsulinResistance() << 8));
     }
 
 
@@ -54,10 +59,11 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
                 Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
                 updateWater.setWater(water);
-//                PacketReadFreezeCooldown updateFreezingCooldown = new PacketReadFreezeCooldown();
-//                updateFreezingCooldown.setFreezingCooldown(FreezingCooldown);
-//                this.playerNetServerHandler.sendPacket(updateFreezingCooldown);
+                updateWater.setFreezingCooldown(FreezingCooldown);
                 this.playerNetServerHandler.sendPacket(updateWater);
+//              PacketReadFreezeCooldown updateFreezingCooldown = new PacketReadFreezeCooldown();
+//              updateFreezingCooldown.setFreezingCooldown(FreezingCooldown);
+//              this.playerNetServerHandler.sendPacket(updateFreezingCooldown);
                 this.last_water = water;
                 this.last_FreezingCooldown = FreezingCooldown;
                 this.lastHealth = health;
@@ -127,8 +133,14 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         ReflectHelper.dyCast(ServerPlayer.class, this).updateCraftingInventory(this.openContainer, ((ContainerEnchantReserver)this.openContainer).getInventory());
         this.openContainer.onCraftGuiOpened(this);
     }
-
-
+    @Overwrite
+    public boolean isMalnourished() {
+        return this.protein <= 800000 || this.phytonutrients <= 800000;
+    }
+    @Overwrite
+    public boolean isDoubleMalnourished() {
+        return this.protein <= 800000 && this.phytonutrients <= 800000;
+    }
     public boolean isMalnourishedLv1() {
         if(this.protein <= 800000 && this.protein >= 320000){
             return true;

@@ -137,7 +137,9 @@ public class BlockFlowerExtend extends BlockFlower {
                 return false;
             }else if (subtype == 0 && biome.temperature < BiomeBase.plains.temperature) {
                 return false;
-            }else if (subtype != 0 && biome.temperature < BiomeBase.extremeHills.temperature) {
+            }else if (subtype != 0 && subtype != 7 && biome.temperature < BiomeBase.forestHills.temperature) {
+                return false;
+            }else if(subtype == 7 && biome.temperature<BiomeBase.icePlains.temperature){
                 return false;
             }else {
                 return !biome.isJungleBiome();

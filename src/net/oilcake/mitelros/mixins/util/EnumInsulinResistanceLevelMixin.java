@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
+
 @Mixin(EnumInsulinResistanceLevel.class)
 public class EnumInsulinResistanceLevelMixin {
     @Shadow
@@ -24,6 +25,17 @@ public class EnumInsulinResistanceLevelMixin {
 
     public float getBlueAsFloatC() {
         return this.color.getBlueAsFloat();
+    }
+    public int getOrdinalForTransmissionC(EnumInsulinResistanceLevel insulin_resistance_level) {
+        return getOrdinalForTransmission(insulin_resistance_level);
+    }
+    @Shadow
+    static int getOrdinalForTransmission(EnumInsulinResistanceLevel insulin_resistance_level) {
+        return 0;
+    }
+    @Shadow
+    int getOrdinalForTransmission() {
+        return 0;
     }
 
 }

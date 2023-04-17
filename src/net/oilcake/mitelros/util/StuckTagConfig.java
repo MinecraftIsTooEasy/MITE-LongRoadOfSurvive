@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.util;
 
 import javax.swing.*;
+import javax.swing.text.html.HTML;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +48,7 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagLegendFreeze = new ConfigItem<>("LegendFreeze",false,"(LVL1)刺骨寒风：寒冷惩罚的积累速度提升200%");
         public static ConfigItem <Boolean> TagUnstableConvection = new ConfigItem<>("UnstableConvection",false,"(LVL1)不稳定对流：闪电的触发频率提升300%");
         public static ConfigItem <Boolean> TagEternalRaining = new ConfigItem<>("EternalRaining",false,"(LVL1)阴雨连绵：雨的最长持续时间提升300%，最短持续时间提升700%");
-
+        public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物的回复含水量的能力（奇数去尾，等于1更改概率）");
 
         //*这个有问题*//        public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
         //*这个有问题*//        public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再生成可提供肉类的动物");
@@ -55,13 +56,15 @@ public class StuckTagConfig {
     }
 
     public static void loadConfigs(){
-        System.out.println("Tags Was put in HASHMAP");
+        System.out.println("Tags Were put in HASHMAP");
         //常驻
-        Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
+        Tags.put("DryDilemma",TagConfig.TagDryDilemma);
         Tags.put("HeatStroke",TagConfig.TagHeatStroke);
         Tags.put("InstinctSurvival",TagConfig.TagInstinctSurvival);
         Tags.put("LegendFreeze",TagConfig.TagLegendFreeze);
+
         //临时
+//        Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 //        Tags.put("FallenInMine",TagConfig.TagFallenInMine);
 //        Tags.put("BattleSuffer",TagConfig.TagBattleSuffer);
 //        Tags.put("InvisibleFollower",TagConfig.TagInvisibleFollower);

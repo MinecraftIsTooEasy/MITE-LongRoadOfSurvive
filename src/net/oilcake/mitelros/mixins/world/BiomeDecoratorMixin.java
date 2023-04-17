@@ -145,7 +145,7 @@ public class BiomeDecoratorMixin{
             int var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             int var4 = this.randomGenerator.nextInt(128);
             int var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
-            this.flowerExtendGen.setMetadata(random_test.nextInt(7));
+            this.flowerExtendGen.setMetadata(random_test.nextInt(8));
             this.flowerExtendGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
         }
     }

@@ -26,7 +26,7 @@ public class EntityClusterSpider extends EntityArachnid {
         EntityDamageResult result = super.attackEntityAsMob(target);
         if (result != null && !result.entityWasDestroyed()) {
             if (result.entityLostHealth() && target instanceof EntityLiving) {
-                target.getAsEntityLivingBase().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 600, 1));
+                target.getAsEntityLivingBase().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, 450, 1));
             }
 
             return result;

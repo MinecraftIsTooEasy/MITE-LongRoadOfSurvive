@@ -30,7 +30,14 @@ public abstract class EntityPlayerMixin extends EntityLiving{
 //    public float getWaterLimit() {
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //
-
+    @Shadow
+    private int insulin_resistance;
+    public int getCurrent_insulin_resistance_lvl(){
+        if(insulin_resistance>=144000)return 3;
+        if(insulin_resistance>=96000)return 2;
+        if(insulin_resistance>=48000)return 1;
+        return 0;
+    }
     @Overwrite
     public void attackTargetEntityWithCurrentItem(Entity target) {
         if (!this.isImmuneByGrace()) {
@@ -391,6 +398,61 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     }
 
     @Overwrite
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        this.FreezingCooldown = par1NBTTagCompound.getInteger("FreezingCooldown");
+        this.FreezingWarning = par1NBTTagCompound.getInteger("FreezingWarning");
+        this.experience = par1NBTTagCompound.getInteger("experience");
+        if (par1NBTTagCompound.hasKey("XpTotal")) {
+            this.experience = par1NBTTagCompound.getInteger("XpTotal");
+        }
+
+        super.readEntityFromNBT(par1NBTTagCompound);
+        NBTTagList var2 = par1NBTTagCompound.getTagList("Inventory");
+        this.inventory.readFromNBT(var2);
+        this.inventory.currentItem = par1NBTTagCompound.getInteger("SelectedItemSlot");
+        this.setScore(par1NBTTagCompound.getInteger("Score"));
+        if (this.inBed()) {
+            this.bed_location = new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+            this.wakeUpPlayer(true, (Entity)null);
+        }
+
+        if (par1NBTTagCompound.hasKey("SpawnX") && par1NBTTagCompound.hasKey("SpawnY") && par1NBTTagCompound.hasKey("SpawnZ")) {
+            this.spawnChunk = new ChunkCoordinates(par1NBTTagCompound.getInteger("SpawnX"), par1NBTTagCompound.getInteger("SpawnY"), par1NBTTagCompound.getInteger("SpawnZ"));
+            this.spawnForced = par1NBTTagCompound.getBoolean("SpawnForced");
+        }
+
+        this.foodStats.readNBT(par1NBTTagCompound);
+        this.capabilities.readCapabilitiesFromNBT(par1NBTTagCompound);
+        if (par1NBTTagCompound.hasKey("EnderItems")) {
+            NBTTagList var3 = par1NBTTagCompound.getTagList("EnderItems");
+            this.theInventoryEnderChest.loadInventoryFromNBT(var3);
+        }
+
+        this.vision_dimming = par1NBTTagCompound.getFloat("vision_dimming");
+    }
+    @Overwrite
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        par1NBTTagCompound.setInteger("FreezingCooldown",this.FreezingCooldown);
+        par1NBTTagCompound.setInteger("FreezingWarning",this.FreezingWarning);
+        par1NBTTagCompound.setInteger("experience", this.experience);
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setTag("Inventory", this.inventory.writeToNBT(new NBTTagList()));
+        par1NBTTagCompound.setInteger("SelectedItemSlot", this.inventory.currentItem);
+        par1NBTTagCompound.setInteger("Score", this.getScore());
+        if (this.spawnChunk != null) {
+            par1NBTTagCompound.setInteger("SpawnX", this.spawnChunk.posX);
+            par1NBTTagCompound.setInteger("SpawnY", this.spawnChunk.posY);
+            par1NBTTagCompound.setInteger("SpawnZ", this.spawnChunk.posZ);
+            par1NBTTagCompound.setBoolean("SpawnForced", this.spawnForced);
+        }
+
+        this.foodStats.writeNBT(par1NBTTagCompound);
+        this.capabilities.writeCapabilitiesToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setTag("EnderItems", this.theInventoryEnderChest.saveInventoryToNBT());
+        par1NBTTagCompound.setFloat("vision_dimming", this.vision_dimming);
+    }
+
+    @Overwrite
     private void checkForArmorAchievements() {
         boolean wearing_leather = false;
         boolean wearing_full_suit_plate = true;
@@ -475,6 +537,8 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     @Shadow
     public int getSatiation() {return 1;}
     @Shadow
+    public int getScore() {return 0;}
+    @Shadow
     protected FoodMetaData foodStats;
     @Shadow
     public ItemStack[] getWornItems() {
@@ -558,7 +622,17 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     @Shadow
     public void triggerAchievement(Statistic par1StatBase) {}
 
-    @Shadow public abstract void addExperience(int amount);
+    @Shadow
+    public abstract void addExperience(int amount);
+    @Shadow
+    public ChunkCoordinates bed_location;
+    @Shadow
+    private ChunkCoordinates spawnChunk;
+    @Shadow
+    private boolean spawnForced;
+    @Shadow
+    public float vision_dimming;
+
 
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;

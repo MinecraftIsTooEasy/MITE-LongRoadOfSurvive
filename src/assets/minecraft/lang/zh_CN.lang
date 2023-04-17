@@ -221,6 +221,7 @@ item.records/record_damnation.name=音乐唱片
 item.experimental_potion.name=实验的药水
 
 item.wolf_fur.name=狼的毛皮
+item.ancient_metal_armor_piece.name=镶金远古金属铠甲残片
 
 itemarrow.tooltip.disable=因为技术原因被禁用
 itemtool.tooltip.slimeresistance=史莱姆杀手

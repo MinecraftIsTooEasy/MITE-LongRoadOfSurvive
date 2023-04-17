@@ -126,9 +126,9 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                             this.slots.getOutPut().putStack(Items.coinGold.getItemStackForStatsIcon());
                         }
                     }
-                    if (this.getEXP() >= 250) {
+                    if (this.getEXP() >= 500) {
                         if (outputStack.itemID == Item.ancientMetalNugget.itemID && outputStack.stackSize * 250 <= this.getEXP() + 2000) {
-                            this.EXP -= 250;
+                            this.EXP -= 500;
                             //* size;
                             this.slots.getOutPut().putStack(Items.coinAncientMetal.getItemStackForStatsIcon());
                         }
