@@ -42,12 +42,12 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagNoWeatherPredict = new ConfigItem<>("NoWeatherPredict", false, "(LVL1)阴晴无定：删除天气预报");
         public static ConfigItem <Boolean> TagHeatStroke = new ConfigItem<>("HeatStroke",false,"(LVL1)酷暑代价：水分自然消耗的速度提升200%");
         public static ConfigItem <Boolean> TagInstinctSurvival = new ConfigItem<>("InstinctSurvival",false,"(LVL2)防御本能：怪物享受护甲防御的比率提升25%");
-        public static ConfigItem <Boolean> TagFallenInMine = new ConfigItem<>("FallenInMine",false,"(LVL2)矿难群体：亡灵的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
+        public static ConfigItem <Boolean> TagFallenInMine = new ConfigItem<>("FallenInMine",false,"(LVL2)矿难群体：亡魂的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
         public static ConfigItem <Boolean> TagBattleSuffer = new ConfigItem<>("BattleSuffer",false,"(LVL2)久经沙场：骷髅领主的生命值提升50%，攻击力提升40%，召唤的支援获得强化");
         public static ConfigItem <Boolean> TagInvisibleFollower = new ConfigItem<>("InvisibleFollower",false,"(LVL1)无形跟随：更低层数的爬行者将被替换为潜伏爬行者");
         public static ConfigItem <Boolean> TagLegendFreeze = new ConfigItem<>("LegendFreeze",false,"(LVL1)刺骨寒风：寒冷惩罚的积累速度提升200%");
         public static ConfigItem <Boolean> TagUnstableConvection = new ConfigItem<>("UnstableConvection",false,"(LVL1)不稳定对流：闪电的触发频率提升300%");
-        public static ConfigItem <Boolean> TagEternalRaining = new ConfigItem<>("EternalRaining",false,"(LVL1)阴雨连绵：雨的最长持续时间提升300%，最短持续时间提升700%");
+        public static ConfigItem <Boolean> TagEternalRaining = new ConfigItem<>("EternalRaining",false,"(LVL2)阴雨连绵：雨的最长持续时间提升300%，最短持续时间提升700%");
         public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物的回复含水量的能力（奇数去尾，等于1更改概率）");
 
         //*这个有问题*//        public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
@@ -64,13 +64,15 @@ public class StuckTagConfig {
         Tags.put("LegendFreeze",TagConfig.TagLegendFreeze);
 
         //临时
-//        Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
-//        Tags.put("FallenInMine",TagConfig.TagFallenInMine);
-//        Tags.put("BattleSuffer",TagConfig.TagBattleSuffer);
-//        Tags.put("InvisibleFollower",TagConfig.TagInvisibleFollower);
-//        Tags.put("UnstableConvection",TagConfig.TagUnstableConvection);
-//        Tags.put("EternalRaining",TagConfig.TagEternalRaining);
 
+        Tags.put("FallenInMine",TagConfig.TagFallenInMine);
+        Tags.put("BattleSuffer",TagConfig.TagBattleSuffer);
+        Tags.put("InvisibleFollower",TagConfig.TagInvisibleFollower);
+        Tags.put("UnstableConvection",TagConfig.TagUnstableConvection);
+        Tags.put("EternalRaining",TagConfig.TagEternalRaining);
+
+        //删除
+//       Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 //      Tags.put("WorshipDark",TagConfig.TagWorshipDark);
 //      Tags.put("Apocalypse",TagConfig.TagApocalypse);
         String filePth = "StuckChallenge.cfg";
