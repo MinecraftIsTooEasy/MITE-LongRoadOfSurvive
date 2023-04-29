@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Mixin;
@@ -59,6 +60,9 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreAdamantium) {
                 id_dropped = Items.pieceAdamantium.itemID;
                 quantity_dropped = 1 + info.world.rand.nextInt(2);
+            }  else if (this == Blocks.oreUru) {
+                id_dropped = Items.pieceUru.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
             } else {
                 id_dropped = this.blockID;
             }
@@ -107,6 +111,9 @@ public class BlockOreMixin extends Block {
                 quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreAdamantium) {
                 id_dropped = HasRestore ? this.blockID : Items.pieceAdamantium.itemID;
+                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+            }  else if (this == Blocks.oreUru) {
+                id_dropped = HasRestore ? this.blockID : Items.pieceUru.itemID;
                 quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
             } else {
                 id_dropped = this.blockID;

@@ -81,6 +81,8 @@ public class EntityMonsterMixin extends EntityCreature {
                         }
 
                         EnchantmentThorns.func_92096_a(attacker, target.getAsEntityLivingBase(), attacker.getRand());
+//                        EnchantmentProtectFire.PerformProtect(attacker, target.getAsEntityLivingBase(), attacker.getRand());
+
                         int stunning = EnchantmentManager.getStunModifier(attacker, target.getAsEntityLivingBase());
                         if ((double)stunning > Math.random() * 10.0) {
                             target.getAsEntityLivingBase().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, stunning * 50, stunning * 5));

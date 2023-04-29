@@ -233,5 +233,23 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
     public int getExperienceValue() {
         return super.getExperienceValue() * 20;
     }
+    @Override
+    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+        this.dropItem(Items.forgingnote.itemID, 1);
+        int looting = damage_source.getLootingModifier();
+        int num_drops;
+        int i;
+        num_drops = this.rand.nextInt(3 + looting) - 1;
+        if (num_drops > 0 && !recently_hit_by_player) {
+            num_drops -= this.rand.nextInt(num_drops + 1);
+        }
 
+        for(i = 0; i < num_drops; ++i) {
+            this.dropItem(Items.AncientmetalArmorPiece.itemID, 1);
+        }
+
+        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
+            this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
+        }
+    }
 }

@@ -19,6 +19,14 @@ achievement.SoundofUnder=Sound of Under
 achievement.SoundofUnder.desc=Got the underworld disc.
 achievement.NoChoice=No way to go
 achievement.NoChoice.desc=Get milk before you use this
+achievement.CheersforMinecraft=Cheers for MINECRAFT
+achievement.CheersforMinecraft.desc=Cheeeeeeeeeers!!!
+achievement.Copying=COPYRIGHT FAILED
+achievement.Copying.desc=No Copyright after centuries
+achievement.NeverEnds=Never Ends
+achievement.NeverEnds.desc=Minecraft doesn't mean The End
+achievement.ForgingLegend=Forging Master
+achievement.ForgingLegend.desc=For Minecraft 1.20
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -117,6 +125,7 @@ item.tool/tungsten/tungsten_shovel.name=Tungsten Shovel
 item.tool/tungsten/tungsten_sword.name=Tungsten Sword
 item.tool/tungsten/tungsten_war_hammer.name=Tungsten War Hammer
 item.tool/tungsten/tungsten_club.name=Tungsten Morningstar
+item.tungsten_bow.name=Tungsten Bow
 
 item.door/tungsten.name=Tungsten Door
 item.chain/tungsten.name=Tungsten Chain
@@ -130,6 +139,21 @@ tile.tungsten_anvil.slightlyDamaged.name=Slightly Damaged Tungsten Anvil
 tile.tungsten_anvil.veryDamaged.name=Very Damaged Tungsten Anvil
 tile.bars/tungsten_bars.name=Tungsten Bars
 tile.toolbench.tungsten.name=Tungsten Toolbench
+
+tile.ore/uru_ore.name=Uru Ore
+
+item.armor/uru_helmet.name=Uru Helmet
+item.armor/uru_chestplate.name=Uru Chestplate
+item.armor/uru_leggings.name=Uru Leggings
+item.armor/uru_boots.name=Uru Boots
+
+item.ingot/uru.name=Uru Ingot
+item.ingot/nugget/uru.name=Uru Nugget
+item.tool/uru/uru_battle_axe.name=Uru Battle Axe
+item.tool/uru/uru_mattock.name=Uru Mattock
+item.tool/uru/uru_scythe.name=Uru Scythe
+item.tool/uru/uru_sword.name=Uru Sword
+item.tool/uru/uru_war_hammer.name=Uru War Hammer
 
 item.armor/vibranium_helmet.name=Fake Vibranium Helmet
 item.armor/vibranium_chestplate.name=Fake Vibranium Chestplate
@@ -170,6 +194,7 @@ item.pieces/nickel.name=Nickel Orepiece
 item.pieces/mithril.name=Mithril Orepiece
 item.pieces/tungsten.name=Tungsten Orepiece
 item.pieces/adamantium.name=Adamantium Orepiece
+item.pieces/uru.name=Uru Orepiece
 
 item.buckets/nickel/empty.name=Nickel Bucket
 item.buckets/nickel/lava.name=Nickel Bucket of Lava
@@ -209,6 +234,9 @@ item.apple_golden.name=§bGolden Apple
 item.apple_golden_legend.name=§dGolden Apple
 item.food/glow_berries.name=Glow Berries
 item.food/agave.name=Agave
+item.pulque.name=Pulque
+item.ale.name=Ale
+item.forging_note.name=Forging Note
 
 item.shards/diamond.name=Diamond Shard
 item.shards/emerald.name=Emerald Shard
@@ -246,6 +274,8 @@ entity.EntityStalkerCreeper.name=Stalker Creeper
 entity.EntityZombieLord?.name=Fake Zombie Lord
 entity.EntityZombieMiner.name=Fallen Miner
 entity.EntityBoneBodyguard.name=Skeleton Bodyguard
+entity.EntityGhost.name=Ghost
+entity.EntityEvil.name=Evil
 
 death.extend.attack.thirsty=%1$s dead because of dehydration
 death.extend.attack.freeze=%1$s Freezed Fully

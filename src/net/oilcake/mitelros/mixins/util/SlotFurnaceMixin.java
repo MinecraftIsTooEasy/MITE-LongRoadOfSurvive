@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.mixins.util;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.achivements.AchievementExtend;
+import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -32,6 +34,8 @@ public class SlotFurnaceMixin extends SlotCraftingBase {
                 this.player.triggerAchievement(AchievementList.mithrilIngot);
             } else if (item == Item.ingotAdamantium || item == Item.adamantiumNugget) {
                 this.player.triggerAchievement(AchievementList.adamantiumIngot);
+            } else if (item == Items.UruIngot || item == Items.UruNugget) {
+                this.player.triggerAchievement(AchievementExtend.neverEnds);
             }
         } else {
             this.player.addStat(AchievementList.cookFish, 1);

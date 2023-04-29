@@ -31,8 +31,13 @@ public class SlotResultMixin extends Slot {
         this.amountCrafted = 0;
         Item item = par1ItemStack.getItem();
         Block block = item instanceof ItemBlock ? ((ItemBlock)item).getBlock() : null;
-
-        if (item == Item.bowMithril){
+        if (item == Items.LeggingsAncientmetalsacred || item == Items.ChestplateAncientmetalsacred ||item == Items.HelmetAncientmetalsacred ||item == Items.BootsAncientmetalsacred ){
+            this.thePlayer.addStat(AchievementExtend.forgingLegend,1);
+        }
+        if (item == Items.forgingnote){
+            this.thePlayer.addStat(AchievementExtend.copying,1);
+        }
+        if (item == Items.bowTungsten){
             this.thePlayer.addStat(AchievementExtend.Arbalistic,1);
         }
         if (block == Block.beacon){
@@ -40,6 +45,9 @@ public class SlotResultMixin extends Slot {
         }
         if (item == Items.mashedCactus || item == Items.glowberries || item == Items.Agave){
             this.thePlayer.addStat(AchievementExtend.mashedCactus,1);
+        }
+        if (item == Items.Pulque || item == Items.Ale){
+            this.thePlayer.addStat(AchievementExtend.cheersforMinecraft,1);
         }
         if (item == Items.ExperimentalPotion){
             this.thePlayer.addStat(AchievementExtend.nochoice,1);

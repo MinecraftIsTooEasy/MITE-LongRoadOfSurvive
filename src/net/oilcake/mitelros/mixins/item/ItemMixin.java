@@ -123,7 +123,10 @@ public class ItemMixin{
                 return Items.tungstenNugget;
             } else if (material_for_repairs == Materials.ancient_metal_sacred){
                 return Items.AncientmetalArmorPiece;
+            } else if (material_for_repairs == Materials.uru){
+                return Items.UruNugget;
             }
+
             else {
                 return material_for_repairs == Material.ancient_metal ? Item.ancientMetalNugget : null;
             }

@@ -88,7 +88,7 @@ public class EntityWitherBodyguard extends EntitySkeleton {
             items.add(new RandomItemListEntry(Items.tungstenBattleAxe, 1));
         }
         if(this.rand.nextInt(8)==0){
-            this.stowed_item_stack = (new ItemStack(Item.bowAncientMetal)).randomizeForMob(this, true);
+            this.stowed_item_stack = (new ItemStack(Items.bowTungsten)).randomizeForMob(this, true);
         }
         RandomItemListEntry entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, items);
         this.setHeldItemStack((new ItemStack(entry.item)).randomizeForMob(this, true));

@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " ITF Aleph-0x00000158 ";
+    public static final String VERSION = " ITF Stable 0.0.3 - pre release ";
     public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -41,15 +41,15 @@ public class Constant {
     public static ItemArmor[][] ARMORS = null;
     public static void initItemArray() {
         HELMETS = new ItemArmor[]{Item.helmetLeather, Item.helmetChainCopper, Item.helmetCopper, Item.helmetRustedIron, Item.helmetChainIron, Item.helmetIron, Item.helmetChainAncientMetal, Item.helmetAncientMetal, Item.helmetChainMithril, Item.helmetMithril, Item.helmetAdamantium,
-                Items.nickelHelmet, Items.nickelHelmetChain,Items.tungstenHelmet,Items.tungstenHelmetChain,Items.WolfHelmet,Items.VibraniumHelmet,Items.MaidHelmet,Items.HelmetAncientmetalsacred};
+                Items.nickelHelmet, Items.nickelHelmetChain,Items.tungstenHelmet,Items.tungstenHelmetChain,Items.WolfHelmet,Items.VibraniumHelmet,Items.MaidHelmet,Items.HelmetAncientmetalsacred,Items.UruHelmet};
         CHESTPLATES = new ItemArmor[]{Item.plateLeather, Item.plateChainCopper, Item.plateCopper, Item.plateRustedIron, Item.plateChainIron, Item.plateIron, Item.plateChainAncientMetal, Item.plateAncientMetal, Item.plateChainMithril, Item.plateMithril, Item.plateAdamantium,
-                Items.nickelChestplate, Items.nickelChestplateChain,Items.tungstenChestplate,Items.tungstenChestplateChain,Items.WolfChestplate,Items.VibraniumChestplate,Items.MaidChestplate,Items.ChestplateAncientmetalsacred};
+                Items.nickelChestplate, Items.nickelChestplateChain,Items.tungstenChestplate,Items.tungstenChestplateChain,Items.WolfChestplate,Items.VibraniumChestplate,Items.MaidChestplate,Items.ChestplateAncientmetalsacred,Items.UruChestplate};
         LEGGINGS = new ItemArmor[]{Item.legsLeather, Item.legsChainCopper, Item.legsCopper, Item.legsRustedIron, Item.legsChainIron, Item.legsIron, Item.legsChainAncientMetal, Item.legsAncientMetal, Item.legsChainMithril, Item.legsMithril, Item.legsAdamantium,
-                Items.nickelLeggings, Items.nickelLeggingsChain,Items.tungstenLeggings,Items.tungstenLeggings,Items.WolfLeggings,Items.VibraniumLeggings,Items.MaidLeggings,Items.LeggingsAncientmetalsacred};
+                Items.nickelLeggings, Items.nickelLeggingsChain,Items.tungstenLeggings,Items.tungstenLeggings,Items.WolfLeggings,Items.VibraniumLeggings,Items.MaidLeggings,Items.LeggingsAncientmetalsacred,Items.UruLeggings};
         BOOTS = new ItemArmor[]{Item.bootsLeather, Item.bootsChainCopper, Item.bootsCopper, Item.bootsRustedIron, Item.bootsChainIron, Item.bootsIron, Item.bootsChainAncientMetal, Item.bootsAncientMetal, Item.bootsChainMithril, Item.bootsMithril, Item.bootsAdamantium,
-                Items.nickelBoots, Items.nickelBootsChain,Items.tungstenBoots,Items.tungstenBootsChain,Items.WolfBoots,Items.VibraniumBoots,Items.MaidBoots,Items.BootsAncientmetalsacred};
+                Items.nickelBoots, Items.nickelBootsChain,Items.tungstenBoots,Items.tungstenBootsChain,Items.WolfBoots,Items.VibraniumBoots,Items.MaidBoots,Items.BootsAncientmetalsacred,Items.UruBoots};
         ARMORS = new ItemArmor[][]{HELMETS, CHESTPLATES, LEGGINGS, BOOTS};
-        SWORDS = new Item[]{Item.swordRustedIron, Item.swordIron, Item.swordAncientMetal,Item.swordMithril,Item.swordAdamantium,Items.nickelSword,Items.tungstenSword,Items.VibraniumSword
+        SWORDS = new Item[]{Item.swordRustedIron, Item.swordIron, Item.swordAncientMetal,Item.swordMithril,Item.swordAdamantium,Items.nickelSword,Items.tungstenSword,Items.VibraniumSword,Items.UruSword
         };
     }
     public static int CalculateCurrentDiff(){
@@ -64,6 +64,8 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagUnstableConvection.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue) Diff+=1;
+        if(StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue) Diff+=2;
+        if(StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue) Diff+=1;
         return Diff;
     }
 }

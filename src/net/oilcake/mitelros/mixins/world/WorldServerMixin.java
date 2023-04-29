@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.world;
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.entity.EntityClusterSpider;
+import net.oilcake.mitelros.entity.EntityGhost;
 import net.oilcake.mitelros.entity.EntityStalkerCreeper;
 import net.oilcake.mitelros.entity.EntityZombieLord;
 import net.oilcake.mitelros.util.StuckTagConfig;
@@ -89,6 +90,9 @@ public class WorldServerMixin extends World {
             //new
             else if (entity_class == EntityInvisibleStalker.class) {
                 if (!check_depth || y <= 40) {
+                    if (this.rand.nextInt(40) >= y && this.rand.nextFloat() < 0.5F) {
+                        return EntityGhost.class;
+                    }
                     return entity_class;
                 }
             } else if (entity_class == EntityEarthElemental.class) {

@@ -21,7 +21,7 @@ public class ItemFoodMixin extends Item {
                 this.setWater(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 3);
             }else if (this.hasMaterial(Material.vegetable) && item_stack!=Item.bakedPotato.getItemStackForStatsIcon() && item_stack!=Item.poisonousPotato.getItemStackForStatsIcon() || this.hasMaterial(Materials.mashedCactus)) {
                 this.setWater(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 2);
-            }else if (this.hasMaterial(Materials.glowberries) && StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue) {
+            }else if (this.hasMaterial(Materials.glowberries)) {
                 Random rand = new Random();
                 if(rand.nextDouble()<=(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 0.5 : 1)){
                     this.setWater(1);

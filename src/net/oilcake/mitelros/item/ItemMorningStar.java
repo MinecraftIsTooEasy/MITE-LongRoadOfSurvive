@@ -24,10 +24,4 @@ public class ItemMorningStar extends ItemClub {
     public int getNumComponentsForDurability() {
         return 1;
     }
-
-    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
-        if (extended_info) {
-            info.add(EnumChatFormat.RED + Translator.getFormatted("秽土转生", new Object[0]));
-        }
-    }
 }

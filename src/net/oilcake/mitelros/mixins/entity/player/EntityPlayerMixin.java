@@ -122,6 +122,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
                         }
 
                         EnchantmentThorns.func_92096_a(this, (EntityLiving)target, this.rand);
+//                        EnchantmentProtectFire.PerformProtect(this,(EntityLiving)target,this.rand);
                     }
                 }
 
@@ -207,11 +208,17 @@ public abstract class EntityPlayerMixin extends EntityLiving{
         }
         return false;
     }
-
+    public boolean InHeat(){
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        return biome.temperature >= 1.50F && StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue;
+    }
+    private int HeatResistance;
     private int FreezingCooldown;
     private int FreezingWarning;
     private int reduce_weight;
     private double dry_resist;
+    public boolean Hasdrunked = false;
+    private int drunk_duration = 0;
     public int getReduce_weight(){
         int Weight = 0;
         if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID){
@@ -264,6 +271,10 @@ public abstract class EntityPlayerMixin extends EntityLiving{
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
             }
+            if(this.Hasdrunked) {
+                this.drunk_duration = 6000;
+                this.Hasdrunked = false;
+            }
             int freezelevel = Math.max(((FreezingCooldown - (3000 * getReduce_weight())) / 12000), 0);
             if(this.FreezingCooldown > 3000 * getReduce_weight()){
                 if(freezelevel >= 1){
@@ -279,13 +290,21 @@ public abstract class EntityPlayerMixin extends EntityLiving{
                     this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
                 }
             }
-            if(this.InFreeze()){
+            if(this.HeatResistance > 3200 - (getReduce_weight() * 50)){
+                this.addPotionEffect(new MobEffect(MobEffectList.confusion.id, 1600, 1));
+                this.HeatResistance = 0;
+            }
+            if(this.InFreeze() || this.drunk_duration > 0){
                 FreezingCooldown += StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1;
+                FreezingCooldown += this.drunk_duration > 0 ? StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1 : 0;
             }
             else{
                 if(FreezingCooldown > 0){
                     --FreezingCooldown;
                 }
+            }
+            if(this.drunk_duration > 0){
+                drunk_duration--;
             }
         }
 
@@ -303,7 +322,14 @@ public abstract class EntityPlayerMixin extends EntityLiving{
         return FreezingCooldown;
     }
     public void setFreezingCooldown(int iptfreezingCooldown) {
-            this.FreezingCooldown = iptfreezingCooldown;
+        this.FreezingCooldown = iptfreezingCooldown;
+    }
+    public void addFreezingCooldown(int dummy){
+        if(this.FreezingCooldown + dummy < 0)
+            this.FreezingCooldown = 0;
+        else{
+            this.FreezingCooldown += dummy;
+        }
     }
 
     public float getCurrentBiomeTemperature(){
@@ -401,6 +427,8 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.FreezingCooldown = par1NBTTagCompound.getInteger("FreezingCooldown");
         this.FreezingWarning = par1NBTTagCompound.getInteger("FreezingWarning");
+        this.drunk_duration = par1NBTTagCompound.getInteger("DrunkDuration");
+        this.HeatResistance = par1NBTTagCompound.getInteger("HeatResistance");
         this.experience = par1NBTTagCompound.getInteger("experience");
         if (par1NBTTagCompound.hasKey("XpTotal")) {
             this.experience = par1NBTTagCompound.getInteger("XpTotal");
@@ -434,6 +462,8 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setInteger("FreezingCooldown",this.FreezingCooldown);
         par1NBTTagCompound.setInteger("FreezingWarning",this.FreezingWarning);
+        par1NBTTagCompound.setInteger("DrunkDuration",this.drunk_duration);
+        par1NBTTagCompound.setInteger("HeatResistance",this.HeatResistance);
         par1NBTTagCompound.setInteger("experience", this.experience);
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setTag("Inventory", this.inventory.writeToNBT(new NBTTagList()));

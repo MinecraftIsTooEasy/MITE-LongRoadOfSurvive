@@ -49,6 +49,9 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagUnstableConvection = new ConfigItem<>("UnstableConvection",false,"(LVL1)不稳定对流：闪电的触发频率提升300%");
         public static ConfigItem <Boolean> TagEternalRaining = new ConfigItem<>("EternalRaining",false,"(LVL2)阴雨连绵：雨的最长持续时间提升300%，最短持续时间提升700%");
         public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物的回复含水量的能力（奇数去尾，等于1更改概率）");
+        public static ConfigItem <Boolean> TagDeadgeothermy = new ConfigItem<>("DeadGeothermy",false,"(LVL2)地热失效：地下世界成为寒冷生物群系，更改地下世界基岩生成，同时生成绿宝石");
+        public static ConfigItem <Boolean> TagHeatStorm = new ConfigItem<>("HeatStorm",false,"(LVL1)灼地烈阳：玩家额外拥有炎热惩罚");
+
 
         //*这个有问题*//        public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
         //*这个有问题*//        public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再生成可提供肉类的动物");
@@ -62,6 +65,7 @@ public class StuckTagConfig {
         Tags.put("HeatStroke",TagConfig.TagHeatStroke);
         Tags.put("InstinctSurvival",TagConfig.TagInstinctSurvival);
         Tags.put("LegendFreeze",TagConfig.TagLegendFreeze);
+        Tags.put("HeatStorm",TagConfig.TagHeatStorm);
 
         //临时
 
@@ -70,6 +74,7 @@ public class StuckTagConfig {
         Tags.put("InvisibleFollower",TagConfig.TagInvisibleFollower);
         Tags.put("UnstableConvection",TagConfig.TagUnstableConvection);
         Tags.put("EternalRaining",TagConfig.TagEternalRaining);
+        Tags.put("DeadGeothermy",TagConfig.TagDeadgeothermy);
 
         //删除
 //       Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
@@ -165,7 +170,7 @@ public class StuckTagConfig {
     public static void generateConfigFile(File file) {
         try{
             FileWriter fileWritter = new FileWriter(file.getName());
-            fileWritter.write("// 在每一项配置后填入true或者false来选择，不开放任何完全自定义选项 \n");
+            fileWritter.write("// 在每一项配置后填入true或者false来选择，不建议在游玩中途更改设置 \n");
             for (Map.Entry<String, ConfigItem> entry: Tags.entrySet()) {
                 ConfigItem value = entry.getValue();
                 fileWritter.write("// " + value.ConfigComment + "\n");

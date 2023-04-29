@@ -6,6 +6,7 @@ public class Materials extends Material {
     public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setMetal(true).setMinHarvestLevel(3);
     public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setMetal(true).setMinHarvestLevel(5);
     public static final Materials vibranium = (Materials) new Materials(EnumEquipmentMaterials.vibranium).setMetal(true).setMinHarvestLevel(1);
+    public static final Materials uru = (Materials) new Materials(EnumEquipmentMaterials.uru).setMetal(true).setMinHarvestLevel(5);
     public static final Material porkchop_stew = (new MaterialFood("porkchop_stew")).setHarmedByPepsin();
     public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
     public static final Material mashedCactus = (new MaterialFood("mashed_cactus"));
@@ -62,6 +63,8 @@ public class Materials extends Material {
         } else if (this == mithril) {
             return 5.0F;
         } else if (this == adamantium) {
+            return 6.0F;
+        } else if (this == uru) {
             return 6.0F;
         } else if (this == diamond) {
             return 4.0F;

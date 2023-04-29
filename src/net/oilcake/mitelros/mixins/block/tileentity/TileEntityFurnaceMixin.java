@@ -24,7 +24,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public int heat_level = 0;
     @Overwrite
     public static int getHeatLevelRequired(int item_id) {
-        if (item_id == Block.oreAdamantium.blockID || item_id == Items.pieceAdamantium.itemID) {
+        if (item_id == Block.oreAdamantium.blockID || item_id == Items.pieceAdamantium.itemID || item_id == Blocks.oreUru.blockID || item_id == Items.pieceUru.itemID) {
             return 4;
         } else if (item_id == Block.oreMithril.blockID || item_id == Blocks.oreTungsten.blockID || item_id == Items.pieceMithril.itemID || item_id == Items.pieceTungsten.itemID) {
             return 3;

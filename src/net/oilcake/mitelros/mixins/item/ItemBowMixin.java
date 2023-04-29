@@ -7,14 +7,19 @@ import net.oilcake.mitelros.item.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
 import java.util.Random;
 
 import static net.minecraft.ItemBow.getFractionPulled;
 
 @Mixin(ItemBow.class)
-public class ItemBowMixin {
+public class ItemBowMixin extends Item{
+    public ItemBowMixin(int id, Material reinforcement_material) {
+        super(id, Material.wood, "bows/" + reinforcement_material.toString() + "/");
+    }
     @Inject(method = "<clinit>", at = @At("FIELD"))
     private static void injectClinit(CallbackInfo callback) {
         possible_arrow_materials = new Material[]{Material.flint, Material.obsidian, Material.copper, Material.silver, Material.rusted_iron, Material.gold, Material.iron, Material.mithril, Material.adamantium, Material.ancient_metal,Materials.nickel,Materials.tungsten,Materials.magical};
@@ -93,6 +98,44 @@ public class ItemBowMixin {
                     world.spawnEntityInWorld(entity_arrow);
                 }
 
+            }
+        }
+    }
+    @Shadow
+    private Material reinforcement_material;
+
+    @Inject(method = "<init>",at = @At("RETURN"))
+    private void injectInit(CallbackInfo callbackInfo){
+        this.setMaxDamage(reinforcement_material == Materials.tungsten ? 256 : (reinforcement_material == Material.mithril ? 128 : (reinforcement_material == Material.ancient_metal ? 64 : 32)));
+    }
+
+    @Overwrite
+    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
+        if (extended_info && this.reinforcement_material.isMetal()) {
+            int bonus = this.reinforcement_material == Material.mithril ? 25 : (this.reinforcement_material == Materials.tungsten ? 35 : 10);
+            info.add("");
+            info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.velocityBonus", new Object[]{bonus}));
+        }
+
+        super.addInformation(item_stack, player, info, extended_info, slot);
+    }
+
+    @Redirect(method = "<init>",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/Item;setMaxDamage(I)Lnet/minecraft/Item;"))
+    private void redirectSetMaxDamage(){
+        if (reinforcement_material == Materials.tungsten) {
+            this.setMaxDamage(256);
+        } else {
+            if (reinforcement_material == Material.mithril) {
+                this.setMaxDamage(128);
+            } else {
+                if (reinforcement_material == Material.ancient_metal) {
+                    this.setMaxDamage(64);
+                } else {
+                    this.setMaxDamage(32);
+                }
             }
         }
     }

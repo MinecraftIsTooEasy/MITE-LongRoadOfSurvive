@@ -56,6 +56,8 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
             protection = 7;
         } else if (this.effective_material == Material.gold) {
             protection = 6;
+        } else if (this.effective_material == Materials.uru) {
+            protection = 10;
         } else if (this.effective_material != Material.iron && this.effective_material != Material.ancient_metal && this.effective_material != Materials.nickel) {
             if (this.effective_material == Material.mithril || this.effective_material == Materials.tungsten || this.effective_material == Materials.ancient_metal_sacred) {
                 protection = 9;

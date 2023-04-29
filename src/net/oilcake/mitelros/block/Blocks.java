@@ -49,6 +49,8 @@ public class Blocks extends Block {
     public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
     public static final Block flowerextend = new BlockFlowerExtend(Constant.getNextBlockID()).setMaxStackSize(32);
     public static final Block blockEnchantEnhancer = new BlockEnchantEnhancer(Constant.getNextBlockID()).setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
+    public static final Block oreUru = new BlockOre(Constant.getNextBlockID(), Materials.uru, 4).setBlockHardness(5.0F).setExplosionResistance(150.0f);
+
 
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
@@ -93,6 +95,8 @@ public class Blocks extends Block {
         registerItemBlock("door/door_tungsten", doorTungsten);
         registerItemBlock("flowers/" , flowerextend);
         registerItemBlock("block_enchant_enhancer",blockEnchantEnhancer);
+        registerItemBlock("ore/uru_ore",oreUru);
+
     }
 
     public static void registerRecipes(RecipeRegister register) {
@@ -184,6 +188,8 @@ public class Blocks extends Block {
 
         RecipesFurnace.smelting().addSmelting(oreTungsten.blockID, new ItemStack(Items.tungstenIngot));
         RecipesFurnace.smelting().addSmelting(oreNickel.blockID, new ItemStack(Items.nickelIngot));
+        RecipesFurnace.smelting().addSmelting(oreUru.blockID, new ItemStack(Items.UruIngot));
+
     }
 
 

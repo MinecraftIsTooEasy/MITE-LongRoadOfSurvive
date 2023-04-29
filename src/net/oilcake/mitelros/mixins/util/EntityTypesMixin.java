@@ -38,6 +38,9 @@ public class EntityTypesMixin {
         addMapping(EntityZombieLord.class,"EntityZombieLord?",554);
         addMapping(EntityMinerZombie.class,"EntityZombieMiner",555);
         addMapping(EntityBoneBodyguard.class,"EntityBoneBodyguard",556);
+        addMapping(EntityGhost.class,"EntityGhost",557);
+        addMapping(EntityEvil.class,"EntityEvil",558);
+
     }
 
 }

@@ -12,5 +12,11 @@ public class RecipeOther {
         register.registerShapelessRecipe(new ItemStack(Items.ExperimentalPotion,1),true,
                 Item.blazePowder,Item.netherStalkSeeds,new ItemStack(Item.potion,1,0),new ItemStack(Item.appleGold,1,0)
         );
+        register.registerShapelessRecipe(new ItemStack(Items.Pulque,1),true,
+                Item.sugar,Items.Agave,new ItemStack(Item.potion,1,0)
+        );
+        register.registerShapelessRecipe(new ItemStack(Items.Ale,1),true,
+                Item.sugar,Item.wheat,new ItemStack(Item.potion,1,0)
+        );
     }
 }

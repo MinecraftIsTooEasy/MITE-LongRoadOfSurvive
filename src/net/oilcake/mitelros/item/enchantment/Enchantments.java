@@ -20,7 +20,7 @@ public class Enchantments {
     public static final Enchantment enchantmentCallofNether = new EnchantmentCallofNether(Constant.getNextEnchantmentID(), yq.b,10);
     public static final Enchantment enchantmentDestroying = new EnchantmentDestroying(Constant.getNextEnchantmentID(), yq.d,15);
     public static final Enchantment enchantmentInfinity = new EnchantmentInfinity(Constant.getNextEnchantmentID(), yq.d,10);
-
+//    public static final Enchantment enchantmentProtectFire = new EnchantmentProtectFire(Constant.getNextEnchantmentID(), yq.b,15);
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){

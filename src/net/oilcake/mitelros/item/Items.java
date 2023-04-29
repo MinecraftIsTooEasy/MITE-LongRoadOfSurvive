@@ -155,7 +155,24 @@ public class Items extends Item {
     public static final ItemArmor BootsAncientmetalsacred = new ItemBoots(Constant.getNextItemID(),Materials.ancient_metal_sacred,false);
     public static final Item AncientmetalArmorPiece = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.ancient_metal_sacred).setCraftingDifficultyAsComponent(800.0F).setUnlocalizedName("ancient_metal_sacred_piece").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
     public static final ItemFood Agave = (ItemFood) new ItemFood(Constant.getNextItemID(),Materials.agave,1,0,false,false,false,"agave").setMaxStackSize(16).setAlwaysEdible();
-    //    public static PotionBrewer potionBrewer;
+    public static final Item Pulque = (new ItemWine(Constant.getNextItemID())).setUnlocalizedName("pulque").setCreativeTab(CreativeModeTab.tabFood);
+    public static final Item Ale = (new ItemWine(Constant.getNextItemID())).setUnlocalizedName("ale").setCreativeTab(CreativeModeTab.tabFood);
+    public static final ItemBow bowTungsten = (new ItemBow(Constant.getNextItemID(),Materials.tungsten));
+    public static final ItemArmor UruHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.uru,false);
+    public static final ItemArmor UruChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.uru,false);
+    public static final ItemArmor UruLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.uru,false);
+    public static final ItemArmor UruBoots = new ItemBoots(Constant.getNextItemID(),Materials.uru,false);
+    public static final ItemNugget UruNugget = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final ItemBattleAxe UruBattleAxe = createInstance(ItemBattleAxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final Item UruIngot = createInstance(ItemIngot.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru).setXPReward(150);
+    public static final ItemSword UruSword = createInstance(ItemSword.class,new Class[]{int.class,Material.class},Constant.getNextItemID(), Materials.uru);
+    public static final ItemWarHammer UruWarHammer = createInstance(ItemWarHammer.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final ItemMattock UruMattock = createInstance(ItemMattock.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final ItemScythe UruScythe = createInstance(ItemScythe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final ItemPieces pieceUru = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(15));
+    public static final Item forgingnote = (ItemStandard) (new ItemStandard(Constant.getNextItemID(),Materials.paper,"forging_note"));
+
+   //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
 
@@ -308,6 +325,22 @@ public class Items extends Item {
         register("armor/ancient_metal_sacred_boots",BootsAncientmetalsacred);
         register("ancient_metal_armor_piece",AncientmetalArmorPiece);
         register("food/agave",Agave);
+        register("pulque",Pulque);
+        register("ale",Ale);
+        register("armor/uru_helmet",UruHelmet);
+        register("armor/uru_chestplate",UruChestplate);
+        register("armor/uru_leggings",UruLeggings);
+        register("armor/uru_boots",UruBoots);
+        register("forging_note",forgingnote);
+        register("ingot/uru", UruIngot);
+        register("ingot/nugget/uru", UruNugget);
+        register("tool/uru/uru_battle_axe", UruBattleAxe);
+        register("tool/uru/uru_mattock", UruMattock);
+        register("tool/uru/uru_scythe", UruScythe);
+        register("tool/uru/uru_sword", UruSword);
+        register("tool/uru/uru_war_hammer", UruWarHammer);
+        register("pieces/uru",pieceUru);
+        register("bows/tungsten/", bowTungsten).setUnlocalizedName("tungsten_bow");
         Constant.initItemArray();
     }
 
@@ -705,7 +738,55 @@ public class Items extends Item {
                 " # ",
                 '#', adamantiumNugget,
                 '*', ingotAdamantium);
-
+        register.registerShapedRecipe(new ItemStack(bowTungsten, 1), true,
+                "#C ",
+                "#EC",
+                "#C ",
+                '#', silk,
+                'E', tungstenIngot,
+                'C', tungstenIngot);
+        register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
+                Items.forgingnote,Item.writableBook
+        );
+        register.registerShapelessRecipe(new ItemStack(UruHelmet,1),false,
+                Items.forgingnote,Items.UruIngot,Item.helmetMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruChestplate,1),false,
+                Items.forgingnote,Items.UruIngot,Item.plateMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruLeggings,1),false,
+                Items.forgingnote,Items.UruIngot,Item.legsMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruBoots,1),false,
+                Items.forgingnote,Items.UruIngot,Item.bootsMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruSword,1),false,
+                Items.forgingnote,Items.UruIngot,Item.swordMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruScythe,1),false,
+                Items.forgingnote,Items.UruIngot,Item.scytheMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruBattleAxe,1),false,
+                Items.forgingnote,Items.UruIngot,Item.battleAxeMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruWarHammer,1),false,
+                Items.forgingnote,Items.UruIngot,Item.warHammerMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruMattock,1),false,
+                Items.forgingnote,Items.UruIngot,Item.mattockMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(HelmetAncientmetalsacred,1),false,
+                Items.forgingnote,Item.ingotGold,Item.helmetAncientMetal
+        );
+        register.registerShapelessRecipe(new ItemStack(ChestplateAncientmetalsacred,1),false,
+                Items.forgingnote,Item.ingotGold,Item.plateAncientMetal
+        );
+        register.registerShapelessRecipe(new ItemStack(LeggingsAncientmetalsacred,1),false,
+                Items.forgingnote,Item.ingotGold,Item.legsAncientMetal
+        );
+        register.registerShapelessRecipe(new ItemStack(BootsAncientmetalsacred,1),false,
+                Items.forgingnote,Item.ingotGold,Item.bootsAncientMetal
+        );
         register.registerShapelessRecipe(new ItemStack(tungstenNugget,1),false,
                 Items.arrowTungsten
         );
@@ -759,6 +840,7 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(pieceNickel.itemID, new ItemStack(nickelNugget));
         RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
         RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(tungstenNugget));
+        RecipesFurnace.smelting().addSmelting(pieceUru.itemID, new ItemStack(UruNugget));
         RecipesFurnace.smelting().addSmelting(watersuspicious.itemID, new ItemStack(bowlWater));
         RecipesFurnace.smelting().addSmelting(waterswampland.itemID, new ItemStack(bowlWater));
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));

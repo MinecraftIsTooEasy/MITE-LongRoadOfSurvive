@@ -44,6 +44,8 @@ public class ItemToolMixin extends Item{
             return 2.5F;
         } else if (this.effective_material == Material.adamantium) {
             return 3.0F;
+        } else if (this.effective_material == Materials.uru) {
+            return 4.75F;
         } else if (this.effective_material == Material.diamond) {
             return 2.5F;
         } else if (this.effective_material == Material.ancient_metal) {
