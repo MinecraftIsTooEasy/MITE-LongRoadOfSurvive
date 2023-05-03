@@ -308,11 +308,19 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             }
         }
 
-        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup&&!rewarded_disc){
+        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup&&!rewarded_disc_damnation){
             this.triggerAchievement(AchievementExtend.feast);
             this.addExperience(2500);
-            this.rewarded_disc = true;
+            this.rewarded_disc_damnation = true;
             EntityItem RewardingRecord = new EntityItem(worldObj,posX,posY,posZ,new ItemStack(Items.recordDamnation.itemID,1));
+            worldObj.spawnEntityInWorld(RewardingRecord);
+            RewardingRecord.entityFX(EnumEntityFX.summoned);
+        }
+        if(this.isPotionActive(MobEffectList.moveSpeed) && this.isPotionActive(MobEffectList.regeneration) && this.isPotionActive(MobEffectList.fireResistance) && this.isPotionActive(MobEffectList.nightVision) && this.isPotionActive(MobEffectList.damageBoost) && this.isPotionActive(MobEffectList.resistance) && this.isPotionActive(MobEffectList.invisibility) && !rewarded_disc_connected){
+            this.triggerAchievement(AchievementExtend.invincible);
+            this.addExperience(2500);
+            this.rewarded_disc_connected = true;
+            EntityItem RewardingRecord = new EntityItem(worldObj,posX,posY,posZ,new ItemStack(Items.recordConnected.itemID,1));
             worldObj.spawnEntityInWorld(RewardingRecord);
             RewardingRecord.entityFX(EnumEntityFX.summoned);
         }
@@ -662,8 +670,6 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     private boolean spawnForced;
     @Shadow
     public float vision_dimming;
-
-
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;
     public boolean Feast_trigger_porridge = false;
@@ -681,6 +687,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     public boolean Feast_trigger_porkchop_stew = false;
     public boolean Feast_trigger_pumpkin_soup = false;
     public boolean Feast_trigger_sorbet = false;
-    private boolean rewarded_disc = false;
+    private boolean rewarded_disc_damnation = false;
+    private boolean rewarded_disc_connected = false;
 
 }

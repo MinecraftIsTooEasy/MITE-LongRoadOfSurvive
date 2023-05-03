@@ -27,6 +27,8 @@ achievement.NeverEnds=Never Ends
 achievement.NeverEnds.desc=Minecraft doesn't mean The End
 achievement.ForgingLegend=Forging Master
 achievement.ForgingLegend.desc=For Minecraft 1.20
+achievement.Invincible=UNSHAKABLE
+achievement.Invincible.desc=Brew to strengthen yourself
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -245,6 +247,7 @@ item.lapis_lazuli.name=Lapis Lazuli
 item.dyePowder.blue.name=Blue Dye
 
 item.records/record_damnation.name=Music Disc
+item.records/record_connected.name=Music Disc
 
 item.experimental_potion.name=Experimental Potion
 

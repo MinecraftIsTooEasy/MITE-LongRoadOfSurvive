@@ -139,6 +139,7 @@ public class Items extends Item {
     public static final ItemShardAT shardEmerald = (ItemShardAT) (new ItemShardAT(861, Material.emerald)).setUnlocalizedName("shardEmerald").setXPReward(3);
     public static final ItemShardAT shardNetherQuartz = (ItemShardAT) (new ItemShardAT(863, Material.quartz)).setUnlocalizedName("shardNetherQuartz").setXPReward(2);
     public static final ItemRecordExtend recordDamnation = (ItemRecordExtend) new ItemRecordExtend(2024, "imported.damnation", "record_damnation", "Damnation", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
+    public static final ItemRecordExtend recordConnected = (ItemRecordExtend) new ItemRecordExtend(2025, "imported.connected", "record_connected", "Connected", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
     public static final ItemArmor VibraniumHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.vibranium,false);
     public static final ItemArmor VibraniumChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.vibranium,false);
     public static final ItemArmor VibraniumLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.vibranium,false);
@@ -309,6 +310,7 @@ public class Items extends Item {
         register("shards/emerald",shardEmerald);
         register("shards/quartz",shardNetherQuartz);
         register("records/record_damnation",recordDamnation);
+        register("records/record_connected",recordConnected);
         register("lapis_lazuli",lapis);
         register("tool/vibranium/vibranium_sword",VibraniumSword);
         register("armor/vibranium_helmet",VibraniumHelmet);
@@ -744,7 +746,7 @@ public class Items extends Item {
                 "#C ",
                 '#', silk,
                 'E', tungstenIngot,
-                'C', tungstenIngot);
+                'C', stick);
         register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
                 Items.forgingnote,Item.writableBook
         );
@@ -822,6 +824,12 @@ public class Items extends Item {
 
         ItemCoin[] coins = new ItemCoin[]{
                 nickelCoin, tungstenCoin};
+        for(int i = 1;i<=9;++i){
+            register.registerShapelessRecipe(new ItemStack(Item.bowlEmpty,i),false,
+                    new ItemStack(Items.watersuspicious,i));
+            register.registerShapelessRecipe(new ItemStack(Item.bowlEmpty,i),false,
+                    new ItemStack(Items.waterswampland,i));
+        }
         for (ItemCoin coin : coins) {
             for (int plank_subtype = 1; plank_subtype <= 9; ++plank_subtype) {
                 register.registerShapelessRecipe(new ItemStack(coin.getNuggetPeer(), plank_subtype), true, new ItemStack(coin, plank_subtype));

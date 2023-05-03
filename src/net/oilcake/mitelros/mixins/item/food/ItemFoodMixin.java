@@ -17,9 +17,9 @@ public class ItemFoodMixin extends Item {
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
-            if (this.hasMaterial(Material.fruit) && item_stack != Item.appleGold.getItemStackForStatsIcon()) {
+            if (this.hasMaterial(Material.fruit)) {
                 this.setWater(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 3);
-            }else if (this.hasMaterial(Material.vegetable) && item_stack!=Item.bakedPotato.getItemStackForStatsIcon() && item_stack!=Item.poisonousPotato.getItemStackForStatsIcon() || this.hasMaterial(Materials.mashedCactus)) {
+            }else if (this.hasMaterial(Material.vegetable) || this.hasMaterial(Materials.mashedCactus) && !(this.itemID == potato.itemID || this.itemID == bakedPotato.itemID || this.itemID == poisonousPotato.itemID)) {
                 this.setWater(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 2);
             }else if (this.hasMaterial(Materials.glowberries)) {
                 Random rand = new Random();
@@ -42,7 +42,9 @@ public class ItemFoodMixin extends Item {
             }else{
                 this.setWater(0);
             }
-
+            if(this.itemID==rottenFlesh.itemID){
+                player.addPotionEffect((new MobEffect(MobEffectList.confusion.id, 600, 0)));
+            }
             player.addFoodValue(this);
             world.playSoundAtEntity(player, "random.burp", 0.5F, player.getRand().nextFloat() * 0.1F + 0.9F);
             this.onEaten(item_stack, world, player);

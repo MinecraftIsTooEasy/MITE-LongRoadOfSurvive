@@ -27,6 +27,8 @@ achievement.NeverEnds=未尽篇章
 achievement.NeverEnds.desc=Minecraft不仅如此
 achievement.ForgingLegend=锻造大师
 achievement.ForgingLegend.desc=试用盔甲图案技术
+achievement.Invincible=势不可挡
+achievement.Invincible.desc=让自身拥有所有持续的药水增益
 
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
@@ -245,6 +247,7 @@ item.lapis_lazuli.name=青金石
 item.dyePowder.blue.name=蓝色染料
 
 item.records/record_damnation.name=音乐唱片
+item.records/record_connected.name=音乐唱片
 
 item.experimental_potion.name=实验的药水
 

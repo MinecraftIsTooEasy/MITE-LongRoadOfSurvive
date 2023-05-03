@@ -34,6 +34,9 @@ public class EntitySpiderKing extends EntityArachnid {
     public boolean peacefulDuringDay() {
         return false;
     }
+    public float getNaturalDefense(DamageSource damage_source) {
+        return super.getNaturalDefense(damage_source) + (damage_source.bypassesMundaneArmor() ? 0.0F : 3.0F);
+    }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.maxHealth, 28.0);

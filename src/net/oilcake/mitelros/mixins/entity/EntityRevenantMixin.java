@@ -35,7 +35,7 @@ public class EntityRevenantMixin extends EntityZombie {
                 } else
                 {
                     EntityMinerZombie Belongings = new EntityMinerZombie(worldObj);
-                    Belongings.setPosition(posX+this.rand.nextInt(4)-this.rand.nextInt(4), posY, posZ-this.rand.nextInt(4)+this.rand.nextInt(4));
+                    Belongings.setPosition(posX, posY, posZ);
                     Belongings.refreshDespawnCounter(-9600);
                     worldObj.spawnEntityInWorld(Belongings);
                     Belongings.onSpawnWithEgg(null);

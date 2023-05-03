@@ -17,6 +17,7 @@ public class SoundsMITEMixin {
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
         this.add("records/imported/damnation.ogg");
+        this.add("records/imported/connected.ogg");
     }
     @Shadow
     private boolean add(String path) {

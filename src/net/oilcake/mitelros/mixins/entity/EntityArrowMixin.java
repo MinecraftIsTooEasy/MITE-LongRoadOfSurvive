@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.entity.EntityBoneBodyguard;
 import net.oilcake.mitelros.entity.EntityStray;
 import net.oilcake.mitelros.entity.EntityWitherBodyguard;
 import net.oilcake.mitelros.item.Items;
@@ -231,6 +232,8 @@ public class EntityArrowMixin extends EntityArrow implements un {
                             min_damage += 3.0F;
                         } else if (this.shootingEntity.getClass() == EntityStray.class) {
                             min_damage += 1.0F;
+                        } else if (this.shootingEntity.getClass() == EntityBoneBodyguard.class) {
+                            min_damage += 2.0F;
                         }
 
                         if (var24 < min_damage) {

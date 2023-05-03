@@ -21,6 +21,7 @@ public class AchievementExtend {
     public static Achievement copying;
     public static Achievement neverEnds;
     public static Achievement forgingLegend;
+    public static Achievement invincible;
     public AchievementExtend() {
     }
 
@@ -38,7 +39,8 @@ public class AchievementExtend {
         cheersforMinecraft = (new Achievement(getNextAchievementID(),"CheersforMinecraft",-3,-5,Items.Ale,AchievementExtend.mashedCactus)).registerAchievement();
         copying = (new Achievement(getNextAchievementID(),"Copying",-2,11,Items.forgingnote,AchievementExtend.SoundofUnder)).registerAchievement();
         neverEnds = (new Achievement(getNextAchievementID(),"NeverEnds",-2,17,Items.UruIngot,AchievementList.adamantiumIngot)).registerAchievement();
-        forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-3,13,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
+        forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-5,13,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
+        invincible = (new Achievement(getNextAchievementID(),"Invincible",-3,13,new ItemStack(Item.potion, 1, 8271),AchievementList.potion)).registerAchievement().setSpecial();
     }
 
     private static int getNextAchievementID() {

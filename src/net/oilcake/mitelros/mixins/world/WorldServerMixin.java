@@ -2,10 +2,7 @@ package net.oilcake.mitelros.mixins.world;
 
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
-import net.oilcake.mitelros.entity.EntityClusterSpider;
-import net.oilcake.mitelros.entity.EntityGhost;
-import net.oilcake.mitelros.entity.EntityStalkerCreeper;
-import net.oilcake.mitelros.entity.EntityZombieLord;
+import net.oilcake.mitelros.entity.*;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -54,7 +51,21 @@ public class WorldServerMixin extends World {
                     }
                     return entity_class;
                 }
-            } else if (entity_class == EntitySlime.class) {
+            } else if (entity_class == EntityZombie.class) {
+                if (!check_depth || y <= 40) {
+                    if (this.rand.nextInt(40) >= y && this.rand.nextFloat() < 0.5F) {
+                        return EntityMinerZombie.class;
+                    }
+                    return entity_class;
+                }
+            } else if (entity_class == EntitySkeleton.class) {
+                if (!check_depth || y <= 40) {
+                    if (this.rand.nextInt(40) >= y && this.rand.nextFloat() < 0.65F) {
+                        return EntityBoneBodyguard.class;
+                    }
+                    return entity_class;
+                }
+            }else if (entity_class == EntitySlime.class) {
                 if (!this.blockTypeIsAbove(Block.stone, x, y, z)) {
                     return entity_class;
                 }
