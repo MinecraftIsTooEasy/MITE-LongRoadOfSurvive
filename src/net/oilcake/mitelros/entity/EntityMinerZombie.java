@@ -59,4 +59,17 @@ public class EntityMinerZombie extends EntityZombie {
     public int getExperienceValue() {
         return super.getExperienceValue() * 2;
     }
+    protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
+        if (this.rand.nextFloat() < (recently_hit_by_player ? 0.5F : 0.25F)) {
+            this.dropItem(Item.rottenFlesh.itemID, 1);
+        }
+        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(5) == 0) {
+            if(this.rand.nextInt(4) > 0){
+                this.dropItem(Item.copperNugget.itemID, 1);
+            }
+            else {
+                this.dropItem(Item.ironNugget.itemID, 1);
+            }
+        }
+    }
 }

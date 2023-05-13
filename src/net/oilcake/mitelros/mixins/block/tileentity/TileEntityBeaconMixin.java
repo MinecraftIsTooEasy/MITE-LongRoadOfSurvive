@@ -1,16 +1,13 @@
 package net.oilcake.mitelros.mixins.block.tileentity;
 
-import net.minecraft.Block;
-import net.minecraft.Item;
-import net.minecraft.ItemStack;
-import net.minecraft.TileEntityBeacon;
+import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(TileEntityBeacon.class)
-public abstract class TileEntityBeaconMixin extends TileEntityBeacon{
+public abstract class TileEntityBeaconMixin extends TileEntity {
     private float c;
     private boolean isBeaconActive;
     private int levels = -1;

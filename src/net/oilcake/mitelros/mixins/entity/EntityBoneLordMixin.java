@@ -17,11 +17,11 @@ public class EntityBoneLordMixin extends EntitySkeleton {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.followRange, 40.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.25999999046325684);
-        this.setEntityAttribute(GenericAttributes.attackDamage, StuckTagConfig.TagConfig.TagBattleSuffer.ConfigValue ? 7.0 : 5.0);
-        this.setEntityAttribute(GenericAttributes.maxHealth, StuckTagConfig.TagConfig.TagBattleSuffer.ConfigValue ? 30.0 : 20.0);
+        this.setEntityAttribute(GenericAttributes.attackDamage, StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue ? 7.0 : 5.0);
+        this.setEntityAttribute(GenericAttributes.maxHealth, StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue ? 30.0 : 20.0);
     }
     @Overwrite
     public Class getTroopClass() {
-        return this.isAncientBoneLord() ? (StuckTagConfig.TagConfig.TagBattleSuffer.ConfigValue ? EntityLongdeadGuardian.class : EntityLongdead.class) : (StuckTagConfig.TagConfig.TagBattleSuffer.ConfigValue ? EntityBoneBodyguard.class : EntitySkeleton.class );
+        return this.isAncientBoneLord() ? (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue ? EntityLongdeadGuardian.class : EntityLongdead.class) : (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue ? EntityBoneBodyguard.class : EntitySkeleton.class );
     }
 }

@@ -11,20 +11,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityZombie.class)
-public class EntityZombieMixin extends EntityZombie{
-    @Shadow
-    private int conversionTime;
-    public EntityZombieMixin(World par1World) {
-        super(par1World);
-    }
+public class EntityZombieMixin{
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
         this.is_smart = true;
     }
-    @Shadow
-    Item[] rare_drops_standard;
-    @Shadow
-    Item[] rare_drops_villager;
     @Shadow
     private boolean is_smart;
 }

@@ -38,7 +38,6 @@ public class WorldServerMixin extends World {
             if (possible_creatures == null || possible_creatures.isEmpty()) {
                 return null;
             }
-
             BiomeMeta entry = (BiomeMeta) WeightedRandom.getRandomItem(this.rand, possible_creatures);
             Class entity_class = entry.entityClass;
             if (entity_class == EntityCreeper.class) {
@@ -51,21 +50,7 @@ public class WorldServerMixin extends World {
                     }
                     return entity_class;
                 }
-            } else if (entity_class == EntityZombie.class) {
-                if (!check_depth || y <= 40) {
-                    if (this.rand.nextInt(40) >= y && this.rand.nextFloat() < 0.5F) {
-                        return EntityMinerZombie.class;
-                    }
-                    return entity_class;
-                }
-            } else if (entity_class == EntitySkeleton.class) {
-                if (!check_depth || y <= 40) {
-                    if (this.rand.nextInt(40) >= y && this.rand.nextFloat() < 0.65F) {
-                        return EntityBoneBodyguard.class;
-                    }
-                    return entity_class;
-                }
-            }else if (entity_class == EntitySlime.class) {
+            } else if (entity_class == EntitySlime.class) {
                 if (!this.blockTypeIsAbove(Block.stone, x, y, z)) {
                     return entity_class;
                 }
@@ -110,6 +95,24 @@ public class WorldServerMixin extends World {
                 if (!check_depth || y <= 40) {
                     return entity_class;
                 }
+            } else if (entity_class == EntityMinerZombie.class) {
+                if (!check_depth || y <= 40) {
+                    return entity_class;
+                }
+            } else if (entity_class == EntityBoneBodyguard.class) {
+                if (!check_depth || y <= 40) {
+                    return entity_class;
+                }
+            } else if (entity_class == EntityZombie.class) {
+                if (!check_depth || (y <= 40 && this.rand.nextFloat() <= 0.5F ) || is_blood_moon_up) {
+                    return EntityMinerZombie.class;
+                }
+                return entity_class;
+            } else if (entity_class == EntitySkeleton.class) {
+                if (!check_depth || (y <= 40 && this.rand.nextFloat() <= 0.5F ) || is_blood_moon_up) {
+                    return EntityBoneBodyguard.class;
+                }
+                return entity_class;
             } else if (entity_class == EntityBlob.class) {
                 if ((!check_depth || y <= 40) && this.blockTypeIsAbove(Block.stone, x, y, z)) {
                     return entity_class;

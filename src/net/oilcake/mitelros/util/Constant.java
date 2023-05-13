@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " ITF Stable 0.0.3 ";
+    public static final String VERSION = " ITF Aleph-0x00000185 ";
     public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -54,8 +54,10 @@ public class Constant {
     }
     public static int CalculateCurrentDiff(){
         int Diff = 0;
-        if(StuckTagConfig.TagConfig.TagFallenInMine.ConfigValue) Diff += 2;
-        if(StuckTagConfig.TagConfig.TagBattleSuffer.ConfigValue) Diff += 2;
+        if(StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue && !StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) Diff += 1;
+        if(StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue && !StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue) Diff += 1;
+        if(StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) Diff += 2;
+        if(StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagNoWeatherPredict.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagInstinctSurvival.ConfigValue) Diff += 2;

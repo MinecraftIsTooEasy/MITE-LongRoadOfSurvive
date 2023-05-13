@@ -18,13 +18,8 @@ public class EntityLichShadow extends EntitySkeleton{
         if (num_drops > 0 && !recently_hit_by_player) {
             num_drops -= this.rand.nextInt(num_drops + 1);
         }
-
         for(i = 0; i < num_drops; ++i) {
             this.dropItem(Items.AncientmetalArmorPiece.itemID, 1);
-        }
-
-        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
-            this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
         }
     }
     public void addRandomWeapon() {
