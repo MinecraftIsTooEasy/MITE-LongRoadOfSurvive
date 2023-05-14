@@ -5,6 +5,8 @@ import net.minecraft.*;
 import static net.minecraft.EntityPlayer.*;
 
 public class CommandTestFreeze extends CommandAbstract {
+    public CommandTestFreeze(){
+    }
     @Override
     public String getCommandName() {
         return "testfreeze";
@@ -16,7 +18,7 @@ public class CommandTestFreeze extends CommandAbstract {
     }
     @Override
     public String getCommandUsage(ICommandListener iCommandListener) {
-        return "commands.freeze.usage";
+        return "commands.testfreeze.usage";
     }
 
     @Override

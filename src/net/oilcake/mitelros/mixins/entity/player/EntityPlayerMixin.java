@@ -276,7 +276,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
                 this.Hasdrunked = false;
             }
             int freezelevel = Math.max(((FreezingCooldown - (3000 * getReduce_weight())) / 12000), 0);
-            if(this.FreezingCooldown > 3000 * getReduce_weight()){
+            if(this.FreezingCooldown > 3000 * getReduce_weight() && this.InFreeze()){
                 if(freezelevel >= 1){
                     if (freezelevel >= 4) {
                         ++FreezingWarning;

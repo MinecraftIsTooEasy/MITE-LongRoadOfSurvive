@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " ITF Aleph-0x00000185 ";
+    public static final String VERSION = " ITF Aleph-0x00000190 ";
     public static final bjo icons_lros = new bjo("textures/gui/icons_lros.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -68,6 +68,7 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue) Diff+=1;
         if(StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue) Diff+=2;
         if(StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue) Diff+=1;
+        if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue) Diff+=3;
         return Diff;
     }
 }

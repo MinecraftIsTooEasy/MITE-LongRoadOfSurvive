@@ -257,14 +257,14 @@ public class GuiIngameMixin extends avk {
                 s = "阴晴无定";
             } else{
                 if (event != null) {
-                    s = "风暴已经抵达";
+                    s = "轰雷降至";
                 } else {
                     event = this.g.f.getNextWeatherEvent(true);
                     if (event != null) {
                         s = "乌云滚滚";
                     } else {
                         event = this.g.f.getPreviousWeatherEvent(true);
-                        s = event == null ? "现在风平浪静" : "风暴已经结束";
+                        s = event == null ? "风平浪静" : "雨过天晴";
                     }
                 }
             }

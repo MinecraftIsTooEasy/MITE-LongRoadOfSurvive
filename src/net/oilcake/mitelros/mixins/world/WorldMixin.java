@@ -55,7 +55,7 @@ public abstract class WorldMixin {
                 }
             }
 
-            if (isBloodMoon(first_tick_of_day + 5000L, false)) {
+            if (isBloodMoon(first_tick_of_day + 6000L, false)) {
                 WeatherEvent event = new WeatherEvent(first_tick_of_day + 5000L, 14000);
                 event.setStorm(event.start, event.end);
                 events.add(event);

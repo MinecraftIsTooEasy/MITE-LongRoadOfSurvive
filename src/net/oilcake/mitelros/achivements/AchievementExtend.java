@@ -28,7 +28,7 @@ public class AchievementExtend {
     public static void registerAchievements() {
         FragofMine = (new Achievement(getNextAchievementID(), "MinePieces", 2, 3, Items.pieceCopper, AchievementList.buildPickaxe)).registerAchievement();
         BravetheCold = (new Achievement(getNextAchievementID(), "WearAllWolfArmor", 11, -3, Items.WolfHelmet, AchievementList.wearLeather)).registerAchievement();
-        Arbalistic = (new Achievement(getNextAchievementID(), "BuildMithrilBow", -4, 9, Items.bowTungsten, AchievementList.mithrilIngot)).registerAchievement();
+        Arbalistic = (new Achievement(getNextAchievementID(), "BuildTungstenBow", -4, 9, Items.bowTungsten, AchievementList.mithrilIngot)).registerAchievement();
         getWitherSkull = (new Achievement(getNextAchievementID(), "getWitherSkull", 4, 11, new ItemStack(Block.skull, 1, 1), AchievementList.portalToNether)).registerAchievement();
         getBeacon = (new Achievement(getNextAchievementID(), "getBeacon", 6, 11, Block.beacon, AchievementExtend.getWitherSkull)).setSpecial().registerAchievement();
         mashedCactus = (new Achievement(getNextAchievementID(), "mashedCactus", -3, -3, Items.mashedCactus, AchievementList.seeds)).registerAchievement();
@@ -40,7 +40,7 @@ public class AchievementExtend {
         copying = (new Achievement(getNextAchievementID(),"Copying",-2,11,Items.forgingnote,AchievementExtend.SoundofUnder)).registerAchievement();
         neverEnds = (new Achievement(getNextAchievementID(),"NeverEnds",-2,17,Items.UruIngot,AchievementList.adamantiumIngot)).registerAchievement();
         forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-5,13,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
-        invincible = (new Achievement(getNextAchievementID(),"Invincible",-3,13,new ItemStack(Item.potion, 1, 8271),AchievementList.potion)).registerAchievement().setSpecial();
+        invincible = (new Achievement(getNextAchievementID(),"Invincible",-3,13,Items.Pulque,AchievementList.potion)).registerAchievement().setSpecial();
     }
 
     private static int getNextAchievementID() {

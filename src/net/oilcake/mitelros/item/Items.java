@@ -750,43 +750,43 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
                 Items.forgingnote,Item.writableBook
         );
-        register.registerShapelessRecipe(new ItemStack(UruHelmet,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruHelmet,1),true,
                 Items.forgingnote,Items.UruIngot,Item.helmetMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruChestplate,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruChestplate,1),true,
                 Items.forgingnote,Items.UruIngot,Item.plateMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruLeggings,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruLeggings,1),true,
                 Items.forgingnote,Items.UruIngot,Item.legsMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruBoots,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruBoots,1),true,
                 Items.forgingnote,Items.UruIngot,Item.bootsMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruSword,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruSword,1),true,
                 Items.forgingnote,Items.UruIngot,Item.swordMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruScythe,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruScythe,1),true,
                 Items.forgingnote,Items.UruIngot,Item.scytheMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruBattleAxe,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruBattleAxe,1),true,
                 Items.forgingnote,Items.UruIngot,Item.battleAxeMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruWarHammer,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruWarHammer,1),true,
                 Items.forgingnote,Items.UruIngot,Item.warHammerMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(UruMattock,1),false,
+        register.registerShapelessRecipe(new ItemStack(UruMattock,1),true,
                 Items.forgingnote,Items.UruIngot,Item.mattockMithril,Item.ingotMithril
         );
-        register.registerShapelessRecipe(new ItemStack(HelmetAncientmetalsacred,1),false,
+        register.registerShapelessRecipe(new ItemStack(HelmetAncientmetalsacred,1),true,
                 Items.forgingnote,Item.ingotGold,Item.helmetAncientMetal
         );
-        register.registerShapelessRecipe(new ItemStack(ChestplateAncientmetalsacred,1),false,
+        register.registerShapelessRecipe(new ItemStack(ChestplateAncientmetalsacred,1),true,
                 Items.forgingnote,Item.ingotGold,Item.plateAncientMetal
         );
-        register.registerShapelessRecipe(new ItemStack(LeggingsAncientmetalsacred,1),false,
+        register.registerShapelessRecipe(new ItemStack(LeggingsAncientmetalsacred,1),true,
                 Items.forgingnote,Item.ingotGold,Item.legsAncientMetal
         );
-        register.registerShapelessRecipe(new ItemStack(BootsAncientmetalsacred,1),false,
+        register.registerShapelessRecipe(new ItemStack(BootsAncientmetalsacred,1),true,
                 Items.forgingnote,Item.ingotGold,Item.bootsAncientMetal
         );
         register.registerShapelessRecipe(new ItemStack(tungstenNugget,1),false,

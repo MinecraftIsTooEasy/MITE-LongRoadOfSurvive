@@ -44,8 +44,8 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagInstinctSurvival = new ConfigItem<>("InstinctSurvival",false,"(LVL2)防御本能：怪物享受护甲防御的比率提升25%");
         public static ConfigItem <Boolean> TagFallenInMineLVL1 = new ConfigItem<>("FallenInMineLVL1",false,"(LVL1)矿难群体：主世界矿洞生成矿工僵尸的概率提升");
         public static ConfigItem <Boolean> TagBattleSufferLVL1 = new ConfigItem<>("BattleSufferLVL1",false,"(LVL1)久经沙场：主世界矿洞生成骷髅侍卫的概率提升");
-        public static ConfigItem <Boolean> TagFallenInMineLVL2 = new ConfigItem<>("FallenInMineLVL2",false,"(LVL2)矿难群体：主世界矿洞将生成矿工僵尸，亡魂的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
-        public static ConfigItem <Boolean> TagBattleSufferLVL2 = new ConfigItem<>("BattleSufferLVL2",false,"(LVL2)久经沙场：主世界矿洞将生成骷髅侍卫，骷髅领主的生命值提升50%，攻击力提升40%，召唤的支援获得强化");
+        public static ConfigItem <Boolean> TagFallenInMineLVL2 = new ConfigItem<>("FallenInMineLVL2",false,"(LVL2)矿难群体：主世界矿洞生成矿工僵尸的概率提升，亡魂的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
+        public static ConfigItem <Boolean> TagBattleSufferLVL2 = new ConfigItem<>("BattleSufferLVL2",false,"(LVL2)久经沙场：主世界矿洞生成骷髅侍卫的概率提升，骷髅领主的生命值提升50%，攻击力提升40%，召唤的支援获得强化");
         public static ConfigItem <Boolean> TagInvisibleFollower = new ConfigItem<>("InvisibleFollower",false,"(LVL1)无形跟随：更低层数的爬行者将被替换为潜伏爬行者");
         public static ConfigItem <Boolean> TagLegendFreeze = new ConfigItem<>("LegendFreeze",false,"(LVL1)刺骨寒风：寒冷惩罚的积累速度提升200%");
         public static ConfigItem <Boolean> TagUnstableConvection = new ConfigItem<>("UnstableConvection",false,"(LVL1)不稳定对流：闪电的触发频率提升300%");
@@ -53,10 +53,11 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物的回复含水量的能力（奇数去尾，等于1更改概率）");
         public static ConfigItem <Boolean> TagDeadgeothermy = new ConfigItem<>("DeadGeothermy",false,"(LVL2)地热失效：地下世界成为寒冷生物群系，更改地下世界基岩生成，同时生成绿宝石");
         public static ConfigItem <Boolean> TagHeatStorm = new ConfigItem<>("HeatStorm",false,"(LVL1)灼地烈阳：玩家额外拥有炎热惩罚");
-
+        public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再自然生成可提供肉类的动物");
 
         //*这个有问题*//        public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
-        //*这个有问题*//        public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再生成可提供肉类的动物");
+        //*这个有问题*//
+
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
     }
 
@@ -78,11 +79,11 @@ public class StuckTagConfig {
         Tags.put("UnstableConvection",TagConfig.TagUnstableConvection);
         Tags.put("EternalRaining",TagConfig.TagEternalRaining);
         Tags.put("DeadGeothermy",TagConfig.TagDeadgeothermy);
-
+        Tags.put("Apocalypse",TagConfig.TagApocalypse);
         //删除
-//       Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
+//      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 //      Tags.put("WorshipDark",TagConfig.TagWorshipDark);
-//      Tags.put("Apocalypse",TagConfig.TagApocalypse);
+
         String filePth = "StuckChallenge.cfg";
         File file_mite = new File(filePth);
         if (file_mite.exists()) {

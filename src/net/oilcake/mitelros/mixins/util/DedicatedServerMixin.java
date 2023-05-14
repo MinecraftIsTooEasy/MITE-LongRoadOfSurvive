@@ -21,8 +21,8 @@ public class DedicatedServerMixin {
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(EnumChatFormat.AQUA)));
-        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,150,0)));
-        player.vision_dimming += 2.0F;
+        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
+        player.vision_dimming += 1.25F;
     }
     @Shadow
     public void updatePlayersFile() {

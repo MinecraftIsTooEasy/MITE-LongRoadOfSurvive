@@ -37,7 +37,18 @@ public class BiomeBaseMixin{
     public void injectCtor(CallbackInfo callbackInfo) {
         this.spawnableMonsterList.add(new BiomeMeta(EntityMinerZombie.class, (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue) ? 50 : 20, 4, 4));
         this.spawnableMonsterList.add(new BiomeMeta(EntityBoneBodyguard.class, (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue || StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue) ? 50 : 20,4,4));
+        if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue){
+            this.removeEntityFromSpawnableLists(EntityCow.class);
+            this.removeEntityFromSpawnableLists(EntityChicken.class);
+            this.removeEntityFromSpawnableLists(EntitySheep.class);
+            this.removeEntityFromSpawnableLists(EntityPig.class);
+            this.removeEntityFromSpawnableLists(EntityHorse.class);
+        }
     }
+    @Shadow
+    public void removeEntityFromSpawnableLists(Class _class) {
+    }
+
     @Overwrite
     public boolean isHillyOrMountainous() {
         return biomeID == extremeHills.biomeID || biomeID == iceMountains.biomeID || biomeID == desertHills.biomeID || biomeID == forestHills.biomeID || biomeID == taigaHills.biomeID || biomeID == extremeHillsEdge.biomeID || biomeID == jungleHills.biomeID || biomeID == windsweptpleatu.biomeID;
