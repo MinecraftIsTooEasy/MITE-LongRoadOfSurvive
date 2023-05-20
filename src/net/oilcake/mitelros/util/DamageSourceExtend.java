@@ -40,7 +40,7 @@ public class DamageSourceExtend extends DamageSource{
         if(Objects.equals(this.damageType, thirsty.damageType)){
             var3 = par1EntityLivingBase.getEntityName() +" 渴死了";
         }
-        if(Objects.equals(this.damageType, thirsty.damageType)){
+        if(Objects.equals(this.damageType, malnourished.damageType)){
             var3 = par1EntityLivingBase.getEntityName() +" 营养不良而死";
         }
         return ChatMessage.createFromTranslationWithSubstitutions(var3);
