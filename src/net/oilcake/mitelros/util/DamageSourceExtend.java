@@ -3,7 +3,6 @@ package net.oilcake.mitelros.util;
 import net.minecraft.ChatMessage;
 import net.minecraft.DamageSource;
 import net.minecraft.EntityLiving;
-import net.minecraft.LocaleI18n;
 
 import java.util.Objects;
 
@@ -19,6 +18,7 @@ public class DamageSourceExtend extends DamageSource{
     }
     public static DamageSourceExtend freeze = (new DamageSourceExtend("freeze")).setUnblockable();
     public static DamageSourceExtend thirsty = (new DamageSourceExtend("thirsty")).setUnblockable();
+    public static DamageSourceExtend malnourished = (new DamageSourceExtend("malnourished")).setUnblockable();
     protected DamageSourceExtend setUnblockable() {
         this.is_unblockable = true;
         return this.setDamageBypassesMundaneArmor();
@@ -39,6 +39,9 @@ public class DamageSourceExtend extends DamageSource{
         }
         if(Objects.equals(this.damageType, thirsty.damageType)){
             var3 = par1EntityLivingBase.getEntityName() +" 渴死了";
+        }
+        if(Objects.equals(this.damageType, thirsty.damageType)){
+            var3 = par1EntityLivingBase.getEntityName() +" 营养不良而死";
         }
         return ChatMessage.createFromTranslationWithSubstitutions(var3);
     }

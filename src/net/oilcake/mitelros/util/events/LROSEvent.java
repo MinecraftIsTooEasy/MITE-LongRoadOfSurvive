@@ -3,6 +3,7 @@ package net.oilcake.mitelros.util.events;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.*;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.EnumChatFormats;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
 import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
 import net.xiaoyu233.fml.reload.event.HandleChatCommandEvent;
@@ -10,6 +11,49 @@ import net.xiaoyu233.fml.reload.event.PacketRegisterEvent;
 import net.xiaoyu233.fml.reload.event.PlayerLoggedInEvent;
 
 public class LROSEvent {
+    @Subscribe
+    public void handleChatCommand(HandleChatCommandEvent event) {
+        String par2Str = event.getCommand();
+        EntityPlayer player = event.getPlayer();
+        ICommandListener commandListener = event.getListener();
+        if (par2Str.startsWith("tpt") && !Minecraft.inDevMode()) {
+            BiomeBase biome = player.worldObj.getBiomeGenForCoords(player.getBlockPosX(), player.getBlockPosZ());
+            if(player.InFreeze()){
+                player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+player.BodyTemperature+"℃，玩家受到寒冷影响").setColor(EnumChatFormat.WHITE));
+            }
+            else{
+                player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+player.BodyTemperature+"℃，玩家未受到寒冷影响").setColor(EnumChatFormat.WHITE));
+            }
+            event.setExecuteSuccess(true);
+        }
+        if (par2Str.startsWith("yay")){
+            World world = player.getWorld();
+            ItemStack itemStack = new ItemStack(Item.fireworkCharge);
+            ItemStack itemStack2 = new ItemStack(Item.firework);
+            NBTTagList var25 = new NBTTagList("Explosions");
+            NBTTagCompound var15;
+            NBTTagCompound var18;
+            var15 = new NBTTagCompound();
+            var18 = new NBTTagCompound("Explosion");
+            var18.setBoolean("Flicker", true);
+            var18.setBoolean("Trail", true);
+            byte var23 = (byte)(player.getRand().nextInt(4) + 1);
+            var18.setIntArray("Colors", ItemDye.dyeColors);
+            var18.setIntArray("FadeColors", ItemDye.dyeColors);
+            var18.setByte("Type", (byte)(player.getRand().nextInt(4) + 1));
+            var15.setTag("Explosion", var18);
+            itemStack.setTagCompound(var15);
+            var15 = new NBTTagCompound();
+            var18 = new NBTTagCompound("Fireworks");
+            var25.appendTag(itemStack.getTagCompound().getCompoundTag("Explosion"));
+            var18.setTag("Explosions", var25);
+            var18.setByte("Flight", (byte)(player.getRand().nextInt(3) + 1));
+            var15.setTag("Fireworks", var18);
+            itemStack2.setTagCompound(var15);
+            world.spawnEntityInWorld(new EntityFireworks(world, player.posX, player.posY + 5, player.posZ, itemStack2));
+            event.setExecuteSuccess(true);
+        }
+    }
 
     @Subscribe
     public void onPacketRegister(PacketRegisterEvent event){
@@ -22,14 +66,14 @@ public class LROSEvent {
     public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
         EntityPlayer player = event.getPlayer();
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
-                .appendComponent(ChatMessage.createFromTranslationKey("MITE-ITF挂载成功,当前版本:").setColor(EnumChatFormat.AQUA))
-                .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.BLUE)));
+                .appendComponent(ChatMessage.createFromTranslationKey("MITE-ITF挂载成功,当前版本:").setColor(EnumChatFormat.BLUE))
+                .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.YELLOW)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
-                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.AQUA)));
+                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.BLUE)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
-                .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(EnumChatFormat.AQUA)));
+                .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(Constant.CalculateCurrentDiff() >= 16 ? EnumChatFormat.DARK_RED : Constant.CalculateCurrentDiff() >= 12 ? EnumChatFormat.RED : Constant.CalculateCurrentDiff() >= 8 ? EnumChatFormat.YELLOW: Constant.CalculateCurrentDiff() >= 4 ? EnumChatFormat.GREEN : Constant.CalculateCurrentDiff() > 0 ? EnumChatFormat.AQUA : EnumChatFormat.BLUE)));
         player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
         player.vision_dimming += 1.25F;
     }

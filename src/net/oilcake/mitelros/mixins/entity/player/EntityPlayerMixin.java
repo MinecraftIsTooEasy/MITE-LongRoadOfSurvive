@@ -1,5 +1,6 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
+import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
@@ -17,12 +18,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.text.DecimalFormat;
 import java.util.Iterator;
 
+import static java.lang.Math.max;
 import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(EntityPlayer.class)
-public abstract class EntityPlayerMixin extends EntityLiving{
+public abstract class EntityPlayerMixin extends EntityLiving implements ICommandListener {
 
 //    private static int getWaterLimit(int level) {
 //        return Math.max(Math.min(6 + level / 5 * 2, 20), 6);
@@ -193,18 +196,36 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     public boolean hasFoodEnergy() {
         return this.getSatiation() + this.getNutrition() != 0 && this.getWater() != 0;
     }
+    public boolean UnderArrogance() {
+        ItemStack Helmet = this.getHelmet();
+        ItemStack Cuirass = this.getCuirass();
+        ItemStack Leggings = this.getLeggings();
+        ItemStack Boots = this.getBoots();
+        ItemStack Holding = this.getHeldItemStack();
+        boolean temp1 = false;
+        if(Helmet != null)temp1 = EnchantmentManager.hasEnchantment(Helmet, Enchantments.enchantmentArrogance);
+        if(Cuirass != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Cuirass, Enchantments.enchantmentArrogance);
+        if(Leggings != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Leggings, Enchantments.enchantmentArrogance);
+        if(Boots != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Boots, Enchantments.enchantmentArrogance);
+        if(Holding != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Holding, Enchantments.enchantmentArrogance);
+        float quality_adjusted_crafting_difficulty = 0.0F;
+        if(Helmet != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Helmet.getItem().getLowestCraftingDifficultyToProduce(), Helmet.getQuality()));
+        if(Cuirass != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Cuirass.getItem().getLowestCraftingDifficultyToProduce(), Cuirass.getQuality()));
+        if(Leggings != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Leggings.getItem().getLowestCraftingDifficultyToProduce(), Leggings.getQuality()));
+        if(Boots != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Boots.getItem().getLowestCraftingDifficultyToProduce(), Boots.getQuality()));
+        if(Holding != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Holding.getItem().getLowestCraftingDifficultyToProduce(), Holding.getQuality()));
+        int cost = Math.round(quality_adjusted_crafting_difficulty / 5.0F);
+        return this.experience < max(2300, cost) && temp1;
+    }
 
     public boolean InFreeze(){
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         ItemStack wearingItemStack = this.getCuirass();
         if (biome.temperature <= 0.16F){
-            if((this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
-                    this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
-                    this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
-                    this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID )|| EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether) ){
-                return false;
-            }
-            return true;
+            return (this.getHelmet() == null || this.getHelmet().itemID != Items.WolfHelmet.itemID ||
+                    this.getCuirass() == null || this.getCuirass().itemID != Items.WolfChestplate.itemID ||
+                    this.getLeggings() == null || this.getLeggings().itemID != Items.WolfLeggings.itemID ||
+                    this.getBoots() == null || this.getBoots().itemID != Items.WolfBoots.itemID) && !EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether);
         }
         return false;
     }
@@ -216,6 +237,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     private int FreezingCooldown;
     private int FreezingWarning;
     private int reduce_weight;
+    public float BodyTemperature = 37.2F;
     private double dry_resist;
     public boolean Hasdrunked = false;
     private int drunk_duration = 0;
@@ -275,24 +297,29 @@ public abstract class EntityPlayerMixin extends EntityLiving{
                 this.drunk_duration = 6000;
                 this.Hasdrunked = false;
             }
-            int freezelevel = Math.max(((FreezingCooldown - (3000 * getReduce_weight())) / 12000), 0);
-            if(this.FreezingCooldown > 3000 * getReduce_weight() && this.InFreeze()){
+            int freezeunit = max(FreezingCooldown - (3000 * getReduce_weight()), 0);
+            BodyTemperature = 37.2F - (0.000125F * freezeunit);
+            int freezelevel = max(freezeunit/12000, 0);
+            if(freezeunit > 12000 && this.InFreeze()){
                 if(freezelevel >= 1){
                     if (freezelevel >= 4) {
                         ++FreezingWarning;
                         this.triggerAchievement(AchievementExtend.hypothermia);
                     }
                     if (FreezingWarning > 500) {
-                        this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 1.0F));
+                        this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 4.0F));
                         FreezingWarning = 0;
                     }
-                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
-                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, FreezingCooldown, this.isInRain() ? freezelevel : freezelevel - 1));
+                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
+                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
                 }
             }
             if(this.HeatResistance > 3200 - (getReduce_weight() * 50)){
                 this.addPotionEffect(new MobEffect(MobEffectList.confusion.id, 1600, 1));
                 this.HeatResistance = 0;
+            }
+            if(this.InHeat()){
+                this.HeatResistance++;
             }
             if(this.InFreeze() || this.drunk_duration > 0){
                 FreezingCooldown += StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1;
@@ -308,7 +335,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             }
         }
 
-        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup&&!rewarded_disc_damnation){
+        if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup &&Feast_trigger_salmon_soup &&Feast_trigger_beetroot_soup &&!rewarded_disc_damnation){
             this.triggerAchievement(AchievementExtend.feast);
             this.addExperience(2500);
             this.rewarded_disc_damnation = true;
@@ -323,6 +350,9 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             EntityItem RewardingRecord = new EntityItem(worldObj,posX,posY,posZ,new ItemStack(Items.recordConnected.itemID,1));
             worldObj.spawnEntityInWorld(RewardingRecord);
             RewardingRecord.entityFX(EnumEntityFX.summoned);
+        }
+        if(this.UnderArrogance()){
+            this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
         }
     }
 
@@ -339,7 +369,6 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             this.FreezingCooldown += dummy;
         }
     }
-
     public float getCurrentBiomeTemperature(){
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         return biome.getFloatTemperature();
@@ -418,7 +447,7 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             return this.getMinCraftingQuality(item, applicable_skillsets);
         } else {
             if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
-                //Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
+                Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
             }
 
             for(int i = item.getMaxQuality().ordinal(); i > EnumQuality.average.ordinal(); --i) {
@@ -570,6 +599,17 @@ public abstract class EntityPlayerMixin extends EntityLiving{
             return result;
         }
     }
+    @Overwrite
+    public static int getHealthLimit(int level) {
+        int HealthLMTwithTag = 0;
+        int HealthLMTwithoutTag = (Math.max(Math.min(6 + level / 5 * 2, 20), 6));
+        if(level<=35) {
+            HealthLMTwithTag = HealthLMTwithoutTag;
+        }else{
+            HealthLMTwithTag = (Math.max(Math.min(14 + level / 10 * 2, 40), 20));
+        }
+        return StuckTagConfig.TagConfig.TagDistortion.ConfigValue ? HealthLMTwithTag : HealthLMTwithoutTag;
+    }
     @Shadow
     public int getNutrition() {return 1;}
     @Shadow
@@ -659,6 +699,8 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     public void addHungerServerSide(float hunger) {}
     @Shadow
     public void triggerAchievement(Statistic par1StatBase) {}
+    @Shadow
+    public void sendPacket(Packet packet) {}
 
     @Shadow
     public abstract void addExperience(int amount);
@@ -687,6 +729,8 @@ public abstract class EntityPlayerMixin extends EntityLiving{
     public boolean Feast_trigger_porkchop_stew = false;
     public boolean Feast_trigger_pumpkin_soup = false;
     public boolean Feast_trigger_sorbet = false;
+    public boolean Feast_trigger_salmon_soup = false;
+    public boolean Feast_trigger_beetroot_soup = false;
     private boolean rewarded_disc_damnation = false;
     private boolean rewarded_disc_connected = false;
 

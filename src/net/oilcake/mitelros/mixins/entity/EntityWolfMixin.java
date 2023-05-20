@@ -17,7 +17,10 @@ public class EntityWolfMixin extends EntityTameableAnimal {
     }
     @Overwrite
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
-        this.dropItem(Items.Wolf_fur.itemID, 1 + rand.nextInt(2));
+        int looting = damage_source.getLootingModifier();
+        for(int i = 0; i < rand.nextInt(2 + looting); i++){
+            this.dropItem(Items.Wolf_fur.itemID, 1);
+        }
     }
     public EntityWolfMixin(World par1World) {
         super(par1World);

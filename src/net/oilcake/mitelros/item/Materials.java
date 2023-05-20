@@ -9,6 +9,7 @@ public class Materials extends Material {
     public static final Materials uru = (Materials) new Materials(EnumEquipmentMaterials.uru).setMetal(true).setMinHarvestLevel(5);
     public static final Material porkchop_stew = (new MaterialFood("porkchop_stew")).setHarmedByPepsin();
     public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
+    public static final Material fish_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
     public static final Material mashedCactus = (new MaterialFood("mashed_cactus"));
     public static final Material glowberries = (new MaterialFood("glowberries"));
     public static final Material orePieces = (new Material("Pieces"));
@@ -20,6 +21,7 @@ public class Materials extends Material {
     public static final Materials magical = (Materials) new Materials(EnumEquipmentMaterials.magical).setMetal(false).setMinHarvestLevel(0);
     public static final Materials ancient_metal_sacred = (Materials) new Materials(EnumEquipmentMaterials.ancient_metal_sacred).setMetal(true).setMinHarvestLevel(3);
     public static final Material agave = (new MaterialFood("agave"));
+    public static final Material beetroot = new MaterialFood("beetroot");
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);
     }

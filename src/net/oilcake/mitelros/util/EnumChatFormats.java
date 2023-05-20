@@ -31,7 +31,9 @@ public class EnumChatFormats {
 
     private EnumChatFormats(){}
     public static final List<EnumChatFormat> VALUES = Lists.newArrayList(EnumChatFormat.values());
-    public static final EnumChatFormat GLODC = newEnumChatFormat("GOLDC",'s',255,170,0);
+    public static final EnumChatFormat ORANGE = newEnumChatFormat("ORANGE",'s',255,127,0);
+    public static final EnumChatFormat LIME = newEnumChatFormat("LIME",'t',160,255,160);
+
 
     private static EnumChatFormat newEnumChatFormat(String name,char c, int r, int g, int b){
         try {

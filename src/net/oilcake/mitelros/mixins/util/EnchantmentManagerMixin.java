@@ -16,43 +16,10 @@ import static net.minecraft.EnchantmentManager.getMaxEnchantmentLevel;
 public class EnchantmentManagerMixin {
     @Shadow
     private static Map mapEnchantmentData(int enchantment_levels, ItemStack item_stack) {
-        Item item = item_stack.getItem();
-        boolean is_book = item == Item.book;
-        HashMap map = new HashMap();
-
-        for(int i = 0; i < Enchantment.enchantmentsList.length; ++i) {
-            Enchantment enchantment = Enchantment.get(i);
-            if (enchantment != null && (is_book || enchantment.canEnchantItem(item))) {
-                if (enchantment.hasLevels()) {
-                    for(int level = enchantment.getNumLevels(); level > 0; --level) {
-                        if (enchantment.getMinEnchantmentLevelsCost(level) <= enchantment_levels) {
-                            map.put(enchantment.effectId, new EnchantmentInstance(enchantment, level));
-                            break;
-                        }
-                    }
-                } else if (enchantment.getMinEnchantmentLevelsCost() <= enchantment_levels) {
-                    map.put(enchantment.effectId, new EnchantmentInstance(enchantment, 1));
-                }
-            }
-        }
-
-        return map.size() == 0 ? null : map;
+        return null;
     }
     @Shadow
     private static void removeEnchantmentsFromMapThatConflict(Map map, ArrayList enchantments) {
-        for(int i = 0; i < enchantments.size(); ++i) {
-            EnchantmentInstance enchantment_data = (EnchantmentInstance)enchantments.get(i);
-            Enchantment enchantment = enchantment_data.enchantmentobj;
-            Iterator iterator = map.keySet().iterator();
-
-            while(iterator.hasNext()) {
-                int id = (Integer)iterator.next();
-                if (!enchantment.canApplyTogether(Enchantment.get(id))) {
-                    iterator.remove();
-                }
-            }
-        }
-
     }
     @Overwrite
     public static List buildEnchantmentList(Random random, ItemStack item_stack, int enchantment_levels) {

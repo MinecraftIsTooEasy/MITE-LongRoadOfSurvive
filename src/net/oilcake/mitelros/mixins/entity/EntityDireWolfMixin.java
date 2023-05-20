@@ -12,7 +12,10 @@ import org.spongepowered.asm.mixin.Overwrite;
 public class EntityDireWolfMixin extends EntityWolf {
 
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
-        this.dropItem(Items.Wolf_fur.itemID, 2 + rand.nextInt(1));
+        int looting = damage_source.getLootingModifier();
+        for(int i = 0; i < 1 + rand.nextInt(2 + looting); i++){
+            this.dropItem(Items.Wolf_fur.itemID, 1);
+        }
     }
     public EntityDireWolfMixin(World par1World) {
         super(par1World);

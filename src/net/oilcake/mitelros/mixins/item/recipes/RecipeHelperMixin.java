@@ -44,7 +44,7 @@ public class RecipeHelperMixin {
                         Item peer = Item.getMatchingItem(item.getClass(), Material.copper);
                         if (peer != null) {
                             if (item.getMaterialForDurability() == null) {
-                                //Minecraft.setErrorMessage("addRecipe: getMaterialForDurability()==null for component " + item);
+                                Minecraft.setErrorMessage("addRecipe: getMaterialForDurability()==null for component " + item);
                             }
 
                             item.setCraftingDifficultyAsComponent(peer.getCraftingDifficultyAsComponent((ItemStack)null) * item.getMaterialForDurability().getDurability() / peer.getMaterialForDurability().getDurability());
@@ -54,7 +54,7 @@ public class RecipeHelperMixin {
                 }
 
                 if (component_difficulty < 0.0F) {
-                    //Minecraft.setErrorMessage("Warning: recipe for " + recipe_output.getDisplayName() + ", component crafting difficulty not set: " + output_item_stack.getItem().getItemDisplayName(output_item_stack) + " [" + (output_item_stack.itemID - 256) + "]");
+                    Minecraft.setErrorMessage("Warning: recipe for " + recipe_output.getDisplayName() + ", component crafting difficulty not set: " + output_item_stack.getItem().getItemDisplayName(output_item_stack) + " [" + (output_item_stack.itemID - 256) + "]");
                 } else {
                     difficulty += component_difficulty;
                 }
@@ -62,12 +62,12 @@ public class RecipeHelperMixin {
         }
 
         if (difficulty < 0.0F) {
-            //Minecraft.setErrorMessage("addRecipe: recipe output cannot have a crafting difficulty < 0.0F");
+            Minecraft.setErrorMessage("addRecipe: recipe output cannot have a crafting difficulty < 0.0F");
         }
 
         recipe.setDifficulty(difficulty);
         if (recipe_output.stackSize < 1) {
-            //Minecraft.setErrorMessage("stackSize is 0 for recipe output (" + recipe_output.getDisplayName() + ")");
+            Minecraft.setErrorMessage("stackSize is 0 for recipe output (" + recipe_output.getDisplayName() + ")");
         } else {
             float var10000 = difficulty / (float)recipe_output.stackSize;
         }

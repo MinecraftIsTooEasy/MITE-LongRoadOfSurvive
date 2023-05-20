@@ -101,6 +101,14 @@ public class ItemBowlMixin extends ItemVessel {
                     player.Feast_trigger_vegetable_soup = true;
                     player.getFoodStats().addWater(4);
                 }
+                if(this.contains(Materials.fish_soup)){
+                    player.Feast_trigger_salmon_soup = true;
+                    player.getFoodStats().addWater(4);
+                }
+                if(this.contains(Materials.beetroot)){
+                    player.Feast_trigger_beetroot_soup = true;
+                    player.getFoodStats().addWater(6);
+                }
             }
 
             player.addFoodValue(this);

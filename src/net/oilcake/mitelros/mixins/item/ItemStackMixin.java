@@ -199,7 +199,7 @@ public class ItemStackMixin{
                 required_heat_level = TileEntityFurnace.getHeatLevelRequired(this.itemID);
                 hypothetical_level = tile_entity_furnace.heat_level > 0 ? tile_entity_furnace.heat_level : tile_entity_furnace.getFuelHeatLevel();
                 if (hypothetical_level > 0 && hypothetical_level < required_heat_level) {
-                    var3.add(EnumChatFormats.GLODC + Translator.get("container.furnace.needsMoreHeat"));
+                    var3.add(EnumChatFormats.ORANGE + Translator.get("container.furnace.needsMoreHeat"));
                 }
             }
         }

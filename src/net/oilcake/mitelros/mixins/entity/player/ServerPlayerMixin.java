@@ -2,9 +2,11 @@ package net.oilcake.mitelros.mixins.entity.player;
 
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
+import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.ContainerEnchantReserver;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.mixins.util.EnumInsulinResistanceLevelMixin;
+import net.oilcake.mitelros.util.Constant;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -118,6 +120,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                                      PlayerInteractManager par4ItemInWorldManager, CallbackInfo callback){
         this.protein = this.essential_fats = this.phytonutrients = 960000;
     }
+
     @Shadow
     private int currentWindowId;
 
@@ -189,7 +192,51 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
         float malnourishment_factor = this.isMalnourishedLv1() ? 0.5F : (this.isMalnourishedLv2() ? 1.0F : (this.isMalnourishedLv3() ? 3.0F : (this.isMalnourishedFin() ? 31.0F : 0.0F)));
         return 1.0F + wetness_factor + malnourishment_factor;
     }
+    @Overwrite
+    public void travelToDimension(int par1) {
+        if (this.dimension == 1 && par1 == 1) {
+            this.triggerAchievement(AchievementList.theEnd2);
+            if(Constant.CalculateCurrentDiff() > 18){
+                this.triggerAchievement(AchievementExtend.stormStriker);
+            }
+            this.worldObj.removeEntity(this);
+            this.playerConqueredTheEnd = true;
+            this.playerNetServerHandler.sendPacket(new Packet70Bed(4, 0));
+        } else {
+            WorldServer destination_world = this.mcServer.a(par1);
+            if (destination_world.isUnderworld()) {
+                this.worldObj.getWorldInfo().setUnderworldVisited();
+            }
 
+            if (destination_world.isTheNether()) {
+                this.worldObj.getWorldInfo().setNetherVisited();
+            }
+
+            if (destination_world.isTheEnd() && destination_world.playerEntities.size() == 0) {
+                ((WorldProviderTheEnd)this.mcServer.a(par1).provider).heal_ender_dragon = true;
+            }
+
+            if (this.dimension == 0 && par1 == 1) {
+                this.triggerAchievement(AchievementList.theEnd);
+                ChunkCoordinates var2 = this.mcServer.a(par1).getEntrancePortalLocation();
+                if (var2 != null) {
+                    this.playerNetServerHandler.setPlayerLocation((double)var2.posX, (double)var2.posY, (double)var2.posZ, 0.0F, 0.0F);
+                }
+
+                par1 = 1;
+            } else {
+                this.triggerAchievement(AchievementList.portal);
+            }
+
+            this.mcServer.getConfigurationManager().transferPlayerToDimension(this.getAsEntityPlayerMP(), par1);
+            this.last_experience = -1;
+            this.lastHealth = -1.0F;
+            this.last_nutrition = -1;
+        }
+
+    }
+    @Shadow
+    public boolean playerConqueredTheEnd;
 
 
 

@@ -54,6 +54,9 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagDeadgeothermy = new ConfigItem<>("DeadGeothermy",false,"(LVL2)地热失效：地下世界成为寒冷生物群系，更改地下世界基岩生成，同时生成绿宝石");
         public static ConfigItem <Boolean> TagHeatStorm = new ConfigItem<>("HeatStorm",false,"(LVL1)灼地烈阳：玩家额外拥有炎热惩罚");
         public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再自然生成可提供肉类的动物");
+        public static ConfigItem <Boolean> TagArmament = new ConfigItem<>("Armament",false,"(LVL-1)战备军械：玩家的护甲值在耐久低于25%时才会减少");
+        public static ConfigItem <Boolean> TagDistortion = new ConfigItem<>("Distortion",false,"(LVL-2)血肉畸变：玩家可获得最高40的生命值");
+
 
         //*这个有问题*//        public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
         //*这个有问题*//
@@ -80,6 +83,8 @@ public class StuckTagConfig {
         Tags.put("EternalRaining",TagConfig.TagEternalRaining);
         Tags.put("DeadGeothermy",TagConfig.TagDeadgeothermy);
         Tags.put("Apocalypse",TagConfig.TagApocalypse);
+        Tags.put("Armament",TagConfig.TagArmament);
+        Tags.put("Distortion",TagConfig.TagDistortion);
         //删除
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 //      Tags.put("WorshipDark",TagConfig.TagWorshipDark);

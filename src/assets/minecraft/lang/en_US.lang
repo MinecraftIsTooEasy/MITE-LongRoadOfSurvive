@@ -29,6 +29,8 @@ achievement.ForgingLegend=Forging Master
 achievement.ForgingLegend.desc=For Minecraft 1.20
 achievement.Invincible=UNSHAKABLE
 achievement.Invincible.desc=Brew to strengthen yourself
+achievement.StormStriker=Storm Striker
+achievement.StormStriker.desc=Beat MITE-ITF.
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -50,6 +52,7 @@ enchantment.absorb=Absorb
 enchantment.destroying=Destroying
 enchantment.callofnether=Call of Nether
 enchantment.infinity=Infinity
+enchantment.arrogance=Curse Of Arrogance
 
 potion.dehydration=Dehydration
 
@@ -184,6 +187,7 @@ item.tool/adamantium/adamantium_club.name=Adamantium Morningstar
 item.bowls/lampchop_stew.name=Chestnut Soup
 item.bowls/porkchop_stew.name=Porkchop Stew
 item.bowls/lemonade.name=Lemonade
+item.bowls/salmon_soup.name=Salmon Soup
 item.bowls/bowl_water_suspicious.name=A Bowl Of Suspicious Water
 item.bowls/bowl_water_swampland.name=A Bowl Of Swampland Water
 
@@ -236,6 +240,8 @@ item.apple_golden.name=§bGolden Apple
 item.apple_golden_legend.name=§dGolden Apple
 item.food/glow_berries.name=Glow Berries
 item.food/agave.name=Agave
+item.food/beetroot.name=Beetroot
+item.food/beetroot_seeds.name=Beetroot seeds
 item.pulque.name=Pulque
 item.ale.name=Ale
 item.forging_note.name=Forging Note

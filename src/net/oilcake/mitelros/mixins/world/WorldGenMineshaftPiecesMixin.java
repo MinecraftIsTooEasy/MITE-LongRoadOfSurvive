@@ -16,6 +16,7 @@ public class WorldGenMineshaftPiecesMixin {
             new StructurePieceTreasure(Item.carrot.itemID, 0, 1, 2, 2),
             new StructurePieceTreasure(Item.potato.itemID, 0, 1, 2, 2),
             new StructurePieceTreasure(Item.onion.itemID, 0, 1, 2, 2),
+            new StructurePieceTreasure(Items.beetroot.itemID, 0, 1, 2, 2),
             new StructurePieceTreasure(Item.cheese.itemID, 0, 1, 3, 3),
             new StructurePieceTreasure(Block.mushroomBrown.blockID, 0, 1, 3, 5),
             new StructurePieceTreasure(Block.mushroomRed.blockID, 0, 1, 3, 5),

@@ -16,15 +16,16 @@ public class Enchantments {
 
     public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.c,20);
     public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.b,10);
-    public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.b,10);
+    public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.c,15);
     public static final Enchantment enchantmentCallofNether = new EnchantmentCallofNether(Constant.getNextEnchantmentID(), yq.b,10);
     public static final Enchantment enchantmentDestroying = new EnchantmentDestroying(Constant.getNextEnchantmentID(), yq.d,15);
     public static final Enchantment enchantmentInfinity = new EnchantmentInfinity(Constant.getNextEnchantmentID(), yq.d,10);
+    public static final Enchantment enchantmentArrogance = new EnchantmentArrogance(Constant.getNextEnchantmentID(), yq.c,15);
 //    public static final Enchantment enchantmentProtectFire = new EnchantmentProtectFire(Constant.getNextEnchantmentID(), yq.b,15);
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){
-        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether,enchantmentInfinity);
+        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether,enchantmentInfinity,enchantmentArrogance);
     }
     public static void registerEnchantmentsUnsafe(Enchantment... enchantments) {
         for (int i = 0, bLength = enchantmentsList.length; i < bLength; i++) {

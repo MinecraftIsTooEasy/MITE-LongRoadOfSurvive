@@ -233,15 +233,21 @@ public class FoodStatsMixin {
                     this.heal_progress = 0.0F;
                     this.dehydration_progress += 0.002F;
                     if (this.dehydration_progress >= 1.0F) {
-                            par1EntityPlayer.attackEntityFrom(new Damage(DamageSourceExtend.thirsty, 1.0F));
+                        par1EntityPlayer.attackEntityFrom(new Damage(DamageSourceExtend.thirsty, 1.0F));
                         --this.dehydration_progress;
                         this.water_for_nutrition_only = 0.0F;
+                    }
+                } else if (par1EntityPlayer.isMalnourishedFin()) {
+                    this.heal_progress = 0.0F;
+                    this.malnourished_progress += 0.002F;
+                    if (this.malnourished_progress >= 1.0F) {
+                        par1EntityPlayer.attackEntityFrom(new Damage(DamageSourceExtend.malnourished, 1.0F));
+                        --this.malnourished_progress;
                     }
                 } else {
                     this.heal_progress += (4.0E-4F + (float)this.nutrition * 2.0E-5F)
                            * (par1EntityPlayer.isMalnourishedLv1() ? 0.25F : (par1EntityPlayer.isMalnourishedLv2() ? 0.0F : (par1EntityPlayer.isMalnourishedLv3() ? 0.0F : 1.0F)))
-                            * (par1EntityPlayer.inBed() ? 4.0F : 1.0F) * EnchantmentManager.getRegenerationModifier(this.player);
-                    this.heal_progress += (4.0E-4F + (float)this.nutrition * 2.0E-5F) * (par1EntityPlayer.isMalnourished() ? 0.25F : 1.0F) * (par1EntityPlayer.inBed() ? 4.0F : 1.0F) * EnchantmentManager.getRegenerationModifier(this.player);
+                            * (par1EntityPlayer.inBed() ? 8.0F : 1.0F) * EnchantmentManager.getRegenerationModifier(this.player);
                     this.starve_progress = 0.0F;
                     if (par1EntityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("naturalRegeneration") && par1EntityPlayer.shouldHeal()) {
                         if (this.heal_progress >= 1.0F) {
@@ -273,6 +279,7 @@ public class FoodStatsMixin {
     @Shadow
     private float starve_progress;
     private float dehydration_progress;
+    private float malnourished_progress;
     @Shadow
     public int addNutrition(int nutrition) {
         return this.nutrition;

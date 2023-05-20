@@ -3,7 +3,7 @@ achievement.MinePieces.desc=敲碎矿物
 achievement.WearAllWolfArmor=追逐潮流
 achievement.WearAllWolfArmor.desc=穿上全套的极地护甲
 achievement.BuildTungstenBow=劲弩手
-achievement.BuildTungstenBow.desc=制造一把更大威力的秘银弓
+achievement.BuildTungstenBow.desc=制造一把更大威力的钨弓
 achievement.getWitherSkull=猎手的证明
 achievement.getWitherSkull.desc=获得生物的头颅
 achievement.getBeacon=带信标回家
@@ -29,6 +29,8 @@ achievement.ForgingLegend=锻造大师
 achievement.ForgingLegend.desc=试用盔甲图案技术
 achievement.Invincible=势不可挡
 achievement.Invincible.desc=让自身拥有所有持续的药水增益
+achievement.StormStriker=不畏苦暗
+achievement.StormStriker.desc=克服绝境并征服MITE-ITF
 
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
@@ -50,6 +52,7 @@ enchantment.absorb=汲取
 enchantment.destroying=毁灭
 enchantment.callofnether=下界呼唤
 enchantment.infinity=无限
+enchantment.arrogance=傲慢诅咒
 
 potion.dehydration=脱水
 
@@ -184,6 +187,7 @@ item.tool/adamantium/adamantium_club.name=艾德曼合金钉头锤
 item.bowls/lampchop_stew.name=栗羊羹
 item.bowls/porkchop_stew.name=猪肉煲
 item.bowls/lemonade.name=柠檬汁
+item.bowls/salmon_soup.name=鱼汤
 item.bowls/bowl_water_suspicious.name=一碗可疑的水
 item.bowls/bowl_water_swampland.name=一碗沼泽水
 
@@ -236,6 +240,8 @@ item.apple_golden.name=§b金苹果
 item.apple_golden_legend.name=§d金苹果
 item.food/glow_berries.name=发光浆果
 item.food/agave.name=龙舌兰草
+item.food/beetroot.name=甜菜根
+item.food/beetroot_seeds.name=甜菜种子
 item.pulque.name=普利克酒
 item.ale.name=麦芽酒
 item.forging_note.name=锻造笔记

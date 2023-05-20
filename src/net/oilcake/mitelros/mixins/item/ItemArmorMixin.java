@@ -85,7 +85,7 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
         } else if (owner instanceof EntityPlayer && item_stack.getMaxDamage() > 1 && item_stack.getItemDamage() >= item_stack.getMaxDamage() - 1) {
             return 0.0F;
         } else {
-            float armor_damage_factor = 2.0F - (float)item_stack.getItemDamage() / (float)item_stack.getItem().getMaxDamage(item_stack) * 2.0F;
+            float armor_damage_factor = StuckTagConfig.TagConfig.TagArmament.ConfigValue ? (4.0F - (float)item_stack.getItemDamage() / (float)item_stack.getItem().getMaxDamage(item_stack) * 4.0F) : (2.0F - (float)item_stack.getItemDamage() / (float)item_stack.getItem().getMaxDamage(item_stack) * 2.0F);
             if (armor_damage_factor > 1.0F) {
                 armor_damage_factor = 1.0F;
             }

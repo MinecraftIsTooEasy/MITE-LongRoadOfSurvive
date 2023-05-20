@@ -172,6 +172,10 @@ public class Items extends Item {
     public static final ItemScythe UruScythe = createInstance(ItemScythe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
     public static final ItemPieces pieceUru = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium").setXPReward(15));
     public static final Item forgingnote = (ItemStandard) (new ItemStandard(Constant.getNextItemID(),Materials.paper,"forging_note"));
+    public static final ItemSeeds seedsBeetroot = new ItemSeeds(Constant.getNextItemID(), 1, 1, false, false,false, Blocks.beetroots.blockID, Block.tilledField.blockID, "Beetrootseeds");
+    public static final ItemFood beetroot = (new ItemFood(Constant.getNextItemID(), Materials.beetroot, 2, 1, 1000, false, false, true, "Beetroot")).setPlantProduct();
+    public static final ItemBowl salmonSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
+    public static final ItemBowl beetrootSoup = (ItemBowl) (new ItemBowl(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
 
    //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
@@ -237,6 +241,8 @@ public class Items extends Item {
         register("arrows/tungsten_arrow", arrowTungsten);
         register("bowls/porkchop_stew",porkchopStew);
         register("bowls/lampchop_stew",chestnutSoup);
+        register("bowls/salmon_soup",salmonSoup);
+        register("bowls/beetroot_soup",beetrootSoup);
         register("pieces/copper",pieceCopper);
         register("pieces/silver",pieceSilver);
         register("pieces/gold",pieceGold);
@@ -343,6 +349,8 @@ public class Items extends Item {
         register("tool/uru/uru_war_hammer", UruWarHammer);
         register("pieces/uru",pieceUru);
         register("bows/tungsten/", bowTungsten).setUnlocalizedName("tungsten_bow");
+        register("food/beetroot",beetroot);
+        register("food/beetroot_seeds",seedsBeetroot);
         Constant.initItemArray();
     }
 
@@ -801,6 +809,9 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(chestnutSoup,1),true,
                 Item.bowlWater,Item.lambchopCooked,Item.onion,Item.potato
         );
+        register.registerShapelessRecipe(new ItemStack(salmonSoup,1),true,
+                Item.fishLargeCooked,Items.beetroot,Block.mushroomBrown,Item.bowlWater
+        );
         register.registerShapelessRecipe(new ItemStack(mashedCactus,1),true,
                 Block.cactus
         );
@@ -821,7 +832,14 @@ public class Items extends Item {
         );
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,4),false,
                 Items.lapis);
-
+        register.registerShapelessRecipe(new ItemStack(Items.seedsBeetroot,1),false,
+                Items.beetroot,Items.beetroot);
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),false,
+                Items.beetroot,Items.beetroot);
+        register.registerShapelessRecipe(new ItemStack(Items.beetrootSoup,1,0),false,
+                Items.beetroot,Items.beetroot,Items.beetroot,
+                Items.beetroot,Items.beetroot,Items.beetroot,
+                Item.bowlWater);
         ItemCoin[] coins = new ItemCoin[]{
                 nickelCoin, tungstenCoin};
         for(int i = 1;i<=9;++i){

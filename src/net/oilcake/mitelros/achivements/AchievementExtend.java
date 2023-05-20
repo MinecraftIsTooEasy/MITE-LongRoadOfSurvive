@@ -22,6 +22,8 @@ public class AchievementExtend {
     public static Achievement neverEnds;
     public static Achievement forgingLegend;
     public static Achievement invincible;
+    public static Achievement stormStriker;
+
     public AchievementExtend() {
     }
 
@@ -41,6 +43,7 @@ public class AchievementExtend {
         neverEnds = (new Achievement(getNextAchievementID(),"NeverEnds",-2,17,Items.UruIngot,AchievementList.adamantiumIngot)).registerAchievement();
         forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-5,13,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
         invincible = (new Achievement(getNextAchievementID(),"Invincible",-3,13,Items.Pulque,AchievementList.potion)).registerAchievement().setSpecial();
+        stormStriker = (new Achievement(getNextAchievementID(),"StormStriker",9,16,new ItemStack(Block.skull, 1, 3),AchievementList.theEnd2)).registerAchievement().setSpecial();
     }
 
     private static int getNextAchievementID() {

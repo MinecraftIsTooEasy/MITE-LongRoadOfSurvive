@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 @Mixin(GuiIngame.class)
@@ -261,7 +262,12 @@ public class GuiIngameMixin extends avk {
                 } else {
                     event = this.g.f.getNextWeatherEvent(true);
                     if (event != null) {
-                        s = "乌云滚滚";
+                        if (event.start - this.g.f.getTotalWorldTime() < 2000) {
+                            s = "乌云滚滚";
+                        }
+                        else {
+                            s = "风平浪静";
+                        }
                     } else {
                         event = this.g.f.getPreviousWeatherEvent(true);
                         s = event == null ? "风平浪静" : "雨过天晴";

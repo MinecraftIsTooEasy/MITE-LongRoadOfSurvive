@@ -9,7 +9,7 @@ public class BlockEnchantEnhancer extends Block {
     private IIcon TEXTURE_BOTOTM;
     private IIcon TEXTURE_SIDE;
     protected BlockEnchantEnhancer(int par1) {
-        super(par1, Material.obsidian, new BlockConstants());
+        super(par1, Material.anvil, new BlockConstants());
         this.setCreativeTab(CreativeModeTab.tabDecorations);
         this.setMaxStackSize(1);
         this.setLightOpacity(0);

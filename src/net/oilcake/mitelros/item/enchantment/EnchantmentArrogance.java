@@ -1,12 +1,16 @@
 package net.oilcake.mitelros.item.enchantment;
 
-import net.minecraft.*;
+import net.minecraft.CreativeModeTab;
+import net.minecraft.Enchantment;
+import net.minecraft.Item;
+import net.minecraft.yq;
 import net.oilcake.mitelros.item.Materials;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.*;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentVanishing;
 
-public class EnchantmentVanishing extends Enchantment {
-    protected EnchantmentVanishing(int id, yq rarity, int difficulty) {
+public class EnchantmentArrogance extends Enchantment{
+    protected EnchantmentArrogance(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);
     }
 
@@ -16,11 +20,11 @@ public class EnchantmentVanishing extends Enchantment {
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentArrogance.effectId;
+        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentVanishing.effectId;
     }
     @Override
     public String getNameSuffix() {
-        return "vanishing";
+        return "arrogance";
     }
 
     @Override
