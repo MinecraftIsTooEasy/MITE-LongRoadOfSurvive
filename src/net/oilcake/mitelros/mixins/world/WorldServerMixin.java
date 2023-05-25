@@ -96,20 +96,20 @@ public class WorldServerMixin extends World {
                     return entity_class;
                 }
             } else if (entity_class == EntityMinerZombie.class) {
-                if (!check_depth || y <= 40 && (StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue)) {
+                if (!check_depth || y <= 32) {
                     return entity_class;
                 }
             } else if (entity_class == EntityBoneBodyguard.class) {
-                if (!check_depth || y <= 40 && (StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue || StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue)) {
+                if (!check_depth || y <= 32) {
                     return entity_class;
                 }
             } else if (entity_class == EntityZombie.class) {
-                if (!check_depth || (y <= 32 && this.rand.nextFloat() <= 0.125F ) || is_blood_moon_up) {
+                if (!check_depth || (y <= 32 && this.rand.nextFloat() <= 0.25F ) || is_blood_moon_up) {
                     return EntityMinerZombie.class;
                 }
                 return entity_class;
             } else if (entity_class == EntitySkeleton.class) {
-                if (!check_depth || (y <= 32 && this.rand.nextFloat() <= 0.125F ) || is_blood_moon_up) {
+                if (!check_depth || (y <= 32 && this.rand.nextFloat() <= 0.25F ) || is_blood_moon_up) {
                     return EntityBoneBodyguard.class;
                 }
                 return entity_class;

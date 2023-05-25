@@ -197,25 +197,23 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         return this.getSatiation() + this.getNutrition() != 0 && this.getWater() != 0;
     }
     public boolean UnderArrogance() {
+        boolean Hel_Arro = false;
+        boolean Cst_Arro = false;
+        boolean Lgs_Arro = false;
+        boolean Bts_Arro = false;
+        boolean Hnd_Arro = false;
         ItemStack Helmet = this.getHelmet();
         ItemStack Cuirass = this.getCuirass();
         ItemStack Leggings = this.getLeggings();
         ItemStack Boots = this.getBoots();
         ItemStack Holding = this.getHeldItemStack();
-        boolean temp1 = false;
-        if(Helmet != null)temp1 = EnchantmentManager.hasEnchantment(Helmet, Enchantments.enchantmentArrogance);
-        if(Cuirass != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Cuirass, Enchantments.enchantmentArrogance);
-        if(Leggings != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Leggings, Enchantments.enchantmentArrogance);
-        if(Boots != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Boots, Enchantments.enchantmentArrogance);
-        if(Holding != null)temp1 = temp1 || EnchantmentManager.hasEnchantment(Holding, Enchantments.enchantmentArrogance);
-        float quality_adjusted_crafting_difficulty = 0.0F;
-        if(Helmet != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Helmet.getItem().getLowestCraftingDifficultyToProduce(), Helmet.getQuality()));
-        if(Cuirass != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Cuirass.getItem().getLowestCraftingDifficultyToProduce(), Cuirass.getQuality()));
-        if(Leggings != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Leggings.getItem().getLowestCraftingDifficultyToProduce(), Leggings.getQuality()));
-        if(Boots != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Boots.getItem().getLowestCraftingDifficultyToProduce(), Boots.getQuality()));
-        if(Holding != null)quality_adjusted_crafting_difficulty = max(quality_adjusted_crafting_difficulty, CraftingResult.getQualityAdjustedDifficulty(Holding.getItem().getLowestCraftingDifficultyToProduce(), Holding.getQuality()));
-        int cost = Math.round(quality_adjusted_crafting_difficulty / 5.0F);
-        return this.experience < max(2300, cost) && temp1;
+        if(Helmet != null)Hel_Arro = EnchantmentManager.hasEnchantment(Helmet, Enchantments.enchantmentArrogance);
+        if(Cuirass != null)Cst_Arro = EnchantmentManager.hasEnchantment(Cuirass, Enchantments.enchantmentArrogance);
+        if(Leggings != null)Lgs_Arro = EnchantmentManager.hasEnchantment(Leggings, Enchantments.enchantmentArrogance);
+        if(Boots != null)Bts_Arro = EnchantmentManager.hasEnchantment(Boots, Enchantments.enchantmentArrogance);
+        if(Holding != null)Hnd_Arro = EnchantmentManager.hasEnchantment(Holding, Enchantments.enchantmentArrogance);
+        boolean Arro = Hel_Arro || Cst_Arro || Lgs_Arro || Bts_Arro || Hnd_Arro;
+        return this.experience < 2300 && Arro;
     }
 
     public boolean InFreeze(){
@@ -241,6 +239,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     private double dry_resist;
     public boolean Hasdrunked = false;
     private int drunk_duration = 0;
+    private int water_duration = 0;
     public int getReduce_weight(){
         int Weight = 0;
         if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID){
@@ -288,6 +287,23 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+            if(this.getBlockAtFeet()!= null && this.getBlockAtFeet().blockMaterial == Material.water && this.isSneaking()){
+                ++this.water_duration;
+            }else{
+                this.water_duration = 0;
+            }
+            if (this.water_duration > 160) {
+                this.water_duration = 0;
+                if (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland) {
+                    this.getFoodStats().addWater(1);
+                    this.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
+                } else if(biome == BiomeBase.river || biome == BiomeBase.desertRiver){
+                    this.getFoodStats().addWater(2);
+                } else{
+                    this.getFoodStats().addWater(1);
+                    this.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
+                }
+            }
             dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 3.0D : 1.0D) + (double) biome.getFloatTemperature();
             if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
@@ -712,6 +728,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     private boolean spawnForced;
     @Shadow
     public float vision_dimming;
+    @Shadow protected float speedOnGround;
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;
     public boolean Feast_trigger_porridge = false;

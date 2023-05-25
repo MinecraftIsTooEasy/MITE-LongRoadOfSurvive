@@ -63,10 +63,10 @@ public class Items extends Item {
     public static final ItemCoin tungstenCoin = createInstance(ItemCoin.class, new Class[]{int.class, Material.class}, Constant.getNextItemID(), Materials.tungsten);
     public static final ItemArrow arrowTungsten = new ItemArrow(Constant.getNextItemID(), Materials.tungsten);
 
-    public static final ItemBowl porkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
-    public static final ItemBowl chestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
-    public static final ItemBowl watersuspicious = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.unsafe_water, "suspicious_water")).setUnlocalizedName("SuspiciousWater");
-    public static final ItemBowl waterswampland = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.dangerous_water, "swampland_water")).setUnlocalizedName("SwamplandWater");
+    public static final ItemBowl bowlPorkchopStew = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
+    public static final ItemBowl bowlChestnutSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
+    public static final ItemBowl bowlWaterSuspicious = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.unsafe_water, "suspicious_water")).setUnlocalizedName("SuspiciousWater");
+    public static final ItemBowl bowlWaterSwampland = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.dangerous_water, "swampland_water")).setUnlocalizedName("SwamplandWater");
     public static final ItemPieces pieceCopper = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceCopper").setXPReward(1));
     public static final ItemPieces pieceSilver = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceSilver").setXPReward(1));
     public static final ItemPieces pieceGold = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceGold").setXPReward(2));
@@ -116,7 +116,7 @@ public class Items extends Item {
     public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden");
     public static final Item Goldenapplelegend = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
-    public static final ItemBowl lemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
+    public static final ItemBowl bowlLemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
     public static final ItemBowl bowlEmpty = (ItemBowl)(new ItemBowl(25, (Material)null, "VANILLA")).setUnlocalizedName("bowl").useVanillaTexture("bowl").setMaxStackSize(4);
     public static final ItemMorningStar morningStarCopper = new ItemMorningStar(Constant.getNextItemID(), Material.copper);
     public static final ItemMorningStar morningStarSilver = new ItemMorningStar(Constant.getNextItemID(), Material.silver);
@@ -174,8 +174,33 @@ public class Items extends Item {
     public static final Item forgingnote = (ItemStandard) (new ItemStandard(Constant.getNextItemID(),Materials.paper,"forging_note"));
     public static final ItemSeeds seedsBeetroot = new ItemSeeds(Constant.getNextItemID(), 1, 1, false, false,false, Blocks.beetroots.blockID, Block.tilledField.blockID, "Beetrootseeds");
     public static final ItemFood beetroot = (new ItemFood(Constant.getNextItemID(), Materials.beetroot, 2, 1, 1000, false, false, true, "Beetroot")).setPlantProduct();
-    public static final ItemBowl salmonSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
-    public static final ItemBowl beetrootSoup = (ItemBowl) (new ItemBowl(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
+    public static final ItemBowl bowlSalmonSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
+    public static final ItemBowl bowlBeetrootSoup = (ItemBowl) (new ItemBowl(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
+    public static final ItemStandard claybowlRaw = (ItemStandard) new ItemStandard(Constant.getNextItemID(),Material.clay,"bowlclayRaw").setMaxStackSize(4);
+    public static final ItemBowlClay claybowlEmpty = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), (Material)null, "VANILLA")).setUnlocalizedName("bowlclay").useVanillaTexture("bowlclay").setMaxStackSize(4);
+    public static final ItemBowlClay claybowlMushroomStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.mushroom_stew, "mushroom_stew")).setFoodValue(2, 4, false, false, false).setPlantProduct().setUnlocalizedName("mushroomStew");
+    public static final ItemBowlClay claybowlMilk = (ItemBowlClay)(new ItemBowlClay(Constant.getNextItemID(), Material.milk, "bowl_milk")).setFoodValue(0, 1, true, false, false).setAnimalProduct().setContainerItem(bowlEmpty).setAlwaysEdible().setUnlocalizedName("bowlMilk");
+    public static final ItemBowlClay claybowlWater = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.water, "bowl_water")).setContainerItem(bowlEmpty).setUnlocalizedName("bowlWater");
+    public static final ItemBowlClay claybowlBeefStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.beef_stew, "beef_stew")).setFoodValue(16, 16, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beefStew");
+    public static final ItemBowlClay claybowlChickenSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.chicken_soup, "chicken_soup")).setFoodValue(10, 10, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("chickenSoup");
+    public static final ItemBowlClay claybowlVegetableSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.vegetable_soup, "vegetable_soup")).setFoodValue(6, 6, false, false, true).setPlantProduct().setUnlocalizedName("vegetableSoup");
+    public static final ItemBowlClay claybowlIceCream = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.ice_cream, "ice_cream")).setFoodValue(5, 4, 1000, true, false, false).setPlantProduct().setAnimalProduct().setUnlocalizedName("iceCream");
+    public static final ItemBowlClay claybowlSalad = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.salad, "bowl_salad")).setFoodValue(1, 1, false, false, true).setPlantProduct().setUnlocalizedName("salad");
+    public static final ItemBowlClay claybowlCreamOfMushroomSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.cream_of_mushroom_soup, "cream_of_mushroom_soup")).setFoodValue(3, 5, true, false, false).setPlantProduct().setAnimalProduct().setUnlocalizedName("creamOfMushroomSoup");
+    public static final ItemBowlClay claybowlCreamOfVegetableSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.cream_of_vegetable_soup, "cream_of_vegetable_soup")).setFoodValue(7, 7, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("creamOfVegetableSoup");
+    public static final ItemBowlClay claybowlPumpkinSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.pumpkin_soup, "pumpkin_soup")).setFoodValue(1, 2, false, false, true).setPlantProduct().setUnlocalizedName("pumpkinSoup");
+    public static final ItemBowlClay claybowlMashedPotato = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.mashed_potato, "mashed_potato")).setFoodValue(12, 8, true, false, false).setPlantProduct().setAnimalProduct().setUnlocalizedName("mashedPotato");
+    public static final ItemBowlClay claybowlSorbet = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.sorbet, "sorbet")).setFoodValue(4, 2, 2000, false, false, true).setPlantProduct().setUnlocalizedName("sorbet");
+    public static final ItemBowlClay claybowlPorridge = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.porridge, "porridge")).setFoodValue(4, 2, 2000, false, false, true).setPlantProduct().setUnlocalizedName("porridge");
+    public static final ItemBowlClay claybowlCereal = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.cereal, "cereal")).setFoodValue(4, 2, 1000, true, false, false).setPlantProduct().setAnimalProduct().setUnlocalizedName("cereal");
+
+    public static final ItemBowlClay claybowlLemonade = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.lemonade,"lemonade")).setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
+    public static final ItemBowlClay claybowlPorkchopStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
+    public static final ItemBowlClay claybowlChestnutSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
+    public static final ItemBowlClay claybowlWaterSuspicious = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.unsafe_water, "suspicious_water")).setUnlocalizedName("SuspiciousWater");
+    public static final ItemBowlClay claybowlWaterSwampland = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.dangerous_water, "swampland_water")).setUnlocalizedName("SwamplandWater");
+    public static final ItemBowlClay claybowlSalmonSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
+    public static final ItemBowlClay claybowlBeetrootSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
 
    //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
@@ -239,10 +264,10 @@ public class Items extends Item {
         register("chain/tungsten", tungstenChain);
         register("coin/tungsten", tungstenCoin);
         register("arrows/tungsten_arrow", arrowTungsten);
-        register("bowls/porkchop_stew",porkchopStew);
-        register("bowls/lampchop_stew",chestnutSoup);
-        register("bowls/salmon_soup",salmonSoup);
-        register("bowls/beetroot_soup",beetrootSoup);
+        register("bowls/porkchop_stew",bowlPorkchopStew);
+        register("bowls/lampchop_stew",bowlChestnutSoup);
+        register("bowls/salmon_soup",bowlSalmonSoup);
+        register("bowls/beetroot_soup",bowlBeetrootSoup);
         register("pieces/copper",pieceCopper);
         register("pieces/silver",pieceSilver);
         register("pieces/gold",pieceGold);
@@ -255,7 +280,7 @@ public class Items extends Item {
         register("food/mashed_cactus",mashedCactus);
         register("food/lemon",lemon);
         register("food/lemon_pie",lemonPie);
-        register("bowls/lemonade",lemonade);
+        register("bowls/lemonade",bowlLemonade);
         register("buckets/nickel/empty",nickelBucket);
         register("buckets/nickel/lava",nickelBucketLava);
         register("buckets/nickel/milk",nickelBucketMilk);
@@ -266,8 +291,8 @@ public class Items extends Item {
         register("buckets/tungsten/milk",tungstenBucketMilk);
         register("buckets/tungsten/stone",tungstenBucketStone);
         register("buckets/tungsten/water",tungstenBucketWater);
-        register("bowls/bowl_water_suspicious",watersuspicious);
-        register("bowls/bowl_water_swampland",waterswampland);
+        register("bowls/bowl_water_suspicious",bowlWaterSuspicious);
+        register("bowls/bowl_water_swampland",bowlWaterSwampland);
         register("buckets/copper/water_suspicious",copperBucketWaterSuspicious);
         register("buckets/silver/water_suspicious",silverBucketWaterSuspicious);
         register("buckets/gold/water_suspicious",goldBucketWaterSuspicious);
@@ -351,6 +376,30 @@ public class Items extends Item {
         register("bows/tungsten/", bowTungsten).setUnlocalizedName("tungsten_bow");
         register("food/beetroot",beetroot);
         register("food/beetroot_seeds",seedsBeetroot);
+        register("hardened_clay_bowls/raw",claybowlRaw);
+        register("hardened_clay_bowls/beef_stew",claybowlBeefStew);
+        register("hardened_clay_bowls/beetroot_soup",claybowlBeetrootSoup);
+        register("hardened_clay_bowls/bowl_milk",claybowlMilk);
+        register("hardened_clay_bowls/bowl_salad",claybowlSalad);
+        register("hardened_clay_bowls/bowl_water",claybowlWater);
+        register("hardened_clay_bowls/bowl_water_suspicious",claybowlWaterSuspicious);
+        register("hardened_clay_bowls/bowl_water_swampland",claybowlWaterSwampland);
+        register("hardened_clay_bowls/cereal",claybowlCereal);
+        register("hardened_clay_bowls/chicken_soup",claybowlChickenSoup);
+        register("hardened_clay_bowls/cream_of_mushroom_soup",claybowlCreamOfMushroomSoup);
+        register("hardened_clay_bowls/cream_of_vegetable_soup",claybowlCreamOfVegetableSoup);
+        register("hardened_clay_bowls/empty",claybowlEmpty);
+        register("hardened_clay_bowls/ice_cream",claybowlIceCream);
+        register("hardened_clay_bowls/lampchop_stew",claybowlChestnutSoup);
+        register("hardened_clay_bowls/lemonade",claybowlLemonade);
+        register("hardened_clay_bowls/mashed_potato",claybowlMashedPotato);
+        register("hardened_clay_bowls/mushroom_stew",claybowlMushroomStew);
+        register("hardened_clay_bowls/porkchop_stew",claybowlPorkchopStew);
+        register("hardened_clay_bowls/porridge",claybowlPorridge);
+        register("hardened_clay_bowls/pumpkin_soup",claybowlPumpkinSoup);
+        register("hardened_clay_bowls/salmon_soup",claybowlSalmonSoup);
+        register("hardened_clay_bowls/sorbet",claybowlSorbet);
+        register("hardened_clay_bowls/vegetable_soup",claybowlVegetableSoup);
         Constant.initItemArray();
     }
 
@@ -803,20 +852,10 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(nickelNugget,1),false,
                 Items.arrowNickel
         );
-        register.registerShapelessRecipe(new ItemStack(porkchopStew,1),true,
-                Item.bowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
-        );
-        register.registerShapelessRecipe(new ItemStack(chestnutSoup,1),true,
-                Item.bowlWater,Item.lambchopCooked,Item.onion,Item.potato
-        );
-        register.registerShapelessRecipe(new ItemStack(salmonSoup,1),true,
-                Item.fishLargeCooked,Items.beetroot,Block.mushroomBrown,Item.bowlWater
-        );
+
         register.registerShapelessRecipe(new ItemStack(mashedCactus,1),true,
                 Block.cactus
         );
-        register.registerShapelessRecipe(new ItemStack(lemonade,1),true,
-                Item.sugar,Items.lemon,Item.bowlWater);
         register.registerShapelessRecipe(new ItemStack(nickelIngot,1),true,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
                 Items.nickelNugget,Items.nickelNugget,Items.nickelNugget,
@@ -836,21 +875,188 @@ public class Items extends Item {
                 Items.beetroot,Items.beetroot);
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),false,
                 Items.beetroot,Items.beetroot);
-        register.registerShapelessRecipe(new ItemStack(Items.beetrootSoup,1,0),false,
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlRaw,1),false,
+                Item.clay);
+
+        register.registerShapelessRecipe(new ItemStack(Items.bowlBeetrootSoup,1,0),false,
                 Items.beetroot,Items.beetroot,Items.beetroot,
                 Items.beetroot,Items.beetroot,Items.beetroot,
-                Item.bowlWater);
-        ItemCoin[] coins = new ItemCoin[]{
-                nickelCoin, tungstenCoin};
+                Item.bowlWater
+        );
+        register.registerShapelessRecipe(new ItemStack(bowlPorkchopStew,1),true,
+                Item.bowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
+        );
+        register.registerShapelessRecipe(new ItemStack(bowlChestnutSoup,1),true,
+                Item.bowlWater,Item.lambchopCooked,Item.onion,Item.potato
+        );
+        register.registerShapelessRecipe(new ItemStack(bowlSalmonSoup,1),true,
+                Item.fishLargeCooked,Items.beetroot,Block.mushroomBrown,Item.bowlWater
+        );
+        register.registerShapelessRecipe(new ItemStack(bowlLemonade,1),true,
+                Item.sugar,Items.lemon,Item.bowlWater
+        );
         for(int i = 1;i<=9;++i){
             register.registerShapelessRecipe(new ItemStack(Item.bowlEmpty,i),false,
-                    new ItemStack(Items.watersuspicious,i));
+                    new ItemStack(Items.bowlWaterSuspicious,i));
             register.registerShapelessRecipe(new ItemStack(Item.bowlEmpty,i),false,
-                    new ItemStack(Items.waterswampland,i));
+                    new ItemStack(Items.bowlWaterSwampland,i));
         }
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlBeefStew),false,
+                Item.beefCooked, Block.mushroomBrown, Item.potato, Items.claybowlWater);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlChickenSoup),false,
+                Item.chickenCooked, Item.carrot, Item.onion, Items.claybowlWater);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlVegetableSoup),false,
+                Item.potato, Item.carrot, Item.onion, Items.claybowlWater);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlIceCream),false,
+                Item.chocolate, Items.claybowlMilk, Item.snowball);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlIceCream),false,
+                new ItemStack(Item.dyePowder, 1, 3), Item.sugar, Items.claybowlMilk, Item.snowball);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlSalad),false,
+                Block.plantYellow, Block.plantYellow, Block.plantYellow, Items.claybowlEmpty);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlCreamOfMushroomSoup),false,
+                Block.mushroomBrown, Block.mushroomBrown, Items.claybowlMilk);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlCreamOfVegetableSoup),false,
+                Item.potato, Item.carrot, Item.onion, Items.claybowlMilk);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlPumpkinSoup),false,
+                Block.pumpkin, Items.claybowlWater);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlMashedPotato),false,
+                Item.bakedPotato, Item.cheese, Items.claybowlMilk);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlSorbet),false,
+                Item.orange, Item.sugar, Item.snowball, Items.claybowlEmpty);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlPorridge),false,
+                Item.seeds, Item.blueberries, Item.sugar, Items.claybowlWater);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlCereal),false,
+                Item.wheat, Item.sugar, Items.claybowlMilk);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlMushroomStew),false,
+                Block.mushroomBrown, Block.mushroomRed, Items.claybowlWater);
+        register.registerShapelessRecipe(new ItemStack(Items.claybowlBeetrootSoup,1,0),false,
+                Items.beetroot,Items.beetroot,Items.beetroot,
+                Items.beetroot,Items.beetroot,Items.beetroot,
+                Items.claybowlWater
+        );
+        register.registerShapelessRecipe(new ItemStack(claybowlPorkchopStew,1),true,
+                Items.claybowlWater,Item.porkCooked,Item.carrot,Item.potato,Block.mushroomBrown
+        );
+        register.registerShapelessRecipe(new ItemStack(claybowlChestnutSoup,1),true,
+                Items.claybowlWater,Item.lambchopCooked,Item.onion,Item.potato
+        );
+        register.registerShapelessRecipe(new ItemStack(claybowlSalmonSoup,1),true,
+                Item.fishLargeCooked,Items.beetroot,Block.mushroomBrown,Items.claybowlWater
+        );
+        register.registerShapelessRecipe(new ItemStack(claybowlLemonade,1),true,
+                Item.sugar,Items.lemon,Items.claybowlWater
+        );
+        register.registerShapelessRecipe(new ItemStack(Item.cheese, 1),false,
+                new ItemStack(Items.claybowlMilk, 4)
+        ).resetDifficulty(6400);
+        register.registerShapelessRecipe(new ItemStack(Item.cheese, 2),false,
+                new ItemStack(Items.claybowlMilk, 8)
+        ).resetDifficulty(6400);
+        for(int i = 1;i<=9;++i){
+            register.registerShapelessRecipe(new ItemStack(Items.claybowlEmpty,i),false,
+                    new ItemStack(Items.claybowlWaterSuspicious,i));
+            register.registerShapelessRecipe(new ItemStack(Items.claybowlEmpty,i),false,
+                    new ItemStack(Items.claybowlWaterSwampland,i));
+        }
+        yi[] milk_buckets = new yi[]{Item.bucketCopperMilk, Item.bucketSilverMilk, Item.bucketGoldMilk, Item.bucketIronMilk, Item.bucketAncientMetalMilk, Item.bucketMithrilMilk, Item.bucketAdamantiumMilk, Items.tungstenBucketMilk, Items.nickelBucketMilk};
+        for(int n = 0; n < milk_buckets.length; n++) {
+            register.registerShapelessRecipe(new ItemStack(Item.cake), false,
+                    Item.flour, Item.sugar, Item.egg, milk_buckets[n]
+            );
+
+            for(int i = 1; i <= 9; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Item.cheese, i),false,
+                        new ItemStack(milk_buckets[n], i)
+                ).resetDifficulty(6400);
+            }
+
+            for(int i = 1; i <= 4; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Item.bowlMilk, i), true,
+                        milk_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+            }
+            for(int i = 1; i <= 4; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Items.claybowlMilk, i), true,
+                        milk_buckets[n], new ItemStack(Items.claybowlEmpty, i)
+                ).resetDifficulty(25);
+            }
+            register.registerShapelessRecipe(new ItemStack(milk_buckets[n]), true,
+                    milk_buckets[n].getEmptyVessel(), Item.bowlMilk, Item.bowlMilk, Item.bowlMilk, Item.bowlMilk
+            ).resetDifficulty(25);
+            register.registerShapelessRecipe(new ItemStack(milk_buckets[n]), true,
+                    milk_buckets[n].getEmptyVessel(), Items.claybowlMilk, Items.claybowlMilk, Items.claybowlMilk, Items.claybowlMilk
+            ).resetDifficulty(25);
+        }
+
+        register.registerShapelessRecipe(new ItemStack(Item.dough, 1),false,
+                Item.flour, Item.bowlWater
+        );
+        register.registerShapelessRecipe(new ItemStack(Item.dough, 1),false,
+                Item.flour, Items.claybowlWater
+        );
+        ItemBucket[] water_buckets = new ItemBucket[]{Item.bucketCopperWater, Item.bucketSilverWater, Item.bucketGoldWater, Item.bucketIronWater, Item.bucketAncientMetalWater, Item.bucketMithrilWater, Item.bucketAdamantiumWater, Items.nickelBucketWater, Items.tungstenBucketWater};
+        for(int n = 0; n < water_buckets.length; ++n) {
+            for(int i = 1; i <= 4; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Item.dough, i), false,
+                        water_buckets[n], new ItemStack(Item.flour, i)
+                );
+                register.registerShapelessRecipe(new ItemStack(Item.cookie, i * 4), false,
+                        water_buckets[n], new ItemStack(Item.flour, i), new ItemStack(Item.chocolate, i)
+                );
+                register.registerShapelessRecipe(new ItemStack(Item.bowlWater, i), true,
+                        water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+                register.registerShapelessRecipe(new ItemStack(Items.claybowlWater, i), true,
+                        water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+            }
+
+            for(int i = 1; i <= 2; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Item.cookie, i * 4), false,
+                        water_buckets[n], new ItemStack(Item.flour, i), new ItemStack(Item.dyePowder, i, 3), new ItemStack(Item.sugar, i)
+                );
+            }
+
+            register.registerShapelessRecipe(new ItemStack(water_buckets[n]), true, water_buckets[n].getEmptyVessel(), new ItemStack(Item.bowlWater, 4)
+            ).resetDifficulty(25);
+            register.registerShapelessRecipe(new ItemStack(water_buckets[n]), true, water_buckets[n].getEmptyVessel(), new ItemStack(Items.claybowlWater, 4)
+            ).resetDifficulty(25);
+        }
+        ItemBucket[] sus_water_buckets = new ItemBucket[]{Items.copperBucketWaterSuspicious, Items.silverBucketWaterSuspicious, Items.goldBucketWaterSuspicious, Items.ironBucketWaterSuspicious, Items.ancientmetalBucketWaterSuspicious, Items.mithrilBucketWaterSuspicious, Items.adamantiumBucketWaterSuspicious, Items.nickelBucketWaterSuspicious, Items.tungstenBucketWaterSuspicious};
+        for(int n = 0; n < sus_water_buckets.length; ++n) {
+            for(int i = 1; i <= 4; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Items.bowlWaterSuspicious, i), true,
+                        sus_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+                register.registerShapelessRecipe(new ItemStack(Items.claybowlWaterSuspicious, i), true,
+                        sus_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+            }
+            register.registerShapelessRecipe(new ItemStack(sus_water_buckets[n]), true, sus_water_buckets[n].getEmptyVessel(), new ItemStack(Items.bowlWaterSuspicious, 4)
+            ).resetDifficulty(25);
+            register.registerShapelessRecipe(new ItemStack(sus_water_buckets[n]), true, sus_water_buckets[n].getEmptyVessel(), new ItemStack(Items.claybowlWaterSuspicious, 4)
+            ).resetDifficulty(25);
+        }
+        ItemBucket[] smp_water_buckets = new ItemBucket[]{Items.copperBucketWaterSwampland, Items.silverBucketWaterSwampland, Items.goldBucketWaterSwampland, Items.ironBucketWaterSwampland, Items.ancientmetalBucketWaterSwampland, Items.mithrilBucketWaterSwampland, Items.adamantiumBucketWaterSwampland, Items.nickelBucketWaterSwampland, Items.tungstenBucketWaterSwampland};
+        for(int n = 0; n < smp_water_buckets.length; ++n) {
+            for(int i = 1; i <= 4; ++i) {
+                register.registerShapelessRecipe(new ItemStack(Items.bowlWaterSwampland, i), true,
+                        smp_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+                register.registerShapelessRecipe(new ItemStack(Items.claybowlWaterSwampland, i), true,
+                        smp_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                ).resetDifficulty(25);
+            }
+            register.registerShapelessRecipe(new ItemStack(smp_water_buckets[n]), true, smp_water_buckets[n].getEmptyVessel(), new ItemStack(Items.bowlWaterSwampland, 4)
+            ).resetDifficulty(25);
+            register.registerShapelessRecipe(new ItemStack(smp_water_buckets[n]), true, smp_water_buckets[n].getEmptyVessel(), new ItemStack(Items.claybowlWaterSwampland, 4)
+            ).resetDifficulty(25);
+        }
+        ItemCoin[] coins = new ItemCoin[]{
+                nickelCoin, tungstenCoin};
         for (ItemCoin coin : coins) {
             for (int plank_subtype = 1; plank_subtype <= 9; ++plank_subtype) {
-                register.registerShapelessRecipe(new ItemStack(coin.getNuggetPeer(), plank_subtype), true, new ItemStack(coin, plank_subtype));
+                register.registerShapelessRecipe(new ItemStack(coin.getNuggetPeer(), plank_subtype), true, new ItemStack(coin, plank_subtype)).resetDifficulty(25);
             }
             register.registerShapelessRecipe(new ItemStack(coin), true, new ItemStack(coin.getNuggetPeer()));
         }
@@ -867,10 +1073,12 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
         RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(tungstenNugget));
         RecipesFurnace.smelting().addSmelting(pieceUru.itemID, new ItemStack(UruNugget));
-        RecipesFurnace.smelting().addSmelting(watersuspicious.itemID, new ItemStack(bowlWater));
-        RecipesFurnace.smelting().addSmelting(waterswampland.itemID, new ItemStack(bowlWater));
+        RecipesFurnace.smelting().addSmelting(bowlWaterSuspicious.itemID, new ItemStack(bowlWater));
+        RecipesFurnace.smelting().addSmelting(bowlWaterSwampland.itemID, new ItemStack(bowlWater));
+        RecipesFurnace.smelting().addSmelting(claybowlWaterSuspicious.itemID, new ItemStack(claybowlWater));
+        RecipesFurnace.smelting().addSmelting(claybowlWaterSwampland.itemID, new ItemStack(claybowlWater));
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));
-
+        RecipesFurnace.smelting().addSmelting(claybowlRaw.itemID, new ItemStack(claybowlEmpty));
         ItemFood.setCookingResult((ItemFood) horse_meat, (ItemFood) horse_meat_cooked, 6);
     }
     private static Item register(String resourceLocation, Item item, CreativeModeTab tab) {

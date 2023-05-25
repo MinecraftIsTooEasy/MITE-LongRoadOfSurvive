@@ -10,7 +10,7 @@ import net.xiaoyu233.fml.reload.event.HandleChatCommandEvent;
 import net.xiaoyu233.fml.reload.event.PacketRegisterEvent;
 import net.xiaoyu233.fml.reload.event.PlayerLoggedInEvent;
 
-public class LROSEvent {
+public class ITFEvent {
     @Subscribe
     public void handleChatCommand(HandleChatCommandEvent event) {
         String par2Str = event.getCommand();

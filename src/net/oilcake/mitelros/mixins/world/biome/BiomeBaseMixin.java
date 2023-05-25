@@ -8,15 +8,11 @@ package net.oilcake.mitelros.mixins.world.biome;
 import net.oilcake.mitelros.entity.EntityBoneBodyguard;
 import net.oilcake.mitelros.entity.EntityMinerZombie;
 import net.oilcake.mitelros.util.StuckTagConfig;
-import net.oilcake.mitelros.world.biome.BiomeWindsweptPleatu;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -30,19 +26,35 @@ import static net.oilcake.mitelros.world.BiomeBases.windsweptpleatu;
 @Mixin(BiomeBase.class)
 public class BiomeBaseMixin{
     @Shadow protected List spawnableMonsterList;
+    @Shadow protected List spawnableCreatureList;
 
     @Shadow @Final public int biomeID;
+    public void RegenAnimals(){
+        this.removeEntityFromSpawnableLists(EntityCow.class);
+        this.removeEntityFromSpawnableLists(EntityChicken.class);
+        this.removeEntityFromSpawnableLists(EntitySheep.class);
+        this.removeEntityFromSpawnableLists(EntityPig.class);
+        this.spawnableCreatureList.add(new BiomeMeta(EntitySheep.class, 5, 4, 8));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityPig.class, 5, 4, 8));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityChicken.class, 5, 4, 8));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityCow.class, 5, 4, 8));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityBoneBodyguard.class, 60, 0, 0));
+    }
+    public void DisgenAnimals(){
+        this.removeEntityFromSpawnableLists(EntityCow.class);
+        this.removeEntityFromSpawnableLists(EntityChicken.class);
+        this.removeEntityFromSpawnableLists(EntitySheep.class);
+        this.removeEntityFromSpawnableLists(EntityPig.class);
+        this.removeEntityFromSpawnableLists(EntityHorse.class);
+    }
 
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.spawnableMonsterList.add(new BiomeMeta(EntityMinerZombie.class, (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue) ? 50 : 20, 4, 4));
-        this.spawnableMonsterList.add(new BiomeMeta(EntityBoneBodyguard.class, (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue || StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue) ? 50 : 20,4,4));
+        this.spawnableMonsterList.add(new BiomeMeta(EntityMinerZombie.class, (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue) ? 35 : 10, 4, 4));
+        this.spawnableMonsterList.add(new BiomeMeta(EntityBoneBodyguard.class, (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue || StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue) ? 35 : 10,4,4));
+        this.RegenAnimals();
         if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue){
-            this.removeEntityFromSpawnableLists(EntityCow.class);
-            this.removeEntityFromSpawnableLists(EntityChicken.class);
-            this.removeEntityFromSpawnableLists(EntitySheep.class);
-            this.removeEntityFromSpawnableLists(EntityPig.class);
-            this.removeEntityFromSpawnableLists(EntityHorse.class);
+            this.DisgenAnimals();
         }
     }
     @Shadow

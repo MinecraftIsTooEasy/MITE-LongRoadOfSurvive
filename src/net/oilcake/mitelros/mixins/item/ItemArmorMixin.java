@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
@@ -15,6 +16,14 @@ import java.util.List;
 
 @Mixin(ItemArmor.class)
 public abstract class ItemArmorMixin extends Item implements IDamageableItem {
+    @Shadow
+    @Final
+    private boolean is_leather;
+
+    @Inject(method = "<init>",at = @At("RETURN"))
+    public void injectCtor(CallbackInfo callbackInfo) {
+        this.is_leather = this.effective_material == Material.leather || this.effective_material == Materials.wolf_fur;
+    }
     @Overwrite
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         if (extended_info) {

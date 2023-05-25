@@ -3,10 +3,10 @@ package net.oilcake.mitelros.item;
 import net.minecraft.*;
 
 public class Materials extends Material {
-    public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setMetal(true).setMinHarvestLevel(3);
-    public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setMetal(true).setMinHarvestLevel(5);
-    public static final Materials vibranium = (Materials) new Materials(EnumEquipmentMaterials.vibranium).setMetal(true).setMinHarvestLevel(1);
-    public static final Materials uru = (Materials) new Materials(EnumEquipmentMaterials.uru).setMetal(true).setMinHarvestLevel(5);
+    public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setRequiresTool().setMetal(true).setMinHarvestLevel(3);
+    public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setRequiresTool().setMetal(true).setMinHarvestLevel(5);
+    public static final Materials vibranium = (Materials) new Materials(EnumEquipmentMaterials.vibranium).setRequiresTool().setMetal(true).setMinHarvestLevel(1);
+    public static final Materials uru = (Materials) new Materials(EnumEquipmentMaterials.uru).setRequiresTool().setMetal(true).setMinHarvestLevel(5);
     public static final Material porkchop_stew = (new MaterialFood("porkchop_stew")).setHarmedByPepsin();
     public static final Material chestnut_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
     public static final Material fish_soup = (new MaterialFood("chestnut_soup")).setHarmedByPepsin();
@@ -19,9 +19,10 @@ public class Materials extends Material {
     public static final Material unsafe_water = (new MaterialLiquid("suspicious_water", MaterialMapColor.waterColor)).setDrinkable();
     public static final Material dangerous_water = (new MaterialLiquid("swampland_water", MaterialMapColor.waterColor)).setDrinkable();
     public static final Materials magical = (Materials) new Materials(EnumEquipmentMaterials.magical).setMetal(false).setMinHarvestLevel(0);
-    public static final Materials ancient_metal_sacred = (Materials) new Materials(EnumEquipmentMaterials.ancient_metal_sacred).setMetal(true).setMinHarvestLevel(3);
+    public static final Materials ancient_metal_sacred = (Materials) new Materials(EnumEquipmentMaterials.ancient_metal_sacred).setRequiresTool().setMetal(true).setMinHarvestLevel(3);
     public static final Material agave = (new MaterialFood("agave"));
     public static final Material beetroot = new MaterialFood("beetroot");
+
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);
     }

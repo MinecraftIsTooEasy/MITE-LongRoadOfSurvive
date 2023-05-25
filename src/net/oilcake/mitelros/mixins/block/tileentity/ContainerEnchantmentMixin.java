@@ -51,7 +51,7 @@ public class ContainerEnchantmentMixin extends Container {
                 return Math.max(Math.round((float)enchantment_levels * fraction), 1);
             }
         } else {
-            return 3;
+            return 2;
         }
     }
 

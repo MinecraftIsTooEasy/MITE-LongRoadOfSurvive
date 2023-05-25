@@ -2,9 +2,7 @@ package net.oilcake.mitelros.mixins.world.biome;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
-import net.oilcake.mitelros.entity.EntitySpiderKing;
-import net.oilcake.mitelros.entity.EntityStalkerCreeper;
-import net.oilcake.mitelros.entity.EntityWitherBoneLord;
+import net.oilcake.mitelros.entity.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,6 +24,8 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
         this.removeEntityFromSpawnableLists(EntityRevenant.class);
         this.removeEntityFromSpawnableLists(EntityBoneLord.class);
         this.removeEntityFromSpawnableLists(EntityCreeper.class);
+        this.removeEntityFromSpawnableLists(EntityBoneBodyguard.class);
+        this.removeEntityFromSpawnableLists(EntityMinerZombie.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStalkerCreeper.class, 100, 1, 2));
         this.spawnableMonsterList.add(new BiomeMeta(EntityCaveSpider.class, 40, 1, 2));
         this.spawnableMonsterList.add(new BiomeMeta(EntityLongdead.class, 40, 1, 2));

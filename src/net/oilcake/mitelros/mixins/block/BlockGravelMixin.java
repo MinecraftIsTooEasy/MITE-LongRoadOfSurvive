@@ -59,12 +59,14 @@ public class BlockGravelMixin extends Block {
                 }
 
                 if (this.isNetherGravel(info.getMetadata())) {
-                    if (id_dropped != Item.copperNugget.itemID && id_dropped != Item.silverNugget.itemID && id_dropped != Item.mithrilNugget.itemID && id_dropped != Item.adamantiumNugget.itemID) {
-                        if (id_dropped == Item.shardObsidian.itemID || id_dropped == Item.shardEmerald.itemID || id_dropped == Item.shardDiamond.itemID) {
-                            id_dropped = Item.shardNetherQuartz.itemID;
-                        }
-                    } else {
+                    if (rand.nextInt(3) > 0) {
+                        return super.dropBlockAsEntityItem(info);
+                    } else if (rand.nextInt(8) > 0) {
+                        id_dropped = Item.shardNetherQuartz.itemID;
+                    } else if (rand.nextInt(8) > 0) {
                         id_dropped = Item.goldNugget.itemID;
+                    } else {
+                        id_dropped = Items.tungstenNugget.itemID;
                     }
                 }
 

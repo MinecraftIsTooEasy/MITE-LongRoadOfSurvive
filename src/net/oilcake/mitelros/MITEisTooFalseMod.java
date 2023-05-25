@@ -2,8 +2,9 @@ package net.oilcake.mitelros;
 
 import net.oilcake.mitelros.mixins.MinecraftMixin;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.SpecializedTPAConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
-import net.oilcake.mitelros.util.events.LROSEvent;
+import net.oilcake.mitelros.util.events.ITFEvent;
 import net.xiaoyu233.fml.AbstractMod;
 import net.xiaoyu233.fml.classloading.Mod;
 import net.xiaoyu233.fml.config.InjectionConfig;
@@ -13,7 +14,7 @@ import org.spongepowered.asm.mixin.MixinEnvironment;
 import javax.annotation.Nonnull;
 
 @Mod
-public class RoadSurviveMod extends AbstractMod {
+public class MITEisTooFalseMod extends AbstractMod {
 
     @Override
     public void preInit() {
@@ -21,12 +22,12 @@ public class RoadSurviveMod extends AbstractMod {
     @Nonnull
     @Override
     public InjectionConfig getInjectionConfig() {
-        return InjectionConfig.Builder.of("MITE-LROS", MinecraftMixin.class.getPackage(), MixinEnvironment.Phase.INIT).setRequired().build();
+        return InjectionConfig.Builder.of("MITE-ITF", MinecraftMixin.class.getPackage(), MixinEnvironment.Phase.INIT).setRequired().build();
     }
 
     @Override
     public String modId() {
-        return "RoadSurvive";
+        return "MITEIsTooFalse";
     }
 
     @Override
@@ -41,6 +42,7 @@ public class RoadSurviveMod extends AbstractMod {
     @Override
     public void postInit() {
         StuckTagConfig.loadConfigs();
-        MITEEvents.MITE_EVENT_BUS.register(new LROSEvent());
+        MITEEvents.MITE_EVENT_BUS.register(new ITFEvent());
+        SpecializedTPAConfig.FileInit();
     }
 }

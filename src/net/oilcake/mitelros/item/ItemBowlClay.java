@@ -1,114 +1,185 @@
-package net.oilcake.mitelros.mixins.item.food;
+package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
-import net.oilcake.mitelros.item.Materials;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.List;
-import java.util.Random;
+import static net.oilcake.mitelros.item.Items.*;
 
+public class ItemBowlClay extends ItemVessel {
 
-@Mixin(ItemBowl.class)
-public class ItemBowlMixin extends ItemVessel {
+    public ItemBowlClay(int id, Material contents, String texture) {
+        super(id, Material.wood, contents, 1, 4, 4, "hardened_clay_bowls/" + texture);
+        this.setCraftingDifficultyAsComponent(25.0F);
+        this.setCreativeTab(CreativeModeTab.tabMisc);
+    }
 
-//    @Inject(method = "<init>",at = @At("RETURN"))
-//    private void injectCtor(CallbackInfo callback){
-//        if (this.contains(Material.milk)) {
-//            this.setWater(2);
-//        }else{
-//            this.setWater(4);
-//        }
-//    }
-    @Overwrite
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+        return 32;
+    }
+
+    public EnumItemInUseAction getItemInUseAction(ItemStack item_stack, EntityPlayer player) {
+        return !this.isIngestable(item_stack) ? null : super.getItemInUseAction(item_stack, player);
+    }
+
+    public int getSimilarityToItem(Item item) {
+        if (item instanceof ItemBowlClay) {
+            ItemBowlClay item_bowl = (ItemBowlClay) item;
+            if (item_bowl.isEmpty() || this.isEmpty()) {
+                return 2;
+            }
+        }
+
+        return super.getSimilarityToItem(item);
+    }
+
+    public ItemBowlClay setAnimalProduct() {
+        super.setAnimalProduct();
+        return this;
+    }
+
+    public ItemBowlClay setPlantProduct() {
+        super.setPlantProduct();
+        return this;
+    }
+
+    public int getBurnTime(ItemStack item_stack) {
+        return 0;
+    }
+
+    public ItemVessel getPeerForContents(Material contents) {
+        return getPeer(this.getVesselMaterial(), contents);
+    }
+
+    public ItemVessel getPeerForVesselMaterial(Material vessel_material) {
+        return getPeer(vessel_material, this.getContents());
+    }
+
+    public boolean hasIngestionPriority(ItemStack item_stack, boolean ctrl_is_down) {
+        return !this.contains(Material.water);
+    }
+    public static boolean isSoupOrStew(Item item) {
+        if (!(item instanceof ItemBowlClay)) {
+            return false;
+        } else {
+            Material contents = ((ItemBowlClay)item).getContents();
+            return contents instanceof MaterialSoup || contents instanceof MaterialStew;
+        }
+    }
+
+    public float getCompostingValue() {
+        return this == claybowlMilk ? 0.0F : super.getCompostingValue();
+    }
+
+    public Item getCompostingRemains(ItemStack item_stack) {
+        return this.getEmptyVessel();
+    }
+
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
             if (this.contains(Materials.dangerous_water)) {
                 player.getFoodStats().addWater(1);
                 player.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
             }
+
             if (this.contains(Materials.unsafe_water)) {
                 player.getFoodStats().addWater(1);
                 player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
             }
+
             if (this.contains(Material.milk)) {
                 player.clearActivePotions();
             }
-            if (this.contains(Material.water) || this.contains(Material.milk)) {
-                player.getFoodStats().addWater(2);
-            }else{
-                if(this.contains(Material.beef_stew)){
+
+            if (!this.contains(Material.water) && !this.contains(Material.milk)) {
+                if (this.contains(Material.beef_stew)) {
                     player.Feast_trigger_beef_stew = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.chicken_soup)){
+
+                if (this.contains(Material.chicken_soup)) {
                     player.Feast_trigger_chicken_soup = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.cereal)){
+
+                if (this.contains(Material.cereal)) {
                     player.Feast_trigger_cereal = true;
                     player.getFoodStats().addWater(2);
                 }
-                if(this.contains(Materials.chestnut_soup)){
+
+                if (this.contains(Materials.chestnut_soup)) {
                     player.Feast_trigger_chestnut_soup = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.ice_cream)){
+
+                if (this.contains(Material.ice_cream)) {
                     player.Feast_trigger_ice_cream = true;
                     player.getFoodStats().addWater(2);
                 }
-                if(this.contains(Materials.lemonade)){
+
+                if (this.contains(Materials.lemonade)) {
                     player.Feast_trigger_lemonade = true;
                     player.getFoodStats().addWater(2);
                 }
-                if(this.contains(Material.mashed_potato)){
+
+                if (this.contains(Material.mashed_potato)) {
                     player.Feast_trigger_mashed_potatoes = true;
                 }
-                if(this.contains(Material.mushroom_stew)){
+
+                if (this.contains(Material.mushroom_stew)) {
                     player.Feast_trigger_mushroom_soup = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.cream_of_mushroom_soup)){
+
+                if (this.contains(Material.cream_of_mushroom_soup)) {
                     player.Feast_trigger_cream_mushroom_soup = true;
                     player.getFoodStats().addWater(2);
                 }
-                if(this.contains(Material.cream_of_vegetable_soup)){
+
+                if (this.contains(Material.cream_of_vegetable_soup)) {
                     player.Feast_trigger_cream_vegetable_soup = true;
                     player.getFoodStats().addWater(2);
                 }
-                if(this.contains(Material.porridge)){
+
+                if (this.contains(Material.porridge)) {
                     player.Feast_trigger_porridge = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Materials.porkchop_stew)){
+
+                if (this.contains(Materials.porkchop_stew)) {
                     player.Feast_trigger_porkchop_stew = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.pumpkin_soup)){
+
+                if (this.contains(Material.pumpkin_soup)) {
                     player.Feast_trigger_pumpkin_soup = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.sorbet)){
+
+                if (this.contains(Material.sorbet)) {
                     player.Feast_trigger_sorbet = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Material.salad)){
+
+                if (this.contains(Material.salad)) {
                     player.Feast_trigger_salad = true;
                 }
-                if(this.contains(Material.vegetable_soup)){
+
+                if (this.contains(Material.vegetable_soup)) {
                     player.Feast_trigger_vegetable_soup = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Materials.fish_soup)){
+
+                if (this.contains(Materials.fish_soup)) {
                     player.Feast_trigger_salmon_soup = true;
                     player.getFoodStats().addWater(4);
                 }
-                if(this.contains(Materials.beetroot)){
-                    player.Feast_trigger_beetroot_soup = true;
+
+                if (this.contains(Materials.beetroot)) {
+                    player.Feast_trigger_salmon_soup = true;
                     player.getFoodStats().addWater(6);
                 }
+            } else {
+                player.getFoodStats().addWater(2);
             }
 
             player.addFoodValue(this);
@@ -120,12 +191,6 @@ public class ItemBowlMixin extends ItemVessel {
         super.onItemUseFinish(item_stack, world, player);
     }
 
-
-    public ItemBowlMixin(int id, Material vessel_material, Material contents_material, int standard_volume, int max_stack_size_empty, int max_stack_size_full, String texture) {
-        super(id, vessel_material, contents_material, standard_volume, max_stack_size_empty, max_stack_size_full, texture);
-    }
-
-    @Overwrite
     public boolean onItemRightClick(EntityPlayer player, float partial_tick, boolean ctrl_is_down) {
         RaycastCollision rc = player.getSelectedObject(partial_tick, true);
         BiomeBase biome = player.worldObj.getBiomeGenForCoords(player.getBlockPosX(), player.getBlockPosZ());
@@ -134,11 +199,12 @@ public class ItemBowlMixin extends ItemVessel {
                 if (rc.getBlockHitMaterial() == Material.water || rc.getNeighborOfBlockHitMaterial() == Material.water) {
                     if (player.onServer() && (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland)) {
                         player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.dangerous_water)));
-                    } else if(player.onServer() && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)){
+                    } else if (player.onServer() && (biome == BiomeBase.river || biome == BiomeBase.desertRiver)) {
                         player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Material.water)));
-                    } else if(player.onServer()){
+                    } else if (player.onServer()) {
                         player.convertOneOfHeldItem(new ItemStack(this.getPeerForContents(Materials.unsafe_water)));
                     }
+
                     return true;
                 }
             } else {
@@ -177,88 +243,81 @@ public class ItemBowlMixin extends ItemVessel {
         return false;
     }
 
-    @Overwrite
     public static ItemVessel getPeer(Material vessel_material, Material contents) {
         if (vessel_material == Material.wood) {
             if (contents == null) {
-                return bowlEmpty;
+                return claybowlEmpty;
             }
 
             if (contents == Material.mushroom_stew) {
-                return bowlMushroomStew;
+                return claybowlMushroomStew;
             }
 
             if (contents == Material.milk) {
-                return bowlMilk;
+                return claybowlMilk;
             }
 
             if (contents == Material.water) {
-                return bowlWater;
+                return claybowlWater;
             }
 
             if (contents == Material.beef_stew) {
-                return bowlBeefStew;
+                return claybowlBeefStew;
             }
 
             if (contents == Material.chicken_soup) {
-                return bowlChickenSoup;
+                return claybowlChickenSoup;
             }
 
             if (contents == Material.vegetable_soup) {
-                return bowlVegetableSoup;
+                return claybowlVegetableSoup;
             }
 
             if (contents == Material.ice_cream) {
-                return bowlIceCream;
+                return claybowlIceCream;
             }
 
             if (contents == Material.salad) {
-                return bowlSalad;
+                return claybowlSalad;
             }
 
             if (contents == Material.cream_of_mushroom_soup) {
-                return bowlCreamOfMushroomSoup;
+                return claybowlCreamOfMushroomSoup;
             }
 
             if (contents == Material.cream_of_vegetable_soup) {
-                return bowlCreamOfVegetableSoup;
+                return claybowlCreamOfVegetableSoup;
             }
 
             if (contents == Material.mashed_potato) {
-                return bowlMashedPotato;
+                return claybowlMashedPotato;
             }
 
             if (contents == Material.porridge) {
-                return bowlPorridge;
+                return claybowlPorridge;
             }
 
             if (contents == Material.cereal) {
-                return bowlCereal;
+                return claybowlCereal;
             }
+
             if (contents == Materials.chestnut_soup) {
-                return Items.bowlChestnutSoup;
+                return claybowlChestnutSoup;
             }
+
             if (contents == Materials.porkchop_stew) {
-                return Items.bowlPorkchopStew;
+                return claybowlPorkchopStew;
             }
+
             if (contents == Materials.unsafe_water) {
-                return Items.bowlWaterSuspicious;
+                return claybowlWaterSuspicious;
             }
-            if (contents == Materials.dangerous_water){
-                return Items.bowlWaterSwampland;
+
+            if (contents == Materials.dangerous_water) {
+                return claybowlWaterSwampland;
             }
         }
 
-        return null;
-    }
-
-
-    @Shadow
-    public ItemVessel getPeerForContents(Material material) {
-        return null;
-    }
-    @Shadow
-    public ItemVessel getPeerForVesselMaterial(Material material) {
         return null;
     }
 }

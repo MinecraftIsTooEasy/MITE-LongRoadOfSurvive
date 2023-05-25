@@ -14,12 +14,12 @@ import java.util.ArrayList;
 public class RegisterHelper {
     public static ArrayList<RecipesArgs> shapedRecipes = new ArrayList<>();
     public static ArrayList<RecipesArgs> shapelessRecipe = new ArrayList<>();
+    private float difficulty;
     public static void registerAllItems(){
         Items.registerItems();
         Blocks.registerBlocks();
         AchievementExtend.registerAchievements();
     }
-
     public static void registerAllRecipes(CraftingManager crafters){
         RecipeRegister recipeRegister = new RecipeRegister();
         Blocks.registerRecipes(recipeRegister);
@@ -33,12 +33,18 @@ public class RegisterHelper {
             if (recipesArgs.isExtendsNBT()){
                 shapedRecipes.func_92100_c();
             }
+            if (recipesArgs.isSpecialized_difficulty()){
+                shapedRecipes.setDifficulty(recipesArgs.difficulty);
+            }
         }
         for (RecipesArgs args : shapelessRecipe) {
             recipesArgs = args;
             ShapelessRecipes shapelessRecipes = ((CraftingManagerInvoker) crafters).addShapelessRecipeP(recipesArgs.result, recipesArgs.include_in_lowest_crafting_difficulty_determination, recipesArgs.inputs);
             if (recipesArgs.isExtendsNBT()){
                 shapelessRecipes.propagateTagCompound();
+            }
+            if (recipesArgs.isSpecialized_difficulty()){
+                shapelessRecipes.setDifficulty(recipesArgs.difficulty);
             }
         }
     }

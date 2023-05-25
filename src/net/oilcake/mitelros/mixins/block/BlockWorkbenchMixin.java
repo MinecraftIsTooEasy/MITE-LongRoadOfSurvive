@@ -14,55 +14,18 @@ import java.util.Random;
 @Mixin(BlockWorkbench.class)
 public class BlockWorkbenchMixin extends Block{
 
+    protected IIcon[] front_icons = new IIcon[17];
+    protected IIcon[] side_icons = new IIcon[17];
+
     protected BlockWorkbenchMixin(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
     }
-
-
-//    @Inject(method = "<init>", at = @At("INVOKE"))
-//    private void injectInit(int par1, CallbackInfo callback) {
-//        this.setMinHarvestLevel(4);
-//    }
-
-
-
-//    public void breakBlock(World world, int x, int y, int z, int block_id, int metadata) {
-//        super.breakBlock(world, x, y, z, block_id, metadata);
-//        Random random = new Random();
-//        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
-//        if (random.nextInt(2) == 0) {
-//            this.dropBlockAsEntityItem(info, Item.silk.itemID, 0, 1, 0.01F);
-//        }
-//        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
-//        this.dropBlockAsEntityItem(info, Item.silk.itemID, 0, 2, 1.0F);
-//        for(int i = 0; i < Block.workbench.getNumSubBlocks(); ++i) {
-//            Material material = BlockWorkbench.getToolMaterial(i);
-//            Random random = new Random();
-//            if (material == Material.flint) {
-//                this.dropBlockAsEntityItem(info, Item.chipFlint.itemID, 0, random.nextInt(4), 0);
-//            } else if (material == Material.obsidian) {
-//                this.dropBlockAsEntityItem(info, Item.shardObsidian.itemID, 0, random.nextInt(4), 0);
-//            } else if (material == Material.silver) {
-//                this.dropBlockAsEntityItem(info, Item.silverNugget.itemID, 0, random.nextInt(4), 0);
-//            }  else if (material== Materials.nickel) {
-//                this.dropBlockAsEntityItem(info, Items.nickelNugget.itemID, 0, random.nextInt(4), 0);
-//            } else if (material == Material.mithril) {
-//                this.dropBlockAsEntityItem(info, Items.tungstenNugget.itemID, 0, random.nextInt(4), 0);
-//            } else if (material == Materials.tungsten){
-//                this.dropBlockAsEntityItem(info, Items.mithrilNugget.itemID, 0, random.nextInt(4), 0);
-//            }else{
-//                this.dropBlockAsEntityItem(info, Block.stone.blockID, 0, 3, 3.0F);
-//            }
-//        }
-//        world.removeBlockTileEntity(x, y, z);
-//    }
-
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
         return super.dropBlockAsEntityItem(info);
     }
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback) {
-        tool_materials = new Material[]{Material.flint, Material.silver, Material.gold, Material.ancient_metal, Material.mithril, Material.adamantium,
+        tool_materials = new Material[]{Material.flint,Material.copper, Material.silver, Material.gold,Material.iron, Material.ancient_metal, Material.mithril, Material.adamantium,
                 Materials.nickel, Materials.tungsten, Material.obsidian};
     }
 
@@ -70,8 +33,8 @@ public class BlockWorkbenchMixin extends Block{
     public IIcon a(int side, int metadata) {
         if (metadata < 4) {
             return side == 1 ? this.icon_flint_top : Block.wood.a(side, metadata);
-        } else if (metadata >= 11) {
-            return side == 1 ? this.icon_obsidian_top : Block.wood.a(side, metadata - 11);
+        } else if (metadata >= 13) {
+            return side == 1 ? this.icon_obsidian_top : Block.wood.a(side, metadata - 13);
         } else if (side == 0) {
             return Block.planks.m(side);
         } else if (side == 1) {
@@ -79,6 +42,27 @@ public class BlockWorkbenchMixin extends Block{
         } else {
             return side != 2 && side != 3 ? this.side_icons[metadata] : this.front_icons[metadata];
         }
+    }
+    @Overwrite
+    public static Material getToolMaterial(int metadata) {
+        if (metadata > 12) {
+            return tool_materials[10];
+        } else {
+            return metadata < 4 ? tool_materials[0] : tool_materials[metadata - 3];
+        }
+    }
+    @Overwrite
+    public static ItemStack getBlockComponent(int metadata) {
+        Material tool_material = getToolMaterial(metadata);
+        if (tool_material == Material.flint) {
+            return new ItemStack(Block.wood, 1, metadata);
+        } else {
+            return tool_material == Material.obsidian ? new ItemStack(Block.wood, 1, metadata - 11) : null;
+        }
+    }
+    @Overwrite
+    public boolean isValidMetadata(int metadata) {
+        return metadata >= 0 && metadata < 17;
     }
 
     @Overwrite
@@ -97,11 +81,7 @@ public class BlockWorkbenchMixin extends Block{
     @Final
     private static Material[] tool_materials;
     @Shadow
-    protected IIcon[] side_icons;
-    @Shadow
     private IIcon displayOnCreativeTab;
-    @Shadow
-    private IIcon[] front_icons;
     @Shadow
     private IIcon icon_flint_top;
     @Shadow

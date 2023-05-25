@@ -3,20 +3,31 @@ package net.oilcake.mitelros.mixins.item;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
+import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(Item.class)
 public class ItemMixin{
-
     private int water;
 
-//    @Inject(method = "<init>", at = @At("RETURN"))
-//    protected void injectInit(CallbackInfo callbackInfo){
-//        this.setWater(1);
-//    }
+    @Inject(method = "<init>()V",at = @At("RETURN"))
+    private void injectCtor(CallbackInfo callbackInfo){
+        ReflectHelper.dyCast(Item.class,this).recipes = new aah[512];
+    }
+
+    @Inject(method = "<init>(ILjava/lang/String;I)V" ,at = @At("RETURN"))
+    private void ItemInject(int par1, String texture, int num_subtypes, CallbackInfo callbackInfo) {
+        ReflectHelper.dyCast(Item.class,this).recipes = new aah[512];
+    }
     public Item item;
 
     public final Item setFoodValueForWather(int satiation, int nutrition, int sugar_content, boolean has_protein, boolean has_essential_fats, boolean has_phytonutrients, int water) {
@@ -189,5 +200,6 @@ public class ItemMixin{
     public int getNutrition() {
         return 1;
     }
+    public aah[] recipes;
 
 }

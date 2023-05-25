@@ -14,9 +14,9 @@ public class RecipeOther {
         );
         register.registerShapelessRecipe(new ItemStack(Items.Pulque,1),true,
                 Item.sugar,Items.Agave,new ItemStack(Item.potion,1,0)
-        );
+        ).resetDifficulty(3200);
         register.registerShapelessRecipe(new ItemStack(Items.Ale,1),true,
                 Item.sugar,Item.wheat,new ItemStack(Item.potion,1,0)
-        );
+        ).resetDifficulty(3200);
     }
 }

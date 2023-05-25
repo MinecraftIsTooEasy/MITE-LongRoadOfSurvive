@@ -24,8 +24,8 @@ public class RecipeHelperMixin {
 
         ItemStack output_item_stack;
         float highest_durability_that_is_less_than_tool_material;
-        for(int i = 0; i < recipe_items.length; ++i) {
-            output_item_stack = recipe_items[i];
+        for (ItemStack recipeItem : recipe_items) {
+            output_item_stack = recipeItem;
             if (output_item_stack != null) {
                 Item item = output_item_stack.getItem();
                 if (item.getHasSubtypes() && output_item_stack.getItemSubtype() != 32767) {
@@ -47,8 +47,8 @@ public class RecipeHelperMixin {
                                 Minecraft.setErrorMessage("addRecipe: getMaterialForDurability()==null for component " + item);
                             }
 
-                            item.setCraftingDifficultyAsComponent(peer.getCraftingDifficultyAsComponent((ItemStack)null) * item.getMaterialForDurability().getDurability() / peer.getMaterialForDurability().getDurability());
-                            component_difficulty = item.getCraftingDifficultyAsComponent((ItemStack)null);
+                            item.setCraftingDifficultyAsComponent(peer.getCraftingDifficultyAsComponent((ItemStack) null) * item.getMaterialForDurability().getDurability() / peer.getMaterialForDurability().getDurability());
+                            component_difficulty = item.getCraftingDifficultyAsComponent((ItemStack) null);
                         }
                     }
                 }
@@ -109,6 +109,5 @@ public class RecipeHelperMixin {
                 }
             }
         }
-
     }
 }

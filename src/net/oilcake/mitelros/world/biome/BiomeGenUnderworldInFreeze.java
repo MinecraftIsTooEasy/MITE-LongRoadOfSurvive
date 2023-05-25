@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.entity.EntitySpiderKing;
-import net.oilcake.mitelros.entity.EntityStalkerCreeper;
-import net.oilcake.mitelros.entity.EntityWitherBoneLord;
+import net.oilcake.mitelros.entity.*;
 
 public class BiomeGenUnderworldInFreeze extends BiomeGenUnderworld {
     public BiomeGenUnderworldInFreeze(int id) {
@@ -22,6 +20,8 @@ public class BiomeGenUnderworldInFreeze extends BiomeGenUnderworld {
         this.removeEntityFromSpawnableLists(EntityRevenant.class);
         this.removeEntityFromSpawnableLists(EntityBoneLord.class);
         this.removeEntityFromSpawnableLists(EntityCreeper.class);
+        this.removeEntityFromSpawnableLists(EntityBoneBodyguard.class);
+        this.removeEntityFromSpawnableLists(EntityMinerZombie.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStalkerCreeper.class, 100, 1, 2));
         this.spawnableMonsterList.add(new BiomeMeta(EntityCaveSpider.class, 40, 1, 2));
         this.spawnableMonsterList.add(new BiomeMeta(EntityLongdead.class, 40, 1, 2));

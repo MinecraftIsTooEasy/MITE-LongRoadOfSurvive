@@ -182,8 +182,48 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public boolean isFlooded() {
         return false;
     }
-    @Shadow
+    @Overwrite
     public void smeltItem(int heat_level) {
+        if (this.canSmelt(heat_level)) {
+            ItemStack var1 = RecipesFurnace.smelting().getSmeltingResult(this.getInputItemStack(), heat_level);
+            ItemStack var10000;
+            if (this.furnaceItemStacks[2] == null) {
+                this.furnaceItemStacks[2] = var1.copy();
+            } else if (this.furnaceItemStacks[2].itemID == var1.itemID) {
+                var10000 = this.furnaceItemStacks[2];
+                var10000.stackSize += var1.stackSize;
+            }
+
+            byte consumption;
+            if (this.getInputItemStack().itemID == Block.sand.blockID && var1.itemID == Block.sandStone.blockID) {
+                consumption = 4;
+            } else if (this.getInputItemStack().itemID == Block.sand.blockID && var1.itemID == Block.glass.blockID) {
+                consumption = 4;
+            } else if (this.getInputItemStack().itemID == Items.claybowlRaw.itemID && var1.itemID == Items.claybowlEmpty.itemID) {
+                consumption = 4;
+            } else {
+                consumption = 1;
+            }
+
+            var10000 = this.getInputItemStack();
+            var10000.stackSize -= consumption;
+            if (this.getInputItemStack().getItem() == Item.clay && var1.getItem() == Item.brick) {
+                int extra_converted = Math.min(this.getOutputItemStack().getMaxStackSize() - this.getOutputItemStack().stackSize, this.getInputItemStack().stackSize);
+                if (extra_converted > 3) {
+                    extra_converted = 3;
+                }
+
+                var10000 = this.getOutputItemStack();
+                var10000.stackSize += extra_converted;
+                var10000 = this.getInputItemStack();
+                var10000.stackSize -= extra_converted;
+            }
+
+            if (this.furnaceItemStacks[0].stackSize <= 0) {
+                this.furnaceItemStacks[0] = null;
+            }
+        }
+
     }
 
 
