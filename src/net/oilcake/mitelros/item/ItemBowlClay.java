@@ -1,14 +1,13 @@
 package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.Items;
 
 import static net.oilcake.mitelros.item.Items.*;
 
 public class ItemBowlClay extends ItemVessel {
 
     public ItemBowlClay(int id, Material contents, String texture) {
-        super(id, Material.wood, contents, 1, 4, 4, "hardened_clay_bowls/" + texture);
+        super(id, Material.hardened_clay, contents, 1, 4, 4, "hardened_clay_bowls/" + texture);
         this.setCraftingDifficultyAsComponent(25.0F);
         this.setCreativeTab(CreativeModeTab.tabMisc);
     }
@@ -244,7 +243,7 @@ public class ItemBowlClay extends ItemVessel {
     }
 
     public static ItemVessel getPeer(Material vessel_material, Material contents) {
-        if (vessel_material == Material.wood) {
+        if (vessel_material == Material.hardened_clay) {
             if (contents == null) {
                 return claybowlEmpty;
             }

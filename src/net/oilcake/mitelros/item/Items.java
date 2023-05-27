@@ -177,10 +177,10 @@ public class Items extends Item {
     public static final ItemBowl bowlSalmonSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
     public static final ItemBowl bowlBeetrootSoup = (ItemBowl) (new ItemBowl(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
     public static final ItemStandard claybowlRaw = (ItemStandard) new ItemStandard(Constant.getNextItemID(),Material.clay,"bowlclayRaw").setMaxStackSize(4);
-    public static final ItemBowlClay claybowlEmpty = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), (Material)null, "VANILLA")).setUnlocalizedName("bowlclay").useVanillaTexture("bowlclay").setMaxStackSize(4);
+    public static final ItemBowlClay claybowlEmpty = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), null, "VANILLA")).setUnlocalizedName("bowlclay").useVanillaTexture("bowlclay").setMaxStackSize(4);
     public static final ItemBowlClay claybowlMushroomStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.mushroom_stew, "mushroom_stew")).setFoodValue(2, 4, false, false, false).setPlantProduct().setUnlocalizedName("mushroomStew");
-    public static final ItemBowlClay claybowlMilk = (ItemBowlClay)(new ItemBowlClay(Constant.getNextItemID(), Material.milk, "bowl_milk")).setFoodValue(0, 1, true, false, false).setAnimalProduct().setContainerItem(bowlEmpty).setAlwaysEdible().setUnlocalizedName("bowlMilk");
-    public static final ItemBowlClay claybowlWater = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.water, "bowl_water")).setContainerItem(bowlEmpty).setUnlocalizedName("bowlWater");
+    public static final ItemBowlClay claybowlMilk = (ItemBowlClay)(new ItemBowlClay(Constant.getNextItemID(), Material.milk, "bowl_milk")).setFoodValue(0, 1, true, false, false).setAnimalProduct().setContainerItem(claybowlEmpty).setAlwaysEdible().setUnlocalizedName("bowlMilk");
+    public static final ItemBowlClay claybowlWater = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.water, "bowl_water")).setContainerItem(claybowlMilk).setUnlocalizedName("bowlWater");
     public static final ItemBowlClay claybowlBeefStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.beef_stew, "beef_stew")).setFoodValue(16, 16, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beefStew");
     public static final ItemBowlClay claybowlChickenSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.chicken_soup, "chicken_soup")).setFoodValue(10, 10, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("chickenSoup");
     public static final ItemBowlClay claybowlVegetableSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.vegetable_soup, "vegetable_soup")).setFoodValue(6, 6, false, false, true).setPlantProduct().setUnlocalizedName("vegetableSoup");
@@ -877,6 +877,10 @@ public class Items extends Item {
                 Items.beetroot,Items.beetroot);
         register.registerShapelessRecipe(new ItemStack(Items.claybowlRaw,1),false,
                 Item.clay);
+        register.registerShapelessRecipe(new ItemStack(Items.tungstenBucket,1),false,
+                Items.tungstenBucketStone).resetDifficulty(100);
+        register.registerShapelessRecipe(new ItemStack(Items.nickelBucket,1),false,
+                Items.nickelBucketStone).resetDifficulty(100);
 
         register.registerShapelessRecipe(new ItemStack(Items.bowlBeetrootSoup,1,0),false,
                 Items.beetroot,Items.beetroot,Items.beetroot,

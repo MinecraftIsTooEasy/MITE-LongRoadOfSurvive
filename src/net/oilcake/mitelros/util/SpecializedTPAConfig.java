@@ -31,7 +31,7 @@ public class SpecializedTPAConfig {
         file_Config.setWritable(false, false);
         file_Config.mkdir();
         File file = new File(TPA);
-        file.setWritable(true, false);
+        file.setWritable(false, false);
         if (!file.exists() || !file.isDirectory()) {
             file.mkdir();
         }
@@ -59,9 +59,9 @@ public class SpecializedTPAConfig {
                 FileWriter fw = new FileWriter(TPACONGFIG);
                 fw.write("#ITF预设配置，暂时不启用更改，如有特殊情况可考虑删除其他配置文件来重置冷却等" + System.getProperty("line.separator"));
                 fw.write("# admin=服主名，如果是中文名，要替换成mc编码(unicode)，地精站可在线转码" + System.getProperty("line.separator"));
-                fw.write("home=0" + System.getProperty("line.separator"));
+                fw.write("home=1" + System.getProperty("line.separator"));
                 fw.write("back=0" + System.getProperty("line.separator"));
-                fw.write("time=1200" + System.getProperty("line.separator"));
+                fw.write("time=600" + System.getProperty("line.separator"));
                 fw.write("whitelist=0" + System.getProperty("line.separator"));
                 fw.write("admin=" + System.getProperty("line.separator"));
                 fw.close();
@@ -71,7 +71,7 @@ public class SpecializedTPAConfig {
         }
 
         File file_tpaYorN = new File(TPAYorN);
-        file_tpaYorN.setWritable(true, false);
+        file_tpaYorN.setWritable(false, false);
         if (!file_tpaYorN.exists()) {
             try {
                 file_tpaYorN.createNewFile();

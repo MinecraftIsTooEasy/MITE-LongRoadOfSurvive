@@ -43,6 +43,6 @@ public class MITEisTooFalseMod extends AbstractMod {
     public void postInit() {
         StuckTagConfig.loadConfigs();
         MITEEvents.MITE_EVENT_BUS.register(new ITFEvent());
-        SpecializedTPAConfig.FileInit();
+//        SpecializedTPAConfig.FileInit();
     }
 }

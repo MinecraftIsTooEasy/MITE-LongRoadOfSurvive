@@ -57,8 +57,13 @@ public class DamageMixin{
             float amount_dealt_to_armor = Math.min(target.getProtectionFromArmor(this.getSource(), false), this.amount);
             target.tryDamageArmorC(this.getSource(), amount_dealt_to_armor, result);
             DebugAttack.setDamageDealtToArmor(amount_dealt_to_armor);
-
-            float piercing = Enchantment.piercing.getLevelFraction(this.getItemAttackedWith()) * 5.0F + (this.getItemAttackedWith().getItem() instanceof ItemMorningStar ? 3.0F : 0.0F);
+            boolean using_morningstar = false;
+            if(this.getItemAttackedWith() != null){
+                if(this.getItemAttackedWith().getItem() instanceof ItemMorningStar){
+                    using_morningstar = true;
+                }
+            }
+            float piercing = Enchantment.piercing.getLevelFraction(this.getItemAttackedWith()) * 5.0F + (using_morningstar ? 3.0F : 0.0F);
             float effective_protection = Math.max(total_protection - piercing, 0.0F);
             DebugAttack.setPiercing(piercing);
             if (target instanceof EntityPlayer && effective_protection >= this.amount) {
