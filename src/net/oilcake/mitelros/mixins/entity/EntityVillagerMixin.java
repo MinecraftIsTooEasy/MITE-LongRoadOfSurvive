@@ -91,7 +91,22 @@ public class EntityVillagerMixin extends EntityAgeable implements IMerchant, NPC
                 addBlacksmithItem(var2, Item.eyeOfEnder.itemID, this.rand, this.adjustProbability(0.3F));
                 addBlacksmithItem(var2, Item.redstone.itemID, this.rand, this.adjustProbability(0.4F));
                 addBlacksmithItem(var2, Block.glowStone.blockID, this.rand, this.adjustProbability(0.3F));
-                int[] var3 = new int[]{Item.swordCopper.itemID, Item.swordIron.itemID, Item.plateCopper.itemID, Item.plateIron.itemID, Item.axeCopper.itemID, Item.axeIron.itemID, Item.pickaxeCopper.itemID, Item.pickaxeIron.itemID};
+                if (this.rand.nextFloat() < this.adjustProbability(0.5F)) {
+                    var2.add(new MerchantRecipe(new ItemStack(Item.emerald.itemID, 1), new ItemStack(Item.expBottle.itemID, 1, 0)));
+                }
+                if (this.rand.nextFloat() < this.adjustProbability(0.25F)) {
+                    var2.add(new MerchantRecipe(new ItemStack(Item.rottenFlesh, 14 + rand.nextInt(3)), new ItemStack(Item.emerald.itemID, 1, 0)));
+                }
+                if (this.rand.nextFloat() < this.adjustProbability(0.25F)) {
+                    var2.add(new MerchantRecipe(new ItemStack(Item.netherStalkSeeds, 14 + rand.nextInt(3)), new ItemStack(Item.emerald.itemID, 1, 0)));
+                }
+                if (this.rand.nextFloat() < this.adjustProbability(0.25F)) {
+                    var2.add(new MerchantRecipe(new ItemStack(Item.bone, 14 + rand.nextInt(3)), new ItemStack(Item.emerald.itemID, 1, 0)));
+                }
+                if (this.rand.nextFloat() < this.adjustProbability(0.1F)) {
+                    var2.add(new MerchantRecipe(new ItemStack(Item.emerald.itemID, 7 + rand.nextInt(3)), new ItemStack(Items.totemofundying.itemID, 1, 0)));
+                }
+                int[] var3 = new int[]{Items.nickelSword.itemID, Items.nickelPickaxe.itemID, Item.swordIron.itemID, Item.pickaxeIron.itemID};
                 int[] var4 = var3;
                 int var5 = var3.length;
                 var6 = 0;
@@ -103,7 +118,7 @@ public class EntityVillagerMixin extends EntityAgeable implements IMerchant, NPC
 
                     int var7 = var4[var6];
                     if (this.rand.nextFloat() < this.adjustProbability(0.05F)) {
-                        var2.add(new MerchantRecipe(new ItemStack(var7, 1, 0), new ItemStack(Item.emerald, 2 + this.rand.nextInt(3), 0), EnchantmentManager.addRandomEnchantment(this.rand, new ItemStack(var7, 1, 0), 5 + this.rand.nextInt(15))));
+                        var2.add(new MerchantRecipe(new ItemStack(var7, 1, 0), new ItemStack(Item.emerald, 1 + this.rand.nextInt(2), 0), EnchantmentManager.addRandomEnchantment(this.rand, new ItemStack(var7, 1, 0), 5 + this.rand.nextInt(15))));
                     }
 
                     ++var6;

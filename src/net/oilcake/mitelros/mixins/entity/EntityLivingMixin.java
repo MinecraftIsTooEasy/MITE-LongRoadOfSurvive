@@ -4,6 +4,10 @@ import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
@@ -84,5 +88,11 @@ public class EntityLivingMixin extends Entity{
     }
     public void tryDamageArmorC(DamageSource damage_source, float amount, EntityDamageResult result) {
         tryDamageArmor(damage_source, amount, result);
+    }
+    @Inject(locals = LocalCapture.CAPTURE_FAILHARD,method = "attackEntityFrom",at = @At(value = "INVOKE",shift = At.Shift.AFTER,target = "Lnet/minecraft/EntityLiving;attackEntityFromHelper(Lnet/minecraft/Damage;Lnet/minecraft/EntityDamageResult;)Lnet/minecraft/EntityDamageResult;"))
+    private void injectAfterDamageCallback(Damage damage, CallbackInfoReturnable<EntityDamageResult> c, EntityDamageResult result){
+        this.checkForAfterDamage(damage, result);
+    }
+    protected void checkForAfterDamage(Damage damage, EntityDamageResult result) {
     }
 }

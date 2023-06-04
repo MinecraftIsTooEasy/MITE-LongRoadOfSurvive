@@ -51,6 +51,14 @@ public class ItemFoodMixin extends Item {
             if(this.itemID==poisonousPotato.itemID){
                 this.setWater(0);
             }
+            if(this.itemID==egg.itemID){
+                Random rand = new Random();
+                if(rand.nextDouble()<=(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 0.5 : 0.25)){
+                    this.setWater(-1);
+                } else{
+                    this.setWater(0);
+                }
+            }
             if(this.itemID==rottenFlesh.itemID){
                 player.addPotionEffect((new MobEffect(MobEffectList.confusion.id, 600, 0)));
             }

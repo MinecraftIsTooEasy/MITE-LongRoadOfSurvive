@@ -10,6 +10,7 @@ public class EntityWitherBodyguard extends EntitySkeleton {
     ItemStack stowed_item_stack;
     public EntityWitherBodyguard(World par1World) {
         super(par1World);
+        this.setSkeletonType(1);
         this.setCanPickUpLoot(false);
     }
     public int getRandomSkeletonType(World world) {

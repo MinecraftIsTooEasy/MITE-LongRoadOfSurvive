@@ -31,6 +31,8 @@ achievement.Invincible=UNSHAKABLE
 achievement.Invincible.desc=Brew to strengthen yourself
 achievement.StormStriker=Storm Striker
 achievement.StormStriker.desc=Beat MITE-ITF.
+achievement.DeathCheater=Postmortal
+achievement.DeathCheater.desc=Use the totem of undying to cheat death.
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -270,6 +272,7 @@ item.food/beetroot_seeds.name=Beetroot seeds
 item.pulque.name=Pulque
 item.ale.name=Ale
 item.forging_note.name=Forging Note
+item.totem_of_undying.name=Totem of Undying
 
 item.shards/diamond.name=Diamond Shard
 item.shards/emerald.name=Emerald Shard

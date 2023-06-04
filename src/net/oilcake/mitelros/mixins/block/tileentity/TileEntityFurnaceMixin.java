@@ -128,6 +128,14 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                     if (this.furnaceCookTime >= temp) {
                         this.furnaceCookTime = 0;
                         this.smeltItem(this.heat_level);
+                        //烧肉提示
+                        if(this.getInputItemStack()!= null && this.getOutputItemStack().getItem() instanceof ItemMeat){
+                            this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.sizzle");
+                        }
+                        //烧水提示
+                        if(this.getInputItemStack()!= null && this.getOutputItemStack().getItem() == Item.bowlWater || this.getOutputItemStack().getItem() == Items.claybowlWater){
+                            this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.boil");
+                        }
                         var2 = true;
                     }
                 } else {

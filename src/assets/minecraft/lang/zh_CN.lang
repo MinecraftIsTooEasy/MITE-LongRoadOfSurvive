@@ -31,6 +31,8 @@ achievement.Invincible=势不可挡
 achievement.Invincible.desc=让自身拥有所有持续的药水增益
 achievement.StormStriker=不畏苦暗
 achievement.StormStriker.desc=克服绝境并征服MITE-ITF
+achievement.DeathCheater=超脱生死
+achievement.DeathCheater.desc=使用不死图腾来避免死亡
 
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
@@ -270,6 +272,7 @@ item.food/beetroot_seeds.name=甜菜种子
 item.pulque.name=普利克酒
 item.ale.name=麦芽酒
 item.forging_note.name=锻造笔记
+item.totem_of_undying.name=不死图腾
 
 item.shards/diamond.name=钻石碎片
 item.shards/emerald.name=绿宝石碎片

@@ -10,6 +10,7 @@ public class EntityWitherBoneLord extends EntityBoneLord {
 
     public EntityWitherBoneLord(World par1World) {
         super(par1World);
+        this.setSkeletonType(1);
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

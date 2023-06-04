@@ -23,6 +23,7 @@ public class AchievementExtend {
     public static Achievement forgingLegend;
     public static Achievement invincible;
     public static Achievement stormStriker;
+    public static Achievement cheatdeath;
 
     public AchievementExtend() {
     }
@@ -36,14 +37,15 @@ public class AchievementExtend {
         mashedCactus = (new Achievement(getNextAchievementID(), "mashedCactus", -3, -3, Items.mashedCactus, AchievementList.seeds)).registerAchievement();
         hypothermia = (new Achievement(getNextAchievementID(),"Hypothermia",-4,2, Block.ice,AchievementList.openInventory)).registerAchievement();
         feast = (new Achievement(getNextAchievementID(),"Feast",1,-3, Item.bowlBeefStew,AchievementList.fineDining)).setSpecial().registerAchievement();
-        SoundofUnder = (new Achievement(getNextAchievementID(),"SoundofUnder",-4,11,Item.recordUnderworld,AchievementList.portal)).setSpecial().registerAchievement();
+        SoundofUnder = (new Achievement(getNextAchievementID(),"SoundofUnder",6,13,Item.recordUnderworld,AchievementList.portal)).setSpecial().registerAchievement();
         nochoice = (new Achievement(getNextAchievementID(),"NoChoice",0,11,Items.ExperimentalPotion,AchievementList.portal)).registerAchievement();
         cheersforMinecraft = (new Achievement(getNextAchievementID(),"CheersforMinecraft",-3,-5,Items.Ale,AchievementExtend.mashedCactus)).registerAchievement();
         copying = (new Achievement(getNextAchievementID(),"Copying",-2,11,Items.forgingnote,AchievementExtend.SoundofUnder)).registerAchievement();
         neverEnds = (new Achievement(getNextAchievementID(),"NeverEnds",-2,17,Items.UruIngot,AchievementList.adamantiumIngot)).registerAchievement();
-        forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-5,13,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
-        invincible = (new Achievement(getNextAchievementID(),"Invincible",-3,13,Items.Pulque,AchievementList.potion)).registerAchievement().setSpecial();
+        forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-4,11,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
+        invincible = (new Achievement(getNextAchievementID(),"Invincible",-5,13,Items.Pulque,AchievementExtend.cheatdeath)).registerAchievement().setSpecial();
         stormStriker = (new Achievement(getNextAchievementID(),"StormStriker",9,16,new ItemStack(Block.skull, 1, 3),AchievementList.theEnd2)).registerAchievement().setSpecial();
+        cheatdeath = (new Achievement(getNextAchievementID(),"DeathCheater",-3,13,Items.totemofundying,AchievementList.potion)).registerAchievement();
     }
 
     private static int getNextAchievementID() {

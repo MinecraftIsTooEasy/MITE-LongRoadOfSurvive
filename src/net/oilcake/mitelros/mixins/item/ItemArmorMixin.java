@@ -53,18 +53,18 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
     @Overwrite
     public int getMaterialProtection() {
         int protection;
-        if (this.effective_material == Material.leather) {
+        if(this.effective_material == Materials.custom_a){
+            protection = 0;
+        } else if (this.effective_material == Materials.maid) {
+            protection = 1;
+        } else if (this.effective_material == Material.leather) {
             protection = 2;
-        } else if(this.effective_material == Materials.wolf_fur || this.effective_material == Materials.maid){
+        } else if(this.effective_material == Materials.wolf_fur){
             protection = 3;
-        } else if (this.effective_material == Material.rusted_iron || this.effective_material == Materials.vibranium) {
+        } else if (this.effective_material == Material.rusted_iron || this.effective_material == Materials.vibranium || this.effective_material == Material.gold) {
             protection = 6;
-        } else if (this.effective_material == Material.copper) {
+        } else if (this.effective_material == Material.copper || this.effective_material == Material.silver) {
             protection = 7;
-        } else if (this.effective_material == Material.silver) {
-            protection = 7;
-        } else if (this.effective_material == Material.gold) {
-            protection = 6;
         } else if (this.effective_material == Materials.uru) {
             protection = 10;
         } else if (this.effective_material != Material.iron && this.effective_material != Material.ancient_metal && this.effective_material != Materials.nickel) {

@@ -18,6 +18,7 @@ public class SoundsMITEMixin {
     public void injectCtor(CallbackInfo callbackInfo) {
         this.add("records/imported/damnation.ogg");
         this.add("records/imported/connected.ogg");
+        this.add("sound/imported/random/totem_use.ogg");
     }
     @Shadow
     private boolean add(String path) {

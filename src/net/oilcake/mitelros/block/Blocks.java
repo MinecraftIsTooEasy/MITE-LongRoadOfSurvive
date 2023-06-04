@@ -52,6 +52,7 @@ public class Blocks extends Block {
     public static final Block oreUru = new BlockOre(Constant.getNextBlockID(), Materials.uru, 4).setBlockHardness(5.0F).setExplosionResistance(150.0f);
     public static final Block beetroots = new BlockBeetroots(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
     public static final Block beetrootsDead = new BlockBeetrootsDead(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
+//    public static final Block invisibleLight = new BlockInvisibleLight(160).setBlockLightLevel(0.5F);
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
@@ -98,6 +99,8 @@ public class Blocks extends Block {
         registerItemBlock("ore/uru_ore",oreUru);
         registerItemBlock("beetroot",beetroots);
         registerItemBlock("beetroot",beetrootsDead);
+//        registerItemBlock("invisible",invisibleLight);
+
     }
 
     public static void registerRecipes(RecipeRegister register) {

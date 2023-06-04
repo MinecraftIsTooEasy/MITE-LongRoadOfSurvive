@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.entity.player;
 import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
+import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.entity.EntityClusterSpider;
 import net.oilcake.mitelros.item.Items;
@@ -16,10 +17,13 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import static java.lang.Math.max;
 import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
@@ -231,6 +235,43 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         return biome.temperature >= 1.50F && StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue;
     }
+    private void activeNegativeUndying() {
+        this.clearActivePotions();
+        this.setHealth(2,true,this.getHealFX());
+        this.entityFX(EnumEntityFX.smoke_and_steam);
+        this.makeSound("imported.random.totem_use", 3.0F, 1.0F+this.rand.nextFloat()*0.1F);
+        this.addPotionEffect(new MobEffect(MobEffectList.resistance.id, 400, 3));
+        this.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 400, 0));
+        this.addPotionEffect(new MobEffect(MobEffectList.blindness.id, 40, 4));
+        this.vision_dimming+=0.75F;
+        this.triggerAchievement(AchievementExtend.cheatdeath);
+    }
+    protected void checkForAfterDamage(Damage damage, EntityDamageResult result) {
+        if (result.entityWasDestroyed()) {
+            ItemStack var5 = this.getHeldItemStack();
+            if (var5 != null && var5.getItem() == Items.totemofundying) {
+                result.setEntity_was_destroyed(false);
+                this.activeNegativeUndying();
+                this.setHeldItemStack(null);
+            }
+        }
+    }
+    @Redirect(method = "attackEntityFrom",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/EntityLiving;attackEntityFrom(Lnet/minecraft/Damage;)Lnet/minecraft/EntityDamageResult;"))
+    private EntityDamageResult redirectEntityAttack(EntityLiving caller,Damage damage){
+        EntityDamageResult entityDamageResult = super.attackEntityFrom(damage);
+
+        if (entityDamageResult != null && (double)this.getHealthFraction() <= 0.1D && !entityDamageResult.entityWasDestroyed()) {
+            ItemStack var5 = this.getHeldItemStack();
+            if (var5 != null && var5.getItem() == Items.totemofundying) {
+                entityDamageResult.setEntity_was_destroyed(false);
+                this.activeNegativeUndying();
+                this.setHeldItemStack(null);
+            }
+        }
+        return entityDamageResult;
+    }
     private int HeatResistance;
     private int FreezingCooldown;
     private int FreezingWarning;
@@ -286,6 +327,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
+            //站定喝水
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
             if(this.getBlockAtFeet()!= null && this.getBlockAtFeet().blockMaterial == Material.water && this.isSneaking()){
                 ++this.water_duration;
@@ -304,15 +346,18 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
                 }
             }
+            //水分自然扣减
             dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 3.0D : 1.0D) + (double) biome.getFloatTemperature();
             if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
             }
+            //喝酒
             if(this.Hasdrunked) {
                 this.drunk_duration = 6000;
                 this.Hasdrunked = false;
             }
+            //寒冷惩罚
             int freezeunit = max(FreezingCooldown - (3000 * getReduce_weight()), 0);
             BodyTemperature = 37.2F - (0.000125F * freezeunit);
             int freezelevel = max(freezeunit/12000, 0);
@@ -330,6 +375,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
                 }
             }
+            //炎热惩罚
             if(this.HeatResistance > 3200 - (getReduce_weight() * 50)){
                 this.addPotionEffect(new MobEffect(MobEffectList.confusion.id, 1600, 1));
                 this.HeatResistance = 0;
@@ -337,6 +383,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             if(this.InHeat()){
                 this.HeatResistance++;
             }
+            //叠加寒冷惩罚
             if(this.InFreeze() || this.drunk_duration > 0){
                 FreezingCooldown += StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1;
                 FreezingCooldown += this.drunk_duration > 0 ? StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1 : 0;
@@ -346,11 +393,12 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     --FreezingCooldown;
                 }
             }
+            //调用喝酒翻倍计算时间
             if(this.drunk_duration > 0){
                 drunk_duration--;
             }
         }
-
+        //成就奖励
         if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup &&Feast_trigger_salmon_soup &&Feast_trigger_beetroot_soup &&!rewarded_disc_damnation){
             this.triggerAchievement(AchievementExtend.feast);
             this.addExperience(2500);
@@ -367,9 +415,16 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             worldObj.spawnEntityInWorld(RewardingRecord);
             RewardingRecord.entityFX(EnumEntityFX.summoned);
         }
+        //傲慢惩罚
         if(this.UnderArrogance()){
             this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
         }
+        //实验性动态光源
+//        if(this.getHeldItemStack()!=null&&this.getHeldItem().itemID==Block.torchWood.blockID){
+//            if(this.getBlockAtFeet() == null && this.onGround){
+//                this.worldObj.setBlock(this.getBlockPosX(), this.getFootBlockPosY(), this.getBlockPosZ(), Blocks.invisibleLight.blockID);
+//            }
+//        }
     }
 
     public int getFreezingCooldown() {
@@ -615,6 +670,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             return result;
         }
     }
+
     @Overwrite
     public static int getHealthLimit(int level) {
         int HealthLMTwithTag = 0;
@@ -626,6 +682,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         }
         return StuckTagConfig.TagConfig.TagDistortion.ConfigValue ? HealthLMTwithTag : HealthLMTwithoutTag;
     }
+
     @Shadow
     public int getNutrition() {return 1;}
     @Shadow

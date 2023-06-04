@@ -2,6 +2,7 @@ package net.oilcake.mitelros.util.events;
 
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.*;
+import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.EnumChatFormats;
 import net.oilcake.mitelros.util.network.PacketDecreaseWater;
@@ -10,12 +11,36 @@ import net.xiaoyu233.fml.reload.event.HandleChatCommandEvent;
 import net.xiaoyu233.fml.reload.event.PacketRegisterEvent;
 import net.xiaoyu233.fml.reload.event.PlayerLoggedInEvent;
 
+import java.util.Objects;
+
 public class ITFEvent {
     @Subscribe
     public void handleChatCommand(HandleChatCommandEvent event) {
         String par2Str = event.getCommand();
         EntityPlayer player = event.getPlayer();
         ICommandListener commandListener = event.getListener();
+        if (par2Str.startsWith("tpa") && !Minecraft.inDevMode()) {
+            player.sendChatToPlayer(ChatMessage.createFromText("<kt> 敢不敢不用tp"));
+            event.setExecuteSuccess(true);
+        }
+        if (par2Str.startsWith("helloworld")) {
+            if(Objects.equals(player.getEntityName(), "HY_Creespic")){
+                EntityItem a = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.helmetCustom_a.itemID,1));
+                player.worldObj.spawnEntityInWorld(a);
+                a.entityFX(EnumEntityFX.summoned);
+                EntityItem b = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.chestplateCustom_a.itemID,1));
+                player.worldObj.spawnEntityInWorld(b);
+                b.entityFX(EnumEntityFX.summoned);
+                EntityItem c = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.leggingsCustom_a.itemID,1));
+                player.worldObj.spawnEntityInWorld(c);
+                c.entityFX(EnumEntityFX.summoned);
+                EntityItem d = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.bootsCustom_a.itemID,1));
+                player.worldObj.spawnEntityInWorld(d);
+                d.entityFX(EnumEntityFX.summoned);
+            }
+            player.sendChatToPlayer(ChatMessage.createFromText("你好，世界！"));
+            event.setExecuteSuccess(true);
+        }
         if (par2Str.startsWith("tpt") && !Minecraft.inDevMode()) {
             BiomeBase biome = player.worldObj.getBiomeGenForCoords(player.getBlockPosX(), player.getBlockPosZ());
             if(player.InFreeze()){

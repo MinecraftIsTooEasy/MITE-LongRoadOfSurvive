@@ -17,7 +17,7 @@ public class EntityStray extends EntitySkeleton {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.followRange, 64.0);
-        this.setEntityAttribute(GenericAttributes.maxHealth, 6.0);
+        this.setEntityAttribute(GenericAttributes.maxHealth, 8.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.28999999165534973);
         this.setEntityAttribute(GenericAttributes.attackDamage, 5.0);
     }
@@ -68,20 +68,23 @@ public class EntityStray extends EntitySkeleton {
 
     protected void addRandomEquipment() {
         this.addRandomWeapon();
-        Calendar var5 = this.worldObj.getCurrentDate();
-        if (var5.get(2) + 1 == 4 && var5.get(5) == 1){
-            this.setBoots((new ItemStack(Items.MaidBoots)).randomizeForMob(this, false));
-            this.setLeggings((new ItemStack(Items.MaidLeggings)).randomizeForMob(this, false));
-            this.setCuirass((new ItemStack(Items.MaidChestplate)).randomizeForMob(this, false));
-            this.setHelmet((new ItemStack(Items.MaidHelmet)).randomizeForMob(this, false));
-        } else{
-            this.setBoots((new ItemStack(Items.WolfBoots)).randomizeForMob(this, false));
-            this.setLeggings((new ItemStack(Items.WolfLeggings)).randomizeForMob(this, false));
-            this.setCuirass((new ItemStack(Items.WolfChestplate)).randomizeForMob(this, false));
-            this.setHelmet((new ItemStack(Items.WolfHelmet)).randomizeForMob(this, false));
-        }
+//        Calendar var5 = this.worldObj.getCurrentDate();
+//        if (var5.get(2) + 1 == 4 && var5.get(5) == 1){
+//            this.setBoots((new ItemStack(Items.MaidBoots)).randomizeForMob(this, false));
+//            this.setLeggings((new ItemStack(Items.MaidLeggings)).randomizeForMob(this, false));
+//            this.setCuirass((new ItemStack(Items.MaidChestplate)).randomizeForMob(this, false));
+//            this.setHelmet((new ItemStack(Items.MaidHelmet)).randomizeForMob(this, false));
+//        } else{
+//            this.setBoots((new ItemStack(Items.WolfBoots)).randomizeForMob(this, false));
+//            this.setLeggings((new ItemStack(Items.WolfLeggings)).randomizeForMob(this, false));
+//            this.setCuirass((new ItemStack(Items.WolfChestplate)).randomizeForMob(this, false));
+//            this.setHelmet((new ItemStack(Items.WolfHelmet)).randomizeForMob(this, false));
+//        }
     }
     public float getNaturalDefense(DamageSource damage_source) {
         return super.getNaturalDefense(damage_source) + (damage_source.bypassesMundaneArmor() ? 0.0F : 1.0F);
+    }
+    public boolean catchesFireInSunlight() {
+        return false;
     }
 }

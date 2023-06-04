@@ -201,8 +201,13 @@ public class Items extends Item {
     public static final ItemBowlClay claybowlWaterSwampland = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.dangerous_water, "swampland_water")).setUnlocalizedName("SwamplandWater");
     public static final ItemBowlClay claybowlSalmonSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
     public static final ItemBowlClay claybowlBeetrootSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
+    public static final Item totemofundying = (ItemStandard) (new ItemStandard(Constant.getNextItemID(),Materials.ancient_metal,"totem_of_undying")).setMaxStackSize(1);
+    public static final ItemArmor helmetCustom_a = new ItemHelmet(Constant.getNextItemID(),Materials.custom_a,false);
+    public static final ItemArmor chestplateCustom_a = new ItemCuirass(Constant.getNextItemID(),Materials.custom_a,false);
+    public static final ItemArmor leggingsCustom_a = new ItemLeggings(Constant.getNextItemID(),Materials.custom_a,false);
+    public static final ItemArmor bootsCustom_a = new ItemBoots(Constant.getNextItemID(),Materials.custom_a,false);
 
-   //    public static PotionBrewer potionBrewer;
+    //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
 
@@ -352,6 +357,10 @@ public class Items extends Item {
         register("armor/maid_chestplate",MaidChestplate);
         register("armor/maid_leggings",MaidLeggings);
         register("armor/maid_boots",MaidBoots);
+        register("armor/maid_helmet",helmetCustom_a);
+        register("armor/maid_chestplate",chestplateCustom_a);
+        register("armor/maid_leggings",leggingsCustom_a);
+        register("armor/maid_boots",bootsCustom_a);
         register("armor/ancient_metal_sacred_helmet",HelmetAncientmetalsacred);
         register("armor/ancient_metal_sacred_chestplate",ChestplateAncientmetalsacred);
         register("armor/ancient_metal_sacred_leggings",LeggingsAncientmetalsacred);
@@ -400,6 +409,7 @@ public class Items extends Item {
         register("hardened_clay_bowls/salmon_soup",claybowlSalmonSoup);
         register("hardened_clay_bowls/sorbet",claybowlSorbet);
         register("hardened_clay_bowls/vegetable_soup",claybowlVegetableSoup);
+        register("totem_of_undying",totemofundying);
         Constant.initItemArray();
     }
 
