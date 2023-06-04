@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.text.DecimalFormat;
@@ -293,4 +294,9 @@ public class GuiIngameMixin extends avk {
     private final Random f = new Random();
     @Shadow
     private int i;
+    @Redirect(method = "a(II)V",
+            at = @At(value = "INVOKE",target = "Lnet/minecraft/AttributeInstance;getAttributeValue()D"))
+    private double redirectHealthLimit(AttributeInstance att){
+        return this.g.h.getHealthLimit();
+    }
 }

@@ -224,10 +224,15 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         ItemStack wearingItemStack = this.getCuirass();
         if (biome.temperature <= 0.16F){
-            return (this.getHelmet() == null || this.getHelmet().itemID != Items.WolfHelmet.itemID ||
+            return  (this.getHelmet() == null || this.getHelmet().itemID != Items.helmetCustom_a.itemID ||
+                    this.getCuirass() == null || this.getCuirass().itemID != Items.chestplateCustom_a.itemID ||
+                    this.getLeggings() == null || this.getLeggings().itemID != Items.leggingsCustom_a.itemID ||
+                    this.getBoots() == null || this.getBoots().itemID != Items.bootsCustom_a.itemID) ||
+                    (this.getHelmet() == null || this.getHelmet().itemID != Items.WolfHelmet.itemID ||
                     this.getCuirass() == null || this.getCuirass().itemID != Items.WolfChestplate.itemID ||
                     this.getLeggings() == null || this.getLeggings().itemID != Items.WolfLeggings.itemID ||
-                    this.getBoots() == null || this.getBoots().itemID != Items.WolfBoots.itemID) && !EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether);
+                    this.getBoots() == null || this.getBoots().itemID != Items.WolfBoots.itemID)
+                    && !EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether);
         }
         return false;
     }
