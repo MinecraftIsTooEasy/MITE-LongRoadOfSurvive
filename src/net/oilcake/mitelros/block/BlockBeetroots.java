@@ -35,7 +35,7 @@ public class BlockBeetroots extends BlockCrops {
     }
 
     protected int getMatureYield() {
-        return Math.random() < 0.5 ? 2 : 1;
+        return Math.random() < 0.5 ? 3 : 2;
     }
 
     public int getGrowthStage(int metadata) {

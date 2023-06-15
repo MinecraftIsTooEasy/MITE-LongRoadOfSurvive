@@ -115,7 +115,7 @@ public class Items extends Item {
     public static final ItemArmor WolfLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden");
-    public static final Item Goldenapplelegend = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
+    public static final Item Goldenapplelegend = (ItemGoldenAppleLegend)(new ItemGoldenAppleLegend(Constant.getNextItemID(),2,1, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
     public static final ItemBowl bowlLemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
     public static final ItemBowl bowlEmpty = (ItemBowl)(new ItemBowl(25, (Material)null, "VANILLA")).setUnlocalizedName("bowl").useVanillaTexture("bowl").setMaxStackSize(4);
     public static final ItemMorningStar morningStarCopper = new ItemMorningStar(Constant.getNextItemID(), Material.copper);
@@ -180,7 +180,7 @@ public class Items extends Item {
     public static final ItemBowlClay claybowlEmpty = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), null, "VANILLA")).setUnlocalizedName("bowlclay").useVanillaTexture("bowlclay").setMaxStackSize(4);
     public static final ItemBowlClay claybowlMushroomStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.mushroom_stew, "mushroom_stew")).setFoodValue(2, 4, false, false, false).setPlantProduct().setUnlocalizedName("mushroomStew");
     public static final ItemBowlClay claybowlMilk = (ItemBowlClay)(new ItemBowlClay(Constant.getNextItemID(), Material.milk, "bowl_milk")).setFoodValue(0, 1, true, false, false).setAnimalProduct().setContainerItem(claybowlEmpty).setAlwaysEdible().setUnlocalizedName("bowlMilk");
-    public static final ItemBowlClay claybowlWater = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.water, "bowl_water")).setContainerItem(claybowlMilk).setUnlocalizedName("bowlWater");
+    public static final ItemBowlClay claybowlWater = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.water, "bowl_water")).setContainerItem(claybowlEmpty).setUnlocalizedName("bowlWater");
     public static final ItemBowlClay claybowlBeefStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.beef_stew, "beef_stew")).setFoodValue(16, 16, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beefStew");
     public static final ItemBowlClay claybowlChickenSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.chicken_soup, "chicken_soup")).setFoodValue(10, 10, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("chickenSoup");
     public static final ItemBowlClay claybowlVegetableSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.vegetable_soup, "vegetable_soup")).setFoodValue(6, 6, false, false, true).setPlantProduct().setUnlocalizedName("vegetableSoup");
@@ -884,7 +884,13 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(Items.seedsBeetroot,1),false,
                 Items.beetroot,Items.beetroot);
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),false,
-                Items.beetroot,Items.beetroot);
+                Items.beetroot);
+        register.registerShapelessRecipe(new ItemStack(Items.Pulque,1),true,
+                Item.sugar,Items.Agave,new ItemStack(Item.potion,1,0)
+        ).resetDifficulty(3200);
+        register.registerShapelessRecipe(new ItemStack(Items.Ale,1),true,
+                Item.sugar,Item.wheat,new ItemStack(Item.potion,1,0)
+        ).resetDifficulty(3200);
         register.registerShapelessRecipe(new ItemStack(Items.claybowlRaw,1),false,
                 Item.clay);
         register.registerShapelessRecipe(new ItemStack(Items.tungstenBucket,1),false,

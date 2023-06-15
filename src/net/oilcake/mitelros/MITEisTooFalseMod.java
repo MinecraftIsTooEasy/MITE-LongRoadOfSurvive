@@ -2,6 +2,7 @@ package net.oilcake.mitelros;
 
 import net.oilcake.mitelros.mixins.MinecraftMixin;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.SpecializedTPAConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import net.oilcake.mitelros.util.events.ITFEvent;
@@ -42,6 +43,7 @@ public class MITEisTooFalseMod extends AbstractMod {
     @Override
     public void postInit() {
         StuckTagConfig.loadConfigs();
+        ExperimentalConfig.loadConfigs();
         MITEEvents.MITE_EVENT_BUS.register(new ITFEvent());
 //        SpecializedTPAConfig.FileInit();
     }

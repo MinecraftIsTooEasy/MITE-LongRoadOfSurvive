@@ -23,7 +23,25 @@ public class ITFEvent {
             player.sendChatToPlayer(ChatMessage.createFromText("<kt> 敢不敢不用tp"));
             event.setExecuteSuccess(true);
         }
-        if (par2Str.startsWith("helloworld")) {
+        if (par2Str.startsWith("Hello World!")) {
+            if(Objects.equals(player.getEntityName(), "HY_Creespic")){
+                EntityItem a = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidHelmet.itemID,1));
+                player.worldObj.spawnEntityInWorld(a);
+                a.entityFX(EnumEntityFX.summoned);
+                EntityItem b = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidChestplate.itemID,1));
+                player.worldObj.spawnEntityInWorld(b);
+                b.entityFX(EnumEntityFX.summoned);
+                EntityItem c = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidLeggings.itemID,1));
+                player.worldObj.spawnEntityInWorld(c);
+                c.entityFX(EnumEntityFX.summoned);
+                EntityItem d = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidBoots.itemID,1));
+                player.worldObj.spawnEntityInWorld(d);
+                d.entityFX(EnumEntityFX.summoned);
+            }
+            player.sendChatToPlayer(ChatMessage.createFromText("你好，世界！"));
+            event.setExecuteSuccess(true);
+        }
+        if (par2Str.startsWith("Brain Power")) {
             if(Objects.equals(player.getEntityName(), "HY_Creespic")){
                 EntityItem a = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.helmetCustom_a.itemID,1));
                 player.worldObj.spawnEntityInWorld(a);
@@ -38,7 +56,12 @@ public class ITFEvent {
                 player.worldObj.spawnEntityInWorld(d);
                 d.entityFX(EnumEntityFX.summoned);
             }
-            player.sendChatToPlayer(ChatMessage.createFromText("你好，世界！"));
+            if(player.getRand().nextFloat() <= (Objects.equals(player.getEntityName(), "HY_Creespic") ? 10F : 0.1F))
+                player.makeSound("imported.meme.brainpower", 10.0F, 1.0F);
+            player.sendChatToPlayer(ChatMessage.createFromText("O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA\n" +
+                    "O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA\n" +
+                    "O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-ooo-oooo EEEEO-A-AAA-AAA- O----------\n" +
+                    "\n"));
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("tpt") && !Minecraft.inDevMode()) {

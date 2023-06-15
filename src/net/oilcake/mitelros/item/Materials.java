@@ -3,7 +3,7 @@ package net.oilcake.mitelros.item;
 import net.minecraft.*;
 
 public class Materials extends Material {
-    public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setRequiresTool().setMetal(true).setMinHarvestLevel(3);
+    public static final Materials nickel = (Materials) new Materials(EnumEquipmentMaterials.nickel).setRequiresTool().setMetal(false).setMinHarvestLevel(3);
     public static final Materials tungsten = (Materials) new Materials(EnumEquipmentMaterials.tungsten).setRequiresTool().setMetal(true).setMinHarvestLevel(5);
     public static final Materials vibranium = (Materials) new Materials(EnumEquipmentMaterials.vibranium).setRequiresTool().setMetal(true).setMinHarvestLevel(1);
     public static final Materials uru = (Materials) new Materials(EnumEquipmentMaterials.uru).setRequiresTool().setMetal(true).setMinHarvestLevel(5);

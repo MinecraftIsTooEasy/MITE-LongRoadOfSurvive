@@ -196,7 +196,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     public void travelToDimension(int par1) {
         if (this.dimension == 1 && par1 == 1) {
             this.triggerAchievement(AchievementList.theEnd2);
-            if(Constant.CalculateCurrentDiff() > 18){
+            if(Constant.CalculateCurrentDiff() >= 18){
                 this.triggerAchievement(AchievementExtend.stormStriker);
             }
             this.worldObj.removeEntity(this);

@@ -9,7 +9,6 @@ import java.util.List;
 public class EntityGhost extends EntityInvisibleStalker {
     public EntityGhost(World par1World) {
         super(par1World);
-        this.tasks.addTask(3, new EntityAIMoveToTree(this, 1.0F));
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();

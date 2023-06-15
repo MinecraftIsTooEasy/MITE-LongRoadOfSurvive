@@ -31,7 +31,7 @@ public class ItemBowlMixin extends ItemVessel {
             }
             if (this.contains(Materials.unsafe_water)) {
                 player.getFoodStats().addWater(1);
-                player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
+                player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 600, 0));
             }
             if (this.contains(Material.milk)) {
                 player.clearActivePotions();

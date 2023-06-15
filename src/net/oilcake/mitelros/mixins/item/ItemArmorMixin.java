@@ -53,10 +53,8 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
     @Overwrite
     public int getMaterialProtection() {
         int protection;
-        if(this.effective_material == Materials.custom_a){
+        if(this.effective_material == Materials.custom_a || this.effective_material == Materials.maid){
             protection = 0;
-        } else if (this.effective_material == Materials.maid) {
-            protection = 1;
         } else if (this.effective_material == Material.leather) {
             protection = 2;
         } else if(this.effective_material == Materials.wolf_fur){

@@ -19,14 +19,16 @@ public class RenderPlayerMixin extends bhb {
     private bbj g;
     @Shadow
     private bbj h;
-    private bbj SpecializedRender;
+    private bbj SpecializedRenderBody;
+    private bbj SpecializedRenderLegs;
 
     public RenderPlayerMixin(bbo par1ModelBase, float par2) {
         super(par1ModelBase, par2);
     }
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.SpecializedRender = new bbj(0.5F);
+        this.SpecializedRenderBody = new bbj(0.25F);
+        this.SpecializedRenderLegs = new bbj(0.0125F);
     }
 
     @Overwrite
@@ -39,7 +41,7 @@ public class RenderPlayerMixin extends bhb {
                 this.a((bjo)bgu.a(var6, par2));
                 bbj var7;
                 if (var6.getArmorMaterial() == Materials.maid || var6.getArmorMaterial() == Materials.custom_a) {
-                    var7 = this.SpecializedRender;
+                    var7 = par2 == 2 ? this.SpecializedRenderLegs : this.SpecializedRenderBody;
                     var7.c.j = par2 == 0;
                     var7.d.j = par2 == 0;
                     var7.e.j = par2 == 1 || par2 == 2;
@@ -93,26 +95,26 @@ public class RenderPlayerMixin extends bhb {
         float var10 = 1.0F;
         GL11.glColor3f(var10, var10, var10);
         ItemStack var11 = par1AbstractClientPlayer.inventory.getCurrentItemStack();
-        this.g.m = this.h.m = this.f.m = var11 != null ? 1 : 0;
+        this.g.m = this.h.m = this.f.m = this.SpecializedRenderBody.m = this.SpecializedRenderLegs.m = var11 != null ? 1 : 0;
         if (var11 != null && par1AbstractClientPlayer.bq() > 0) {
             EnumItemInUseAction var12 = var11.getItemInUseAction(par1AbstractClientPlayer);
             if (var12 == EnumItemInUseAction.BLOCK) {
-                this.g.m = this.h.m = this.f.m = 3;
+                this.g.m = this.h.m = this.f.m = this.SpecializedRenderBody.m = this.SpecializedRenderLegs.m = 3;
             } else if (var12 == EnumItemInUseAction.BOW) {
-                this.g.o = this.h.o = this.f.o = true;
+                this.g.o = this.h.o = this.f.o = this.SpecializedRenderBody.o = this.SpecializedRenderLegs.o = true;
             }
         }
 
-        this.g.n = this.h.n = this.f.n = par1AbstractClientPlayer.isSneaking();
+        this.g.n = this.h.n = this.f.n  = this.SpecializedRenderBody.n = this.SpecializedRenderLegs.n = par1AbstractClientPlayer.isSneaking();
         double var14 = par4 - (double)par1AbstractClientPlayer.yOffset;
         if (par1AbstractClientPlayer.isSneaking() && !(par1AbstractClientPlayer instanceof bex)) {
             var14 -= 0.125;
         }
 
         super.a(par1AbstractClientPlayer, par2, var14, par6, par8, par9);
-        this.g.o = this.h.o = this.f.o = false;
-        this.g.n = this.h.n = this.f.n = false;
-        this.g.m = this.h.m = this.f.m = 0;
+        this.g.o = this.h.o = this.f.o = this.SpecializedRenderBody.o = this.SpecializedRenderLegs.o = false;
+        this.g.n = this.h.n = this.f.n = this.SpecializedRenderBody.n = this.SpecializedRenderLegs.n = false;
+        this.g.m = this.h.m = this.f.m = this.SpecializedRenderBody.m = this.SpecializedRenderLegs.m = 0;
     }
 
     @Shadow

@@ -168,7 +168,6 @@ public class EntityVillagerMixin extends EntityAgeable implements IMerchant, NPC
                 addBlacksmithItem(var2, Item.legsLeather.itemID, this.rand, this.adjustProbability(0.3F));
                 addBlacksmithItem(var2, Item.porkCooked.itemID, this.rand, this.adjustProbability(0.3F));
                 addBlacksmithItem(var2, Item.beefCooked.itemID, this.rand, this.adjustProbability(0.3F));
-                addBlacksmithItem(var2, Items.horse_meat_cooked.itemID, this.rand, this.adjustProbability(0.3F));
                 addBlacksmithItem(var2, Item.lambchopCooked.itemID, this.rand, this.adjustProbability(0.3F));
                 if (this.rand.nextFloat() < this.adjustProbability(0.5F)) {
                     var2.add(new MerchantRecipe(new ItemStack(Items.horse_meat, 12 + rand.nextInt(2)), new ItemStack(Item.emerald.itemID, 1, 0)));

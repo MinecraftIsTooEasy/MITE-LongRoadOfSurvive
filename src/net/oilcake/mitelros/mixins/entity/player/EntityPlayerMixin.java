@@ -223,16 +223,28 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     public boolean InFreeze(){
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         ItemStack wearingItemStack = this.getCuirass();
+        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
+            return false;
+        }
         if (biome.temperature <= 0.16F){
-            return  (this.getHelmet() == null || this.getHelmet().itemID != Items.helmetCustom_a.itemID ||
-                    this.getCuirass() == null || this.getCuirass().itemID != Items.chestplateCustom_a.itemID ||
-                    this.getLeggings() == null || this.getLeggings().itemID != Items.leggingsCustom_a.itemID ||
-                    this.getBoots() == null || this.getBoots().itemID != Items.bootsCustom_a.itemID) ||
-                    (this.getHelmet() == null || this.getHelmet().itemID != Items.WolfHelmet.itemID ||
-                    this.getCuirass() == null || this.getCuirass().itemID != Items.WolfChestplate.itemID ||
-                    this.getLeggings() == null || this.getLeggings().itemID != Items.WolfLeggings.itemID ||
-                    this.getBoots() == null || this.getBoots().itemID != Items.WolfBoots.itemID)
-                    && !EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether);
+            if(this.getHelmet() != null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
+                    this.getCuirass() != null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
+                    this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
+                    this.getBoots() != null && this.getBoots().itemID == Items.WolfBoots.itemID){
+                return false;
+            } else if(this.getHelmet() != null && this.getHelmet().itemID == Items.helmetCustom_a.itemID &&
+                    this.getCuirass() != null && this.getCuirass().itemID == Items.chestplateCustom_a.itemID &&
+                    this.getLeggings() != null && this.getLeggings().itemID == Items.leggingsCustom_a.itemID &&
+                    this.getBoots() != null && this.getBoots().itemID == Items.bootsCustom_a.itemID){
+                return false;
+            } else if(this.getHelmet() != null && this.getHelmet().itemID == Items.MaidHelmet.itemID &&
+                    this.getCuirass() != null && this.getCuirass().itemID == Items.MaidChestplate.itemID &&
+                    this.getLeggings() != null && this.getLeggings().itemID == Items.MaidLeggings.itemID &&
+                    this.getBoots() != null && this.getBoots().itemID == Items.MaidBoots.itemID){
+                return false;
+            } else{
+                return true;
+            }
         }
         return false;
     }
@@ -289,40 +301,40 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     public int getReduce_weight(){
         int Weight = 0;
         if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID){
-            Weight += 7;
+            Weight += 2;
         }
         if(this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID){
-            Weight += 7;
+            Weight += 2;
         }
         if(this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID){
-            Weight += 7;
+            Weight += 2;
         }
         if(this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID ){
-            Weight += 7;
+            Weight += 2;
         }
         if(this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID){
-            Weight += 2;
+            Weight += 1;
         }
         if(this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID){
-            Weight += 2;
+            Weight += 1;
         }
         if(this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID){
-            Weight += 2;
+            Weight += 1;
         }
         if(this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID ){
-            Weight += 2;
+            Weight += 1;
         }
         if(this.getHelmet()!= null){
-            Weight += 1;
+            Weight += 2;
         }
-        if(this.getCuirass()!= null){
-            Weight += 1;
+        if(this.getCuirass()!= null) {
+            Weight += 2;
         }
         if(this.getLeggings()!= null){
-            Weight += 1;
+            Weight += 2;
         }
         if(this.getBoots()!= null){
-            Weight += 1;
+            Weight += 2;
         }
         return Weight;
     }
@@ -348,11 +360,11 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.getFoodStats().addWater(2);
                 } else{
                     this.getFoodStats().addWater(1);
-                    this.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
+                    this.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 600, 0));
                 }
             }
             //水分自然扣减
-            dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 3.0D : 1.0D) + (double) biome.getFloatTemperature();
+            dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 2.0D : 1.0D) + (double) biome.getFloatTemperature();
             if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
@@ -363,7 +375,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 this.Hasdrunked = false;
             }
             //寒冷惩罚
-            int freezeunit = max(FreezingCooldown - (3000 * getReduce_weight()), 0);
+            int freezeunit = max(FreezingCooldown - (1500 * getReduce_weight()), 0);
             BodyTemperature = 37.2F - (0.000125F * freezeunit);
             int freezelevel = max(freezeunit/12000, 0);
             if(freezeunit > 12000 && this.InFreeze()){
@@ -686,6 +698,89 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             HealthLMTwithTag = (Math.max(Math.min(14 + level / 10 * 2, 40), 20));
         }
         return StuckTagConfig.TagConfig.TagDistortion.ConfigValue ? HealthLMTwithTag : HealthLMTwithoutTag;
+    }
+    @Overwrite
+    public float getCurrentPlayerStrVsBlock(int x, int y, int z, boolean apply_held_item) {
+        Block block = Block.blocksList[this.worldObj.getBlockId(x, y, z)];
+        if (block == null) {
+            return 0.0F;
+        } else {
+            float block_hardness = this.worldObj.getBlockHardness(x, y, z);
+            if (block_hardness == 0.0F) {
+                return 1.0F;
+            } else {
+                float min_str_vs_block = -3.4028235E38F;
+                Item held_item = this.getHeldItem();
+                float str_vs_block;
+                if (block.isPortable(this.worldObj, this, x, y, z)) {
+                    str_vs_block = min_str_vs_block = 4.0F * block_hardness;
+                } else {
+                    int metadata;
+                    if (apply_held_item && held_item != null) {
+                        metadata = this.worldObj.getBlockMetadata(x, y, z);
+                        str_vs_block = held_item.getStrVsBlock(block, metadata);
+//                        if(str_vs_block == 0.0F)
+//                            System.out.println("Warning: strength_vs_block is 0.");
+                        if (str_vs_block < 1.0F) {
+                            return this.getCurrentPlayerStrVsBlock(x, y, z, false);
+                        }
+
+                        int var4 = EnchantmentManager.getEfficiencyModifier(this);
+                        if (var4 > 0) {
+                            float var6 = (float)(var4 * var4 + 1);
+                            str_vs_block += var6;
+                        }
+                    } else {
+                        metadata = this.worldObj.getBlockMetadata(x, y, z);
+                        if (block.blockMaterial.requiresTool(block, metadata)) {
+                            str_vs_block = 0.0F;
+                        } else {
+                            str_vs_block = 1.0F;
+                        }
+                    }
+                }
+
+                if (block == Block.web) {
+                    boolean decrease_strength = true;
+                    if (apply_held_item && held_item != null && held_item.isTool() && held_item.getAsTool().isEffectiveAgainstBlock(block, 0)) {
+                        decrease_strength = false;
+                    }
+
+                    if (decrease_strength) {
+                        str_vs_block *= 0.2F;
+                    }
+                }
+
+                if (this.isPotionActive(MobEffectList.digSpeed)) {
+                    str_vs_block *= 1.0F + (float)(this.getActivePotionEffect(MobEffectList.digSpeed).getAmplifier() + 1) * 0.2F;
+                }
+
+                if (this.isPotionActive(MobEffectList.digSlowdown)) {
+                    str_vs_block *= 1.0F - (float)(this.getActivePotionEffect(MobEffectList.digSlowdown).getAmplifier() + 1) * 0.2F;
+                }
+
+                if (this.isInsideOfMaterial(Material.water) && !EnchantmentManager.getAquaAffinityModifier(this)) {
+                    str_vs_block /= 5.0F;
+                }
+
+                if (!this.onGround) {
+                    str_vs_block /= 5.0F;
+                }
+
+                if (!this.hasFoodEnergy()) {
+                    str_vs_block /= 5.0F;
+                }
+
+                str_vs_block *= 1.0F + this.getLevelModifier(EnumLevelBonus.HARVESTING);
+//                if(str_vs_block == 0.0F)
+//                    System.out.println("Warning: strength_vs_block is 0.");
+                return Math.max(str_vs_block, min_str_vs_block);
+            }
+        }
+    }
+    @Shadow
+    public float getLevelModifier(EnumLevelBonus kind) {
+        return 0;
     }
 
     @Shadow

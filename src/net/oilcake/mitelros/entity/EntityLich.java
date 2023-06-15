@@ -249,7 +249,7 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
         }
 
         if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
-            this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
+            this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 0), 0.0F);
         }
     }
 }

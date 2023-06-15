@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.world;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -253,6 +254,48 @@ public class SpawnerCreatureMixin {
                     }
                 }
             }
+        }
+    }
+    @Overwrite
+    public float calcEffectiveHostileMobSpawningRateModifier(WorldServer world) {
+        if (world.provider.dimensionId != 0) {
+            return 0.25F;
+        } else {
+            float hostile_mob_spawning_rate_modifier;
+            if(ExperimentalConfig.TagConfig.TagSpawningV2.ConfigValue){
+                hostile_mob_spawning_rate_modifier = Math.abs((float)world.getTimeOfDay() - 12000.0F) / 6000.0F ;
+                if (hostile_mob_spawning_rate_modifier < 1.0F && (world.isBloodMoon(false) || world.isThundering(true))) {
+                    hostile_mob_spawning_rate_modifier = 1.0F;
+                }
+            }
+            else{
+                hostile_mob_spawning_rate_modifier = 1.0F;
+                if (world.decreased_hostile_mob_spawning_counter > 0) {
+                    --world.decreased_hostile_mob_spawning_counter;
+                    hostile_mob_spawning_rate_modifier *= 0.5F;
+                } else if (this.random.nextInt(24000) == 0) {
+                    world.decreased_hostile_mob_spawning_counter = this.random.nextInt(4000) + 1;
+                }
+
+                if (world.increased_hostile_mob_spawning_counter > 0) {
+                    --world.increased_hostile_mob_spawning_counter;
+                    hostile_mob_spawning_rate_modifier *= 2.0F;
+                } else if (this.random.nextInt(24000) == 0) {
+                    world.increased_hostile_mob_spawning_counter = this.random.nextInt(2000);
+                }
+
+                if (world.no_hostile_mob_spawning_counter > 0) {
+                    --world.no_hostile_mob_spawning_counter;
+                    hostile_mob_spawning_rate_modifier = 0.0F;
+                } else if (this.random.nextInt(24000) == 0) {
+                    world.no_hostile_mob_spawning_counter = this.random.nextInt(2000) + this.random.nextInt(2000);
+                }
+
+                if (hostile_mob_spawning_rate_modifier < 1.0F && (world.isBloodMoon(false) || world.isThundering(true))) {
+                    hostile_mob_spawning_rate_modifier = 1.0F;
+                }
+            }
+            return hostile_mob_spawning_rate_modifier;
         }
     }
 }

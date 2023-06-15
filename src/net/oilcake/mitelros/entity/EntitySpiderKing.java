@@ -2,9 +2,6 @@ package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
 
-import java.util.Iterator;
-import java.util.List;
-
 public class EntitySpiderKing extends EntityArachnid {
     private final int num_webs;
     public EntitySpiderKing(World par1World) {
@@ -59,19 +56,24 @@ public class EntitySpiderKing extends EntityArachnid {
     }
     private int spawnCounter;
     private int spawnSums;
+    private boolean gathering_troops = false;
     public void onUpdate()
     {
         super.onUpdate();
         if (!getWorld().isRemote)
         {
-                if (spawnSums < 8)
-                    if (spawnCounter < 20)
-                    {
+            if(this.getTarget()!=null){
+                if(!this.isNoDespawnRequired() && this.getTarget() != null){
+                    this.gathering_troops = true;
+                    this.func_110163_bv();
+                }
+            }
+                if (spawnSums < 8 && gathering_troops) {
+                    if (spawnCounter < 20) {
                         spawnCounter++;
-                    } else
-                    {
+                    } else {
                         EntityClusterSpider clusterSpider = new EntityClusterSpider(worldObj);
-                        clusterSpider.setPosition(posX+this.rand.nextInt(8)-this.rand.nextInt(8), posY, posZ-this.rand.nextInt(8)+this.rand.nextInt(8));
+                        clusterSpider.setPosition(posX + this.rand.nextInt(4) - this.rand.nextInt(4),posY, posZ - this.rand.nextInt(4) + this.rand.nextInt(4));
                         clusterSpider.refreshDespawnCounter(-9600);
                         worldObj.spawnEntityInWorld(clusterSpider);
                         clusterSpider.onSpawnWithEgg(null);
@@ -79,6 +81,7 @@ public class EntitySpiderKing extends EntityArachnid {
                         spawnCounter = 0;
                         spawnSums++;
                     }
+                }
         }
     }
     public int getExperienceValue() {

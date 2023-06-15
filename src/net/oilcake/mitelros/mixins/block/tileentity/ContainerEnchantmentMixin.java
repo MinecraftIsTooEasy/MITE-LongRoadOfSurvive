@@ -2,6 +2,8 @@ package net.oilcake.mitelros.mixins.block.tileentity;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.item.ItemGoldenAppleLegend;
+import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,7 +34,7 @@ public class ContainerEnchantmentMixin extends Container {
     @Overwrite
     public int calcEnchantmentLevelsForSlot(Random random, int slotIndex, int numAccessibleBookshelves, ItemStack itemStack) {
         Item item = itemStack.getItem();
-        if (!ItemPotion.isBottleOfWater(itemStack) && !ItemGoldenApple.isUnenchantedGoldenApple(itemStack)) {
+        if (!ItemPotion.isBottleOfWater(itemStack) && !ItemGoldenApple.isUnenchantedGoldenApple(itemStack) && !ItemGoldenAppleLegend.isUnenchantedGoldenApple(itemStack)) {
             if (item.getItemEnchantability() <= 0) {
                 return 0;
             } else {
@@ -51,7 +53,7 @@ public class ContainerEnchantmentMixin extends Container {
                 return Math.max(Math.round((float)enchantment_levels * fraction), 1);
             }
         } else {
-            return 2;
+            return item.itemID == Items.Goldenapplelegend.itemID ? 10 : 2;
         }
     }
 

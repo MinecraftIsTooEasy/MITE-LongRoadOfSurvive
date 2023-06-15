@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(EntityRevenant.class)
 public class EntityRevenantMixin extends EntityZombie {
+    private boolean gathering_troops = false;
     public EntityRevenantMixin(World world) {
         super(world);
     }
@@ -28,12 +29,16 @@ public class EntityRevenantMixin extends EntityZombie {
         super.onUpdate();
         if (!getWorld().isRemote)
         {
-            if (spawnSums <= 8)
-                if (spawnCounter < 20)
-                {
-                    if(StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) spawnCounter++;
-                } else
-                {
+            if(this.getTarget()!=null){
+                if(!this.isNoDespawnRequired() && this.getTarget() != null){
+                    this.gathering_troops = true;
+                    this.func_110163_bv();
+                }
+            }
+            if (spawnSums <= 8 && gathering_troops) {
+                if (spawnCounter < 20) {
+                    if (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) spawnCounter++;
+                } else {
                     EntityMinerZombie Belongings = new EntityMinerZombie(worldObj);
                     Belongings.setPosition(posX, posY, posZ);
                     Belongings.refreshDespawnCounter(-9600);
@@ -43,6 +48,7 @@ public class EntityRevenantMixin extends EntityZombie {
                     spawnCounter = 0;
                     spawnSums++;
                 }
+            }
         }
     }
 }

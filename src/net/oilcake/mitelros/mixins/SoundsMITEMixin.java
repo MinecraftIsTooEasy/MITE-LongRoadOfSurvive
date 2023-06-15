@@ -19,6 +19,7 @@ public class SoundsMITEMixin {
         this.add("records/imported/damnation.ogg");
         this.add("records/imported/connected.ogg");
         this.add("sound/imported/random/totem_use.ogg");
+        this.add("sound/imported/meme/brainpower.ogg");
     }
     @Shadow
     private boolean add(String path) {

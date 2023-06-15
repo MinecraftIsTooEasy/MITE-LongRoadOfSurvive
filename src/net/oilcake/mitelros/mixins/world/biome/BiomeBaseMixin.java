@@ -7,6 +7,7 @@ package net.oilcake.mitelros.mixins.world.biome;
 
 import net.oilcake.mitelros.entity.EntityBoneBodyguard;
 import net.oilcake.mitelros.entity.EntityMinerZombie;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +39,7 @@ public class BiomeBaseMixin{
         this.spawnableCreatureList.add(new BiomeMeta(EntityPig.class, 5, 4, 8));
         this.spawnableCreatureList.add(new BiomeMeta(EntityChicken.class, 5, 4, 8));
         this.spawnableCreatureList.add(new BiomeMeta(EntityCow.class, 5, 4, 8));
-        this.spawnableCreatureList.add(new BiomeMeta(EntityBoneBodyguard.class, 60, 0, 0));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityBoneBodyguard.class, 70, 0, 0));
     }
     public void DisgenAnimals(){
         this.removeEntityFromSpawnableLists(EntityCow.class);
@@ -52,7 +53,9 @@ public class BiomeBaseMixin{
     public void injectCtor(CallbackInfo callbackInfo) {
         this.spawnableMonsterList.add(new BiomeMeta(EntityMinerZombie.class, (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue) ? 35 : 10, 4, 4));
         this.spawnableMonsterList.add(new BiomeMeta(EntityBoneBodyguard.class, (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue || StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue) ? 35 : 10,4,4));
-        this.RegenAnimals();
+        if(ExperimentalConfig.TagConfig.TagCreaturesV2.ConfigValue){
+            this.RegenAnimals();
+        }
         if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue){
             this.DisgenAnimals();
         }

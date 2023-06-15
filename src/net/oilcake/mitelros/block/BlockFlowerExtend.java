@@ -30,6 +30,7 @@ public class BlockFlowerExtend extends BlockFlower {
         this.setUnlocalizedName("flower");
         this.setTextureName("flowers/");
         this.setMaxStackSize(32);
+
     }
 
     public void a(mt par1IconRegister) {
@@ -73,7 +74,6 @@ public class BlockFlowerExtend extends BlockFlower {
         float width = 0.2F;
         if (metadata == 0) {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
-            this.setLightValue(0.125F);
         } else if (metadata == 1) {
             this.setBlockBoundsForCurrentThread((double)(0.5F - width), 0.0, (double)(0.5F - width), (double)(0.5F + width), 0.75, (double)(0.5F + width));
         } else if (metadata == 2) {

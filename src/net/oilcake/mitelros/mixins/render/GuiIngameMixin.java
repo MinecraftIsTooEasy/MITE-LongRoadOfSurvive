@@ -254,24 +254,27 @@ public class GuiIngameMixin extends avk {
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
         if (!Minecraft.inDevMode()) {
             WeatherEvent event = this.g.f.getCurrentWeatherEvent(true, false);
-            String s;
+            String pos = "平面坐标: ("+ MathHelper.floor_double(this.g.h.posX) + ", " + MathHelper.floor_double(this.g.h.posZ) +") ";
+            String time = "时间: ("+this.g.h.getWorld().getHourOfDay()+":"+this.g.h.getWorld().getTotalWorldTime()%1000*60/1000+") ";
+            EntityPlayer player = this.g.h.getAsPlayer();
+            String weather;
             if(StuckTagConfig.TagConfig.TagNoWeatherPredict.ConfigValue){
-                s = "阴晴无定";
+                weather = "阴晴无定";
             } else{
                 if (event != null) {
-                    s = "轰雷降至";
+                    weather = "轰雷降至";
                 } else {
                     event = this.g.f.getNextWeatherEvent(true);
                     if (event != null) {
                         if (event.start - this.g.f.getTotalWorldTime() < 2000) {
-                            s = "乌云滚滚";
+                            weather = "乌云滚滚";
                         }
                         else {
-                            s = "风平浪静";
+                            weather = "风平浪静";
                         }
                     } else {
                         event = this.g.f.getPreviousWeatherEvent(true);
-                        s = event == null ? "风平浪静" : "雨过天晴";
+                        weather = event == null ? "风平浪静" : "雨过天晴";
                     }
                 }
             }
@@ -280,10 +283,16 @@ public class GuiIngameMixin extends avk {
                 String text = GuiIngame.server_load + "%";
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
-            String t;
-            t = " 挑战难度: " + Constant.CalculateCurrentDiff() + " ";
-            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ").append(s).append(t).append("   FPS=");
-            var68.append(Minecraft.last_fps).append(" (");
+            String t = " 挑战难度: " + Constant.CalculateCurrentDiff() + " ";
+            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ");
+            if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.compass)
+                var68.append(pos);
+            if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.pocketSundial)
+                var68.append(time);
+            var68.append(weather);
+            if(Constant.CalculateCurrentDiff()!=0)
+                var68.append(t);
+            var68.append("   FPS=").append(Minecraft.last_fps).append(" (");
             this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }
     }
