@@ -120,26 +120,26 @@ public class EntityWandShockWave extends EntityProjectile{
         this.motionY -= (double)var19;
         this.setPosition(this.posX, this.posY, this.posZ);
     }
+
     @Override
     protected void onImpact(RaycastCollision rc) {
-        if (!this.worldObj.isRemote)
-        {
-            if (rc.isEntity() && rc.getEntityHit() instanceof EntityLiving)
-            {
+        if (!this.worldObj.isRemote) {
+            if (rc.isEntity() && rc.getEntityHit() instanceof EntityLiving) {
                 Entity var3 = rc.getEntityHit();
                 float damage = 10.0F;
                 var3.attackEntityFrom(new Damage(DamageSource.divine_lightning, damage));
+//                rc.world.di
                 EntityLightning lightingbolt = new EntityLightning(worldObj,var3.posX,var3.posY,var3.posZ);
                 worldObj.spawnEntityInWorld(lightingbolt);
                 lightingbolt.entityFX(EnumEntityFX.summoned);
                 this.setDead();
-            }else if(rc.isEntity()){
+            } else if(rc.isEntity()){
                 Entity var3 = rc.getEntityHit();
                 EntityLightning lightingbolt = new EntityLightning(worldObj,var3.posX,var3.posY,var3.posZ);
                 worldObj.spawnEntityInWorld(lightingbolt);
                 lightingbolt.entityFX(EnumEntityFX.summoned);
                 this.setDead();
-            }else{
+            } else{
                 EntityLightning lightingbolt = new EntityLightning(worldObj,rc.block_hit_x, rc.block_hit_y, rc.block_hit_z);
                 worldObj.spawnEntityInWorld(lightingbolt);
                 lightingbolt.entityFX(EnumEntityFX.summoned);

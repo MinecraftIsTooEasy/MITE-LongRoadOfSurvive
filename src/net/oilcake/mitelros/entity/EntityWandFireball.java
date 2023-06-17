@@ -26,6 +26,8 @@ public class EntityWandFireball extends EntityProjectile{
     protected float getGravityVelocity() {
         return 0.0F;
     }
+
+    @Override
     public void onUpdate(){
         super.onUpdate();
         this.worldObj.spawnParticle(EnumParticle.largesmoke, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);

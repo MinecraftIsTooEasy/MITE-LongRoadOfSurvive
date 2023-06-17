@@ -134,7 +134,6 @@ public class Items extends Item {
     public static final ItemWand FreezeWand = new ItemWand(Constant.getNextItemID(),Materials.nickel,"wandfreeze");
     public static final ItemWand ShockWand = new ItemWand(Constant.getNextItemID(),Material.ancient_metal,"wandshock");
     public static final Item ExperimentalPotion = (new ItemPotionExperimental(Constant.getNextItemID())).setUnlocalizedName("experimentalPotion").setCreativeTab(CreativeModeTab.tabMisc);
-
     public static final ItemShardAT shardDiamond = (ItemShardAT) new ItemShardAT(862, Material.diamond).setUnlocalizedName("shardDiamond").setXPReward(4);
     public static final ItemShardAT shardEmerald = (ItemShardAT) (new ItemShardAT(861, Material.emerald)).setUnlocalizedName("shardEmerald").setXPReward(3);
     public static final ItemShardAT shardNetherQuartz = (ItemShardAT) (new ItemShardAT(863, Material.quartz)).setUnlocalizedName("shardNetherQuartz").setXPReward(2);
@@ -193,7 +192,6 @@ public class Items extends Item {
     public static final ItemBowlClay claybowlSorbet = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.sorbet, "sorbet")).setFoodValue(4, 2, 2000, false, false, true).setPlantProduct().setUnlocalizedName("sorbet");
     public static final ItemBowlClay claybowlPorridge = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.porridge, "porridge")).setFoodValue(4, 2, 2000, false, false, true).setPlantProduct().setUnlocalizedName("porridge");
     public static final ItemBowlClay claybowlCereal = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.cereal, "cereal")).setFoodValue(4, 2, 1000, true, false, false).setPlantProduct().setAnimalProduct().setUnlocalizedName("cereal");
-
     public static final ItemBowlClay claybowlLemonade = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.lemonade,"lemonade")).setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
     public static final ItemBowlClay claybowlPorkchopStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.porkchop_stew, "porkchop_stew")).setFoodValue(14, 14, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("porkchopStew");
     public static final ItemBowlClay claybowlChestnutSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.chestnut_soup, "lampchop_stew")).setFoodValue(12, 12, true, false, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("lampchopStew");
@@ -206,12 +204,8 @@ public class Items extends Item {
     public static final ItemArmor chestplateCustom_a = new ItemCuirass(Constant.getNextItemID(),Materials.custom_a,false);
     public static final ItemArmor leggingsCustom_a = new ItemLeggings(Constant.getNextItemID(),Materials.custom_a,false);
     public static final ItemArmor bootsCustom_a = new ItemBoots(Constant.getNextItemID(),Materials.custom_a,false);
-
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
-
-
-
 
 
         public static void registerItems() {

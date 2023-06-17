@@ -18,13 +18,13 @@ public class RenderSnowballMixin extends bgm {
     @Overwrite
     public void a(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
         if (par1Entity instanceof EntityBrick) {
-            this.a = par1Entity.getModelItem();
+            this.a = ((EntityBrick)par1Entity).getModelItem();
         } else if (par1Entity instanceof EntityWandIceBall) {
-            this.a = par1Entity.getModelItem();
+            this.a = ((EntityWandIceBall)par1Entity).getModelItem();
         } else if (par1Entity instanceof EntityWandFireball) {
-            this.a = par1Entity.getModelItem();
+            this.a = ((EntityWandFireball)par1Entity).getModelItem();
         } else if (par1Entity instanceof EntityWandShockWave) {
-            this.a = par1Entity.getModelItem();
+            this.a = ((EntityWandShockWave)par1Entity).getModelItem();
         } else if (par1Entity instanceof EntityGelatinousSphere) {
             this.f = ((EntityGelatinousSphere)par1Entity).getModelSubtype();
         }

@@ -20,6 +20,7 @@ import java.util.Random;
 @Mixin(GuiIngame.class)
 public class GuiIngameMixin extends avk {
 
+    @Overwrite
     private void a(int par1, int par2) {
         boolean var3 = this.g.h.hurtResistantTime / 3 % 2 == 1;
         if (this.g.h.hurtResistantTime < 10) {

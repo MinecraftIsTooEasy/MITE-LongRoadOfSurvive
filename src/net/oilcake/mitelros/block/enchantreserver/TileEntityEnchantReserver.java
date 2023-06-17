@@ -218,12 +218,14 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
         this.isUsing = true;
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         this.EXP = par1NBTTagCompound.getInteger("EXP");
         this.slots.readFromNBT(par1NBTTagCompound, this);
     }
 
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("EXP", this.EXP);
