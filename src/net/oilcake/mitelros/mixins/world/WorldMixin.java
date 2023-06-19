@@ -66,47 +66,27 @@ public abstract class WorldMixin {
     }
     @Shadow
     public static final boolean isBloodMoon(long unadjusted_tick, boolean exclusively_at_night) {
-        if (exclusively_at_night && isDaytime(unadjusted_tick)) {
-            return false;
-        } else {
-            return (unadjusted_tick / 24000L + 1L) % 32L == 0L && !isBlueMoon(unadjusted_tick, exclusively_at_night);
-        }
+        return exclusively_at_night;
     }
     @Shadow
     public final boolean isBloodMoon(boolean exclusively_at_night) {
-        if (!this.isOverworld()) {
-            return false;
-        } else if (exclusively_at_night && this.isDaytime()) {
-            return false;
-        } else {
-            return (this.getTotalWorldTime() / 24000L + 1L) % 32L == 0L && !this.isBlueMoon(exclusively_at_night);
-        }
+        return exclusively_at_night;
     }
     @Shadow
     public static final boolean isBlueMoon(long unadjusted_tick, boolean exclusively_at_night) {
-        if (exclusively_at_night && isDaytime(unadjusted_tick)) {
-            return false;
-        } else {
-            return (unadjusted_tick / 24000L + 1L) % 128L == 0L;
-        }
+        return exclusively_at_night;
     }
     @Shadow
     public final boolean isBlueMoon(boolean exclusively_at_night) {
-        if (!this.isOverworld()) {
-            return false;
-        } else if (exclusively_at_night && this.isDaytime()) {
-            return false;
-        } else {
-            return (this.getTotalWorldTime() / 24000L + 1L) % 128L == 0L;
-        }
+        return exclusively_at_night;
     }
     @Shadow
     public static final boolean isHarvestMoon(long unadjusted_tick, boolean exclusively_at_night) {
-        return exclusively_at_night && isDaytime(unadjusted_tick) ? false : isBloodMoon(unadjusted_tick + 192000L, exclusively_at_night);
+        return exclusively_at_night;
     }
-
+    @Shadow
     public final boolean isHarvestMoon(boolean exclusively_at_night) {
-        return isHarvestMoon(this.getTotalWorldTime(), exclusively_at_night);
+        return exclusively_at_night;
     }
     @Shadow
     public static boolean isDaytime(long unadjusted_tick) {

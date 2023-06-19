@@ -57,7 +57,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 ItemStack heldItemStack = this.getHeldItemStack();
                 if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestroying)){
                     int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, heldItemStack);
-                    target.worldObj.createExplosionC(target, target.posX, target.posY, target.posZ, destorying, destorying);
+                    target.worldObj.createExplosionC(this, target.posX, target.posY, target.posZ, destorying, destorying);
                     //System.out.println("判断为enchantmentDestorying player");
                     //target.setFire(120);
                 }
@@ -677,9 +677,11 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 this.wakeUpPlayer(true, damage.getResponsibleEntityC());
             }
             if (damage.isExplosion()) {
+                if(damage.getResponsibleEntityC() instanceof EntityPlayer){
+                    return null;
+                }
                 damage.scaleAmount(1.5F);
             }
-
             EntityDamageResult result = super.attackEntityFrom(damage);
             if (result != null) {
             }

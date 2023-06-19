@@ -1,10 +1,12 @@
 package net.oilcake.mitelros.mixins.world;
 
 import net.minecraft.*;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.HashMap;
 import java.util.Random;
 
 @Mixin(ChunkProviderGenerate.class)
@@ -320,6 +322,76 @@ public abstract class ChunkProviderGenerateMixin implements IChunkProvider{
                 }
             }
         }
-
     }
+//    @Shadow
+//    private WorldGenBase caveGenerator = new WorldGenCaves();
+//    @Shadow
+//    private WorldGenStronghold strongholdGenerator = new WorldGenStronghold();
+//    @Shadow
+//    private WorldGenVillage villageGenerator = new WorldGenVillage();
+//    @Shadow
+//    private WorldGenMineshaft mineshaftGenerator = new WorldGenMineshaft();
+//    @Shadow
+//    private WorldGenLargeFeature scatteredFeatureGenerator = new WorldGenLargeFeature();
+//    @Shadow
+//    private WorldGenBase ravineGenerator = new WorldGenCanyon();
+//    @Shadow
+//    private MapGenCaveNetwork cave_network_generator = new MapGenCaveNetwork();
+//    @Shadow
+//    public static void placeRandomCobwebs(int chunk_x, int chunk_z, byte[] block_ids, Random rand) {
+//    }
+//    @Shadow
+//    private void performSandFalls(HashMap pending_sand_falls, byte[] block_ids) {
+//    }
+//    @Shadow
+//    @Final
+//    private boolean mapFeaturesEnabled;
+//    @Overwrite
+//    public Chunk provideChunk(int par1, int par2) {
+//        if (!this.worldObj.isChunkWithinBlockDomain(par1, par2)) {
+//            Chunk chunk = new Chunk(this.worldObj, par1, par2);
+//            chunk.generateSkylightMap(true);
+//            return chunk;
+//        } else {
+//            this.rand.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
+//            byte[] var3 = new byte['耀'];
+//            this.generateTerrain(par1, par2, var3);
+//            this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
+//            this.replaceBlocksForBiome(par1, par2, var3, this.biomesForGeneration);
+//            this.caveGenerator.generate(this, this.worldObj, par1, par2, var3);
+//            this.ravineGenerator.generate(this, this.worldObj, par1, par2, var3);
+//            if (this.worldObj.getWorldInfo().getEarliestMITEReleaseRunIn() >= 139) {
+//                this.cave_network_generator.generate(this, this.worldObj, par1, par2, var3);
+//            }
+//
+//            placeRandomCobwebs(par1, par2, var3, this.rand);
+//            if (this.mapFeaturesEnabled) {
+//                this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, var3);
+//                this.villageGenerator.generate(this, this.worldObj, par1, par2, var3);
+//                this.strongholdGenerator.generate(this, this.worldObj, par1, par2, var3);
+//                this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, var3);
+//            }
+//
+//            if (this.worldObj.pending_sand_falls != null && this.worldObj.getWorldInfo().getEarliestMITEReleaseRunIn() >= 189) {
+//                this.performSandFalls(this.worldObj.pending_sand_falls, var3);
+//                this.worldObj.pending_sand_falls = null;
+//            }
+//
+//            Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
+//            byte[] var5 = var4.getBiomeArray();
+//
+//            for(int var6 = 0; var6 < var5.length; ++var6) {
+//                var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
+//            }
+//
+//            var4.generateSkylightMap(true);
+//            if (this.worldObj.pending_sand_falls != null) {
+//                var4.pending_sand_falls = this.worldObj.pending_sand_falls;
+//                this.worldObj.pending_sand_falls = null;
+//            }
+//
+//            return var4;
+//        }
+//    }
+
 }

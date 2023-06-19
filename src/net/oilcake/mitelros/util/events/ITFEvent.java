@@ -58,10 +58,8 @@ public class ITFEvent {
             }
             if(player.getRand().nextFloat() <= (Objects.equals(player.getEntityName(), "HY_Creespic") ? 10F : 0.1F))
                 player.makeSound("imported.meme.brainpower", 10.0F, 1.0F);
-            player.sendChatToPlayer(ChatMessage.createFromText("O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA\n" +
-                    "O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA\n" +
-                    "O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-ooo-oooo EEEEO-A-AAA-AAA- O----------\n" +
-                    "\n"));
+            player.sendChatToPlayer(ChatMessage.createFromText(
+                    "O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-ooo-oooo EEEEO-A-AAA-AAA- O----------\n"));
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("tpt") && !Minecraft.inDevMode()) {

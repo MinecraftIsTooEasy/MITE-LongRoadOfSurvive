@@ -14,7 +14,7 @@ public class EntityPuddingMixin {
 //            Material material = damage_source.getItemAttackedWith().getMaterialForRepairs();
 //            return !damage_source.hasFireAspect() && !damage_source.isLavaDamage() && !damage_source.hasMagicAspect() && !damage_source.isSnowball() && !(damage_source.getItemAttackedWith().getMaterialForRepairs() == Materials.nickel);
 //        }
-        boolean temp = !damage_source.hasFireAspect() && !damage_source.isLavaDamage() && !damage_source.hasMagicAspect() && !damage_source.isSnowball();
+        boolean temp =!damage_source.isExplosion() && !damage_source.hasFireAspect() && !damage_source.isLavaDamage() && !damage_source.hasMagicAspect() && !damage_source.isSnowball();
         return damage_source.getItemAttackedWith() != null ? temp && !(damage_source.getItemAttackedWith().getMaterialForRepairs() == Materials.nickel) : temp;
     }
 }

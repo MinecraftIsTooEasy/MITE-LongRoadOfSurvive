@@ -2,6 +2,7 @@ package net.oilcake.mitelros.world.biome;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityStray;
+import net.oilcake.mitelros.world.WorldGenStoneCone;
 
 import java.util.Random;
 
@@ -29,6 +30,21 @@ public class BiomeWindsweptPleatu extends BiomeBase {
 
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
         super.decorate(par1World, par2Random, par3, par4);
+        if (par2Random.nextInt(150) == 0)
+        {
+            int var5 = par3 + par2Random.nextInt(16) + 8;
+            int var6 = par4 + par2Random.nextInt(16) + 8;
+            WorldGenStoneCone var7 = new WorldGenStoneCone();
+            if(par2Random.nextInt(30) == 0){
+                var7.setSuperLarge();
+                System.out.println("Generate StoneCone at "+var5+" "+var6+" , superlarge.");
+            }
+            else{
+                System.out.println("Generate StoneCone at "+var5+" "+var6);
+            }
+            var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
+
+        }
         int var5 = 3 + par2Random.nextInt(6);
         for (int var6 = 0; var6 < var5; ++var6) {
             int count = par3 + par2Random.nextInt(4);

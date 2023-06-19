@@ -14,7 +14,7 @@ public abstract class EntityOozeMixin extends EntityCubic{
 
     @Overwrite
     public boolean isImmuneTo(DamageSource damage_source) {
-        boolean temp = !damage_source.isLavaDamage() && !damage_source.hasMagicAspect() && !damage_source.isSnowball();
+        boolean temp = !damage_source.isExplosion() && !damage_source.isLavaDamage() && !damage_source.hasMagicAspect() && !damage_source.isSnowball();
         return damage_source.getItemAttackedWith() != null ? temp && !(damage_source.getItemAttackedWith().getMaterialForRepairs() == Materials.nickel) : temp;
     }
 

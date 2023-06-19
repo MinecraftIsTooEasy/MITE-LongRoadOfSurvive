@@ -26,6 +26,7 @@ public class EntityWandIceBall extends EntityProjectile{
     protected float getGravityVelocity() {
         return 0.0F;
     }
+    @Override
     public void onUpdate(){
         super.onUpdate();
         this.lastTickPosX = this.posX;
