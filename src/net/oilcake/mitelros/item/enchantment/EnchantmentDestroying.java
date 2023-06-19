@@ -12,7 +12,7 @@ public class EnchantmentDestroying extends Enchantment {
 
     @Override
     public int getNumLevels() {
-        return 1;
+        return 3;
     }
     @Override
     public String getNameSuffix() {
