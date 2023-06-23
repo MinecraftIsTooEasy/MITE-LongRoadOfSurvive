@@ -226,7 +226,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
             return false;
         }
-        if (biome.temperature <= 0.16F){
+        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && this.isOutdoors()){
             if(this.getHelmet() != null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
                     this.getCuirass() != null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
                     this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&

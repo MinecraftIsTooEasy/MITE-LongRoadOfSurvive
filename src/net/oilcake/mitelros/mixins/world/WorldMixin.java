@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.world;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.util.StuckTagConfig;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,6 +15,8 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(World.class)
 public abstract class WorldMixin {
+    @Shadow public abstract World getWorld();
+
     @Shadow public abstract void removeBlockTileEntity(int par1, int par2, int par3);
 
     @Shadow
@@ -49,7 +52,11 @@ public abstract class WorldMixin {
             random.nextInt();
 
             for(int i = 0; i < 3 && random.nextInt(4) <= 0; ++i) {
-                WeatherEvent event = new WeatherEvent(first_tick_of_day + (long)random.nextInt(24000), random.nextInt((StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue ? 24000 : 12000)) + (StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue ? 48000 : 6000));
+                int duration_static = 6000 * (StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue ? 6 : 1);
+                int duration_random = random.nextInt(12000) * (StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue ? 2 : 1);
+                int duration = duration_random + duration_static;
+                duration *= getRainDurationModify(getWorldSeason());
+                WeatherEvent event = new WeatherEvent(first_tick_of_day + (long)random.nextInt(24000), duration);
                 if (!isHarvestMoon(event.start, true) && !isHarvestMoon(event.end, true) && !isHarvestMoon(event.start + 6000L, true) && !isHarvestMoon(event.end - 6000L, true) && !isBloodMoon(event.start, false) && !isBloodMoon(event.end, false) && !isBlueMoon(event.start, false) && !isBlueMoon(event.end, false)) {
                     events.add(event);
                 }
@@ -117,5 +124,85 @@ public abstract class WorldMixin {
     @Shadow
     private boolean isOverworld() {
         return false;
+    }
+    @Shadow
+    @Final
+    public int getDayOfWorld() {
+        return 0;
+    }
+
+    /*Return int ranged in 0 to 3
+    * 0 Means Spring
+    * 1 Means Summer etc.
+    * 256 days in a row
+    */
+    public int getWorldSeason(){
+        return getSeasonType(this.getDayOfWorld());
+    }
+    public int getSeasonType(int day){
+        return day / 32 % 4;
+    }
+    private static final int SPRING = 0;
+    private static final int SUMMER = 1;
+    private static final int AUTUMN = 2;
+    private static final int WINTER = 3;
+    public float getRainDurationModify(int Season){
+        switch (Season){
+            case SPRING:
+                return 1.0F;
+            case SUMMER:
+                return 2.25F;
+            case AUTUMN:
+                return 0.75F;
+            case WINTER:
+                return 0.5F;
+            default:
+                Debug.setErrorMessage("getRainDurationModify: called for num "+ Season+" for calculating. Use the default.");
+                return 1.0F;
+        }
+    }
+    @Overwrite
+    public final boolean canSnowAt(int par1, int par2, int par3) {
+        BiomeBase var4 = this.getBiomeGenForCoords(par1, par3);
+        float var5 = var4.getFloatTemperature();
+        if (var5 > (getWorldSeason() == WINTER ? 1.0F : 0.15F)) {
+            return false;
+        } else {
+            if (par2 >= 0 && par2 < 256 && this.getSavedLightValue(EnumSkyBlock.Block, par1, par2, par3) < 10) {
+                int var6 = this.getBlockId(par1, par2 - 1, par3);
+                int var7 = this.getBlockId(par1, par2, par3);
+                Block block_below = Block.getBlock(var6);
+                Block block = Block.getBlock(var7);
+                if (block_below == Block.tilledField && block != Block.pumpkinStem) {
+                    return true;
+                }
+                if (var7 == 0 && Block.snow.isLegalAt(this.getWorld(), par1, par2, par3, 0) && var6 != Block.ice.blockID) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    public final boolean chunkExistsAndIsNotEmptyFromBlockCoordsC(int x, int z) {
+        return this.chunkExistsAndIsNotEmptyFromBlockCoords(x, z);
+    }
+    @Shadow
+    @Final
+    protected boolean chunkExistsAndIsNotEmptyFromBlockCoords(int x, int z) {
+        return false;
+    }
+    @Shadow
+    @Final
+    public int getSavedLightValue(EnumSkyBlock block, int par1, int par2, int par3) {
+        return 0;
+    }
+    @Shadow
+    public BiomeBase getBiomeGenForCoords(int par1, int par3) {
+        return null;
+    }
+    @Shadow
+    @Final
+    public int getBlockId(int par1, int par2, int par3) {
+        return 0;
     }
 }

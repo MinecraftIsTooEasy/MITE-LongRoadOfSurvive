@@ -108,7 +108,7 @@ public class BlockLeavesMixin extends BlockTransparant {
                 return true;
             }
         } else {
-            if (RNG.chance_in_100[++RNG.random_number_index + (int)par1World.total_time & 32767] && !wasPlaced(var6) && (!par1World.getAsWorldServer().fast_forwarding || RNG.chance_in_32[++RNG.random_number_index & 32767]) && par5Random.nextInt(500) == 0) {
+            if (RNG.chance_in_100[++RNG.random_number_index + (int)par1World.total_time & 32767] && !wasPlaced(var6) && (!par1World.getAsWorldServer().fast_forwarding || RNG.chance_in_32[++RNG.random_number_index & 32767]) && par5Random.nextInt(par1World.getWorldSeason() == 2 ? 200 : 500) == 0) {
                 if (par1World.getBiomeGenForCoords(par2, par4).isSwampBiome() && par5Random.nextInt(2) == 0) {
                     return false;
                 }
