@@ -121,7 +121,7 @@ public class ITFEvent {
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(Constant.CalculateCurrentDiff() >= 16 ? EnumChatFormat.DARK_RED : Constant.CalculateCurrentDiff() >= 12 ? EnumChatFormat.RED : Constant.CalculateCurrentDiff() >= 8 ? EnumChatFormat.YELLOW: Constant.CalculateCurrentDiff() >= 4 ? EnumChatFormat.GREEN : Constant.CalculateCurrentDiff() > 0 ? EnumChatFormat.AQUA : EnumChatFormat.BLUE)));
         player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
-        player.vision_dimming += 1.25F;
+        player.vision_dimming = 1.25F;
     }
 
 
