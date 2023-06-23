@@ -183,9 +183,14 @@ public abstract class WorldMixin {
             return false;
         }
     }
+    @Overwrite
+    public boolean isFreezing(int x, int z) {
+        return this.getBiomeGenForCoords(x, z).temperature <= (getWorldSeason() == WINTER ? 1.0F : 0.15F);
+    }
     public final boolean chunkExistsAndIsNotEmptyFromBlockCoordsC(int x, int z) {
         return this.chunkExistsAndIsNotEmptyFromBlockCoords(x, z);
     }
+
     @Shadow
     @Final
     protected boolean chunkExistsAndIsNotEmptyFromBlockCoords(int x, int z) {

@@ -68,5 +68,4 @@ public class BiomeBaseMixin{
     public boolean isHillyOrMountainous() {
         return biomeID == extremeHills.biomeID || biomeID == iceMountains.biomeID || biomeID == desertHills.biomeID || biomeID == forestHills.biomeID || biomeID == taigaHills.biomeID || biomeID == extremeHillsEdge.biomeID || biomeID == jungleHills.biomeID || biomeID == windsweptpleatu.biomeID;
     }
-
 }
