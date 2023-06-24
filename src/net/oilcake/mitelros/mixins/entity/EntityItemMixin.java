@@ -306,63 +306,6 @@ public abstract class EntityItemMixin extends Entity{
         this.tryRemoveFromWorldUniques();
     }
 
-//    @Inject(method = {"<init>(Lnet/minecraft/World;)V","<init>(Lnet/minecraft/World;DDD)V","<init>(Lnet/minecraft/World;DDDLnet/minecraft/ItemStack;)V"},at = @At("RETURN"))
-//    protected void injectInit(CallbackInfo callbackInfo) {
-//        this.canBePickUpByPlayer = true;
-//    }
-//    @Inject(method = "canBePickedUpBy",
-//            at = @At(value = "HEAD"),
-//            cancellable = true)
-//    public void injectPlayerCannotPickup(EntityLiving entity_living_base, CallbackInfoReturnable<Boolean> callback){
-//        if (entity_living_base instanceof EntityPlayer) {
-//            if (!this.canBePickUpByPlayer){
-//                callback.setReturnValue(false);
-//                callback.cancel();
-//            }
-//        }
-//    }
-//
-//    @Inject(method = "handleExplosion",
-//            cancellable = true,
-//            at = @At(value = "INVOKE",
-//                    shift = At.Shift.AFTER,
-//                    target = "Lnet/minecraft/EntityItem;calcExplosionForce(FD)F"))
-//    private void injectCancelExplosionCopy(CallbackInfoReturnable<Boolean> callback){
-//        if (this.isExploded) {
-//            this.setDead();
-//            this.tryRemoveFromWorldUniques();
-//            callback.setReturnValue(true);
-//            callback.cancel();
-//        }
-//    }
-//
-//    @Inject(method = "readEntityFromNBT",at = @At(value = "RETURN"))
-//    protected void readEntityFromNBT(NBTTagCompound var1, CallbackInfo callback) {
-//        if (var1.hasKey("CanBePickupByPlayer")){
-//            this.canBePickUpByPlayer = var1.getBoolean("CanBePickupByPlayer");
-//        }
-//    }
-//    @Inject(method = "writeEntityToNBT",at = @At(value = "RETURN"))
-//    protected void writeEntityToNBT(NBTTagCompound var1,CallbackInfo callback) {
-//        var1.setBoolean("CanBePickupByPlayer",this.canBePickUpByPlayer);
-//    }
-//
-//    @Redirect(method = "handleExplosion",
-//            at = @At(value = "INVOKE",
-//                    target = "Lnet/minecraft/EntityItem;tryRemoveFromWorldUniques()V"))
-//    private void injectUpdateExploded(EntityItem caller){
-//        this.isExploded = true;
-//        this.tryRemoveFromWorldUniques();
-//    }
-//
-//    public void setCanBePickUpByPlayer(boolean canBePickUpByPlayer) {
-//        this.canBePickUpByPlayer = canBePickUpByPlayer;
-//    }
-//
-//    public boolean canBePickUpByPlayer() {
-//        return canBePickUpByPlayer;
-//    }
-
     @Shadow
     public EntityItem applyExplosionMotion(Explosion explosion) {
         return null;
