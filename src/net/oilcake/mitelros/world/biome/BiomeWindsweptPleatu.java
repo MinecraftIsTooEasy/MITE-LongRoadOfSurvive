@@ -15,6 +15,9 @@ public class BiomeWindsweptPleatu extends BiomeBase {
         this.removeEntityFromSpawnableLists(EntityPig.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 100, 1, 4));
         this.spawnableCreatureList.add(new BiomeMeta(EntityDireWolf.class, 30, 4, 4));
+        this.theBiomeDecorator.setFlowersPerChunk(-999);
+        this.theBiomeDecorator.setGrassPerChunk(1);
+        this.theBiomeDecorator.setFlowersExtendPerChunk(-999);
         this.topBlock = (byte)Block.grass.blockID;
         this.fillerBlock = (byte)Block.cobblestone.blockID;
         this.setColor(10526880);

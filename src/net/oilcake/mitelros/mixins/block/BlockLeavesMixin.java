@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.util.SeasonColorizer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -152,6 +153,31 @@ public class BlockLeavesMixin extends BlockTransparant {
                 }
                 return leaf_kind == 4 ? this.dropBlockAsEntityItem(info, Item.banana.itemID, 0, 1, 0.005F) : 0;
             }
+        }
+    }
+
+    @Overwrite
+    public int c(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+        int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+        if ((var5 & 3) == 1) {
+            return abs.a();
+        } else if ((var5 & 3) == 2) {
+            return abs.b();
+        } else {
+            int var6 = 0;
+            int var7 = 0;
+            int var8 = 0;
+
+            for(int var9 = -1; var9 <= 1; ++var9) {
+                for(int var10 = -1; var10 <= 1; ++var10) {
+                    int var11 = par1IBlockAccess.getBiomeGenForCoords(par2 + var10, par4 + var9).l();
+                    var6 += SeasonColorizer.getSeasonColorizerModifierRed(par1IBlockAccess.getWorld(),(var11 & 16711680) >> 16);
+                    var7 += (var11 & '\uff00') >> 8;
+                    var8 += var11 & 255;
+                }
+            }
+
+            return (var6 / 9 & 255) << 16 | (var7 / 9 & 255) << 8 | var8 / 9 & 255;
         }
     }
     @Shadow

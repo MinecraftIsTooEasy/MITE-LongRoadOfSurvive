@@ -20,7 +20,14 @@ public class BiomeDecoratorMixin{
     private WorldGenMinable tungstenGen;
     protected WorldGenFlowersExtend flowerExtendGen;
     protected int flowersExtendPerChunk;
-
+    @Shadow
+    protected int waterlilyPerChunk;
+    @Shadow
+    protected int treesPerChunk;
+    @Shadow
+    protected int grassPerChunk;
+    @Shadow
+    protected int flowersPerChunk;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     public void BiomeDecorator(CallbackInfo callbackInfo) {
@@ -142,7 +149,24 @@ public class BiomeDecoratorMixin{
     protected WorldGenMinable silverfishGen;
     @Shadow
     protected void genMinable(int frequency, WorldGenMinable world_gen_minable) {}
+    public void setWaterlilyPerChunk(int waterlilyPerChunk) {
+        this.waterlilyPerChunk = waterlilyPerChunk;
+    }
 
+    public void setTreesPerChunk(int treesPerChunk) {
+        this.treesPerChunk = treesPerChunk;
+    }
+
+    public void setFlowersPerChunk(int flowersPerChunk) {
+        this.flowersPerChunk = flowersPerChunk;
+    }
+
+    public void setGrassPerChunk(int grassPerChunk) {
+        this.grassPerChunk = grassPerChunk;
+    }
+    public void setFlowersExtendPerChunk(int flowersPerChunk){
+        this.flowersExtendPerChunk = flowersPerChunk;
+    }
 
 //    public void genMinableC(int frequency, WorldGenMinable world_gen_minable, boolean vein_size_increases_with_depth) {
 //        this.genMinable(frequency, world_gen_minable, vein_size_increases_with_depth);
