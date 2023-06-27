@@ -1,0 +1,25 @@
+一、关于版权与利益问题
+COPYRIGHT & INTEREST
+
+您现在使用的是MITE-ITF模组，基于开源项目FML修改后的MITE客户端运行，仅供Java类代码学习使用而不参与任何盈利。
+This extended mod pack MITE-ITF is based on the MITE Client based on FML(FishModLoader) which is an open source project on GitHub. Aiming at my coding tech learning the extendpack is. So it has nothing to do with my personal profit.
+
+在所有元素更新完毕后本mod将自行开源，期间不会接受任何形式有关该mod的任何赞助（包括激励创作）。如果有任何声称收取“MITE-ITF/LROS赞助入群”或“赞助激励作者更新”的，请用户不要轻信以免造成不必要的财产损失和纠纷。
+The project will be pulished on Github until the upgrade is complete. 'We' won't accept any sponsor during the developing period. If there's someone declaring "Donate to obtain MITE-ITF mod" or "Sped up the upgrade through donating" or something else. Please do not believe so as to avoid unnecessary property losses and disputes.
+
+如果该mod或FML被MITE原作者avernite声明为侵权，请联系Rizur&Kalsey进行删除，“我们”将于第一时间回应。
+If this mod or FML is declared as an infringement by avernite, the original author of MITE, please contact Rizur&Kalsey to delete it. 'We' will respond immediately.
+
+本模组目前仅开放网盘下载（https://pan.baidu.com/s/1tlu5y3ExP7muEvWQcBEfeQ?pwd=mitf），其余下载渠道均非本模组原作者放出，下载时请注意甄别防止其带有病毒危害用户的计算机；此外，因各种原因付费下载过本模组的用户，因此带来的利益或版权纠纷与本模组作者无关。
+Download link: https://pan.baidu.com/s/1tlu5y3ExP7muEvWQcBEfeQ?pwd=mitf
+(PS: May VPN needed, or try:https://1drv.ms/u/s!Au9Eqp7o3tlWnmRNZn3RMWhoSPIa?e=3wD7F9)
+The author DID NOT published any other download links. Please be careful to prevent downloading something that harming user's computer. In addition, users who have paid to download this mod for various reasons have nothing to do with the authors of MITE-ITF for profit or copyright disputes.
+
+二、关于更新所属方
+UPDATE OWNER
+
+本模组作者由：NoRegretS发起，目前全权由Rizur&Kalsey维护，材质小部分借鉴群峦传说，其余为mojang原版材质包或自行绘制，若有侵权问题请联系更改
+The author of this module was initiated by NoRegretS and is currently maintained solely by Rizur&Kalsey. Some of the textures are reference or copy to the TFC, and the rest are from the original mojang material pack or are drawn by ourselves. Please contact us to change if the author of the texture have any questions of copyrights about this.
+
+NoRegretS的赞助网站上有唯一的“MITE-ITF/LROS创作激励”入口，但目前MITE-ITF更新即将进入尾声，且Rizur&Kalsey不会从该赞助中拿取任何收益，请尽量不要使用该赞助入口
+The NoRegretS sponsorship website has the only "Sponsor Authors for Accelerated Updates to MITE-ITF entry, but MITE-ITF's upgrade will end up soon and Rizur&Kalsey will not receive any proceeds from this grant, so please do not use this entry.
