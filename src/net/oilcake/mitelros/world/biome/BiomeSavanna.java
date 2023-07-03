@@ -6,6 +6,8 @@ import java.awt.*;
 import java.util.Random;
 
 public class BiomeSavanna extends BiomeBase {
+    private boolean enableRain;
+
     public BiomeSavanna(int par1) {
         super(par1);
         this.spawnableCreatureList.add(new BiomeMeta(EntityHorse.class, 5, 1, 2));
@@ -38,7 +40,6 @@ public class BiomeSavanna extends BiomeBase {
             return this;
         }
     }
-    private boolean enableRain;
     private BiomeBase setDisableRain() {
         this.enableRain = false;
         return this;

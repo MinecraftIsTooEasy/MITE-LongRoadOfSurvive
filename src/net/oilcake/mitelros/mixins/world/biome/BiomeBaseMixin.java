@@ -26,8 +26,14 @@ import static net.oilcake.mitelros.world.BiomeBases.windsweptpleatu;
 
 @Mixin(BiomeBase.class)
 public class BiomeBaseMixin{
-    @Shadow protected List spawnableMonsterList;
-    @Shadow protected List spawnableCreatureList;
+    @Shadow
+    private boolean enableSnow;
+    @Shadow
+    private boolean enableRain;
+    @Shadow
+    protected List spawnableMonsterList;
+    @Shadow
+    protected List spawnableCreatureList;
 
     @Shadow @Final public int biomeID;
     public void RegenAnimals(){
@@ -64,9 +70,16 @@ public class BiomeBaseMixin{
     public void removeEntityFromSpawnableLists(Class _class) {
     }
 
+    @Shadow
+    public float rainfall;
+
     @Overwrite
     public boolean isHillyOrMountainous() {
         return biomeID == extremeHills.biomeID || biomeID == iceMountains.biomeID || biomeID == desertHills.biomeID || biomeID == forestHills.biomeID || biomeID == taigaHills.biomeID || biomeID == extremeHillsEdge.biomeID || biomeID == jungleHills.biomeID || biomeID == windsweptpleatu.biomeID;
+    }
+    @Overwrite
+    public boolean canSpawnLightningBolt(boolean is_blood_moon) {
+        return this.enableSnow ? false : this.enableRain && this.rainfall != 0.0F || is_blood_moon;
     }
 
 }

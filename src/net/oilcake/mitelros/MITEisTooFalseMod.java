@@ -28,7 +28,7 @@ public class MITEisTooFalseMod extends AbstractMod {
 
     @Override
     public String modId() {
-        return "MITEIsTooFalse";
+        return "MITEIsTooFalse"+Constant.VERSION;
     }
 
     @Override

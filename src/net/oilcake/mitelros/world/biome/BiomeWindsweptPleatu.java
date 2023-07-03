@@ -38,12 +38,13 @@ public class BiomeWindsweptPleatu extends BiomeBase {
             int var5 = par3 + par2Random.nextInt(16) + 8;
             int var6 = par4 + par2Random.nextInt(16) + 8;
             WorldGenStoneCone var7 = new WorldGenStoneCone();
-            if(par2Random.nextInt(30) == 0){
-                var7.setSuperLarge();
-                System.out.println("Generate StoneCone at "+var5+" "+var6+" , superlarge.");
-            }
-            else{
-                System.out.println("Generate StoneCone at "+var5+" "+var6);
+            if(Minecraft.inDevMode()){
+                if (par2Random.nextInt(30) == 0) {
+                    var7.setSuperLarge();
+                    System.out.println("Generate StoneCone at " + var5 + " " + var6 + " , superlarge.");
+                } else {
+                    System.out.println("Generate StoneCone at " + var5 + " " + var6);
+                }
             }
             var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
 

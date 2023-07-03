@@ -316,3 +316,6 @@ entity.EntityEvil.name=Evil
 
 death.extend.attack.thirsty=%1$s dead because of dehydration
 death.extend.attack.freeze=%1$s Freezed Fully
+
+material.nickel.name=Nickel
+material.tungsten.name=Tungsten

@@ -7,8 +7,8 @@ public class EntityHusk extends EntityZombie {
         super(par1World);
     }
     public void setVillager(boolean villager, int profession) {
-        Minecraft.setErrorMessage("setVillager: why setting villager for husk?");
-        (new Exception()).printStackTrace();
+//        Minecraft.setErrorMessage("setVillager: why setting villager for husk?");
+//        (new Exception()).printStackTrace();
     }
     public boolean isVillager() {
         return false;

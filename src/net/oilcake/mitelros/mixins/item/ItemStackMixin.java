@@ -211,6 +211,12 @@ public class ItemStackMixin{
         return this.isItemStackEqual(par1ItemStack, ignore_stack_size, ignore_quality, ignore_damage_but_not_subtype, ignore_tag_compound);
     }
     @Shadow
+    public EnumQuality getQuality() {
+        return null;
+    }
+    @Shadow
+    private EnumQuality quality;
+    @Shadow
     @Final
     public static DecimalFormat field_111284_a;
     @Shadow
@@ -246,10 +252,6 @@ public class ItemStackMixin{
     @Shadow
     public static boolean areItemStackTagsEqual(ItemStack par0ItemStack, ItemStack par1ItemStack) {
         return false;
-    }
-    @Shadow
-    public EnumQuality getQuality() {
-        return null;
     }
     @Shadow
     public boolean getHasSubtypes() {

@@ -204,6 +204,10 @@ public class Items extends Item {
     public static final ItemArmor chestplateCustom_a = new ItemCuirass(Constant.getNextItemID(),Materials.custom_a,false);
     public static final ItemArmor leggingsCustom_a = new ItemLeggings(Constant.getNextItemID(),Materials.custom_a,false);
     public static final ItemArmor bootsCustom_a = new ItemBoots(Constant.getNextItemID(),Materials.custom_a,false);
+    public static final ItemFishingRod fishingRodNickel = (ItemFishingRod)(new ItemFishingRod(Constant.getNextItemID(), Materials.nickel)).setUnlocalizedName("fishingRod");
+    public static final ItemFishingRod fishingRodTungsten = (ItemFishingRod)(new ItemFishingRod(Constant.getNextItemID(), Materials.tungsten)).setUnlocalizedName("fishingRod");
+    public static final ItemCarrotStick carrotOnAStickNickel = (ItemCarrotStick) (new ItemCarrotStick(Constant.getNextItemID(), Materials.nickel)).setUnlocalizedName("carrotOnAStick");
+    public static final ItemCarrotStick carrotOnAStickTungsten = (ItemCarrotStick) (new ItemCarrotStick(Constant.getNextItemID(), Materials.tungsten)).setUnlocalizedName("carrotOnAStick");
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -808,6 +812,20 @@ public class Items extends Item {
                 '#', silk,
                 'E', tungstenIngot,
                 'C', stick);
+        register.registerShapedRecipe(new ItemStack(fishingRodNickel, 1), true,
+                "  C",
+                " C#",
+                "CE#",
+                '#', silk,
+                'E', nickelNugget,
+                'C', stick);
+        register.registerShapedRecipe(new ItemStack(fishingRodTungsten, 1), true,
+                "  C",
+                " C#",
+                "CE#",
+                '#', silk,
+                'E', tungstenNugget,
+                'C', stick);
         register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
                 Items.forgingnote,Item.writableBook
         );
@@ -909,6 +927,11 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(bowlLemonade,1),true,
                 Item.sugar,Items.lemon,Item.bowlWater
         );
+        register.registerShapelessRecipe(new ItemStack(carrotOnAStickNickel,1),false,
+                Item.carrot,Items.fishingRodNickel);
+        register.registerShapelessRecipe(new ItemStack(carrotOnAStickTungsten,1),false,
+                Item.carrot,Items.fishingRodTungsten);
+
         for(int i = 1;i<=9;++i){
             register.registerShapelessRecipe(new ItemStack(Item.bowlEmpty,i),false,
                     new ItemStack(Items.bowlWaterSuspicious,i));

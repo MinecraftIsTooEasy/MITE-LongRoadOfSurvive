@@ -12,46 +12,46 @@ import static net.xiaoyu233.fml.util.ReflectHelper.createInstance;
 
 
 public class Blocks extends Block {
-    public static final Block blastFurnaceStoneIdle = new BlockBlastFurnace(Constant.getNextBlockID(), Material.stone, false).setCreativeTab(CreativeModeTab.tabDecorations)
+    public static final Block blastFurnaceStoneIdle = new BlockBlastFurnace(174, Material.stone, false).setCreativeTab(CreativeModeTab.tabDecorations)
             .setBlockHardness(4.8F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceObsidianIdle = new BlockBlastFurnace(Constant.getNextBlockID(), Material.obsidian, false).setCreativeTab(CreativeModeTab.tabDecorations)
+    public static final Block blastFurnaceObsidianIdle = new BlockBlastFurnace(175, Material.obsidian, false).setCreativeTab(CreativeModeTab.tabDecorations)
             .setBlockHardness(38.4F).setExplosionResistance(40.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceNetherrackIdle = new BlockBlastFurnace(Constant.getNextBlockID(), Material.netherrack, false).setCreativeTab(CreativeModeTab.tabDecorations)
+    public static final Block blastFurnaceNetherrackIdle = new BlockBlastFurnace(176, Material.netherrack, false).setCreativeTab(CreativeModeTab.tabDecorations)
             .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep);
 
-    public static final Block blastFurnaceStoneBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.stone, true)
+    public static final Block blastFurnaceStoneBurning = new BlockBlastFurnace(177, Material.stone, true)
             .setBlockHardness(4.8F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceObsidianBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.obsidian, true)
+    public static final Block blastFurnaceObsidianBurning = new BlockBlastFurnace(178, Material.obsidian, true)
             .setBlockHardness(38.4F).setExplosionResistance(40.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blastFurnaceNetherrackBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.netherrack, true)
+    public static final Block blastFurnaceNetherrackBurning = new BlockBlastFurnace(179, Material.netherrack, true)
             .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blockSmokerIdle = new BlockSmoker(Constant.getNextBlockID(), false)
+    public static final Block blockSmokerIdle = new BlockSmoker(180, false)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blockSmokerBurning = new BlockSmoker(Constant.getNextBlockID(), true)
+    public static final Block blockSmokerBurning = new BlockSmoker(181, true)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.nickel);
-    public static final Block blockEnchantReserver = new BlockEnchantReserver(Constant.getNextBlockID())
+    public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, 182, Materials.nickel);
+    public static final Block blockEnchantReserver = new BlockEnchantReserver(183)
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block blockNickel = new BlockOreBlockExtend(Constant.getNextBlockID(), Materials.nickel).setStepSound_(Block.soundMetalFootstep);
+    public static final Block blockNickel = new BlockOreBlockExtend(184, Materials.nickel).setStepSound_(Block.soundMetalFootstep);
     public static final Block fenceNickel = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
-            , Constant.getNextBlockID(), "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep).setExplosionResistance(6.0f).setBlockHardness(3.2F).setMinHarvestLevel(3);
+            , 185, "bars/nickel_bars", "bars/nickel_bars", Materials.nickel, false).setStepSound_(soundMetalFootstep).setExplosionResistance(6.0f).setBlockHardness(3.2F).setMinHarvestLevel(3);
     public static final Block doorNickel = createInstance(BlockDoor.class, new Class[] {int.class, Material.class}
-            , Constant.getNextBlockID(), Materials.nickel).setStepSound_(soundMetalFootstep).setMinHarvestLevel(3);
+            , 186, Materials.nickel).setStepSound_(soundMetalFootstep).setMinHarvestLevel(3);
 
-    public static final Block oreNickel = new BlockOre(Constant.getNextBlockID(), Materials.nickel, 2).setBlockHardness(3.0F).setExplosionResistance(20.0f);
-    public static final Block oreTungsten = new BlockOre(Constant.getNextBlockID(), Materials.tungsten, 4).setBlockHardness(3.5F).setExplosionResistance(30.0f);
-    public static final Block blockTungsten = new BlockOreBlock(Constant.getNextBlockID(),Materials.tungsten).setStepSound_(Block.soundMetalFootstep);;
+    public static final Block oreNickel = new BlockOre(187, Materials.nickel, 2).setBlockHardness(3.0F).setExplosionResistance(20.0f);
+    public static final Block oreTungsten = new BlockOre(188, Materials.tungsten, 4).setBlockHardness(3.5F).setExplosionResistance(30.0f);
+    public static final Block blockTungsten = new BlockOreBlock(189,Materials.tungsten).setStepSound_(Block.soundMetalFootstep);;
     public static final Block fenceTungsten = createInstance(BlockThinFence.class, new Class[] {int.class, String.class, String.class, Material.class, boolean.class}
-            , Constant.getNextBlockID(), "bars/tungsten_bars", "bars/tungsten_bars", Materials.tungsten, false).setStepSound_(soundMetalFootstep).setExplosionResistance(96.0f).setBlockHardness(51.2F).setMinHarvestLevel(5);
+            , 190, "bars/tungsten_bars", "bars/tungsten_bars", Materials.tungsten, false).setStepSound_(soundMetalFootstep).setExplosionResistance(96.0f).setBlockHardness(51.2F).setMinHarvestLevel(5);
     public static final Block doorTungsten = createInstance(BlockDoor.class, new Class[] {int.class,Material.class}
-            , Constant.getNextBlockID(), Materials.tungsten).setStepSound_(soundMetalFootstep).setMinHarvestLevel(5);
+            , 191, Materials.tungsten).setStepSound_(soundMetalFootstep).setMinHarvestLevel(5);
 
-    public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.tungsten);
-    public static final Block flowerextend = new BlockFlowerExtend(Constant.getNextBlockID()).setMaxStackSize(32);
-    public static final Block blockEnchantEnhancer = new BlockEnchantEnhancer(Constant.getNextBlockID()).setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
-    public static final Block oreUru = new BlockOre(Constant.getNextBlockID(), Materials.uru, 4).setBlockHardness(5.0F).setExplosionResistance(150.0f);
-    public static final Block beetroots = new BlockBeetroots(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
-    public static final Block beetrootsDead = new BlockBeetrootsDead(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
+    public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, 192, Materials.tungsten);
+    public static final Block flowerextend = new BlockFlowerExtend(193).setMaxStackSize(32);
+    public static final Block blockEnchantEnhancer = new BlockEnchantEnhancer(194).setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
+    public static final Block oreUru = new BlockOre(195, Materials.uru, 4).setBlockHardness(5.0F).setExplosionResistance(150.0f);
+    public static final Block beetroots = new BlockBeetroots(196).setUnlocalizedName("beetroot");
+    public static final Block beetrootsDead = new BlockBeetrootsDead(197).setUnlocalizedName("beetroot");
 //    public static final Block invisibleLight = new BlockInvisibleLight(160).setBlockLightLevel(0.5F);
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {

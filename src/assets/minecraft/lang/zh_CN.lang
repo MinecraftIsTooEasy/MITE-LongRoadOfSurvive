@@ -316,3 +316,6 @@ entity.EntityEvil.name=恶灵
 
 death.extend.attack.thirsty=%1$s 脱水而亡
 death.extend.attack.freeze=%1$s 冻死了
+
+material.nickel.name=镍
+material.tungsten.name=钨

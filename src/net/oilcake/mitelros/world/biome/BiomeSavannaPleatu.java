@@ -5,6 +5,7 @@ import net.minecraft.*;
 import java.util.Random;
 
 public class BiomeSavannaPleatu extends BiomeBase{
+    private boolean enableRain;
     public BiomeSavannaPleatu(int par1) {
         super(par1);
         this.theBiomeDecorator.setTreesPerChunk(1);
@@ -36,7 +37,6 @@ public class BiomeSavannaPleatu extends BiomeBase{
             return this;
         }
     }
-    private boolean enableRain;
     private BiomeBase setDisableRain() {
         this.enableRain = false;
         return this;

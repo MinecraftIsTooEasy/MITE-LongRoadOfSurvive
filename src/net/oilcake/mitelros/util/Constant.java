@@ -6,13 +6,13 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " ITF Aleph-0x00000240 ";
+    public static final String VERSION = " ITF Aleph-0x00000241 ";
     public static final bjo icons_itf = new bjo("textures/gui/icons_mitf.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
     public static final int VER_NUM = 114514;
     public static int nextItemID = 1284;
-    public static int nextBlockID = 174;
+    public static int nextBlockID = 256;
     public static int nextPotionID = 24;
     public static int nextEnchantmentID = 96;
     public static int nextAchievementID = 136;
@@ -31,8 +31,7 @@ public class Constant {
 
     public static int getNextAchievementID() {return nextAchievementID++;}
     public static int getNextPacketID() {return nextPacketID++;}
-
-
+    public static final int Extended_Block_ID = 1024;
     public static ItemArmor[] HELMETS = null;
     public static ItemArmor[] CHESTPLATES = null;
     public static ItemArmor[] LEGGINGS = null;
