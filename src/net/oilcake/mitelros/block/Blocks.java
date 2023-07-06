@@ -47,11 +47,12 @@ public class Blocks extends Block {
             , 191, Materials.tungsten).setStepSound_(soundMetalFootstep).setMinHarvestLevel(5);
 
     public static final BlockAnvil anvilTungsten = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, 192, Materials.tungsten);
-    public static final Block flowerextend = new BlockFlowerExtend(193).setMaxStackSize(32);
+    public static final BlockFlowerExtend flowerextend = (BlockFlowerExtend) new BlockFlowerExtend(193).setMaxStackSize(32);
     public static final Block blockEnchantEnhancer = new BlockEnchantEnhancer(194).setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block oreUru = new BlockOre(195, Materials.uru, 4).setBlockHardness(5.0F).setExplosionResistance(150.0f);
     public static final Block beetroots = new BlockBeetroots(196).setUnlocalizedName("beetroot");
     public static final Block beetrootsDead = new BlockBeetrootsDead(197).setUnlocalizedName("beetroot");
+    public static final Block flowerPotExtend = new BlockFlowerPotExtend(160).setBlockHardness(0.0F).setStepSound_(soundPowderFootstep).setUnlocalizedName("flowerPot");
 //    public static final Block invisibleLight = new BlockInvisibleLight(160).setBlockLightLevel(0.5F);
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
@@ -99,6 +100,7 @@ public class Blocks extends Block {
         registerItemBlock("ore/uru_ore",oreUru);
         registerItemBlock("beetroot",beetroots);
         registerItemBlock("beetroot",beetrootsDead);
+        registerItemBlock("flower_pot",flowerPotExtend);
 //        registerItemBlock("invisible",invisibleLight);
 
     }

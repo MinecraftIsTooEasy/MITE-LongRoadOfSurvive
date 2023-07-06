@@ -27,7 +27,7 @@ public class WorldGenStoneCone extends WorldGenerator {
         }
 
         int var6 = par1World.getBlockId(par3, par4, par5);
-        if (!par1World.isUnderworld() && var6 != Block.grass.blockID)
+        if (var6 != Block.grass.blockID)
         {
             return false;
         }

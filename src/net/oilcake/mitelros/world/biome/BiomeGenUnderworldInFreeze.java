@@ -10,6 +10,7 @@ import java.util.Random;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.*;
+import net.oilcake.mitelros.world.WorldGenUnderworldCastle;
 
 public class BiomeGenUnderworldInFreeze extends BiomeGenUnderworld {
     public BiomeGenUnderworldInFreeze(int id) {
@@ -77,6 +78,17 @@ public class BiomeGenUnderworldInFreeze extends BiomeGenUnderworld {
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
         this.placeMycelium(par1World, par3, par4);
         super.decorate(par1World, par2Random, par3, par4);
+        if (par2Random.nextInt(1500) == 0)
+        {
+            int var5 = par3 + par2Random.nextInt(16) + 8;
+            int var6 = par4 + par2Random.nextInt(16) + 8;
+            WorldGenUnderworldCastle var7 = new WorldGenUnderworldCastle();
+            if(Minecraft.inDevMode()){
+                System.out.println("Generate Castle at " + var5 + " " + var6 + ".");
+            }
+            var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
+
+        }
         int var5 = 8 + par2Random.nextInt(24);
         for(int var6 = 0; var6 < var5; ++var6) {
             int var7 = par3 + par2Random.nextInt(16);

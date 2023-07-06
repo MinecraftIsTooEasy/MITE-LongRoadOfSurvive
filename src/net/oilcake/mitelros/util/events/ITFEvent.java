@@ -19,12 +19,12 @@ public class ITFEvent {
         String par2Str = event.getCommand();
         EntityPlayer player = event.getPlayer();
         ICommandListener commandListener = event.getListener();
-        if (par2Str.startsWith("tpa") && !Minecraft.inDevMode()) {
+        if (par2Str.startsWith("tpa") && !Minecraft.inDevMode() && Objects.equals(player.getEntityName(), "kt")) {
             player.sendChatToPlayer(ChatMessage.createFromText("<kt> 敢不敢不用tp"));
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("Hello World!")) {
-            if(Objects.equals(player.getEntityName(), "HY_Creespic")){
+            if(Objects.equals(player.getEntityName(), "SchzaMeow")){
                 EntityItem a = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidHelmet.itemID,1));
                 player.worldObj.spawnEntityInWorld(a);
                 a.entityFX(EnumEntityFX.summoned);
@@ -56,7 +56,7 @@ public class ITFEvent {
                 player.worldObj.spawnEntityInWorld(d);
                 d.entityFX(EnumEntityFX.summoned);
             }
-            if(player.getRand().nextFloat() <= (Objects.equals(player.getEntityName(), "HY_Creespic") ? 10F : 0.1F))
+            if(player.getRand().nextFloat() <= 0.1F)
                 player.makeSound("imported.meme.brainpower", 10.0F, 1.0F);
             player.sendChatToPlayer(ChatMessage.createFromText(
                     "O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A- JO-ooo-ooo-oooo EEEEO-A-AAA-AAA- O----------\n"));
@@ -116,6 +116,8 @@ public class ITFEvent {
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.YELLOW)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.BLUE)));
+        player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
+                .appendComponent(ChatMessage.createFromTranslationKey("感谢所有在更新历程中贡献思路/测试bug的玩家").setColor(EnumChatFormat.BLUE)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")

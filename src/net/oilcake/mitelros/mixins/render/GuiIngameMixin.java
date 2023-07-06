@@ -271,11 +271,10 @@ public class GuiIngameMixin extends avk {
                             weather = "乌云滚滚";
                         }
                         else {
-                            weather = "风平浪静";
+                            weather = null;
                         }
                     } else {
-                        event = this.g.f.getPreviousWeatherEvent(true);
-                        weather = event == null ? "风平浪静" : "雨过天晴";
+                        weather = null;
                     }
                 }
             }
@@ -285,12 +284,13 @@ public class GuiIngameMixin extends avk {
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
             String t = " 挑战难度: " + Constant.CalculateCurrentDiff() + " ";
-            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ");
+            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF");
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.compass)
                 var68.append(pos);
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.pocketSundial)
                 var68.append(time);
-            var68.append(weather);
+            if(weather!=null)
+                var68.append(weather);
             if(Constant.CalculateCurrentDiff()!=0)
                 var68.append(t);
             var68.append("   FPS=").append(Minecraft.last_fps).append(" (");

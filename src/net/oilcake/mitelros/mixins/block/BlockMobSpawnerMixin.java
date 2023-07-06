@@ -14,16 +14,7 @@ public class BlockMobSpawnerMixin extends BlockContainer {
     }
     @Overwrite
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 15 + info.world.rand.nextInt(15) + info.world.rand.nextInt(15));
-        if (info.world.isUnderworld() && info.world.rand.nextFloat() < 0.05) {
-            EntityLich lich = new EntityLich(info.world);
-            lich.setPosition((double)info.x, (double)info.y, (double)info.z);
-            lich.refreshDespawnCounter(-9600);
-            lich.entityFX(EnumEntityFX.summoned);
-            lich.onSpawnWithEgg((GroupDataEntity)null);
-            info.world.spawnEntityInWorld(lich);
-        }
-
+        this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, 15 + info.world.rand.nextInt(30));
         return 0;
     }
     @Shadow

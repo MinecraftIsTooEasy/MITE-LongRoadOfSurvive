@@ -21,7 +21,7 @@ public class BiomeSavannaPleatu extends BiomeBase{
         this.setDisableRain();
     }
     public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
-        return (WorldGenerator)(par1Random.nextInt(10) == 0 ? this.worldGeneratorTrees : null);
+        return (WorldGenerator)(par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);
     }
     private BiomeBase setMinMaxHeight(float par1, float par2) {
         this.minHeight = par1;
