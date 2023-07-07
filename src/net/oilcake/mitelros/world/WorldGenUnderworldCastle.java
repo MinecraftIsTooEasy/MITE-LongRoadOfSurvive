@@ -43,7 +43,7 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
                                 System.err.println("Failed to fetch mob spawner entity at (" + (x + par1) + ", " + y + ", " + (z + par2) + ")");
                             }
                         }else if(id == Block.chestAncientMetal.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 0, 2);
+                            par1World.setBlock(x + par1, y, z + par2, Block.chestAncientMetal.blockID, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 2);
                             StructurePieceTreasure[] var16 = StructurePieceTreasure.func_92080_a(getChestContentsForWorld(par1World), Item.enchantedBook.func_92114_b(random));
                             TileEntityChest var17 = (TileEntityChest)par1World.getBlockTileEntity(x + par1, y, z + par2);
                             if (var17 != null) {
@@ -72,7 +72,7 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
                                 System.err.println("Failed to fetch mob spawner entity at (" + (x + par1) + ", " + y + ", " + (z + par2) + ")");
                             }
                         }else if(id == Block.chestAncientMetal.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 0, 2);
+                            par1World.setBlock(x + par1, y, z + par2, Block.chestAncientMetal.blockID, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 2);
                             StructurePieceTreasure[] var16 = StructurePieceTreasure.func_92080_a(getChestContentsForWorld(par1World), Item.enchantedBook.func_92114_b(random));
                             TileEntityChest var17 = (TileEntityChest)par1World.getBlockTileEntity(x + par1, y, z + par2);
                             if (var17 != null) {
