@@ -29,13 +29,13 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
             }
             for(int par0 = 0; par0 < 12; par0++){
                 ++y;
-                int id = 0;
+                int id;
                 int Builder = 0;
                 for(int par1 = -10; par1<=0; par1++){
                     for(int par2 = -10; par2<=10; par2++){
                         id = getFlitteredBlockID(Layer[par0].charAt(Builder));
                         if(id == Block.mobSpawner.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.mobSpawner.blockID, 0, 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, 0, 2);
                             TileEntityMobSpawner var18 = (TileEntityMobSpawner)par1World.getBlockTileEntity(x + par1, y, z + par2);
                             if (var18 != null) {
                                 var18.getSpawnerLogic().setMobID("LongdeadGuardian");
@@ -43,16 +43,16 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
                                 System.err.println("Failed to fetch mob spawner entity at (" + (x + par1) + ", " + y + ", " + (z + par2) + ")");
                             }
                         }else if(id == Block.chestAncientMetal.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.chestAncientMetal.blockID, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 2);
                             StructurePieceTreasure[] var16 = StructurePieceTreasure.func_92080_a(getChestContentsForWorld(par1World), Item.enchantedBook.func_92114_b(random));
                             TileEntityChest var17 = (TileEntityChest)par1World.getBlockTileEntity(x + par1, y, z + par2);
                             if (var17 != null) {
-                                StructurePieceTreasure.generateChestContents(par1World, y, random, var16, var17, 8, (float[])null);
+                                StructurePieceTreasure.generateChestContents(par1World, y, random, var16, var17, 8, null);
                             }
                         }else if(id == Block.fenceAncientMetal.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, getRandomFence(random.nextInt(4)), 0, 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, 0, 2);
                         }else if(id == Block.stoneBrick.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.stoneBrick.blockID, getRandomBrickSubtype(random.nextInt(7)), 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, getRandomBrickSubtype(random.nextInt(7)), 2);
                         }else {
                             par1World.setBlockToAir(x + par1, y, z + par2);
                         }
@@ -64,7 +64,7 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
                     for(int par2 = -10; par2<=10; par2++){
                         id = getFlitteredBlockID(Layer[par0].charAt(Builder));
                         if(id == Block.mobSpawner.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.mobSpawner.blockID, 0, 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, 0, 2);
                             TileEntityMobSpawner var18 = (TileEntityMobSpawner)par1World.getBlockTileEntity(x + par1, y, z + par2);
                             if (var18 != null) {
                                 var18.getSpawnerLogic().setMobID("LongdeadGuardian");
@@ -72,16 +72,16 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
                                 System.err.println("Failed to fetch mob spawner entity at (" + (x + par1) + ", " + y + ", " + (z + par2) + ")");
                             }
                         }else if(id == Block.chestAncientMetal.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.chestAncientMetal.blockID, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, Block.chestAncientMetal.getMetadataForDirectionFacing(0, getRandomDirection(random)), 2);
                             StructurePieceTreasure[] var16 = StructurePieceTreasure.func_92080_a(getChestContentsForWorld(par1World), Item.enchantedBook.func_92114_b(random));
                             TileEntityChest var17 = (TileEntityChest)par1World.getBlockTileEntity(x + par1, y, z + par2);
                             if (var17 != null) {
-                                StructurePieceTreasure.generateChestContents(par1World, y, random, var16, var17, 8, (float[])null);
+                                StructurePieceTreasure.generateChestContents(par1World, y, random, var16, var17, 8, null);
                             }
                         }else if(id == Block.fenceAncientMetal.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, getRandomFence(random.nextInt(4)), 0, 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, 0, 2);
                         }else if(id == Block.stoneBrick.blockID){
-                            par1World.setBlock(x + par1, y, z + par2, Block.stoneBrick.blockID, getRandomBrickSubtype(random.nextInt(7)), 2);
+                            par1World.setBlock(x + par1, y, z + par2, id, getRandomBrickSubtype(random.nextInt(7)), 2);
                         }else {
                             par1World.setBlockToAir(x + par1, y, z + par2);
                         }
@@ -91,7 +91,7 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
             }
             EntityLich var11 = new EntityLich(par1World);
             var11.setLocationAndAngles((double)x + 0.5, (double)y-4, (double)z + 0.5, 0.0F, 0.0F);
-            var11.onSpawnWithEgg((GroupDataEntity)null);
+            var11.onSpawnWithEgg(null);
             var11.func_110163_bv();
             par1World.spawnEntityInWorld(var11);
             return true;
@@ -116,8 +116,9 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
     private int getRandomStone(int index){
         return index == 0 ? Block.cobblestoneMossy.blockID : Block.cobblestone.blockID;
     }
-    private int getRandomFence(int index){
-        return index == 0 ? Block.fenceAncientMetal.blockID : 0;
+    private int getRandomFence(){
+        Random rand = new Random();
+        return rand.nextInt(4) == 0 ? Block.fenceAncientMetal.blockID : 0;
     }
     private int getFlitteredBlockID(char index){
         if(index == 'S'){
@@ -127,7 +128,7 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
         }else if(index == 'B'){
             return Block.chestAncientMetal.blockID;
         }else if(index == 'F'){
-            return getRandomFence(0);
+            return getRandomFence();
         }else {
             return 0;
         }
