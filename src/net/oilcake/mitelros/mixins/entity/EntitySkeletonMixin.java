@@ -13,7 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Calendar;
 
 @Mixin(EntitySkeleton.class)
-public class EntitySkeletonMixin extends EntityMonster{
+public abstract class EntitySkeletonMixin extends EntityMonster{
+    @Shadow
+    private int frenzied_by_bone_lord_countdown;
+    int num_arrows;
 
     public EntitySkeletonMixin(World par1World) {
         super(par1World);
@@ -21,7 +24,56 @@ public class EntitySkeletonMixin extends EntityMonster{
 
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
+        this.num_arrows = this.rand.nextInt(3) + (this.isLongdead() ? 6 : 2) + (this.isLongdeadGuardian() ? 2 : 0);
         this.tasks.addTask(3, new PathfinderGoalAvoidPlayer(this, EntityWolf.class, 10.0F, 1.0, 1.2));
+    }
+    @Overwrite
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        if (par1NBTTagCompound.hasKey("SkeletonType")) {
+            byte var2 = par1NBTTagCompound.getByte("SkeletonType");
+            this.setSkeletonType(var2);
+        }
+        this.setCombatTask();
+        this.num_arrows = par1NBTTagCompound.getByte("num_arrows");
+    }
+    @Overwrite
+    public void onLivingUpdate() {
+        if (this.worldObj.isRemote && this.getSkeletonType() == 1) {
+            this.setSize(0.72F, 2.34F);
+        }
+        if (this.frenzied_by_bone_lord_countdown > 0) {
+            this.setFrenziedByBoneLordCountdown(this.frenzied_by_bone_lord_countdown - 1);
+        }
+        if (this.num_arrows == 0 && this.getHeldItemStack() != null) {
+            if(this.getHeldItemStack().getItem() instanceof ItemBow){
+                this.setHeldItemStack(null);
+            }
+        }
+        if(this.getHeldItemStack() == null && this.getSkeletonType() == 0){
+            this.setSkeletonType(2);
+            this.setCombatTask();
+        }
+        super.onLivingUpdate();
+    }
+    @Overwrite
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setByte("SkeletonType", (byte)this.getSkeletonType());
+        par1NBTTagCompound.setByte("num_arrows", (byte)this.num_arrows);
+    }
+    @Overwrite
+    public void setCombatTask() {
+        this.tasks.removeTask(this.aiAttackOnCollide);
+        this.tasks.removeTask(this.aiArrowAttack);
+        ItemStack var1 = this.getHeldItemStack();
+        if (var1 != null && var1.getItem() instanceof ItemBow && this.num_arrows > 0) {
+            this.tasks.addTask(4, this.aiArrowAttack);
+            this.tasks.addTask(3, new EntityAISeekFiringPosition(this, 1.0F, true));
+        } else {
+            this.tasks.addTask(4, this.aiAttackOnCollide);
+        }
+
     }
 
 //    @Overwrite
@@ -143,6 +195,13 @@ public class EntitySkeletonMixin extends EntityMonster{
         return this.dataWatcher.getWatchableObjectByte(13);
     }
 
+    @Shadow public abstract boolean isLongdeadGuardian();
+    @Shadow public boolean setFrenziedByBoneLordCountdown(int frenzied_by_bone_lord_countdown) {
+        return false;
+    }
+
+    @Shadow public abstract void setHeldItemStack(ItemStack item_stack);
+
     @Overwrite
     public void attackEntityWithRangedAttack(EntityLiving par1EntityLivingBase, float par2) {
         EntityArrow var3 = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4), this.isLongdead() ? Item.arrowAncientMetal : Item.arrowRustedIron, false);
@@ -164,6 +223,7 @@ public class EntitySkeletonMixin extends EntityMonster{
 
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var3);
+        this.num_arrows--;
     }
     protected boolean Is_Wizard = false;
     @Overwrite
@@ -197,7 +257,7 @@ public class EntitySkeletonMixin extends EntityMonster{
                 this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 1), 0.0F);
             }
         } else if (this.getSkeletonType() != 2) {
-            num_drops = this.rand.nextInt(2 + looting);
+            num_drops = Math.min(this.num_arrows, this.rand.nextInt(2 + looting));
             if (num_drops > 0 && !recently_hit_by_player) {
                 num_drops -= this.rand.nextInt(num_drops + 1);
             }

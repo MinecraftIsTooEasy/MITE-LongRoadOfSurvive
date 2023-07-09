@@ -9,10 +9,13 @@ import java.util.TimeZone;
 public class EntityStray extends EntitySkeleton {
     private Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"));
     private int spawnCounter;
+    int num_arrows;
+    private int frenzied_by_bone_lord_countdown;
 
     public EntityStray(World par1World) {
         super(par1World);
         this.tasks.addTask(3, new PathfinderGoalLeapAtTarget(this, 0.35F));
+        this.num_arrows = 4;
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -21,8 +24,36 @@ public class EntityStray extends EntitySkeleton {
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.28999999165534973);
         this.setEntityAttribute(GenericAttributes.attackDamage, 5.0);
     }
-    public void onUpdate(){
-        super.onUpdate();
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setByte("SkeletonType", (byte)this.getSkeletonType());
+        par1NBTTagCompound.setByte("num_arrows", (byte)this.num_arrows);
+    }
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        if (par1NBTTagCompound.hasKey("SkeletonType")) {
+            byte var2 = par1NBTTagCompound.getByte("SkeletonType");
+            this.setSkeletonType(var2);
+        }
+        this.setCombatTask();
+        this.num_arrows = par1NBTTagCompound.getByte("num_arrows");
+    }
+    public void onLivingUpdate() {
+        if (this.worldObj.isRemote && this.getSkeletonType() == 1) {
+            this.setSize(0.72F, 2.34F);
+        }
+        if (this.frenzied_by_bone_lord_countdown > 0) {
+            this.setFrenziedByBoneLordCountdown(this.frenzied_by_bone_lord_countdown - 1);
+        }
+        if (this.num_arrows == 0 && this.getHeldItemStack() != null) {
+            if(this.getHeldItemStack().getItem() instanceof ItemBow){
+                this.setHeldItemStack(null);
+            }
+        }
+        if(this.getHeldItemStack() == null && this.getSkeletonType() == 0){
+            this.setSkeletonType(2);
+            this.setCombatTask();
+        }
         if(!getWorld().isRemote){
             spawnCounter++;
             if (spawnCounter > 300) {
@@ -35,6 +66,7 @@ public class EntityStray extends EntitySkeleton {
 
             }
         }
+        super.onLivingUpdate();
     }
     public void addRandomWeapon() {
         if(this.getSkeletonType() == 2 && this.rand.nextInt(24)==0){
@@ -64,6 +96,7 @@ public class EntityStray extends EntitySkeleton {
 
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var3);
+        --this.num_arrows;
     }
 
     protected void addRandomEquipment() {

@@ -15,6 +15,9 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(World.class)
 public abstract class WorldMixin {
+    @Shadow public abstract float getRainStrength(float par1);
+
+    private static final double pi = Math.acos(-1);
     @Shadow public abstract World getWorld();
 
     @Shadow public abstract void removeBlockTileEntity(int par1, int par2, int par3);
@@ -160,6 +163,11 @@ public abstract class WorldMixin {
                 Debug.setErrorMessage("getRainDurationModify: called for num "+ Season+" for calculating. Use the default.");
                 return 1.0F;
         }
+    }
+    public float getSeasonGrowthModifier(){
+        int day_in_row = this.getDayOfWorld();
+        float growModifier = (float) Math.sin((double) (day_in_row - 16) / 64 * pi);
+        return growModifier;
     }
     @Overwrite
     public final boolean canSnowAt(int par1, int par2, int par3) {

@@ -8,10 +8,12 @@ import java.util.List;
 
 public class EntityWitherBodyguard extends EntitySkeleton {
     ItemStack stowed_item_stack;
+    int num_arrows;
     public EntityWitherBodyguard(World par1World) {
         super(par1World);
         this.setSkeletonType(1);
         this.setCanPickUpLoot(false);
+        this.num_arrows = 6;
     }
     public int getRandomSkeletonType(World world) {
         return 2;
@@ -45,8 +47,30 @@ public class EntityWitherBodyguard extends EntitySkeleton {
                 }
             }
         }
+        if (this.num_arrows == 0 && this.getHeldItemStack() != null) {
+            if(this.getHeldItemStack().getItem() instanceof ItemBow){
+                this.setHeldItemStack(null);
+            }
+        }
+        if(this.getHeldItemStack() == null && this.getSkeletonType() == 0){
+            this.setSkeletonType(2);
+            this.setCombatTask();
+        }
     }
-
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setByte("SkeletonType", (byte)this.getSkeletonType());
+        par1NBTTagCompound.setByte("num_arrows", (byte)this.num_arrows);
+    }
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        if (par1NBTTagCompound.hasKey("SkeletonType")) {
+            byte var2 = par1NBTTagCompound.getByte("SkeletonType");
+            this.setSkeletonType(var2);
+        }
+        this.setCombatTask();
+        this.num_arrows = par1NBTTagCompound.getByte("num_arrows");
+    }
     public void attackEntityWithRangedAttack(EntityLiving par1EntityLivingBase, float par2) {
         EntityArrow var3 = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4), Items.arrowTungsten, false);
         int var4 = EnchantmentManager.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItemStack());
@@ -62,6 +86,7 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         var3.setFire(100);
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var3);
+        this.num_arrows--;
     }
     @Override
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
