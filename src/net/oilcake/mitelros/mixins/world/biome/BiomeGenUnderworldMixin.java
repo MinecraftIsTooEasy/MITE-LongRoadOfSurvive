@@ -29,10 +29,6 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
         this.removeEntityFromSpawnableLists(EntityBoneBodyguard.class);
         this.removeEntityFromSpawnableLists(EntityMinerZombie.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStalkerCreeper.class, 100, 1, 2));
-        this.spawnableMonsterList.add(new BiomeMeta(EntityCaveSpider.class, 40, 1, 2));
-        this.spawnableMonsterList.add(new BiomeMeta(EntityLongdead.class, 40, 1, 2));
-        this.spawnableMonsterList.add(new BiomeMeta(EntityAncientBoneLord.class, 5, 1, 1));
-        this.spawnableMonsterList.add(new BiomeMeta(EntityWitherBoneLord.class,5,1,1));
         this.spawnableMonsterList.add(new BiomeMeta(EntitySpiderKing.class,5,1,1));
     }
 

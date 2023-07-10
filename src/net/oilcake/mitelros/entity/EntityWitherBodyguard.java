@@ -15,9 +15,6 @@ public class EntityWitherBodyguard extends EntitySkeleton {
         this.setCanPickUpLoot(false);
         this.num_arrows = 6;
     }
-    public int getRandomSkeletonType(World world) {
-        return 2;
-    }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.followRange, 128.0);

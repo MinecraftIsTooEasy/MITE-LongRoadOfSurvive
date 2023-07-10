@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
+import net.oilcake.mitelros.entity.EntityWitherBoneLord;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -128,18 +129,25 @@ public abstract class EntitySkeletonMixin extends EntityMonster{
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
         int skeleton_type = this.forced_skeleton_type >= 0 ? this.forced_skeleton_type : this.getRandomSkeletonType(this.worldObj);
         if (skeleton_type == 1) {
-
-            this.setCurrentItemOrArmor(1, (new ItemStack(Items.tungstenBootsChain)).randomizeForMob(this, false));
-            this.setCurrentItemOrArmor(2, (new ItemStack(Items.tungstenLeggingsChain)).randomizeForMob(this, false));
-            this.setCurrentItemOrArmor(3, (new ItemStack(Items.tungstenChestplateChain)).randomizeForMob(this, false));
-            this.setCurrentItemOrArmor(4, (new ItemStack(Items.tungstenHelmetChain)).randomizeForMob(this, false));
-            this.getEntityAttribute(GenericAttributes.attackDamage).setAttribute(6.0);
+            if(this.isBoneLord()){
+                this.setCurrentItemOrArmor(1, (new ItemStack(Items.tungstenBoots)).randomizeForMob(this, false));
+                this.setCurrentItemOrArmor(2, (new ItemStack(Items.tungstenLeggings)).randomizeForMob(this, false));
+                this.setCurrentItemOrArmor(3, (new ItemStack(Items.tungstenChestplate)).randomizeForMob(this, false));
+                this.setCurrentItemOrArmor(4, (new ItemStack(Items.tungstenHelmet)).randomizeForMob(this, false));
+                this.getEntityAttribute(GenericAttributes.attackDamage).setAttribute(8.0);
+            } else{
+                this.setCurrentItemOrArmor(1, (new ItemStack(Items.tungstenBootsChain)).randomizeForMob(this, false));
+                this.setCurrentItemOrArmor(2, (new ItemStack(Items.tungstenLeggingsChain)).randomizeForMob(this, false));
+                this.setCurrentItemOrArmor(3, (new ItemStack(Items.tungstenChestplateChain)).randomizeForMob(this, false));
+                this.setCurrentItemOrArmor(4, (new ItemStack(Items.tungstenHelmetChain)).randomizeForMob(this, false));
+                this.getEntityAttribute(GenericAttributes.attackDamage).setAttribute(6.0);
+            }
             if(this.rand.nextInt(24)==0){
                 this.Is_Wizard = true;
                 this.setCurrentItemOrArmor(0, (new ItemStack(Items.LavaWand)).randomizeForMob(this, false));
                 this.tasks.addTask(3, new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 9.0F, 1.0, 1.0));
                 this.tasks.addTask(4, this.aiArrowAttack);
-            }else{
+            } else{
                 this.setCurrentItemOrArmor(0, (new ItemStack(Items.tungstenSword)).randomizeForMob(this, false));
                 this.tasks.addTask(4, this.aiAttackOnCollide);
             }
@@ -201,6 +209,8 @@ public abstract class EntitySkeletonMixin extends EntityMonster{
     }
 
     @Shadow public abstract void setHeldItemStack(ItemStack item_stack);
+
+    @Shadow public abstract boolean isBoneLord();
 
     @Overwrite
     public void attackEntityWithRangedAttack(EntityLiving par1EntityLivingBase, float par2) {
