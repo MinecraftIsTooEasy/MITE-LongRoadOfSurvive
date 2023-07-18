@@ -328,7 +328,7 @@ public class GuiIngameMixin extends avk {
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
             String t = " 挑战难度: " + Constant.CalculateCurrentDiff() + " ";
-            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF");
+            StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ");
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.compass)
                 var68.append(pos);
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.pocketSundial)

@@ -69,7 +69,7 @@ public class EntityStray extends EntitySkeleton {
         super.onLivingUpdate();
     }
     public void addRandomWeapon() {
-        if(this.getSkeletonType() == 2 && this.rand.nextInt(24)==0){
+        if(this.getSkeletonType() == 2 && this.rand.nextInt(8)==0){
             this.setHeldItemStack(new ItemStack((Item)(Items.FreezeWand)));
             this.Is_Wizard = true;
         }else{

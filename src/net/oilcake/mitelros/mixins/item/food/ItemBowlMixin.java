@@ -151,7 +151,7 @@ public class ItemBowlMixin extends ItemVessel {
                     return true;
                 }
 
-                if (this.contains(Material.water)) {
+                if (this.contains(Material.water) || this.contains(Materials.unsafe_water) || this.contains(Materials.dangerous_water)) {
                     Block block = rc.getBlockHit();
                     int x = rc.block_hit_x;
                     int y = rc.block_hit_y;

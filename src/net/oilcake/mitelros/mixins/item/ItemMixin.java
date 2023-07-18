@@ -92,9 +92,8 @@ public class ItemMixin{
         return item;
     }
 
-    public Item setPotionEffectC(String par1Str) {
+    public void setPotionEffectC(String par1Str) {
         this.setPotionEffect(par1Str);
-        return item;
     }
     // must not to do this
 //    public final Item setFoodValue(int satiation, int nutrition, int sugar_content, boolean has_protein, boolean has_essential_fats, boolean has_phytonutrients) {
