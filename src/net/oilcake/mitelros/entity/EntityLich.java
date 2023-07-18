@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityLich extends EntitySkeleton implements IBossbarEntity {
+    private PathfinderGoalAvoidPlayer aiAvoidPlayerStrategic = new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 6.0F, 1.1, 1.4);
+    private PathfinderGoalAvoidPlayer aiAvoidPlayerPanic = new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 32.0F, 1.3, 1.5);
+    private PathfinderGoalMeleeAttack aiAttackOnCollide = new PathfinderGoalMeleeAttack(this, EntityPlayer.class, 1.2, false);
     private int max_num_evasions;
     private int num_evasions;
     private int spawnCounter;
@@ -24,7 +27,6 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
         if (par1World != null && this.onServer()) {
             this.max_num_evasions = this.num_evasions = 6;
         }
-        this.tasks.addTask(1, new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 9.0F, 1.1, 1.4));
     }
 
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
@@ -105,11 +107,21 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
                 if (target != null && this.canSeeTarget(true)) {
                     double distance = (double)this.getDistanceToEntity(target);
                     if (this.getHeldItemStack().itemID == Items.ShockWand.itemID) {
-                        if (distance < 5.0) {
-                            this.swapHeldItemStackWithStowed();
-                            attack_mode = true;
+                        if (distance < 3.0) {
+                            if(this.getHealth() >= 20.0F){
+                                this.swapHeldItemStackWithStowed();
+                                attack_mode = true;
+                                this.tasks.removeTask(aiAvoidPlayerStrategic);
+                                this.tasks.addTask(3,aiAttackOnCollide);
+                            }
                         }
-                    } else if (distance > 6.0) {
+                    } else if (distance > 3.0) {
+                        this.tasks.removeTask(aiAttackOnCollide);
+                        if(this.getHealth() < 20.0F){
+                            this.tasks.addTask(3,aiAvoidPlayerPanic);
+                        }else{
+                            this.tasks.addTask(3,aiAvoidPlayerStrategic);
+                        }
                         this.swapHeldItemStackWithStowed();
                         attack_mode = false;
                     }
@@ -210,15 +222,19 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
 
     public EntityDamageResult attackEntityFrom(Damage damage) {
         boolean can_evade = !damage.isFallDamage() && !damage.isFireDamage() && !damage.isPoison();
-        if (can_evade && this.num_evasions > 0) {
-            --this.num_evasions;
+        if (can_evade && (this.num_evasions > 0 || (this.getHealth() < 20.0F && this.rand.nextInt(8) == 0))) {
+            if(this.num_evasions > 0){
+                --this.num_evasions;
+            }
             if (this.tryTeleportAwayFrom(this.getTarget(), 6.0)) {
-                EntityLichShadow shadow = new EntityLichShadow(worldObj);
-                shadow.setPosition(posX, posY, posZ);
-                shadow.refreshDespawnCounter(-9600);
-                worldObj.spawnEntityInWorld(shadow);
-                shadow.onSpawnWithEgg(null);
-                shadow.entityFX(EnumEntityFX.summoned);
+                if(this.getHealth() >= 20.0F) {
+                    EntityLichShadow shadow = new EntityLichShadow(worldObj);
+                    shadow.setPosition(posX, posY, posZ);
+                    shadow.refreshDespawnCounter(-9600);
+                    worldObj.spawnEntityInWorld(shadow);
+                    shadow.onSpawnWithEgg(null);
+                    shadow.entityFX(EnumEntityFX.summoned);
+                }
                 return null;
             }
         }
@@ -235,7 +251,7 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
     }
     @Override
     protected void dropFewItems(boolean recently_hit_by_player, DamageSource damage_source) {
-        this.dropItem(Items.forgingnote.itemID, 1);
+        this.dropItemStack(new ItemStack(Items.forgingnote.itemID, 1, 0), 0.0F);
         int looting = damage_source.getLootingModifier();
         int num_drops;
         int i;

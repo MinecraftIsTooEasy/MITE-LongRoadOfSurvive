@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.DecimalFormat;
 import java.util.Random;
@@ -254,30 +255,73 @@ public class GuiIngameMixin extends avk {
     @Inject(method = "a(FZII)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/Minecraft;inDevMode()Z", shift = At.Shift.BEFORE))
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
         if (!Minecraft.inDevMode()) {
-            WeatherEvent event = this.g.f.getCurrentWeatherEvent(true, false);
             String pos = "平面坐标: ("+ MathHelper.floor_double(this.g.h.posX) + ", " + MathHelper.floor_double(this.g.h.posZ) +") ";
             String time = "时间: ("+this.g.h.getWorld().getHourOfDay()+":"+this.g.h.getWorld().getTotalWorldTime()%1000*60/1000+") ";
             EntityPlayer player = this.g.h.getAsPlayer();
-            String weather;
-            if(StuckTagConfig.TagConfig.TagNoWeatherPredict.ConfigValue){
-                weather = "阴晴无定";
-            } else{
-                if (event != null) {
-                    weather = "轰雷降至";
+            String Weather;
+            String Biome;
+            String s;
+                switch (this.g.h.getDirectionFromYaw().toString()) {
+                    case "EAST":
+                        s = "东";
+                        break;
+                    case "WEST":
+                        s = "西";
+                        break;
+                    case "NORTH":
+                        s = "北";
+                        break;
+                    case "SOUTH":
+                        s = "南";
+                        break;
+                    default:
+                        s = "null";
+                }
+
+                Biome = StringUtils.substringBefore(this.g.h.getBiome().toString(), "@").substring(19) + " ";
+                String RainSnow;
+                if (!this.g.h.getBiome().isFreezing() || !(this.g.h.worldObj.getWorldSeason() == 3)) {
+                    RainSnow = "雨";
                 } else {
-                    event = this.g.f.getNextWeatherEvent(true);
-                    if (event != null) {
-                        if (event.start - this.g.f.getTotalWorldTime() < 2000) {
-                            weather = "乌云滚滚";
+                    RainSnow = "雪";
+                }
+
+                WeatherEvent event = this.g.f.getCurrentWeatherEvent();
+                Random R = new Random((long)this.g.f.getDayOfWorld());
+                int ran2;
+                if (event != null) {
+                    if (this.g.f.getDayOfWorld() % 32 == 0) {
+                        Weather = "雷暴";
+                    } else {
+                        ran2 = R.nextInt(3);
+                        if (ran2 == 0) {
+                            Weather = "小" + RainSnow;
+                        } else if (ran2 == 1) {
+                            Weather = "中" + RainSnow;
+                        } else {
+                            Weather = "大" + RainSnow;
                         }
-                        else {
-                            weather = null;
+                    }
+                } else {
+                    event = this.g.f.getNextWeatherEvent(false);
+                    if (event != null) {
+                        if (event.start - (long)this.g.f.getAdjustedTimeOfDay() < 2000L) {
+                            Weather = "有雨";
+                        } else {
+                            Weather = "阴";
                         }
                     } else {
-                        weather = null;
+                        ran2 = R.nextInt(3);
+                        if (ran2 == 0) {
+                            Weather = "晴";
+                        } else if (ran2 == 1) {
+                            Weather = "多云";
+                        } else {
+                            Weather = "晴转多云";
+                        }
                     }
                 }
-            }
+            String GAinfo = " " + s + " " + Biome + " " + Weather;
             if (GuiIngame.server_load >= 0) {
                 awf sr = new awf(this.g.u, this.g.d, this.g.e);
                 String text = GuiIngame.server_load + "%";
@@ -289,10 +333,10 @@ public class GuiIngameMixin extends avk {
                 var68.append(pos);
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.pocketSundial)
                 var68.append(time);
-            if(weather!=null)
-                var68.append(weather);
             if(Constant.CalculateCurrentDiff()!=0)
                 var68.append(t);
+            var68.append(Weather);
+//            var68.append(GAinfo);
             var68.append("   FPS=").append(Minecraft.last_fps).append(" (");
             this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }

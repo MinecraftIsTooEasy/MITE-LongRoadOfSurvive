@@ -37,14 +37,12 @@ public class Packet8UpdateHealthMixin extends Packet {
             at = @At("RETURN"))
     private void injectReadPacketData(DataInput par1DataInput, CallbackInfo c) throws IOException {
         this.water = par1DataInput.readInt();
-        this.FreezingCooldown = par1DataInput.readInt();
     }
 
     @Inject(method = "writePacketData",
             at = @At("RETURN"))
     private void injectWritePacketData(DataOutput par1DataOutput, CallbackInfo c) throws IOException {
         par1DataOutput.writeInt(this.water);
-        par1DataOutput.writeInt(this.FreezingCooldown);
     }
 
 

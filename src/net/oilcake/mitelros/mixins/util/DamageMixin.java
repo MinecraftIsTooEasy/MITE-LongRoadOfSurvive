@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.util;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.ItemMorningStar;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -68,7 +69,7 @@ public class DamageMixin{
                 }
             }
 
-            return Math.max(this.amount - effective_protection, 1.0F);
+            return Math.max(this.amount - effective_protection, StuckTagConfig.TagConfig.TagInstinctSurvival.ConfigValue ? 0.0F : 1.0F);
         }
     }
     @Shadow

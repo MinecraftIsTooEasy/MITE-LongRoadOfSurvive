@@ -39,11 +39,14 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //
     @Shadow
     private int insulin_resistance;
+    @Shadow
+    public EnumInsulinResistanceLevel insulin_resistance_level;
     public int getCurrent_insulin_resistance_lvl(){
-        if(insulin_resistance>=144000)return 3;
-        if(insulin_resistance>=96000)return 2;
-        if(insulin_resistance>=48000)return 1;
-        return 0;
+        if(this.insulin_resistance_level == null)
+            return 0;
+        else{
+            return insulin_resistance_level.ordinal() + 1;
+        }
     }
     @Overwrite
     public void attackTargetEntityWithCurrentItem(Entity target) {
@@ -226,7 +229,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
             return false;
         }
-        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && this.isOutdoors()){
+        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && (this.isOutdoors() || this.worldObj.provider.dimensionId == -2)){
             if(this.getHelmet() != null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
                     this.getCuirass() != null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
                     this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&

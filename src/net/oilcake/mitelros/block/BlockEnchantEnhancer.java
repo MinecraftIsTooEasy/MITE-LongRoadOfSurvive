@@ -43,4 +43,7 @@ public class BlockEnchantEnhancer extends Block {
     public void getItemStacks(int id, CreativeModeTab creative_tabs, List list) {
         super.getItemStacks(id, creative_tabs, list);
     }
+    public boolean isPortable(World world, EntityLiving entity_living_base, int x, int y, int z) {
+        return true;
+    }
 }

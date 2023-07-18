@@ -79,7 +79,7 @@ public class BiomeBaseMixin{
     }
     @Overwrite
     public boolean canSpawnLightningBolt(boolean is_blood_moon) {
-        return this.enableSnow ? false : this.enableRain && this.rainfall != 0.0F || is_blood_moon;
+        return this.enableSnow ? false : (this.enableRain && this.rainfall != 0.0F) || is_blood_moon;
     }
 
 }

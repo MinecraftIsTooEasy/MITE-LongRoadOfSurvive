@@ -41,7 +41,7 @@ public class StuckTagConfig {
     public static class TagConfig {
         public static ConfigItem <Boolean> TagNoWeatherPredict = new ConfigItem<>("NoWeatherPredict", false, "(LVL1)阴晴无定：删除天气预报");
         public static ConfigItem <Boolean> TagHeatStroke = new ConfigItem<>("HeatStroke",false,"(LVL1)酷暑代价：水分自然消耗的速度提升100%");
-        public static ConfigItem <Boolean> TagInstinctSurvival = new ConfigItem<>("InstinctSurvival",false,"(LVL1)防御本能：怪物享受护甲防御的比率提升25%");
+        public static ConfigItem <Boolean> TagInstinctSurvival = new ConfigItem<>("InstinctSurvival",false,"(LVL1)防御本能：怪物享受护甲防御的比率提升25%，同时取消保底1伤害的设定");
         public static ConfigItem <Boolean> TagFallenInMineLVL1 = new ConfigItem<>("FallenInMineLVL1",false,"(LVL2)矿难群体：主世界矿洞生成矿工僵尸的概率提升");
         public static ConfigItem <Boolean> TagBattleSufferLVL1 = new ConfigItem<>("BattleSufferLVL1",false,"(LVL1)久经沙场：主世界矿洞生成骷髅侍卫的概率提升");
         public static ConfigItem <Boolean> TagFallenInMineLVL2 = new ConfigItem<>("FallenInMineLVL2",false,"(LVL3)矿难群体：主世界矿洞生成矿工僵尸的概率提升，亡魂的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
