@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,8 +17,8 @@ public class ItemHoeMixin extends ItemTool {
 
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.addMaterialsEffectiveAgainst(new Material[]{Material.cake, Material.craftedSnow, Material.grass, Material.dirt, Material.sand, Material.snow});
-        this.addBlocksEffectiveAgainst(new Block[]{Block.carrot, Block.potato, Block.onions, Blocks.beetroots});
+        this.addMaterialsEffectiveAgainst(new Material[]{Materials.beetroot});
+        this.addBlocksEffectiveAgainst(new Block[]{Blocks.beetroots});
     }
 
     @Shadow

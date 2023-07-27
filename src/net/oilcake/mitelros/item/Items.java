@@ -1110,8 +1110,8 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
         RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(tungstenNugget));
         RecipesFurnace.smelting().addSmelting(pieceUru.itemID, new ItemStack(UruNugget));
-        RecipesFurnace.smelting().addSmelting(bowlWaterSuspicious.itemID, new ItemStack(bowlWater));
-        RecipesFurnace.smelting().addSmelting(bowlWaterSwampland.itemID, new ItemStack(bowlWater));
+//        RecipesFurnace.smelting().addSmelting(bowlWaterSuspicious.itemID, new ItemStack(bowlWater));
+//        RecipesFurnace.smelting().addSmelting(bowlWaterSwampland.itemID, new ItemStack(bowlWater));
         RecipesFurnace.smelting().addSmelting(claybowlWaterSuspicious.itemID, new ItemStack(claybowlWater));
         RecipesFurnace.smelting().addSmelting(claybowlWaterSwampland.itemID, new ItemStack(claybowlWater));
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));

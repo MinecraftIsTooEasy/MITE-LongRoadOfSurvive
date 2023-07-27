@@ -57,6 +57,7 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagArmament = new ConfigItem<>("Armament",false,"(LVL-1)战备军械：玩家的护甲值在耐久低于25%时才会减少");
         public static ConfigItem <Boolean> TagDistortion = new ConfigItem<>("Distortion",false,"(LVL-2)血肉畸变：玩家可获得最高40的生命值");
         public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
+        public static ConfigItem <Boolean> TagMiracleDisaster = new ConfigItem<>("MiracleDisaster",false,"(LVL1)迷幻危机：刷怪笼的危险等级不再受y轴限制");
         //*这个有问题*//
 
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
@@ -84,6 +85,7 @@ public class StuckTagConfig {
         Tags.put("Armament",TagConfig.TagArmament);
         Tags.put("Distortion",TagConfig.TagDistortion);
         Tags.put("WorshipDark",TagConfig.TagWorshipDark);
+        Tags.put("MiracleDisaster",TagConfig.TagMiracleDisaster);
         //删除
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 

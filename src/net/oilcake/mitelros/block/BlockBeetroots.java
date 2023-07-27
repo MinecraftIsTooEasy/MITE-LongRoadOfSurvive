@@ -25,7 +25,10 @@ public class BlockBeetroots extends BlockCrops {
                 playCropPopSound(info);
             }
         } else {
-            this.dropBlockAsEntityItem(info, this.getSeedItem(), 0, 1, 1F);
+            if(this.isMature(metadata)) {
+                for(int i = 0; i < Math.random() * 2; i++)
+                    this.dropBlockAsEntityItem(info, this.getSeedItem(), 0, 1, 1F);
+            }
         }
 
     }

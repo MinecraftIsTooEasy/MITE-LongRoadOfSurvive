@@ -38,7 +38,7 @@ public class DamageSourceExtend extends DamageSource{
             var3 = par1EntityLivingBase.getEntityName() +" 冻死了";
         }
         if(Objects.equals(this.damageType, thirsty.damageType)){
-            var3 = par1EntityLivingBase.getEntityName() +" 渴死了";
+            var3 = par1EntityLivingBase.getEntityName() +" 脱水而亡";
         }
         if(Objects.equals(this.damageType, malnourished.damageType)){
             var3 = par1EntityLivingBase.getEntityName() +" 营养不良而死";

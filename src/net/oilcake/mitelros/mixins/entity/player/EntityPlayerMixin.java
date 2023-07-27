@@ -1,11 +1,8 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
-import com.sun.xml.internal.ws.wsdl.writer.document.soap.Body;
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
-import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
-import net.oilcake.mitelros.entity.EntityClusterSpider;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
@@ -20,9 +17,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static java.lang.Math.max;
@@ -60,7 +54,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 ItemStack heldItemStack = this.getHeldItemStack();
                 if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestroying)){
                     int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, heldItemStack);
-                    target.worldObj.createExplosionC(this, target.posX, target.posY, target.posZ, destorying, destorying);
+                    target.worldObj.createExplosionC(this, target.posX, target.posY, target.posZ, destorying * 0.5F, destorying * 0.5F);
                     //System.out.println("判断为enchantmentDestorying player");
                     //target.setFire(120);
                 }
@@ -91,6 +85,17 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                         entity_living.ticks_disarmed = 40;
                     }
                 }
+                if (this.onServer() && target instanceof EntityLiving) {
+                    EntityLiving entity_living_base = (EntityLiving)target;
+                    ItemStack[] item_stack_to_drop = entity_living_base.getWornItems();
+                    int rand = this.rand.nextInt(4);
+                    if (item_stack_to_drop[rand] != null && this.rand.nextFloat() < EnchantmentManager.getEnchantmentLevelFraction(Enchantments.enchantmentThresher, this.getHeldItemStack()) && entity_living_base instanceof EntityInsentient) {
+                        EntityInsentient entity_living = (EntityInsentient)entity_living_base;
+                        entity_living.dropItemStack(item_stack_to_drop[rand], entity_living.height / 2.0F);
+                        entity_living.clearMatchingEquipmentSlot(item_stack_to_drop[rand]);
+                        entity_living.ticks_disarmed = 40;
+                    }
+                }
 
                 EntityDamageResult result = target.attackEntityFrom(new Damage(DamageSource.causePlayerDamage(dyCast(this)).setFireAspectC(fire_aspect > 0), damage));
                 boolean target_was_harmed = result != null && result.entityWasNegativelyAffected();
@@ -101,8 +106,11 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                         if ((double)stunning > Math.random() * 10.0) {
                             ((EntityLiving)target).addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, stunning * 50, stunning * 5));
                         }
-
                         this.heal((float)EnchantmentManager.getVampiricTransfer(this, (EntityLiving)target, damage), EnumEntityFX.vampiric_gain);
+                        if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentSweeping)){
+                            List <Entity>targets  = this.getNearbyEntities(5.0F, 5.0F);
+                            this.attackMonsters(targets, damage * EnchantmentManager.getEnchantmentLevelFraction(Enchantments.enchantmentSweeping,heldItemStack));
+                        }
                     }
 
                     if (knockback > 0) {
@@ -445,6 +453,10 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //                this.worldObj.setBlock(this.getBlockPosX(), this.getFootBlockPosY(), this.getBlockPosZ(), Blocks.invisibleLight.blockID);
 //            }
 //        }
+        //冲锋
+//        if(this.isForwarding()){
+//            List <Entity>targets = this.getNearbyEntities(4.0F, 4.0F);
+//        }
     }
 
     public int getFreezingCooldown() {
@@ -783,6 +795,26 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             }
         }
     }
+    public void attackMonsters(List <Entity>targets, float damage) {
+        for(int i = 0; i< targets.size(); i++) {
+            EntityLiving entityMonster = targets.get(i) instanceof EntityLiving ? (EntityLiving) targets.get(i) : null;
+            if(entityMonster != null && entityMonster.getDistanceSqToEntity(this) <= this.getReach(EnumEntityReachContext.FOR_MELEE_ATTACK,entityMonster) && entityMonster.canEntityBeSeenFrom(this.posX,this.getEyePosY(),this.posZ,5.0)) {
+                entityMonster.attackEntityFrom(new Damage(DamageSource.causePlayerDamage(this.getAsPlayer()), damage));
+            }
+        }
+    }
+//    public boolean isForwarding() {
+//        return this.isUsingItem() && Item.itemsList[this.itemInUse.itemID].getItemInUseAction(this.itemInUse, this.getAsPlayer()) == EnumItemInUseActionExtend.FORWARDING;
+//    }
+//    public double getSpeed(){
+//        return this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ;
+//    }
+    @Shadow
+    protected ItemStack itemInUse;
+    @Shadow
+    public boolean isUsingItem() {
+        return false;
+    }
     @Shadow
     public float getLevelModifier(EnumLevelBonus kind) {
         return 0;
@@ -891,6 +923,15 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     @Shadow
     public float vision_dimming;
     @Shadow protected float speedOnGround;
+
+    @Shadow protected abstract void entityInit();
+
+    @Shadow public abstract float getReach(EnumEntityReachContext context, Entity entity);
+
+    @Shadow public abstract double getEyePosY();
+
+    @Shadow protected abstract void fall(float par1);
+
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;
     public boolean Feast_trigger_porridge = false;

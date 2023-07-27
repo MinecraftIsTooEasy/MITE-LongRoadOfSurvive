@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Calendar;
 
 @Mixin(EntitySkeleton.class)
-public abstract class EntitySkeletonMixin extends EntityMonster{
+public abstract class EntitySkeletonMixin extends EntityMonster implements IRangedEntity{
     @Shadow
     private int frenzied_by_bone_lord_countdown;
     int num_arrows;

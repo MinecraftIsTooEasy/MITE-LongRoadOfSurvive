@@ -15,7 +15,7 @@ public class EntityBoneLordMixin extends EntitySkeleton {
     @Overwrite
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setEntityAttribute(GenericAttributes.followRange, 40.0);
+        this.setEntityAttribute(GenericAttributes.followRange, 128.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.25999999046325684);
         this.setEntityAttribute(GenericAttributes.attackDamage, StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue ? 7.0 : 5.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue ? 30.0 : 20.0);

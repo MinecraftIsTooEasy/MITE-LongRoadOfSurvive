@@ -18,11 +18,11 @@ public class EnchantmentMixin {
     @Inject(method = "<clinit>",at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callbackInfo){
         Enchantments.registerEnchantments();
-        for (Enchantment enchantment : enchantmentsList) {
-            if (enchantment != null && !Enchantments.enchantmentsListC.contains(enchantment)){
-                Enchantments.enchantmentsListC.add(enchantment);
-            }
-        }
+//        for (Enchantment enchantment : enchantmentsList) {
+//            if (enchantment != null && !Enchantments.enchantmentsListC.contains(enchantment)){
+//                Enchantments.enchantmentsListC.add(enchantment);
+//            }
+//        }
     }
     public boolean isReverse(){
         return false;

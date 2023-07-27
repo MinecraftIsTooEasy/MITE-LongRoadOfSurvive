@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
+import net.oilcake.mitelros.item.ItemBowlClay;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -52,7 +53,6 @@ public class SlotResultMixin extends Slot {
         if (item == Items.ExperimentalPotion){
             this.thePlayer.addStat(AchievementExtend.nochoice,1);
         }
-
         if (block instanceof BlockFurnace && ((BlockFurnace)block).isOven()) {
             this.thePlayer.addStat(AchievementList.buildOven, 1);
         } else if (par1ItemStack.itemID == Block.workbench.blockID) {
@@ -102,6 +102,8 @@ public class SlotResultMixin extends Slot {
                         } else if (item == Item.flour) {
                             this.thePlayer.triggerAchievement(AchievementList.flour);
                         } else if (item instanceof ItemBowl && (item == Item.bowlSalad || ItemBowl.isSoupOrStew(item))) {
+                            this.thePlayer.triggerAchievement(AchievementList.fineDining);
+                        } else if (item instanceof ItemBowlClay && (item == Items.claybowlSalad || ItemBowlClay.isSoupOrStew(item))) {
                             this.thePlayer.triggerAchievement(AchievementList.fineDining);
                         }
                     } else {

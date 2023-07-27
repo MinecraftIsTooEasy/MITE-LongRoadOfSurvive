@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.world;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -82,6 +83,45 @@ public class WorldGenDungeonsMixin extends WorldGenerator {
     @Shadow
     public boolean generate(World world, Random random, int i, int i1, int i2) {
         return false;
+    }
+    @Overwrite
+    private String pickMobSpawner(World world, Random par1Random, int y) {
+        if (world.isUnderworld()) {
+            return par1Random.nextInt(6) == 0 ? "LongdeadGuardian" : "Longdead";
+        } else {
+            int danger;
+            if(StuckTagConfig.TagConfig.TagMiracleDisaster.ConfigValue){
+                danger = par1Random.nextInt(7);
+            }
+            else{
+                if (par1Random.nextInt(2) == 0) {
+                    danger = par1Random.nextInt(4);
+                } else {
+                    danger = (int) Math.max(1.0F - (float) y / 64.0F, 0.0F) * 4 + par1Random.nextInt(3) - par1Random.nextInt(3);
+                }
+
+                if (danger < 0) {
+                    danger = par1Random.nextInt(4);
+                }
+            }
+
+            switch (danger) {
+                case 0:
+                    return "Zombie";
+                case 1:
+                    return "Ghoul";
+                case 2:
+                    return "Skeleton";
+                case 3:
+                    return "Spider";
+                case 4:
+                    return "Wight";
+                case 5:
+                    return "DemonSpider";
+                default:
+                    return "Hellhound";
+            }
+        }
     }
 
 }

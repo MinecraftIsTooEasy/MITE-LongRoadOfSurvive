@@ -126,13 +126,13 @@ public class BlockOreMixin extends Block {
         float chance = suppress_fortune ? 1.0F : 1.0F + (float) info.getHarvesterFortune() * 0.2F;
         if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
             if (this == Block.oreDiamond) {
-                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(500*chance));
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(530*chance));
             } else if (this == Block.oreEmerald) {
-                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(250*chance));
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(270*chance));
             } else if (this == Block.oreNetherQuartz) {
-                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(50*chance));
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(60*chance));
             } else if (this == Block.oreLapis) {
-                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((2 + info.world.rand.nextInt(2)) * 25)*chance));
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((2 + info.world.rand.nextInt(2)) * 30)*chance));
             }
         }
         return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);

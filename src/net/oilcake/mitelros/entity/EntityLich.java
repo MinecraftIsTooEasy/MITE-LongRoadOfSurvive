@@ -219,10 +219,19 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
             return false;
         }
     }
+    public EntityDamageResult attackEntityAsMob(Entity target) {
+        EntityDamageResult result = super.attackEntityAsMob(target);
+        if (result != null && !result.entityWasDestroyed()) {
+            this.tryTeleportAwayFrom(this.getTarget(), 8.0);
+            return result;
+        } else {
+            return result;
+        }
+    }
 
     public EntityDamageResult attackEntityFrom(Damage damage) {
         boolean can_evade = !damage.isFallDamage() && !damage.isFireDamage() && !damage.isPoison();
-        if (can_evade && (this.num_evasions > 0 || (this.getHealth() < 20.0F && this.rand.nextInt(8) == 0))) {
+        if (can_evade && (this.num_evasions > 0 || (this.getHealth() < 20.0F && this.rand.nextInt(8) != 0))) {
             if(this.num_evasions > 0){
                 --this.num_evasions;
             }

@@ -59,7 +59,7 @@ public class BlockGravelMixin extends Block {
                 }
 
                 if (this.isNetherGravel(info.getMetadata())) {
-                    if (rand.nextInt(3) > 0) {
+                    if (rand.nextInt(12 - fortune * 2) > 4) {
                         return super.dropBlockAsEntityItem(info);
                     } else if (rand.nextInt(8) > 0) {
                         id_dropped = Item.shardNetherQuartz.itemID;
