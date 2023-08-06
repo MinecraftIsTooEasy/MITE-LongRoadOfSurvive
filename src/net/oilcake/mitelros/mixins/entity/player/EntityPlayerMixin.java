@@ -88,7 +88,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 if (this.onServer() && target instanceof EntityLiving) {
                     EntityLiving entity_living_base = (EntityLiving)target;
                     ItemStack[] item_stack_to_drop = entity_living_base.getWornItems();
-                    int rand = this.rand.nextInt(4);
+                    int rand = this.rand.nextInt(item_stack_to_drop.length);
                     if (item_stack_to_drop[rand] != null && this.rand.nextFloat() < EnchantmentManager.getEnchantmentLevelFraction(Enchantments.enchantmentThresher, this.getHeldItemStack()) && entity_living_base instanceof EntityInsentient) {
                         EntityInsentient entity_living = (EntityInsentient)entity_living_base;
                         entity_living.dropItemStack(item_stack_to_drop[rand], entity_living.height / 2.0F);
