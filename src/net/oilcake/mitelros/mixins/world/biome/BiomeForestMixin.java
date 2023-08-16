@@ -2,8 +2,12 @@ package net.oilcake.mitelros.mixins.world.biome;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.entity.EntityStray;
 import net.oilcake.mitelros.util.Constant;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -11,6 +15,11 @@ import java.util.Random;
 public class BiomeForestMixin extends BiomeBase {
     protected BiomeForestMixin(int par1) {
         super(par1);
+    }
+    @Inject(method = "<init>",at = @At("RETURN"))
+    public void injectCtor(CallbackInfo callbackInfo) {
+        this.removeEntityFromSpawnableLists(EntityWolf.class);
+        this.spawnableCreatureList.add(new BiomeMeta(EntityWolf.class, 5, 4, 8));
     }
 
     public void decorate(World par1World, Random par2Random, int par3, int par4) {

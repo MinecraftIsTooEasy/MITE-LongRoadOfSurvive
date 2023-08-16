@@ -17,6 +17,9 @@ public class EntityEvil extends EntityGhost{
         this.setEntityAttribute(GenericAttributes.attackDamage, 7.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 20.0);
     }
+    protected float getSoundVolume(String sound) {
+        return 1.25F;
+    }
     public void addRandomWeapon() {
         List items = new ArrayList();
         items.add(new RandomItemListEntry(Item.swordGold, 1));

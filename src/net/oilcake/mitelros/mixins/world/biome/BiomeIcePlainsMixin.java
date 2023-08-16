@@ -21,6 +21,10 @@ public class BiomeIcePlainsMixin extends BiomeBase {
     public void injectCtor(CallbackInfo callbackInfo) {
         this.removeEntityFromSpawnableLists(EntitySkeleton.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 100, 1, 4));
+        this.removeEntityFromSpawnableLists(EntityWolf.class);
+        this.spawnableCreatureList.add(new BiomeMeta(EntityWolf.class, 8, 4, 8));
+        this.removeEntityFromSpawnableLists(EntityDireWolf.class);
+        this.spawnableCreatureList.add(new BiomeMeta(EntityDireWolf.class, 2, 4, 6));
     }
 
 

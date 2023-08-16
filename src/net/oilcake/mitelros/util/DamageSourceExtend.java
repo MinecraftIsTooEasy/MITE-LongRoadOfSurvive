@@ -3,6 +3,7 @@ package net.oilcake.mitelros.util;
 import net.minecraft.ChatMessage;
 import net.minecraft.DamageSource;
 import net.minecraft.EntityLiving;
+import net.minecraft.Translator;
 
 import java.util.Objects;
 
@@ -33,16 +34,7 @@ public class DamageSourceExtend extends DamageSource{
     }
     public ChatMessage getDeathMessage(EntityLiving par1EntityLivingBase) {
         EntityLiving var2 = par1EntityLivingBase.func_94060_bK();
-        String var3 = "death.null_reason";
-        if(Objects.equals(this.damageType, freeze.damageType)){
-            var3 = par1EntityLivingBase.getEntityName() +" 冻死了";
-        }
-        if(Objects.equals(this.damageType, thirsty.damageType)){
-            var3 = par1EntityLivingBase.getEntityName() +" 脱水而亡";
-        }
-        if(Objects.equals(this.damageType, malnourished.damageType)){
-            var3 = par1EntityLivingBase.getEntityName() +" 营养不良而死";
-        }
+        String var3 = par1EntityLivingBase.getEntityName() +" "+ Translator.get("death.extend.attack." + this.damageType);
         return ChatMessage.createFromTranslationWithSubstitutions(var3);
     }
 

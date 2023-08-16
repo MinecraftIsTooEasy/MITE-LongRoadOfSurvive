@@ -42,9 +42,11 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     private boolean canSmelt(int heat_level) {
         if (this.furnaceItemStacks[0] == null) {
             return false;
-        } else if(this.getInputItemStack().getItem() instanceof ItemFood && this.getFurnaceBlock() instanceof BlockBlastFurnace){
+        } else if(this.getInputItemStack().getItem() instanceof ItemFood && this.isBlastFurnace()){
             return false;
-        } else if(!(this.getInputItemStack().getItem() instanceof ItemFood) && this.getFurnaceBlock() instanceof BlockSmoker){
+        } else if(!(this.getInputItemStack().getItem() instanceof ItemFood) && this.isSmoker()){
+            return false;
+        } else if(heat_level > getHeatLevelRequired(this.getInputItemStack().getItem().itemID) + 1){
             return false;
         } else {
             BlockFurnace furnace = this.getFurnaceBlock();
@@ -60,6 +62,12 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                 }
             }
         }
+    }
+    public boolean isBlastFurnace(){
+        return this.getFurnaceBlock() instanceof BlockBlastFurnace;
+    }
+    public boolean isSmoker(){
+        return this.getFurnaceBlock() instanceof BlockSmoker;
     }
 
     //getCookProgressScaled

@@ -291,7 +291,7 @@ item.wolf_fur.name=狼的毛皮
 item.ancient_metal_armor_piece.name=镶金远古金属铠甲残片
 
 itemarrow.tooltip.disable=因为技术原因被禁用
-itemtool.tooltip.slimeresistance=史莱姆杀手
+itemtool.tooltip.slimeresistance=腐蚀抗性
 itemarmor.tooltip.slimeresistance=腐蚀抗性
 
 item.arrows/magical_arrow.name=魔法箭
@@ -316,8 +316,9 @@ entity.EntityBoneBodyguard.name=骷髅侍卫
 entity.EntityGhost.name=怨灵
 entity.EntityEvil.name=恶灵
 
-death.extend.attack.thirsty=%1$s 脱水而亡
-death.extend.attack.freeze=%1$s 冻死了
+death.extend.attack.thirsty=干枯了
+death.extend.attack.freeze=冻死了
+death.extend.attack.malnourished=营养不良而死
 
 material.nickel.name=镍
 material.tungsten.name=钨

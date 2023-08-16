@@ -23,12 +23,12 @@ public class ItemMixin{
 
     @Inject(method = "<init>()V",at = @At("RETURN"))
     private void injectCtor(CallbackInfo callbackInfo){
-        ReflectHelper.dyCast(Item.class,this).recipes = new aah[512];
+        ReflectHelper.dyCast(Item.class,this).recipes = new aah[1024];
     }
 
     @Inject(method = "<init>(ILjava/lang/String;I)V" ,at = @At("RETURN"))
     private void ItemInject(int par1, String texture, int num_subtypes, CallbackInfo callbackInfo) {
-        ReflectHelper.dyCast(Item.class,this).recipes = new aah[512];
+        ReflectHelper.dyCast(Item.class,this).recipes = new aah[1024];
     }
     public Item item;
 

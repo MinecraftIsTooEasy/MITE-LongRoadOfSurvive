@@ -243,16 +243,6 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
                     this.getBoots() != null && this.getBoots().itemID == Items.WolfBoots.itemID){
                 return false;
-            } else if(this.getHelmet() != null && this.getHelmet().itemID == Items.helmetCustom_a.itemID &&
-                    this.getCuirass() != null && this.getCuirass().itemID == Items.chestplateCustom_a.itemID &&
-                    this.getLeggings() != null && this.getLeggings().itemID == Items.leggingsCustom_a.itemID &&
-                    this.getBoots() != null && this.getBoots().itemID == Items.bootsCustom_a.itemID){
-                return false;
-            } else if(this.getHelmet() != null && this.getHelmet().itemID == Items.MaidHelmet.itemID &&
-                    this.getCuirass() != null && this.getCuirass().itemID == Items.MaidChestplate.itemID &&
-                    this.getLeggings() != null && this.getLeggings().itemID == Items.MaidLeggings.itemID &&
-                    this.getBoots() != null && this.getBoots().itemID == Items.MaidBoots.itemID){
-                return false;
             } else{
                 return true;
             }

@@ -14,8 +14,8 @@ public class Materials extends Material {
     public static final Material glowberries = (new MaterialFood("glowberries"));
     public static final Material orePieces = (new Material("Pieces"));
     public static final Materials wolf_fur = (Materials) new Materials(EnumEquipmentMaterials.wolf_fur).setMetal(false).setMinHarvestLevel(0);
-    public static final Materials maid = (Materials) new Materials(EnumEquipmentMaterials.maid).setMetal(false).setMinHarvestLevel(0);
     public static final Materials custom_a = (Materials) new Materials(EnumEquipmentMaterials.custom_a).setMetal(false).setMinHarvestLevel(0);
+    public static final Materials custom_b = (Materials) new Materials(EnumEquipmentMaterials.custom_b).setMetal(false).setMinHarvestLevel(0);
     public static final Material lemonade = (new MaterialFood("lemonade")).setDrinkable();
     public static final Material unsafe_water = (new MaterialLiquid("suspicious_water", MaterialMapColor.waterColor)).setDrinkable();
     public static final Material dangerous_water = (new MaterialLiquid("swampland_water", MaterialMapColor.waterColor)).setDrinkable();

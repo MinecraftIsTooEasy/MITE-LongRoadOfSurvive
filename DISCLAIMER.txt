@@ -18,8 +18,8 @@ The author DID NOT published any other download links. Please be careful to prev
 二、关于更新所属方
 UPDATE OWNER
 
-本模组作者由：NoRegretS发起，目前全权由Rizur&Kalsey维护，材质小部分借鉴群峦传说，其余为mojang原版材质包或自行绘制，若有侵权问题请联系更改
-The author of this module was initiated by NoRegretS and is currently maintained solely by Rizur&Kalsey. Some of the textures are reference or copy to the TFC, and the rest are from the original mojang material pack or are drawn by ourselves. Please contact us to change if the author of the texture have any questions of copyrights about this.
+本模组作者由：NoRegretS发起，目前由Rizur&Kalsey维护，材质小部分借鉴群峦传说，其余为mojang原版材质包或自行绘制，若有侵权问题请联系更改
+The author of this module was initiated by NoRegretS and is currently maintained by Rizur&Kalsey. Some of the textures are reference or copy to the TFC, and the rest are from the original mojang material pack or are drawn by ourselves. Please contact us to change if the author of the texture have any questions of copyrights about this.
 
 NoRegretS的赞助网站上有唯一的“MITE-ITF/LROS创作激励”入口，但目前MITE-ITF更新即将进入尾声，且Rizur&Kalsey不会从该赞助中拿取任何收益，请尽量不要使用该赞助入口
 The NoRegretS sponsorship website has the only "Sponsor Authors for Accelerated Updates to MITE-ITF entry, but MITE-ITF's upgrade will end up soon and Rizur&Kalsey will not receive any proceeds from this grant, so please do not use this entry.

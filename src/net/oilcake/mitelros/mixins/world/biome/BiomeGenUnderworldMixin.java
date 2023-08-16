@@ -20,11 +20,6 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
     }
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.removeEntityFromSpawnableLists(EntitySkeleton.class);
-        this.removeEntityFromSpawnableLists(EntityZombie.class);
-        this.removeEntityFromSpawnableLists(EntityGhoul.class);
-        this.removeEntityFromSpawnableLists(EntityRevenant.class);
-        this.removeEntityFromSpawnableLists(EntityBoneLord.class);
         this.removeEntityFromSpawnableLists(EntityCreeper.class);
         this.removeEntityFromSpawnableLists(EntityBoneBodyguard.class);
         this.removeEntityFromSpawnableLists(EntityMinerZombie.class);

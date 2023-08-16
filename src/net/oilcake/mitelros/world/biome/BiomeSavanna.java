@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.world.biome;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.util.StuckTagConfig;
 
 import java.awt.*;
 import java.util.Random;
@@ -22,6 +23,9 @@ public class BiomeSavanna extends BiomeBase {
         this.setMinMaxHeight(0.1F, 0.4F);
         this.setTemperatureRainfall(1.6F, 0.0F);
         this.setDisableRain();
+        if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue){
+            this.removeEntityFromSpawnableLists(EntityHorse.class);
+        }
     }
     public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
         return (WorldGenerator)(par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);

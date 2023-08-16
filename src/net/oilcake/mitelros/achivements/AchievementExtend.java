@@ -43,9 +43,9 @@ public class AchievementExtend {
         copying = (new Achievement(getNextAchievementID(),"Copying",-2,11,Items.forgingnote,AchievementExtend.SoundofUnder)).registerAchievement();
         neverEnds = (new Achievement(getNextAchievementID(),"NeverEnds",-2,17,Items.UruIngot,AchievementList.adamantiumIngot)).registerAchievement();
         forgingLegend = (new Achievement(getNextAchievementID(),"ForgingLegend",-4,11,Items.ChestplateAncientmetalsacred,AchievementExtend.copying)).registerAchievement();
-        invincible = (new Achievement(getNextAchievementID(),"Invincible",-5,13,Items.Pulque,AchievementExtend.cheatdeath)).registerAchievement().setSpecial();
+        invincible = (new Achievement(getNextAchievementID(),"Invincible",-3,12,Items.Pulque,AchievementList.potion)).registerAchievement().setSpecial();
         stormStriker = (new Achievement(getNextAchievementID(),"StormStriker",9,16,new ItemStack(Block.skull, 1, 3),AchievementList.theEnd2)).registerAchievement().setSpecial();
-        cheatdeath = (new Achievement(getNextAchievementID(),"DeathCheater",-3,13,Items.totemofundying,AchievementList.potion)).registerAchievement();
+        cheatdeath = (new Achievement(getNextAchievementID(),"DeathCheater",-3,14,Items.totemofundying,AchievementList.potion)).registerAchievement();
     }
 
     private static int getNextAchievementID() {

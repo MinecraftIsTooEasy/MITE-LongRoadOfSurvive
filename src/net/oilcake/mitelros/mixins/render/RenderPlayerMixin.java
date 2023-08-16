@@ -40,7 +40,7 @@ public class RenderPlayerMixin extends bhb {
                 ItemArmor var6 = (ItemArmor)var5;
                 this.a((bjo)bgu.a(var6, par2));
                 bbj var7;
-                if (var6.getArmorMaterial() == Materials.maid || var6.getArmorMaterial() == Materials.custom_a) {
+                if (var6.getArmorMaterial() == Materials.custom_b || var6.getArmorMaterial() == Materials.custom_a) {
                     var7 = par2 == 2 ? this.SpecializedRenderLegs : this.SpecializedRenderBody;
                     var7.c.j = par2 == 0;
                     var7.d.j = par2 == 0;

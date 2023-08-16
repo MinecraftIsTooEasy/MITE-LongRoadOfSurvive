@@ -53,14 +53,14 @@ public class EnchantmentManagerMixin {
                 }
 
                 Enchantment enchantment = enchantment_data.enchantmentobj;
-                if (enchantments_for_item.size() < (item.getMaterialForRepairs() == Materials.maid ? 6 : item.getMaterialForRepairs() == Materials.uru ? 4 : 2) && all_possible_enchantments.size() > 1 && enchantment.hasLevels() && random.nextInt(2) == 0) {
+                if (enchantments_for_item.size() < (item.getMaterialForRepairs() == Materials.uru ? 4 : 2) && all_possible_enchantments.size() > 1 && enchantment.hasLevels() && random.nextInt(2) == 0) {
                     enchantment_data.enchantmentLevel = random.nextInt(enchantment_data.enchantmentLevel) + 1;
                 }
 
                 enchantments_for_item.add(enchantment_data);
                 adjusted_enchantment_levels -= enchantment.hasLevels() ? enchantment.getMinEnchantmentLevelsCost(enchantment_data.enchantmentLevel) : enchantment.getMinEnchantmentLevelsCost();
                 adjusted_enchantment_levels -= 5;
-                if (adjusted_enchantment_levels < 5 || enchantments_for_item.size() > (item.getMaterialForRepairs() == Materials.maid ? 6 : item.getMaterialForRepairs() == Materials.uru ? 4 : 2)) {
+                if (adjusted_enchantment_levels < 5 || enchantments_for_item.size() > (item.getMaterialForRepairs() == Materials.uru ? 4 : 2)) {
                     break;
                 }
             }

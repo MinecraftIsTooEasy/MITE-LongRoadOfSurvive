@@ -254,7 +254,7 @@ public class GuiIngameMixin extends avk {
 
     @Inject(method = "a(FZII)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/Minecraft;inDevMode()Z", shift = At.Shift.BEFORE))
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
-        if (!Minecraft.inDevMode()) {
+        if (!Minecraft.inDevMode() && !(this.g.u.ab && this.g.u.gui_mode == 0) && Minecraft.getErrorMessage() == null) {
             String pos = "平面坐标: ("+ MathHelper.floor_double(this.g.h.posX) + ", " + MathHelper.floor_double(this.g.h.posZ) +") ";
             String time = "时间: ("+this.g.h.getWorld().getHourOfDay()+":"+this.g.h.getWorld().getTotalWorldTime()%1000*60/1000+") ";
             EntityPlayer player = this.g.h.getAsPlayer();

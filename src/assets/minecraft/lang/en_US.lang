@@ -316,8 +316,9 @@ entity.EntityBoneBodyguard.name=Skeleton Bodyguard
 entity.EntityGhost.name=Ghost
 entity.EntityEvil.name=Evil
 
-death.extend.attack.thirsty=%1$s dead because of dehydration
-death.extend.attack.freeze=%1$s Freezed Fully
+death.extend.attack.thirsty=Dried Up
+death.extend.attack.freeze=Freezed Fully
+death.extend.attack.malnourished=Dead Because of Malnourished
 
 material.nickel.name=Nickel
 material.tungsten.name=Tungsten

@@ -24,38 +24,10 @@ public class ITFEvent {
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("Hello World!")) {
-            if(Objects.equals(player.getEntityName(), "SchzaMeow")){
-                EntityItem a = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidHelmet.itemID,1));
-                player.worldObj.spawnEntityInWorld(a);
-                a.entityFX(EnumEntityFX.summoned);
-                EntityItem b = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidChestplate.itemID,1));
-                player.worldObj.spawnEntityInWorld(b);
-                b.entityFX(EnumEntityFX.summoned);
-                EntityItem c = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidLeggings.itemID,1));
-                player.worldObj.spawnEntityInWorld(c);
-                c.entityFX(EnumEntityFX.summoned);
-                EntityItem d = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.MaidBoots.itemID,1));
-                player.worldObj.spawnEntityInWorld(d);
-                d.entityFX(EnumEntityFX.summoned);
-            }
             player.sendChatToPlayer(ChatMessage.createFromText("你好，世界！"));
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("Brain Power")) {
-            if(Objects.equals(player.getEntityName(), "HY_Creespic")){
-                EntityItem a = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.helmetCustom_a.itemID,1));
-                player.worldObj.spawnEntityInWorld(a);
-                a.entityFX(EnumEntityFX.summoned);
-                EntityItem b = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.chestplateCustom_a.itemID,1));
-                player.worldObj.spawnEntityInWorld(b);
-                b.entityFX(EnumEntityFX.summoned);
-                EntityItem c = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.leggingsCustom_a.itemID,1));
-                player.worldObj.spawnEntityInWorld(c);
-                c.entityFX(EnumEntityFX.summoned);
-                EntityItem d = new EntityItem(player.worldObj,player.posX,player.posY+32,player.posZ,new ItemStack(Items.bootsCustom_a.itemID,1));
-                player.worldObj.spawnEntityInWorld(d);
-                d.entityFX(EnumEntityFX.summoned);
-            }
             if(player.getRand().nextFloat() <= 0.1F)
                 player.makeSound("imported.meme.brainpower", 10.0F, 1.0F);
             player.sendChatToPlayer(ChatMessage.createFromText(

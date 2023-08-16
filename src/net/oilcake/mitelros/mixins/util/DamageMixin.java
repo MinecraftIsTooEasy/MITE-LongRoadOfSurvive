@@ -61,14 +61,13 @@ public class DamageMixin{
             DebugAttack.setPiercing(piercing);
             if (target instanceof EntityPlayer && effective_protection >= this.amount) {
                 int delta = (int)(effective_protection - this.amount);
-
                 for(int i = -1; i < delta; ++i) {
                     if (target.getRand().nextFloat() < 0.2F) {
                         return 0.0F;
                     }
                 }
+                return Math.max(this.amount - effective_protection, 1.0F);
             }
-
             return Math.max(this.amount - effective_protection, StuckTagConfig.TagConfig.TagInstinctSurvival.ConfigValue ? 0.0F : 1.0F);
         }
     }

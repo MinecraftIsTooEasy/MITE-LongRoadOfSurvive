@@ -41,11 +41,11 @@ public class BiomeBaseMixin{
         this.removeEntityFromSpawnableLists(EntityChicken.class);
         this.removeEntityFromSpawnableLists(EntitySheep.class);
         this.removeEntityFromSpawnableLists(EntityPig.class);
-        this.spawnableCreatureList.add(new BiomeMeta(EntitySheep.class, 5, 4, 8));
-        this.spawnableCreatureList.add(new BiomeMeta(EntityPig.class, 5, 4, 8));
-        this.spawnableCreatureList.add(new BiomeMeta(EntityChicken.class, 5, 4, 8));
-        this.spawnableCreatureList.add(new BiomeMeta(EntityCow.class, 5, 4, 8));
-        this.spawnableCreatureList.add(new BiomeMeta(EntityBoneBodyguard.class, 80, 0, 0));
+        this.spawnableCreatureList.add(new BiomeMeta(EntitySheep.class, 5, 4, 6));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityPig.class, 5, 4, 6));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityChicken.class, 5, 4, 6));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityCow.class, 5, 4, 6));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityBoneBodyguard.class, 110, 0, 0));
     }
     public void DisgenAnimals(){
         this.removeEntityFromSpawnableLists(EntityCow.class);

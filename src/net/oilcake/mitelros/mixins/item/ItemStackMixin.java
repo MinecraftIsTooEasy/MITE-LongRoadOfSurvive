@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.item;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockBlastFurnace;
 import net.oilcake.mitelros.util.EnumChatFormats;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -200,6 +201,15 @@ public class ItemStackMixin{
                 hypothetical_level = tile_entity_furnace.heat_level > 0 ? tile_entity_furnace.heat_level : tile_entity_furnace.getFuelHeatLevel();
                 if (hypothetical_level > 0 && hypothetical_level < required_heat_level) {
                     var3.add(EnumChatFormats.ORANGE + Translator.get("container.furnace.needsMoreHeat"));
+                }
+                if (hypothetical_level > 0 && hypothetical_level > required_heat_level + 1) {
+                    var3.add(EnumChatFormats.ORANGE + Translator.get("container.furnace.tooHot"));
+                }
+                if (tile_entity_furnace.getInputItemStack().getItem() instanceof ItemFood && tile_entity_furnace.isBlastFurnace()){
+                    var3.add(EnumChatFormats.ORANGE + Translator.get("container.furnace.wontFit"));
+                }
+                if (!(tile_entity_furnace.getInputItemStack().getItem() instanceof ItemFood) && tile_entity_furnace.isSmoker()){
+                    var3.add(EnumChatFormats.ORANGE + Translator.get("container.furnace.wontFit"));
                 }
             }
         }
