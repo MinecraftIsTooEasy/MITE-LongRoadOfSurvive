@@ -13,16 +13,130 @@ import java.util.Random;
 
 @Mixin(BlockWorkbench.class)
 public class BlockWorkbenchMixin extends Block{
-
     protected IIcon[] front_icons = new IIcon[17];
     protected IIcon[] side_icons = new IIcon[17];
+
+    private final Random random = new Random();
 
     protected BlockWorkbenchMixin(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
     }
+
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        return super.dropBlockAsEntityItem(info);
+        if (info.getMetadata() == 0 || info.getMetadata() == 1 || info.getMetadata() == 2 || info.getMetadata() == 3) {
+            if(this.random.nextInt(4) == 0){
+                this.dropBlockAsEntityItem(info, Item.flint);
+            } else{
+                this.dropBlockAsEntityItem(info, Item.chipFlint.itemID, 0, 2, 1.3F);
+            }
+
+            if(this.random.nextInt(4) == 0){
+                this.dropBlockAsEntityItem(info,1174, 0, 1, 1);
+            }
+
+            if(info.getMetadata() == 0){
+                this.dropBlockAsEntityItem(info,5, 0, 1, 1.5F);
+            } else if (info.getMetadata() == 1) {
+                this.dropBlockAsEntityItem(info,5, 1, 1, 1.5F);
+            } else if (info.getMetadata() == 2) {
+                this.dropBlockAsEntityItem(info,5, 2, 1, 1.5F);
+            } else if (info.getMetadata() == 3) {
+                this.dropBlockAsEntityItem(info,5, 3, 1, 1.5F);
+            }
+
+        } else if (info.getMetadata() == 13 || info.getMetadata() == 14 || info.getMetadata() == 15) {
+            if(this.random.nextInt(4) == 0){
+                this.dropBlockAsEntityItem(info, 49);
+            } else{
+                this.dropBlockAsEntityItem(info, 1122, 0, 2, 1.3F);
+            }
+
+            if(this.random.nextInt(4) == 0){
+                this.dropBlockAsEntityItem(info,1174, 0, 1, 1);
+            }
+
+            if(info.getMetadata() == 13){
+                this.dropBlockAsEntityItem(info,5, 0, 1, 1.5F);
+            } else if (info.getMetadata() == 14) {
+                this.dropBlockAsEntityItem(info,5, 1, 1, 1.5F);
+            } else if (info.getMetadata() == 15) {
+                this.dropBlockAsEntityItem(info,5, 2, 1, 1.5F);
+            }
+
+        } else {
+            if(this.random.nextInt(4) == 0){
+                this.dropBlockAsEntityItem(info,334, 0, 1, 1);
+            } else {
+                this.dropBlockAsEntityItem(info,1174, 0, 1, 1.4F);
+            }
+
+
+
+            if(info.getMetadata() == 4){
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.copper));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.copper).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 5) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.silver));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.silver).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 6) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.gold));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.gold).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 7) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.iron));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.iron).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 8) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.ancient_metal));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.ancient_metal).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 9) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.mithril));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.mithril).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 10) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.adamantium));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.adamantium).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 11) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.nickel));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Materials.nickel).itemID, 0, 6, 1.3F);
+                }
+            } else if (info.getMetadata() == 12) {
+                if(this.random.nextInt(4) == 0){
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.tungsten));
+                } else {
+                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Materials.tungsten).itemID, 0, 6, 1.3F);
+                }
+            }
+        }
+
+        this.dropBlockAsEntityItem(info, Item.stick.itemID, 0, 2, 1.3F);
+        return -1;
     }
+
+    protected void dropXpOnBlockBreak(World par1World, int par2, int par3, int par4, int par5) {
+
+    }
+
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback) {
         tool_materials = new Material[]{Material.flint,Material.copper, Material.silver, Material.gold,Material.iron, Material.ancient_metal, Material.mithril, Material.adamantium,

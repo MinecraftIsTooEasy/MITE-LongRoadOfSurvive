@@ -87,15 +87,17 @@ public class ITFEvent {
                 .appendComponent(ChatMessage.createFromTranslationKey("MITE-ITF挂载成功,当前版本:").setColor(EnumChatFormat.BLUE))
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.YELLOW)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
-                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,NoRegrets,Kalsey").setColor(EnumChatFormat.BLUE)));
+                .appendComponent(ChatMessage.createFromTranslationKey("作者:Lee074,Huix,Kalsey").setColor(EnumChatFormat.BLUE)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("感谢所有在更新历程中贡献思路/测试bug的玩家").setColor(EnumChatFormat.BLUE)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(Constant.CalculateCurrentDiff() >= 16 ? EnumChatFormat.DARK_RED : Constant.CalculateCurrentDiff() >= 12 ? EnumChatFormat.RED : Constant.CalculateCurrentDiff() >= 8 ? EnumChatFormat.YELLOW: Constant.CalculateCurrentDiff() >= 4 ? EnumChatFormat.GREEN : Constant.CalculateCurrentDiff() > 0 ? EnumChatFormat.AQUA : EnumChatFormat.BLUE)));
-        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
-        player.vision_dimming = 1.25F;
+        if(!Minecraft.inDevMode()){
+            player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
+            player.vision_dimming = 1.25F;
+        }
     }
 
 
