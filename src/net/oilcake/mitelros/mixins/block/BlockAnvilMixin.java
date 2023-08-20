@@ -18,21 +18,25 @@ public class BlockAnvilMixin extends BlockFalling{
 
     @Overwrite
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        if (info.getMetadata() == 0){
+        TileEntityAnvil tile_entity_anvil = (TileEntityAnvil)info.tile_entity;
+
+        float centesimal = this.getAnvilDurabilityByCentesimal(tile_entity_anvil.damage);
+        if (centesimal == 100){
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, metal_type).itemID, 0, 40, 1.5F);
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, metal_type).itemID, 0, 15, 1.5F);
-        } else if (info.damage <= this.getMinimumDamageForStage(1) && info.damage >= this.getMinimumDamageForStage(2)){
+        } else if (centesimal <= 66 && centesimal >= 33){
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, metal_type).itemID, 0, 30, 1.4F);
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, metal_type).itemID, 0, 10, 1.4F);
-        } else if (info.damage <= this.getMinimumDamageForStage(2)){
+        } else if (centesimal <= 33){
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, metal_type).itemID, 0, 20, 1.3F);
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, metal_type).itemID, 0, 5, 1.3F);
         }
-
-
-        TileEntityAnvil tile_entity_anvil = (TileEntityAnvil)info.tile_entity;
-        info.setDamage(tile_entity_anvil.damage);
         return -1;
+    }
+
+    public float getAnvilDurabilityByCentesimal(int damage){
+        float nowDurability = this.getDurability() - damage;
+        return (nowDurability / this.getDurability()) * 100;
     }
 
 
@@ -42,7 +46,10 @@ public class BlockAnvilMixin extends BlockFalling{
     public int getMinimumDamageForStage(int stage) {
         return 0;
     }
-
+    @Shadow
+    public int getDurability() {
+        return 0;
+    }
 
 
 }
