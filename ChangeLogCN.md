@@ -6,7 +6,7 @@
 ---
 ## MITE is too false R08-pre4
 ### 方块
-* 砧在破坏时掉落锭和粒
+* 砧在破坏时(耐久>66)掉落锭和粒
 ---
 ## MITE is too false R08-pre3
 ### 方块

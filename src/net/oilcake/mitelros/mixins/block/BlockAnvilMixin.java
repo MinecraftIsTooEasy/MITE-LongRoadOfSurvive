@@ -22,8 +22,7 @@ public class BlockAnvilMixin extends BlockFalling{
 
         float centesimal = this.getAnvilDurabilityByCentesimal(tile_entity_anvil.damage);
         if (centesimal == 100){
-            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, metal_type).itemID, 0, 40, 1.5F);
-            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, metal_type).itemID, 0, 15, 1.5F);
+           super.dropBlockAsEntityItem(info.setDamage(tile_entity_anvil.damage));
         } else if (centesimal <= 66 && centesimal >= 33){
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, metal_type).itemID, 0, 30, 1.4F);
             this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, metal_type).itemID, 0, 10, 1.4F);
