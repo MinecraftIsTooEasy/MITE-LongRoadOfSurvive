@@ -41,6 +41,7 @@ public class ExperimentalConfig {
     public static class TagConfig {
         public static ConfigItem <Boolean> TagCreaturesV2 = new ConfigItem<>("CreaturesV2", true, "新动物生成机制");
         public static ConfigItem <Boolean> TagSpawningV2 = new ConfigItem<>("SpawningV2",true,"新怪物生成频率");
+        public static ConfigItem <Boolean> TagBenchingV2 = new ConfigItem<>("BenchingV2",false,"工作站废料回收");
         //*这个有问题*//
 
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
@@ -49,8 +50,9 @@ public class ExperimentalConfig {
     public static void loadConfigs(){
         System.out.println("Experimental settings were put in HASHMAP");
         //常驻
-        Tags.put("DryDilemma",TagConfig.TagCreaturesV2);
-        Tags.put("HeatStroke",TagConfig.TagSpawningV2);
+        Tags.put("CreaturesV2",TagConfig.TagCreaturesV2);
+        Tags.put("SpawningV2",TagConfig.TagSpawningV2);
+        Tags.put("BenchingV2",TagConfig.TagBenchingV2);
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 
 

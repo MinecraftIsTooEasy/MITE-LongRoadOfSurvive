@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,118 +24,113 @@ public class BlockWorkbenchMixin extends Block{
     }
 
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        if (info.getMetadata() == 0 || info.getMetadata() == 1 || info.getMetadata() == 2 || info.getMetadata() == 3) {
-            if(this.random.nextInt(4) == 0){
-                this.dropBlockAsEntityItem(info, Item.flint);
+        if(ExperimentalConfig.TagConfig.TagBenchingV2.ConfigValue){
+            if(info.wasExploded()){
+                int quantity_drops = 2 + (int) (this.random.nextFloat() * 4);
+                if (info.getMetadata() < 4) {
+                    this.dropBlockAsEntityItem(info, Item.chipFlint.itemID, 0, quantity_drops / 2, 1.0F);
+                } else if (info.getMetadata() == 13 || info.getMetadata() == 14 || info.getMetadata() == 15) {
+                    if(this.random.nextInt(16) == 0){
+                        this.dropBlockAsEntityItem(info, Block.obsidian.blockID);
+                    } else{
+                        this.dropBlockAsEntityItem(info, Item.shardObsidian.itemID, 0, quantity_drops, 1.0F);
+                    }
+                } else {
+                    this.dropBlockAsEntityItem(info,Item.sinew.itemID, 0, 1, 1.5F);
+                    if(info.getMetadata() == 4){
+                        if(this.random.nextInt(8) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.copper));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.copper).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 5) {
+                        if(this.random.nextInt(8) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.silver));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.silver).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 6) {
+                        if(this.random.nextInt(8) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.gold));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.gold).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 7) {
+                        if(this.random.nextInt(6) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.iron));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.iron).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 8) {
+                        if(this.random.nextInt(4) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.ancient_metal));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.ancient_metal).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 9) {
+                        if(this.random.nextInt(3) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.mithril));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.mithril).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 10) {
+                        this.random.nextInt(1);
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.adamantium));
+                    } else if (info.getMetadata() == 11) {
+                        if(this.random.nextInt(6) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.nickel));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Materials.nickel).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    } else if (info.getMetadata() == 12) {
+                        if(this.random.nextInt(2) == 0){
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.tungsten));
+                        } else {
+                            this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Materials.tungsten).itemID, 0, quantity_drops, 1.0F);
+                        }
+                    }
+                }
+                this.dropBlockAsEntityItem(info, Item.stick.itemID, 0, 1, 1.5F);
             } else{
-                this.dropBlockAsEntityItem(info, Item.chipFlint.itemID, 0, 2, 1.3F);
-            }
-
-            if(this.random.nextInt(4) == 0){
-                this.dropBlockAsEntityItem(info,1174, 0, 1, 1);
-            }
-
-            if(info.getMetadata() == 0){
-                this.dropBlockAsEntityItem(info,5, 0, 1, 1.5F);
-            } else if (info.getMetadata() == 1) {
-                this.dropBlockAsEntityItem(info,5, 1, 1, 1.5F);
-            } else if (info.getMetadata() == 2) {
-                this.dropBlockAsEntityItem(info,5, 2, 1, 1.5F);
-            } else if (info.getMetadata() == 3) {
-                this.dropBlockAsEntityItem(info,5, 3, 1, 1.5F);
-            }
-
-        } else if (info.getMetadata() == 13 || info.getMetadata() == 14 || info.getMetadata() == 15) {
-            if(this.random.nextInt(4) == 0){
-                this.dropBlockAsEntityItem(info, 49);
-            } else{
-                this.dropBlockAsEntityItem(info, 1122, 0, 2, 1.3F);
-            }
-
-            if(this.random.nextInt(4) == 0){
-                this.dropBlockAsEntityItem(info,1174, 0, 1, 1);
-            }
-
-            if(info.getMetadata() == 13){
-                this.dropBlockAsEntityItem(info,5, 0, 1, 1.5F);
-            } else if (info.getMetadata() == 14) {
-                this.dropBlockAsEntityItem(info,5, 1, 1, 1.5F);
-            } else if (info.getMetadata() == 15) {
-                this.dropBlockAsEntityItem(info,5, 2, 1, 1.5F);
-            }
-
-        } else {
-            if(this.random.nextInt(4) == 0){
-                this.dropBlockAsEntityItem(info,334, 0, 1, 1);
-            } else {
-                this.dropBlockAsEntityItem(info,1174, 0, 1, 1.4F);
-            }
-
-
-
-            if(info.getMetadata() == 4){
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.copper));
+                if (info.getMetadata() < 4) {
+                    this.dropBlockAsEntityItem(info, Item.knifeFlint.itemID);
+                    this.dropBlockAsEntityItem(info, Block.wood.blockID, info.getMetadata(),1,1.0F);
+                } else if (info.getMetadata() > 12) {
+                    this.dropBlockAsEntityItem(info, Item.knifeObsidian.itemID);
+                    this.dropBlockAsEntityItem(info, Block.wood.blockID, info.getMetadata() - 13,1,1.0F);
                 } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.copper).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 5) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.silver));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.silver).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 6) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.gold));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.gold).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 7) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.iron));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.iron).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 8) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.ancient_metal));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.ancient_metal).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 9) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.mithril));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.mithril).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 10) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.adamantium));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Material.adamantium).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 11) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.nickel));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Materials.nickel).itemID, 0, 6, 1.3F);
-                }
-            } else if (info.getMetadata() == 12) {
-                if(this.random.nextInt(4) == 0){
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.tungsten));
-                } else {
-                    this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemNugget.class, Materials.tungsten).itemID, 0, 6, 1.3F);
+                    this.dropBlockAsEntityItem(info,Item.leather.itemID, 0, 1, 1.0F);
+                    if(info.getMetadata() == 4){
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.copper));
+                    } else if (info.getMetadata() == 5) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.silver));
+                    } else if (info.getMetadata() == 6) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.gold));
+                    } else if (info.getMetadata() == 7) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.iron));
+                    } else if (info.getMetadata() == 8) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.ancient_metal));
+                    } else if (info.getMetadata() == 9) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.mithril));
+                    } else if (info.getMetadata() == 10) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Material.adamantium));
+                    } else if (info.getMetadata() == 11) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.nickel));
+                    } else if (info.getMetadata() == 12) {
+                        this.dropBlockAsEntityItem(info, Item.getMatchingItem(ItemIngot.class, Materials.tungsten));
+                    }
+                    this.dropBlockAsEntityItem(info, Block.planks.blockID,0);
+                    this.dropBlockAsEntityItem(info, Item.stick.itemID);
                 }
             }
+            return 0;
         }
-
-        this.dropBlockAsEntityItem(info, Item.stick.itemID, 0, 2, 1.3F);
-        return -1;
+        else{
+            return super.dropBlockAsEntityItem(info);
+        }
     }
 
     protected void dropXpOnBlockBreak(World par1World, int par2, int par3, int par4, int par5) {
-
     }
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
