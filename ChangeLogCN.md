@@ -4,6 +4,10 @@
 不要尝试滥用spreadplayers指令以免造成坏档等严重后果
 编码一定要选择GB18030或GBK切勿UTF-8或GB2313
 ---
+## MITE is too false R08-pre4
+### 方块
+* 砧在破坏时掉落锭和粒
+---
 ## MITE is too false R08-pre3
 ### 方块
 * 在挖掘工作台时会掉落所有用于合成工作台的物品，爆炸摧毁时掉落部分物品
