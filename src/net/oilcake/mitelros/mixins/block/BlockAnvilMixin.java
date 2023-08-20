@@ -19,21 +19,7 @@
 //    public BlockAnvilMixin(int par1, Material material, BlockConstants constants) {
 //        super(par1, material, constants);
 //    }
-//
-//
-//    @Overwrite
-//    public void breakBlock(World world, int x, int y, int z, int block_id, int metadata) {
-//        super.breakBlock(world, x, y, z, block_id, metadata);
-//        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
-//        Random random = new Random();
-//        if(statuses[0].equals("intact")){
-//            this.dropBlockAsEntityItem(info, this.getNuggetID(), 0, random.nextInt(40) + 10, 1F);
-//        }else if (statuses[1].equals("slightlyDamaged")){
-//            this.dropBlockAsEntityItem(info, this.getNuggetID(), 0, random.nextInt(30) + 10, 1F);
-//        }else if (statuses[2].equals("veryDamaged")){
-//            this.dropBlockAsEntityItem(info, this.getNuggetID(), 0, random.nextInt(20) + 10, 1F);
-//        }
-//        world.removeBlockTileEntity(x, y, z);
+//    protected void dropXpOnBlockBreak(World par1World, int par2, int par3, int par4, int par5) {
 //    }
 //    @Overwrite
 //    public int dropBlockAsEntityItem(BlockBreakInfo info) {

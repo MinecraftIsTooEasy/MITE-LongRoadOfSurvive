@@ -12,6 +12,8 @@ public class BlockGravelMixin extends Block {
     protected BlockGravelMixin(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
     }
+    protected void dropXpOnBlockBreak(World par1World, int par2, int par3, int par4, int par5) {
+    }
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
         if (info.getMetadata() == 1) {
             return super.dropBlockAsEntityItem(info);
