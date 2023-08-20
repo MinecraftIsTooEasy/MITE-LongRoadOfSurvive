@@ -11,4 +11,10 @@ public class ItemPieces extends Item {
         this.setCraftingDifficultyAsComponent(20.0F);
         this.setCreativeTab(CreativeModeTab.tabMaterials);
     }
+    //.setXPReward(1) 铜 silver iron nickel
+    //.setXPReward(2) gold
+    //.setXPReward(4) mithril
+    //.setXPReward(7) tungsten
+    //.setXPReward(10) adamantium
+    //.setXPReward(15) urn
 }
