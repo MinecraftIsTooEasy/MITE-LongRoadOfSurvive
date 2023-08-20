@@ -95,7 +95,7 @@ public class WorldServerMixin extends World {
                 if (!check_depth || y <= 40) {
                     return entity_class;
                 }
-            } else if (entity_class == EntityMinerZombie.class) {
+            } else if (entity_class == EntityRetinueZombie.class) {
                 if (!check_depth || y <= 32) {
                     return entity_class;
                 }
@@ -105,7 +105,7 @@ public class WorldServerMixin extends World {
                 }
             } else if (entity_class == EntityZombie.class) {
                 if (!check_depth || (y <= 32 && this.rand.nextFloat() <= 0.25F ) || is_blood_moon_up) {
-                    return EntityMinerZombie.class;
+                    return EntityRetinueZombie.class;
                 }
                 return entity_class;
             } else if (entity_class == EntitySkeleton.class) {

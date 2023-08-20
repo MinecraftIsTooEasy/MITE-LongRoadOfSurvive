@@ -17,7 +17,7 @@ import java.util.List;
 import static net.minecraft.Block.*;
 
 @Mixin(Block.class)
-public class BlockMixin{
+public abstract class BlockMixin{
 
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void injectClinit(CallbackInfo callback) {
@@ -250,6 +250,21 @@ public class BlockMixin{
             Debug.println("validate: " + this + " always uses neighbor brightness");
         }
 
+    }
+
+    public Block getMatchingBlock(Class item_class, Material material) {
+        Block matching_block = null;
+        for(int i = 0; i < 256; ++i) {
+            Block block = getBlock(i);
+            if (block != null && block.getClass() == item_class && block.blockMaterial == material) {
+                if (matching_block == null) {
+                    matching_block = block;
+                } else {
+                    Minecraft.setErrorMessage("getMatchingItem: more than one item matched " + item_class + ", " + material);
+                }
+            }
+        }
+        return matching_block;
     }
 //    @Overwrite
 //    public final int dropBlockAsEntityItem(BlockBreakInfo info, int id_dropped, int subtype, int quantity, float chance) {

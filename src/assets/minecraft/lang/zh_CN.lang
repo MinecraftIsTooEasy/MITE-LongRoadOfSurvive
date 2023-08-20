@@ -49,7 +49,7 @@ item.armor/wolf_leggings.name=极地护腿
 item.armor/wolf_boots.name=极地皮靴
 
 enchantment.vanishing=消失诅咒
-enchantment.restore=还原
+enchantment.melting=熔毁
 enchantment.absorb=汲取
 enchantment.destroying=毁灭
 enchantment.callofnether=下界呼唤
@@ -311,7 +311,7 @@ entity.EntityLichShadow.name=巫妖的幻影
 entity.EntityLich.name=巫妖
 entity.EntityStalkerCreeper.name=潜伏爬行者
 entity.EntityZombieLord?.name=僵尸领主!?
-entity.EntityZombieMiner.name=僵尸矿工
+entity.EntityZombieRetinue.name=僵尸扈从
 entity.EntityBoneBodyguard.name=骷髅侍卫
 entity.EntityGhost.name=怨灵
 entity.EntityEvil.name=恶灵

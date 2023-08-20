@@ -14,7 +14,7 @@ import static net.minecraft.Enchantment.enchantmentsList;
 public class Enchantments {
 
 
-    public static final Enchantment enchantmentRestore = new EnchantmentRestore(Constant.getNextEnchantmentID(), yq.c,20);
+    public static final Enchantment enchantmentMelting = new EnchantmentMelting(Constant.getNextEnchantmentID(), yq.c,10);
     public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.b,10);
     public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.c,15);
     public static final Enchantment enchantmentCallofNether = new EnchantmentCallofNether(Constant.getNextEnchantmentID(), yq.b,10);
@@ -27,7 +27,7 @@ public class Enchantments {
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){
-        Enchantments.registerEnchantmentsUnsafe(enchantmentRestore, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether,enchantmentInfinity,enchantmentArrogance,enchantmentThresher,enchantmentSweeping);
+        Enchantments.registerEnchantmentsUnsafe(enchantmentMelting, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether,enchantmentInfinity,enchantmentArrogance,enchantmentThresher,enchantmentSweeping);
     }
     public static void registerEnchantmentsUnsafe(Enchantment... enchantments) {
         for (int i = 80, bLength = enchantmentsList.length; i < bLength; i++) {

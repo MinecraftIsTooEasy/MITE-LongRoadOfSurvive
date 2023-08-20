@@ -69,52 +69,51 @@ public class BlockOreMixin extends Block {
         }
         else {
             boolean HasAbsorb = EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb);
-            boolean HasRestore = EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentRestore);
             if (this == Block.oreEmerald) {
-                id_dropped = HasAbsorb ? 0 : HasRestore ? Item.emerald.itemID : Item.shardEmerald.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = HasAbsorb ? 0 : Item.shardEmerald.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreNetherQuartz) {
-                id_dropped = HasAbsorb ? 0 : HasRestore ? Item.netherQuartz.itemID : Item.shardNetherQuartz.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = HasAbsorb ? 0 : Item.shardNetherQuartz.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreDiamond) {
-                id_dropped = HasAbsorb ? 0 : HasRestore ? Item.diamond.itemID : Item.shardDiamond.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = HasAbsorb ? 0 : Item.shardDiamond.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreLapis) {
                 id_dropped = HasAbsorb ? 0 : Items.lapis.itemID;
                 metadata_dropped = 4;
-                quantity_dropped = HasRestore ? 3 + info.world.rand.nextInt(3) : 2 + info.world.rand.nextInt(2);
+                quantity_dropped = 2 + info.world.rand.nextInt(2);
             } else if (this == Block.oreCoal) {
                 id_dropped = Item.coal.itemID;
             } else if (this == Block.oreRedstone) {
                 id_dropped = Item.redstone.itemID;
                 quantity_dropped = 3 + info.world.rand.nextInt(2);
             } else if (this == Block.oreCopper) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceCopper.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceCopper.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreSilver) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceSilver.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceSilver.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreGold) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceGold.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceGold.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreIron) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceIron.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceIron.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == oreNickel) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceNickel.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceNickel.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreMithril) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceMithril.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceMithril.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == oreTungsten) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceTungsten.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceTungsten.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreAdamantium) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceAdamantium.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceAdamantium.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             }  else if (this == Blocks.oreUru) {
-                id_dropped = HasRestore ? this.blockID : Items.pieceUru.itemID;
-                quantity_dropped = HasRestore ? 1 : 3 + info.world.rand.nextInt(5);
+                id_dropped = Items.pieceUru.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else {
                 id_dropped = this.blockID;
             }
@@ -132,7 +131,29 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreNetherQuartz) {
                 this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(60*chance));
             } else if (this == Block.oreLapis) {
-                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((2 + info.world.rand.nextInt(2)) * 30)*chance));
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((3 + info.world.rand.nextInt(3)) * 30)*chance));
+            }
+        }
+        float melting_chance = EnchantmentManager.getEnchantmentLevelFraction(Enchantments.enchantmentMelting, info.responsible_item_stack);
+        if(info.world.rand.nextFloat() < melting_chance){
+            if (this == Block.oreCopper) {
+                id_dropped = Item.copperNugget.itemID;
+            } else if (this == Block.oreSilver) {
+                id_dropped = Item.silverNugget.itemID;
+            } else if (this == Block.oreGold) {
+                id_dropped = Item.goldNugget.itemID;
+            } else if (this == Block.oreIron) {
+                id_dropped = Items.ironNugget.itemID;
+            } else if (this == oreNickel) {
+                id_dropped = Items.nickelNugget.itemID;
+            } else if (this == Block.oreMithril) {
+                id_dropped = Item.mithrilNugget.itemID;
+            } else if (this == oreTungsten) {
+                id_dropped = Items.tungstenNugget.itemID;
+            } else if (this == Block.oreAdamantium) {
+                id_dropped = Item.adamantiumNugget.itemID;
+            }  else if (this == Blocks.oreUru) {
+                id_dropped = Items.UruNugget.itemID;
             }
         }
         return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);

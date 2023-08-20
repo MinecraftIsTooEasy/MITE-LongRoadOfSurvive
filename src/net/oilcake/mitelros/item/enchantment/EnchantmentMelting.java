@@ -4,14 +4,14 @@ import net.minecraft.*;
 
 import static net.oilcake.mitelros.item.enchantment.Enchantments.*;
 
-public class EnchantmentRestore extends Enchantment {
-    protected EnchantmentRestore(int id, yq rarity, int difficulty) {
+public class EnchantmentMelting extends Enchantment {
+    protected EnchantmentMelting(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);
     }
 
     @Override
     public int getNumLevels() {
-        return 1;
+        return 5;
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
@@ -19,7 +19,7 @@ public class EnchantmentRestore extends Enchantment {
     }
     @Override
     public String getNameSuffix() {
-        return "restore";
+        return "melting";
     }
 
     @Override

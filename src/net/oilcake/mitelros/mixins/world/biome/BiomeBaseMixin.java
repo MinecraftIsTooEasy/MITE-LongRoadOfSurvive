@@ -5,21 +5,20 @@
 
 package net.oilcake.mitelros.mixins.world.biome;
 
+import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityBoneBodyguard;
-import net.oilcake.mitelros.entity.EntityMinerZombie;
+import net.oilcake.mitelros.entity.EntityRetinueZombie;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-
-import java.util.List;
-
-import net.minecraft.*;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 import static net.minecraft.BiomeBase.*;
 import static net.oilcake.mitelros.world.BiomeBases.windsweptpleatu;
@@ -57,7 +56,7 @@ public class BiomeBaseMixin{
 
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.spawnableMonsterList.add(new BiomeMeta(EntityMinerZombie.class, (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue) ? 35 : 10, 4, 4));
+        this.spawnableMonsterList.add(new BiomeMeta(EntityRetinueZombie.class, (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue || StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue) ? 35 : 10, 4, 4));
         this.spawnableMonsterList.add(new BiomeMeta(EntityBoneBodyguard.class, (StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue || StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue) ? 35 : 10,4,4));
         if(ExperimentalConfig.TagConfig.TagCreaturesV2.ConfigValue){
             this.RegenAnimals();

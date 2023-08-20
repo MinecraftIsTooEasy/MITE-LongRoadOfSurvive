@@ -437,6 +437,76 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         if(this.UnderArrogance()){
             this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
         }
+        //幻听
+//        if(StuckTagConfig.TagConfig.TagAcousma.ConfigValue){
+//            if(this.worldObj.isOverworld()){
+//                if(this.ticksExisted % 600 == this.rand.nextInt(8)){
+//                    boolean temp = false;
+//                    if(this.rand.nextInt(4) == 0){
+//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 2;
+//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
+//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 2;
+//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+//                        temp = true;
+//                    }
+//                    if(this.rand.nextInt(8) == 0 && this.posY < 40){
+//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
+//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        for(int i = 0;i < (this.rand.nextInt(3) + 2);){
+//                            if(this.ticksExisted % 20 == 4) {
+//                                i++;
+//                                x_offset += Math.sin(this.rotationYaw) * this.rand.nextDouble() * 4 - 2;
+//                                y_offset += this.rand.nextDouble() * 1.5 - 0.75;
+//                                z_offset += - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 4 - 2;
+//                                this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"mob.endermen.portal", 1.0F, 1.0F);
+//                            }
+//                        }
+//                    }
+//                    if(this.rand.nextInt(64) == 0 && !temp){
+//                        this.playSound("mob.endermen.stare", 1.0F, 1.0F);
+//                    }
+//                }
+//            } else if(this.worldObj.isUnderworld()){
+//                if(this.ticksExisted % 400 == this.rand.nextInt(8)){
+//                    boolean temp = false;
+//                    if(this.rand.nextInt(4) == 0 && this.posY > 120){
+//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 2;
+//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
+//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 2;
+//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
+//                        temp = true;
+//                    }
+//                    if(this.rand.nextInt(8) == 0 && this.posY < 40){
+//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
+//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"liquid.lavapop", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F);
+//                    }
+//                    if(this.rand.nextInt(64) == 0 && this.posY > 120 && !temp){
+//                         this.playSound("mob.endermen.stare", 1.0F, 1.0F);
+//                    }
+//                }
+//            } else{
+//                if(this.ticksExisted % 400 == this.rand.nextInt(4)){
+//                    boolean temp = false;
+//                    if(this.rand.nextInt(8) == 0){
+//                        temp = true;
+//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
+//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"imported.mob.invisiblestalker.say", 1.25F, 1.0F);
+//                    }
+//                    if(this.rand.nextInt(8) == 0 && !temp){
+//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
+//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
+//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"mob.zombiepig.zpigangry", 1.25F, 1.0F);
+//                    }
+//                }
+//            }
+//        }
+
         //实验性动态光源
 //        if(this.getHeldItemStack()!=null&&this.getHeldItem().itemID==Block.torchWood.blockID){
 //            if(this.getBlockAtFeet() == null && this.onGround){
@@ -921,6 +991,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     @Shadow public abstract double getEyePosY();
 
     @Shadow protected abstract void fall(float par1);
+
+    @Shadow public abstract void playSound(String par1Str, float par2, float par3);
 
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;

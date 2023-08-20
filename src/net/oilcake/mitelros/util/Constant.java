@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " R08-pre4 ";
+    public static final String VERSION = " R08a ";
     public static final bjo icons_itf = new bjo("textures/gui/icons_mitf.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -72,6 +72,8 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagDistortion.ConfigValue) Diff-=2;
         if(StuckTagConfig.TagConfig.TagWorshipDark.ConfigValue) Diff+=2;
         if(StuckTagConfig.TagConfig.TagMiracleDisaster.ConfigValue) Diff+=1;
+        if(StuckTagConfig.TagConfig.TagAcousma.ConfigValue) Diff+=1;
+        if(StuckTagConfig.TagConfig.TagPseudovision.ConfigValue) Diff+=1;
         return Diff;
     }
 }

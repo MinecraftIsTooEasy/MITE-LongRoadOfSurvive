@@ -22,7 +22,7 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
     public void injectCtor(CallbackInfo callbackInfo) {
         this.removeEntityFromSpawnableLists(EntityCreeper.class);
         this.removeEntityFromSpawnableLists(EntityBoneBodyguard.class);
-        this.removeEntityFromSpawnableLists(EntityMinerZombie.class);
+        this.removeEntityFromSpawnableLists(EntityRetinueZombie.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStalkerCreeper.class, 100, 1, 2));
         this.spawnableMonsterList.add(new BiomeMeta(EntitySpiderKing.class,5,1,1));
     }

@@ -49,7 +49,7 @@ item.armor/wolf_leggings.name=Wolf Boarder Leggings
 item.armor/wolf_boots.name=Wolf Boarder Boots
 
 enchantment.vanishing=Curse Of Vanishing
-enchantment.restore=Restore
+enchantment.melting=Melting
 enchantment.absorb=Absorb
 enchantment.destroying=Destroying
 enchantment.callofnether=Call of Nether
@@ -311,7 +311,7 @@ entity.EntityLichShadow.name=Shadow of Lich
 entity.EntityLich.name=Lich
 entity.EntityStalkerCreeper.name=Stalker Creeper
 entity.EntityZombieLord?.name=Fake Zombie Lord
-entity.EntityZombieMiner.name=Fallen Miner
+entity.EntityZombieRetinue.name=Zombie Retinue
 entity.EntityBoneBodyguard.name=Skeleton Bodyguard
 entity.EntityGhost.name=Ghost
 entity.EntityEvil.name=Evil

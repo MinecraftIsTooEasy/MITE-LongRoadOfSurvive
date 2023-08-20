@@ -24,7 +24,7 @@ public class BlockWorkbenchMixin extends Block{
     }
 
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
-        if(ExperimentalConfig.TagConfig.TagBenchingV2.ConfigValue){
+        if(ExperimentalConfig.TagConfig.TagBenchingV2.ConfigValue || info.wasExploded()){
             if(info.wasExploded()){
                 int quantity_drops = 2 + (int) (this.random.nextFloat() * 4);
                 if (info.getMetadata() < 4) {

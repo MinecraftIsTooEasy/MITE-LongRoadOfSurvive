@@ -22,7 +22,7 @@ public class BiomeGenUnderworldInFreeze extends BiomeGenUnderworld {
         this.removeEntityFromSpawnableLists(EntityBoneLord.class);
         this.removeEntityFromSpawnableLists(EntityCreeper.class);
         this.removeEntityFromSpawnableLists(EntityBoneBodyguard.class);
-        this.removeEntityFromSpawnableLists(EntityMinerZombie.class);
+        this.removeEntityFromSpawnableLists(EntityRetinueZombie.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStalkerCreeper.class, 100, 1, 2));
         this.spawnableMonsterList.add(new BiomeMeta(EntitySpiderKing.class, 5, 1, 1));
         this.setColor(10526880);

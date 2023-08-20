@@ -58,8 +58,9 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagDistortion = new ConfigItem<>("Distortion",false,"(LVL-2)血肉畸变：玩家可获得最高40的生命值");
         public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
         public static ConfigItem <Boolean> TagMiracleDisaster = new ConfigItem<>("MiracleDisaster",false,"(LVL1)迷幻危机：刷怪笼的危险等级不再受y轴限制");
+        public static ConfigItem <Boolean> TagPseudovision = new ConfigItem<>("Pseudovision",false,"(LVL1)幻视暗示：黑色食尸鬼在成功索敌玩家后会给予玩家一次视觉黑暗效果");
         //*这个有问题*//
-
+        public static ConfigItem <Boolean> TagAcousma = new ConfigItem<>("Acousma",false,"(LVL1)幻听暗示：玩家依照y轴位置会随机产生一些幻听");
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
     }
 
@@ -86,8 +87,11 @@ public class StuckTagConfig {
         Tags.put("Distortion",TagConfig.TagDistortion);
         Tags.put("WorshipDark",TagConfig.TagWorshipDark);
         Tags.put("MiracleDisaster",TagConfig.TagMiracleDisaster);
+
+        Tags.put("Pseudovision",TagConfig.TagPseudovision);
         //删除
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
+//      Tags.put("Acousma",TagConfig.TagAcousma);
 
 
         String filePth = "StuckChallenge.cfg";

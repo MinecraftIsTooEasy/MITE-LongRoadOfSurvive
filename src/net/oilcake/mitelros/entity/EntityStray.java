@@ -14,7 +14,6 @@ public class EntityStray extends EntitySkeleton {
 
     public EntityStray(World par1World) {
         super(par1World);
-        this.tasks.addTask(3, new PathfinderGoalLeapAtTarget(this, 0.35F));
         this.num_arrows = 4;
     }
     protected void applyEntityAttributes() {

@@ -40,7 +40,7 @@ public class EntityTypesMixin {
         addMapping(EntityWandIceBall.class,"EntityWandIceball",552);
         addMapping(EntityWandShockWave.class,"EntityWandShockWave",553);
         addMapping(EntityZombieLord.class,"EntityZombieLord?",554, 44975, 7969893);
-        addMapping(EntityMinerZombie.class,"EntityZombieMiner",555, 44975, 7969893);
+        addMapping(EntityRetinueZombie.class,"EntityZombieRetinue",555, 44975, 7969893);
         addMapping(EntityBoneBodyguard.class,"EntityBoneBodyguard",556, 12698049, 4802889);
         addMapping(EntityGhost.class,"EntityGhost",557,9539985, 6629376);
         addMapping(EntityEvil.class,"EntityEvil",558,9539985, 14008320);

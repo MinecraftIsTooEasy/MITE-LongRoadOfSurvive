@@ -2,8 +2,6 @@ package net.oilcake.mitelros.item.enchantment;
 
 import net.minecraft.*;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentRestore;
-
 public class EnchantmentAbsorb extends Enchantment {
     protected EnchantmentAbsorb(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);
@@ -15,7 +13,7 @@ public class EnchantmentAbsorb extends Enchantment {
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentRestore.effectId && par1Enchantment.effectId != silkTouch.effectId;
+        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != silkTouch.effectId;
     }
 
     @Override

@@ -8,8 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentRestore;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.*;
 
 @Mixin(net.minecraft.EnchantmentSilkTouch.class)
 public class EnchantmentSilkTouchMixin extends Enchantment {
@@ -19,7 +18,7 @@ public class EnchantmentSilkTouchMixin extends Enchantment {
     }
     @Overwrite
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != fortune.effectId  && par1Enchantment.effectId != enchantmentRestore.effectId && par1Enchantment.effectId != enchantmentAbsorb.effectId;
+        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != fortune.effectId  && par1Enchantment.effectId != enchantmentMelting.effectId && par1Enchantment.effectId != enchantmentAbsorb.effectId;
     }
     @Shadow
     public String getNameSuffix() {

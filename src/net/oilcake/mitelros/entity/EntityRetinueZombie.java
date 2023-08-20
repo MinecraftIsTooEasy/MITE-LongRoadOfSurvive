@@ -6,9 +6,9 @@ import net.minecraft.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityMinerZombie extends EntityZombie {
+public class EntityRetinueZombie extends EntityZombie {
     private int conversionTime;
-    public EntityMinerZombie(World world) {
+    public EntityRetinueZombie(World world) {
         super(world);
         this.tasks.addTask(3, new EntityAISeekLitTorch(this, 1.0F));
     }

@@ -1,8 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.entity.EntityClusterSpider;
-import net.oilcake.mitelros.entity.EntityMinerZombie;
+import net.oilcake.mitelros.entity.EntityRetinueZombie;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -39,7 +38,7 @@ public class EntityRevenantMixin extends EntityZombie {
                 if (spawnCounter < 20) {
                     if (StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) spawnCounter++;
                 } else {
-                    EntityMinerZombie Belongings = new EntityMinerZombie(worldObj);
+                    EntityRetinueZombie Belongings = new EntityRetinueZombie(worldObj);
                     Belongings.setPosition(posX, posY, posZ);
                     Belongings.refreshDespawnCounter(-9600);
                     worldObj.spawnEntityInWorld(Belongings);
