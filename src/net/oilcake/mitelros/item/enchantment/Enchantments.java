@@ -15,11 +15,11 @@ public class Enchantments {
 
 
     public static final Enchantment enchantmentMelting = new EnchantmentMelting(Constant.getNextEnchantmentID(), yq.c,10);
-    public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.b,10);
+    public static final Enchantment enchantmentAbsorb = new EnchantmentAbsorb(Constant.getNextEnchantmentID(), yq.c,10);
     public static final Enchantment enchantmentVanishing = new EnchantmentVanishing(Constant.getNextEnchantmentID(), yq.c,15);
     public static final Enchantment enchantmentCallofNether = new EnchantmentCallofNether(Constant.getNextEnchantmentID(), yq.b,10);
-    public static final Enchantment enchantmentDestroying = new EnchantmentDestroying(Constant.getNextEnchantmentID(), yq.d,15);
-    public static final Enchantment enchantmentInfinity = new EnchantmentInfinity(Constant.getNextEnchantmentID(), yq.d,10);
+    public static final Enchantment enchantmentDestroying = new EnchantmentDestroying(Constant.getNextEnchantmentID(), yq.d,20);
+    public static final Enchantment enchantmentInfinity = new EnchantmentInfinity(Constant.getNextEnchantmentID(), yq.c,20);
     public static final Enchantment enchantmentArrogance = new EnchantmentArrogance(Constant.getNextEnchantmentID(), yq.c,15);
     public static final Enchantment enchantmentThresher = new EnchantmentThresher(Constant.getNextEnchantmentID(),yq.c, 10);
     public static final Enchantment enchantmentSweeping = new EnchantmentSweeping(Constant.getNextEnchantmentID(),yq.c,10);

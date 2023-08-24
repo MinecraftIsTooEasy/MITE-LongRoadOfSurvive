@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.entity.EntityStray;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,9 +19,15 @@ public class BiomeForestMixin extends BiomeBase {
     }
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
+        if(ExperimentalConfig.TagConfig.TagCreaturesV2.ConfigValue){
+            this.RegenHostileAnimals();
+        }
+    }
+    private void RegenHostileAnimals(){
         this.removeEntityFromSpawnableLists(EntityWolf.class);
         this.spawnableCreatureList.add(new BiomeMeta(EntityWolf.class, 5, 4, 8));
     }
+
 
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
         super.decorate(par1World, par2Random, par3, par4);

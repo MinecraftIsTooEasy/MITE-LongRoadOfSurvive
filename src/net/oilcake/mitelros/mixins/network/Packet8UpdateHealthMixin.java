@@ -4,6 +4,7 @@ import net.minecraft.Connection;
 import net.minecraft.Packet;
 import net.minecraft.Packet8UpdateHealth;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -58,9 +59,9 @@ public class Packet8UpdateHealthMixin extends Packet {
     public boolean containsSameEntityIDAs(Packet par1Packet) {
         return true;
     }
-    @Shadow
+    @Overwrite
     public int getPacketSize() {
-        return 1;
+        return 14;
     }
     @Shadow
     public boolean isRealPacket() {

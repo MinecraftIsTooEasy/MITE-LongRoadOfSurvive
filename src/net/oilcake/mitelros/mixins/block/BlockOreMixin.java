@@ -71,12 +71,14 @@ public class BlockOreMixin extends Block {
             boolean HasAbsorb = EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb);
             if (this == Block.oreEmerald) {
                 id_dropped = HasAbsorb ? 0 : Item.shardEmerald.itemID;
+                info.getResponsiblePlayer().triggerAchievement(AchievementList.emeralds);
                 quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreNetherQuartz) {
                 id_dropped = HasAbsorb ? 0 : Item.shardNetherQuartz.itemID;
                 quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreDiamond) {
                 id_dropped = HasAbsorb ? 0 : Item.shardDiamond.itemID;
+                info.getResponsiblePlayer().triggerAchievement(AchievementList.diamonds);
                 quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreLapis) {
                 id_dropped = HasAbsorb ? 0 : Items.lapis.itemID;
@@ -134,26 +136,30 @@ public class BlockOreMixin extends Block {
                 this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((3 + info.world.rand.nextInt(3)) * 30)*chance));
             }
         }
-        float melting_chance = EnchantmentManager.getEnchantmentLevelFraction(Enchantments.enchantmentMelting, info.responsible_item_stack);
-        if(info.world.rand.nextFloat() < melting_chance){
-            if (this == Block.oreCopper) {
-                id_dropped = Item.copperNugget.itemID;
-            } else if (this == Block.oreSilver) {
-                id_dropped = Item.silverNugget.itemID;
-            } else if (this == Block.oreGold) {
-                id_dropped = Item.goldNugget.itemID;
-            } else if (this == Block.oreIron) {
-                id_dropped = Items.ironNugget.itemID;
-            } else if (this == oreNickel) {
-                id_dropped = Items.nickelNugget.itemID;
-            } else if (this == Block.oreMithril) {
-                id_dropped = Item.mithrilNugget.itemID;
-            } else if (this == oreTungsten) {
-                id_dropped = Items.tungstenNugget.itemID;
-            } else if (this == Block.oreAdamantium) {
-                id_dropped = Item.adamantiumNugget.itemID;
-            }  else if (this == Blocks.oreUru) {
-                id_dropped = Items.UruNugget.itemID;
+        boolean HasMelting = EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentMelting);
+        if(HasMelting){
+            float melting_chance = EnchantmentManager.getEnchantmentLevelFraction(Enchantments.enchantmentMelting, info.responsible_item_stack);
+            melting_chance *= info.responsible_item_stack.getItemAsTool().getMaterialHarvestLevel() - this.getMinHarvestLevel(0);
+            if(info.world.rand.nextFloat() < melting_chance){
+                if (this == Block.oreCopper) {
+                    id_dropped = Item.copperNugget.itemID;
+                } else if (this == Block.oreSilver) {
+                    id_dropped = Item.silverNugget.itemID;
+                } else if (this == Block.oreGold) {
+                    id_dropped = Item.goldNugget.itemID;
+                } else if (this == Block.oreIron) {
+                    id_dropped = Items.ironNugget.itemID;
+                } else if (this == oreNickel) {
+                    id_dropped = Items.nickelNugget.itemID;
+                } else if (this == Block.oreMithril) {
+                    id_dropped = Item.mithrilNugget.itemID;
+                } else if (this == oreTungsten) {
+                    id_dropped = Items.tungstenNugget.itemID;
+                } else if (this == Block.oreAdamantium) {
+                    id_dropped = Item.adamantiumNugget.itemID;
+                }  else if (this == Blocks.oreUru) {
+                    id_dropped = Items.UruNugget.itemID;
+                }
             }
         }
         return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);

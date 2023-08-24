@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.entity.EntityStray;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,12 +22,16 @@ public class BiomeIcePlainsMixin extends BiomeBase {
     public void injectCtor(CallbackInfo callbackInfo) {
         this.removeEntityFromSpawnableLists(EntitySkeleton.class);
         this.spawnableMonsterList.add(new BiomeMeta(EntityStray.class, 100, 1, 4));
+        if(ExperimentalConfig.TagConfig.TagCreaturesV2.ConfigValue){
+            this.RegenHostileAnimals();
+        }
+    }
+    private void RegenHostileAnimals(){
         this.removeEntityFromSpawnableLists(EntityWolf.class);
         this.spawnableCreatureList.add(new BiomeMeta(EntityWolf.class, 8, 4, 8));
         this.removeEntityFromSpawnableLists(EntityDireWolf.class);
         this.spawnableCreatureList.add(new BiomeMeta(EntityDireWolf.class, 2, 4, 6));
     }
-
 
     public void decorate(World par1World, Random par2Random, int par3, int par4) {
         super.decorate(par1World, par2Random, par3, par4);

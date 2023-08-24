@@ -82,6 +82,7 @@ public class ITFEvent {
     @Subscribe
     public void onPlayerLoggedIn(PlayerLoggedInEvent event) {
         EntityPlayer player = event.getPlayer();
+        player.setHealth(player.getHealth());
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("MITE-ITF挂载成功,当前版本:").setColor(EnumChatFormat.BLUE))
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.YELLOW)));

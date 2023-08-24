@@ -7,6 +7,7 @@ import net.oilcake.mitelros.block.enchantreserver.ContainerEnchantReserver;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.mixins.util.EnumInsulinResistanceLevelMixin;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -15,10 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends EntityPlayer implements ICrafting {
@@ -51,7 +49,17 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                     }
                 }
             }
+            if(!this.is_cursed && StuckTagConfig.TagConfig.TagRejection.ConfigValue){
+                EntityWitch temp = new EntityWitch(this.worldObj);
+                int username_hash = 0;
 
+                for (int i = 0; i < this.username.length(); ++i)
+                {
+                    username_hash += this.username.charAt(i) * i;
+                }
+                this.worldObj.getAsWorldServer().addCurse(this.getAsEntityPlayerMP(),temp,Curse.getRandomCurse(new Random((long)(this.rand.nextInt() + username_hash))), 0);
+                this.learnCurseEffect();
+            }
             float health = this.getHealth();
             int satiation = this.getSatiation();
             int nutrition = this.getNutrition();
@@ -196,7 +204,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     public void travelToDimension(int par1) {
         if (this.dimension == 1 && par1 == 1) {
             this.triggerAchievement(AchievementList.theEnd2);
-            if(Constant.CalculateCurrentDiff() >= 18){
+            if(Constant.CalculateCurrentDiff() >= 16){
                 this.triggerAchievement(AchievementExtend.stormStriker);
             }
             this.worldObj.removeEntity(this);

@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class DedicatedServerMixin {
     @Inject(method = "playerLoggedIn",at = @At("RETURN"))
     public void playerLoggedIn(ServerPlayer player, CallbackInfo callbackInfo) {
+        player.setHealth(player.getHealth());
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("MITE-ITF挂载成功,当前版本:").setColor(EnumChatFormat.AQUA))
                 .appendComponent(ChatMessage.createFromText(Constant.VERSION).setColor(EnumChatFormat.BLUE)));

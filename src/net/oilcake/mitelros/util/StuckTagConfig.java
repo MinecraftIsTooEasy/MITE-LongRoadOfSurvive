@@ -39,7 +39,6 @@ public class StuckTagConfig {
     }
 
     public static class TagConfig {
-        public static ConfigItem <Boolean> TagNoWeatherPredict = new ConfigItem<>("NoWeatherPredict", false, "(LVL1)阴晴无定：删除天气预报");
         public static ConfigItem <Boolean> TagHeatStroke = new ConfigItem<>("HeatStroke",false,"(LVL1)酷暑代价：水分自然消耗的速度提升100%");
         public static ConfigItem <Boolean> TagInstinctSurvival = new ConfigItem<>("InstinctSurvival",false,"(LVL1)防御本能：怪物享受护甲防御的比率提升25%，同时取消保底1伤害的设定");
         public static ConfigItem <Boolean> TagFallenInMineLVL1 = new ConfigItem<>("FallenInMineLVL1",false,"(LVL2)矿难群体：主世界矿洞生成矿工僵尸的概率提升");
@@ -59,8 +58,10 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
         public static ConfigItem <Boolean> TagMiracleDisaster = new ConfigItem<>("MiracleDisaster",false,"(LVL1)迷幻危机：刷怪笼的危险等级不再受y轴限制");
         public static ConfigItem <Boolean> TagPseudovision = new ConfigItem<>("Pseudovision",false,"(LVL1)幻视暗示：黑色食尸鬼在成功索敌玩家后会给予玩家一次视觉黑暗效果");
+        public static ConfigItem <Boolean> TagRejection = new ConfigItem<>("Rejection",false,"(LVL2)世界排异：玩家始终获得一种女巫诅咒，尝试消除诅咒将随机改变诅咒类型");
         //*这个有问题*//
         public static ConfigItem <Boolean> TagAcousma = new ConfigItem<>("Acousma",false,"(LVL1)幻听暗示：玩家依照y轴位置会随机产生一些幻听");
+        public static ConfigItem <Boolean> TagNoWeatherPredict = new ConfigItem<>("NoWeatherPredict", false, "(LVL1)阴晴无定：删除天气预报");
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
     }
 
@@ -72,6 +73,7 @@ public class StuckTagConfig {
         Tags.put("InstinctSurvival",TagConfig.TagInstinctSurvival);
         Tags.put("LegendFreeze",TagConfig.TagLegendFreeze);
         Tags.put("HeatStorm",TagConfig.TagHeatStorm);
+        Tags.put("Rejection",TagConfig.TagRejection);
 
         //临时
         Tags.put("FallenInMineLVL1",TagConfig.TagFallenInMineLVL1);
@@ -87,7 +89,6 @@ public class StuckTagConfig {
         Tags.put("Distortion",TagConfig.TagDistortion);
         Tags.put("WorshipDark",TagConfig.TagWorshipDark);
         Tags.put("MiracleDisaster",TagConfig.TagMiracleDisaster);
-
         Tags.put("Pseudovision",TagConfig.TagPseudovision);
         //删除
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);

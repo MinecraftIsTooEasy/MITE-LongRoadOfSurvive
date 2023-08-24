@@ -52,7 +52,6 @@ public class BiomeDecoratorMixin{
             this.genMinable(10, this.redstoneGen);
             this.genMinable(5, this.diamondGen);
             this.genMinable(5, this.lapisGen);
-
             this.genMinable(2, tungstenGen);
             this.genMinable(30, nickelGen, true);
         } else if (this.currentWorld.isUnderworld()) {
@@ -66,7 +65,6 @@ public class BiomeDecoratorMixin{
             this.genMinable(10, this.redstoneGen);
             this.genMinable(5, this.diamondGen);
             this.genMinable(5, this.lapisGen);
-
             this.genMinable(5, tungstenGen, true);
             this.genMinable(30, nickelGen, true);
             if (this.currentWorld.underworld_y_offset != 0) {
