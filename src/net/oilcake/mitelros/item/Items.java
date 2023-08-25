@@ -856,6 +856,8 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(UruMattock,1),true,
                 Items.forgingnote,Items.UruIngot,Item.mattockMithril,Item.ingotMithril
         );
+        register.registerShapelessRecipe(new ItemStack(UruNugget, 9), true,
+                UruIngot);
         register.registerShapelessRecipe(new ItemStack(HelmetAncientmetalsacred,1),true,
                 Items.forgingnote,Item.ingotGold,Item.helmetAncientMetal
         );
@@ -887,6 +889,11 @@ public class Items extends Item {
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget,
                 Items.tungstenNugget,Items.tungstenNugget,Items.tungstenNugget
+        );
+        register.registerShapelessRecipe(new ItemStack(UruIngot,1),true,
+                Items.UruNugget,Items.UruNugget,Items.UruNugget,
+                Items.UruNugget,Items.UruNugget,Items.UruNugget,
+                Items.UruNugget,Items.UruNugget,Items.UruNugget
         );
         register.registerShapelessRecipe(new ItemStack(Item.leather,1),true,
                 Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur

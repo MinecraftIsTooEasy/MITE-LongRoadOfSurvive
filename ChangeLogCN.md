@@ -4,6 +4,10 @@
 不要尝试滥用spreadplayers指令以免造成坏档等严重后果
 编码一定要选择GB18030或GBK切勿UTF-8或GB2313
 ---
+## MITE is too false R08c
+### 物品
+* 修复了乌鲁金属粒锭转换丢失的合成表
+---
 ## MITE is too false R08b
 ### 生物
 * 修复了在旧生物生成模式下狼的生成不正确的问题
