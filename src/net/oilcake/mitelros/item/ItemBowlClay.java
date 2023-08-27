@@ -79,16 +79,13 @@ public class ItemBowlClay extends ItemVessel {
                 player.getFoodStats().addWater(1);
                 player.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
             }
-
             if (this.contains(Materials.unsafe_water)) {
                 player.getFoodStats().addWater(1);
                 player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 1200, 0));
             }
-
             if (this.contains(Material.milk)) {
                 player.clearActivePotions();
             }
-
             if (!this.contains(Material.water) && !this.contains(Material.milk)) {
                 if (this.contains(Material.beef_stew)) {
                     player.Feast_trigger_beef_stew = true;
@@ -174,7 +171,7 @@ public class ItemBowlClay extends ItemVessel {
                 }
 
                 if (this.contains(Materials.beetroot)) {
-                    player.Feast_trigger_salmon_soup = true;
+                    player.Feast_trigger_beetroot_soup = true;
                     player.getFoodStats().addWater(6);
                 }
             } else {
