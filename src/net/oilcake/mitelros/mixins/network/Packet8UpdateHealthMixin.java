@@ -20,6 +20,8 @@ import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 public class Packet8UpdateHealthMixin extends Packet {
     public int water;
     public int FreezingCooldown;
+    public int phytonutrients;
+    public int protein;
 
     public Packet8UpdateHealthMixin(float health, int satiation, int nutrition, float vision_dimming) {
         this.healthMP = health;
@@ -38,12 +40,23 @@ public class Packet8UpdateHealthMixin extends Packet {
             at = @At("RETURN"))
     private void injectReadPacketData(DataInput par1DataInput, CallbackInfo c) throws IOException {
         this.water = par1DataInput.readInt();
+        this.protein = par1DataInput.readInt();
+        this.phytonutrients = par1DataInput.readInt();
     }
 
     @Inject(method = "writePacketData",
             at = @At("RETURN"))
     private void injectWritePacketData(DataOutput par1DataOutput, CallbackInfo c) throws IOException {
         par1DataOutput.writeInt(this.water);
+        par1DataOutput.writeInt(this.protein);
+        par1DataOutput.writeInt(this.phytonutrients);
+    }
+    public void setPhytonutrients(int phytonutrients) {
+        this.phytonutrients = phytonutrients;
+    }
+
+    public void setProtein(int protein) {
+        this.protein = protein;
     }
 
 
@@ -61,7 +74,7 @@ public class Packet8UpdateHealthMixin extends Packet {
     }
     @Overwrite
     public int getPacketSize() {
-        return 14;
+        return 22;
     }
     @Shadow
     public boolean isRealPacket() {

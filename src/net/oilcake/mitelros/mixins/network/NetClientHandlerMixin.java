@@ -175,6 +175,8 @@ public class NetClientHandlerMixin extends ConnectionMixin{
         this.h.h.getFoodStats().setSatiation(par1Packet8UpdateHealth.satiation, false);
         this.h.h.getFoodStats().setNutrition(par1Packet8UpdateHealth.nutrition, false);
         this.h.h.getFoodStats().setSatiationWater(par1Packet8UpdateHealth.water, false);
+        this.h.h.setPhytonutrients(par1Packet8UpdateHealth.phytonutrients);
+        this.h.h.setProtein(par1Packet8UpdateHealth.protein);
         if (this.h.h.vision_dimming < par1Packet8UpdateHealth.vision_dimming) {
             this.h.h.vision_dimming = par1Packet8UpdateHealth.vision_dimming;
         }

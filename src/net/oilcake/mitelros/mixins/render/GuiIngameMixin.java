@@ -3,8 +3,7 @@ package net.oilcake.mitelros.mixins.render;
 import net.minecraft.*;
 //import net.oilcake.mitelros.item.potion.Potions;
 import net.oilcake.mitelros.util.Constant;
-import net.oilcake.mitelros.util.StuckTagConfig;
-import net.xiaoyu233.fml.config.Configs;
+import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -14,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 
 @Mixin(GuiIngame.class)
@@ -340,6 +339,52 @@ public class GuiIngameMixin extends avk {
             var68.append("   FPS=").append(Minecraft.last_fps).append(" (");
             this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }
+    }
+    @Inject(locals = LocalCapture.CAPTURE_FAILHARD,
+            method = "a(II)V",
+            at = @At(value = "INVOKE_STRING",
+                    target = "endStartSection(Ljava/lang/String;)V",
+                    args = "ldc=air",
+                    shift = At.Shift.BEFORE))
+    private void injectRenderNutrition(int par1, int par2, CallbackInfo ci, boolean var3, int var4, int var5, FoodMetaData var7, int var8, AttributeInstance var10, int var11, int var12, int var13, float var14, float var15){
+        int protein = Math.max(this.g.h.getProtein() - 800000, 0);
+        int phytonutrients = Math.max(this.g.h.getPhytonutrients() - 800000, 0);
+        int var26 = var12 - 90;
+        int var25 = var13 + 32;
+        if(getNutrientsPriority(protein,phytonutrients)){
+            GL11.glPushMatrix();
+            GL11.glScalef(0.6F, 1.0F, 1.0F);
+            this.g.J().a(Constant.icons_itf);
+            this.b(var26 - 205, var25, 0, 106, 182, 6);
+            this.b(var26 - 205, var25, 0, 100, (int)(182.0F * getRateNutrient(protein)), 6);
+            GL11.glPopMatrix();
+            GL11.glPushMatrix();
+            GL11.glScalef(0.6F, 1.0F, 1.0F);
+            this.g.J().a(Constant.icons_itf);
+            this.b(var26 - 205, var25, 0, 94, (int)(182.0F * getRateNutrient(phytonutrients)), 6);
+            GL11.glPopMatrix();
+        }
+        else{
+            GL11.glPushMatrix();
+            GL11.glScalef(0.6F, 1.0F, 1.0F);
+            this.g.J().a(Constant.icons_itf);
+            this.b(var26 - 205, var25, 0, 106, 182, 6);
+            this.b(var26 - 205, var25, 0, 94, (int)(182.0F * getRateNutrient(phytonutrients)), 6);
+            GL11.glPopMatrix();
+            GL11.glPushMatrix();
+            GL11.glScalef(0.6F, 1.0F, 1.0F);
+            this.g.J().a(Constant.icons_itf);
+            this.b(var26 - 205, var25, 0, 100, (int)(182.0F * getRateNutrient(protein)), 6);
+            GL11.glPopMatrix();
+        }
+    }
+    private boolean getNutrientsPriority(int protein,int phytonutrients){
+        return protein > phytonutrients;
+    }
+    private float getRateNutrient(long par1){
+        par1 *= par1;
+        par1 /= 160000;
+        return ((float) par1) / 160000F;
     }
     @Shadow
     @Final

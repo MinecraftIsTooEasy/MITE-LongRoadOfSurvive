@@ -16,6 +16,8 @@ public class EntityPlayerSPMixin {
     public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
         this.d.a(new GuiEnchantReserver(ReflectHelper.dyCast(this), x, y, z, slots));
     }
+    private int phytonutrients;
+    private int protein;
     @Overwrite
     private float getBenchAndToolsModifier(Container container) {
         if (!(container instanceof ContainerWorkbench)) {
@@ -61,5 +63,18 @@ public class EntityPlayerSPMixin {
                 }
             }
         }
+    }
+
+    public int getProtein() {
+        return this.protein;
+    }
+    public int getPhytonutrients() {
+        return this.phytonutrients;
+    }
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+    public void setPhytonutrients(int phytonutrients) {
+        this.phytonutrients = phytonutrients;
     }
 }
