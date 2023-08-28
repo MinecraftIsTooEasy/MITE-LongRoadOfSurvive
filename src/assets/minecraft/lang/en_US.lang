@@ -274,7 +274,11 @@ item.food/beetroot_seeds.name=Beetroot seeds
 item.pulque.name=Pulque
 item.ale.name=Ale
 item.forging_note.name=Forging Note
-item.totem_of_undying.name=Totem of Undying
+item.totem_of_fecund.name=Totem of Fecund
+item.totem_of_knowledge.name=Totem of Knowledge
+item.totem_of_destroy.name=Totem of Destroying
+item.totem_of_preserve.name=Totem of Preservation
+
 
 item.shards/diamond.name=Diamond Shard
 item.shards/emerald.name=Emerald Shard
@@ -286,6 +290,7 @@ item.records/record_damnation.name=Music Disc
 item.records/record_connected.name=Music Disc
 
 item.experimental_potion.name=Experimental Potion
+item.suspicious_potion.name=Natural Water Bottle
 
 item.wolf_fur.name=Wolf Fur
 item.ancient_metal_armor_piece.name=Gilding Ancient Metal Armor Piece

@@ -23,6 +23,7 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
         this.is_leather = this.effective_material == Material.leather || this.effective_material == Materials.wolf_fur;
+        this.setCraftingDifficultyAsComponent(this.effective_material.getDurability() * 100.0F * this.getNumComponentsForDurability());
     }
     @Overwrite
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {

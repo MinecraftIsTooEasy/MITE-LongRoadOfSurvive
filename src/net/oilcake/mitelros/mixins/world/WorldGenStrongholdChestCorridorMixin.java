@@ -56,5 +56,7 @@ public class WorldGenStrongholdChestCorridorMixin {
             new StructurePieceTreasure(Item.saddle.itemID, 0, 1, 1, 1),
             new StructurePieceTreasure(Item.horseArmorCopper.itemID, 0, 1, 1, 1),
             new StructurePieceTreasure(Item.horseArmorIron.itemID, 0, 1, 1, 1),
-            new StructurePieceTreasure(Item.shears.itemID, 0, 1, 1, 1)};
+            new StructurePieceTreasure(Item.shears.itemID, 0, 1, 1, 1),
+            new StructurePieceTreasure(Items.totemofpreserve.itemID, 0, 1, 1, 5),
+    };
 }

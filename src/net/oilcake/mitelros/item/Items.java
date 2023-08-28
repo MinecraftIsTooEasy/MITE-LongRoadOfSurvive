@@ -199,7 +199,7 @@ public class Items extends Item {
     public static final ItemBowlClay claybowlWaterSwampland = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.dangerous_water, "swampland_water")).setUnlocalizedName("SwamplandWater");
     public static final ItemBowlClay claybowlSalmonSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
     public static final ItemBowlClay claybowlBeetrootSoup = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
-    public static final Item totemofundying = (ItemStandard) (new ItemStandard(Constant.getNextItemID(),Materials.ancient_metal,"totem_of_undying")).setMaxStackSize(1);
+    public static final Item totemoffecund = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Material.gold,"totem")).setMaxStackSize(1);
     public static final ItemArmor helmetCustom_b = new ItemHelmet(Constant.getNextItemID(),Materials.custom_b,false);
     public static final ItemArmor chestplateCustom_b = new ItemCuirass(Constant.getNextItemID(),Materials.custom_b,false);
     public static final ItemArmor leggingsCustom_b = new ItemLeggings(Constant.getNextItemID(),Materials.custom_b,false);
@@ -208,6 +208,10 @@ public class Items extends Item {
     public static final ItemFishingRod fishingRodTungsten = (ItemFishingRod)(new ItemFishingRod(Constant.getNextItemID(), Materials.tungsten)).setUnlocalizedName("fishingRod");
     public static final ItemCarrotStick carrotOnAStickNickel = (ItemCarrotStick) (new ItemCarrotStick(Constant.getNextItemID(), Materials.nickel)).setUnlocalizedName("carrotOnAStick");
     public static final ItemCarrotStick carrotOnAStickTungsten = (ItemCarrotStick) (new ItemCarrotStick(Constant.getNextItemID(), Materials.tungsten)).setUnlocalizedName("carrotOnAStick");
+    public static final ItemPotionSuspicious SuspiciousPotion = (ItemPotionSuspicious) new ItemPotionSuspicious(Constant.getNextItemID()).setUnlocalizedName("suspiciousPotion").setCreativeTab(CreativeModeTab.tabMisc);
+    public static final Item totemofdestroy = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Materials.tungsten,"totem")).setMaxStackSize(1);
+    public static final Item totemofpreserve = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Material.iron,"totem")).setMaxStackSize(1);
+    public static final Item totemofknowledge = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Material.ancient_metal,"totem")).setMaxStackSize(1);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -339,6 +343,7 @@ public class Items extends Item {
         register("wand/lava", LavaWand);
         register("wand/ice", FreezeWand);
         register("wand/thunder", ShockWand);
+        register("suspicious_potion",SuspiciousPotion);
         register("experimental_potion",ExperimentalPotion);
         register("shards/diamond",shardDiamond);
         register("shards/emerald",shardEmerald);
@@ -407,7 +412,10 @@ public class Items extends Item {
         register("hardened_clay_bowls/salmon_soup",claybowlSalmonSoup);
         register("hardened_clay_bowls/sorbet",claybowlSorbet);
         register("hardened_clay_bowls/vegetable_soup",claybowlVegetableSoup);
-        register("totem_of_undying",totemofundying);
+        register("totem_of_fecund",totemoffecund);
+        register("totem_of_destroy",totemofdestroy);
+        register("totem_of_knowledge",totemofknowledge);
+        register("totem_of_preserve",totemofpreserve);
         Constant.initItemArray();
     }
 
@@ -916,6 +924,11 @@ public class Items extends Item {
                 Items.tungstenBucketStone).resetDifficulty(100);
         register.registerShapelessRecipe(new ItemStack(Items.nickelBucket,1),false,
                 Items.nickelBucketStone).resetDifficulty(100);
+        for(int i = 1;i<=9;++i){
+            register.registerShapelessRecipe(new ItemStack(Item.glassBottle,i),false,
+                    new ItemStack(Items.SuspiciousPotion,i));
+        }
+
 
         register.registerShapelessRecipe(new ItemStack(Items.bowlBeetrootSoup,1,0),false,
                 Items.beetroot,Items.beetroot,Items.beetroot,
@@ -1121,6 +1134,7 @@ public class Items extends Item {
 //        RecipesFurnace.smelting().addSmelting(bowlWaterSwampland.itemID, new ItemStack(bowlWater));
         RecipesFurnace.smelting().addSmelting(claybowlWaterSuspicious.itemID, new ItemStack(claybowlWater));
         RecipesFurnace.smelting().addSmelting(claybowlWaterSwampland.itemID, new ItemStack(claybowlWater));
+        RecipesFurnace.smelting().addSmelting(SuspiciousPotion.itemID, new ItemStack(potion,1,0));
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));
         RecipesFurnace.smelting().addSmelting(claybowlRaw.itemID, new ItemStack(claybowlEmpty));
         ItemFood.setCookingResult((ItemFood) horse_meat, (ItemFood) horse_meat_cooked, 6);

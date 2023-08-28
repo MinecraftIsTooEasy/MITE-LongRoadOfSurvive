@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.entity.player;
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
+import net.oilcake.mitelros.item.ItemTotem;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
@@ -255,11 +256,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     private void activeNegativeUndying() {
         this.clearActivePotions();
-        this.setHealth(2,true,this.getHealFX());
+        this.setHealth(this.getMaxHealth(),true,this.getHealFX());
         this.entityFX(EnumEntityFX.smoke_and_steam);
         this.makeSound("imported.random.totem_use", 3.0F, 1.0F+this.rand.nextFloat()*0.1F);
-        this.addPotionEffect(new MobEffect(MobEffectList.resistance.id, 400, 3));
-        this.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 400, 0));
         this.addPotionEffect(new MobEffect(MobEffectList.blindness.id, 40, 4));
         this.vision_dimming+=0.75F;
         this.triggerAchievement(AchievementExtend.cheatdeath);
@@ -267,10 +266,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     protected void checkForAfterDamage(Damage damage, EntityDamageResult result) {
         if (result.entityWasDestroyed()) {
             ItemStack var5 = this.getHeldItemStack();
-            if (var5 != null && var5.getItem() == Items.totemofundying) {
+            if (var5 != null && var5.getItem() instanceof ItemTotem) {
                 result.setEntity_was_destroyed(false);
-                this.activeNegativeUndying();
-                this.setHeldItemStack(null);
+                ((ItemTotem) var5.getItem()).performNegativeEffect(this.getAsPlayer());
             }
         }
     }
@@ -282,7 +280,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
         if (entityDamageResult != null && (double)this.getHealthFraction() <= 0.1D && !entityDamageResult.entityWasDestroyed()) {
             ItemStack var5 = this.getHeldItemStack();
-            if (var5 != null && var5.getItem() == Items.totemofundying) {
+            if (var5 != null && var5.getItem() == Items.totemoffecund) {
                 entityDamageResult.setEntity_was_destroyed(false);
                 this.activeNegativeUndying();
                 this.setHeldItemStack(null);

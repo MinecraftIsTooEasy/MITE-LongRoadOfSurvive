@@ -13,6 +13,7 @@ public class ItemPotionExperimental extends Item{
         }
 
         public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
+            player.addWater(3);
             double rand = Math.random();
             if (player.onServer()) {
                 if(rand<0.25){

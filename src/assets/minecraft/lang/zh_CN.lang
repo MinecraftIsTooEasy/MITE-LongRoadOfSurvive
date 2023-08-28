@@ -274,7 +274,10 @@ item.food/beetroot_seeds.name=甜菜种子
 item.pulque.name=普利克酒
 item.ale.name=麦芽酒
 item.forging_note.name=锻造笔记
-item.totem_of_undying.name=不死图腾
+item.totem_of_fecund.name=丰饶图腾
+item.totem_of_knowledge.name=智识图腾
+item.totem_of_destroy.name=毁灭图腾
+item.totem_of_preserve.name=存护图腾
 
 item.shards/diamond.name=钻石碎片
 item.shards/emerald.name=绿宝石碎片
@@ -286,6 +289,7 @@ item.records/record_damnation.name=音乐唱片
 item.records/record_connected.name=音乐唱片
 
 item.experimental_potion.name=实验的药水
+item.suspicious_potion.name=自然水瓶
 
 item.wolf_fur.name=狼的毛皮
 item.ancient_metal_armor_piece.name=镶金远古金属铠甲残片

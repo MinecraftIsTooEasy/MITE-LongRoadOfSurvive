@@ -43,7 +43,7 @@ public class CraftingManagerMixin {
             }
 
             if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
-                Minecraft.setErrorMessage("Warning: " + item.getItemDisplayName((ItemStack)null) + " [" + item.itemID + "] is " + (item.isCraftingComponent(subtype_or_0) ? "a crafting product" : "repairable") + " but its lowest_crafting_difficulty_to_produce cannot be determined");
+//                Minecraft.setErrorMessage("Warning: " + item.getItemDisplayName((ItemStack)null) + " [" + item.itemID + "] is " + (item.isCraftingComponent(subtype_or_0) ? "a crafting product" : "repairable") + " but its lowest_crafting_difficulty_to_produce cannot be determined");
             }
         }
 
@@ -52,7 +52,7 @@ public class CraftingManagerMixin {
             if (lowest_crafting_difficulty_to_produce != Float.MAX_VALUE) {
                 item.setCraftingDifficultyAsComponent(lowest_crafting_difficulty_to_produce);
             } else {
-                Minecraft.setErrorMessage("Warning: " + item.getItemDisplayName((ItemStack)null) + " [" + item.itemID + "] is a crafting component but its crafting_difficulty_as_component has not been set");
+//                Minecraft.setErrorMessage("Warning: " + item.getItemDisplayName((ItemStack)null) + " [" + item.itemID + "] is a crafting component but its crafting_difficulty_as_component has not been set");
             }
         }
 
