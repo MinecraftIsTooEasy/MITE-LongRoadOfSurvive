@@ -15,7 +15,7 @@ public class EntityGhost extends EntityInvisibleStalker {
         this.setEntityAttribute(GenericAttributes.followRange, 128.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.25999999046325684);
         this.setEntityAttribute(GenericAttributes.attackDamage, 5.0);
-        this.setEntityAttribute(GenericAttributes.maxHealth, 12.0);
+        this.setEntityAttribute(GenericAttributes.maxHealth, 20.0);
     }
     protected float getSoundVolume(String sound) {
         return 0.75F;

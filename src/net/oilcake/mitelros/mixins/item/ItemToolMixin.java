@@ -45,7 +45,7 @@ public class ItemToolMixin extends Item{
         } else if (this.effective_material == Material.adamantium) {
             return 3.0F;
         } else if (this.effective_material == Materials.uru) {
-            return 4.75F;
+            return 4.5F;
         } else if (this.effective_material == Material.diamond) {
             return 2.5F;
         } else if (this.effective_material == Material.ancient_metal) {
@@ -53,7 +53,7 @@ public class ItemToolMixin extends Item{
         } else if (this.effective_material == Materials.nickel) {
             return 2.0F;
         } else if (this.effective_material == Materials.tungsten) {
-            return 2.7F;
+            return 2.75F;
         }else {
             Minecraft.setErrorMessage("getMaterialHarvestEfficiency: tool material not handled");
             return 0.0F;

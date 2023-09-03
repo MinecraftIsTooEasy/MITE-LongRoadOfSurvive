@@ -15,7 +15,7 @@ public class EntityEvil extends EntityGhost{
         this.setEntityAttribute(GenericAttributes.followRange, 128.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.3);
         this.setEntityAttribute(GenericAttributes.attackDamage, 7.0);
-        this.setEntityAttribute(GenericAttributes.maxHealth, 20.0);
+        this.setEntityAttribute(GenericAttributes.maxHealth, 30.0);
     }
     protected float getSoundVolume(String sound) {
         return 1.25F;

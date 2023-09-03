@@ -13,10 +13,9 @@ public class ItemTotem extends Item {
     private void performEffectCommon(EntityPlayer player, ItemTotem totem) {
         player.clearActivePotions();
         player.setHealth(Math.max(player.getHealth(),2),true,player.getHealFX());
-        player.entityFX(EnumEntityFX.smoke_and_steam);
         player.makeSound("imported.random.totem_use", 3.0F, 1.0F+ player.getRand().nextFloat()*0.1F);
         player.addPotionEffect(new MobEffect(MobEffectList.blindness.id, 40, 4));
-        player.vision_dimming+=0.25F;
+        player.vision_dimming = 1.0F;
     }
     private void performEffectSpecified(EntityPlayer player, ItemTotem totem){
         Material totem_material = totem.getHardestMetalMaterial();
@@ -39,9 +38,8 @@ public class ItemTotem extends Item {
             player.setHealth(player.getMaxHealth() / 2.0F,true,player.getHealFX());
             for (int i = 0; i<8;i++){
                 player.entityFX(EnumEntityFX.smoke);
-                player.entityFX(EnumEntityFX.burned_up_in_lava);
             }
-            player.worldObj.createExplosionC(player, player.posX, player.posY + 1.5, player.posZ, 0.0F, 4.0F);
+            player.worldObj.createExplosion(player, player.posX, player.posY + 1.5, player.posZ, 0.0F, 4.0F, true);
         } else {
             Minecraft.setErrorMessage("effectSpecified(): Undefined Material "+totem_material.toString()+".");
         }

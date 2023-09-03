@@ -55,7 +55,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 ItemStack heldItemStack = this.getHeldItemStack();
                 if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestroying)){
                     int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, heldItemStack);
-                    target.worldObj.createExplosionC(this, target.posX, target.posY, target.posZ, destorying * 0.5F, destorying * 0.5F);
+                    target.worldObj.createExplosion(this, target.posX, target.posY, target.posZ, 0F, destorying * 0.5F, true);
                     //System.out.println("判断为enchantmentDestorying player");
                     //target.setFire(120);
                 }
@@ -695,7 +695,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     wearing_leather = true;
                 }
 
-                if (material != Material.copper && material != Material.silver && material != Material.gold && material != Material.iron && material != Material.mithril && material != Material.adamantium && material != Material.ancient_metal) {
+                if (material != Material.copper && material != Material.silver && material != Material.gold && material != Material.iron && material != Material.mithril && material != Material.adamantium && material != Material.ancient_metal && material != Materials.tungsten && material != Materials.nickel) {
                     wearing_full_suit_plate = false;
                 }
 

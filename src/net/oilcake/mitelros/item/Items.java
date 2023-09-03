@@ -1109,6 +1109,8 @@ public class Items extends Item {
             register.registerShapelessRecipe(new ItemStack(smp_water_buckets[n]), true, smp_water_buckets[n].getEmptyVessel(), new ItemStack(Items.claybowlWaterSwampland, 4)
             ).resetDifficulty(25);
         }
+        register.registerShapelessRecipe(new ItemStack(Item.cake),false,
+                Item.flour, Item.sugar, Item.egg, Items.claybowlMilk);
         ItemCoin[] coins = new ItemCoin[]{
                 nickelCoin, tungstenCoin};
         for (ItemCoin coin : coins) {
@@ -1130,6 +1132,7 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(pieceMithril.itemID, new ItemStack(Items.mithrilNugget));
         RecipesFurnace.smelting().addSmelting(pieceTungsten.itemID, new ItemStack(tungstenNugget));
         RecipesFurnace.smelting().addSmelting(pieceUru.itemID, new ItemStack(UruNugget));
+        RecipesFurnace.smelting().addSmelting(AncientmetalArmorPiece.itemID, new ItemStack(ancientMetalNugget));
 //        RecipesFurnace.smelting().addSmelting(bowlWaterSuspicious.itemID, new ItemStack(bowlWater));
 //        RecipesFurnace.smelting().addSmelting(bowlWaterSwampland.itemID, new ItemStack(bowlWater));
         RecipesFurnace.smelting().addSmelting(claybowlWaterSuspicious.itemID, new ItemStack(claybowlWater));
