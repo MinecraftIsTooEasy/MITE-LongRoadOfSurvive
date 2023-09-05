@@ -212,6 +212,17 @@ public class Items extends Item {
     public static final Item totemofdestroy = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Materials.tungsten,"totem")).setMaxStackSize(1);
     public static final Item totemofpreserve = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Material.iron,"totem")).setMaxStackSize(1);
     public static final Item totemofknowledge = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Material.ancient_metal,"totem")).setMaxStackSize(1);
+    public static final ItemIgnition ignitionCopper = new ItemIgnition(Constant.getNextItemID(),Material.copper);
+    public static final ItemIgnition ignitionSilver = new ItemIgnition(Constant.getNextItemID(),Material.silver);
+    public static final ItemIgnition ignitionGold = new ItemIgnition(Constant.getNextItemID(),Material.gold);
+    public static final ItemIgnition ignitionIron = new ItemIgnition(3,Material.iron);
+    public static final ItemIgnition ignitionNickel = new ItemIgnition(Constant.getNextItemID(),Materials.nickel);
+    public static final ItemIgnition ignitionTungsten = new ItemIgnition(Constant.getNextItemID(),Materials.tungsten);
+    public static final ItemIgnition ignitionMithril = new ItemIgnition(Constant.getNextItemID(),Material.mithril);
+    public static final ItemIgnition ignitionAncientMetal = new ItemIgnition(Constant.getNextItemID(),Material.ancient_metal);
+    public static final ItemIgnition ignitionAdamantium = new ItemIgnition(Constant.getNextItemID(),Material.adamantium);
+    public static final ItemIgnition ignitionWood = new ItemIgnition(Constant.getNextItemID(),Material.wood);
+
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -412,10 +423,20 @@ public class Items extends Item {
         register("hardened_clay_bowls/salmon_soup",claybowlSalmonSoup);
         register("hardened_clay_bowls/sorbet",claybowlSorbet);
         register("hardened_clay_bowls/vegetable_soup",claybowlVegetableSoup);
-        register("totem_of_fecund",totemoffecund);
-        register("totem_of_destroy",totemofdestroy);
-        register("totem_of_knowledge",totemofknowledge);
-        register("totem_of_preserve",totemofpreserve);
+        register("totem/totem_of_fecund",totemoffecund);
+        register("totem/totem_of_destroy",totemofdestroy);
+        register("totem/totem_of_knowledge",totemofknowledge);
+        register("totem/totem_of_preserve",totemofpreserve);
+        register("ignition/wood",ignitionWood);
+        register("ignition/copper",ignitionCopper);
+        register("ignition/silver",ignitionSilver);
+        register("ignition/gold",ignitionGold);
+        register("ignition/iron",ignitionIron);
+        register("ignition/nickel",ignitionNickel);
+        register("ignition/ancient_metal",ignitionAncientMetal);
+        register("ignition/mithril",ignitionMithril);
+        register("ignition/tungsten",ignitionTungsten);
+        register("ignition/adamantium",ignitionAdamantium);
         Constant.initItemArray();
     }
 
@@ -752,13 +773,13 @@ public class Items extends Item {
                 "A A",
                 'A',Wolf_fur,
                 'B',bootsLeather);
-        register.registerShapedRecipe(new ItemStack(Goldenapplelegend),true,
-                "AAA",
-                "ASA",
-                "AAA",
-                'A',Block.blockGold,
-                'S',Item.appleRed
-        );
+//        register.registerShapedRecipe(new ItemStack(Goldenapplelegend),true,
+//                "AAA",
+//                "ASA",
+//                "AAA",
+//                'A',Block.blockGold,
+//                'S',Item.appleRed
+//        );
         register.registerShapedRecipe(new ItemStack(morningStarCopper, 1), true,
                 "###",
                 "#*#",
@@ -834,6 +855,70 @@ public class Items extends Item {
                 '#', silk,
                 'E', tungstenNugget,
                 'C', stick);
+        register.registerShapedRecipe(new ItemStack(ignitionWood, 1),true,
+                "SW",
+                "WW",
+                'S',silk,
+                'W',stick);
+        register.registerShapedRecipe(new ItemStack(ignitionWood, 1),true,
+                "SW",
+                "WW",
+                'S',sinew,
+                'W',stick);
+        register.registerShapedRecipe(new ItemStack(ignitionCopper,1),true,
+                "C ",
+                " F",
+                'C',copperNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionSilver,1),true,
+                "C ",
+                " F",
+                'C',silverNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionGold,1),true,
+                "C ",
+                " F",
+                'C',goldNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionIron,1),true,
+                "C ",
+                " F",
+                'C',ironNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionNickel,1),true,
+                "C ",
+                " F",
+                'C',nickelNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionAncientMetal,1),true,
+                "C ",
+                " F",
+                'C',ancientMetalNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionMithril,1),true,
+                "C ",
+                " F",
+                'C',mithrilNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionTungsten,1),true,
+                "C ",
+                " F",
+                'C',tungstenNugget,
+                'F',flint
+        );
+        register.registerShapedRecipe(new ItemStack(ignitionAdamantium,1),true,
+                "C ",
+                " F",
+                'C',adamantiumNugget,
+                'F',flint
+        );
         register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
                 Items.forgingnote,Item.writableBook
         );

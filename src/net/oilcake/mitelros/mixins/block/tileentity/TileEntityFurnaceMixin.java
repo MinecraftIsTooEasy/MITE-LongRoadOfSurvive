@@ -22,6 +22,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public int furnaceCookTime;
     @Shadow
     public int heat_level = 0;
+    private boolean activated = false;
     @Overwrite
     public static int getHeatLevelRequired(int item_id) {
         if (item_id == Block.oreAdamantium.blockID || item_id == Items.pieceAdamantium.itemID || item_id == Blocks.oreUru.blockID || item_id == Items.pieceUru.itemID) {
@@ -85,6 +86,15 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
 //            return this.furnaceCookTime * par1 / 200;
 //        }
 //    }
+    public boolean canBurnbyItself(){
+        return this.getFuelHeatLevel() > 2;
+    }
+    public void activateFurnace(){
+        this.activated = true;
+    }
+    private boolean canNormallyWork(){
+        return activated && this.furnaceItemStacks[1] != null;
+    }
     @Overwrite
     public void updateEntity() {
         if (this.worldObj.isRemote || this.furnaceBurnTime == 1 || !this.isFlooded() && !this.isSmotheredBySolidBlock()) {
@@ -97,11 +107,14 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                 }
                 this.furnaceBurnTime -= temp;
             } else {
+                if(this.furnaceItemStacks[1] == null){
+                    this.activated = false;
+                }
                 this.heat_level = 0;
             }
 
             if (!this.worldObj.isRemote) {
-                if (this.furnaceBurnTime == 0 && this.canSmelt(this.getFuelHeatLevel())) {
+                if (this.furnaceBurnTime == 0 && this.canSmelt(this.getFuelHeatLevel()) && (canNormallyWork() || this.canBurnbyItself())) {
                     this.currentItemBurnTime = this.furnaceBurnTime = this.getItemBurnTime(this.furnaceItemStacks[1]);
                     if (this.furnaceBurnTime > 0) {
                         this.heat_level = this.getItemHeatLevel(this.furnaceItemStacks[1]);

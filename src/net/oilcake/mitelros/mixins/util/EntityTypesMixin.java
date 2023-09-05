@@ -44,7 +44,6 @@ public class EntityTypesMixin {
         addMapping(EntityBoneBodyguard.class,"EntityBoneBodyguard",556, 12698049, 4802889);
         addMapping(EntityGhost.class,"EntityGhost",557,9539985, 6629376);
         addMapping(EntityEvil.class,"EntityEvil",558,9539985, 14008320);
-
     }
 
 }

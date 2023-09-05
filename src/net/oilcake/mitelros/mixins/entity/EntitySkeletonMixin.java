@@ -1,9 +1,9 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
-import net.minecraft.server.MinecraftServer;
-import net.oilcake.mitelros.entity.EntityWitherBoneLord;
+import net.oilcake.mitelros.entity.EntitySpiderKing;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -173,7 +173,6 @@ public abstract class EntitySkeletonMixin extends EntityMonster implements IRang
                 this.equipmentDropChances[4] = 0.0F;
             }
         }
-
         return par1EntityLivingData;
     }
     @Shadow
@@ -211,6 +210,8 @@ public abstract class EntitySkeletonMixin extends EntityMonster implements IRang
     @Shadow public abstract void setHeldItemStack(ItemStack item_stack);
 
     @Shadow public abstract boolean isBoneLord();
+
+    @Shadow public abstract boolean isAncientBoneLord();
 
     @Overwrite
     public void attackEntityWithRangedAttack(EntityLiving par1EntityLivingBase, float par2) {
@@ -288,5 +289,8 @@ public abstract class EntitySkeletonMixin extends EntityMonster implements IRang
         for(i = 0; i < num_drops; ++i) {
             this.dropItem(Item.bone.itemID, 1);
         }
+    }
+    public void setNum_arrows(int arrows){
+        this.num_arrows = arrows;
     }
 }
