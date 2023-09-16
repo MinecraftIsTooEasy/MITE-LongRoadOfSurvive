@@ -278,6 +278,7 @@ item.totem/totem_of_fecund.name=Totem of Fecund
 item.totem/totem_of_knowledge.name=Totem of Knowledge
 item.totem/totem_of_destroy.name=Totem of Destroying
 item.totem/totem_of_preserve.name=Totem of Preservation
+item.wither_branch.name=Wither Branch
 
 item.ignition/wood.name=Ignition
 item.ignition/copper.name=Copper Fire Starter

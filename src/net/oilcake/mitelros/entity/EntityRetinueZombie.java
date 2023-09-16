@@ -48,8 +48,6 @@ public class EntityRetinueZombie extends EntityZombie {
         if (this.worldObj.getDayOfWorld() >= 24 && !Minecraft.isInTournamentMode()) {
             items.add(new RandomItemListEntry(Item.warHammerRustedIron, 1));
         }
-
-
         RandomItemListEntry entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, items);
         this.setHeldItemStack((new ItemStack(entry.item)).randomizeForMob(this, true));
     }
@@ -97,6 +95,12 @@ public class EntityRetinueZombie extends EntityZombie {
         if (this.worldObj.getDayOfWorld() >= 24 && !Minecraft.isInTournamentMode()) {
             boots.add(new RandomItemListEntry(Item.bootsCopper, 1));
             boots.add(new RandomItemListEntry(Item.bootsRustedIron, 1));
+        }
+        if (this.worldObj.getDayOfWorld() > 31){
+            helmet.remove(0);
+            plate.remove(0);
+            legs.remove(0);
+            boots.remove(0);
         }
         RandomItemListEntry entry;
         entry = (RandomItemListEntry)WeightedRandom.getRandomItem(this.rand, helmet);

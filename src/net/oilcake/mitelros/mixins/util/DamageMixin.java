@@ -66,7 +66,7 @@ public class DamageMixin{
                         return 0.0F;
                     }
                 }
-                return Math.max(this.amount - effective_protection, 1.0F);
+                return Math.max(this.amount - effective_protection, StuckTagConfig.TagConfig.TagArmament.ConfigValue ? 0.0F : 1.0F);
             }
             return Math.max(this.amount - effective_protection, StuckTagConfig.TagConfig.TagInstinctSurvival.ConfigValue ? 0.0F : 1.0F);
         }

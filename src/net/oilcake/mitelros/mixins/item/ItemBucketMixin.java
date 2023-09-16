@@ -15,7 +15,7 @@ public class ItemBucketMixin extends ItemVessel {
     @Overwrite
     public float getChanceOfMeltingWhenFilledWithLava() {
         Material material = this.getVesselMaterial();
-        return material == Material.adamantium ? 0.0F : (material == Material.gold ? 0.5F : 0.025F * (Material.mithril.getDurability() / material.getDurability()));
+        return (material == Material.adamantium || material == Materials.tungsten) ? 0.0F : (material == Material.gold ? 0.5F : 0.025F * (Material.mithril.getDurability() / material.getDurability()));
     }
     @Overwrite
     public Block getBlockForContents() {

@@ -28,6 +28,7 @@ public class PotionBrewerMixin {
 
     //地狱疣+8min
         potionRequirements.put(Integer.valueOf(MobEffectList.resistance.getId()), "0 & 1 & 2 & !3 & 2+6");
+        potionRequirements.put(Integer.valueOf(MobEffectList.wither.getId()), "0 & !1 & 2 & 3 & 2+6");
         potionRequirements.put(Integer.valueOf(MobEffectList.regeneration.getId()), "0 & !1 & !2 & !3 & 0+6");
         potionRequirements.put(Integer.valueOf(MobEffectList.moveSpeed.getId()), "!0 & 1 & !2 & !3 & 1+6");
         potionRequirements.put(Integer.valueOf(MobEffectList.fireResistance.getId()), "0 & 1 & !2 & !3 & 0+6");
@@ -57,7 +58,7 @@ public class PotionBrewerMixin {
         potionAmplifiers.put(Integer.valueOf(MobEffectList.heal.getId()), "5");
         potionAmplifiers.put(Integer.valueOf(MobEffectList.poison.getId()), "5");
         potionAmplifiers.put(Integer.valueOf(MobEffectList.resistance.getId()), "5");
-
+        potionAmplifiers.put(Integer.valueOf(MobEffectList.wither.getId()), "5");
         field_77925_n = new HashMap();
         potionPrefixes = new String[]{"potion.prefix.mundane", "potion.prefix.uninteresting", "potion.prefix.bland", "potion.prefix.clear", "potion.prefix.milky", "potion.prefix.diffuse", "potion.prefix.artless", "potion.prefix.thin", "potion.prefix.awkward", "potion.prefix.flat", "potion.prefix.bulky", "potion.prefix.bungling", "potion.prefix.buttered", "potion.prefix.smooth", "potion.prefix.suave", "potion.prefix.debonair", "potion.prefix.thick", "potion.prefix.elegant", "potion.prefix.fancy", "potion.prefix.charming", "potion.prefix.dashing", "potion.prefix.refined", "potion.prefix.cordial", "potion.prefix.sparkling", "potion.prefix.potent", "potion.prefix.foul", "potion.prefix.odorless", "potion.prefix.rank", "potion.prefix.harsh", "potion.prefix.acrid", "potion.prefix.gross", "potion.prefix.stinky"};
     }

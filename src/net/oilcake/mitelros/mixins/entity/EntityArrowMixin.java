@@ -5,6 +5,8 @@ import net.oilcake.mitelros.entity.EntityBoneBodyguard;
 import net.oilcake.mitelros.entity.EntityStray;
 import net.oilcake.mitelros.entity.EntityWitherBodyguard;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -71,6 +73,9 @@ public class EntityArrowMixin extends Entity{
     @Redirect(method = "onUpdate",at = @At(ordinal = 0, value = "INVOKE",target = "Lnet/minecraft/ItemArrow;getDamage()F"))
     public float SPSkeletonExtraDamage(ItemArrow itemArrow) {
         float dummy = 0.0F;
+        if (ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
+            dummy += (float) Constant.CalculateCurrentDiff() / 12.5F;
+        }
         if (this.shootingEntity.getClass() == EntityStray.class) {
             dummy += 0.5F;
         }

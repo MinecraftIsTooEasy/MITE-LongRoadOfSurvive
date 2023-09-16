@@ -2,6 +2,8 @@ package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
@@ -27,6 +29,7 @@ public class EntityMonsterMixin extends EntityCreature {
 //        }
 //
 //    }
+
 
     @Overwrite
     public static EntityDamageResult attackEntityAsMob(EntityInsentient attacker, Entity target) {
@@ -103,4 +106,34 @@ public class EntityMonsterMixin extends EntityCreature {
     public EntityMonsterMixin(World par1World) {
         super(par1World);
     }
+    private boolean modified_attribute = false;
+    @Overwrite
+    public void onUpdate() {
+        super.onUpdate();
+        if (!this.worldObj.isRemote && !this.modified_attribute && this.getHealth() > 0 && ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
+            this.setEntityAttribute(GenericAttributes.maxHealth, this.getMaxHealth() * ( 1.0F + (float) Constant.CalculateCurrentDiff() / 16.0F ));
+            double attack_damage = this.getEntityAttributeValue(GenericAttributes.attackDamage);
+            if(this.getHeldItemStack() != null && this.getHeldItemStack().getItem() instanceof ItemTool){
+                attack_damage -= this.getHeldItemStack().getItemAsTool().getMaterialDamageVsEntity();
+                attack_damage -= this.getHeldItemStack().getItemAsTool().getBaseDamageVsEntity();
+            }
+            this.setEntityAttribute(GenericAttributes.attackDamage, attack_damage * (1.0F + (float) Constant.CalculateCurrentDiff() / 32.0F ));
+            this.setHealth(this.getMaxHealth());
+            this.modified_attribute = true;
+        }
+        if (!this.worldObj.isRemote && this.worldObj.difficultySetting == 0) {
+            this.setDead();
+        }
+
+    }
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setBoolean("modified_attribute", (boolean) this.modified_attribute);
+    }
+
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        this.modified_attribute = par1NBTTagCompound.getBoolean("modified_attribute");
+    }
+
 }

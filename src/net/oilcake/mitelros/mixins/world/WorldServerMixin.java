@@ -20,7 +20,6 @@ public class WorldServerMixin extends World {
     public WorldServerMixin(IDataManager par1ISaveHandler, String par2Str, WorldProvider par3WorldProvider, WorldSettings par4WorldSettings, MethodProfiler par5Profiler, IConsoleLogManager par6ILogAgent, long world_creation_time, long total_world_time) {
         super(par1ISaveHandler, par2Str, par3WorldProvider, par4WorldSettings, par5Profiler, par6ILogAgent, world_creation_time, total_world_time);
     }
-
     @Overwrite
     public Class getSuitableCreature(EnumCreatureType creature_type, int x, int y, int z) {
         boolean check_depth = this.isOverworld();

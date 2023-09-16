@@ -17,7 +17,7 @@ public class ItemMeatMixin extends ItemFood {
             if(!this.is_cooked){
                 Random rand;
                 rand = new Random();
-                if(rand.nextInt(2) == 0){
+                if(rand.nextInt(StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 2) != 0){
                     player.addPotionEffect(new MobEffect(MobEffectList.hunger.id,600,0));
                 }
             }

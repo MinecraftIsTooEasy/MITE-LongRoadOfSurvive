@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.render;
 import net.minecraft.*;
 //import net.oilcake.mitelros.item.potion.Potions;
 import net.oilcake.mitelros.util.Constant;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -326,14 +327,20 @@ public class GuiIngameMixin extends avk {
                 String text = GuiIngame.server_load + "%";
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
-            String t = " 挑战难度: " + Constant.CalculateCurrentDiff() + " ";
+            String t = " §c挑战难度: " + Constant.CalculateCurrentDiff() + "§r ";
             StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ");
+            if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue && Constant.CalculateCurrentDiff() == 25)
+                t = " §4终极难度§r ";
+            if(Constant.CalculateCurrentDiff() < 0){
+                t = " §a休闲难度§r ";
+            }
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.compass)
                 var68.append(pos);
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.pocketSundial)
                 var68.append(time);
             if(Constant.CalculateCurrentDiff()!=0)
                 var68.append(t);
+
             var68.append(Weather);
 //            var68.append(GAinfo);
             var68.append("   FPS=").append(Minecraft.last_fps).append(" (");

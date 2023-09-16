@@ -7,7 +7,9 @@ import net.oilcake.mitelros.item.ItemTotem;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.DamageSourceExtend;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -756,9 +758,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 damage.scaleAmount(1.5F);
             }
             EntityDamageResult result = super.attackEntityFrom(damage);
-            if (result != null) {
+            if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
+                damage.scaleAmount(1.0F + (float) Constant.CalculateCurrentDiff() / 50);
             }
-
             return result;
         }
     }
@@ -847,6 +849,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 }
 
                 str_vs_block *= 1.0F + this.getLevelModifier(EnumLevelBonus.HARVESTING);
+                if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
+                    str_vs_block *= 1.0F - ((float) Constant.CalculateCurrentDiff() / 100);
+                }
 //                if(str_vs_block == 0.0F)
 //                    System.out.println("Warning: strength_vs_block is 0.");
                 return Math.max(str_vs_block, min_str_vs_block);
