@@ -23,6 +23,18 @@ public class EntityRevenantMixin extends EntityZombie {
     }
     private int spawnCounter;
     private int spawnSums;
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        this.spawnSums = par1NBTTagCompound.getByte("num_troops_summoned");
+    }
+
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        if (this.spawnSums > 0) {
+            par1NBTTagCompound.setByte("num_troops_summoned", (byte)this.spawnSums);
+        }
+
+    }
     public void onUpdate()
     {
         super.onUpdate();

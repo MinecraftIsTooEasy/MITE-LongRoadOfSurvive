@@ -54,6 +54,18 @@ public class EntitySpiderKing extends EntityArachnid {
             return result;
         }
     }
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        this.spawnSums = par1NBTTagCompound.getByte("num_troops_summoned");
+    }
+
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        if (this.spawnSums > 0) {
+            par1NBTTagCompound.setByte("num_troops_summoned", (byte)this.spawnSums);
+        }
+
+    }
     private int spawnCounter;
     private int spawnSums;
     private boolean gathering_troops = false;

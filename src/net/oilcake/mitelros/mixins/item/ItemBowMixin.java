@@ -28,6 +28,25 @@ public class ItemBowMixin extends Item{
     @Shadow
     @Mutable
     private static Material[] possible_arrow_materials;
+    @Overwrite
+    public static int getTicksForMaxPull(ItemStack item_stack) {
+        int TicksPull;
+        Material material = item_stack.getMaterialForRepairs();
+        if (material == Materials.tungsten) {
+            TicksPull = 30;
+        } else {
+            if (material == Material.mithril) {
+                TicksPull = 27;
+            } else {
+                if (material == Material.ancient_metal) {
+                    TicksPull = 24;
+                } else {
+                    TicksPull = 20;
+                }
+            }
+        }
+        return (int) ((float) TicksPull * (1.0F - 0.5F * EnchantmentManager.getEnchantmentLevelFraction(Enchantment.quickness, item_stack)));
+    }
 
     @Overwrite
     public boolean onItemRightClick(EntityPlayer player, float partial_tick, boolean ctrl_is_down) {
@@ -69,6 +88,21 @@ public class ItemBowMixin extends Item{
                 player.nocked_arrow = null;
                 if (fraction_pulled == 1.0F) {
                     entity_arrow.setIsCritical(true);
+                }
+
+                Material material = item_stack.getMaterialForRepairs();
+                if (material == Materials.tungsten) {
+                    entity_arrow.setDamage(entity_arrow.getDamage() * 1.15F);
+                } else {
+                    if (material == Material.mithril) {
+                        entity_arrow.setDamage(entity_arrow.getDamage() * 1.1F);
+                    } else {
+                        if (material == Material.ancient_metal) {
+                            entity_arrow.setDamage(entity_arrow.getDamage() * 1.05F);
+                        } else {
+                            entity_arrow.setDamage(entity_arrow.getDamage() * 0.75F);
+                        }
+                    }
                 }
 
                 int power = EnchantmentManager.getEnchantmentLevel(Enchantment.power.effectId, item_stack);

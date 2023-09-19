@@ -329,8 +329,9 @@ public class GuiIngameMixin extends avk {
             }
             String t = " §c挑战难度: " + Constant.CalculateCurrentDiff() + "§r ";
             StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ");
-            if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue && Constant.CalculateCurrentDiff() == 25)
+            if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue && Constant.CalculateCurrentDiff() == 25) {
                 t = " §4终极难度§r ";
+            }
             if(Constant.CalculateCurrentDiff() < 0){
                 t = " §a休闲难度§r ";
             }

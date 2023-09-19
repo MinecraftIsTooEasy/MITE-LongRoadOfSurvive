@@ -30,7 +30,7 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
         if (extended_info) {
             info.add("");
             float protection = this.getProtectionAfterDamageFactor(item_stack, player);
-            int decimal_places = protection < 1.0F ? 2 : 1;
+            int decimal_places = 3;
             info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.protectionBonus", new Object[]{StringHelper.formatFloat(protection, decimal_places, decimal_places)}));
 
             if (item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel) {

@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " R10a ";
+    public static final String VERSION = " R10b ";
     public static final bjo icons_itf = new bjo("textures/gui/icons_mitf.png");
     public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -53,9 +53,9 @@ public class Constant {
     }
     public static int CalculateCurrentDiff(){
         int Diff = 0;
-        if(StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue && !StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) Diff += 2;
+        if(StuckTagConfig.TagConfig.TagFallenInMineLVL1.ConfigValue && !StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagBattleSufferLVL1.ConfigValue && !StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue) Diff += 1;
-        if(StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) Diff += 3;
+        if(StuckTagConfig.TagConfig.TagFallenInMineLVL2.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagBattleSufferLVL2.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagNoWeatherPredict.ConfigValue) Diff += 1;
@@ -65,7 +65,7 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagUnstableConvection.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue) Diff += 1;
-        if(StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue) Diff += 1;
+        if(StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue) Diff += 3;
         if(StuckTagConfig.TagConfig.TagWorshipDark.ConfigValue) Diff += 2;

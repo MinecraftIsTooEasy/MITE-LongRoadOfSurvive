@@ -41,16 +41,16 @@ public class StuckTagConfig {
     public static class TagConfig {
         public static ConfigItem <Boolean> TagHeatStroke = new ConfigItem<>("HeatStroke",false,"(LVL1)酷暑代价：水分自然消耗的速度提升100%");
         public static ConfigItem <Boolean> TagInstinctSurvival = new ConfigItem<>("InstinctSurvival",false,"(LVL1)防御本能：怪物享受护甲防御的比率提升25%，同时取消保底1伤害的设定");
-        public static ConfigItem <Boolean> TagFallenInMineLVL1 = new ConfigItem<>("FallenInMineLVL1",false,"(LVL2)矿难群体：主世界矿洞生成矿工僵尸的概率提升");
+        public static ConfigItem <Boolean> TagFallenInMineLVL1 = new ConfigItem<>("FallenInMineLVL1",false,"(LVL1)矿难群体：主世界矿洞生成僵尸扈从的概率提升");
         public static ConfigItem <Boolean> TagBattleSufferLVL1 = new ConfigItem<>("BattleSufferLVL1",false,"(LVL1)久经沙场：主世界矿洞生成骷髅侍卫的概率提升");
-        public static ConfigItem <Boolean> TagFallenInMineLVL2 = new ConfigItem<>("FallenInMineLVL2",false,"(LVL3)矿难群体：主世界矿洞生成矿工僵尸的概率提升，亡魂的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
+        public static ConfigItem <Boolean> TagFallenInMineLVL2 = new ConfigItem<>("FallenInMineLVL2",false,"(LVL2)矿难群体：主世界矿洞生成僵尸扈从的概率提升，亡魂的生命值提升50%，攻击力提升25%，且召唤僵尸支援");
         public static ConfigItem <Boolean> TagBattleSufferLVL2 = new ConfigItem<>("BattleSufferLVL2",false,"(LVL2)久经沙场：主世界矿洞生成骷髅侍卫的概率提升，骷髅领主的生命值提升50%，攻击力提升40%，召唤的支援获得强化");
         public static ConfigItem <Boolean> TagInvisibleFollower = new ConfigItem<>("InvisibleFollower",false,"(LVL1)无形跟随：更低层数的爬行者将被替换为潜伏爬行者");
         public static ConfigItem <Boolean> TagLegendFreeze = new ConfigItem<>("LegendFreeze",false,"(LVL1)刺骨寒风：寒冷惩罚的积累速度提升200%");
         public static ConfigItem <Boolean> TagUnstableConvection = new ConfigItem<>("UnstableConvection",false,"(LVL1)不稳定对流：闪电的触发频率提升300%");
         public static ConfigItem <Boolean> TagEternalRaining = new ConfigItem<>("EternalRaining",false,"(LVL2)阴雨连绵：雨的最长持续时间提升300%，最短持续时间提升700%");
         public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物的回复含水量的能力（奇数去尾，等于1更改概率）");
-        public static ConfigItem <Boolean> TagDeadgeothermy = new ConfigItem<>("DeadGeothermy",false,"(LVL1)地热失效：地下世界成为寒冷生物群系，更改地下世界基岩生成，同时生成绿宝石");
+        public static ConfigItem <Boolean> TagDeadgeothermy = new ConfigItem<>("DeadGeothermy",false,"(LVL2)地热失效：地下世界成为寒冷生物群系，更改地下世界基岩生成，同时生成绿宝石");
         public static ConfigItem <Boolean> TagHeatStorm = new ConfigItem<>("HeatStorm",false,"(LVL1)灼地烈阳：玩家额外拥有炎热惩罚");
         public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再自然生成可提供肉类的动物");
         public static ConfigItem <Boolean> TagArmament = new ConfigItem<>("Armament",false,"(LVL-2)战备军械：玩家的护甲值在耐久低于25%时才会减少，且不再受到低于自身护甲值的伤害");
@@ -77,8 +77,6 @@ public class StuckTagConfig {
         Tags.put("LegendFreeze",TagConfig.TagLegendFreeze);
         Tags.put("HeatStorm",TagConfig.TagHeatStorm);
         Tags.put("Rejection",TagConfig.TagRejection);
-
-        //临时
         Tags.put("FallenInMineLVL1",TagConfig.TagFallenInMineLVL1);
         Tags.put("BattleSufferLVL1",TagConfig.TagBattleSufferLVL1);
         Tags.put("FallenInMineLVL2",TagConfig.TagFallenInMineLVL2);
