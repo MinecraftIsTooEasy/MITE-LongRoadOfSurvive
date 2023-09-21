@@ -8,6 +8,7 @@ package net.oilcake.mitelros.mixins.world.biome;
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityBoneBodyguard;
 import net.oilcake.mitelros.entity.EntityRetinueZombie;
+import net.oilcake.mitelros.entity.EntityUnknown;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;
@@ -44,7 +45,7 @@ public class BiomeBaseMixin{
         this.spawnableCreatureList.add(new BiomeMeta(EntityPig.class, 5, 4, 6));
         this.spawnableCreatureList.add(new BiomeMeta(EntityChicken.class, 5, 4, 6));
         this.spawnableCreatureList.add(new BiomeMeta(EntityCow.class, 5, 4, 6));
-        this.spawnableCreatureList.add(new BiomeMeta(EntityBoneBodyguard.class, 110, 0, 0));
+        this.spawnableCreatureList.add(new BiomeMeta(EntityUnknown.class, 110, 0, 0));
     }
     public void DisgenAnimals(){
         this.removeEntityFromSpawnableLists(EntityCow.class);

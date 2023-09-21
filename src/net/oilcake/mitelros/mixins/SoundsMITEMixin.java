@@ -20,6 +20,14 @@ public class SoundsMITEMixin {
         this.add("records/imported/connected.ogg");
         this.add("sound/imported/random/totem_use.ogg");
         this.add("sound/imported/meme/brainpower.ogg");
+        this.add("sound/imported/mob/spiderking/hit1.ogg");
+        this.add("sound/imported/mob/spiderking/hit1.ogg");
+        this.add("sound/imported/mob/spiderking/hit1.ogg");
+        this.add("sound/imported/mob/spiderking/hit1.ogg");
+        this.add("sound/imported/mob/spiderking/death.ogg");
+        this.add("sound/imported/mob/spiderking/say1.ogg");
+        this.add("sound/imported/mob/spiderking/say2.ogg");
+        this.add("sound/imported/mob/spiderking/say3.ogg");
     }
     @Shadow
     private boolean add(String path) {

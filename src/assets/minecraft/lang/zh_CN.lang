@@ -34,6 +34,8 @@ achievement.StormStriker.desc=克服绝境并征服MITE-ITF
 achievement.DeathCheater=超越生死
 achievement.DeathCheater.desc=使用图腾来避免死亡
 
+generator.default_1_1=旧巨型生物群系
+
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
 item.armor/nickel_leggings.name=镍护腿

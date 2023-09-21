@@ -10,15 +10,15 @@ public class EntitySpiderKing extends EntityArachnid {
     }
 
     protected String getLivingSound() {
-        return "imported.mob.demonspider.say";
+        return "imported.mob.spiderking.say";
     }
 
     protected String getHurtSound() {
-        return "imported.mob.demonspider.hurt";
+        return "imported.mob.spiderking.hit";
     }
 
     protected String getDeathSound() {
-        return "imported.mob.demonspider.death";
+        return "imported.mob.spiderking.death";
     }
 
     protected float getSoundVolume(String sound) {

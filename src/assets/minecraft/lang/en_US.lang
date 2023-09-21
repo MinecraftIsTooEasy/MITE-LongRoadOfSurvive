@@ -34,6 +34,8 @@ achievement.StormStriker.desc=Beat MITE-ITF.
 achievement.DeathCheater=Postmortal
 achievement.DeathCheater.desc=Use the totem to cheat death.
 
+generator.default_1_1=Large Biomes(Old)
+
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
 item.armor/nickel_leggings.name=Nickel Leggings

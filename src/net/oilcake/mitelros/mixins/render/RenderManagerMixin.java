@@ -35,8 +35,10 @@ public class RenderManagerMixin {
         this.q.put(EntityWandFireball.class, new bgx(Item.fireballCharge));
         this.q.put(EntityWandIceBall.class, new bgx(Item.snowball));
         this.q.put(EntityWandShockWave.class, new bgx(Item.eyeOfEnder));
+        this.q.put(EntityUnknown.class, new RenderUnknown());
         for (bgm o : this.q.values()) {
             o.a(dyCast(bgl.class, this));
         }
     }
+
 }
