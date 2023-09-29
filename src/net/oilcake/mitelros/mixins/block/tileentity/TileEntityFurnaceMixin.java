@@ -9,6 +9,9 @@ import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TileEntityFurnace.class)
 public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventory {
@@ -107,12 +110,8 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                 }
                 this.furnaceBurnTime -= temp;
             } else {
-                if(this.furnaceItemStacks[1] == null){
-                    this.activated = false;
-                }
                 this.heat_level = 0;
             }
-
             if (!this.worldObj.isRemote) {
                 if (this.furnaceBurnTime == 0 && this.canSmelt(this.getFuelHeatLevel()) && (canNormallyWork() || this.canBurnbyItself())) {
                     this.currentItemBurnTime = this.furnaceBurnTime = this.getItemBurnTime(this.furnaceItemStacks[1]);
@@ -130,6 +129,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                 }
 
                 if (this.isBurning() && this.canSmelt(this.heat_level)) {
+                    this.activateFurnace();
                     int temp = 200;
                     int item_id = this.getInputItemStack().itemID;
                     int speed_bonus = 1;
@@ -181,6 +181,9 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
             }
             this.furnaceBurnTime = 0;
             this.furnaceCookTime = 0;
+            if(!this.worldObj.isRemote){
+                this.activated = false;
+            }
         }
 //        if(this.furnaceCookTime == 0){
 //            BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
@@ -253,6 +256,16 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
             }
         }
 
+    }
+    @Inject(method = "readNBT", at = @At("RETURN"))
+    public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
+        //else if (par1NBTTagCompound.hasKey("water")){
+        this.activated = par1NBTTagCompound.getBoolean("activated");
+        //  }
+    }
+    @Inject(method = "writeNBT", at = @At("RETURN"))
+    public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
+        par1NBTTagCompound.setBoolean("activated", this.activated);
     }
 
 

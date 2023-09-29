@@ -19,29 +19,6 @@ public class ItemRockMixin {
     }
     @Overwrite
     public static boolean onItemRightClick(EntityPlayer player, ItemStack item_stack, float partial_tick, boolean ctrl_is_down) {
-        RaycastCollision rc = player.getSelectedObject(partial_tick, false);
-        if(rc!=null){
-            if(rc.isBlock()){
-                if(rc.getBlockHitID()== Blocks.blockEnchantReserver.blockID){
-                    int xp_value = getExperienceValueWhenSacrificed(item_stack);
-                    if (xp_value < 1) {
-                        return false;
-                    } else {
-                        if (player.onServer()) {
-                            player.causeBreakingItemEffect(item_stack.getItem(), player.inventory.currentItem);
-                            player.convertOneOfHeldItem((ItemStack)null);
-                            player.addExperience(xp_value);
-                        } else {
-                            player.bobItem();
-                        }
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-        else {
-            return false;
-        }
+        return false;
     }
 }

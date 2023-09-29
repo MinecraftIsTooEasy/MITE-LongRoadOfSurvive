@@ -121,8 +121,7 @@ public class ItemBucketMixin extends ItemVessel {
                         return false;
                     }
                 }
-
-                if (player.inCreativeMode() || rc.getBlockHitMaterial() != this.getContents() && rc.getNeighborOfBlockHitMaterial() != this.getContents()) {
+                if (player.inCreativeMode() || rc.getBlockHitMaterial() != this.classifyMaterialForm(this.getContents()) && rc.getNeighborOfBlockHitMaterial() != this.classifyMaterialForm(this.getContents())) {
                     if (!rc.getBlockHit().isLiquid() && !rc.isBlockHitReplaceableBy(this.getBlockForContents(), 0)) {
                         x = rc.neighbor_block_x;
                         y = rc.neighbor_block_y;
@@ -223,7 +222,6 @@ public class ItemBucketMixin extends ItemVessel {
                                             }
                                         }
                                     }
-
                                     world.setBlock(x, y, z, this.getBlockForContents().blockID, 0, 3);
                                 }
                             }
@@ -390,6 +388,9 @@ public class ItemBucketMixin extends ItemVessel {
         } else {
             return null;
         }
+    }
+    private Material classifyMaterialForm(Material material){
+        return material.classifyMaterialForm(material);
     }
 
 //    @Overwrite

@@ -4,15 +4,25 @@ import net.minecraft.*;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.block.enchantreserver.GuiEnchantReserver;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.xiaoyu233.fml.util.ReflectHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(bex.class)
-public class EntityPlayerSPMixin {
+public abstract class EntityPlayerSPMixin extends beu{
     @Shadow
     protected Minecraft d;
+    @Shadow
+    public int f;
+
+    public EntityPlayerSPMixin(World par1World, String par2Str) {
+        super(par1World, par2Str);
+    }
     public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
         this.d.a(new GuiEnchantReserver(ReflectHelper.dyCast(this), x, y, z, slots));
     }
@@ -62,6 +72,12 @@ public class EntityPlayerSPMixin {
                     return 0.25F;
                 }
             }
+        }
+    }
+    @Inject(method = "setSprinting(Z)V", at = @At("HEAD"))
+    public void InjectCannotRun(boolean par1, CallbackInfo callbackInfo) {
+        if (this.getHealth() / 5.0F < 1.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+            par1 = false;
         }
     }
 

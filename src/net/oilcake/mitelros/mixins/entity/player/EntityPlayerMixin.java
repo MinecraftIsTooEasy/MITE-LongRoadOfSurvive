@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
 import net.minecraft.*;
+import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.item.ItemTotem;
@@ -38,11 +39,24 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     private int insulin_resistance;
     @Shadow
     public EnumInsulinResistanceLevel insulin_resistance_level;
+    @Shadow
+    private int field_82249_h;
+
     public int getCurrent_insulin_resistance_lvl(){
         if(this.insulin_resistance_level == null)
             return 0;
         else{
             return insulin_resistance_level.ordinal() + 1;
+        }
+    }
+    @Overwrite
+    protected void jump() {
+        if(!(this.getHealth() <= 5.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue)){
+            super.jump();
+            this.addStat(StatisticList.jumpStat, 1);
+            if (this.getAsPlayer() instanceof ClientPlayer) {
+                this.getAsPlayer().getAsEntityClientPlayerMP().sendPacket((new Packet85SimpleSignal(EnumSignal.increment_stat_for_this_world_only)).setInteger(StatisticList.jumpStat.statId));
+            }
         }
     }
     @Overwrite
@@ -415,6 +429,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             if(this.drunk_duration > 0){
                 drunk_duration--;
             }
+            if(this.getHealth() < 5.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+                this.vision_dimming = Math.max(this.vision_dimming,(1.0F - this.getHealthFraction()));
+            }
         }
         //成就奖励
         if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup &&Feast_trigger_salmon_soup &&Feast_trigger_beetroot_soup &&!rewarded_disc_damnation){
@@ -537,58 +554,59 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         return biome.getFloatTemperature();
     }
 
+    @Overwrite
+    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {
+        suppress_healing = true;
+        if (amount < 0) {
+            if (!suppress_sound) {
+                this.worldObj.playSoundAtEntity(this, "imported.random.level_drain");
+            }
+        } else if (amount > 0) {
+            this.addScore(amount);
+            if (!suppress_sound) {
+                this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
+            }
+        }
 
-//    @Overwrite
-//    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {
-//        suppress_healing = true;
-//        if (amount < 0) {
-//            if (!suppress_sound) {
-//                this.worldObj.playSoundAtEntity(this, "imported.random.level_drain");
-//            }
-//        } else if (amount > 0) {
-//            this.addScore(amount);
-//            if (!suppress_sound) {
-//                this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
-//            }
+        float health_limit_before = this.getHealthLimit();
+        int level_before = this.getExperienceLevel();
+        this.experience += amount;
+        if (this.experience < getExperienceRequired(-40)) {
+            this.experience = getExperienceRequired(-40);
+        }
+
+        int level_after = this.getExperienceLevel();
+        int level_change = level_after - level_before;
+        if (level_change < 0) {
+            this.setHealth(this.getHealth());
+            this.foodStats.setSatiation(this.foodStats.getSatiation(), true);
+            this.foodStats.setNutrition(this.foodStats.getNutrition(), true);
+            this.addWater(0);
+        } else if (level_change > 0) {
+            if (this.getHealthLimit() > health_limit_before && (float)this.field_82249_h < (float)this.ticksExisted - 100.0F) {
+                float volume = level_after > 30 ? 1.0F : (float)level_after / 30.0F;
+                if (!suppress_sound) {
+                    this.worldObj.playSoundAtEntity(this, "random.levelup", volume * 0.75F, 1.0F);
+                }
+
+                this.field_82249_h = this.ticksExisted;
+            }
+
+            if (!suppress_healing) {
+                this.setHealth(this.getHealth() + this.getHealthLimit() - health_limit_before);
+            }
+        }
+
+        if (level_change != 0 && !this.worldObj.isRemote) {
+            MinecraftServer.a(MinecraftServer.F()).sendPlayerInfoToAllPlayers(true);
+        }
+
+//        if (this.getAsPlayer() instanceof ServerPlayer && DedicatedServer.tournament_type == EnumTournamentType.score) {
+//            DedicatedServer.getOrCreateTournamentStanding(this.getAsPlayer()).experience = this.experience;
+//            DedicatedServer.updateTournamentScoreOnClient(this.getAsPlayer(), true);
 //        }
-//
-//        float health_limit_before = this.getHealthLimit();
-//        int level_before = this.getExperienceLevel();
-//        this.experience += amount;
-//        if (this.experience < getExperienceRequired(-40)) {
-//            this.experience = getExperienceRequired(-40);
-//        }
-//
-//        int level_after = this.getExperienceLevel();
-//        int level_change = level_after - level_before;
-//        if (level_change < 0) {
-//            this.setHealth(this.getHealth());
-//            this.foodStats.setSatiation(this.foodStats.getSatiation(), true);
-//            this.foodStats.setNutrition(this.foodStats.getNutrition(), true);
-//        } else if (level_change > 0) {
-//            if (this.getHealthLimit() > health_limit_before && (float)this.field_82249_h < (float)this.ticksExisted - 100.0F) {
-//                float volume = level_after > 30 ? 1.0F : (float)level_after / 30.0F;
-//                if (!suppress_sound) {
-//                    this.worldObj.playSoundAtEntity(this, "random.levelup", volume * 0.75F, 1.0F);
-//                }
-//
-//                this.field_82249_h = this.ticksExisted;
-//            }
-//
-//            if (!suppress_healing) {
-//                this.setHealth(this.getHealth() + this.getHealthLimit() - health_limit_before);
-//            }
-//        }
-//
-//        if (level_change != 0 && !this.worldObj.isRemote) {
-//            MinecraftServer.a(MinecraftServer.F()).sendPlayerInfoToAllPlayers(true);
-//        }
-//
-//        if (entityPlayer instanceof ServerPlayer && DedicatedServer.tournament_type == EnumTournamentType.score) {
-//            DedicatedServer.getOrCreateTournamentStanding(entityPlayer).experience = this.experience;
-//            DedicatedServer.updateTournamentScoreOnClient(entityPlayer, true);
-//        }
-//    }
+
+    }
     public FoodMetaData getFoodStats(){
     return foodStats;
 }
@@ -852,6 +870,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
                     str_vs_block *= 1.0F - ((float) Constant.CalculateCurrentDiff() / 100);
                 }
+                str_vs_block *= Math.min((float) Math.pow(this.getHealth() , 2) / 25.0F, 1.0F);
 //                if(str_vs_block == 0.0F)
 //                    System.out.println("Warning: strength_vs_block is 0.");
                 return Math.max(str_vs_block, min_str_vs_block);
@@ -996,6 +1015,15 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     @Shadow protected abstract void fall(float par1);
 
     @Shadow public abstract void playSound(String par1Str, float par2, float par3);
+    @Shadow public void addScore(int par1){}
+    @Shadow
+    public final int getExperienceLevel() {
+        return 0;
+    }
+    @Shadow
+    public float getHealthLimit() {return 0;}
+    @Shadow
+    protected static final int getExperienceRequired(int level) {return 0;}
 
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;

@@ -43,6 +43,7 @@ public class ExperimentalConfig {
         public static ConfigItem <Boolean> TagSpawningV2 = new ConfigItem<>("SpawningV2",true,"新怪物生成频率");
         public static ConfigItem <Boolean> TagBenchingV2 = new ConfigItem<>("BenchingV2",false,"工作站废料回收");
         public static ConfigItem <Boolean> FinalChallenge = new ConfigItem<>("FinalChallenge",false,"终极挑战模式");
+        public static ConfigItem <Boolean> Realistic = new ConfigItem<>("Realistic",false,"真实状态模拟");
         //*这个有问题*//
 
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
@@ -55,6 +56,7 @@ public class ExperimentalConfig {
         Tags.put("SpawningV2",TagConfig.TagSpawningV2);
         Tags.put("BenchingV2",TagConfig.TagBenchingV2);
         Tags.put("FinalChallenge",TagConfig.FinalChallenge);
+        Tags.put("Realistic", TagConfig.Realistic);
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 
 

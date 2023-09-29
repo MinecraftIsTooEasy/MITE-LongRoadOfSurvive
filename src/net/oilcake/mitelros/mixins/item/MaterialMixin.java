@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.Material;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -32,5 +33,11 @@ public class MaterialMixin {
 
     public String getName() {
         return this.name;
+    }
+    public Material classifyMaterialForm(Material material){
+        if(material == Material.water || material == Materials.unsafe_water || material == Materials.dangerous_water){
+            return Material.water;
+        }
+        return material;
     }
 }

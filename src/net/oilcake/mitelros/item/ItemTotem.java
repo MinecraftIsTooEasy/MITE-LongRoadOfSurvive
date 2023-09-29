@@ -35,11 +35,12 @@ public class ItemTotem extends Item {
             }
             player.addPotionEffect((new MobEffect(MobEffectList.resistance.id, 400, (int) ((1.0F - player.getHealthFraction()) * 4))));
         } else if(totem_material == Materials.tungsten){
-            player.setHealth(player.getMaxHealth() / 2.0F,true,player.getHealFX());
+            float delta = player.getHealthFraction() - 0.5F;
             for (int i = 0; i<8;i++){
                 player.entityFX(EnumEntityFX.smoke);
             }
-            player.worldObj.createExplosion(player, player.posX, player.posY + 1.5, player.posZ, 0.0F, 4.0F, true);
+            player.worldObj.createExplosion(player, player.posX, player.posY + 1.5, player.posZ, 0.0F, (4.0F - 4.0F * delta), true);
+            player.setHealth(player.getMaxHealth() / 2.0F,true,player.getHealFX());
         } else {
             Minecraft.setErrorMessage("effectSpecified(): Undefined Material "+totem_material.toString()+".");
         }
