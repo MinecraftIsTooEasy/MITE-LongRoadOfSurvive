@@ -51,12 +51,55 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     @Overwrite
     protected void jump() {
-        if(!(this.getHealth() <= 5.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue)){
+        if(!((this.getHealth() <= 5.0F || !this.hasFoodEnergy()) && ExperimentalConfig.TagConfig.Realistic.ConfigValue)){
             super.jump();
             this.addStat(StatisticList.jumpStat, 1);
             if (this.getAsPlayer() instanceof ClientPlayer) {
                 this.getAsPlayer().getAsEntityClientPlayerMP().sendPacket((new Packet85SimpleSignal(EnumSignal.increment_stat_for_this_world_only)).setInteger(StatisticList.jumpStat.statId));
             }
+        }
+    }
+    @Override
+    public boolean isOnLadder()
+    {
+        if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+            int x = MathHelper.floor_double(this.posX);
+            int y = MathHelper.floor_double(this.boundingBox.minY);
+            int z = MathHelper.floor_double(this.posZ);
+            int var0 = this.worldObj.getBlockId(x, y, z);
+            if(var0 == Block.ladder.blockID || var0 == Block.vine.blockID){
+                return true;
+            }
+            float yaw = this.rotationYaw % 360F;
+            if(yaw < -45F){
+                yaw += 360F;
+            }
+            int towards = (int) ((yaw + 45.0F) % 360F) / 90;
+            switch (towards){
+                case 0:
+                    z += 1;
+                    break;
+                case 1:
+                    x -= 1;
+                    break;
+                case 2:
+                    z -= 1;
+                    break;
+                case 3:
+                    x += 1;
+                    break;
+                default:
+                    Minecraft.setErrorMessage("isOnLadder: Undefined Facing : " + towards + ".");
+            }
+            Block var1 = this.worldObj.getBlock(x, y, z);
+            Block var2 = this.worldObj.getBlock(x, y + 1, z);
+            return this.fallDistance == 0F && var1 != null && var1.isSolid(0) && var2 == null || (var2 != null && !var2.isSolid(0));
+        }else{
+            int var1 = MathHelper.floor_double(this.posX);
+            int var2 = MathHelper.floor_double(this.boundingBox.minY);
+            int var3 = MathHelper.floor_double(this.posZ);
+            int var4 = this.worldObj.getBlockId(var1, var2, var3);
+            return var4 == Block.ladder.blockID || var4 == Block.vine.blockID;
         }
     }
     @Overwrite

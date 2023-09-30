@@ -92,10 +92,10 @@ public class StuckTagConfig {
         Tags.put("MiracleDisaster",TagConfig.TagMiracleDisaster);
         Tags.put("Pseudovision",TagConfig.TagPseudovision);
         Tags.put("UnderAlliance",TagConfig.TagUnderAlliance);
-        Tags.put("Digest",TagConfig.TagDigest);
         //删除
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 //      Tags.put("Acousma",TagConfig.TagAcousma);
+//      Tags.put("Digest",TagConfig.TagDigest);
 
 
         String filePth = "StuckChallenge.cfg";

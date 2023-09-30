@@ -78,6 +78,7 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagArmament.ConfigValue) Diff -= 2;
         if(StuckTagConfig.TagConfig.TagDistortion.ConfigValue) Diff -= 2;
         if(StuckTagConfig.TagConfig.TagDigest.ConfigValue) Diff -= 1;
+
         return Diff;
     }
 }
