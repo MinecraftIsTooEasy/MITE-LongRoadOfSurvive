@@ -4,7 +4,7 @@
 不要尝试滥用spreadplayers指令以免造成坏档等严重后果
 编码一定要选择GB18030或GBK 切勿选择UTF-8或GB2313
 ---
-## MITE is too false R11
+## MITE is too false R11a
 * 我不保证客户端和服务端在不统一实验性玩法时的具体呈现情况相同
 ### 杂项
 * 添加实验性玩法“真实体验”，默认关闭
