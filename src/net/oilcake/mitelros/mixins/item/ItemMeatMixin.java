@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,7 +18,7 @@ public class ItemMeatMixin extends ItemFood {
             if(!this.is_cooked){
                 Random rand;
                 rand = new Random();
-                if(rand.nextInt(StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 2) != 0){
+                if(rand.nextInt(!ExperimentalConfig.TagConfig.Realistic.ConfigValue ? 1 : 2) != 0){
                     player.addPotionEffect(new MobEffect(MobEffectList.hunger.id,600,0));
                 }
             }

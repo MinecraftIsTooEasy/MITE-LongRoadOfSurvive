@@ -13,7 +13,7 @@ public class RenderLichShadow extends bgu {
 
     @Override
     protected void setTextures() {
-        this.setTexture(0, "textures/entity/skeleton/longdead_guardian");
+        this.setTexture(0, "textures/entity/skeleton/lich_shadow");
     }
     protected bjo a(EntityInsentient par1EntityLiving) {
         return this.textures[0];

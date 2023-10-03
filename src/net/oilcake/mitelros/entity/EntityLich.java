@@ -6,7 +6,7 @@ import net.oilcake.mitelros.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntityLich extends EntitySkeleton implements IBossbarEntity {
+public class EntityLich extends EntityBoneLord implements IBossbarEntity {
     private PathfinderGoalAvoidPlayer aiAvoidPlayerStrategic = new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 6.0F, 1.1, 1.4);
     private PathfinderGoalAvoidPlayer aiAvoidPlayerPanic = new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 32.0F, 1.3, 1.5);
     private PathfinderGoalMeleeAttack aiAttackOnCollide = new PathfinderGoalMeleeAttack(this, EntityPlayer.class, 1.2, false);
@@ -67,7 +67,7 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
                     this.worldObj.spawnParticle(EnumParticle.witchMagic, this.posX + (this.rand.nextDouble() - 0.5) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height, this.posZ + (this.rand.nextDouble() - 0.5) * (double) this.width, 0.0, 0.0, 0.0);
                     this.getTarget().attackEntityFrom(new Damage(DamageSource.divine_lightning, 5));
                 }
-                EntityLongdeadGuardian guardian = new EntityLongdeadGuardian(worldObj);
+                EntityLichShadow guardian = new EntityLichShadow(worldObj);
                 guardian.setPosition(posX + this.rand.nextInt(8) - this.rand.nextInt(8), posY, posZ - this.rand.nextInt(8) + this.rand.nextInt(8));
                 guardian.refreshDespawnCounter(-9600);
                 worldObj.spawnEntityInWorld(guardian);
@@ -276,5 +276,9 @@ public class EntityLich extends EntitySkeleton implements IBossbarEntity {
         if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
             this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 0), 0.0F);
         }
+    }
+    @Override
+    public Class getTroopClass() {
+        return EntityLichShadow.class;
     }
 }

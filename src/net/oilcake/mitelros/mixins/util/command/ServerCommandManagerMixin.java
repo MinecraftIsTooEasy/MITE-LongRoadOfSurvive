@@ -22,5 +22,6 @@ public class ServerCommandManagerMixin extends CommandHandler {
         this.registerCommand(new CommandCurrentSituation());
         this.registerCommand(new CommandAddCurrentSituation());
         this.registerCommand(new CommandTPA());
+        this.registerCommand(new CommandHunger());
     }
 }

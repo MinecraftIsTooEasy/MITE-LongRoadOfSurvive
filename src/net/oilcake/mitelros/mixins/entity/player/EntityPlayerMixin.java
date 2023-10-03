@@ -758,7 +758,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     wearing_leather = true;
                 }
 
-                if (material != Material.copper && material != Material.silver && material != Material.gold && material != Material.iron && material != Material.mithril && material != Material.adamantium && material != Material.ancient_metal && material != Materials.tungsten && material != Materials.nickel) {
+                if (material != Material.copper && material != Material.silver && material != Material.gold && material != Material.iron && material != Material.mithril && material != Material.adamantium && material != Material.ancient_metal && material != Materials.tungsten && material != Materials.nickel && material != Materials.ancient_metal_sacred && material != Materials.uru) {
                     wearing_full_suit_plate = false;
                 }
 

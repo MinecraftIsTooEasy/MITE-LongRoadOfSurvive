@@ -24,6 +24,8 @@ public class GuiCreateWorldMixin extends awe {
     private boolean u;
     private boolean v;
     private boolean w;
+    private String E;
+    private String F;
     private aut x;
     private aut y;
     private aut z;
@@ -77,9 +79,6 @@ public class GuiCreateWorldMixin extends awe {
     }
     @Shadow
     private void g() {
-    }
-    @Shadow
-    private void h() {
     }
     @Overwrite
     protected void a(aut par1GuiButton) {
@@ -190,6 +189,25 @@ public class GuiCreateWorldMixin extends awe {
             }
         }
 
+    }
+    @Overwrite
+    private void h() {
+        this.x.f = bkb.a("selectWorld.gameMode") + " " + bkb.a("selectWorld.gameMode." + this.p);
+        this.E = bkb.a("selectWorld.gameMode." + this.p + ".line1");
+        this.F = bkb.a("selectWorld.gameMode." + this.p + ".line2");
+        this.z.f = bkb.a("selectWorld.mapFeatures") + " ";
+        if (this.q) {
+            this.z.f = this.z.f + bkb.a("options.on");
+        } else {
+            this.z.f = this.z.f + bkb.a("options.off");
+        }
+
+        this.A.f = bkb.a("selectWorld.bonusItems") + " ";
+        this.A.f = this.A.f + (this.t ? bkb.a("options.on") : bkb.a("options.off"));
+        this.B.f = bkb.a("selectWorld.mapType") + " " + bkb.a(WorldType.worldTypes[this.I].b());
+        this.C.f = bkb.a("selectWorld.allowCommands") + " ";
+        this.C.f = this.C.f + bkb.a("options.off");
+        this.button_skills.f = bkb.a("selectWorld.professions") + " " + bkb.a(this.are_skills_enabled ? "options.enabled" : "options.disabled");
     }
     @Shadow
     private void i() {

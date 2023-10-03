@@ -2,6 +2,9 @@ package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class EntitySpiderKing extends EntityArachnid {
     private final int num_webs;
     public EntitySpiderKing(World par1World) {
@@ -69,11 +72,26 @@ public class EntitySpiderKing extends EntityArachnid {
     private int spawnCounter;
     private int spawnSums;
     private boolean gathering_troops = false;
-    public void onUpdate()
+    public void onLivingUpdate()
     {
-        super.onUpdate();
+        super.onLivingUpdate();
         if (!getWorld().isRemote)
         {
+            List nearby_spiders = this.worldObj.getEntitiesWithinAABB(EntityArachnid.class, this.boundingBox.expand(16.0D, 8.0D, 16.0D));
+            Iterator i = nearby_spiders.iterator();
+            if(this.getTicksExistedWithOffset() % 100 == 0){
+                while (i.hasNext()){
+                    EntityArachnid spiders = (EntityArachnid) i.next();
+                    if(spiders != this){
+                        spiders.setFrenzied_counter(200);
+                        if(spiders.getHealthFraction() < 1.0F){
+                            spiders.healByPercentage(0.2F);
+                            spiders.entityFX(EnumEntityFX.repair);
+                        }
+                    }
+                }
+            }
+
             if(this.getTarget()!=null){
                 if(!this.isNoDespawnRequired() && this.getTarget() != null){
                     this.gathering_troops = true;
@@ -94,6 +112,18 @@ public class EntitySpiderKing extends EntityArachnid {
                         spawnSums++;
                     }
                 }
+        }
+    }
+    @Override
+    public void onDeathUpdate(){
+        super.onDeathUpdate();
+        if (this.deathTime == 20) {
+            EntityPotion potion = new EntityPotion(this.worldObj,this,16388);
+            potion.setPosition(this.posX,this.posY - 1,this.posZ);
+            this.worldObj.spawnEntityInWorld(potion);
+            potion = new EntityPotion(this.worldObj,this,16426);
+            potion.setPosition(this.posX,this.posY - 1,this.posZ);
+            this.worldObj.spawnEntityInWorld(potion);
         }
     }
     public int getExperienceValue() {

@@ -96,10 +96,13 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
         this.activated = true;
     }
     private boolean canNormallyWork(){
-        return activated && this.furnaceItemStacks[1] != null;
+        return this.activated && this.furnaceItemStacks[1] != null;
     }
     @Overwrite
     public void updateEntity() {
+        if (!this.worldObj.isRemote && !this.isBurning() && this.activated && this.furnaceItemStacks[1] == null){
+            this.activated = false;
+        }
         if (this.worldObj.isRemote || this.furnaceBurnTime == 1 || !this.isFlooded() && !this.isSmotheredBySolidBlock()) {
             boolean var1 = this.furnaceBurnTime > 0;
             boolean var2 = false;
@@ -181,9 +184,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
             }
             this.furnaceBurnTime = 0;
             this.furnaceCookTime = 0;
-            if(!this.worldObj.isRemote){
-                this.activated = false;
-            }
+            this.activated = false;
         }
 //        if(this.furnaceCookTime == 0){
 //            BlockFurnace.updateFurnaceBlockState(this.furnaceBurnTime > 0, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
