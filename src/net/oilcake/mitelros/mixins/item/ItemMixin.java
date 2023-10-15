@@ -147,6 +147,8 @@ public class ItemMixin{
         }
     }
     @Shadow
+    private List crafting_products_this_is_component_of;
+    @Shadow
     protected Item setPotionEffect(String par1Str) {
         return item;
     }

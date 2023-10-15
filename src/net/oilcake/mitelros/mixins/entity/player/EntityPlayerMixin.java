@@ -35,6 +35,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //    public float getWaterLimit() {
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //
+    public boolean isNewPlayer = true;
     @Shadow
     private int insulin_resistance;
     @Shadow
@@ -51,7 +52,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     @Overwrite
     protected void jump() {
-        if(!((this.getHealth() <= 5.0F || !this.hasFoodEnergy()) && ExperimentalConfig.TagConfig.Realistic.ConfigValue)){
+        if(!((this.getHealth() <= 5.0F || this.capabilities.getWalkSpeed() < 0.05F || !this.hasFoodEnergy()) && ExperimentalConfig.TagConfig.Realistic.ConfigValue)){
             super.jump();
             this.addStat(StatisticList.jumpStat, 1);
             if (this.getAsPlayer() instanceof ClientPlayer) {
@@ -339,7 +340,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
         if (entityDamageResult != null && (double)this.getHealthFraction() <= 0.1D && !entityDamageResult.entityWasDestroyed()) {
             ItemStack var5 = this.getHeldItemStack();
-            if (var5 != null && var5.getItem() == Items.totemoffecund) {
+            if (var5 != null && var5.getItem() instanceof ItemTotem) {
                 entityDamageResult.setEntity_was_destroyed(false);
                 this.activeNegativeUndying();
                 this.setHeldItemStack(null);
@@ -402,6 +403,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
+            if(Minecraft.inDevMode() && this.vision_dimming > 0.1F && this.isPlayerInCreative()){
+                this.vision_dimming = 0.1F;
+            }
             //站定喝水
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
             if(this.getBlockAtFeet()!= null && this.getBlockAtFeet().blockMaterial == Material.water && this.isSneaking()){
@@ -686,6 +690,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
     @Overwrite
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        this.isNewPlayer = par1NBTTagCompound.getBoolean("isNewPlayer");
         this.FreezingCooldown = par1NBTTagCompound.getInteger("FreezingCooldown");
         this.FreezingWarning = par1NBTTagCompound.getInteger("FreezingWarning");
         this.drunk_duration = par1NBTTagCompound.getInteger("DrunkDuration");
@@ -721,6 +726,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     @Overwrite
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        par1NBTTagCompound.setBoolean("isNewPlayer", this.isNewPlayer);
         par1NBTTagCompound.setInteger("FreezingCooldown",this.FreezingCooldown);
         par1NBTTagCompound.setInteger("FreezingWarning",this.FreezingWarning);
         par1NBTTagCompound.setInteger("DrunkDuration",this.drunk_duration);
@@ -794,15 +800,49 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         }
 
     }
+    public float getNickelArmorCoverage()
+    {
+        float coverage = 0.0F;
+        ItemStack[] worn_items = this.getWornItems();
 
+        for (int i = 0; i < worn_items.length; ++i)
+        {
+            ItemStack item_stack = worn_items[i];
+
+            if (item_stack != null)
+            {
+                if (item_stack.isArmor())
+                {
+                    ItemArmor barding = item_stack.getItem().getAsArmor();
+
+                    if (barding.getArmorMaterial() == Materials.nickel)
+                    {
+                        coverage += barding.getCoverage() * barding.getDamageFactor(item_stack, this);
+                    }
+                }
+                else if (item_stack.getItem() instanceof ItemHorseArmor)
+                {
+                    ItemHorseArmor var6 = (ItemHorseArmor)item_stack.getItem();
+
+                    if (var6.getArmorMaterial() == Materials.nickel)
+                    {
+                        coverage += var6.getCoverage();
+                    }
+                }
+            }
+        }
+
+        return coverage;
+    }
     @Overwrite
     public EntityDamageResult attackEntityFrom(Damage damage) {
-        if(this.getHelmet()!= null && this.getHelmet().itemID == Items.nickelHelmet.itemID &&
-            this.getCuirass()!= null && this.getCuirass().itemID == Items.nickelChestplate.itemID &&
-                this.getLeggings()!= null && this.getLeggings().itemID == Items.nickelLeggings.itemID &&
-                    this.getBoots()!= null && this.getBoots().itemID == Items.nickelBoots.itemID &&
-                        damage.getResponsibleEntityC() instanceof EntityGelatinousCube ){
-            return null;
+        float nickel_coverage = MathHelper.clamp_float(this.getNickelArmorCoverage(),0.0F,1.0F);
+        if(damage.getResponsibleEntityC() instanceof EntityGelatinousCube){
+            System.out.println("nickel_coverage = " + nickel_coverage);
+            if(nickel_coverage >= 0.999F){
+                return null;
+            }
+            damage.scaleAmount(1.0F - nickel_coverage);
         }
         if (this.ticksExisted < 1000 && Damage.wasCausedByPlayer(damage) && this.isWithinTournamentSafeZone()) {
             return null;
@@ -813,15 +853,15 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 this.wakeUpPlayer(true, damage.getResponsibleEntityC());
             }
             if (damage.isExplosion()) {
-                if(damage.getResponsibleEntityC() instanceof EntityPlayer){
+                if(damage.getResponsibleEntityC() == this){
                     return null;
                 }
                 damage.scaleAmount(1.5F);
             }
-            EntityDamageResult result = super.attackEntityFrom(damage);
             if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
                 damage.scaleAmount(1.0F + (float) Constant.CalculateCurrentDiff() / 50);
             }
+            EntityDamageResult result = super.attackEntityFrom(damage);
             return result;
         }
     }

@@ -16,11 +16,11 @@ public class EntityShadowMixin extends EntityMonster{
         super(par1World);
     }
     private boolean cursed_player = false;
-    @Overwrite
-    public boolean isImmuneTo(DamageSource damage_source) {
-        boolean temp = !damage_source.hasSilverAspect() && !damage_source.hasMagicAspect() && !damage_source.isSunlight();
-        return damage_source.getItemAttackedWith() != null ? temp && !(damage_source.getItemAttackedWith().getMaterialForRepairs() == Materials.nickel) : temp;
-    }
+//    @Overwrite
+//    public boolean isImmuneTo(DamageSource damage_source) {
+//        boolean temp = !damage_source.hasSilverAspect() && !damage_source.hasMagicAspect() && !damage_source.isSunlight();
+//        return damage_source.getItemAttackedWith() != null ? temp && !(damage_source.getItemAttackedWith().getMaterialForRepairs() == Materials.nickel) : temp;
+//    }
     @Overwrite
     public GroupDataEntity onSpawnWithEgg(GroupDataEntity par1EntityLivingData) {
         this.setCanPickUpLoot(true);

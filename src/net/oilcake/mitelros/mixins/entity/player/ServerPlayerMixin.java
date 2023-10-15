@@ -20,6 +20,17 @@ import java.util.*;
 
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin extends EntityPlayer implements ICrafting {
+    public boolean isNewPlayer = true;
+    @Inject(method = "readNBT", at = @At("RETURN"))
+    public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
+        //else if (par1NBTTagCompound.hasKey("water")){
+        this.isNewPlayer = par1NBTTagCompound.getBoolean("isNewPlayer");
+        //  }
+    }
+    @Inject(method = "writeNBT", at = @At("RETURN"))
+    public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
+        par1NBTTagCompound.setBoolean("isNewPlayer", this.isNewPlayer);
+    }
     private int last_water = -99999999;
     private int last_FreezingCooldown = -99999999;
     private int last_phytonutrients;

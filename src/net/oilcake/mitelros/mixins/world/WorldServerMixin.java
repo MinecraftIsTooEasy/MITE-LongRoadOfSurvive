@@ -176,7 +176,7 @@ public class WorldServerMixin extends World {
 
         return null;
     }
-
+    @Overwrite
     protected void tickBlocksAndAmbiance() {
         super.tickBlocksAndAmbiance();
         int var1 = 0;

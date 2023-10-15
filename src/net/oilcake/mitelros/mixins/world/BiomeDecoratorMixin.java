@@ -61,11 +61,11 @@ public class BiomeDecoratorMixin{
             this.genMinable(20, this.goldGen, true);
             this.genMinable(60, this.ironGen, true);
             this.genMinable(10, this.mithrilGen, true);
-            this.genMinable(5, this.adamantiteGen);
+            this.genMinable(5, this.adamantiteGen, true);
             this.genMinable(10, this.redstoneGen);
             this.genMinable(5, this.diamondGen);
             this.genMinable(5, this.lapisGen);
-            this.genMinable(5, tungstenGen, true);
+            this.genMinable(10, tungstenGen, true);
             this.genMinable(30, nickelGen, true);
             if (this.currentWorld.underworld_y_offset != 0) {
                 this.genMinable(50, this.silverfishGen);

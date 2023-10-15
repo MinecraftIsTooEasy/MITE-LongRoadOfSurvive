@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.mixins.util;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.ItemGuideBook;
+import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.util.Constant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,7 +25,18 @@ public class DedicatedServerMixin {
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(EnumChatFormat.AQUA)));
         player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
-        player.vision_dimming += 1.25F;
+        if(!Minecraft.inDevMode()){
+            player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
+            player.vision_dimming = 1.25F;
+        }
+        if(player.isNewPlayer){
+            ItemStack guide = new ItemStack(Items.guide);
+            guide.setTagCompound(ItemGuideBook.generateBookContents());
+            player.vision_dimming = 3.75F;
+            player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,180,0)));
+            player.inventory.addItemStackToInventoryOrDropIt(guide);
+            player.isNewPlayer = false;
+        }
     }
     @Shadow
     public void updatePlayersFile() {
