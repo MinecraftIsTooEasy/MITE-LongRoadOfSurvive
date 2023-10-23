@@ -34,7 +34,15 @@ achievement.StormStriker.desc=Beat MITE-ITF.
 achievement.DeathCheater=Postmortal
 achievement.DeathCheater.desc=Use the totem to cheat death.
 
+curse.fearOfDarkness.name=Fear of Darkness
+curse.fearOfDarkness.desc=The darkness keeps you from moving.
+curse.fearOfLight.name=Fear of Light
+curse.fearOfLight.desc=You can only feel your way in the light.
+
 generator.default_1_1=Large Biomes(Old)
+
+item.tooltip.water.add=Water+%d
+item.tooltip.water.minus=Water%d
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate

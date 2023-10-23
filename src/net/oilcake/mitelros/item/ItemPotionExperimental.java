@@ -10,10 +10,10 @@ public class ItemPotionExperimental extends Item{
             this.setMaxStackSize(1);
             this.setCraftingDifficultyAsComponent(25.0F);
             this.setCreativeTab(CreativeModeTab.tabMisc);
+            this.setWater(3);
         }
 
         public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
-            player.addWater(3);
             double rand = Math.random();
             if (player.onServer()) {
                 if(rand<0.25){

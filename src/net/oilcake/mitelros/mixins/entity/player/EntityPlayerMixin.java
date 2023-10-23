@@ -8,10 +8,7 @@ import net.oilcake.mitelros.item.ItemTotem;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
-import net.oilcake.mitelros.util.Constant;
-import net.oilcake.mitelros.util.DamageSourceExtend;
-import net.oilcake.mitelros.util.ExperimentalConfig;
-import net.oilcake.mitelros.util.StuckTagConfig;
+import net.oilcake.mitelros.util.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -63,7 +60,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     @Override
     public boolean isOnLadder()
     {
-        if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+        if(ExperimentalConfig.TagConfig.Realistic.ConfigValue && (this.getHealth() <= 5.0F || this.capabilities.getWalkSpeed() < 0.05F || !this.hasFoodEnergy())){
             int x = MathHelper.floor_double(this.posX);
             int y = MathHelper.floor_double(this.boundingBox.minY);
             int z = MathHelper.floor_double(this.posZ);
@@ -403,6 +400,16 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
+            if(this.hasCurse(CurseExtend.fear_of_light)) {
+                float light_modifier = (18 - this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ))) / 15.0F;
+                if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_light,true)){
+                }
+            }
+            if(this.hasCurse(CurseExtend.fear_of_darkness)) {
+                float light_modifier = (this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ)) + 3) / 15.0F;
+                if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_darkness,true)){
+                }
+            }
             if(Minecraft.inDevMode() && this.vision_dimming > 0.1F && this.isPlayerInCreative()){
                 this.vision_dimming = 0.1F;
             }
@@ -953,7 +960,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue){
                     str_vs_block *= 1.0F - ((float) Constant.CalculateCurrentDiff() / 100);
                 }
-                str_vs_block *= Math.min((float) Math.pow(this.getHealth() , 2) / 25.0F, 1.0F);
+                if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+                    str_vs_block *= Math.min((float) Math.pow(this.getHealth() , 2) / 25.0F, 1.0F);
+                }
 //                if(str_vs_block == 0.0F)
 //                    System.out.println("Warning: strength_vs_block is 0.");
                 return Math.max(str_vs_block, min_str_vs_block);
@@ -1086,6 +1095,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     @Shadow
     private boolean spawnForced;
     @Shadow
+    public boolean is_cursed;
+    @Shadow
     public float vision_dimming;
     @Shadow protected float speedOnGround;
 
@@ -1107,6 +1118,12 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     public float getHealthLimit() {return 0;}
     @Shadow
     protected static final int getExperienceRequired(int level) {return 0;}
+    @Shadow
+    public void learnCurseEffect() {}
+    @Shadow
+    public boolean hasCurse(Curse curse) {
+        return this.hasCurse(curse, false);
+    }
 
     //try to trigger Achievement - Feast
     public boolean Feast_trigger_salad = false;

@@ -34,7 +34,15 @@ achievement.StormStriker.desc=克服绝境并征服MITE-ITF
 achievement.DeathCheater=超越生死
 achievement.DeathCheater.desc=使用图腾来避免死亡
 
+curse.fearOfDarkness.name=黑暗恐惧
+curse.fearOfDarkness.desc=你在黑暗中只能摸索前进
+curse.fearOfLight.name=光照恐惧
+curse.fearOfLight.desc=光照让你行动不便
+
 generator.default_1_1=旧巨型生物群系
+
+item.tooltip.water.add=水分+%d
+item.tooltip.water.minus=水分%d
 
 item.armor/nickel_helmet.name=镍头盔
 item.armor/nickel_chestplate.name=镍胸甲
@@ -277,9 +285,9 @@ item.pulque.name=普利克酒
 item.ale.name=麦芽酒
 item.forging_note.name=锻造笔记
 item.totem/totem_of_fecund.name=丰饶图腾
-item.totem/totem_of_knowledge.name=博识图腾
+item.totem/totem_of_knowledge.name=智识图腾
 item.totem/totem_of_destroy.name=毁灭图腾
-item.totem/totem_of_preserve.name=永恒图腾
+item.totem/totem_of_preserve.name=存护图腾
 item.wither_branch.name=凋零残叶
 
 item.ignition/wood.name=引火器

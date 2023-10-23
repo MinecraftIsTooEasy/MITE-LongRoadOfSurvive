@@ -16,6 +16,7 @@ public class ItemGoldenAppleMixin extends ItemFood {
 //    }
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
+        this.setWater(-3);
         this.setPotionEffect("+0+1+2-3+13&4-4");
     }
     @Overwrite
@@ -36,9 +37,6 @@ public class ItemGoldenAppleMixin extends ItemFood {
 
     }
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
-        if (player.onServer()) {
-            player.getFoodStats().addWater(-8);
-        }
         super.onItemUseFinish(item_stack, world, player);
     }
 

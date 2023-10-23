@@ -11,6 +11,7 @@ public class ItemGoldenAppleLegend extends ItemFood{
         super(id, Material.fruit, satiation, nutrition, 1000, false, false, true, texture);
         this.addMaterial(Material.gold);
         this.setPlantProduct();
+        this.setWater(-8);
     }
     public boolean e(ItemStack par1ItemStack) {
         return par1ItemStack.getItemSubtype() > 0;
@@ -57,10 +58,6 @@ public class ItemGoldenAppleLegend extends ItemFood{
 
     }
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
-        if (player.onServer()) {
-            player.getFoodStats().addWater(-8);
-        }
-
         super.onItemUseFinish(item_stack, world, player);
     }
 }

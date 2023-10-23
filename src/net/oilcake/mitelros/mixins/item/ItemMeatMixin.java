@@ -6,11 +6,18 @@ import net.oilcake.mitelros.util.ExperimentalConfig;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
 @Mixin(ItemMeat.class)
 public class ItemMeatMixin extends ItemFood {
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void injectInit(CallbackInfo callbackInfo){
+        this.setWater(-1);
+    }
     @Shadow public boolean is_cooked;
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {

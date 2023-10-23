@@ -8,10 +8,10 @@ public class ItemPotionSuspicious extends Item{
         this.setMaxStackSize(1);
         this.setCraftingDifficultyAsComponent(25.0F);
         this.setCreativeTab(CreativeModeTab.tabMisc);
+        this.setWater(1);
     }
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
-        player.addWater(1);
         double rand = Math.random();
         if (player.onServer()) {
             if(rand>0.9){

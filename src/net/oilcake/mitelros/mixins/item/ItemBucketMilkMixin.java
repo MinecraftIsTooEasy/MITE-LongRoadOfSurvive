@@ -4,22 +4,18 @@ import org.spongepowered.asm.mixin.Mixin;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(yi.class)
 public class ItemBucketMilkMixin extends ItemVessel{
+    @Inject(method = "<init>", at = @At("RETURN"))
+    private void injectInit(CallbackInfo callbackInfo){
+        this.setWater(8);
+    }
     public ItemBucketMilkMixin(int id, Material vessel_material, Material contents_material, int standard_volume, int max_stack_size_empty, int max_stack_size_full, String texture) {
         super(id, vessel_material, contents_material, standard_volume, max_stack_size_empty, max_stack_size_full, texture);
-    }
-
-    @Overwrite
-    public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
-        if (player.onServer()) {
-            player.clearActivePotions();
-            player.getFoodStats().addFoodValue(this);
-            player.addWater(8);
-        }
-
-        super.onItemUseFinish(item_stack, world, player);
     }
 
     @Shadow

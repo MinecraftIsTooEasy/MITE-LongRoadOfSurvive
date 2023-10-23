@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
+import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.entity.EntitySpiderKing;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.util.StuckTagConfig;
@@ -194,8 +195,17 @@ public abstract class EntitySkeletonMixin extends EntityMonster implements IRang
     @Shadow
     protected void addRandomEquipment() {
     }
-    @Shadow
+    @Overwrite
     public void addRandomWeapon() {
+        if (this.getSkeletonType() == 2 && this.rand.nextInt(20) == 0) {
+            int day_of_world = this.worldObj.getDayOfWorld();
+            if (day_of_world >= 10) {
+                this.setCurrentItemOrArmor(0, (new ItemStack(day_of_world >= 20 && !this.rand.nextBoolean() ? Item.swordRustedIron : Item.daggerRustedIron)).randomizeForMob(this, false));
+                return;
+            }
+        }
+
+        this.setCurrentItemOrArmor(0, (new ItemStack((Item)(this.getSkeletonType() == 2 ? Item.clubWood : Item.bow))).randomizeForMob(this, true));
     }
     @Shadow
     public int getSkeletonType() {
