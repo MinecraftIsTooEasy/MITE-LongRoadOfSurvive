@@ -33,11 +33,17 @@ achievement.StormStriker=Storm Striker
 achievement.StormStriker.desc=Beat MITE-ITF.
 achievement.DeathCheater=Postmortal
 achievement.DeathCheater.desc=Use the totem to cheat death.
+achievement.Pull=Oh s**t!
+achievement.Pull.desc=Disgusting...
 
 curse.fearOfDarkness.name=Fear of Darkness
 curse.fearOfDarkness.desc=The darkness keeps you from moving.
 curse.fearOfLight.name=Fear of Light
 curse.fearOfLight.desc=You can only feel your way in the light.
+
+potion.extend.freeze=Freeze
+potion.extend.dehydration=Dehydration
+potion.extend.thirsty=Thirsty
 
 generator.default_1_1=Large Biomes(Old)
 
@@ -284,10 +290,11 @@ item.food/beetroot_seeds.name=Beetroot seeds
 item.pulque.name=Pulque
 item.ale.name=Ale
 item.forging_note.name=Forging Note
-item.totem/totem_of_fecund.name=Totem of Fecund
-item.totem/totem_of_knowledge.name=Totem of Knowledge
-item.totem/totem_of_destroy.name=Totem of Destroying
+item.totem/totem_of_fecund.name=Totem of Abundance
+item.totem/totem_of_knowledge.name=Totem of Erudition
+item.totem/totem_of_destroy.name=Totem of Destruction
 item.totem/totem_of_preserve.name=Totem of Preservation
+item.totem/totem_of_hunting.name=Totem of The Hunt
 item.wither_branch.name=Wither Branch
 
 item.ignition/wood.name=Ignition
@@ -342,6 +349,7 @@ entity.EntityBoneBodyguard.name=Skeleton Bodyguard
 entity.EntityGhost.name=Ghost
 entity.EntityEvil.name=Evil
 entity.EntitySkeletonHorse.name=Skeleton Horse
+entity.EntityUndeadGuard.name=Undead Guard
 
 death.extend.attack.thirsty=Dried Up
 death.extend.attack.freeze=Freezed Fully

@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.item.food;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,7 +34,7 @@ public class ItemFoodMixin extends Item {
             }else if(material == Material.cheese || id == 88){
                 return (-1);
             }else if(material == (Material.bread) || material == (Material.desert)){
-                return (-2);
+                return (-1);
             }else if(material == (Materials.agave)){
                 return (1);
             }else{
@@ -48,6 +49,9 @@ public class ItemFoodMixin extends Item {
         if (player.onServer()) {
             if(this.itemID==rottenFlesh.itemID){
                 player.addPotionEffect((new MobEffect(MobEffectList.confusion.id, 600, 0)));
+            }
+            if(this.hasMaterial(Material.bread) || this.hasMaterial(Material.desert)){
+                player.addPotionEffect((new MobEffect(PotionExtend.thirsty.id, 1280, 0)));
             }
             if(this.hasMaterial(Materials.glowberries)){
                 Random rand = new Random();

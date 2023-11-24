@@ -18,6 +18,7 @@ import java.io.File;
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
     public aul u;
+    public float ReportedGamma;
 
     @Overwrite
     public static String getVersionDescriptor(boolean include_formatting) {
@@ -25,5 +26,13 @@ public class MinecraftMixin {
         return "1.6.4-MITE" + " is too false" + (Main.is_MITE_DS ? "-DS" : "")  + (Minecraft
                 .inDevMode() ? red + " DEV" : "");
     }
+//    @Inject(method = "S()V", at = @At(value = "RETURN"))
+//    public void ResetGammaTail(CallbackInfo callbackInfo){
+//        this.u.ak = this.ReportedGamma;
+//    }
+//    @Inject(method = "S()V", at = @At(value = "HEAD"))
+//    public void ResetGammaHead(CallbackInfo callbackInfo){
+//        this.ReportedGamma = this.u.ak;
+//    }
 
 }

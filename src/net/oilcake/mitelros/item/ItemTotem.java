@@ -2,6 +2,7 @@ package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
+import net.oilcake.mitelros.entity.EntityUndeadGuard;
 
 public class ItemTotem extends Item {
     public ItemTotem(int id, Material material, String texture) {
@@ -34,6 +35,13 @@ public class ItemTotem extends Item {
                 player.entityFX(EnumEntityFX.smoke_and_steam);
             }
             player.addPotionEffect((new MobEffect(MobEffectList.resistance.id, 400, (int) ((1.0F - player.getHealthFraction()) * 4))));
+        } else if(totem_material == Materials.nickel){
+            for(int i = 0;i < 8;i++){
+                player.entityFX(EnumEntityFX.summoned);
+            }
+            player.setHunt_counter(400);
+            player.hunt_cap = true;
+            player.addPotionEffect((new MobEffect(MobEffectList.damageBoost.id, 400, (int) ((1.0F - player.getHealthFraction()) * 2))));
         } else if(totem_material == Materials.tungsten){
             float delta = player.getHealthFraction() - 0.5F;
             for (int i = 0; i<8;i++){

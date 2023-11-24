@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.render;
 
 import net.minecraft.*;
 //import net.oilcake.mitelros.item.potion.Potions;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.lwjgl.opengl.GL11;
@@ -181,7 +182,7 @@ public class GuiIngameMixin extends avk {
                 var28 = var13;
                 var25 = 16;
                 byte var36 = 0;
-                if (this.g.h.isPotionActive(MobEffectList.hunger)) {
+                if (this.g.h.isPotionActive(MobEffectList.hunger) || this.g.h.isPotionActive(PotionExtend.dehydration)) {
                     var25 += 36;
                     var36 = 13;
                 }

@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.item.food;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,7 +47,7 @@ public class ItemBowlMixin extends ItemVessel {
                 player.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
             }
             if (this.contains(Materials.unsafe_water)) {
-                player.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 600, 0));
+                player.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 300, 0));
             }
             if (this.contains(Material.milk)) {
                 player.clearActivePotions();

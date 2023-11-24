@@ -22,7 +22,7 @@ public abstract class EntityInsentientMixin extends EntityLiving {
     public EntityInsentientMixin(World par1World) {
         super(par1World);
     }
-
+    @Overwrite
     public boolean isTargetWithinStrikingDistance(EntityLiving target) {
         if (!this.isAIEnabled()) {
             Minecraft.setErrorMessage("isTargetWithinStrikingDistance: doesn't handle old AI mobs yet");

@@ -33,11 +33,17 @@ achievement.StormStriker=不畏苦暗
 achievement.StormStriker.desc=克服绝境并征服MITE-ITF
 achievement.DeathCheater=超越生死
 achievement.DeathCheater.desc=使用图腾来避免死亡
+achievement.Pull=一泻千里
+achievement.Pull.desc=连汤带水！酣畅淋漓！
 
 curse.fearOfDarkness.name=黑暗恐惧
 curse.fearOfDarkness.desc=你在黑暗中只能摸索前进
 curse.fearOfLight.name=光照恐惧
 curse.fearOfLight.desc=光照让你行动不便
+
+potion.extend.freeze=霜冻
+potion.extend.dehydration=腹泻
+potion.extend.thirsty=干渴
 
 generator.default_1_1=旧巨型生物群系
 
@@ -288,6 +294,7 @@ item.totem/totem_of_fecund.name=丰饶图腾
 item.totem/totem_of_knowledge.name=智识图腾
 item.totem/totem_of_destroy.name=毁灭图腾
 item.totem/totem_of_preserve.name=存护图腾
+item.totem/totem_of_hunting.name=巡猎图腾
 item.wither_branch.name=凋零残叶
 
 item.ignition/wood.name=引火器
@@ -342,6 +349,7 @@ entity.EntityBoneBodyguard.name=骷髅侍卫
 entity.EntityGhost.name=怨灵
 entity.EntityEvil.name=恶灵
 entity.EntitySkeletonHorse.name=骷髅马
+entity.EntityUndeadGuard.name=亡灵守卫
 
 death.extend.attack.thirsty=干枯了
 death.extend.attack.freeze=冻死了

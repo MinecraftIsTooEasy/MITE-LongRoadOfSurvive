@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 
 public class ItemPotionSuspicious extends Item{
     public ItemPotionSuspicious(int id) {
@@ -18,7 +19,7 @@ public class ItemPotionSuspicious extends Item{
                 player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 400, 0)));
             }
             if(rand > 0.05){
-                player.addPotionEffect((new MobEffect(MobEffectList.hunger.id, 600, 0)));
+                player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, 300, 0)));
             }
             if(rand == 0){
                 player.getFoodStats().addNutrition(1);

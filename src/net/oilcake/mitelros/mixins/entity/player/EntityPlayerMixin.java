@@ -8,6 +8,7 @@ import net.oilcake.mitelros.item.ItemTotem;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.*;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,6 +40,14 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     public EnumInsulinResistanceLevel insulin_resistance_level;
     @Shadow
     private int field_82249_h;
+    private int hunt_counter = 0;
+    public int getHunt_counter(){
+        return this.hunt_counter;
+    }
+    public void setHunt_counter(int counter){
+        this.hunt_counter = counter;
+    }
+    public boolean hunt_cap = false;
 
     public int getCurrent_insulin_resistance_lvl(){
         if(this.insulin_resistance_level == null)
@@ -327,6 +336,10 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 result.setEntity_was_destroyed(false);
                 ((ItemTotem) var5.getItem()).performNegativeEffect(this.getAsPlayer());
             }
+            if (hunt_counter > 0){
+                result.setEntity_was_destroyed(false);
+                this.setHealth(1);
+            }
         }
     }
     @Redirect(method = "attackEntityFrom",
@@ -347,6 +360,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     private int HeatResistance;
     private int FreezingCooldown;
+    private int diarrheaCounter;
     private int FreezingWarning;
     private int reduce_weight;
     public float BodyTemperature = 37.2F;
@@ -400,6 +414,20 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
+            //拉屎！？
+            if(this.isPotionActive(PotionExtend.dehydration) && this.diarrheaCounter <= 1200){
+                ++this.diarrheaCounter;
+            }else {
+                if(this.diarrheaCounter > 0){
+                    --this.diarrheaCounter;
+                }
+            }
+            if(this.diarrheaCounter >= 1200){
+                this.dropItem(Item.manure);
+                this.triggerAchievement(AchievementExtend.pull);
+                this.diarrheaCounter = 0;
+            }
+            //拓展诅咒
             if(this.hasCurse(CurseExtend.fear_of_light)) {
                 float light_modifier = (18 - this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ))) / 15.0F;
                 if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_light,true)){
@@ -410,8 +438,15 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_darkness,true)){
                 }
             }
+            //巡猎图腾效果
+            if(this.hunt_counter > (this.hunt_cap ? -1 : 0)){
+                this.hunt_counter--;
+            }
+            if(this.hunt_counter < 0){
+                this.attackEntityFrom(new Damage(DamageSource.absolute, 10000.0F));
+            }
             if(Minecraft.inDevMode() && this.vision_dimming > 0.1F && this.isPlayerInCreative()){
-                this.vision_dimming = 0.1F;
+                this.vision_dimming = 0.05F;
             }
             //站定喝水
             BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
@@ -429,11 +464,17 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.getFoodStats().addWater(2);
                 } else{
                     this.getFoodStats().addWater(1);
-                    this.addPotionEffect(new MobEffect(MobEffectList.hunger.id, 600, 0));
+                    this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 300, 0));
                 }
             }
             //水分自然扣减
             dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 2.0D : 1.0D) + (double) biome.getFloatTemperature();
+            if(this.isPotionActive(PotionExtend.dehydration)){
+                dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.dehydration).getAmplifier() + 1) * 20D);
+            }
+            if(this.isPotionActive(PotionExtend.thirsty)){
+                dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.thirsty).getAmplifier() + 1) * 10D);
+            }
             if(dry_resist > 12800.0D) {
                 this.getFoodStats().addWater(-1);
                 dry_resist = 0;
@@ -457,8 +498,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                         this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 4.0F));
                         FreezingWarning = 0;
                     }
-                    this.addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
-                    this.addPotionEffect(new MobEffect(MobEffectList.digSlowdown.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
+                    this.addPotionEffect(new MobEffect(PotionExtend.freeze.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
                 }
             }
             //炎热惩罚
@@ -697,6 +737,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
     @Overwrite
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+        this.diarrheaCounter = par1NBTTagCompound.getInteger("diarrheaCounter");
+        this.hunt_cap = par1NBTTagCompound.getBoolean("UsedTotemOfHunt");
+        this.hunt_counter = par1NBTTagCompound.getInteger("TotemDyingCounter");
         this.isNewPlayer = par1NBTTagCompound.getBoolean("isNewPlayer");
         this.FreezingCooldown = par1NBTTagCompound.getInteger("FreezingCooldown");
         this.FreezingWarning = par1NBTTagCompound.getInteger("FreezingWarning");
@@ -733,6 +776,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     @Overwrite
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+        par1NBTTagCompound.setInteger("diarrheaCounter",this.diarrheaCounter);
+        par1NBTTagCompound.setBoolean("UsedTotemOfHunt", this.hunt_cap);
+        par1NBTTagCompound.setInteger("TotemDyingCounter", this.hunt_counter);
         par1NBTTagCompound.setBoolean("isNewPlayer", this.isNewPlayer);
         par1NBTTagCompound.setInteger("FreezingCooldown",this.FreezingCooldown);
         par1NBTTagCompound.setInteger("FreezingWarning",this.FreezingWarning);
@@ -942,6 +988,10 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
                 if (this.isPotionActive(MobEffectList.digSlowdown)) {
                     str_vs_block *= 1.0F - (float)(this.getActivePotionEffect(MobEffectList.digSlowdown).getAmplifier() + 1) * 0.2F;
+                }
+
+                if (this.isPotionActive(PotionExtend.freeze)) {
+                    str_vs_block *= 1.0F - (float)(this.getActivePotionEffect(PotionExtend.freeze).getAmplifier() + 1) * 0.5F;
                 }
 
                 if (this.isInsideOfMaterial(Material.water) && !EnchantmentManager.getAquaAffinityModifier(this)) {

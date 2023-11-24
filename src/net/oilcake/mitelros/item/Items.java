@@ -224,6 +224,7 @@ public class Items extends Item {
     public static final ItemIgnition ignitionWood = new ItemIgnition(Constant.getNextItemID(),Material.wood);
     public static final ItemBrewingMisc wither_branch = new ItemBrewingMisc(Constant.getNextItemID(),Material.wood,"wither_wood").setPotionEffectExtend("+0-1+2+3+13&4-4");
     public static final ItemGuideBook guide = new ItemGuideBook(Constant.getNextItemID());
+    public static final Item totemofhunting = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Materials.nickel,"totem")).setMaxStackSize(1);
 
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
@@ -429,6 +430,7 @@ public class Items extends Item {
         register("totem/totem_of_destroy",totemofdestroy);
         register("totem/totem_of_knowledge",totemofknowledge);
         register("totem/totem_of_preserve",totemofpreserve);
+        register("totem/totem_of_hunting",totemofhunting);
         register("ignition/wood",ignitionWood);
         register("ignition/copper",ignitionCopper);
         register("ignition/silver",ignitionSilver);
