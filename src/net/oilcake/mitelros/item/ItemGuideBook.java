@@ -49,7 +49,7 @@ public class ItemGuideBook extends ItemWrittenBook {
         pages.appendTag(new NBTTagString("30", "* 钉锤 *\n对护甲和骷髅强化的武器，在攻击目标时额外无视目标3点护甲且对骷髅拥有100%的增伤，类似战锤"));
         pages.appendTag(new NBTTagString("31", "* 陶瓦碗 *\n单个黏土可以合成黏土碗并在熔炉中4个为一个单位烧制成陶瓦碗，拥有碗类相同的功效并可以烧水；\n\n木碗无法烧水！"));
         pages.appendTag(new NBTTagString("32", "* 图腾 *\n移植自高版本的不死图腾，每种图腾都拥有不同的效果，但是需要手持才能生效(在受到死亡攻击时消失并产生效果)！"));
-        pages.appendTag(new NBTTagString("33", "* 配置文件 *\n详见「StuckTagConfig.cfg」和「Experimental.cfg」，按照正常流程更改其中的配置可以让玩家体验到更加不一样的MITE-ITF。"));
+        pages.appendTag(new NBTTagString("33", "* 配置文件 *\n详见「StuckChallenge.cfg」和「ExperimentalOption.cfg」，按照正常流程更改其中的配置可以让玩家体验到更加不一样的MITE-ITF。"));
         pages.appendTag(new NBTTagString("34", "更多改动详见更新日志！ 链接：https://docs.qq.com/doc/p/6556873ce3bc40e32e1b61a0d05e8dc461792230"));
         nbt.setString("flavor_text", "Try to survive in distorted MITE World.");
         return nbt;

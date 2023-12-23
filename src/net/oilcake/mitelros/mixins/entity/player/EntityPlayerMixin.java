@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
+import net.oilcake.mitelros.entity.EntityUndeadGuard;
 import net.oilcake.mitelros.item.ItemTotem;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
@@ -441,6 +442,14 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             //巡猎图腾效果
             if(this.hunt_counter > (this.hunt_cap ? -1 : 0)){
                 this.hunt_counter--;
+            }
+            if(this.hunt_counter % 80 == 79){
+                EntityUndeadGuard Belongings = new EntityUndeadGuard(this.worldObj);
+                Belongings.setPosition(this.posX, this.posY, this.posZ);
+                Belongings.refreshDespawnCounter(-9600);
+                this.worldObj.spawnEntityInWorld(Belongings);
+                Belongings.onSpawnWithEgg(null);
+                Belongings.entityFX(EnumEntityFX.summoned);
             }
             if(this.hunt_counter < 0){
                 this.attackEntityFrom(new Damage(DamageSource.absolute, 10000.0F));
