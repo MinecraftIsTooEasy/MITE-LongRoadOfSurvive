@@ -44,7 +44,10 @@ public class SlotResultMixin extends Slot {
         if (block == Block.beacon){
             this.thePlayer.addStat(AchievementExtend.getBeacon,1);
         }
-        if (item == Items.mashedCactus || item == Items.glowberries || item == Items.Agave){
+        if (item == Items.mashedCactus){
+            this.thePlayer.addStat(AchievementList.seeds,1);
+        }
+        if (item == Items.glowberries || item == Items.Agave){
             this.thePlayer.addStat(AchievementExtend.mashedCactus,1);
         }
         if (item == Items.Pulque || item == Items.Ale){

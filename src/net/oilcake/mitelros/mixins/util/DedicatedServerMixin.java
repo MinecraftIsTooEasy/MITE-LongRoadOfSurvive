@@ -24,9 +24,7 @@ public class DedicatedServerMixin {
                 .appendComponent(ChatMessage.createFromTranslationKey("若有bug请在群聊内反馈……").setColor(EnumChatFormat.AQUA)));
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(EnumChatFormat.AQUA)));
-        player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
         if(!Minecraft.inDevMode()){
-            player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
             player.vision_dimming = 1.25F;
         }
 //        if(player.isNewPlayer){

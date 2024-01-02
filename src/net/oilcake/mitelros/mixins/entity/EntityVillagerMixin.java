@@ -106,6 +106,9 @@ public class EntityVillagerMixin extends EntityAgeable implements IMerchant, NPC
                 if (this.rand.nextFloat() < this.adjustProbability(0.1F)) {
                     var2.add(new MerchantRecipe(new ItemStack(Item.emerald.itemID, 7 + rand.nextInt(3)), new ItemStack(Items.totemoffecund.itemID, 1, 0)));
                 }
+                if (this.rand.nextFloat() < this.adjustProbability(0.1F)) {
+                    var2.add(new MerchantRecipe(new ItemStack(Item.emerald.itemID, 7 + rand.nextInt(3)), new ItemStack(Items.totemofhunting.itemID, 1, 0)));
+                }
                 int[] var3 = new int[]{Items.nickelSword.itemID, Items.nickelPickaxe.itemID, Item.swordIron.itemID, Item.pickaxeIron.itemID};
                 int[] var4 = var3;
                 int var5 = var3.length;

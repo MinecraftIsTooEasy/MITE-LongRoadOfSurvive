@@ -96,14 +96,11 @@ public class ITFEvent {
         player.sendChatToPlayer(ChatMessage.createFromTranslationKey("[Server]")
                 .appendComponent(ChatMessage.createFromTranslationKey("当前难度：" + Constant.CalculateCurrentDiff()).setColor(Constant.CalculateCurrentDiff() >= 16 ? EnumChatFormat.DARK_RED : Constant.CalculateCurrentDiff() >= 12 ? EnumChatFormat.RED : Constant.CalculateCurrentDiff() >= 8 ? EnumChatFormat.YELLOW: Constant.CalculateCurrentDiff() >= 4 ? EnumChatFormat.GREEN : Constant.CalculateCurrentDiff() > 0 ? EnumChatFormat.AQUA : EnumChatFormat.BLUE)));
         if(!Minecraft.inDevMode()){
-            player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,60,0)));
             player.vision_dimming = 1.25F;
         }
         if(player.isNewPlayer){
             ItemStack guide = new ItemStack(Items.guide);
             guide.setTagCompound(ItemGuideBook.generateBookContents());
-            player.vision_dimming = 3.75F;
-            player.addPotionEffect(new MobEffect(new MobEffect(MobEffectList.blindness.id,180,0)));
             player.inventory.addItemStackToInventoryOrDropIt(guide);
             player.isNewPlayer = false;
         }

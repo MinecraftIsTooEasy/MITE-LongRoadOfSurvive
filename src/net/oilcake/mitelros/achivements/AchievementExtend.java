@@ -35,7 +35,7 @@ public class AchievementExtend {
         Arbalistic = (new Achievement(getNextAchievementID(), "BuildTungstenBow", -4, 9, Items.bowTungsten, AchievementList.mithrilIngot)).registerAchievement();
         getWitherSkull = (new Achievement(getNextAchievementID(), "getWitherSkull", 4, 11, new ItemStack(Block.skull, 1, 1), AchievementList.portalToNether)).registerAchievement();
         getBeacon = (new Achievement(getNextAchievementID(), "getBeacon", 6, 11, Block.beacon, AchievementExtend.getWitherSkull)).setSpecial().registerAchievement();
-        mashedCactus = (new Achievement(getNextAchievementID(), "mashedCactus", -3, -3, Items.mashedCactus, AchievementList.seeds)).registerAchievement();
+        mashedCactus = (new Achievement(getNextAchievementID(), "mashedCactus", -3, -3, Items.glowberries, AchievementList.seeds)).registerAchievement();
         hypothermia = (new Achievement(getNextAchievementID(),"Hypothermia",-4,2, Block.ice,AchievementList.openInventory)).registerAchievement();
         feast = (new Achievement(getNextAchievementID(),"Feast",1,-3, Item.bowlBeefStew,AchievementList.fineDining)).setSpecial().registerAchievement();
         SoundofUnder = (new Achievement(getNextAchievementID(),"SoundofUnder",6,13,Item.recordUnderworld,AchievementList.portal)).setSpecial().registerAchievement();
