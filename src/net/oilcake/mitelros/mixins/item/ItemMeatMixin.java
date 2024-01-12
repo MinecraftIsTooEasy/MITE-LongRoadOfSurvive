@@ -24,10 +24,10 @@ public class ItemMeatMixin extends ItemFood {
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
             Random rand = new Random();;
-            int outcome = rand.nextInt(!ExperimentalConfig.TagConfig.Realistic.ConfigValue ? 2 : 4);
+            int outcome = rand.nextInt(!ExperimentalConfig.TagConfig.Realistic.ConfigValue ? 1 : 4);
             if(!this.is_cooked){
-                if(outcome == 0){
-                    player.addPotionEffect(new MobEffect(PotionExtend.dehydration.id,600,0));
+                if(outcome == (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 4 : 0)){
+                    player.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, (int) (640 * (1 + rand.nextDouble())),0));
                 }
             }else {
                 player.addPotionEffect(new MobEffect(PotionExtend.thirsty.id,1280,0));

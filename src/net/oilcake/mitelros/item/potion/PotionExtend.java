@@ -23,6 +23,10 @@ public class PotionExtend extends MobEffectList{
     public String getName() {
         return this.name;
     }
+    @Override
+    public int getId() {
+        return this.id;
+    }
 
 //    public static void registerPoints(){
 //        PotionExtend.registerPoints(dehydration);
@@ -66,13 +70,22 @@ public class PotionExtend extends MobEffectList{
         this.name = par1Str;
         return this;
     }
+    @Override
     public void performEffect(EntityLiving par1EntityLivingBase, int par2) {
         if (!par1EntityLivingBase.onClient()) {
             if (this.id == dehydration.id && par1EntityLivingBase instanceof EntityPlayer) {
                 if (!par1EntityLivingBase.worldObj.isRemote) {
-                    ((EntityPlayer)par1EntityLivingBase).addHungerServerSide(0.05F * (float)(par2 + 1));
+                    ((EntityPlayer)par1EntityLivingBase).getFoodStats().addHungerServerSide(0.05F * (float)(par2 + 1));
                 }
             }
+        }
+    }
+    @Override
+    public int getEffectInterval(int amplifier) {
+        if(this.id == dehydration.id){
+            return 1;
+        }else {
+            return -1;
         }
     }
 }

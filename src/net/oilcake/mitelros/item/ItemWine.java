@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class ItemWine extends Item{
         this.setMaxStackSize(1);
         this.setCraftingDifficultyAsComponent(512.0F);
         this.setCreativeTab(CreativeModeTab.tabMisc);
+        this.setWater(2);
     }
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
@@ -17,6 +19,8 @@ public class ItemWine extends Item{
             player.addFreezingCooldown(-6000);
             player.Hasdrunked = true;
             player.addPotionEffect((new MobEffect(MobEffectList.confusion.id, 400, 0)));
+            player.addPotionEffect((new MobEffect(PotionExtend.thirsty.id,2560,0)));
+            player.addWater(this.getWater());
         }
         super.onItemUseFinish(item_stack, world, player);
     }

@@ -26,11 +26,11 @@ public class ItemPotionMixin extends Item {
             List effects = this.getEffects(item_stack);
             if (effects != null) {
                 Iterator i = effects.iterator();
-
                 while(i.hasNext()) {
                     player.addPotionEffect(new MobEffect((MobEffect)i.next()));
                 }
             }
+            player.addWater(this.getWater());
         }
         super.onItemUseFinish(item_stack, world, player);
     }

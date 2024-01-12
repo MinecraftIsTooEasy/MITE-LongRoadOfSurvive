@@ -473,7 +473,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.getFoodStats().addWater(2);
                 } else{
                     this.getFoodStats().addWater(1);
-                    this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 300, 0));
+                    this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 320, 0));
                 }
             }
             //水分自然扣减

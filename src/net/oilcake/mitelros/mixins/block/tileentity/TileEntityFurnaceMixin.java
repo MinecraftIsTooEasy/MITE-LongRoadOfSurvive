@@ -127,6 +127,9 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                                 Item var3 = this.furnaceItemStacks[1].getItem().getContainerItem();
                                 this.furnaceItemStacks[1] = var3 != null ? new ItemStack(var3) : null;
                             }
+                            if (this.isBlastFurnace()){
+                                this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.melting");
+                            }
                         }
                     }
                 }

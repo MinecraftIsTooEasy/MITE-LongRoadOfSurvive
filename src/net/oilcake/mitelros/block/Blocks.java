@@ -20,15 +20,15 @@ public class Blocks extends Block {
             .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep);
 
     public static final Block blastFurnaceStoneBurning = new BlockBlastFurnace(177, Material.stone, true)
-            .setBlockHardness(4.8F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
+            .setBlockHardness(4.8F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep).setBlockLightLevel(0.875F);
     public static final Block blastFurnaceObsidianBurning = new BlockBlastFurnace(178, Material.obsidian, true)
-            .setBlockHardness(38.4F).setExplosionResistance(40.0f).setStepSound_(Block.soundStoneFootstep);
+            .setBlockHardness(38.4F).setExplosionResistance(40.0f).setStepSound_(Block.soundStoneFootstep).setBlockLightLevel(0.875F);
     public static final Block blastFurnaceNetherrackBurning = new BlockBlastFurnace(179, Material.netherrack, true)
-            .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep);
+            .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep).setBlockLightLevel(0.875F);
     public static final Block blockSmokerIdle = new BlockSmoker(180, false)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockSmokerBurning = new BlockSmoker(181, true)
-            .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
+            .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep).setBlockLightLevel(0.875F);
     public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, 182, Materials.nickel);
     public static final Block blockEnchantReserver = new BlockEnchantReserver(183)
             .setBlockHardness(8.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);

@@ -28,6 +28,7 @@ public class ItemPotionExperimental extends Item{
                 if(rand>0.9){
                     player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 400, 0)));
                 }
+                player.addWater(this.getWater());
             }
             super.onItemUseFinish(item_stack, world, player);
         }

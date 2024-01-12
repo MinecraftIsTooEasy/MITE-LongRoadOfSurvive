@@ -28,6 +28,7 @@ public class SoundsMITEMixin {
         this.add("sound/imported/mob/spiderking/say1.ogg");
         this.add("sound/imported/mob/spiderking/say2.ogg");
         this.add("sound/imported/mob/spiderking/say3.ogg");
+        this.add("sound/imported/random/melting.ogg");
     }
     @Shadow
     private boolean add(String path) {

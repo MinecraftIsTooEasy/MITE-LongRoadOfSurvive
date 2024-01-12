@@ -60,7 +60,7 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagPseudovision = new ConfigItem<>("Pseudovision",false,"(LVL1)幻视暗示：黑色食尸鬼在成功索敌玩家后会给予玩家一次视觉黑暗效果");
         public static ConfigItem <Boolean> TagRejection = new ConfigItem<>("Rejection",false,"(LVL2)世界排异：玩家始终获得一种女巫诅咒，尝试消除诅咒将随机改变诅咒类型");
         public static ConfigItem <Boolean> TagUnderAlliance = new ConfigItem<>("UnderAlliance", false, "(LVL1)蛰骨联盟：出现更多种类的骷髅骑士");
-        public static ConfigItem <Boolean> TagDigest = new ConfigItem<>("Digest", false, "(LVL-1)原生代谢：玩家食用生肉获得debuff的概率降低100%");
+        public static ConfigItem <Boolean> TagDigest = new ConfigItem<>("Digest", false, "(LVL-2)原生代谢：玩家食用生肉/饮用水获得概率性debuff的概率降低100%");
         //*这个有问题*//
         public static ConfigItem <Boolean> TagAcousma = new ConfigItem<>("Acousma",false,"(LVL1)幻听暗示：玩家依照y轴位置会随机产生一些幻听");
         public static ConfigItem <Boolean> TagNoWeatherPredict = new ConfigItem<>("NoWeatherPredict", false, "(LVL1)阴晴无定：删除天气预报");
@@ -92,10 +92,11 @@ public class StuckTagConfig {
         Tags.put("MiracleDisaster",TagConfig.TagMiracleDisaster);
         Tags.put("Pseudovision",TagConfig.TagPseudovision);
         Tags.put("UnderAlliance",TagConfig.TagUnderAlliance);
+        Tags.put("Digest",TagConfig.TagDigest);
         //删除
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 //      Tags.put("Acousma",TagConfig.TagAcousma);
-//      Tags.put("Digest",TagConfig.TagDigest);
+
 
 
         String filePth = "StuckChallenge.cfg";

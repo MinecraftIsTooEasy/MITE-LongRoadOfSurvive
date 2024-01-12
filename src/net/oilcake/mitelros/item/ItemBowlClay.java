@@ -2,6 +2,8 @@ package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.potion.PotionExtend;
+import net.oilcake.mitelros.util.ExperimentalConfig;
+import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Overwrite;
 
 import static net.oilcake.mitelros.item.Items.*;
@@ -12,9 +14,9 @@ public class ItemBowlClay extends ItemVessel {
         super(id, Material.hardened_clay, contents, 1, 4, 4, "hardened_clay_bowls/" + texture);
         this.setCraftingDifficultyAsComponent(25.0F);
         this.setCreativeTab(CreativeModeTab.tabMisc);
-        if (this.contains(Material.milk) || this.contains(Material.water)) {
+        if (this.contains(Material.water)) {
             this.setWater(2);
-        } else if(this.contains(Materials.dangerous_water) || this.contains(Materials.unsafe_water)){
+        } else if(this.contains(Materials.dangerous_water) || this.contains(Materials.unsafe_water) || this.contains(Material.milk)){
             this.setWater(1);
         } else if(this.contains(Material.mashed_potato)){
             this.setWater(0);
@@ -97,11 +99,34 @@ public class ItemBowlClay extends ItemVessel {
     @Overwrite
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
-            if (this.contains(Materials.dangerous_water)) {
-                player.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
-            }
-            if (this.contains(Materials.unsafe_water)) {
-                player.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 300, 0));
+            if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+                if (this.contains(Materials.dangerous_water)) {
+                    double rand = Math.random();
+                    player.addPotionEffect((new MobEffect(MobEffectList.poison.id, (int) (450 * (1 + rand)), 0)));
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                }
+                if (this.contains(Materials.unsafe_water)) {
+                    double rand = Math.random();
+                    if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.5)){
+                        player.addPotionEffect((new MobEffect(MobEffectList.poison.id, (int) (450 * (1 + rand)), 0)));
+                    }
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                }
+            }else {
+                if (this.contains(Materials.dangerous_water)) {
+                    double rand = Math.random();
+                    if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.2)){
+                        player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 450, 0)));
+                    }
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                }
+                if (this.contains(Materials.unsafe_water)) {
+                    double rand = Math.random();
+                    if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.8)){
+                        player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 450, 0)));
+                    }
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                }
             }
             if (this.contains(Material.milk)) {
                 player.clearActivePotions();

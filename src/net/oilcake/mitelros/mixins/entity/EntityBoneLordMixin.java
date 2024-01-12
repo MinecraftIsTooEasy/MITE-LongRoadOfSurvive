@@ -28,7 +28,7 @@ public class EntityBoneLordMixin extends EntitySkeleton {
     @Override
     public GroupDataEntity onSpawnWithEgg(GroupDataEntity par1EntityLivingData) {
         par1EntityLivingData = super.onSpawnWithEgg(par1EntityLivingData);
-        if(StuckTagConfig.TagConfig.TagUnderAlliance.ConfigValue && this.rand.nextInt(3) == 0 && this.ridingEntity == null && this.getSkeletonType() != 1){
+        if(StuckTagConfig.TagConfig.TagUnderAlliance.ConfigValue && this.rand.nextInt(3) == 0 && this.ridingEntity == null && this.getSkeletonType() != 1 && this.isAncientBoneLord()){
             EntitySpiderKing ridingSpider = new EntitySpiderKing(this.worldObj);
             ridingSpider.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
             ridingSpider.onSpawnWithEgg((GroupDataEntity)null);
