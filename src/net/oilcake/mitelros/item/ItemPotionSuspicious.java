@@ -19,12 +19,12 @@ public class ItemPotionSuspicious extends Item{
         if (player.onServer()) {
             if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){
                 player.addPotionEffect((new MobEffect(MobEffectList.poison.id, (int) (450 * (1 + rand)), 0)));
-                player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (160 * (1 + rand)), 0)));
             }else {
                 if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.8)){
                     player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 450, 0)));
                 }
-                player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (160 * (1 + rand)), 0)));
             }
             if(rand == 0){
                 player.getFoodStats().addNutrition(1);

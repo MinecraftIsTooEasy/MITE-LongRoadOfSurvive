@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.util.CurseExtend;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -104,8 +105,10 @@ public final class EntityRendererMixin {
                 if (var15 > 1.0F) {
                     var15 = 1.0F;
                 }
-
                 var16 = this.q.u.ReportedGamma * this.q.u.ReportedGamma - 0.5F;
+                if(this.q.h.hasCurse(CurseExtend.fear_of_darkness,true)){
+                    var16 = -0.5F;
+                }
                 var17 = 1.0F - var13;
                 float var18 = 1.0F - var14;
                 float var19 = 1.0F - var15;

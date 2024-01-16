@@ -49,14 +49,14 @@ public class StuckTagConfig {
         public static ConfigItem <Boolean> TagLegendFreeze = new ConfigItem<>("LegendFreeze",false,"(LVL1)刺骨寒风：寒冷惩罚的积累速度提升200%");
         public static ConfigItem <Boolean> TagUnstableConvection = new ConfigItem<>("UnstableConvection",false,"(LVL1)不稳定对流：闪电的触发频率提升300%");
         public static ConfigItem <Boolean> TagEternalRaining = new ConfigItem<>("EternalRaining",false,"(LVL2)阴雨连绵：雨的最长持续时间提升300%，最短持续时间提升700%");
-        public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物的回复含水量的能力（奇数去尾，等于1更改概率）");
+        public static ConfigItem <Boolean> TagDryDilemma = new ConfigItem<>("DryDilemma",false,"(LVL1)旱地：降低非碗类食物回复含水量的能力（奇数去尾，等于1更改概率）");
         public static ConfigItem <Boolean> TagDeadgeothermy = new ConfigItem<>("DeadGeothermy",false,"(LVL2)地热失效：地下世界成为寒冷生物群系，更改地下世界基岩生成，同时生成绿宝石");
         public static ConfigItem <Boolean> TagHeatStorm = new ConfigItem<>("HeatStorm",false,"(LVL1)灼地烈阳：玩家额外拥有炎热惩罚");
         public static ConfigItem <Boolean> TagApocalypse = new ConfigItem<>("Apocalypse",false,"(LVL3)灾厄余生：不再自然生成可提供肉类的动物");
         public static ConfigItem <Boolean> TagArmament = new ConfigItem<>("Armament",false,"(LVL-2)战备军械：玩家的护甲值在耐久低于25%时才会减少，且不再受到低于自身护甲值的伤害");
         public static ConfigItem <Boolean> TagDistortion = new ConfigItem<>("Distortion",false,"(LVL-2)血肉畸变：玩家可获得最高40的生命值");
         public static ConfigItem <Boolean> TagWorshipDark = new ConfigItem<>("WorshipDark",false,"(LVL2)崇尚黑暗：僵尸将尝试摧毁其沿途可见的火把");
-        public static ConfigItem <Boolean> TagMiracleDisaster = new ConfigItem<>("MiracleDisaster",false,"(LVL1)迷幻危机：刷怪笼的危险等级不再受y轴限制");
+        public static ConfigItem <Boolean> TagMiracleDisaster = new ConfigItem<>("MiracleDisaster",false,"(LVL1)迷幻危机：出现更多种类怪物的刷怪笼");
         public static ConfigItem <Boolean> TagPseudovision = new ConfigItem<>("Pseudovision",false,"(LVL1)幻视暗示：黑色食尸鬼在成功索敌玩家后会给予玩家一次视觉黑暗效果");
         public static ConfigItem <Boolean> TagRejection = new ConfigItem<>("Rejection",false,"(LVL2)世界排异：玩家始终获得一种女巫诅咒，尝试消除诅咒将随机改变诅咒类型");
         public static ConfigItem <Boolean> TagUnderAlliance = new ConfigItem<>("UnderAlliance", false, "(LVL1)蛰骨联盟：出现更多种类的骷髅骑士");

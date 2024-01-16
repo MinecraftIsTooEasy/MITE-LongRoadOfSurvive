@@ -35,7 +35,7 @@ public class ItemGuideBook extends ItemWrittenBook {
         pages.appendTag(new NBTTagString("16", "金苹果在MITE-ITF的强度被大幅度削弱，基本没有办法在强大怪物面前救你一命，它在MITF的定位更类似于酿造材料，请参考MITE-ITF合成表内的实验药水，亦或是将它丢进酿造台。"));
         pages.appendTag(new NBTTagString("17", "* 镍 *\n这种矿石的完整盔甲可以免疫史莱姆的攻击，即便它严重损毁也可以一定程度上减免史莱姆的伤害，同时可以在没有附魔的情况下攻击黑色和灰色史莱姆，这让一些简单附魔成为非必需品。"));
         pages.appendTag(new NBTTagString("18", "* 钨 *\n用于强化地狱怪物的金属，拥有优秀的耐久性能，在制作艾德曼合金工作台时需要其作为前置，纯钨制品同样免疫岩浆的损毁。"));
-        pages.appendTag(new NBTTagString("19", "* 乌鲁金属 *\n位于末地的附魔特化金属，可以拥有更多的附魔词条同时拥有一个与其他工具的合成路线，碍于作者的更新速度和方块id问题它并没有完全的金属制品。"));
+        pages.appendTag(new NBTTagString("19", "* 乌鲁金属 *\n位于末地的附魔特化金属，可以拥有更多的附魔词条同时拥有一个区别于其他工具的合成路线，碍于作者的更新速度和方块id问题它并没有完全的金属制品。"));
         pages.appendTag(new NBTTagString("20", "* 风袭高原 *\n拥有极其庞大且圆石覆盖的覆雪山体，同时会生成露天的绿宝石，在该群系的地下会生成极其发达的矿脉网络，相当危险。"));
         pages.appendTag(new NBTTagString("21", "* 萨瓦纳草原 *\n与沙漠相同的不会下雨拥有兰花和少量树的草原，是最为理想的常驻生物群系。"));
         pages.appendTag(new NBTTagString("22", "* 寒冷惩罚 *\n在覆雪生物群系露天呆一段时间后会获取不断刷新的缓慢与挖掘疲劳，并在其达到高等级时将冻死玩家，穿着对应的盔甲可以减免这个效果，同时极地护甲可以免疫这个效果。"));

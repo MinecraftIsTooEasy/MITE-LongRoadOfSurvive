@@ -31,7 +31,9 @@ public class ItemBowlClay extends ItemVessel {
         } else if(this.contains(Materials.salad)){
             this.setWater(0);
         } else{
-            this.setWater(4);
+            if(!this.isEmpty()){
+                this.setWater(4);
+            }
         }
     }
 
@@ -103,14 +105,14 @@ public class ItemBowlClay extends ItemVessel {
                 if (this.contains(Materials.dangerous_water)) {
                     double rand = Math.random();
                     player.addPotionEffect((new MobEffect(MobEffectList.poison.id, (int) (450 * (1 + rand)), 0)));
-                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (160 * (1 + rand)), 0)));
                 }
                 if (this.contains(Materials.unsafe_water)) {
                     double rand = Math.random();
                     if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.5)){
                         player.addPotionEffect((new MobEffect(MobEffectList.poison.id, (int) (450 * (1 + rand)), 0)));
                     }
-                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (160 * (1 + rand)), 0)));
                 }
             }else {
                 if (this.contains(Materials.dangerous_water)) {
@@ -118,14 +120,14 @@ public class ItemBowlClay extends ItemVessel {
                     if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.2)){
                         player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 450, 0)));
                     }
-                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (160 * (1 + rand)), 0)));
                 }
                 if (this.contains(Materials.unsafe_water)) {
                     double rand = Math.random();
                     if(rand > (StuckTagConfig.TagConfig.TagDigest.ConfigValue ? 1 : 0.8)){
                         player.addPotionEffect((new MobEffect(MobEffectList.poison.id, 450, 0)));
                     }
-                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (320 * (1 + rand)), 0)));
+                    player.addPotionEffect((new MobEffect(PotionExtend.dehydration.id, (int) (160 * (1 + rand)), 0)));
                 }
             }
             if (this.contains(Material.milk)) {

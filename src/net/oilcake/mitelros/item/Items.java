@@ -76,7 +76,7 @@ public class Items extends Item {
     public static final ItemPieces pieceMithril = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceMithril"));
     public static final ItemPieces pieceTungsten = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten"));
     public static final ItemPieces pieceAdamantium = (ItemPieces) (new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceAdamantium"));
-    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(), Materials.mashedCactus,2, 0,false,true,false,"mashedCactus")).setMaxStackSize(4);
+    public static final ItemFood mashedCactus = (ItemFood) (new ItemFood(Constant.getNextItemID(), Materials.mashedCactus,1, 0,false,true,false,"mashedCactus")).setMaxStackSize(4);
     public static final ItemFood lemon = (ItemFood)(new ItemFood(Constant.getNextItemID(), Material.fruit, 2, 1, 1000, false, false, true, "lemon")).setPlantProduct();
     public static final Item lemonPie = (new ItemFood(Constant.getNextItemID(), Material.pie, 10, 6, 1000, true, true, true, "lemon_pie")).setMaxStackSize(8).setPlantProduct().setAnimalProduct();
     public static final ItemBucket nickelBucket = new ItemBucket(Constant.getNextItemID(), Materials.nickel, null);
@@ -225,6 +225,8 @@ public class Items extends Item {
     public static final ItemBrewingMisc wither_branch = new ItemBrewingMisc(Constant.getNextItemID(),Material.wood,"wither_wood").setPotionEffectExtend("+0-1+2+3+13&4-4");
     public static final ItemGuideBook guide = new ItemGuideBook(Constant.getNextItemID());
     public static final Item totemofhunting = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Materials.nickel,"totem")).setMaxStackSize(1);
+    public static final ItemClub UruMorningStar = createInstance(ItemClub.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final ItemPickaxe UruPickaxe = createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
 
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
@@ -398,6 +400,8 @@ public class Items extends Item {
         register("tool/uru/uru_scythe", UruScythe);
         register("tool/uru/uru_sword", UruSword);
         register("tool/uru/uru_war_hammer", UruWarHammer);
+        register("tool/uru/uru_club", UruMorningStar);
+        register("tool/uru/uru_pickaxe", UruPickaxe);
         register("pieces/uru",pieceUru);
         register("bows/tungsten/", bowTungsten).setUnlocalizedName("tungsten_bow");
         register("food/beetroot",beetroot);
@@ -677,6 +681,12 @@ public class Items extends Item {
         );
         register.registerShapelessRecipe(new ItemStack(UruMattock,1),true,
                 Items.forgingnote,Items.UruIngot,Item.mattockMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruMorningStar,1),true,
+                Items.forgingnote,Items.UruIngot,Items.morningStarMithril,Item.ingotMithril
+        );
+        register.registerShapelessRecipe(new ItemStack(UruPickaxe,1),true,
+                Items.forgingnote,Items.UruIngot,Item.pickaxeMithril,Item.ingotMithril
         );
         register.registerShapelessRecipe(new ItemStack(UruNugget, 9), true,
                 UruIngot);

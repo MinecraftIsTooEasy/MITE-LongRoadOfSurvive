@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.item;
 import com.google.common.collect.Multimap;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.BlockBlastFurnace;
+import net.oilcake.mitelros.item.ItemGoldenAppleLegend;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -214,7 +215,32 @@ public class ItemStackMixin{
         }
         return var3;
     }
+    @Overwrite
+    public boolean isEnchantable() {
+        if (this.getItem() == Item.book) {
+            return true;
+        } else if (!ItemPotion.isBottleOfWater(this.getItem().getItemStackForStatsIcon()) && !ItemGoldenApple.isUnenchantedGoldenApple(this.getItem().getItemStackForStatsIcon()) && !ItemGoldenAppleLegend.isUnenchantedGoldenApple(this.getItem().getItemStackForStatsIcon())) {
+            if (this.getMaxStackSize() != 1) {
+                return false;
+            } else if (!this.isItemStackDamageable()) {
+                return false;
+            } else {
+                return this.getItem().getItemEnchantability() > 0 && !this.isItemEnchanted();
+            }
+        } else {
+            return true;
+        }
+    }
 
+
+    @Shadow
+    public int getMaxStackSize() {
+        return 0;
+    }
+    @Shadow
+    public boolean isItemEnchanted() {
+        return false;
+    }
 
     public boolean isItemStackEqualC(ItemStack par1ItemStack, boolean ignore_stack_size, boolean ignore_quality, boolean ignore_damage_but_not_subtype, boolean ignore_tag_compound) {
         return this.isItemStackEqual(par1ItemStack, ignore_stack_size, ignore_quality, ignore_damage_but_not_subtype, ignore_tag_compound);

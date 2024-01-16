@@ -453,7 +453,10 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             }
             if(this.hunt_counter < 0){
                 this.attackEntityFrom(new Damage(DamageSource.absolute, 10000.0F));
+                this.hunt_counter = 0;
+                this.hunt_cap = false;
             }
+            //创造模式下减轻视觉黑暗
             if(Minecraft.inDevMode() && this.vision_dimming > 0.1F && this.isPlayerInCreative()){
                 this.vision_dimming = 0.05F;
             }
@@ -473,7 +476,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.getFoodStats().addWater(2);
                 } else{
                     this.getFoodStats().addWater(1);
-                    this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 320, 0));
+                    this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 160, 0));
                 }
             }
             //水分自然扣减

@@ -26,8 +26,8 @@ public class ItemFoodMixin extends Item {
 
     public int resetWaterVal(int id,Material material){
             if (material == Material.fruit) {
-                return (StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 3);
-            }else if (id == 135) {
+                return (StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 2);
+            }else if (id == 135/*carrot*/) {
                 return (StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue ? 1 : 2);
             }else if (material == Materials.glowberries) {
                 return (1);

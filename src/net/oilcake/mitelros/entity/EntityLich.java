@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.item.Items;
 
 import java.util.ArrayList;
@@ -272,9 +273,22 @@ public class EntityLich extends EntityBoneLord implements IBossbarEntity {
         for(i = 0; i < num_drops; ++i) {
             this.dropItem(Items.AncientmetalArmorPiece.itemID, 1);
         }
-
+        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2){
+            this.dropItem(Items.Goldenapplelegend);
+        }
         if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
             this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 0), 0.0F);
+        }
+    }
+    @Override
+    public void onDeath(DamageSource par1DamageSource) {
+        super.onDeath(par1DamageSource);
+        List <Entity>targets  = this.getNearbyEntities(48.0F, 48.0F);
+        for(int i = 0; i< targets.size(); i++) {
+            EntityPlayer entityPlayer = targets.get(i) instanceof EntityPlayer ? (EntityPlayer) targets.get(i) : null;
+            if(entityPlayer != null) {
+                entityPlayer.triggerAchievement(AchievementExtend.lichHunter);
+            }
         }
     }
     @Override
