@@ -360,6 +360,7 @@ entity.EntityUndeadGuard.name=亡灵守卫
 death.extend.attack.thirsty=干枯了
 death.extend.attack.freeze=冻死了
 death.extend.attack.malnourished=营养不良而死
+death.extend.attack.sacrificed=赴死如归
 
 material.nickel.name=镍
 material.tungsten.name=钨

@@ -452,7 +452,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 Belongings.entityFX(EnumEntityFX.summoned);
             }
             if(this.hunt_counter < 0){
-                this.attackEntityFrom(new Damage(DamageSource.absolute, 10000.0F));
+                this.attackEntityFrom(new Damage(DamageSourceExtend.sacrificed, 10000.0F));
                 this.hunt_counter = 0;
                 this.hunt_cap = false;
             }

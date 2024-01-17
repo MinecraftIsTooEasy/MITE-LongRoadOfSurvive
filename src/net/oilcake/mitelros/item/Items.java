@@ -827,6 +827,9 @@ public class Items extends Item {
         register.registerShapelessRecipe(new ItemStack(claybowlLemonade,1),true,
                 Item.sugar,Items.lemon,Items.claybowlWater
         );
+        register.registerShapelessRecipe(new ItemStack(Items.ExperimentalPotion,1),true,
+                Item.blazePowder,Item.netherStalkSeeds,new ItemStack(Item.potion,1,0),new ItemStack(Item.appleGold,1,0)
+        );
         register.registerShapelessRecipe(new ItemStack(Item.cheese, 1),false,
                 new ItemStack(Items.claybowlMilk, 4)
         ).resetDifficulty(6400);

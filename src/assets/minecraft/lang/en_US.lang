@@ -358,8 +358,9 @@ entity.EntitySkeletonHorse.name=Skeleton Horse
 entity.EntityUndeadGuard.name=Undead Guard
 
 death.extend.attack.thirsty=Dried Up
-death.extend.attack.freeze=Freezed Fully
+death.extend.attack.freeze=Froze Fully
 death.extend.attack.malnourished=Dead Because of Malnourished
+death.extend.attack.sacrificed=Burned out the life
 
 material.nickel.name=Nickel
 material.tungsten.name=Tungsten

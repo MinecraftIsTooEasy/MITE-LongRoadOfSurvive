@@ -5,8 +5,6 @@ import net.minecraft.DamageSource;
 import net.minecraft.EntityLiving;
 import net.minecraft.Translator;
 
-import java.util.Objects;
-
 public class DamageSourceExtend extends DamageSource{
     private boolean is_unblockable;
     private boolean bypasses_mundane_armor;
@@ -20,6 +18,7 @@ public class DamageSourceExtend extends DamageSource{
     public static DamageSourceExtend freeze = (new DamageSourceExtend("freeze")).setUnblockable();
     public static DamageSourceExtend thirsty = (new DamageSourceExtend("thirsty")).setUnblockable();
     public static DamageSourceExtend malnourished = (new DamageSourceExtend("malnourished")).setUnblockable();
+    public static DamageSourceExtend sacrificed = (new DamageSourceExtend("sacrificed")).setUnblockable();
     protected DamageSourceExtend setUnblockable() {
         this.is_unblockable = true;
         return this.setDamageBypassesMundaneArmor();

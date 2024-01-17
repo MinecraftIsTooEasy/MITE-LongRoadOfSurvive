@@ -24,7 +24,6 @@ public class RegisterHelper {
         RecipeRegister recipeRegister = new RecipeRegister();
         Blocks.registerRecipes(recipeRegister);
         Items.registerRecipes(recipeRegister);
-        RecipeOther.registerRecipes(recipeRegister);
 
         RecipesArgs recipesArgs;
         for (RecipesArgs shapedRecipe : shapedRecipes) {
