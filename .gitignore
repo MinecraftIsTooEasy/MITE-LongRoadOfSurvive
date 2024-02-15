@@ -1,3 +1,6 @@
 # 项目排除路径
 /out/
 /MITE R196-ITF
+/.idea
+/libs
+/MITE-LongRoadOfSurvive.iml
