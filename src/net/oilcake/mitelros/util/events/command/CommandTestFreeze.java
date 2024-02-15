@@ -2,8 +2,6 @@ package net.oilcake.mitelros.util.events.command;
 
 import net.minecraft.*;
 
-import static net.minecraft.EntityPlayer.*;
-
 public class CommandTestFreeze extends CommandAbstract {
     public CommandTestFreeze(){
     }

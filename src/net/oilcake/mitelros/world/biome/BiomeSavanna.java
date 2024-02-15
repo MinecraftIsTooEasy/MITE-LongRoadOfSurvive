@@ -3,7 +3,6 @@ package net.oilcake.mitelros.world.biome;
 import net.minecraft.*;
 import net.oilcake.mitelros.util.StuckTagConfig;
 
-import java.awt.*;
 import java.util.Random;
 
 public class BiomeSavanna extends BiomeBase {

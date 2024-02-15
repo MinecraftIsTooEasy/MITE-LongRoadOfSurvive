@@ -1,14 +1,10 @@
 package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BlockFurnace.class)
 public abstract class BlockFurnaceMixin extends BlockDirectionalWithTileEntity {

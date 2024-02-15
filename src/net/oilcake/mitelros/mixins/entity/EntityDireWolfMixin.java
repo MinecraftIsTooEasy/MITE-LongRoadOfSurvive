@@ -6,7 +6,6 @@ import net.minecraft.EntityWolf;
 import net.minecraft.World;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(EntityDireWolf.class)
 public class EntityDireWolfMixin extends EntityWolf {

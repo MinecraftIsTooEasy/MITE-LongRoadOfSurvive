@@ -8,8 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import java.nio.FloatBuffer;
-import java.util.List;
 import java.util.Random;
 
 @Mixin(EntityRenderer.class)
@@ -536,9 +534,11 @@ public final class EntityRendererMixin {
     public void a(double par1) {
     }
     @Shadow
-    private static final bjo o = new bjo("textures/environment/rain.png");
+    @Final
+    private static bjo o;
     @Shadow
-    private static final bjo p = new bjo("textures/environment/snow.png");
+    @Final
+    private static bjo p;
     @Shadow
     private Minecraft q;
     @Shadow

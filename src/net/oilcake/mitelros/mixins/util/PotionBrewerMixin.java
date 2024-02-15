@@ -103,7 +103,8 @@ public class PotionBrewerMixin {
     @Mutable
     public static String goldenCarrotEffect;
     @Shadow
-    private static final HashMap potionRequirements = new HashMap();
+    @Final
+    private static HashMap potionRequirements;
     private static final HashMap potionAmplifiers = new HashMap();
     @Shadow
     @Final

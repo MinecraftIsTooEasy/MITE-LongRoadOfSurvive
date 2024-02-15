@@ -3,7 +3,6 @@ package net.oilcake.mitelros.block.enchantreserver;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.BlockEnchantReserver;
 import net.oilcake.mitelros.item.Items;
-import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
 
 import java.util.Arrays;
 

@@ -23,7 +23,8 @@ public abstract class WorldMixin {
     @Shadow public abstract void removeBlockTileEntity(int par1, int par2, int par3);
 
     @Shadow
-    public final WorldProvider provider;
+    @Final
+    public WorldProvider provider;
 
     public WorldMixin(WorldProvider provider) {
         this.provider = provider;

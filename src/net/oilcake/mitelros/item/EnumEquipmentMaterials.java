@@ -1,6 +1,5 @@
 package net.oilcake.mitelros.item;
 
-import net.minecraft.Enchantment;
 import net.minecraft.EnumEquipmentMaterial;
 import net.minecraft.EnumQuality;
 import sun.reflect.ConstructorAccessor;

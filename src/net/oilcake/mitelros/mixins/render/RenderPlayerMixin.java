@@ -1,10 +1,9 @@
 package net.oilcake.mitelros.mixins.render;
 
-import net.oilcake.mitelros.item.Items;
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import net.minecraft.*;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

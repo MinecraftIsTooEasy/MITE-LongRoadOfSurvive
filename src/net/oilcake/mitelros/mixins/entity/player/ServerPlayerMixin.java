@@ -5,7 +5,6 @@ import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.ContainerEnchantReserver;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
-import net.oilcake.mitelros.mixins.util.EnumInsulinResistanceLevelMixin;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import net.xiaoyu233.fml.util.ReflectHelper;

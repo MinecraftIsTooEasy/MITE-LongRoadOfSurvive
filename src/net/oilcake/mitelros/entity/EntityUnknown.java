@@ -1,6 +1,9 @@
 package net.oilcake.mitelros.entity;
 
-import net.minecraft.*;
+import net.minecraft.EntityZombie;
+import net.minecraft.GenericAttributes;
+import net.minecraft.ItemStack;
+import net.minecraft.World;
 import net.oilcake.mitelros.item.Items;
 
 public class EntityUnknown extends EntityZombie {

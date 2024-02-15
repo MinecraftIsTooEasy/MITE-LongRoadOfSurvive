@@ -1,7 +1,6 @@
 package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.Items;
 
 public class EntityBoneBodyguard extends EntitySkeleton {
     public EntityBoneBodyguard(World par1World) {

@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.mixins.world;
 
-import net.minecraft.*;
+import net.minecraft.Debug;
+import net.minecraft.WeatherEvent;
+import net.minecraft.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;

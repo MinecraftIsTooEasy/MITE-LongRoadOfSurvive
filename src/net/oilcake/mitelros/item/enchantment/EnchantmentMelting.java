@@ -2,7 +2,7 @@ package net.oilcake.mitelros.item.enchantment;
 
 import net.minecraft.*;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.*;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
 
 public class EnchantmentMelting extends Enchantment {
     protected EnchantmentMelting(int id, yq rarity, int difficulty) {

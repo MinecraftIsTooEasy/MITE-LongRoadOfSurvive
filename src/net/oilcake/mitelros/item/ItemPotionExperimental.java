@@ -2,8 +2,6 @@ package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
 
-import java.util.Random;
-
 public class ItemPotionExperimental extends Item{
         public ItemPotionExperimental(int id) {
             super(id, Material.glass, "experimental_potion");

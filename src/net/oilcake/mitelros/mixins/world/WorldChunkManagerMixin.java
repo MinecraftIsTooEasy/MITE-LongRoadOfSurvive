@@ -1,6 +1,5 @@
 package net.oilcake.mitelros.mixins.world;
 
-import net.minecraft.BiomeBase;
 import net.minecraft.WorldChunkManager;
 import net.oilcake.mitelros.world.BiomeBases;
 import org.spongepowered.asm.mixin.Mixin;

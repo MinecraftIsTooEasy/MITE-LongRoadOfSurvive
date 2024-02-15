@@ -3,7 +3,6 @@ package net.oilcake.mitelros.mixins.world.biome;
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityEvil;
 import net.oilcake.mitelros.entity.EntityPigmanLord;
-import net.oilcake.mitelros.entity.EntityWitherBoneLord;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

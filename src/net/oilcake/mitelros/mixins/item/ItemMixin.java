@@ -12,9 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
+import java.io.PrintStream;
 import java.util.List;
 
 @Mixin(Item.class)
@@ -24,6 +23,14 @@ public class ItemMixin{
     @Inject(method = "<init>()V",at = @At("RETURN"))
     private void injectCtor(CallbackInfo callbackInfo){
         ReflectHelper.dyCast(Item.class,this).recipes = new aah[1024];
+    }
+
+    @Redirect(method = "<init>(ILjava/lang/String;I)V", at = @At(value = "INVOKE", target = "Ljava/io/PrintStream;println(Ljava/lang/String;)V"))
+    public void removePrint(PrintStream printStream, String messsage) {
+    }
+
+    @Redirect(method = "doesSubtypeMatterForProduct", at = @At(value = "INVOKE", target = "Lnet/minecraft/Minecraft;setErrorMessage(Ljava/lang/String;)V"))
+    public void removeErrorInfo(String text) {
     }
 
     @Inject(method = "<init>(ILjava/lang/String;I)V" ,at = @At("RETURN"))

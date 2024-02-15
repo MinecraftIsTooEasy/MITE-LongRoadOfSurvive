@@ -2,7 +2,6 @@ package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
-import net.oilcake.mitelros.util.DamageSourceExtend;
 import net.oilcake.mitelros.util.EntitySelectorHunter;
 
 import java.util.ArrayList;

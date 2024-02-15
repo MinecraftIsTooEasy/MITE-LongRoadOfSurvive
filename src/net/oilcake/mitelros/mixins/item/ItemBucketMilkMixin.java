@@ -1,8 +1,9 @@
 package net.oilcake.mitelros.mixins.item;
 
+import net.minecraft.ItemVessel;
+import net.minecraft.Material;
+import net.minecraft.yi;
 import org.spongepowered.asm.mixin.Mixin;
-import net.minecraft.*;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

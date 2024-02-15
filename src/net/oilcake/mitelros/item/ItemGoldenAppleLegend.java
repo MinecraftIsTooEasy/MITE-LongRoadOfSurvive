@@ -1,8 +1,6 @@
 package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.transformer.meta.MixinMerged;
 
 import java.util.List;
 

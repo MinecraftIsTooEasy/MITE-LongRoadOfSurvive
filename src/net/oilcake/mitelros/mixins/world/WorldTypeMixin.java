@@ -1,9 +1,7 @@
 package net.oilcake.mitelros.mixins.world;
 
-import net.minecraft.NBTTagCompound;
 import net.minecraft.WorldType;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -1,6 +1,5 @@
 package net.oilcake.mitelros.block;
 
-import net.minecraft.BlockCrops;
 import net.minecraft.BlockCropsDead;
 
 public class BlockBeetrootsDead extends BlockCropsDead {

@@ -1,10 +1,10 @@
 package net.oilcake.mitelros.mixins.render;
 
 import net.minecraft.*;
-//import net.oilcake.mitelros.item.potion.Potions;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.ExperimentalConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.Random;
@@ -31,7 +30,7 @@ public class GuiIngameMixin extends avk {
 
         int var4 = MathHelper.ceiling_float_int(this.g.h.getHealth());
         int var5 = MathHelper.ceiling_float_int(this.g.h.prevHealth);
-        this.f.setSeed((long) (this.i * 312871));
+        this.f.setSeed(this.i * 312871L);
         FoodMetaData foodStats = this.g.h.getFoodStats();
         int var8 = foodStats.getNutrition();
         AttributeInstance var10 = this.g.h.getEntityAttribute(GenericAttributes.maxHealth);
@@ -399,7 +398,8 @@ public class GuiIngameMixin extends avk {
     @Final
     private Minecraft g;
     @Shadow
-    private final Random f = new Random();
+    @Final
+    private Random f;
     @Shadow
     private int i;
     @Redirect(method = "a(II)V",

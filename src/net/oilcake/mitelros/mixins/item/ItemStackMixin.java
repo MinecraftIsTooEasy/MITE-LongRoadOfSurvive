@@ -2,7 +2,6 @@ package net.oilcake.mitelros.mixins.item;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.*;
-import net.oilcake.mitelros.block.BlockBlastFurnace;
 import net.oilcake.mitelros.item.ItemGoldenAppleLegend;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

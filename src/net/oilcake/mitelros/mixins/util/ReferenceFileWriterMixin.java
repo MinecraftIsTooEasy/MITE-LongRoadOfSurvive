@@ -1,16 +1,12 @@
 package net.oilcake.mitelros.mixins.util;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import net.minecraft.*;
-import net.oilcake.mitelros.util.Constant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.Iterator;
-import java.util.List;
 
 import static net.minecraft.StringHelper.formatFloat;
 
@@ -49,6 +45,7 @@ public class ReferenceFileWriterMixin {
         fw.write(sb.toString());
         fw.close();
     }
+
     @Overwrite
     private static void writeItemReachFile(File dir) throws Exception
     {

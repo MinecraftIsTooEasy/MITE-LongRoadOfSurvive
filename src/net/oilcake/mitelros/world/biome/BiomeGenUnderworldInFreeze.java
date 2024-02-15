@@ -5,12 +5,15 @@
 
 package net.oilcake.mitelros.world.biome;
 
+import net.minecraft.*;
+import net.oilcake.mitelros.entity.EntityBoneBodyguard;
+import net.oilcake.mitelros.entity.EntityRetinueZombie;
+import net.oilcake.mitelros.entity.EntitySpiderKing;
+import net.oilcake.mitelros.entity.EntityStalkerCreeper;
+import net.oilcake.mitelros.world.WorldGenUnderworldCastle;
+
 import java.util.List;
 import java.util.Random;
-
-import net.minecraft.*;
-import net.oilcake.mitelros.entity.*;
-import net.oilcake.mitelros.world.WorldGenUnderworldCastle;
 
 public class BiomeGenUnderworldInFreeze extends BiomeGenUnderworld {
     public BiomeGenUnderworldInFreeze(int id) {

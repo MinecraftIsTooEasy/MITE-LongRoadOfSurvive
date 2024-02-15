@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.world.biome;
 
-import net.minecraft.*;
+import net.minecraft.BiomeBase;
+import net.minecraft.Block;
+import net.minecraft.WorldGenerator;
 
 import java.util.Random;
 

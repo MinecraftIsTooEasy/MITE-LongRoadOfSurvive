@@ -2,7 +2,6 @@ package net.oilcake.mitelros.block;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.util.ExperimentalConfig;
-import org.spongepowered.asm.mixin.Overwrite;
 
 public class BlockBlastFurnace extends BlockFurnace {
     private Material material;

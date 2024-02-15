@@ -1,8 +1,6 @@
 package net.oilcake.mitelros.mixins.util;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.ItemGuideBook;
-import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.util.Constant;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.item.potion;
 
-import net.minecraft.*;
+import net.minecraft.EntityLiving;
+import net.minecraft.EntityPlayer;
+import net.minecraft.MobEffectList;
 import net.oilcake.mitelros.util.Constant;
 
 import java.util.ArrayList;

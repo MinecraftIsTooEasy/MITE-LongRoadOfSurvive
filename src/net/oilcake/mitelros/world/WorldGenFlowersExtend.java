@@ -1,6 +1,9 @@
 package net.oilcake.mitelros.world;
 
-import net.minecraft.*;
+import net.minecraft.Block;
+import net.minecraft.Minecraft;
+import net.minecraft.World;
+import net.minecraft.WorldGenerator;
 import net.oilcake.mitelros.block.Blocks;
 
 import java.util.Random;

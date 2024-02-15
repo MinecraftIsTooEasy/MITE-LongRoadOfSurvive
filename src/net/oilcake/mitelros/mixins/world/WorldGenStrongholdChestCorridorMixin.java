@@ -5,7 +5,6 @@ import net.minecraft.StructurePieceTreasure;
 import net.minecraft.WorldGenStrongholdChestCorridor;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(WorldGenStrongholdChestCorridor.class)
 public class WorldGenStrongholdChestCorridorMixin {

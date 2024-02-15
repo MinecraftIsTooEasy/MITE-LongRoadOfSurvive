@@ -1,13 +1,12 @@
 package net.oilcake.mitelros.mixins.world;
 
-import net.minecraft.*;
+import net.minecraft.Block;
+import net.minecraft.Item;
+import net.minecraft.StructurePieceTreasure;
+import net.minecraft.WorldGenWitchHut;
 import net.oilcake.mitelros.item.Items;
-import org.checkerframework.checker.fenum.qual.SwingTextOrientation;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-
-import java.util.Random;
 
 @Mixin(WorldGenWitchHut.class)
 public class WorldGenWitchHutMixin{

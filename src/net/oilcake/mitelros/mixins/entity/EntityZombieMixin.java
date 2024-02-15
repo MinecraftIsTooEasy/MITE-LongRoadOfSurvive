@@ -1,11 +1,9 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.entity.EntityWitherBoneLord;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -2,9 +2,6 @@ package net.oilcake.mitelros.util.events.command;
 
 import net.minecraft.*;
 
-import java.util.List;
-import java.util.Random;
-
 public class CommandAddCurse extends CommandAbstract {
 
     @Override

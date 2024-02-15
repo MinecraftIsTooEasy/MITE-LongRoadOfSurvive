@@ -1,8 +1,7 @@
 package net.oilcake.mitelros.item;
 
-import net.minecraft.*;
-
-import java.util.List;
+import net.minecraft.ItemClub;
+import net.minecraft.Material;
 
 public class ItemMorningStar extends ItemClub {
     protected ItemMorningStar(int par1, Material material) {

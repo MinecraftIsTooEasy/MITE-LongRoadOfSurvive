@@ -6,7 +6,6 @@ import net.minecraft.Item;
 import net.minecraft.yq;
 import net.oilcake.mitelros.item.Materials;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
 import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentVanishing;
 
 public class EnchantmentArrogance extends Enchantment{

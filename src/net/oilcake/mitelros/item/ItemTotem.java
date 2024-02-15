@@ -2,8 +2,6 @@ package net.oilcake.mitelros.item;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.achivements.AchievementExtend;
-import net.oilcake.mitelros.entity.EntityRetinueZombie;
-import net.oilcake.mitelros.entity.EntityUndeadGuard;
 
 public class ItemTotem extends Item {
     public ItemTotem(int id, Material material, String texture) {

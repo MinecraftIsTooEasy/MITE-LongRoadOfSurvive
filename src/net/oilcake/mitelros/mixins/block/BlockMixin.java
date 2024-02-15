@@ -3,7 +3,6 @@ package net.oilcake.mitelros.mixins.block;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.BlockFlowerExtend;
 import net.oilcake.mitelros.block.Blocks;
-import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -443,7 +442,8 @@ public abstract class BlockMixin{
     @Shadow
     public boolean has_grass_top_icon;
     @Shadow
-    private final boolean[] is_solid = new boolean[16];
+    @Final
+    private boolean[] is_solid;
     @Shadow
     @Final
     public boolean is_always_solid;

@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.*;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
+import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentMelting;
 
 @Mixin(net.minecraft.EnchantmentSilkTouch.class)
 public class EnchantmentSilkTouchMixin extends Enchantment {

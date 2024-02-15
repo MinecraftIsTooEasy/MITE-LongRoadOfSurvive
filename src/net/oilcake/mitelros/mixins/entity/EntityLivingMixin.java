@@ -10,8 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
-
 @Mixin(EntityLiving.class)
 public class EntityLivingMixin extends Entity{
     public EntityLivingMixin(World par1World) {

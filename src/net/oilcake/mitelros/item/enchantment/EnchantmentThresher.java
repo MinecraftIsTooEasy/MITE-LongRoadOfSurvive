@@ -1,6 +1,9 @@
 package net.oilcake.mitelros.item.enchantment;
 
-import net.minecraft.*;
+import net.minecraft.CreativeModeTab;
+import net.minecraft.Enchantment;
+import net.minecraft.Item;
+import net.minecraft.yq;
 import net.oilcake.mitelros.item.ItemMorningStar;
 
 public class EnchantmentThresher extends Enchantment {

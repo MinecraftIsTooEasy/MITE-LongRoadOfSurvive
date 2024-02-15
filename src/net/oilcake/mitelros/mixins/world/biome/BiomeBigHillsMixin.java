@@ -1,13 +1,10 @@
 package net.oilcake.mitelros.mixins.world.biome;
 
-import net.minecraft.*;
-import net.oilcake.mitelros.block.Blocks;
-import net.oilcake.mitelros.util.Constant;
+import net.minecraft.BiomeBase;
+import net.minecraft.BiomeBigHills;
+import net.minecraft.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 

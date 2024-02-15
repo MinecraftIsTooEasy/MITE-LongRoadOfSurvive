@@ -1,10 +1,12 @@
 package net.oilcake.mitelros.mixins.entity.slime;
 
-import net.minecraft.*;
+import net.minecraft.DamageSource;
+import net.minecraft.EntityCubic;
+import net.minecraft.EntityOoze;
+import net.minecraft.World;
 import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(EntityOoze.class)
 public abstract class EntityOozeMixin extends EntityCubic{

@@ -2,9 +2,6 @@ package net.oilcake.mitelros.item.enchantment;
 
 import net.minecraft.*;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentAbsorb;
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentVanishing;
-
 public class EnchantmentDestroying extends Enchantment {
     protected EnchantmentDestroying(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);

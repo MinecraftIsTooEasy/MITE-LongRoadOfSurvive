@@ -1,7 +1,6 @@
 package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import org.spongepowered.asm.mixin.Final;

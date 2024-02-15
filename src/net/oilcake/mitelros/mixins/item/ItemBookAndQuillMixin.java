@@ -2,8 +2,6 @@ package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.Item;
 import net.minecraft.ItemBookAndQuill;
-import net.minecraft.Material;
-import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

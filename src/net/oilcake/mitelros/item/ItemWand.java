@@ -4,9 +4,6 @@ import net.minecraft.*;
 import net.oilcake.mitelros.entity.EntityWandFireball;
 import net.oilcake.mitelros.entity.EntityWandIceBall;
 import net.oilcake.mitelros.entity.EntityWandShockWave;
-import net.oilcake.mitelros.item.enchantment.Enchantments;
-
-import java.util.Random;
 
 public class ItemWand extends ItemTool implements IDamageableItem{
     private Material reinforcement_material;

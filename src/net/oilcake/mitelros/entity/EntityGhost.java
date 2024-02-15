@@ -1,7 +1,6 @@
 package net.oilcake.mitelros.entity;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.util.StuckTagConfig;
 
 import java.util.ArrayList;
 import java.util.List;

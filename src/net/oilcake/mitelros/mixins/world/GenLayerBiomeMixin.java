@@ -1,6 +1,9 @@
 package net.oilcake.mitelros.mixins.world;
 
-import net.minecraft.*;
+import net.minecraft.BiomeBase;
+import net.minecraft.GenLayer;
+import net.minecraft.GenLayerBiome;
+import net.minecraft.WorldType;
 import net.oilcake.mitelros.world.BiomeBases;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

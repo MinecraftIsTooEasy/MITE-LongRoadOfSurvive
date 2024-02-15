@@ -4,7 +4,6 @@ import net.minecraft.CreativeModeTab;
 import net.minecraft.Enchantment;
 import net.minecraft.Item;
 import net.minecraft.yq;
-import net.oilcake.mitelros.item.enchantment.EnchantmentInfinity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 

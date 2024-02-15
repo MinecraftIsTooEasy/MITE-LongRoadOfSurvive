@@ -2,15 +2,14 @@ package net.oilcake.mitelros.mixins.util;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Materials;
-import net.oilcake.mitelros.item.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.SoftOverride;
 
-import java.util.*;
-
-import static net.minecraft.EnchantmentManager.getMaxEnchantmentLevel;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @Mixin(EnchantmentManager.class)
 public class EnchantmentManagerMixin {
