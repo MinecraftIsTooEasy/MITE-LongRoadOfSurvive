@@ -28,7 +28,7 @@ public class EnchantmentVanishing extends Enchantment {
 
     @Override
     public boolean canEnchantItem(Item item) {
-        return item.getHardestMetalMaterial() != Materials.uru;
+        return item.getMaterialForRepairs() != Materials.uru;
     }
 
     @Override

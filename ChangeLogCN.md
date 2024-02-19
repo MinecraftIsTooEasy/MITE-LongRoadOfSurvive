@@ -3,6 +3,7 @@
 ## MITE is too false R13b
 ### 其他
 * 移除了大量的客户端信息
+* 禁用了FML更新检测以加速启动
 ---
 ## MITE is too false R13a
 ### 其他
