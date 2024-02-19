@@ -1,7 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.enchantment.Enchantments;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;

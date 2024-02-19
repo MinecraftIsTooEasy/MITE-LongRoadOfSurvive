@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins;
 import net.minecraft.*;
 import net.minecraft.client.main.Main;
 import net.minecraft.server.MinecraftServer;
+import net.oilcake.mitelros.network.NoConsoleLogManager;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -17,8 +18,14 @@ import java.io.File;
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
-    public aul u;
-    public float ReportedGamma;
+
+    @Shadow
+    public static IConsoleLogManager MITE_log;
+
+    @Inject(method = "<init>", at = @At(value = "RETURN"))
+    public void removeInfo(CallbackInfo ci){
+        MITE_log = new NoConsoleLogManager();
+    }
 
     @Overwrite
     public static String getVersionDescriptor(boolean include_formatting) {

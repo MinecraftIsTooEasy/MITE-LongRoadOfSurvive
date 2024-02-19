@@ -1,7 +1,7 @@
 package net.oilcake.mitelros.mixins.item.enchantment;
 
 import net.minecraft.Enchantment;
-import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

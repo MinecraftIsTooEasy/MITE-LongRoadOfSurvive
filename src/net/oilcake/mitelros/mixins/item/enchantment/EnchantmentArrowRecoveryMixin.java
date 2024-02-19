@@ -7,7 +7,7 @@ import net.minecraft.yq;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import static net.oilcake.mitelros.item.enchantment.Enchantments.enchantmentInfinity;
+import static net.oilcake.mitelros.enchantment.Enchantments.enchantmentInfinity;
 
 @Mixin(net.minecraft.EnchantmentArrowRecovery.class)
 public class EnchantmentArrowRecoveryMixin extends Enchantment {

@@ -4,7 +4,7 @@ import net.minecraft.Connection;
 import net.minecraft.INetworkManager;
 import net.minecraft.PlayerConnection;
 import net.minecraft.ServerPlayer;
-import net.oilcake.mitelros.util.network.PacketDecreaseWater;
+import net.oilcake.mitelros.network.PacketDecreaseWater;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 

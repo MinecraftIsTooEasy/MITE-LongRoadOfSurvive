@@ -3,7 +3,7 @@ package net.oilcake.mitelros.mixins.item;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
-import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.enchantment.Enchantments;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

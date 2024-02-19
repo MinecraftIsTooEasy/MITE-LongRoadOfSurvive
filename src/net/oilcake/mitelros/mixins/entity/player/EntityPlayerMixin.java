@@ -8,7 +8,7 @@ import net.oilcake.mitelros.entity.EntityUndeadGuard;
 import net.oilcake.mitelros.item.ItemTotem;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
-import net.oilcake.mitelros.item.enchantment.Enchantments;
+import net.oilcake.mitelros.enchantment.Enchantments;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.*;
 import org.spongepowered.asm.mixin.Final;

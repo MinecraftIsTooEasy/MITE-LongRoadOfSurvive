@@ -2,7 +2,7 @@ package net.oilcake.mitelros.block.enchantreserver;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.BlockEnchantReserver;
-import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
+import net.oilcake.mitelros.network.PacketEnchantReserverInfo;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

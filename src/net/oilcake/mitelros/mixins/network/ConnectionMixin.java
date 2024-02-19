@@ -2,8 +2,8 @@ package net.oilcake.mitelros.mixins.network;
 
 import net.minecraft.Connection;
 import net.minecraft.Packet;
-import net.oilcake.mitelros.util.network.PacketDecreaseWater;
-import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
+import net.oilcake.mitelros.network.PacketDecreaseWater;
+import net.oilcake.mitelros.network.PacketEnchantReserverInfo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 

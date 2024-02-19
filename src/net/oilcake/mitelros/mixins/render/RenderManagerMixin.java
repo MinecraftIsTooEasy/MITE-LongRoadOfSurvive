@@ -2,7 +2,7 @@ package net.oilcake.mitelros.mixins.render;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.entity.*;
-import net.oilcake.mitelros.util.render.*;
+import net.oilcake.mitelros.client.render.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

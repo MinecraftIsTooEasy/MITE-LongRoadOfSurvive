@@ -2,7 +2,7 @@ package net.oilcake.mitelros.mixins;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.util.DamageSourceExtend;
-import net.oilcake.mitelros.util.network.PacketDecreaseWater;
+import net.oilcake.mitelros.network.PacketDecreaseWater;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;

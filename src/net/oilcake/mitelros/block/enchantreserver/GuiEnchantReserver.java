@@ -1,7 +1,7 @@
 package net.oilcake.mitelros.block.enchantreserver;
 
 import net.minecraft.*;
-import net.oilcake.mitelros.util.network.PacketEnchantReserverInfo;
+import net.oilcake.mitelros.network.PacketEnchantReserverInfo;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
