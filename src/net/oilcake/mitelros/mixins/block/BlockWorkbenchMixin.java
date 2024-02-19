@@ -12,8 +12,6 @@ import java.util.Random;
 
 @Mixin(BlockWorkbench.class)
 public class BlockWorkbenchMixin extends Block{
-    protected IIcon[] front_icons = new IIcon[17];
-    protected IIcon[] side_icons = new IIcon[17];
 
     private final Random random = new Random();
 
@@ -184,6 +182,11 @@ public class BlockWorkbenchMixin extends Block{
             this.side_icons[i] = par1IconRegister.a("crafting_table/" + BlockWorkbench.getToolMaterial(i).toString() + "/side");
         }
     }
+
+    @Shadow
+    protected IIcon[] front_icons;
+    @Shadow
+    protected IIcon[] side_icons;
     @Shadow
     @Mutable
     @Final
