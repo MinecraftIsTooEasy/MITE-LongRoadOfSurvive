@@ -61,16 +61,16 @@ public class Blocks extends Block {
         block.setUnlocalizedName(resourceLocation);
         block.setResourceLocation(resourceLocation);
         Item item = new ItemAnvil(block).setUnlocalizedName(resourceLocation);
-        Item.itemsList[Constant.getNextItemID()] = item;
         item.setMaxStackSize(block.getItemStackLimit());
     }
+
     private static void registerItemBlock(String resourceLocation, Block block){
         block.setUnlocalizedName(resourceLocation);
         block.setResourceLocation(resourceLocation);
         Item item = new ItemBlock(block).setUnlocalizedName(resourceLocation);
         item.setMaxStackSize(block.getItemStackLimit());
-        Item.itemsList[Constant.getNextItemID()] = item;
     }
+
     public static void registerBlocks() {
         registerAnvil("nickel_anvil", anvilNickel);
         anvilNickel.stepSound = Block.soundAnvilFootstep;
