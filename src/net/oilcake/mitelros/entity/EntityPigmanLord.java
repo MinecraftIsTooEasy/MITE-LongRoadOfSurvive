@@ -12,7 +12,6 @@ public class EntityPigmanLord extends EntityPigZombie {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.maxHealth, 30.0);
-        this.setEntityAttribute(GenericAttributes.followRange, 128.0);
         this.setEntityAttribute(GenericAttributes.attackDamage, 9.0);
     }
 

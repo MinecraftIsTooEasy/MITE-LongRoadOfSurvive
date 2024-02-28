@@ -305,7 +305,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
             return false;
         }
-        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && (this.isOutdoors() || this.worldObj.provider.dimensionId == -2)){
+        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && (this.isOutdoors() || (this.worldObj.provider.dimensionId == -2 && StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue))){
             if(this.getHelmet() != null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
                     this.getCuirass() != null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
                     this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
@@ -1039,6 +1039,16 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             }
         }
     }
+    @Overwrite
+    protected void fall(float par1) {
+        if (!this.capabilities.allowFlying) {
+            if (par1 >= 2.0F) {
+                this.addStat(StatisticList.distanceFallenStat, (int)Math.round((double)par1 * 100.0));
+            }
+            super.fall(par1);
+        }
+        this.setSprinting(false);
+    }
 //    public boolean isForwarding() {
 //        return this.isUsingItem() && Item.itemsList[this.itemInUse.itemID].getItemInUseAction(this.itemInUse, this.getAsPlayer()) == EnumItemInUseActionExtend.FORWARDING;
 //    }
@@ -1168,7 +1178,6 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
     @Shadow public abstract double getEyePosY();
 
-    @Shadow protected abstract void fall(float par1);
 
     @Shadow public abstract void playSound(String par1Str, float par2, float par3);
     @Shadow public void addScore(int par1){}

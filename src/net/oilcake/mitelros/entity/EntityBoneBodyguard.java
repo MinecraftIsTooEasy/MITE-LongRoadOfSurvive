@@ -9,7 +9,6 @@ public class EntityBoneBodyguard extends EntitySkeleton {
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setEntityAttribute(GenericAttributes.followRange, 64.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 6.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.28999999165534973);
         this.setEntityAttribute(GenericAttributes.attackDamage, 5.0);

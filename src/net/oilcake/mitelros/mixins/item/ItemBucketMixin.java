@@ -3,6 +3,8 @@ package net.oilcake.mitelros.mixins.item;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
+import net.oilcake.mitelros.util.DispenseBehaviorEmptyBucketRedirect;
+import net.oilcake.mitelros.util.DispenseBehaviorFilledBucketRedirect;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,6 +18,10 @@ public class ItemBucketMixin extends ItemVessel {
     public float getChanceOfMeltingWhenFilledWithLava() {
         Material material = this.getVesselMaterial();
         return (material == Material.adamantium || material == Materials.tungsten) ? 0.0F : (material == Material.gold ? 0.5F : 0.025F * (Material.mithril.getDurability() / material.getDurability()));
+    }
+    @Overwrite
+    public IDispenseBehavior getDispenserBehavior() {
+        return (IDispenseBehavior)(this.isEmpty() ? new DispenseBehaviorEmptyBucketRedirect((ItemBucket) this.getEmptyVessel()) : (this.getContents() != Material.water && this.getContents() != Material.lava ? null : new DispenseBehaviorFilledBucketRedirect((ItemBucket)this.getEmptyVessel())));
     }
     @Overwrite
     public Block getBlockForContents() {

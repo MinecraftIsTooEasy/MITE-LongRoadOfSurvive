@@ -32,7 +32,6 @@ public class EntityUndeadGuard extends EntitySkeleton implements IRangedEntity {
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.setEntityAttribute(GenericAttributes.followRange, 128.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.27000001072883606);
         this.setEntityAttribute(GenericAttributes.attackDamage, 6.0);
         this.setEntityAttribute(GenericAttributes.maxHealth, 12.0);

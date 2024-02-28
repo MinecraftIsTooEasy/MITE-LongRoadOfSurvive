@@ -40,7 +40,7 @@ public class EntitySpiderKing extends EntityArachnid {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.maxHealth, 28.0);
-        this.setEntityAttribute(GenericAttributes.followRange, 48.0);
+        this.setEntityAttribute(GenericAttributes.followRange, 56.0);
         this.setEntityAttribute(GenericAttributes.attackDamage, 13.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.92);
     }

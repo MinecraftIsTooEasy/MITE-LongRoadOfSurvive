@@ -18,7 +18,6 @@ public class EntityClusterSpider extends EntityArachnid {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         this.setEntityAttribute(GenericAttributes.maxHealth, 6.0);
-        this.setEntityAttribute(GenericAttributes.followRange, 48.0);
         this.setEntityAttribute(GenericAttributes.attackDamage, 3.0);
         this.setEntityAttribute(GenericAttributes.movementSpeed, 0.75);
     }

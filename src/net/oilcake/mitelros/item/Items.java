@@ -891,7 +891,7 @@ public class Items extends Item {
                         water_buckets[n], new ItemStack(Item.bowlEmpty, i)
                 ).resetDifficulty(25);
                 register.registerShapelessRecipe(new ItemStack(Items.claybowlWater, i), true,
-                        water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                        water_buckets[n], new ItemStack(Items.claybowlEmpty, i)
                 ).resetDifficulty(25);
             }
 
@@ -913,7 +913,7 @@ public class Items extends Item {
                         sus_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
                 ).resetDifficulty(25);
                 register.registerShapelessRecipe(new ItemStack(Items.claybowlWaterSuspicious, i), true,
-                        sus_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                        sus_water_buckets[n], new ItemStack(Items.claybowlEmpty, i)
                 ).resetDifficulty(25);
             }
             register.registerShapelessRecipe(new ItemStack(sus_water_buckets[n]), true, sus_water_buckets[n].getEmptyVessel(), new ItemStack(Items.bowlWaterSuspicious, 4)
@@ -928,7 +928,7 @@ public class Items extends Item {
                         smp_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
                 ).resetDifficulty(25);
                 register.registerShapelessRecipe(new ItemStack(Items.claybowlWaterSwampland, i), true,
-                        smp_water_buckets[n], new ItemStack(Item.bowlEmpty, i)
+                        smp_water_buckets[n], new ItemStack(Items.claybowlEmpty, i)
                 ).resetDifficulty(25);
             }
             register.registerShapelessRecipe(new ItemStack(smp_water_buckets[n]), true, smp_water_buckets[n].getEmptyVessel(), new ItemStack(Items.bowlWaterSwampland, 4)

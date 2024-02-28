@@ -16,6 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(bex.class)
 public abstract class EntityPlayerSPMixin extends beu{
     @Shadow
+    public bev c;
+    @Shadow
     protected Minecraft d;
     @Shadow
     public int f;
