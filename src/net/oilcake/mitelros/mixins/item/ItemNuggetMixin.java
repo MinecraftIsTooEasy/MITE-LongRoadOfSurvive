@@ -24,6 +24,8 @@ public class ItemNuggetMixin extends ItemIngot  {
             this.setXPReward(1);
         } else if (material == Material.gold){
             this.setXPReward(2);
+        } else if (material == Material.ancient_metal){
+            this.setXPReward(3);
         } else if (material == Material.mithril){
             this.setXPReward(4);
         } else if (material == Materials.tungsten){

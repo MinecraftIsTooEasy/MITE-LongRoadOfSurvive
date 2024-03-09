@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.util.CurseExtend;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -520,6 +521,36 @@ public final class EntityRendererMixin {
                 } else {
                     this.q.f.playSound(var8, var10, var12, "ambient.weather.rain", 0.05F * sleep_factor * distance_from_rain_factor, 0.25F, false);
                 }
+            }
+        }
+
+    }
+    private void f(float par1) {
+        if (this.q.i instanceof EntityPlayer) {
+            if(ExperimentalConfig.TagConfig.TagMovingV2.ConfigValue){
+                EntityPlayer var2 = (EntityPlayer)this.q.i;
+                float var3 = var2.distanceWalkedModified - var2.prevDistanceWalkedModified;
+                float strafe = var2.moveStrafing > 0 ? Math.min(0.8F, var2.moveStrafing)  * var3 / 5 : Math.max(-0.8F, var2.moveStrafing)  * var3 / 5 ;
+                float forward = var2.moveForward > 0 ? Math.min(0.8F, var2.moveForward)  * var3 / 5 : Math.max(-0.8F, var2.moveForward)  * var3 / 5;
+                float var4 = -(var2.distanceWalkedModified + var3 * par1);
+                float var5 = var2.prevCameraYaw + (var2.cameraYaw - var2.prevCameraYaw) * par1;
+                float var6 = var2.prevCameraPitch + (var2.cameraPitch - var2.prevCameraPitch) * par1;
+                GL11.glTranslatef(MathHelper.sin(var4 * 3.1415927F) * var5 * 2F * strafe, MathHelper.cos(var4 * 3.1415927F * 2) * var5 * 1F * forward, 0.0F);
+                GL11.glTranslatef(strafe, -forward, 0.0F);
+                GL11.glRotatef(MathHelper.sin(var4 * 3.1415927F) * var5 * 3.0F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(Math.abs(MathHelper.cos(var4 * 3.1415927F - 0.2F) * var5) * 5.0F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(var6, 1.0F, 0.0F, 0.0F);
+            }
+            else {
+                EntityPlayer var2 = (EntityPlayer)this.q.i;
+                float var3 = var2.distanceWalkedModified - var2.prevDistanceWalkedModified;
+                float var4 = -(var2.distanceWalkedModified + var3 * par1);
+                float var5 = var2.prevCameraYaw + (var2.cameraYaw - var2.prevCameraYaw) * par1;
+                float var6 = var2.prevCameraPitch + (var2.cameraPitch - var2.prevCameraPitch) * par1;
+                GL11.glTranslatef(MathHelper.sin(var4 * 3.1415927F) * var5 * 0.5F, -Math.abs(MathHelper.cos(var4 * 3.1415927F) * var5), 0.0F);
+                GL11.glRotatef(MathHelper.sin(var4 * 3.1415927F) * var5 * 3.0F, 0.0F, 0.0F, 1.0F);
+                GL11.glRotatef(Math.abs(MathHelper.cos(var4 * 3.1415927F - 0.2F) * var5) * 5.0F, 1.0F, 0.0F, 0.0F);
+                GL11.glRotatef(var6, 1.0F, 0.0F, 0.0F);
             }
         }
 

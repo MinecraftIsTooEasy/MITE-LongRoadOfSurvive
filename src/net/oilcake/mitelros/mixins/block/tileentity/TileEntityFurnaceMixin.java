@@ -5,6 +5,7 @@ import net.oilcake.mitelros.block.BlockBlastFurnace;
 import net.oilcake.mitelros.block.BlockSmoker;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,6 +28,12 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     private boolean activated = false;
     @Overwrite
     public static int getHeatLevelRequired(int item_id) {
+        Item item = Item.getItem(item_id);
+        if (item instanceof ItemTool){
+            return item.getHardestMetalMaterial() == Materials.tungsten ? 4 : item.getHardestMetalMaterial() == Material.rusted_iron ? 2 : 3;
+        }else if(item instanceof ItemArmor){
+            return item.getHardestMetalMaterial() == Materials.tungsten ? 4 : item.getHardestMetalMaterial() == Material.rusted_iron ? 2 : 3;
+        }
         if (item_id == Block.oreAdamantium.blockID || item_id == Items.pieceAdamantium.itemID || item_id == Blocks.oreUru.blockID || item_id == Items.pieceUru.itemID) {
             return 4;
         } else if (item_id == Block.oreMithril.blockID || item_id == Blocks.oreTungsten.blockID || item_id == Items.pieceMithril.itemID || item_id == Items.pieceTungsten.itemID || item_id == Items.AncientmetalArmorPiece.itemID) {
@@ -46,6 +53,10 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
         if (this.furnaceItemStacks[0] == null) {
             return false;
         } else if(this.getInputItemStack().getItem() instanceof ItemFood && this.isBlastFurnace()){
+            return false;
+        } else if(this.getInputItemStack().getItem() instanceof ItemArmor && !this.isBlastFurnace()){
+            return false;
+        } else if(this.getInputItemStack().getItem() instanceof ItemTool && !this.isBlastFurnace()){
             return false;
         } else if(!(this.getInputItemStack().getItem() instanceof ItemFood) && this.isSmoker()){
             return false;

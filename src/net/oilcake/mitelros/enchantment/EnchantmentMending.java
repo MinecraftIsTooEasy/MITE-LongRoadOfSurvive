@@ -2,29 +2,28 @@ package net.oilcake.mitelros.enchantment;
 
 import net.minecraft.*;
 
-import static net.oilcake.mitelros.enchantment.Enchantments.enchantmentAbsorb;
-
-public class EnchantmentMelting extends Enchantment {
-    protected EnchantmentMelting(int id, yq rarity, int difficulty) {
+public class EnchantmentMending extends Enchantment{
+    protected EnchantmentMending(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);
     }
 
     @Override
     public int getNumLevels() {
-        return 5;
+        return 1;
     }
     @Override
     public boolean canApplyTogether(Enchantment par1Enchantment) {
-        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != enchantmentAbsorb.effectId && par1Enchantment.effectId != silkTouch.effectId;
+        return super.canApplyTogether(par1Enchantment) && par1Enchantment.effectId != unbreaking.effectId;
     }
+
     @Override
     public String getNameSuffix() {
-        return "melting";
+        return "mending";
     }
 
     @Override
     public boolean canEnchantItem(Item item) {
-        return item instanceof ItemPickaxe && !(item instanceof ItemWarHammer);
+        return item instanceof ItemTool || item instanceof ItemArmor;
     }
 
     @Override

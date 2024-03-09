@@ -4,6 +4,7 @@ import net.minecraft.Minecraft;
 import net.minecraft.aul;
 import net.minecraft.bev;
 import net.minecraft.bew;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -12,7 +13,7 @@ public class MovementInputFromOptionsMixin extends bev {
     @Shadow
     private aul e;
     public void a() {
-        if(Minecraft.O.inDevMode()){
+        if(!ExperimentalConfig.TagConfig.TagMovingV2.ConfigValue){
             this.a = 0.0F;
             this.b = 0.0F;
             if (!Minecraft.O.h.isGhost()) {
@@ -80,7 +81,12 @@ public class MovementInputFromOptionsMixin extends bev {
                         this.a -= 0.5F;
                     }
                 }
-                this.c = this.e.M.c();
+                if(Minecraft.O.h.isInWater() || Minecraft.O.inDevMode()){
+                    this.c = this.e.M.e;
+                }else {
+                    this.c = this.e.M.c();
+                }
+
                 this.d = this.e.Q.e;
                 if (this.d) {
                     this.a = (float)((double)this.a * 0.5);

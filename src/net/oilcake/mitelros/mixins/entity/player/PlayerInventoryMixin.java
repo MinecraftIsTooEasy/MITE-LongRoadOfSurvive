@@ -27,7 +27,7 @@ public class PlayerInventoryMixin {
         for(var1 = 0; var1 < this.armorInventory.length; ++var1) {
             if (this.armorInventory[var1] != null && EnchantmentManager.hasEnchantment(this.armorInventory[var1], Enchantments.enchantmentVanishing)) {
                 //this.player.dropPlayerItemWithRandomChoice(this.armorInventory[var1], true);
-                this.destroyInventoryItemStack(this.mainInventory[var1]);
+                this.destroyInventoryItemStack(this.armorInventory[var1]);
                 this.armorInventory[var1] = null;
             }
         }

@@ -23,7 +23,7 @@ public class EnchantmentAbsorb extends Enchantment {
 
     @Override
     public boolean canEnchantItem(Item item) {
-        return item instanceof ItemPickaxe;
+        return item instanceof ItemPickaxe && !(item instanceof ItemWarHammer);
     }
 
     @Override

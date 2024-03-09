@@ -20,6 +20,14 @@ public class BlockWorkbenchMixin extends Block{
     protected BlockWorkbenchMixin(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
     }
+    @Inject(method = "<init>(I)V", at = @At("RETURN"))
+    private void injectInit(int par1, CallbackInfo callbackInfo){
+        this.setMinHarvestLevel(1);
+    }
+    @Overwrite
+    public boolean isPortable(World world, EntityLiving entity_living_base, int x, int y, int z) {
+        return world.getBlockMetadata(x, y, z) > 3 && world.getBlockMetadata(x, y, z) < 13;
+    }
 
     public int dropBlockAsEntityItem(BlockBreakInfo info) {
         if(ExperimentalConfig.TagConfig.TagBenchingV2.ConfigValue || info.wasExploded()){
@@ -27,7 +35,7 @@ public class BlockWorkbenchMixin extends Block{
                 int quantity_drops = 2 + (int) (this.random.nextFloat() * 4);
                 if (info.getMetadata() < 4) {
                     this.dropBlockAsEntityItem(info, Item.chipFlint.itemID, 0, quantity_drops / 2, 1.0F);
-                } else if (info.getMetadata() == 13 || info.getMetadata() == 14 || info.getMetadata() == 15) {
+                } else if (info.getMetadata() > 12) {
                     if(this.random.nextInt(16) == 0){
                         this.dropBlockAsEntityItem(info, Block.obsidian.blockID);
                     } else{

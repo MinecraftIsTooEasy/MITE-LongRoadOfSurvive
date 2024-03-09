@@ -21,9 +21,6 @@ public class CommandFullyAir extends CommandAbstract {
     public void processCommand(ICommandListener iCommandListener, String[] strings) {
         EntityPlayer player = getCommandSenderAsPlayer(iCommandListener);
         World world = iCommandListener.getEntityWorld();
-
-
-
         //决定X
         int X = Integer.parseInt(strings[0]);
         //决定Y

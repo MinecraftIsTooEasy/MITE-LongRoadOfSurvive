@@ -967,6 +967,26 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(SuspiciousPotion.itemID, new ItemStack(potion,1,0));
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));
         RecipesFurnace.smelting().addSmelting(claybowlRaw.itemID, new ItemStack(claybowlEmpty));
+
+        Class[] tools = new Class[]{ItemSword.class, ItemAxe.class,ItemPickaxe.class,ItemHoe.class, ItemShovel.class, ItemWarHammer.class, ItemBattleAxe.class, ItemScythe.class, ItemDagger.class, ItemKnife.class, ItemMorningStar.class, ItemHatchet.class, ItemShears.class, ItemMattock.class, ItemHelmet.class, ItemBoots.class, ItemLeggings.class, ItemCuirass.class};
+        Material[] available_material = new Material[]{Material.copper, Material.silver, Material.gold, Material.iron, Materials.nickel, Materials.tungsten, Material.ancient_metal, Material.rusted_iron};
+        for (Class tool : tools) {
+            for (Material material : available_material) {
+                Item matchingitem = Item.getMatchingItem(tool, material);
+                if(matchingitem != null){
+                    if(matchingitem instanceof ItemArmor){
+                        matchingitem = ItemArmor.getMatchingArmor(tool, material, false);
+                        RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
+                        matchingitem = ItemArmor.getMatchingArmor(tool, material, true);
+                        RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
+                    }else {
+                        RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
+                    }
+                }
+            }
+        }
+
+
         ItemFood.setCookingResult((ItemFood) horse_meat, (ItemFood) horse_meat_cooked, 6);
     }
     private static Item register(String resourceLocation, Item item, CreativeModeTab tab) {

@@ -1,5 +1,8 @@
 package net.oilcake.mitelros.util;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.checkerframework.checker.units.qual.C;
+
 import javax.swing.*;
 import java.io.*;
 import java.util.HashMap;
@@ -43,6 +46,8 @@ public class ExperimentalConfig {
         public static ConfigItem <Boolean> TagBenchingV2 = new ConfigItem<>("BenchingV2",false,"工作站废料回收");
         public static ConfigItem <Boolean> FinalChallenge = new ConfigItem<>("FinalChallenge",false,"终极挑战模式");
         public static ConfigItem <Boolean> Realistic = new ConfigItem<>("Realistic",false,"真实状态模拟");
+        public static ConfigItem <Boolean> TagMovingV2 = new ConfigItem<>("MovingV2", false, "新移动模式");
+//        public static ConfigItem <Boolean> NewVersion = new ConfigItem<>("NewVersion", false, "启用未完成的版本内容");
         //*这个有问题*//
 
         //public static ConfigItem <Boolean> = new ConfigItem("Tag",false,"(LVL)");
@@ -56,6 +61,8 @@ public class ExperimentalConfig {
         Tags.put("BenchingV2",TagConfig.TagBenchingV2);
         Tags.put("FinalChallenge",TagConfig.FinalChallenge);
         Tags.put("Realistic", TagConfig.Realistic);
+        Tags.put("MovingV2", TagConfig.TagMovingV2);
+//        Tags.put("NewVersion", TagConfig.NewVersion);
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 
 

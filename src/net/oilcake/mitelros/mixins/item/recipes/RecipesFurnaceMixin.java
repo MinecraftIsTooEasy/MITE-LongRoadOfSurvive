@@ -1,9 +1,6 @@
 package net.oilcake.mitelros.mixins.item.recipes;
 
-import net.minecraft.Block;
-import net.minecraft.ItemStack;
-import net.minecraft.RecipesFurnace;
-import net.minecraft.TileEntityFurnace;
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -26,12 +23,37 @@ public class RecipesFurnaceMixin {
                 return (ItemStack)this.smeltingList.get(input_item_id);
             } else {
                 ItemStack result_item_stack;
-                if (input_item_id == Items.claybowlRaw.itemID) {
+                if (input_item_stack.getItem() instanceof ItemArmor){
+                    int quantity = (int) ((float) ((input_item_stack.getMaxDamage() - input_item_stack.getItemDamage()) / (float)input_item_stack.getMaxDamage()) * ((ItemArmor) input_item_stack.getItem()).getNumComponentsForDurability() * (input_item_stack.getItem().isChainMail() ? 4.0F : 9.0F));
+                    ItemStack output;
+                    if(input_item_stack.getItem().getHardestMetalMaterial() == Material.rusted_iron){
+                        quantity /= 3;
+                        output = new ItemStack(Item.getMatchingItem(ItemNugget.class, Material.iron),quantity);
+                    }else {
+                        output = new ItemStack(Item.getMatchingItem(ItemNugget.class, input_item_stack.getItem().getMaterialForRepairs()),quantity);
+                    }
+                    if (quantity == 0) {
+                        output = null;
+                    }
+                    result_item_stack = output;
+                }else if(input_item_stack.getItem() instanceof ItemTool){
+                    int quantity = (int) ((float) ((input_item_stack.getMaxDamage() - input_item_stack.getItemDamage()) / (float)input_item_stack.getMaxDamage()) * ((ItemTool) input_item_stack.getItem()).getNumComponentsForDurability() * 9.0F);
+                    ItemStack output;
+                    if(input_item_stack.getItem().getHardestMetalMaterial() == Material.rusted_iron){
+                        quantity /= 3;
+                        output = new ItemStack(Item.getMatchingItem(ItemNugget.class, Material.iron),quantity);
+                    }else {
+                        output = new ItemStack(Item.getMatchingItem(ItemNugget.class, input_item_stack.getItem().getMaterialForRepairs()),quantity);
+                    }
+                    if (quantity == 0) {
+                        output = null;
+                    }
+                    result_item_stack = output;
+                }else if (input_item_id == Items.claybowlRaw.itemID) {
                     result_item_stack = input_item_stack.stackSize >= 4 ? new ItemStack(Items.claybowlEmpty,4) : null;
-                }
-                else if (input_item_id == Block.sand.blockID) {
+                }else if (input_item_id == Block.sand.blockID) {
                     result_item_stack = (heat_level != 1 || input_item_stack.stackSize >= 4) && input_item_stack.stackSize >= 4 ? new ItemStack(heat_level == 1 ? Block.sandStone : Block.glass) : null;
-                } else {
+                }else {
                     result_item_stack = (ItemStack)this.smeltingList.get(input_item_id);
                 }
 

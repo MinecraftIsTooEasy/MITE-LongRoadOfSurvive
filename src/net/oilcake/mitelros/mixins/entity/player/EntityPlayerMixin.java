@@ -317,6 +317,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         }
         return false;
     }
+    public boolean willRepair(ItemStack holding){
+        return EnchantmentManager.hasEnchantment(holding, Enchantments.enchantmentMending);
+    }
     public boolean InHeat(){
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         return biome.temperature >= 1.50F && StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue;
@@ -640,6 +643,23 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //        if(this.isForwarding()){
 //            List <Entity>targets = this.getNearbyEntities(4.0F, 4.0F);
 //        }
+        //实验性经验修补
+        ItemStack holding = this.getHeldItemStack();
+        if(holding != null && willRepair(holding)){
+            if((float) holding.getRemainingDurability() / holding.getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * holding.getItem().getHardestMetalMaterial().getMinHarvestLevel()){
+                this.addExperience(-holding.getMaxDamage() / 32, false, true);
+                holding.setItemDamage(holding.getItemDamage() - holding.getMaxDamage() / 8);
+            }
+        }
+        ItemStack[] item_stack_to_repair = this.getWornItems();
+        for(int n = 0;n < item_stack_to_repair.length;n++){
+            if(item_stack_to_repair[n] != null && willRepair(item_stack_to_repair[n])){
+                if((float) item_stack_to_repair[n].getRemainingDurability() / item_stack_to_repair[n].getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * item_stack_to_repair[n].getItem().getHardestMetalMaterial().getMinHarvestLevel()){
+                    this.addExperience(-50, false, true);
+                    item_stack_to_repair[n].setItemDamage(item_stack_to_repair[n].getItemDamage() - 1);
+                }
+            }
+        }
     }
 
     public int getFreezingCooldown() {
@@ -672,8 +692,13 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             if (!suppress_sound) {
                 this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
             }
+            ItemStack holding = this.getHeldItemStack();
+            if(holding != null && willRepair(holding)){
+                for(;this.getHeldItemStack().getItemDamage() >= 4 && amount > 0;amount --){
+                    this.getHeldItemStack().setItemDamage(holding.getItemDamage() - 4);
+                }
+            }
         }
-
         float health_limit_before = this.getHealthLimit();
         int level_before = this.getExperienceLevel();
         this.experience += amount;
@@ -1047,7 +1072,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             }
             super.fall(par1);
         }
-        this.setSprinting(false);
+        if (ExperimentalConfig.TagConfig.TagMovingV2.ConfigValue){
+            this.setSprinting(false);
+        }
     }
 //    public boolean isForwarding() {
 //        return this.isUsingItem() && Item.itemsList[this.itemInUse.itemID].getItemInUseAction(this.itemInUse, this.getAsPlayer()) == EnumItemInUseActionExtend.FORWARDING;
