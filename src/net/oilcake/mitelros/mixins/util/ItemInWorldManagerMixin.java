@@ -78,7 +78,7 @@ public class ItemInWorldManagerMixin {
                                 }
 
                                 if (block == Block.wood && !this.tree_felling_in_progress) {
-                                    int felling = EnchantmentManager.getTreeFellingModifier(this.thisPlayerMP);
+                                    int felling = EnchantmentManager.getTreeFellingModifier(this.thisPlayerMP) * 4;
                                     this.tree_felling_in_progress = true;
                                     this.fellTree(this.theWorld,x,y,z,felling);
 //                                    for(int dy = 1; dy <= felling && this.theWorld.getBlockId(x, y + dy, z) == Block.wood.blockID; ++dy) {
@@ -135,6 +135,16 @@ public class ItemInWorldManagerMixin {
                     for(int z = start[2] - 1; z <= start[2] + 1; z++){
                         int[] next = new int[]{x, y, z};
                         if(!(hint.contains(next)) && chopping >= 1 && world.getBlockId(pos_x + x, pos_y + y ,pos_z + z) == Block.wood.blockID){
+                            hint.addLast(next);
+                            this.tryHarvestBlock(pos_x + x, pos_y + y ,pos_z + z);
+                            chopping -= 4;
+                        }
+                        if(!(hint.contains(next)) && chopping >= 1 && world.getBlockId(pos_x + x, pos_y + y ,pos_z + z) == Block.mushroomCapBrown.blockID){
+                            hint.addLast(next);
+                            this.tryHarvestBlock(pos_x + x, pos_y + y ,pos_z + z);
+                            chopping--;
+                        }
+                        if(!(hint.contains(next)) && chopping >= 1 && world.getBlockId(pos_x + x, pos_y + y ,pos_z + z) == Block.mushroomCapRed.blockID){
                             hint.addLast(next);
                             this.tryHarvestBlock(pos_x + x, pos_y + y ,pos_z + z);
                             chopping--;
