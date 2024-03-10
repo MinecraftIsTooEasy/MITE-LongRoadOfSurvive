@@ -6,9 +6,9 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " R13 ";
+    public static final String VERSION = " R13b ";
     public static final bjo icons_itf = new bjo("textures/gui/icons_mitf.png");
-    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
+//    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
     public static final int VER_NUM = 114514;
     public static int nextItemID = 1284;

@@ -75,7 +75,9 @@ public class ItemStackMixin{
                     if (Enchantment.enchantmentsList[required_heat_level] != null) {
                         if(Enchantment.enchantmentsList[required_heat_level].isReverse()){
                             var3.add(EnumChatFormat.RED + Enchantment.enchantmentsList[required_heat_level].getTranslatedName(hypothetical_level, dyCast(this)));
-                        }else{
+                        } else if (Enchantment.enchantmentsList[required_heat_level].isTreasure()) {
+                            var3.add(EnumChatFormat.getByChar('6') + Enchantment.enchantmentsList[required_heat_level].getTranslatedName(hypothetical_level, dyCast(this)));
+                        } else{
                             var3.add(EnumChatFormat.AQUA + Enchantment.enchantmentsList[required_heat_level].getTranslatedName(hypothetical_level, dyCast(this)));
                         }
                     }

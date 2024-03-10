@@ -1,4 +1,4 @@
-package net.oilcake.mitelros.mixins.item.enchantment;
+package net.oilcake.mitelros.mixins.enchantment;
 
 import net.minecraft.CreativeModeTab;
 import net.minecraft.Enchantment;

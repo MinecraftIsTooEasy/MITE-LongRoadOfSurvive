@@ -1,4 +1,4 @@
-//package net.oilcake.mitelros.mixins.item.enchantment;
+//package net.oilcake.mitelros.mixins.enchantment;
 //
 //import net.minecraft.*;
 //import net.oilcake.mitelros.item.Items;
