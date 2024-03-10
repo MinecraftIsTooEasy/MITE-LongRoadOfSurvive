@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.enchantment;
 
 import net.minecraft.*;
+import org.spongepowered.asm.mixin.Unique;
 
 public class EnchantmentMending extends Enchantment{
     protected EnchantmentMending(int id, yq rarity, int difficulty) {
@@ -29,5 +30,9 @@ public class EnchantmentMending extends Enchantment{
     @Override
     public boolean isOnCreativeTab(CreativeModeTab creativeModeTab) {
         return creativeModeTab == CreativeModeTab.tabTools;
+    }
+    @Override
+    public boolean isTreasure(){
+        return true;
     }
 }

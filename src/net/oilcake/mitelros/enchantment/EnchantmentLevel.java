@@ -28,7 +28,7 @@ public class EnchantmentLevel {
         }
     }
 
-    public static final yq Null = newEnumEnchantmentLevel(0, "Null", 0);
+    public static final yq Ultimate = newEnumEnchantmentLevel(13, "Ultimate", 0);
 
     private static final yq newEnumEnchantmentLevel(int color_index, String name, int standard_weight){
         try {

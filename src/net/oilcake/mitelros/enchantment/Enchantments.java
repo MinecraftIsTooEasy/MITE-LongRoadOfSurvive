@@ -23,7 +23,7 @@ public class Enchantments {
     public static final Enchantment enchantmentArrogance = new EnchantmentArrogance(Constant.getNextEnchantmentID(), yq.c,15);
     public static final Enchantment enchantmentThresher = new EnchantmentThresher(Constant.getNextEnchantmentID(),yq.c, 10);
     public static final Enchantment enchantmentSweeping = new EnchantmentSweeping(Constant.getNextEnchantmentID(),yq.c,10);
-    public static final Enchantment enchantmentMending = new EnchantmentMending(Constant.getNextEnchantmentID(),yq.d, 20);
+    public static final Enchantment enchantmentMending = new EnchantmentMending(Constant.getNextEnchantmentID(),EnchantmentLevel.Ultimate, 20);
 //    public static final Enchantment enchantmentProtectFire = new EnchantmentProtectFire(Constant.getNextEnchantmentID(), yq.b,15);
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
