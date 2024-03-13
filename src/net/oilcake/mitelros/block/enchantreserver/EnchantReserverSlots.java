@@ -82,6 +82,7 @@ public class EnchantReserverSlots extends InventorySubcontainer {
 //        }
 //    }
 
+
     public void dropItems(World world, int x, int y, int z) {
         for(int var2 = 0; var2 < this.tileEntityEnchantReserver.getSizeInventory(); ++var2) {
             ItemStack var3 = this.tileEntityEnchantReserver.getItem(var2);

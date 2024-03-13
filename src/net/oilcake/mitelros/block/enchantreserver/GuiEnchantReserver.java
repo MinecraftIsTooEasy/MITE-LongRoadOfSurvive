@@ -42,12 +42,14 @@ public class GuiEnchantReserver extends awy implements ICrafting {
         this.f.J().a(ENCHANT_RESERVER_TEXTURE);
         int var4 = (this.g - this.c) / 2;
         int var5 = (this.h - this.d) / 2;
+        int var6 = this.p;
+        int var7 = this.q;
         this.b(var4, var5, 0, 0, this.c, this.d);
-        int exp = tileEntityEnchantReserver.getEXP();
-        int maxExp = tileEntityEnchantReserver.getMAXEXP();
+        int exp = Math.max(0 , tileEntityEnchantReserver.getEXP() - 2000);
+        int maxExp = tileEntityEnchantReserver.getMAXEXP() - 2000;
         //if (exp != 0) {
         //x, y, u, v, width, height
-        this.b(this.g/2+8, this.h/2-36, 17, 0, 16, (int) (30 * (float) 123 / (float)maxExp));
+        this.b(var6 + 99, var7 + 21, 176, 0, 16, (int) (43 * (float) exp / (float)maxExp));
         //}
         this.o.b(exp + "/" + maxExp , this.g/2+8, this.h/2-70, 7048739);
 

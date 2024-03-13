@@ -6,7 +6,10 @@ import net.oilcake.mitelros.item.Items;
 
 import java.util.Arrays;
 
-public class TileEntityEnchantReserver extends TileEntity implements IInventory {
+public class TileEntityEnchantReserver extends TileEntity implements IWorldInventory {
+    private static final int[] slots_top = new int[]{0};
+    private static final int[] slots_bottom = new int[]{1};
+    private static final int[] slots_sides = new int[]{1};
 
     private final EnchantReserverSlots slots = new EnchantReserverSlots(this);
     private final ItemStack[] items = new ItemStack[EnchantReserverSlots.slotSize];
@@ -52,6 +55,22 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
 //            this.slots.updateInfo();
 //        }
 //    }
+    @Override
+    public int[] getSlotsForFace(int par1) {
+        return par1 == 0 ? slots_bottom : (par1 == 1 ? slots_top : slots_sides);
+    }
+    @Override
+    public boolean canInsertItem(int par1, ItemStack par2ItemStack, int par3) {
+        return this.isItemValidForSlot(par1, par2ItemStack);
+    }
+    @Override
+    public boolean canExtractItem(int par1, ItemStack par2ItemStack, int par3) {
+        if (par3 == 0 && par1 == 1) {
+            return !(par2ItemStack.getItem() instanceof ItemNugget) && par2ItemStack.getItem() != Item.potion;
+        } else {
+            return true;
+        }
+    }
     public void updateEntity() {
         this.slots.updateInfo();
         if (!this.getWorldObj().isRemote) {
@@ -92,64 +111,64 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
                 ItemStack outputStack = this.slots.getOutPutStack();
                 if (outputStack != null) {
                     if (this.getEXP() >= 200) {
-                        if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() + 2000) {
-                            this.EXP -= 200;
+                        if (outputStack.itemID == Item.potion.itemID && outputStack.stackSize * 200 <= this.getEXP() - 2000) {
+                            this.EXP -= 200 * outputStack.stackSize;
                             this.slots.getOutPut().putStack(Item.expBottle.getItemStackForStatsIcon());
                         }
                     }
                     if (this.getEXP() >= 5) {
-                        if (outputStack.itemID == Item.copperNugget.itemID && outputStack.stackSize * 5 <= this.getEXP() + 2000) {
-                            this.EXP -= 5;
+                        if (outputStack.itemID == Item.copperNugget.itemID && outputStack.stackSize * 5 <= this.getEXP() - 2000) {
+                            this.EXP -= 5 * outputStack.stackSize;
                             //* size;
-                            this.slots.getOutPut().putStack(Item.coinCopper.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Item.coinCopper, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 25) {
-                        if (outputStack.itemID == Item.silverNugget.itemID && outputStack.stackSize * 25 <= this.getEXP() + 2000) {
-                            this.EXP -= 25;
+                        if (outputStack.itemID == Item.silverNugget.itemID && outputStack.stackSize * 25 <= this.getEXP() - 2000) {
+                            this.EXP -= 25 * outputStack.stackSize;
                             //* size;
-                            this.slots.getOutPut().putStack(Item.coinSilver.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Item.coinSilver, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 50) {
-                        if (outputStack.itemID == Items.nickelNugget.itemID && outputStack.stackSize * 50 <= this.getEXP() + 2000) {
-                            this.EXP -= 50;
+                        if (outputStack.itemID == Items.nickelNugget.itemID && outputStack.stackSize * 50 <= this.getEXP() - 2000) {
+                            this.EXP -= 50 * outputStack.stackSize;
                             //* size;
-                            this.slots.getOutPut().putStack(Items.nickelCoin.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Items.nickelCoin, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 100) {
-                        if (outputStack.itemID == Item.goldNugget.itemID && outputStack.stackSize * 100 <= this.getEXP() + 2000) {
-                            this.EXP -= 100;
+                        if (outputStack.itemID == Item.goldNugget.itemID && outputStack.stackSize * 100 <= this.getEXP() - 2000) {
+                            this.EXP -= 100 * outputStack.stackSize;
                                     //* size;
-                            this.slots.getOutPut().putStack(Items.coinGold.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Item.coinGold, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 500) {
-                        if (outputStack.itemID == Item.ancientMetalNugget.itemID && outputStack.stackSize * 250 <= this.getEXP() + 2000) {
-                            this.EXP -= 500;
+                        if (outputStack.itemID == Item.ancientMetalNugget.itemID && outputStack.stackSize * 500 <= this.getEXP() - 2000) {
+                            this.EXP -= 500 * outputStack.stackSize;
                             //* size;
-                            this.slots.getOutPut().putStack(Items.coinAncientMetal.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Item.coinAncientMetal, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 2500) {
-                        if (outputStack.itemID == Item.mithrilNugget.itemID && outputStack.stackSize * 2500 <= this.getEXP() + 2000) {
-                            this.EXP -= 2500;
+                        if (outputStack.itemID == Item.mithrilNugget.itemID && outputStack.stackSize * 2500 <= this.getEXP() - 2000) {
+                            this.EXP -= 2500 * outputStack.stackSize;
                             //* size;
-                            this.slots.getOutPut().putStack(Items.coinMithril.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Item.coinMithril, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 5000) {
-                        if (outputStack.itemID == Items.tungstenNugget.itemID && outputStack.stackSize * 5000 <= this.getEXP() + 2000) {
-                            this.EXP -= 5000;
-                            this.slots.getOutPut().putStack(Items.tungstenCoin.getItemStackForStatsIcon());
+                        if (outputStack.itemID == Items.tungstenNugget.itemID && outputStack.stackSize * 5000 <= this.getEXP() - 2000) {
+                            this.EXP -= 5000 * outputStack.stackSize;
+                            this.slots.getOutPut().putStack(new ItemStack(Items.tungstenCoin, outputStack.stackSize));
                         }
                     }
                     if (this.getEXP() >= 10000) {
-                        if (outputStack.itemID == Item.adamantiumNugget.itemID && outputStack.stackSize * 10000 <= this.getEXP() + 2000) {
-                            this.EXP -= 10000;
+                        if (outputStack.itemID == Item.adamantiumNugget.itemID && outputStack.stackSize * 10000 <= this.getEXP() - 2000) {
+                            this.EXP -= 10000 * outputStack.stackSize;
                             //* size;
-                            this.slots.getOutPut().putStack(Item.coinAdamantium.getItemStackForStatsIcon());
+                            this.slots.getOutPut().putStack(new ItemStack(Item.coinAdamantium, outputStack.stackSize));
                         }
                     }
                 }
@@ -200,7 +219,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IInventory 
 
     @Override
     public int getInventoryStackLimit() {
-        return 1;
+        return 64;
     }
 
     @Override
