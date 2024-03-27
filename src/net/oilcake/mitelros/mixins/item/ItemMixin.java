@@ -8,9 +8,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.PrintStream;
@@ -19,6 +17,12 @@ import java.util.List;
 @Mixin(Item.class)
 public class ItemMixin{
     private int water;
+    @ModifyConstant(method = {
+            "<init>(ILjava/lang/String;I)V",
+    }, constant = @Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
 
     @Inject(method = "<init>()V",at = @At("RETURN"))
     private void injectCtor(CallbackInfo callbackInfo){

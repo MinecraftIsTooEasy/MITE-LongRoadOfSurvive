@@ -17,7 +17,7 @@ public class ItemRockMixin {
     public static int getExperienceValueWhenSacrificed(ItemStack item_stack)
     {
         Item item = item_stack.getItem();
-        return item == Items.lapis ? 25 : (item == netherQuartz ? 50 : (item == emerald ? 250 : (item == diamond ? 500 : 0)));
+        return item == Items.shardAzurite ? 3 : (item == Items.lapis ? 25 : (item == netherQuartz ? 50 : (item == emerald ? 250 : (item == diamond ? 500 : 0))));
     }
     @Overwrite
     public static boolean onItemRightClick(EntityPlayer player, ItemStack item_stack, float partial_tick, boolean ctrl_is_down) {

@@ -43,6 +43,8 @@ public class WorldGenMinableMixin {
                 return 0;
             } else if (block == Blocks.oreNickel) {
                 return 0;
+            } else if (block == Blocks.blockAzurite) {
+                return 32;
             } else if (block == Blocks.oreTungsten) {
                 return 0;
             } else if (block == Block.oreMithril) {
@@ -86,8 +88,10 @@ public class WorldGenMinableMixin {
                 return 64;
             } else if (block == Blocks.oreNickel) {
                 return 48;
-            }  else if (block == Blocks.oreTungsten) {
+            } else if (block == Blocks.oreTungsten) {
                 return 32;
+            } else if (block == Blocks.blockAzurite) {
+                return 96;
             } else if (block == Block.oreMithril) {
                 return 32;
             } else if (block != Block.oreAdamantium && block != Block.silverfish) {
@@ -162,6 +166,10 @@ public class WorldGenMinableMixin {
                     relative_height = rand.nextFloat();
                 } while(!(relative_height < rand.nextFloat()));
             }else if (block == Blocks.oreTungsten) {
+                do {
+                    relative_height = rand.nextFloat();
+                } while(!(relative_height < rand.nextFloat()));
+            }else if (block == Blocks.blockAzurite) {
                 do {
                     relative_height = rand.nextFloat();
                 } while(!(relative_height < rand.nextFloat()));

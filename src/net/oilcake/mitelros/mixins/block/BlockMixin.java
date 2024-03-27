@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
@@ -22,7 +24,10 @@ public abstract class BlockMixin{
     private static void injectClinit(CallbackInfo callback) {
         Item.itemsList[Blocks.flowerextend.blockID] = (new ItemMultiTexture(Blocks.flowerextend, BlockFlowerExtend.types)).setUnlocalizedName("flowers");
     }
-
+    @ModifyConstant(method = {"<clinit>", "getBlock(Ljava/lang/String;)Lnet/minecraft/Block;",}, constant = @Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
     @Overwrite
     public int dropBlockAsItself(BlockBreakInfo info) {
         if (info.block != block) {

@@ -20,6 +20,7 @@ public class BiomeDecoratorMixin{
 
     private WorldGenMinable nickelGen;
     private WorldGenMinable tungstenGen;
+    private WorldGenMinable azuriteGen;
     protected WorldGenFlowersExtend flowerExtendGen;
     protected int flowersExtendPerChunk;
     @Shadow
@@ -35,6 +36,7 @@ public class BiomeDecoratorMixin{
     public void BiomeDecorator(CallbackInfo callbackInfo) {
         this.nickelGen = new WorldGenMinable(Blocks.oreNickel.blockID, 6);
         this.tungstenGen = new WorldGenMinable(Blocks.oreTungsten.blockID, 3);
+        this.azuriteGen = new WorldGenMinable(Blocks.blockAzurite.blockID, 4);
         this.flowerExtendGen = new WorldGenFlowersExtend(Blocks.flowerextend.blockID);
         this.flowersExtendPerChunk = 2;
     }
@@ -46,6 +48,7 @@ public class BiomeDecoratorMixin{
             this.genMinable(200, this.gravelGen);
             this.genMinable(50, this.coalGen);
             this.genMinable(40, this.copperGen, true);
+            this.genMinable(10, this.azuriteGen, true);
             this.genMinable(10, this.silverGen, true);
             this.genMinable(20, this.goldGen, true);
             this.genMinable(60, this.ironGen, true);

@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.io.File;
@@ -33,6 +34,12 @@ public class MinecraftMixin {
         return "1.6.4-MITE" + " is too false" + (Main.is_MITE_DS ? "-DS" : "")  + (Minecraft
                 .inDevMode() ? red + " DEV" : "");
     }
+    @ModifyConstant(method = {
+            "W",
+    }, constant = @org.spongepowered.asm.mixin.injection.Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
 //    @Inject(method = "S()V", at = @At(value = "RETURN"))
 //    public void ResetGammaTail(CallbackInfo callbackInfo){
 //        this.u.ak = this.ReportedGamma;
@@ -41,5 +48,4 @@ public class MinecraftMixin {
 //    public void ResetGammaHead(CallbackInfo callbackInfo){
 //        this.ReportedGamma = this.u.ak;
 //    }
-
 }

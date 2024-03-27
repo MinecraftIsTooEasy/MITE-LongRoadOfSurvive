@@ -3,11 +3,17 @@ package net.oilcake.mitelros.mixins.item.recipes;
 import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 import static net.minecraft.RecipeHelper.hasAsComponent;
 
 @Mixin(RecipeHelper.class)
 public class RecipeHelperMixin {
+    @ModifyConstant(method = "addRecipe", constant = @Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
 
     @Overwrite
     public static void addRecipe(aah recipe, boolean include_in_lowest_crafting_difficulty_determination) {

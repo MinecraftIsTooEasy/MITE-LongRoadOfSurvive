@@ -8,9 +8,17 @@ import net.oilcake.mitelros.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(ItemBlock.class)
 public class ItemBlockMixin extends Item{
+    @ModifyConstant(method = {
+            "<init>",
+    }, constant = @Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
     @Shadow
     public Block getBlock() {
         return null;

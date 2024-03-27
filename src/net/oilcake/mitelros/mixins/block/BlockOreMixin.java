@@ -8,6 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
+import java.util.Random;
+
 import static net.minecraft.BlockGoldOre.isGoldOreNetherrack;
 import static net.oilcake.mitelros.block.Blocks.oreNickel;
 import static net.oilcake.mitelros.block.Blocks.oreTungsten;
@@ -33,8 +35,11 @@ public class BlockOreMixin extends Block {
                 id_dropped = -1;
             } else if (this == Block.oreCoal) {
                 id_dropped = -1;
-            }  else if (this == Block.oreRedstone) {
+            } else if (this == Block.oreRedstone) {
                 id_dropped = -1;
+            } else if (this == Blocks.blockAzurite) {
+                id_dropped = Items.shardAzurite.itemID;
+                quantity_dropped = 1 + info.world.rand.nextInt(2);
             } else if (this == Block.oreCopper) {
                 id_dropped = Items.pieceCopper.itemID;
                 quantity_dropped = 1 + info.world.rand.nextInt(2);
@@ -87,6 +92,9 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreRedstone) {
                 id_dropped = Item.redstone.itemID;
                 quantity_dropped = 3 + info.world.rand.nextInt(2);
+            } else if (this == Blocks.blockAzurite) {
+                id_dropped = Items.shardAzurite.itemID;
+                quantity_dropped = 3 + info.world.rand.nextInt(5);
             } else if (this == Block.oreCopper) {
                 id_dropped = Items.pieceCopper.itemID;
                 quantity_dropped = 3 + info.world.rand.nextInt(5);
@@ -128,6 +136,8 @@ public class BlockOreMixin extends Block {
                 this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(530*chance));
             } else if (this == Block.oreEmerald) {
                 this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(270*chance));
+            } else if (this == Blocks.blockAzurite) {
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(((3 + info.world.rand.nextInt(5)) * 5)*chance));
             } else if (this == Block.oreNetherQuartz) {
                 this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(60*chance));
             } else if (this == Block.oreLapis) {

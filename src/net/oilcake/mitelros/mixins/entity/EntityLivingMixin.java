@@ -35,14 +35,15 @@ public class EntityLivingMixin extends Entity{
         MobEffect slowdown_effect = this.getActivePotionEffect(MobEffectList.moveSlowdown);
         MobEffect haste_effect = this.getActivePotionEffect(MobEffectList.moveSpeed);
         MobEffect freeze_effect = this.getActivePotionEffect(PotionExtend.freeze);
+        MobEffect stunning_effect = this.getActivePotionEffect(PotionExtend.stunning);
         float slow_amount = slowdown_effect == null ? 0.0F : (float)(slowdown_effect.getAmplifier() + 1) * -0.2F;
         float haste_amount = haste_effect == null ? 0.0F : (float)(haste_effect.getAmplifier() + 1) * 0.2F;
         float freeze_amount = freeze_effect == null? 0.0F : (float)(freeze_effect.getAmplifier() + 1) * -0.24F;
+        float stunning_amount = stunning_effect == null? 0.0F : (float)(stunning_effect.getAmplifier() + 99) * -0.5F;
         if (this.isInWeb) {
             slow_amount -= 0.75F;
         }
-
-        double overall_speed_modifier = (double)(slow_amount + haste_amount + freeze_amount);
+        double overall_speed_modifier = (double)(slow_amount + haste_amount + freeze_amount + stunning_amount);
         if (overall_speed_modifier < 0.0) {
             overall_speed_modifier *= (double)(1.0F - this.getResistanceToParalysis());
         }

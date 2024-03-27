@@ -6,7 +6,7 @@ import net.minecraft.bjo;
 import net.oilcake.mitelros.item.Items;
 
 public class Constant {
-    public static final String VERSION = " R14 ";
+    public static final String VERSION = " R15a ";
     public static final bjo icons_itf = new bjo("textures/gui/icons_mitf.png");
 //    public static final bjo MITE_icons = new bjo("textures/gui/MITE_icons.png");
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
@@ -31,7 +31,7 @@ public class Constant {
 
     public static int getNextAchievementID() {return nextAchievementID++;}
     public static int getNextPacketID() {return nextPacketID++;}
-    public static final int Extended_Block_ID = 1024;
+    public static final int Extended_Block_ID = 512;
     public static ItemArmor[] HELMETS = null;
     public static ItemArmor[] CHESTPLATES = null;
     public static ItemArmor[] LEGGINGS = null;

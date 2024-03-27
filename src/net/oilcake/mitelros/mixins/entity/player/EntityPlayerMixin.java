@@ -119,6 +119,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 if (damage <= 0.0F) {
                     return;
                 }
+                if (this.isPotionActive(PotionExtend.stunning)){
+                    return;
+                }
                 ItemStack heldItemStack = this.getHeldItemStack();
                 if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentDestroying)){
                     int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, heldItemStack);
@@ -171,8 +174,8 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 if (target_was_harmed) {
                     if (target instanceof EntityLiving) {
                         int stunning = EnchantmentManager.getStunModifier(this, (EntityLiving)target);
-                        if ((double)stunning > Math.random() * 10.0) {
-                            ((EntityLiving)target).addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, stunning * 50, stunning * 5));
+                        if ((double)stunning > Math.random() * 5.0) {
+                            ((EntityLiving)target).addPotionEffect(new MobEffect(PotionExtend.stunning.id, stunning * 60, 0));
                         }
                         this.heal((float)EnchantmentManager.getVampiricTransfer(this, (EntityLiving)target, damage), EnumEntityFX.vampiric_gain);
                         if(EnchantmentManager.hasEnchantment(heldItemStack, Enchantments.enchantmentSweeping)){

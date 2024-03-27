@@ -8,14 +8,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ItemPickaxe.class)
-public class ItemPickaxeMixin extends ItemTool{
-    protected ItemPickaxeMixin(int par1, Material material) {
+@Mixin(ItemAxe.class)
+public class ItemAxeMixin extends ItemTool {
+    protected ItemAxeMixin(int par1, Material material) {
         super(par1, material);
     }
+
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.addMaterialsEffectiveAgainst(new Material[]{Materials.uru,Materials.tungsten,Materials.nickel,Materials.crystal});
+        this.addMaterialsEffectiveAgainst(new Material[]{Materials.crystal});
     }
     @Shadow
     public float getBaseDamageVsEntity() {

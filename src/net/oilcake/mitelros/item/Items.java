@@ -227,6 +227,7 @@ public class Items extends Item {
     public static final Item totemofhunting = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Materials.nickel,"totem")).setMaxStackSize(1);
     public static final ItemClub UruMorningStar = createInstance(ItemClub.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
     public static final ItemPickaxe UruPickaxe = createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
+    public static final ItemRockExtend shardAzurite = (ItemRockExtend) (new ItemRockExtend(Constant.getNextItemID(),Materials.crystal,"azurite")).setXPReward(2);
 
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
@@ -241,24 +242,24 @@ public class Items extends Item {
         register("armor/nickel_chainmail_chestplate", nickelChestplateChain);
         register("armor/nickel_chainmail_leggings", nickelLeggingsChain);
         register("armor/nickel_chainmail_boots", nickelBootsChain);
-        register("ingot/nickel", nickelIngot);
-        register("ingot/nugget/nickel", nickelNugget);
-        register("tool/nickel/nickel_axe", nickelAxe);
-        register("tool/nickel/nickel_battle_axe", nickelBattleAxe);
-        register("tool/nickel/nickel_dagger", nickelDagger);
-        register("tool/nickel/nickel_hatchet", nickelHatchet);
-        register("tool/nickel/nickel_hoe", nickelHoe);
-        register("tool/nickel/nickel_knife", nickelKnife);
-        register("tool/nickel/nickel_pickaxe", nickelPickaxe);
-        register("tool/nickel/nickel_mattock", nickelMattock);
-        register("tool/nickel/nickel_scythe", nickelScythe);
-        register("tool/nickel/nickel_shears", nickelShears);
-        register("tool/nickel/nickel_shovel", nickelShovel);
-        register("tool/nickel/nickel_sword", nickelSword);
-        register("tool/nickel/nickel_war_hammer", nickelWarHammer);
-        register("door/nickel", doorNickel);
-        register("chain/nickel", nickelChain);
-        register("coin/nickel", nickelCoin);
+        register("ingots/nickel", nickelIngot);
+        register("nuggets/nickel", nickelNugget);
+        register("tools/nickel_axe", nickelAxe);
+        register("tools/nickel_battle_axe", nickelBattleAxe);
+        register("tools/nickel_dagger", nickelDagger);
+        register("tools/nickel_hatchet", nickelHatchet);
+        register("tools/nickel_hoe", nickelHoe);
+        register("tools/nickel_knife", nickelKnife);
+        register("tools/nickel_pickaxe", nickelPickaxe);
+        register("tools/nickel_mattock", nickelMattock);
+        register("tools/nickel_scythe", nickelScythe);
+        register("tools/nickel_shears", nickelShears);
+        register("tools/nickel_shovel", nickelShovel);
+        register("tools/nickel_sword", nickelSword);
+        register("tools/nickel_war_hammer", nickelWarHammer);
+        register("doors/nickel", doorNickel);
+        register("chains/nickel", nickelChain);
+        register("coins/nickel", nickelCoin);
         register("arrows/nickel_arrow", arrowNickel);
         register("armor/tungsten_helmet", tungstenHelmet);
         register("armor/tungsten_chestplate", tungstenChestplate);
@@ -268,24 +269,24 @@ public class Items extends Item {
         register("armor/tungsten_chainmail_chestplate", tungstenChestplateChain);
         register("armor/tungsten_chainmail_leggings", tungstenLeggingsChain);
         register("armor/tungsten_chainmail_boots", tungstenBootsChain);
-        register("ingot/tungsten", tungstenIngot);
-        register("ingot/nugget/tungsten", tungstenNugget);
-        register("tool/tungsten/tungsten_axe", tungstenAxe);
-        register("tool/tungsten/tungsten_battle_axe", tungstenBattleAxe);
-        register("tool/tungsten/tungsten_dagger", tungstenDagger);
-        register("tool/tungsten/tungsten_hatchet", tungstenHatchet);
-        register("tool/tungsten/tungsten_hoe", tungstenHoe);
-        register("tool/tungsten/tungsten_knife", tungstenKnife);
-        register("tool/tungsten/tungsten_pickaxe", tungstenPickaxe);
-        register("tool/tungsten/tungsten_mattock", tungstenMattock);
-        register("tool/tungsten/tungsten_scythe", tungstenScythe);
-        register("tool/tungsten/tungsten_shears", tungstenShears);
-        register("tool/tungsten/tungsten_shovel", tungstenShovel);
-        register("tool/tungsten/tungsten_sword", tungstenSword);
-        register("tool/tungsten/tungsten_war_hammer", tungstenWarHammer);
-        register("door/tungsten", doorTungsten);
-        register("chain/tungsten", tungstenChain);
-        register("coin/tungsten", tungstenCoin);
+        register("ingots/tungsten", tungstenIngot);
+        register("nuggets/tungsten", tungstenNugget);
+        register("tools/tungsten_axe", tungstenAxe);
+        register("tools/tungsten_battle_axe", tungstenBattleAxe);
+        register("tools/tungsten_dagger", tungstenDagger);
+        register("tools/tungsten_hatchet", tungstenHatchet);
+        register("tools/tungsten_hoe", tungstenHoe);
+        register("tools/tungsten_knife", tungstenKnife);
+        register("tools/tungsten_pickaxe", tungstenPickaxe);
+        register("tools/tungsten_mattock", tungstenMattock);
+        register("tools/tungsten_scythe", tungstenScythe);
+        register("tools/tungsten_shears", tungstenShears);
+        register("tools/tungsten_shovel", tungstenShovel);
+        register("tools/tungsten_sword", tungstenSword);
+        register("tools/tungsten_war_hammer", tungstenWarHammer);
+        register("doors/tungsten", doorTungsten);
+        register("chains/tungsten", tungstenChain);
+        register("coins/tungsten", tungstenCoin);
         register("arrows/tungsten_arrow", arrowTungsten);
         register("bowls/porkchop_stew",bowlPorkchopStew);
         register("bowls/lampchop_stew",bowlChestnutSoup);
@@ -344,15 +345,15 @@ public class Items extends Item {
         register("apple_golden",Goldenapple);
         register("apple_golden",Goldenapplelegend);
         register("bowl",bowlEmpty);
-        register("tool/copper/copper_club",morningStarCopper);
-        register("tool/silver/silver_club",morningStarSilver);
-        register("tool/gold/gold_club",morningStarGold);
-        register("tool/iron/iron_club",morningStarIron);
-        register("tool/nickel/nickel_club",morningStarNickel);
-        register("tool/ancient_metal/ancient_metal_club",morningStarAncientMetal);
-        register("tool/mithril/mithril_club",morningStarMithril);
-        register("tool/tungsten/tungsten_club",morningStarTungsten);
-        register("tool/adamantium/adamantium_club",morningStarAdamantium);
+        register("tools/copper_club",morningStarCopper);
+        register("tools/silver_club",morningStarSilver);
+        register("tools/gold_club",morningStarGold);
+        register("tools/iron_club",morningStarIron);
+        register("tools/nickel_club",morningStarNickel);
+        register("tools/ancient_metal_club",morningStarAncientMetal);
+        register("tools/mithril_club",morningStarMithril);
+        register("tools/tungsten_club",morningStarTungsten);
+        register("tools/adamantium_club",morningStarAdamantium);
         register("frag/stalker_creeper",fragStalkerCreeper);
         register("food/glow_berries",glowberries);
         register("arrows/magical_arrow", arrowMagical);
@@ -364,10 +365,11 @@ public class Items extends Item {
         register("shards/diamond",shardDiamond);
         register("shards/emerald",shardEmerald);
         register("shards/quartz",shardNetherQuartz);
+        register("azurite",shardAzurite);
         register("records/record_damnation",recordDamnation);
         register("records/record_connected",recordConnected);
         register("lapis_lazuli",lapis);
-        register("tool/vibranium/vibranium_sword",VibraniumSword);
+        register("tools/vibranium_sword",VibraniumSword);
         register("armor/vibranium_helmet",VibraniumHelmet);
         register("armor/vibranium_chestplate",VibraniumChestplate);
         register("armor/vibranium_leggings",VibraniumLeggings);
@@ -393,15 +395,15 @@ public class Items extends Item {
         register("armor/uru_leggings",UruLeggings);
         register("armor/uru_boots",UruBoots);
         register("forging_note",forgingnote);
-        register("ingot/uru", UruIngot);
-        register("ingot/nugget/uru", UruNugget);
-        register("tool/uru/uru_battle_axe", UruBattleAxe);
-        register("tool/uru/uru_mattock", UruMattock);
-        register("tool/uru/uru_scythe", UruScythe);
-        register("tool/uru/uru_sword", UruSword);
-        register("tool/uru/uru_war_hammer", UruWarHammer);
-        register("tool/uru/uru_club", UruMorningStar);
-        register("tool/uru/uru_pickaxe", UruPickaxe);
+        register("ingots/uru", UruIngot);
+        register("nuggets/uru", UruNugget);
+        register("tools/uru_battle_axe", UruBattleAxe);
+        register("tools/uru_mattock", UruMattock);
+        register("tools/uru_scythe", UruScythe);
+        register("tools/uru_sword", UruSword);
+        register("tools/uru_war_hammer", UruWarHammer);
+        register("tools/uru_club", UruMorningStar);
+        register("tools/uru_pickaxe", UruPickaxe);
         register("pieces/uru",pieceUru);
         register("bows/tungsten/", bowTungsten).setUnlocalizedName("tungsten_bow");
         register("food/beetroot",beetroot);
@@ -446,6 +448,7 @@ public class Items extends Item {
         register("ignition/tungsten",ignitionTungsten);
         register("ignition/adamantium",ignitionAdamantium);
         register("wither_branch",wither_branch);
+
         Constant.initItemArray();
     }
     public static void registerBasicToolRecipes(RecipeRegister register,Material material){
@@ -621,6 +624,7 @@ public class Items extends Item {
             registerMITEToolRecipe(register,material);
     }
     public static void registerRecipes(RecipeRegister register) {
+
         register.registerShapelessRecipe(new ItemStack(lemonPie), true,
                 Item.sugar, Item.egg, Item.flour, lemon);
         register.registerShapelessRecipe(new ItemStack(nickelIngot, 9), true,

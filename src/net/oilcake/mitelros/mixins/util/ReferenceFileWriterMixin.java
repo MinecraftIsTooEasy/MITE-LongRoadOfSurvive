@@ -4,6 +4,8 @@ import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,6 +14,27 @@ import static net.minecraft.StringHelper.formatFloat;
 
 @Mixin(ReferenceFileWriter.class)
 public class ReferenceFileWriterMixin {
+    @ModifyConstant(method = {
+            "writeBlockMaterialFile",
+            "writeBlockConstantsFile",
+            "writeBlockHardnessFile",
+            "writeBlockMetadataFile",
+            "writeBlockDissolveTimeFile",
+            "writeSilkHarvestFile",
+            "writeHarvestLevelFile",
+            "writeToolDecayRateFiles",
+            "writeToolHarvestEfficiencyFiles",
+            "writeBlockOpacityFile",
+            "writeIsOpaqueStandardFormCubeFile",
+            "writeNormalCubeFile",
+            "writeBlockMetadataToSubtypeFile",
+            "writeAllowsGrassBeneathFile",
+            "writeUseNeighborBrightnessFile",
+            "writeBlockRenderTypeFile"
+    }, constant = @Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
     @Shadow
     private static String newline;
     @Overwrite

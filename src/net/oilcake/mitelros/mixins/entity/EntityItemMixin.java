@@ -7,9 +7,7 @@ import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EntityItem.class)
@@ -19,6 +17,13 @@ public abstract class EntityItemMixin extends Entity{
     }
     private boolean isExploded;
     private boolean canBePickUpByPlayer;
+    @ModifyConstant(method = {
+            "isImmuneToExplosion",
+            "handleExplosion",
+    }, constant = @Constant(intValue = 256))
+    private static int ExtendedBlockID(int value) {
+        return net.oilcake.mitelros.util.Constant.Extended_Block_ID;
+    }
     @Overwrite
     public EntityDamageResult attackEntityFrom(Damage damage) {
         EntityDamageResult result = super.attackEntityFrom(damage);

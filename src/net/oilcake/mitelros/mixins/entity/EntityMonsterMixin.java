@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.enchantment.Enchantments;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,10 +27,82 @@ public class EntityMonsterMixin extends EntityCreature {
 //
 //    }
 
+    @Overwrite
+    public EntityDamageResult attackEntityAsMob(Entity target) {
+        if (this.isDecoy()) {
+            return null;
+        } else if (this.isPotionActive(PotionExtend.stunning)){
+            return null;
+        } else if (target instanceof EntityPlayer && target.getAsPlayer().isImmuneByGrace()) {
+            return null;
+        } else {
+            ItemStack held_item = this.getHeldItemStack();
+            Damage damage = new Damage(DamageSource.causeMobDamage(this), (float)this.getEntityAttribute(GenericAttributes.attackDamage).getAttributeValue());
+            if (this.isFrenzied()) {
+                damage.addAmount((float)this.getEntityAttributeBaseValue(GenericAttributes.attackDamage) * 0.5F);
+            }
+            if(EnchantmentManager.hasEnchantment(held_item, Enchantments.enchantmentDestroying)){
+                int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, held_item);
+                target.worldObj.createExplosion(this, target.posX, target.posY, target.posZ, 0.0F, destorying * 0.5F, true);
+                //System.out.println("判断为enchantmentDestorying");
+                //target.setFire(120);
+            }
 
+            int knockback_bonus = 0;
+            if (target.isEntityLivingBase()) {
+                damage.addAmount(EnchantmentWeaponDamage.getDamageModifiers(held_item, target.getAsEntityLivingBase()));
+                knockback_bonus += EnchantmentManager.getKnockbackModifier(this, target.getAsEntityLivingBase());
+            }
+
+            int fire_aspect = EnchantmentManager.getFireAspectModifier(this);
+            EntityDamageResult result = target.attackEntityFrom(damage.setFireAspect(fire_aspect > 0));
+            if (result == null) {
+                return result;
+            } else {
+                if (result.entityWasNegativelyAffected()) {
+                    if (knockback_bonus > 0) {
+                        target.addVelocity((double)(-MathHelper.sin(this.rotationYaw * 3.1415927F / 180.0F) * (float)knockback_bonus * 0.5F), 0.1, (double)(MathHelper.cos(this.rotationYaw * 3.1415927F / 180.0F) * (float)knockback_bonus * 0.5F));
+                        this.motionX *= 0.6;
+                        this.motionZ *= 0.6;
+                    }
+
+                    if (fire_aspect > 0) {
+                        target.setFire(fire_aspect * 4);
+                    }
+
+                    if (this.isBurning() && !this.hasHeldItem() && this.rand.nextFloat() < (float)this.worldObj.difficultySetting * 0.3F) {
+                        target.setFire(2 * this.worldObj.difficultySetting);
+                    }
+
+                    if (target.isEntityLivingBase()) {
+                        if (this.worldObj.isRemote) {
+                            System.out.println("EntityMob.attackEntityAsMob() is calling EnchantmentThorns.func_92096_a() on client");
+                            Minecraft.temp_debug = "mob";
+                        }
+
+                        EnchantmentThorns.func_92096_a(this, target.getAsEntityLivingBase(), this.rand);
+                        int stunning = EnchantmentManager.getStunModifier(this, target.getAsEntityLivingBase());
+                        if ((double)stunning > Math.random() * 10.0) {
+                            target.getAsEntityLivingBase().addPotionEffect(new MobEffect(PotionExtend.stunning.id, stunning * 60, 0));
+                        }
+
+                        this.heal((float)EnchantmentManager.getVampiricTransfer(this, target.getAsEntityLivingBase(), result.getAmountOfHealthLost()), EnumEntityFX.vampiric_gain);
+                    }
+
+                    if (target instanceof EntityPlayer) {
+                        this.refreshDespawnCounter(-9600);
+                    }
+                }
+
+                return result;
+            }
+        }
+    }
     @Overwrite
     public static EntityDamageResult attackEntityAsMob(EntityInsentient attacker, Entity target) {
         if (attacker.isDecoy()) {
+            return null;
+        } else if (attacker.isPotionActive(PotionExtend.stunning)){
             return null;
         } else if (target instanceof EntityPlayer && target.getAsPlayer().isImmuneByGrace()) {
             return null;
@@ -41,7 +114,7 @@ public class EntityMonsterMixin extends EntityCreature {
             }
             if(EnchantmentManager.hasEnchantment(held_item, Enchantments.enchantmentDestroying)){
                 int destorying = EnchantmentManager.getEnchantmentLevel(Enchantments.enchantmentDestroying, held_item);
-                target.worldObj.createExplosionC(target, target.posX, target.posY, target.posZ, destorying, destorying);
+                target.worldObj.createExplosion(attacker, target.posX, target.posY, target.posZ, 0.0F, destorying * 0.5F, true);
                 //System.out.println("判断为enchantmentDestorying");
                 //target.setFire(120);
             }
@@ -84,7 +157,7 @@ public class EntityMonsterMixin extends EntityCreature {
 
                         int stunning = EnchantmentManager.getStunModifier(attacker, target.getAsEntityLivingBase());
                         if ((double)stunning > Math.random() * 10.0) {
-                            target.getAsEntityLivingBase().addPotionEffect(new MobEffect(MobEffectList.moveSlowdown.id, stunning * 50, stunning * 5));
+                            target.getAsEntityLivingBase().addPotionEffect(new MobEffect(PotionExtend.stunning.id, stunning * 60, 0));
                         }
 
                         attacker.heal((float)EnchantmentManager.getVampiricTransfer(attacker, target.getAsEntityLivingBase(), result.getAmountOfHealthLost()), EnumEntityFX.vampiric_gain);
