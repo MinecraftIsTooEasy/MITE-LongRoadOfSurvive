@@ -26,7 +26,12 @@ public class BlockWorkbenchMixin extends Block{
     }
     @Overwrite
     public boolean isPortable(World world, EntityLiving entity_living_base, int x, int y, int z) {
-        return world.getBlockMetadata(x, y, z) > 3 && world.getBlockMetadata(x, y, z) < 13;
+        if(world == null){
+            return true;
+        }else {
+            return world.getBlockMetadata(x, y, z) > 3 && world.getBlockMetadata(x, y, z) < 13;
+        }
+
     }
 
     public int dropBlockAsEntityItem(BlockBreakInfo info) {

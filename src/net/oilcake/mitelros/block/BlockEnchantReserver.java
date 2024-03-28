@@ -7,7 +7,7 @@ import java.util.List;
 
 public class BlockEnchantReserver extends Block implements IContainer {
     private IIcon TEXTURE_TOP;
-    private IIcon TEXTURE_BOTOTM;
+    private IIcon TEXTURE_BOTTOM;
     private IIcon TEXTURE_SIDE;
 
     protected BlockEnchantReserver(int par1) {
@@ -24,7 +24,7 @@ public class BlockEnchantReserver extends Block implements IContainer {
             case 1:
                 return TEXTURE_TOP;
             case 0:
-                return TEXTURE_BOTOTM;
+                return TEXTURE_BOTTOM;
             case 2:
             case 3:
             case 5:
@@ -36,9 +36,9 @@ public class BlockEnchantReserver extends Block implements IContainer {
 
     @Override
     public void a(mt mt) {
-        TEXTURE_TOP = mt.a("enchant_reserver/enchant_reserver_top");
-        TEXTURE_BOTOTM = mt.a("enchant_reserver/enchant_reserver_bottom");
-        TEXTURE_SIDE = mt.a("enchant_reserver/enchant_reserver_side");
+        TEXTURE_TOP = mt.a("enchant_reserver/top");
+        TEXTURE_BOTTOM = mt.a("enchant_reserver/bottom");
+        TEXTURE_SIDE = mt.a("enchant_reserver/side");
     }
 
 

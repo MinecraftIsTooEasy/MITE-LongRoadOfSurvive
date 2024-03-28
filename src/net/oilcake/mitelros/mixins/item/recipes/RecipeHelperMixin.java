@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.item.recipes;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -97,6 +98,8 @@ public class RecipeHelperMixin {
                 recipe.setMaterialToCheckToolBenchHardnessAgainst(output_item.getHardestMetalMaterial());
             } else if (output_item.itemID == Block.planks.blockID) {
                 recipe.setMaterialToCheckToolBenchHardnessAgainst(Material.wood);
+            }else if (output_item.itemID == Blocks.blockAzurite.blockID || output_item.itemID == Blocks.azuriteCluster.blockID) {
+                recipe.setMaterialToCheckToolBenchHardnessAgainst(Material.copper);
             } else if (output_item.itemID == Block.workbench.blockID) {
                 Material tool_material = BlockWorkbench.getToolMaterial(output_item_stack.getItemSubtype());
                 if (tool_material.isMetal()) {

@@ -98,7 +98,6 @@ public class ItemBowlClay extends ItemVessel {
         return this.getEmptyVessel();
     }
 
-    @Overwrite
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
             if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){

@@ -1,9 +1,7 @@
 package net.oilcake.mitelros.mixins.item;
 
-import net.minecraft.Block;
-import net.minecraft.Item;
-import net.minecraft.ItemBlock;
-import net.minecraft.ItemStack;
+import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockTorchIdle;
 import net.oilcake.mitelros.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -37,5 +35,30 @@ public class ItemBlockMixin extends Item{
         }
 
         return new ItemStack(id, 1, subtype);
+    }
+    @Overwrite
+    public int getBurnTime(ItemStack item_stack) {
+        if (!this.canBurnAsFuelSource()) {
+            return 0;
+        } else {
+            Block block = this.getBlock();
+            if (block == Block.wood) {
+                return 1600;
+            }else if(block == Block.planks || block == Block.woodDoubleSlab || block == Block.woodenButton){
+                return 400;
+            }else if(block == Block.woodSingleSlab || block == Block.sapling || block == Block.deadBush) {
+                return 200;
+            }else if(block == Block.torchWood) {
+                return 800;
+            }else if(block instanceof BlockRedstoneTorch) {
+                return 100;
+            }else if(block instanceof BlockTorchIdle) {
+                return 25;
+            }else if(block.blockMaterial == Material.wood){
+                return 400;
+            }else {
+                return block == Block.coalBlock ? 16000 : 0;
+            }
+        }
     }
 }

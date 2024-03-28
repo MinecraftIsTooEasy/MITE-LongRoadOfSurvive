@@ -1,7 +1,9 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.TileEntity;
+import net.oilcake.mitelros.block.observer.TileEntityObserver;
 import net.oilcake.mitelros.block.enchantreserver.TileEntityEnchantReserver;
+import net.oilcake.mitelros.block.receiver.TileEntityReceiver;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +16,9 @@ public class TileEntityMixin {
     }
 
     @Inject(method = "<clinit>",at = @At(value = "RETURN"))
-    private static void registerEnchantReserver(CallbackInfo c){
+    private static void registerTileEntity(CallbackInfo c){
         addMapping(TileEntityEnchantReserver.class, "EnchantReserver");
+        addMapping(TileEntityObserver.class, "Observer");
+        addMapping(TileEntityReceiver.class, "Receiver");
     }
 }

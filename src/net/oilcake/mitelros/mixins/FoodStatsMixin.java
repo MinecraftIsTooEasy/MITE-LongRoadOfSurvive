@@ -49,17 +49,20 @@ public class FoodStatsMixin {
     public int getWater() {
         return water;
     }
-
-    @Overwrite
-    public void addFoodValue(Item item) {
-        this.addSatiation(item.getSatiation(this.player));
-        this.addNutrition(item.getNutrition());
+    @Inject(method = "addFoodValue", at = @At("HEAD"))
+    public void injectaddFoodValue(Item item, CallbackInfo callbackInfo) {
         this.addWater(item.getWater());
-        if (this.player instanceof ServerPlayer) {
-            this.player.getAsEntityPlayerMP().addInsulinResistance(item.getInsulinResponse());
-            this.player.getAsEntityPlayerMP().addNutrients(item);
-        }
     }
+//    @Overwrite
+//    public void addFoodValue(Item item) {
+//        this.addSatiation(item.getSatiation(this.player));
+//        this.addNutrition(item.getNutrition());
+//        this.addWater(item.getWater());
+//        if (this.player instanceof ServerPlayer) {
+//            this.player.getAsEntityPlayerMP().addInsulinResistance(item.getInsulinResponse());
+//            this.player.getAsEntityPlayerMP().addNutrients(item);
+//        }
+//    }
 
 
     public void setSatiationWater(int water, boolean check_limit) {

@@ -33,9 +33,9 @@ public class BlockEnchantEnhancer extends Block {
 
     @Override
     public void a(mt mt) {
-        TEXTURE_TOP = mt.a("enchant_enhancer/enchant_enhancer_top");
-        TEXTURE_BOTOTM = mt.a("enchant_enhancer/enchant_enhancer_bottom");
-        TEXTURE_SIDE = mt.a("enchant_enhancer/enchant_enhancer_side");
+        TEXTURE_TOP = mt.a("enchant_enhancer/top");
+        TEXTURE_BOTOTM = mt.a("enchant_enhancer/bottom");
+        TEXTURE_SIDE = mt.a("enchant_enhancer/side");
     }
 
 

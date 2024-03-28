@@ -43,23 +43,25 @@ public class BiomeGenUnderworldMixin extends BiomeBase {
                 int var5 = par3 + par2Random.nextInt(16) + 8;
                 int var6 = par4 + par2Random.nextInt(16) + 8;
                 WorldGenUnderworldCastle var7 = new WorldGenUnderworldCastle();
-                if(Minecraft.inDevMode()){
-                    System.out.println("Generate Castle at " + var5 + " " + var6 + ".");
+                if(var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6)){
+                    if(Minecraft.inDevMode()){
+                        System.out.println("Generate Castle at " + var5 + " " + var6 + ".");
+                    }
                 }
-                var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
             }else {
                 int var5 = par3 + par2Random.nextInt(16) + 8;
                 int var6 = par4 + par2Random.nextInt(16) + 8;
                 WorldGenAzurite var7 = new WorldGenAzurite();
-                if (par2Random.nextInt(3) == 0) {
+                if (par2Random.nextInt(8) == 0) {
                     var7.setSuperLarge();
-                    if(Minecraft.inDevMode())
-                        System.out.println("Generate Azurite at " + var5 + " " + var6 + " , superlarge.");
+                    if(var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6))
+                        if(Minecraft.inDevMode())
+                            System.out.println("Generate Azurite at " + var5 + " " + var6 + " , superlarge.");
                 } else {
-                    if(Minecraft.inDevMode())
-                        System.out.println("Generate Azurite at " + var5 + " " + var6);
+                    if(var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6))
+                        if(Minecraft.inDevMode())
+                            System.out.println("Generate Azurite at " + var5 + " " + var6);
                 }
-                var7.generate(par1World, par2Random, var5, par1World.getHeightValue(var5, var6) + 1, var6);
             }
         }
         int var5 = 8 + par2Random.nextInt(24);
