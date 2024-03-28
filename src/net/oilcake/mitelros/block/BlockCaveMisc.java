@@ -4,9 +4,12 @@ import net.minecraft.*;
 import net.oilcake.mitelros.enchantment.Enchantments;
 import net.oilcake.mitelros.item.Items;
 
+import java.util.Random;
+
 public class BlockCaveMisc extends Block {
     protected BlockCaveMisc(int id, Material material) {
         this(id, material, (new BlockConstants()).setNeverHidesAdjacentFaces().setNotAlwaysLegal());
+        this.setTickRandomly(true);
     }
     protected BlockCaveMisc(int id, Material material, BlockConstants constants) {
         super(id, material, constants);
@@ -61,7 +64,7 @@ public class BlockCaveMisc extends Block {
                 id_dropped = this.blockID;
             }
         }
-        boolean suppress_fortune = id_dropped == this.blockID && BitHelper.isBitSet(info.getMetadata(), 1);
+        boolean suppress_fortune = BitHelper.isBitSet(info.getMetadata(), 1);
         float chance = suppress_fortune ? 0.5F : 0.5F + (float) info.getHarvesterFortune() * 0.1F;
         if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
             if (this == Blocks.azuriteCluster) {
@@ -69,5 +72,37 @@ public class BlockCaveMisc extends Block {
             }
         }
         return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);
+    }
+    @Override
+    public boolean updateTick(World world, int x, int y, int z, Random random)
+    {
+        if (super.updateTick(world, x, y, z, random))
+        {
+            return true;
+        }
+        else {
+            int ran = random.nextInt(512);
+            if(ran == 0){
+                boolean growable = true;
+                for(int i = -1; i < 1; i+=2){
+                    for(int j = -1; j < 1; j+=2){
+                        if(world.getBlockId(x + i, y, z + j) != this.blockID && random.nextInt(8) != 0){
+                            growable = false;
+                        }
+                    }
+                }
+                if(growable){
+                    for(int i = -1; i < 1; i+=2){
+                        for(int j = -1; j < 1; j+=2){
+                            if(world.getBlockId(x + i, y, z + j) == this.blockID){
+                                world.setBlockToAir(x + i, y, z + j);
+                            }
+                        }
+                    }
+                    world.setBlock(x, y, z, Blocks.blockAzurite.blockID, 0, 2);
+                }
+            }
+            return false;
+        }
     }
 }

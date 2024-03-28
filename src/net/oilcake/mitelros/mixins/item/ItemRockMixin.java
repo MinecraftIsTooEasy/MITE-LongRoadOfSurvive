@@ -1,10 +1,7 @@
 package net.oilcake.mitelros.mixins.item;
 
 
-import net.minecraft.EntityPlayer;
-import net.minecraft.Item;
-import net.minecraft.ItemRock;
-import net.minecraft.ItemStack;
+import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;

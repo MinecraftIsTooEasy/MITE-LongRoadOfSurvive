@@ -12,7 +12,7 @@ public class Constant {
 //    public static final bjo inventory = new bjo("textures/gui/inventory.png");
     public static final int VER_NUM = 114514;
     public static int nextItemID = 1284;
-    public static int nextBlockID = 256;
+    public static int nextBlockID = 384;
     public static int nextPotionID = 24;
     public static int nextEnchantmentID = 96;
     public static int nextAchievementID = 136;

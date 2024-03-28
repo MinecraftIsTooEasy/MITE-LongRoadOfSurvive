@@ -117,6 +117,8 @@ tile.nickel_anvil.slightlyDamaged.name=Slightly Damaged Nickel Anvil
 tile.nickel_anvil.veryDamaged.name=Very Damaged Nickel Anvil
 tile.block_enchant_reserver.name=Enchant Reserver
 tile.block_enchant_enhancer.name=Enchant Enhancer
+tile.block_observer.name=Observer
+tile.block_receiver.name=Observer Receiver
 tile.bars/nickel_bars.name=Nickel Bars
 tile.toolbench.nickel.name=Nickel Toolbench
 tile.block_smoker_idle.name=Smoker
@@ -124,7 +126,7 @@ tile.block_smoker_burning.name=Smoker
 tile.azurite_block.name=Azurite Block
 tile.azurite_cluster.name=Azurite Cluster
 tile.torch_idle.name=Torch
-tile.torch_off.name=Torch
+tile.torch_off.name=Extinguished Torch
 
 tile.flowers/.luminescent_herb.name=Luminescent Herb
 tile.flowers/.azure_bluet.name=Azure Bluet

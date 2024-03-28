@@ -38,7 +38,7 @@ achievement.Pull.desc=连汤带水！酣畅淋漓！
 achievement.LichHunter=生物实验
 achievement.LichHunter.desc=你在它身上见到了很多怪物的影子
 achievement.Decimator=降频数位滤波器
-achievement.Decimator.desc=岩浆、虚空、雷击、魔法
+achievement.Decimator.desc=熔岩、虚空、雷击、魔法
 
 curse.fearOfDarkness.name=黑暗恐惧
 curse.fearOfDarkness.desc=你在黑暗中只能摸索前进
@@ -99,9 +99,9 @@ item.tools/nickel_sword.name=镍剑
 item.tools/nickel_war_hammer.name=镍战锤
 item.tools/nickel_club.name=镍钉头锤
 
-item.door/nickel.name=镍门
+item.doors/nickel.name=镍门
 item.chain/nickel.name=镍锁链
-item.coin/nickel.name=镍币
+item.coins/nickel.name=镍币
 item.arrows/nickel_arrow.name=镍箭
 
 tile.ore/nickel_ore.name=镍矿石
@@ -117,14 +117,16 @@ tile.nickel_anvil.slightlyDamaged.name=轻微受损的镍砧
 tile.nickel_anvil.veryDamaged.name=严重受损的镍砧
 tile.block_enchant_reserver.name=附魔回流底座
 tile.block_enchant_enhancer.name=附魔增幅底座
+tile.block_observer.name=侦测器
+tile.block_receiver.name=信号转化器
 tile.bars/nickel_bars.name=镍栅栏
 tile.toolbench.nickel.name=镍工作台
 tile.block_smoker_idle.name=烟熏炉
 tile.block_smoker_burning.name=烟熏炉
 tile.azurite_block.name=碧蓝水晶块
 tile.azurite_cluster.name=碧蓝水晶簇
-tile.torch_idle.name=火把
-tile.torch_off.name=火把
+tile.torch_idle.name=阴燃火把
+tile.torch_off.name=熄灭火把
 
 tile.flowers/.luminescent_herb.name=荧光草
 tile.flowers/.azure_bluet.name=茜草花
@@ -162,9 +164,9 @@ item.tools/tungsten_war_hammer.name=钨钢战锤
 item.tools/tungsten_club.name=钨钢钉头锤
 item.tungsten_bow.name=钨钢弓
 
-item.door/tungsten.name=钨钢门
+item.doors/tungsten.name=钨钢门
 item.chain/tungsten.name=钨钢锁链
-item.coin/tungsten.name=钨钢币
+item.coins/tungsten.name=钨钢币
 item.arrows/tungsten_arrow.name=钨钢箭
 
 tile.ore/tungsten_ore.name=钨矿石
@@ -260,14 +262,14 @@ item.pieces/adamantium.name=艾德曼合金矿石碎块
 item.pieces/uru.name=乌鲁金属矿石碎块
 
 item.buckets/nickel/empty.name=镍桶
-item.buckets/nickel/lava.name=装满岩浆的镍桶
+item.buckets/nickel/lava.name=装满熔岩的镍桶
 item.buckets/nickel/milk.name=装满牛奶的镍桶
 item.buckets/nickel/stone.name=装满石头的镍桶
 item.buckets/nickel/water.name=装满水的镍桶
 item.buckets/nickel/water_suspicious.name=装满可疑的水的镍桶
 item.buckets/nickel/water_swampland.name=装满沼泽水的镍桶
 item.buckets/tungsten/empty.name=钨钢桶
-item.buckets/tungsten/lava.name=装满岩浆的钨钢桶
+item.buckets/tungsten/lava.name=装满熔岩的钨钢桶
 item.buckets/tungsten/milk.name=装满牛奶的钨钢桶
 item.buckets/tungsten/stone.name=装满石头的钨钢桶
 item.buckets/tungsten/water.name=装满水的钨钢桶

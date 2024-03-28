@@ -29,8 +29,7 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreDiamond) {
                 id_dropped = -1;
             } else if (this == Block.oreLapis) {
-                id_dropped = Items.lapis.itemID;
-                quantity_dropped = 1 + info.world.rand.nextInt(1);
+                id_dropped = -1;
             } else if (this == Block.oreNetherQuartz) {
                 id_dropped = -1;
             } else if (this == Block.oreCoal) {
@@ -38,8 +37,7 @@ public class BlockOreMixin extends Block {
             } else if (this == Block.oreRedstone) {
                 id_dropped = -1;
             } else if (this == Blocks.blockAzurite) {
-                id_dropped = Items.shardAzurite.itemID;
-                quantity_dropped = 1 + info.world.rand.nextInt(2);
+                id_dropped = -1;
             } else if (this == Block.oreCopper) {
                 id_dropped = Items.pieceCopper.itemID;
                 quantity_dropped = 1 + info.world.rand.nextInt(2);
