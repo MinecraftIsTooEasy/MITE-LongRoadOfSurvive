@@ -10,15 +10,15 @@ public class TileEntityReceiver extends TileEntity {
 
     }
     public void updateEntity() {
-        if(detect_delay > 0){
-            detect_delay--;
-            return;
-        }
+//        if(detect_delay > 0){
+//            detect_delay--;
+//            return;
+//        }
         if (this.worldObj != null && !this.worldObj.isRemote) {
             Block block = this.getBlockType();
             if (block != null && block instanceof BlockReceiver) {
                 ((BlockReceiver)block).updateSignalLevel(this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-                detect_delay = 15;
+//                detect_delay = 15;
             }
         }
 

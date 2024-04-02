@@ -46,19 +46,19 @@ public class TileEntityObserver extends TileEntity {
     }
     @Override
     public void updateEntity() {
-        if(detect_delay > 0){
-            detect_delay--;
-            return;
-        }
+//        if(detect_delay > 0){
+//            detect_delay--;
+//            return;
+//        }
         if(!this.worldObj.isRemote && needsActivation()){
             BlockObserver.updateState(true, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-            System.out.println("switch on.");
-            this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.sizzle");
-            this.detect_delay = 20;
+//            System.out.println("switch on.");
+//            this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.sizzle");
+//            this.detect_delay = 20;
         }else if(!this.worldObj.isRemote && !needsActivation() && this.getObserver().isActivated(this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord))){
             BlockObserver.updateState(false, this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-            System.out.println("switch off.");
-            this.detect_delay = 20;
+//            System.out.println("switch off.");
+//            this.detect_delay = 20;
         }
         EnumFace facing = getFace(this.getObserver().getDirectionFacing(this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord)));
         World var10000 = this.worldObj;

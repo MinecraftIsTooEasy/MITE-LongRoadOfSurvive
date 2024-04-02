@@ -127,6 +127,7 @@ tile.azurite_block.name=Azurite Block
 tile.azurite_cluster.name=Azurite Cluster
 tile.torch_idle.name=Torch
 tile.torch_off.name=Extinguished Torch
+tile.sulphur.name=Sulphur Block
 
 tile.flowers/.luminescent_herb.name=Luminescent Herb
 tile.flowers/.azure_bluet.name=Azure Bluet
@@ -310,6 +311,7 @@ item.totem/totem_of_destroy.name=Totem of Destruction
 item.totem/totem_of_preserve.name=Totem of Preservation
 item.totem/totem_of_hunting.name=Totem of The Hunt
 item.wither_branch.name=Wither Branch
+item.sulphur_sphere.name=Sulphur
 
 item.ignition/wood.name=Ignition
 item.ignition/copper.name=Copper Fire Starter
@@ -331,6 +333,9 @@ item.dyePowder.blue.name=Blue Dye
 
 item.records/record_damnation.name=Music Disc
 item.records/record_connected.name=Music Disc
+
+item.tools/detector.name=Calibrated Detector
+item.tools/detector_emerald.name=Detector
 
 item.experimental_potion.name=Experimental Potion
 item.suspicious_potion.name=Natural Water Bottle

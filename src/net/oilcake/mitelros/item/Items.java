@@ -1,5 +1,6 @@
 package net.oilcake.mitelros.item;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.util.Constant;
@@ -227,8 +228,10 @@ public class Items extends Item {
     public static final Item totemofhunting = (ItemTotem) (new ItemTotem(Constant.getNextItemID(),Materials.nickel,"totem")).setMaxStackSize(1);
     public static final ItemClub UruMorningStar = createInstance(ItemClub.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
     public static final ItemPickaxe UruPickaxe = createInstance(ItemPickaxe.class,new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.uru);
-    public static final ItemRockExtend shardAzurite = (ItemRockExtend) (new ItemRockExtend(Constant.getNextItemID(),Materials.crystal,"azurite")).setXPReward(2);
-
+    public static final ItemRockExtend shardAzurite = (ItemRockExtend) (new ItemRockExtend(Constant.getNextItemID(),Materials.crystal,"azurite")).setXPReward(1);
+    public static final Item detectorEmerald = new ItemDetector(Constant.getNextItemID(),Material.emerald,"emerald").setUnlocalizedName("detector");
+    public static final Item detectorDiamond = new ItemDetector(Constant.getNextItemID(),Material.diamond,"diamond").setUnlocalizedName("detector");
+    public static final Item sulphur = new ItemStandard(Constant.getNextItemID(),Materials.sulphur,"sulphur_sphere").setMaxStackSize(16);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -448,7 +451,9 @@ public class Items extends Item {
         register("ignition/tungsten",ignitionTungsten);
         register("ignition/adamantium",ignitionAdamantium);
         register("wither_branch",wither_branch);
-
+        register("tools/detector",detectorDiamond);
+        register("tools/detector_emerald",detectorEmerald);
+        register("sulphur_sphere",sulphur);
         Constant.initItemArray();
     }
     public static void registerBasicToolRecipes(RecipeRegister register,Material material){
@@ -624,7 +629,6 @@ public class Items extends Item {
             registerMITEToolRecipe(register,material);
     }
     public static void registerRecipes(RecipeRegister register) {
-
         register.registerShapelessRecipe(new ItemStack(lemonPie), true,
                 Item.sugar, Item.egg, Item.flour, lemon);
         register.registerShapelessRecipe(new ItemStack(nickelIngot, 9), true,
@@ -656,6 +660,25 @@ public class Items extends Item {
                 "WW",
                 'S',sinew,
                 'W',stick);
+        register.registerShapedRecipe(new ItemStack(detectorEmerald, 1),true,
+                "FAF",
+                "ANA",
+                "FAF",
+                'A',Item.goldNugget,
+                'F',Item.ancientMetalNugget,
+                'N',Item.emerald);
+        register.registerShapedRecipe(new ItemStack(detectorDiamond, 1),true,
+                "FAF",
+                "ANA",
+                "FAF",
+                'A',Item.goldNugget,
+                'F',Item.ancientMetalNugget,
+                'N',Item.diamond);
+
+        register.registerShapelessRecipe(new ItemStack(sulphur,9),true,
+                new ItemStack(Blocks.blockSulphur,1));
+        register.registerShapelessRecipe(new ItemStack(Item.gunpowder,8),true,
+                new ItemStack(Items.sulphur, 8),new ItemStack(Item.coal, 1, 1));
         register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
                 Items.forgingnote,Item.writableBook
         );

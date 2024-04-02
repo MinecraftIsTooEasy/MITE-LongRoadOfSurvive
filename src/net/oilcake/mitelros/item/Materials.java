@@ -24,7 +24,7 @@ public class Materials extends Material {
     public static final Material agave = (new MaterialFood("agave"));
     public static final Material beetroot = new MaterialFood("beetroot");
     public static final Material crystal = (new Material("crystal")).setDurability(4.0F);
-
+    public static final Material sulphur = (new Material("sulphur")).setDurability(2.0F);
     public Materials(EnumEquipmentMaterial enum_crafting_material) {
         super(enum_crafting_material);
     }

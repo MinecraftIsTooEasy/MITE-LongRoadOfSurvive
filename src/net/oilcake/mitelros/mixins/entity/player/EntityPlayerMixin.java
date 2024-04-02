@@ -11,6 +11,7 @@ import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.enchantment.Enchantments;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.*;
+import org.lwjgl.Sys;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -35,6 +36,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //        return (float)getWaterLimit(this.getExperienceLevel());
 //
     public boolean isNewPlayer = true;
+    private int detectorDelay = 0;
     @Shadow
     private int insulin_resistance;
     @Shadow
@@ -421,6 +423,36 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     shift = At.Shift.AFTER))
     private void injectTick(CallbackInfo c){
         if (!this.worldObj.isRemote) {
+            //探测器：绿宝石
+            if(this.inventory.getHotbarSlotContainItem(Items.detectorEmerald) > 0){
+                if(detectorDelay < 80){
+                    detectorDelay ++;
+                }else {
+                    detectorDelay = 0;
+                    List <Entity>targets  = this.getNearbyEntities(16.0F, 8.0F);
+                    float range_div = Math.min(2.0F,20.0F / this.detectNearestMonstersDistance(targets));
+//                    System.out.println(range_div);
+                    if(range_div > 0.0F){
+                        this.makeSound("imported.random.warning", 0.3F, 1.0F + range_div);
+                        detectorDelay += (int) (38.0F * range_div);
+                    }
+                }
+            }
+            //探测器：钻石
+            if(this.inventory.getHotbarSlotContainItem(Items.detectorDiamond) > 0){
+                if(detectorDelay < 80){
+                    detectorDelay ++;
+                }else {
+                    detectorDelay = 0;
+                    List <Entity>targets  = this.getNearbyEntities(28.0F, 12.0F);
+                    float range_div = Math.min(2.0F,40.0F / this.detectNearestMonstersDistance(targets));
+//                    System.out.println(range_div);
+                    if(range_div > 0.0F){
+                        this.makeSound("imported.random.warning", 0.3F, 1.0F + range_div);
+                        detectorDelay += (int) (38.0F * range_div);
+                    }
+                }
+            }
             //拉屎！？
             if(this.isPotionActive(PotionExtend.dehydration) && this.diarrheaCounter <= 1200){
                 ++this.diarrheaCounter;
@@ -1066,6 +1098,20 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 entityMonster.attackEntityFrom(new Damage(DamageSource.causePlayerDamage(this.getAsPlayer()), damage));
             }
         }
+    }
+    public float detectNearestMonstersDistance(List <Entity>targets) {
+        float distance = -1.0F;
+        for(int i = 0; i< targets.size(); i++) {
+            EntityMonster entityMonster = targets.get(i) instanceof EntityMonster ? (EntityMonster) targets.get(i) : null;
+            if (entityMonster != null) {
+                if(distance < 0.0F){
+                    distance = (float) entityMonster.getDistanceSqToEntity(this);
+                }else {
+                    distance = Math.min(distance, (float) entityMonster.getDistanceSqToEntity(this));
+                }
+            }
+        }
+        return distance;
     }
     @Overwrite
     protected void fall(float par1) {

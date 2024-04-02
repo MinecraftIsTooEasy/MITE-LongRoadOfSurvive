@@ -62,6 +62,7 @@ public class Blocks extends Block {
     public static final Block torchWoodExtinguished = (new BlockTorchIdle(Constant.getNextBlockID())).setBlockHardness(0.0F).setBlockLightLevel(0.0F).setStepSound_(soundWoodFootstep).setUnlocalizedName("torch");
     public static final Block blockObserver = new BlockObserver(Constant.getNextBlockID(), Material.stone).setBlockHardness(2.5F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockReceiver = new BlockReceiver(Constant.getNextBlockID()).setBlockHardness(2.5F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
+    public static final Block blockSulphur = new BlockOre(Constant.getNextBlockID(),Materials.sulphur,1).setBlockHardness(1.2F).setExplosionResistance(10.0F).setStepSound_(Block.soundStoneFootstep);
 //    public static final Block invisibleLight = new BlockInvisibleLight(160).setBlockLightLevel(0.5F);
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
@@ -116,6 +117,7 @@ public class Blocks extends Block {
         registerItemBlock("azurite_cluster",azuriteCluster);
         registerItemBlock("torch_idle",torchWoodIdle);
         registerItemBlock("torch_off",torchWoodExtinguished);
+        registerItemBlock("sulphur",blockSulphur);
 
 //        registerItemBlock("invisible",invisibleLight);
 

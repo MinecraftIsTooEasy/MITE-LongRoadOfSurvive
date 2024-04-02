@@ -68,7 +68,7 @@ public class BlockCaveMisc extends Block {
         float chance = suppress_fortune ? 0.5F : 0.5F + (float) info.getHarvesterFortune() * 0.1F;
         if (EnchantmentManager.hasEnchantment(info.responsible_item_stack, Enchantments.enchantmentAbsorb)) {
             if (this == Blocks.azuriteCluster) {
-                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(5*chance));
+                this.dropXpOnBlockBreak(info.world, info.x, info.y, info.z, (int)(6*chance));
             }
         }
         return super.dropBlockAsEntityItem(info, id_dropped, metadata_dropped, quantity_dropped, chance);

@@ -221,7 +221,7 @@ public class EntityVillagerMixin extends EntityAgeable implements IMerchant, NPC
                     var2.add(new MerchantRecipe(new ItemStack(Item.emerald, 4), new ItemStack(Items.bowlPorkchopStew, 1, 0)));
                 }
                 if (this.rand.nextFloat() < this.adjustProbability(0.2F)) {
-                    var2.add(new MerchantRecipe(new ItemStack(Item.bowlEmpty, 16), new ItemStack(Item.shardEmerald, 1, 0)));
+                    var2.add(new MerchantRecipe(new ItemStack(Item.bowlEmpty, 4), new ItemStack(Item.shardEmerald, 1, 0)));
                 }
                 break;
             //渔夫
