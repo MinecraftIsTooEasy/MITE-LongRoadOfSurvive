@@ -46,7 +46,7 @@ public class ExperimentalConfig {
         public static ConfigItem <Boolean> TagBenchingV2 = new ConfigItem<>("BenchingV2",false,"工作站废料回收");
         public static ConfigItem <Boolean> FinalChallenge = new ConfigItem<>("FinalChallenge",false,"终极挑战模式");
         public static ConfigItem <Boolean> Realistic = new ConfigItem<>("Realistic",false,"真实状态模拟");
-        public static ConfigItem <Boolean> TagMovingV2 = new ConfigItem<>("MovingV2", false, "新移动模式");
+        public static ConfigItem <Boolean> TagMovingV2 = new ConfigItem<>("MovingV2", true, "新移动模式");
 //        public static ConfigItem <Boolean> NewVersion = new ConfigItem<>("NewVersion", false, "启用未完成的版本内容");
         //*这个有问题*//
 

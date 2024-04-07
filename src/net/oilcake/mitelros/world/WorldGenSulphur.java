@@ -37,7 +37,7 @@ public class WorldGenSulphur extends WorldGenerator {
             temp.setSeed(par1World.getSeed());
             int radius = temp.nextInt(2) + (isSuperLarge ? 2 : 1);
             int layer = 0;
-            while(radius >= 0 && layer < (isSuperLarge ? 4 : 2)){
+            while(radius >= 0 && layer < (isSuperLarge ? 2 : 1)){
                 for(int i = -radius;i <= radius;i++){
                     for(int j = -radius;j <= radius;j++){
                         if(CalRadius(radius,i,j) && par1World.getBlock(par3 + i, par4 - 3 + layer, par5 + j)!=Block.bedrock){

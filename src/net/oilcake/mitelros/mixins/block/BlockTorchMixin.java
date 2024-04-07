@@ -28,7 +28,7 @@ public abstract class BlockTorchMixin extends BlockMounted{
                     }
                 }
             }
-            if(willExtinguish && random.nextInt(8) == 0){
+            if(willExtinguish && random.nextInt(8) == 0 && world.getBlockId(x,y,z) == Block.torchWood.blockID){
                 world.setBlock(x, y, z, Blocks.torchWoodIdle.blockID, world.getBlockMetadata(x,y,z), 2);
             }
             return false;

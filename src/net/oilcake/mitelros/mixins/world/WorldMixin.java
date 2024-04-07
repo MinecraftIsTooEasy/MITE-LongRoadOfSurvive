@@ -162,7 +162,7 @@ public abstract class WorldMixin {
         return getSeasonType(this.getDayOfWorld());
     }
     public int getSeasonType(int day){
-        return day / 32 % 4;
+        return day % 128 / 32;
     }
     private static final int SPRING = 0;
     private static final int SUMMER = 1;

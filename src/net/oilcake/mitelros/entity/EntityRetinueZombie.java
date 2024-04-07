@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityRetinueZombie extends EntityZombie {
+    Item[] rare_drops;
     private int conversionTime;
     public EntityRetinueZombie(World world) {
         super(world);
         this.tasks.addTask(3, new EntityAISeekLitTorch(this, 1.0F));
+        this.rare_drops = new Item[]{Item.copperNugget, Item.silverNugget, Item.goldNugget, Item.ironNugget};
     }
     public void onUpdate() {
         if (!this.worldObj.isRemote && this.isConverting()) {
@@ -120,13 +122,8 @@ public class EntityRetinueZombie extends EntityZombie {
         if (this.rand.nextFloat() < (recently_hit_by_player ? 0.5F : 0.25F)) {
             this.dropItem(Item.rottenFlesh.itemID, 1);
         }
-        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(5) == 0) {
-            if(this.rand.nextInt(4) > 0){
-                this.dropItem(Item.copperNugget.itemID, 1);
-            }
-            else {
-                this.dropItem(Item.ironNugget.itemID, 1);
-            }
+        if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(50) < 10 + damage_source.getLootingModifier() * 5) {
+            this.dropItem(rare_drops[this.rand.nextInt(rare_drops.length)].itemID, 1);
         }
     }
 }

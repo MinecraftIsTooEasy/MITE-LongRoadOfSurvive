@@ -1014,6 +1014,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             } else {
                 float min_str_vs_block = -3.4028235E38F;
                 Item held_item = this.getHeldItem();
+                ItemStack held_item_stack = this.getHeldItemStack();
                 float str_vs_block;
                 if (block.isPortable(this.worldObj, this, x, y, z)) {
                     str_vs_block = min_str_vs_block = 4.0F * block_hardness;
@@ -1041,6 +1042,11 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                             str_vs_block = 1.0F;
                         }
                     }
+                }
+                if(apply_held_item && held_item_stack != null){
+                    int ordinal = held_item_stack.getQuality() == null ? 2 : held_item_stack.getQuality().ordinal();
+                    float quality_modifier = (ordinal - 2) * 0.0625F;
+                    str_vs_block *= 1.0F + quality_modifier;
                 }
 
                 if (block == Block.web) {

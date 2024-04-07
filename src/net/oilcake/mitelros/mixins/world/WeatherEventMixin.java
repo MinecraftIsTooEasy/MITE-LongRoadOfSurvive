@@ -35,10 +35,10 @@ public class WeatherEventMixin {
             Random random = new Random(this.start);
             random.nextInt();
             int day = World.getDayOfWorld(this.start);
-            int season = day / 64 % 4;
-            if (random.nextInt(season == 3 ? 2 : 4) == 0) {
+            int season = day % 128 / 32;
+            if (random.nextInt(season == 1 ? 2 : 4) == 0) {
                 this.duration_of_storm = Math.min((int) (random.nextInt(2400) * this.getStormDurationModify(season) + 2400), this.duration);
-                if (random.nextInt(3) == 0) {
+                if (random.nextInt(season == 2 ? 2 : 3) == 0) {
                     if (random.nextBoolean()) {
                         this.start_of_storm = this.start;
                     } else {

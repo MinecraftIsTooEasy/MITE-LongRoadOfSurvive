@@ -5,6 +5,10 @@ import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -19,48 +23,49 @@ public class ItemToolMixin extends Item{
             }
         }
     }
-
-    @Overwrite
-    public float getMaterialHarvestEfficiency() {
-        if (this.effective_material == Material.wood) {
-            return 1.0F;
-        } else if (this.effective_material == Material.flint) {
-            return 1.25F;
-        } else if (this.effective_material == Material.obsidian) {
-            return 1.5F;
-        } else if (this.effective_material == Material.rusted_iron) {
-            return 1.25F;
-        } else if (this.effective_material == Materials.vibranium) {
-            return 1.25F;
-        } else if (this.effective_material == Material.copper) {
-            return 1.75F;
-        } else if (this.effective_material == Material.silver) {
-            return 1.75F;
-        } else if (this.effective_material == Material.gold) {
-            return 1.75F;
-        } else if (this.effective_material == Material.iron) {
-            return 2.0F;
-        } else if (this.effective_material == Material.mithril) {
-            return 2.5F;
-        } else if (this.effective_material == Material.adamantium) {
-            return 3.0F;
-        } else if (this.effective_material == Materials.uru) {
-            return 3.0F;
-        } else if (this.effective_material == Material.diamond) {
-            return 2.5F;
-        } else if (this.effective_material == Material.ancient_metal) {
-            return 2.0F;
+    @Inject(method = "getMaterialHarvestEfficiency", at = @At(value = "HEAD"),cancellable = true)
+    private void InjectMaterialHarvestEfficiency(CallbackInfoReturnable<Float> callbackInfo){
+        if (this.effective_material == Materials.vibranium) {
+            callbackInfo.setReturnValue(1.25F);
         } else if (this.effective_material == Materials.nickel) {
-            return 2.0F;
+            callbackInfo.setReturnValue(2.0F);
         } else if (this.effective_material == Materials.tungsten) {
-            return 2.75F;
-        }else {
-            Minecraft.setErrorMessage("getMaterialHarvestEfficiency: tool material not handled");
-            return 0.0F;
+            callbackInfo.setReturnValue(2.75F);
+        } else if (this.effective_material == Materials.uru) {
+            callbackInfo.setReturnValue(3.0F);
         }
     }
-    @Shadow
-    private float damageVsEntity;
+//    @Overwrite
+//    public float getMaterialHarvestEfficiency() {
+//        if (this.effective_material == Material.wood) {
+//            return 1.0F;
+//        } else if (this.effective_material == Material.flint) {
+//            return 1.25F;
+//        } else if (this.effective_material == Material.obsidian) {
+//            return 1.5F;
+//        } else if (this.effective_material == Material.rusted_iron) {
+//            return 1.25F;
+//        } else if (this.effective_material == Material.copper) {
+//            return 1.75F;
+//        } else if (this.effective_material == Material.silver) {
+//            return 1.75F;
+//        } else if (this.effective_material == Material.gold) {
+//            return 1.75F;
+//        } else if (this.effective_material == Material.iron) {
+//            return 2.0F;
+//        } else if (this.effective_material == Material.mithril) {
+//            return 2.5F;
+//        } else if (this.effective_material == Material.adamantium) {
+//            return 3.0F;
+//        } else if (this.effective_material == Material.diamond) {
+//            return 2.5F;
+//        } else if (this.effective_material == Material.ancient_metal) {
+//            return 2.0F;
+//        } else {
+//            Minecraft.setErrorMessage("getMaterialHarvestEfficiency: tool material not handled");
+//            return 0.0F;
+//        }
+//    }
     @Shadow
     private Material effective_material;
 

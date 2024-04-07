@@ -677,7 +677,7 @@ public class Items extends Item {
 
         register.registerShapelessRecipe(new ItemStack(sulphur,9),true,
                 new ItemStack(Blocks.blockSulphur,1));
-        register.registerShapelessRecipe(new ItemStack(Item.gunpowder,8),true,
+        register.registerShapelessRecipe(new ItemStack(Item.gunpowder,5),true,
                 new ItemStack(Items.sulphur, 8),new ItemStack(Item.coal, 1, 1));
         register.registerShapelessRecipe(new ItemStack(forgingnote,2),false,
                 Items.forgingnote,Item.writableBook

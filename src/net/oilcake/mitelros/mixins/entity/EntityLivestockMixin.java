@@ -20,7 +20,7 @@ public abstract class EntityLivestockMixin extends EntityAnimal implements Entit
     }
     private int illnessToDeathCounter;
 
-    @Inject(method = "onLivingUpdate",at = @At(value = "FIELD",shift = At.Shift.AFTER,target = "Lnet/minecraft/World;isRemote:Z",ordinal = 1))
+    @Inject(method = "onLivingUpdate",at = @At(value = "FIELD",shift = At.Shift.AFTER,target = "Lnet/minecraft/World;isRemote:Z",ordinal = 0))
     private void injectIllnessToDeath(CallbackInfo c){
         if (!this.isWell()) {
             if(ExperimentalConfig.TagConfig.Realistic.ConfigValue){
