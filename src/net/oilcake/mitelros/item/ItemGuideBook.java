@@ -24,8 +24,8 @@ public class ItemGuideBook extends ItemWrittenBook {
         pages.appendTag(new NBTTagString("5", "*有关水分 7-12页\n*有关熔炉 13页\n*有关矿物规划 14-15页\n*有关金苹果 16页\n*有关新金属 17-19页"));
         pages.appendTag(new NBTTagString("6", "*有关新生物群系 20-21页\n*有关额外机制 22-26页\n*有关新物品 29-32页\n*附页 33页+"));
         pages.appendTag(new NBTTagString("7", "在游玩模组时，作者默认「玩家」(下称「你」)已经游玩过MITE R196并拥有一定的理论知识，同时一部分已有的无关痛痒的机制碍于篇幅不再赘述。"));
-        pages.appendTag(new NBTTagString("8", "位于玩家状态栏右下角饱食度上方的即模组新添加的水分条，依然会随时间推移减少，在玩家食用特定食物时将直接减少或者增加。"));
-        pages.appendTag(new NBTTagString("9", "在食用肉类时这个条会立即减少，在它为空时玩家将逐渐减少血量直到死亡；留意一些新的花和仙人掌，在合成后将触发一个新的成就：紧急避险。对应的合成产物可以在你做出碗之前恢复含水量。"));
+        pages.appendTag(new NBTTagString("8", "位于玩家状态栏右下角饱食度上方的即模组新添加的水分条，依然会随时间推移减少，在玩家食用特定食物或拥有部分状态效果时减少或者增加。"));
+        pages.appendTag(new NBTTagString("9", "在获得部分效果时会快速减少，在食用部分食物时会瞬间降低，它为空时玩家将逐渐减少血量直到死亡；留意一些新的花，在合成后将触发一个新的成就：紧急避险。对应的合成产物可以在你做出碗之前恢复含水量。"));
         pages.appendTag(new NBTTagString("10", "如果对水分拥有迫切的需求，你可以在水中按住潜行键并保持一段时间，这也会让你恢复一部分水分。\n\n至此，你可以正常前进到燧石工具时代了。"));
         pages.appendTag(new NBTTagString("11", "在做出碗舀取水分乃至你在水中潜行获得debuff时，你可能会留意到多数地区的水饮用之后会出现问题，你可以使用黏土炉去蒸馏「一碗可疑的水」或者「一碗沼泽水」来让水变得安全(务必参考p31)。"));
         pages.appendTag(new NBTTagString("12", "一些河流部分段落的水可能无需烧炼即可饮用而不会获取debuff，这也在水质的考虑范围之内。同时你需要干净的水来制作相关的碗类食物，牛奶也不失为一种补水的选择。"));
@@ -37,7 +37,7 @@ public class ItemGuideBook extends ItemWrittenBook {
         pages.appendTag(new NBTTagString("18", "* 钨 *\n用于强化地狱怪物的金属，拥有优秀的耐久性能，在制作艾德曼合金工作台时需要其作为前置，纯钨钢制品同样免疫岩浆的损毁。"));
         pages.appendTag(new NBTTagString("19", "* 乌鲁金属 *\n位于末地的附魔特化金属，可以拥有更多的附魔词条同时拥有一个区别于其他工具的合成路线，碍于作者的更新速度和方块id问题它并没有完全的金属制品。"));
         pages.appendTag(new NBTTagString("20", "* 风袭高原 *\n拥有极其庞大且圆石覆盖的覆雪山体，同时会生成露天的绿宝石，在该群系的地下会生成极其发达的矿脉网络，相当危险。"));
-        pages.appendTag(new NBTTagString("21", "* 萨瓦纳草原 *\n与沙漠相同的不会下雨拥有兰花和少量树的草原，是最为理想的常驻生物群系。"));
+        pages.appendTag(new NBTTagString("21", "* 萨瓦纳草原 *\n季节更替不明显，不存在常态降雨，拥有兰花和少量树的草原，是最为理想的常驻生物群系。"));
         pages.appendTag(new NBTTagString("22", "* 寒冷惩罚 *\n在覆雪生物群系露天呆一段时间后会获取不断刷新的缓慢与挖掘疲劳，并在其达到高等级时将冻死玩家，穿着对应的盔甲可以减免这个效果，同时极地护甲可以免疫这个效果。"));
         pages.appendTag(new NBTTagString("23", "* 季节机制*\n每个蓝月循环内会出现四季交替，春季不会有任何影响；夏季会延长下雨的事件；秋季的水果掉落率会增加；而冬季会让所有非热带群系变为覆雪寒冷群系。"));
         pages.appendTag(new NBTTagString("24", "* 拓展营养条*\n在左下角的营养条消耗完毕后将进入营养不良状态并继续减少隐藏营养条，过久的营养不良会导致更加严重的惩罚(如停止回血乃至缓慢扣血死亡)。"));
@@ -50,7 +50,7 @@ public class ItemGuideBook extends ItemWrittenBook {
         pages.appendTag(new NBTTagString("31", "* 陶瓦碗 *\n单个黏土可以合成黏土碗并在熔炉中4个为一个单位烧制成陶瓦碗，拥有碗类相同的功效并可以烧水；\n\n木碗无法烧水！"));
         pages.appendTag(new NBTTagString("32", "* 图腾 *\n移植自高版本的不死图腾，每种图腾都拥有不同的效果，但是需要手持才能生效(在受到死亡攻击时消失并产生效果)！"));
         pages.appendTag(new NBTTagString("33", "* 配置文件 *\n详见「StuckChallenge.cfg」和「ExperimentalOption.cfg」，按照正常流程更改其中的配置可以让玩家体验到更加不一样的MITE-ITF。"));
-        pages.appendTag(new NBTTagString("34", "更多改动详见更新日志！ 链接：https://docs.qq.com/doc/p/6556873ce3bc40e32e1b61a0d05e8dc461792230"));
+        pages.appendTag(new NBTTagString("34", "Github上的更新日志！ 链接：https://github.com/MinecraftIsTooEasy/MITE-LongRoadOfSurvive/blob/R196/ChangeLogCN.md"));
         nbt.setString("flavor_text", "Try to survive in distorted MITE World.");
         return nbt;
     }

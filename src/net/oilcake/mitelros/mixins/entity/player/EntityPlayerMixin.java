@@ -516,6 +516,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     this.getFoodStats().addWater(1);
                     this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 160, 0));
                 }
+                this.triggerAchievement(AchievementExtend.mashedCactus);
             }
             //水分自然扣减
             dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 2.0D : 1.0D) + (double) biome.getFloatTemperature();

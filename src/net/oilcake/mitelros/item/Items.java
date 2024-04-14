@@ -492,7 +492,7 @@ public class Items extends Item {
                 "  S",
                 " SG",
                 "SAG",
-                'A',getMatchingItem(ItemNugget.class,item.getExclusiveMaterial()),
+                'A',getMatchingItem(ItemNugget.class,item.getHardestMetalMaterial()),
                 'S',Item.stick,
                 'G',Item.silk);
         register.registerShapedRecipe(new ItemStack(Item.getMatchingItem(ItemShears.class, material)),true,
@@ -503,7 +503,7 @@ public class Items extends Item {
     }
     public static void registerMITEToolRecipe(RecipeRegister register, Material material){
         Item item = Item.getMatchingItem(ItemIngot.class,material);
-        Item item_nugget = getMatchingItem(ItemNugget.class,item.getExclusiveMaterial());
+        Item item_nugget = Item.getMatchingItem(ItemNugget.class,item.getHardestMetalMaterial());
         Item item_chain = Item.getMatchingItem(ItemChain.class,material);
         register.registerShapedRecipe(new ItemStack(Item.getMatchingItem(ItemArrow.class,material)), true,
                 "C",
@@ -643,6 +643,28 @@ public class Items extends Item {
         registerITFToolRecipe(register);
         registerFullMetalToolRecipe(register,Materials.nickel);
         registerFullMetalToolRecipe(register,Materials.tungsten);
+
+        register.registerShapelessRecipe(new ItemStack(Items.glowberries,1),true,
+                new ItemStack(Blocks.flowerextend,1,0));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
+                new ItemStack(Blocks.flowerextend,1,1));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,4),true,
+                new ItemStack(Blocks.flowerextend,1,2));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
+                new ItemStack(Blocks.flowerextend,1,3));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,9),true,
+                new ItemStack(Blocks.flowerextend,1,4));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
+                new ItemStack(Blocks.flowerextend,1,5));
+        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),true,
+                new ItemStack(Blocks.flowerextend,1,6));
+        register.registerShapelessRecipe(new ItemStack(Items.Agave,1,1),true,
+                new ItemStack(Blocks.flowerextend,1,7));
+        for(int i = 0; i <= 4; i++){
+            register.registerShapelessRecipe(new ItemStack(Item.stick,1),true,
+                    new ItemStack(Blocks.torchWoodIdle,i),new ItemStack(Blocks.torchWoodExtinguished, 4 - i));
+        }
+
         register.registerShapedRecipe(new ItemStack(bowTungsten, 1), true,
                 "#C ",
                 "#EC",
@@ -995,23 +1017,26 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));
         RecipesFurnace.smelting().addSmelting(claybowlRaw.itemID, new ItemStack(claybowlEmpty));
 
-        Class[] tools = new Class[]{ItemSword.class, ItemAxe.class,ItemPickaxe.class,ItemHoe.class, ItemShovel.class, ItemWarHammer.class, ItemBattleAxe.class, ItemScythe.class, ItemDagger.class, ItemKnife.class, ItemMorningStar.class, ItemHatchet.class, ItemShears.class, ItemMattock.class, ItemHelmet.class, ItemBoots.class, ItemLeggings.class, ItemCuirass.class};
+        Class[] tools = new Class[]{ItemSword.class, ItemAxe.class,ItemPickaxe.class,ItemHoe.class, ItemShovel.class, ItemWarHammer.class, ItemBattleAxe.class, ItemScythe.class, ItemDagger.class, ItemKnife.class, ItemMorningStar.class, ItemHatchet.class, ItemShears.class, ItemMattock.class};
+        Class[] armors = new Class[]{ItemHelmet.class, ItemBoots.class, ItemLeggings.class, ItemCuirass.class};
         Material[] available_material = new Material[]{Material.copper, Material.silver, Material.gold, Material.iron, Materials.nickel, Materials.tungsten, Material.ancient_metal, Material.rusted_iron};
         for (Class tool : tools) {
             for (Material material : available_material) {
                 Item matchingitem = Item.getMatchingItem(tool, material);
                 if(matchingitem != null){
-                    if(matchingitem instanceof ItemArmor){
-                        matchingitem = ItemArmor.getMatchingArmor(tool, material, false);
-                        RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
-                        matchingitem = ItemArmor.getMatchingArmor(tool, material, true);
-                        RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
-                    }else {
-                        RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
-                    }
+                    RecipesFurnace.smelting().addSmelting(matchingitem.itemID, new ItemStack(appleRed));
                 }
             }
         }
+        for (Class armor : armors){
+            for(Material material : available_material) {
+                Item matching_plate = ItemArmor.getMatchingArmor(armor, material, false);
+                RecipesFurnace.smelting().addSmelting(matching_plate.itemID, new ItemStack(appleRed));
+                Item matching_chain = ItemArmor.getMatchingArmor(armor, material, true);
+                RecipesFurnace.smelting().addSmelting(matching_chain.itemID, new ItemStack(appleRed));
+            }
+        }
+
 
 
         ItemFood.setCookingResult((ItemFood) horse_meat, (ItemFood) horse_meat_cooked, 6);

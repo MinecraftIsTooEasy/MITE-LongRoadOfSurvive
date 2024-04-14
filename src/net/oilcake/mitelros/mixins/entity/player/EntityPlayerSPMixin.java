@@ -30,6 +30,7 @@ public abstract class EntityPlayerSPMixin extends beu{
     }
     private int phytonutrients;
     private int protein;
+    private float heal_progress;
     @Overwrite
     private float getBenchAndToolsModifier(Container container) {
         if (!(container instanceof ContainerWorkbench)) {
@@ -89,8 +90,14 @@ public abstract class EntityPlayerSPMixin extends beu{
     public int getPhytonutrients() {
         return this.phytonutrients;
     }
+    public float getHealProgress() {
+        return this.heal_progress;
+    }
     public void setProtein(int protein) {
         this.protein = protein;
+    }
+    public void setHeal_progress(float heal_progress) {
+        this.heal_progress = heal_progress;
     }
     public void setPhytonutrients(int phytonutrients) {
         this.phytonutrients = phytonutrients;

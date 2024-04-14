@@ -82,8 +82,8 @@ enchantment.mending=修补
 
 potion.dehydration=脱水
 
-item.ingot/nickel.name=镍锭
-item.ingot/nugget/nickel.name=镍粒
+item.ingots/nickel.name=镍锭
+item.nuggets/nickel.name=镍粒
 item.tools/nickel_axe.name=镍斧
 item.tools/nickel_pickaxe.name=镍镐
 item.tools/nickel_dagger.name=镍短剑
@@ -100,7 +100,7 @@ item.tools/nickel_war_hammer.name=镍战锤
 item.tools/nickel_club.name=镍钉头锤
 
 item.doors/nickel.name=镍门
-item.chain/nickel.name=镍锁链
+item.chains/nickel.name=镍锁链
 item.coins/nickel.name=镍币
 item.arrows/nickel_arrow.name=镍箭
 
@@ -128,6 +128,7 @@ tile.azurite_cluster.name=碧蓝水晶簇
 tile.torch_idle.name=阴燃火把
 tile.torch_off.name=熄灭火把
 tile.sulphur.name=硫磺块
+tile.lantern.name=金属灯笼
 
 tile.flowers/.luminescent_herb.name=荧光草
 tile.flowers/.azure_bluet.name=茜草花
@@ -147,8 +148,8 @@ item.armor/tungsten_chainmail_chestplate.name=钨钢锁链胸甲
 item.armor/tungsten_chainmail_leggings.name=钨钢锁链护腿
 item.armor/tungsten_chainmail_boots.name=钨钢锁链靴子
 
-item.ingot/tungsten.name=钨钢锭
-item.ingot/nugget/tungsten.name=钨钢粒
+item.ingots/tungsten.name=钨钢锭
+item.nuggets/tungsten.name=钨钢粒
 item.tools/tungsten_axe.name=钨钢斧
 item.tools/tungsten_pickaxe.name=钨钢镐
 item.tools/tungsten_dagger.name=钨钢短剑
@@ -166,7 +167,7 @@ item.tools/tungsten_club.name=钨钢钉头锤
 item.tungsten_bow.name=钨钢弓
 
 item.doors/tungsten.name=钨钢门
-item.chain/tungsten.name=钨钢锁链
+item.chains/tungsten.name=钨钢锁链
 item.coins/tungsten.name=钨钢币
 item.arrows/tungsten_arrow.name=钨钢箭
 
@@ -185,8 +186,8 @@ item.armor/uru_chestplate.name=乌鲁金属胸甲
 item.armor/uru_leggings.name=乌鲁金属护腿
 item.armor/uru_boots.name=乌鲁金属靴子
 
-item.ingot/uru.name=乌鲁金属锭
-item.ingot/nugget/uru.name=乌鲁金属粒
+item.ingots/uru.name=乌鲁金属锭
+item.nuggets/uru.name=乌鲁金属粒
 item.tools/uru_battle_axe.name=乌鲁金属战斧
 item.tools/uru_mattock.name=乌鲁金属鸭嘴锄
 item.tools/uru_scythe.name=乌鲁金属镰刀

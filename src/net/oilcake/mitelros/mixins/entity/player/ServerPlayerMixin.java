@@ -34,7 +34,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     private int last_FreezingCooldown = -99999999;
     private int last_phytonutrients;
     private int last_protein;
-
+    private float last_heal_progress;
     @Inject(method = "onDeath", at = @At("INVOKE"))
     public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
@@ -77,7 +77,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
             int nutrition = this.getNutrition();
             int FreezingCooldown = this.getFreezingCooldown();
             int water = this.getWater();
-            if (water != this.last_water || FreezingCooldown != this.last_FreezingCooldown || health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F || this.phytonutrients != this.last_phytonutrients || this.protein != this.last_protein) {
+            if (water != this.last_water || FreezingCooldown != this.last_FreezingCooldown || health != this.lastHealth || satiation != this.last_satiation || nutrition != this.last_nutrition || this.vision_dimming > 0.0F || this.phytonutrients != this.last_phytonutrients || this.protein != this.last_protein || this.getFoodStats().getHeal_progress() != this.last_heal_progress) {
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
                 Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
                 updateWater.setWater(water);
@@ -85,6 +85,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 updateWater.setPhytonutrients(this.phytonutrients);
                 updateWater.setProtein(this.protein);
                 this.playerNetServerHandler.sendPacket(updateWater);
+                updateWater.setHealProgress(this.getFoodStats().getHeal_progress());
 //              PacketReadFreezeCooldown updateFreezingCooldown = new PacketReadFreezeCooldown();
 //              updateFreezingCooldown.setFreezingCooldown(FreezingCooldown);
 //              this.playerNetServerHandler.sendPacket(updateFreezingCooldown);
@@ -96,6 +97,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.vision_dimming = 0.0F;
                 this.last_phytonutrients = phytonutrients;
                 this.last_protein = protein;
+                this.last_heal_progress = this.getFoodStats().getHeal_progress();
             }
 
             if (this.getHealth() + this.getAbsorptionAmount() != this.field_130068_bO) {

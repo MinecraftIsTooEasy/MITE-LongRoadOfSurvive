@@ -28,7 +28,7 @@ public class ItemTotem extends Item {
             for(int i = 0;i < 8;i++){
                 player.entityFX(EnumEntityFX.curse_effect_learned);
             }
-            player.addExperience(player.experience / 5);
+            player.addExperience(Math.min(player.experience / 5, 30000));
         } else if(totem_material == Material.iron){
             for(int i = 0;i < 8;i++){
                 player.entityFX(EnumEntityFX.smoke_and_steam);

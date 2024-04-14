@@ -26,6 +26,7 @@ public class ItemKnifeMixin extends ItemDagger{
                 } else {
                     rc.world.playSoundAtEntity(player, "dig.wood", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                     player.setHeldItemStack(null);
+                    player.triggerAchievement(AchievementList.buildWorkBench);
                 }
                 return true;
             }else if (rc.getBlockHit() == Block.wood && this.getToolMaterial() == Material.obsidian && player.getHeldItemStack().getItemDamage() == 0) {
@@ -37,6 +38,7 @@ public class ItemKnifeMixin extends ItemDagger{
                 } else {
                     rc.world.playSoundAtEntity(player, "dig.wood", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                     player.setHeldItemStack(null);
+                    player.triggerAchievement(AchievementList.buildWorkBench);
                 }
                 return true;
             } else {

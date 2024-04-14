@@ -41,11 +41,13 @@ public class ItemGoldenAppleLegend extends ItemFood{
     }
     protected void onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         if (par1ItemStack.getItemSubtype() == 0 && !par2World.isRemote) {
+            par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.field_76444_x.id, 600, 3));
             par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 600, 4));
         }
 
         if (par1ItemStack.getItemSubtype() > 0) {
             if (!par2World.isRemote) {
+                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.field_76444_x.id, 600, 3));
                 par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 600, 4));
                 par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.resistance.id, 6000, 1));
                 par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.fireResistance.id, 6000, 1));

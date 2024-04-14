@@ -26,6 +26,7 @@ public class RecipesFurnaceMixin {
                 if (input_item_stack.getItem() instanceof ItemArmor){
                     int quantity = (int) ((float) ((input_item_stack.getMaxDamage() - input_item_stack.getItemDamage()) / (float)input_item_stack.getMaxDamage()) * ((ItemArmor) input_item_stack.getItem()).getNumComponentsForDurability() * (input_item_stack.getItem().isChainMail() ? 4.0F : 9.0F));
                     ItemStack output;
+                    quantity /= 3;
                     if(input_item_stack.getItem().getHardestMetalMaterial() == Material.rusted_iron){
                         quantity /= 3;
                         output = new ItemStack(Item.getMatchingItem(ItemNugget.class, Material.iron),quantity);
@@ -39,6 +40,7 @@ public class RecipesFurnaceMixin {
                 }else if(input_item_stack.getItem() instanceof ItemTool){
                     int quantity = (int) ((float) ((input_item_stack.getMaxDamage() - input_item_stack.getItemDamage()) / (float)input_item_stack.getMaxDamage()) * ((ItemTool) input_item_stack.getItem()).getNumComponentsForDurability() * 9.0F);
                     ItemStack output;
+                    quantity /= 3;
                     if(input_item_stack.getItem().getHardestMetalMaterial() == Material.rusted_iron){
                         quantity /= 3;
                         output = new ItemStack(Item.getMatchingItem(ItemNugget.class, Material.iron),quantity);

@@ -96,4 +96,7 @@ public class EntityWitherBoneLord extends EntityBoneLord {
     public boolean isHarmedByLava() {
         return false;
     }
+    public int getMaxSpawnedInChunk() {
+        return 1;
+    }
 }

@@ -22,7 +22,7 @@ public class Packet8UpdateHealthMixin extends Packet {
     public int FreezingCooldown;
     public int phytonutrients;
     public int protein;
-
+    public float heal_progress;
     public Packet8UpdateHealthMixin(float health, int satiation, int nutrition, float vision_dimming) {
         this.healthMP = health;
         this.satiation = satiation;
@@ -31,6 +31,9 @@ public class Packet8UpdateHealthMixin extends Packet {
     }
     public int setWater(int water) {
         return this.water = water;
+    }
+    public void setHealProgress(float heal_progress){
+        this.heal_progress = heal_progress;
     }
     public int setFreezingCooldown(int FreezingCooldown) {
         return this.FreezingCooldown = FreezingCooldown;
@@ -42,6 +45,7 @@ public class Packet8UpdateHealthMixin extends Packet {
         this.water = par1DataInput.readInt();
         this.protein = par1DataInput.readInt();
         this.phytonutrients = par1DataInput.readInt();
+        this.heal_progress = par1DataInput.readFloat();
     }
 
     @Inject(method = "writePacketData",
@@ -50,6 +54,7 @@ public class Packet8UpdateHealthMixin extends Packet {
         par1DataOutput.writeInt(this.water);
         par1DataOutput.writeInt(this.protein);
         par1DataOutput.writeInt(this.phytonutrients);
+        par1DataOutput.writeFloat(this.heal_progress);
     }
     public void setPhytonutrients(int phytonutrients) {
         this.phytonutrients = phytonutrients;

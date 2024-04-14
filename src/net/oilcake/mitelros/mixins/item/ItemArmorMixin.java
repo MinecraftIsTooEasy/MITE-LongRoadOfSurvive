@@ -92,9 +92,11 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
     @Inject(method = "getMultipliedProtection", at = @At(value = "RETURN"), cancellable = true)
     private void InjectQualityEnhance(ItemStack item_stack, CallbackInfoReturnable<Float> callbackInfo){
         float protection = callbackInfo.getReturnValue();
-        protection *= 0.875F + (item_stack.getQuality().ordinal() * 0.0625F);
-        callbackInfo.setReturnValue(protection);
-        callbackInfo.cancel();
+        if(item_stack != null){
+            protection *= 0.875F + (item_stack.getQuality().ordinal() * 0.0625F);
+            callbackInfo.setReturnValue(protection);
+            callbackInfo.cancel();
+        }
     }
 //    @Overwrite
 //    public int getMaterialProtection() {

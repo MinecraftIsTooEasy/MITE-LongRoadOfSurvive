@@ -77,7 +77,7 @@ public class ItemInWorldManagerMixin {
                                     block.dropBlockAsEntityItem(block_break_info);
                                 }
 
-                                if (block == Block.wood || block == Block.mushroomCapRed || block == Block.mushroomCapBrown && !this.tree_felling_in_progress) {
+                                if ((block == Block.wood || block == Block.mushroomCapRed || block == Block.mushroomCapBrown) && !this.tree_felling_in_progress) {
                                     int felling = EnchantmentManager.getTreeFellingModifier(this.thisPlayerMP) * 4;
                                     this.tree_felling_in_progress = true;
                                     this.fellTree(this.theWorld,x,y,z,felling);

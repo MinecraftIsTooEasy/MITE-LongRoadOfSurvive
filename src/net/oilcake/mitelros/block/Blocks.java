@@ -7,6 +7,7 @@ import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.RecipeRegister;
+import net.xiaoyu233.fml.util.ReflectHelper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -56,13 +57,14 @@ public class Blocks extends Block {
     public static final Block beetroots = new BlockBeetroots(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
     public static final Block beetrootsDead = new BlockBeetrootsDead(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
     public static final Block flowerPotExtend = new BlockFlowerPotExtend(Constant.getNextBlockID()).setBlockHardness(0.0F).setStepSound_(soundPowderFootstep).setUnlocalizedName("flowerPot");
-    public static final Block blockAzurite = new BlockGrowableOre(Constant.getNextBlockID(), Materials.crystal, 2).setStepSound_(soundGlassFootstep).setBlockHardness(1.2F).setExplosionResistance(12.0f).setBlockLightLevel(0.75F);
-    public static final Block azuriteCluster = new BlockCaveMisc(Constant.getNextBlockID(), Materials.crystal).setBlockLightLevel(0.5F).setBlockHardness(0.6F).setMinHarvestLevel(1).setExplosionResistance(6.0f).setStepSound_(soundGlassFootstep);
+    public static final Block blockAzurite = new BlockGrowableOre(Constant.getNextBlockID(), Materials.crystal, 2).setStepSound_(soundGlassFootstep).setBlockHardness(1.2F).setExplosionResistance(12.0f).setBlockLightLevel(1.0F);
+    public static final Block azuriteCluster = new BlockCaveMisc(Constant.getNextBlockID(), Materials.crystal).setBlockLightLevel(0.75F).setBlockHardness(0.6F).setMinHarvestLevel(1).setExplosionResistance(6.0f).setStepSound_(soundGlassFootstep);
     public static final Block torchWoodIdle = (new BlockTorchIdle(Constant.getNextBlockID())).setBlockHardness(0.0F).setBlockLightLevel(0.5F).setStepSound_(soundWoodFootstep).setUnlocalizedName("torch");
     public static final Block torchWoodExtinguished = (new BlockTorchIdle(Constant.getNextBlockID())).setBlockHardness(0.0F).setBlockLightLevel(0.0F).setStepSound_(soundWoodFootstep).setUnlocalizedName("torch");
     public static final Block blockObserver = new BlockObserver(Constant.getNextBlockID(), Material.stone).setBlockHardness(2.5F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockReceiver = new BlockReceiver(Constant.getNextBlockID()).setBlockHardness(2.5F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockSulphur = new BlockOre(Constant.getNextBlockID(),Materials.sulphur,1).setBlockHardness(1.2F).setExplosionResistance(10.0F).setStepSound_(Block.soundStoneFootstep);
+    public static final Block blockAzuriteLantern = (ReflectHelper.createInstance(BlockAzuriteLantern.class, new Class[] {int.class,Material.class}, Constant.getNextBlockID(), Materials.circuits)).setUnlocalizedName("lantern").setStepSound_(Block.soundMetalFootstep);
 //    public static final Block invisibleLight = new BlockInvisibleLight(160).setBlockLightLevel(0.5F);
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
@@ -118,7 +120,7 @@ public class Blocks extends Block {
         registerItemBlock("torch_idle",torchWoodIdle);
         registerItemBlock("torch_off",torchWoodExtinguished);
         registerItemBlock("sulphur",blockSulphur);
-
+        registerItemBlock("lantern",blockAzuriteLantern);
 //        registerItemBlock("invisible",invisibleLight);
 
     }
@@ -214,26 +216,16 @@ public class Blocks extends Block {
 //                "XX ",
 //                "XX ",
 //                'X',Items.tungstenIngot);
-        register.registerShapelessRecipe(new ItemStack(Items.glowberries,1),true,
-                new ItemStack(Blocks.flowerextend,1,0));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
-                new ItemStack(Blocks.flowerextend,1,1));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,4),true,
-                new ItemStack(Blocks.flowerextend,1,2));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
-                new ItemStack(Blocks.flowerextend,1,3));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,9),true,
-                new ItemStack(Blocks.flowerextend,1,4));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
-                new ItemStack(Blocks.flowerextend,1,5));
-        register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,1),true,
-                new ItemStack(Blocks.flowerextend,1,6));
-        register.registerShapelessRecipe(new ItemStack(Items.Agave,1,1),true,
-                new ItemStack(Blocks.flowerextend,1,7));
-        for(int i = 0; i <= 4; i++){
-            register.registerShapelessRecipe(new ItemStack(Item.stick,1),true,
-                    new ItemStack(Blocks.torchWoodIdle,i),new ItemStack(Blocks.torchWoodExtinguished, 4 - i));
+
+        ItemNugget[] nuggets = new ItemNugget[]{Item.copperNugget,Item.silverNugget,Item.goldNugget,Item.ironNugget,Items.nickelNugget,Item.ancientMetalNugget,Item.mithrilNugget,Items.tungstenNugget,Item.adamantiumNugget};
+        for(int i = 0;i < nuggets.length;i++){
+            for(int j = 1; j <= 4; j++){
+                register.registerShapelessRecipe(new ItemStack(Blocks.blockAzuriteLantern,j,i),true,
+                        new ItemStack(nuggets[i].itemID,j), new ItemStack(Items.shardAzurite,j));
+            }
         }
+
+
 
 
 

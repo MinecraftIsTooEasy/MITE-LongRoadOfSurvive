@@ -34,7 +34,7 @@ public class PacketEnchantReserverInfo extends Packet {
     }
     @Override
     public int getPacketSize() {
-        return 2;
+        return 4;
     }
 
     @Override

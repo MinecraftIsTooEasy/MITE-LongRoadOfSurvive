@@ -367,6 +367,7 @@ public class GuiIngameMixin extends avk {
             GL11.glPushMatrix();
             GL11.glScalef(0.6F, 1.0F, 1.0F);
             this.g.J().a(Constant.icons_itf);
+            //this.b(渲染位置x，渲染位置y，png取像素右上顶点x，png取像素右上顶点y，取向左像素宽，取向下像素高)
             this.b(var26 - 205, var25, 0, 106, 182, 6);
             this.b(var26 - 205, var25, 0, 100, (int)(182.0F * getRateNutrient(protein)), 6);
             GL11.glPopMatrix();
@@ -389,7 +390,26 @@ public class GuiIngameMixin extends avk {
             this.b(var26 - 205, var25, 0, 100, (int)(182.0F * getRateNutrient(protein)), 6);
             GL11.glPopMatrix();
         }
+
     }
+    @Inject(locals = LocalCapture.CAPTURE_FAILHARD,
+            method = "a(II)V",
+            at = @At(value = "INVOKE_STRING",
+                    target = "endStartSection(Ljava/lang/String;)V",
+                    args = "ldc=air",
+                    shift = At.Shift.BEFORE))
+    private void injectRenderHealProgress(int par1, int par2, CallbackInfo ci, boolean var3, int var4, int var5, FoodMetaData var7, int var8, AttributeInstance var10, int var11, int var12, int var13, float var14, float var15){
+        int var25 = var13 + 32;
+        GL11.glPushMatrix();
+        GL11.glScalef(0.6F, 1.0F, 1.0F);
+        this.g.J().a(Constant.icons_itf);
+        //
+        this.b((int) (par1 * 1.21), var25, 0, 106, 182, 6);
+        this.b((int) (par1 * 1.21), var25, 0, 112, (int)(182.0F * this.g.h.getHealProgress()), 6);
+        //
+        GL11.glPopMatrix();
+    }
+
     private boolean getNutrientsPriority(int protein,int phytonutrients){
         return protein > phytonutrients;
     }

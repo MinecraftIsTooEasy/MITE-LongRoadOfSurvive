@@ -72,6 +72,16 @@ public class FoodStatsMixin {
             this.water = water;
         }
     }
+    public void setHeal_progress(float heal_progress, boolean check_limit) {
+        if (check_limit) {
+            this.heal_progress = Math.min(heal_progress, 1);
+        } else {
+            this.heal_progress = heal_progress;
+        }
+    }
+    public float getHeal_progress(){
+        return this.heal_progress;
+    }
     public int addWater(int water)
     {
         this.setSatiationWater(this.water + water, true);
@@ -248,9 +258,10 @@ public class FoodStatsMixin {
                         --this.malnourished_progress;
                     }
                 } else {
-                    this.heal_progress += (4.0E-4F + (float)this.nutrition * 2.0E-5F)
+                    this.heal_progress += ((float)this.satiation * 2.0E-5F + (float)this.nutrition * 2.0E-5F)
                            * (par1EntityPlayer.isMalnourishedLv1() ? 0.25F : (par1EntityPlayer.isMalnourishedLv2() ? 0.0F : (par1EntityPlayer.isMalnourishedLv3() ? 0.0F : 1.0F)))
-                            * (par1EntityPlayer.inBed() ? 8.0F : 1.0F) * EnchantmentManager.getRegenerationModifier(this.player);
+                            * (par1EntityPlayer.inBed() ? 8.0F : 1.0F)
+                             * EnchantmentManager.getRegenerationModifier(this.player);
                     this.starve_progress = 0.0F;
                     if (par1EntityPlayer.worldObj.getGameRules().getGameRuleBooleanValue("naturalRegeneration") && par1EntityPlayer.shouldHeal()) {
                         if (this.heal_progress >= 1.0F) {
@@ -267,6 +278,7 @@ public class FoodStatsMixin {
             }
         }
     }
+
     @Shadow
     private float global_hunger_rate = 1.0F;
     @Shadow

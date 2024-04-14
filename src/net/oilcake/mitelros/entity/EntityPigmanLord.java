@@ -53,6 +53,8 @@ public class EntityPigmanLord extends EntityPigZombie {
     public int getExperienceValue() {
         return super.getExperienceValue() * 2;
     }
-
+    public int getMaxSpawnedInChunk() {
+        return 1;
+    }
 
 }

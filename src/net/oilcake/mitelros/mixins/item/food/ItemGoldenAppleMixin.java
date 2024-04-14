@@ -24,12 +24,14 @@ public class ItemGoldenAppleMixin extends ItemFood {
         if (par1ItemStack.getItemSubtype() == 0) {
             if (!par2World.isRemote) {
                 par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 600, 0));
+                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.field_76444_x.id, 600, 1));
             }
         }
         if (par1ItemStack.getItemSubtype() > 0) {
             if (!par2World.isRemote) {
-                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 900, 1));
-                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.fireResistance.id, 900, 0));
+                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.field_76444_x.id, 1200, 3));
+                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.regeneration.id, 1200, 1));
+                par3EntityPlayer.addPotionEffect(new MobEffect(MobEffectList.fireResistance.id, 1200, 0));
             }
         } else {
             super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
