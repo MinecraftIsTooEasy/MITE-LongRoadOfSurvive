@@ -130,6 +130,10 @@ public class BlockOreMixin extends Block {
                 id_dropped = this.blockID;
             }
         }
+        if (metadata_dropped == -1)
+        {
+            metadata_dropped = id_dropped == this.blockID ? this.getItemSubtype(info.getMetadata()) : 0;
+        }
         boolean suppress_fortune = id_dropped == this.blockID && BitHelper.isBitSet(info.getMetadata(), 1);
         if (id_dropped != -1 && info.getMetadata() == 0) {
             DedicatedServer.incrementTournamentScoringCounter(info.getResponsiblePlayer(), Item.getItem(id_dropped));

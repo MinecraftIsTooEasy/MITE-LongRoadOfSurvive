@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.render;
 
 import net.minecraft.Minecraft;
+import net.minecraft.bgl;
 import net.minecraft.bgm;
 import net.minecraft.bjo;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,6 +9,8 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 @Mixin(bgm.class)
 public class BaseRenderMixin {
+    @Shadow
+    protected bgl b;
     @Shadow
     protected bjo[] textures;
 
@@ -30,5 +33,8 @@ public class BaseRenderMixin {
             }
 
         }
+    }
+    public bgl getRenderManager() {
+        return this.b;
     }
 }

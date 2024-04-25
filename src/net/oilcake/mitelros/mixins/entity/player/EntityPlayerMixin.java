@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.entity.player;
 import net.minecraft.*;
 import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.achivements.AchievementExtend;
+import net.oilcake.mitelros.block.Blocks;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.entity.EntityUndeadGuard;
 import net.oilcake.mitelros.item.ItemTotem;
@@ -11,14 +12,13 @@ import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.enchantment.Enchantments;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.*;
+import net.oilcake.mitelros.util.Constant;
 import org.lwjgl.Sys;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
@@ -37,6 +37,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //
     public boolean isNewPlayer = true;
     private int detectorDelay = 0;
+    private int lightTick = 0;
     @Shadow
     private int insulin_resistance;
     @Shadow
@@ -670,9 +671,30 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //        }
 
         //实验性动态光源
-//        if(this.getHeldItemStack()!=null&&this.getHeldItem().itemID==Block.torchWood.blockID){
-//            if(this.getBlockAtFeet() == null && this.onGround){
-//                this.worldObj.setBlock(this.getBlockPosX(), this.getFootBlockPosY(), this.getBlockPosZ(), Blocks.invisibleLight.blockID);
+//        if(this.getHeldItemStack()!=null && this.getHeldItem() instanceof ItemBlock && Block.lightValue[this.getHeldItem().getAsItemBlock().getBlock().blockID] > 0.0F){
+//            if(this.lightTick < 20){
+//                this.lightTick ++;
+//            }
+//        }else {
+//            if(this.lightTick > 0){
+//                this.lightTick --;
+//            }
+//        }
+//        if(this.lightTick == 20){
+//            if((this.worldObj.getBlock(this.getBlockPosX(), this.getEyeBlockPosY(), this.getBlockPosZ()) == null || this.worldObj.getBlock(this.getBlockPosX(), this.getEyeBlockPosY(), this.getBlockPosZ()) == Blocks.invisibleLight) && this.onGround){
+//                this.worldObj.setBlock(this.getBlockPosX(), this.getEyeBlockPosY(), this.getBlockPosZ(), Blocks.invisibleLight.blockID);
+//            }
+//        }else if(this.lightTick == 0){
+//
+//        }else {
+//            for(int dx = -2; dx <= 2; dx++){
+//                for(int dy = -2; dy <= 2; dy++){
+//                    for(int dz = -2; dz <= 2; dz++){
+//                        if(this.worldObj.getBlock(this.getBlockPosX() + dx, this.getEyeBlockPosY() + dy, this.getBlockPosZ() + dz) == Blocks.invisibleLight){
+//                            this.worldObj.setBlockToAir(this.getBlockPosX() + dx, this.getEyeBlockPosY() + dy, this.getBlockPosZ() + dz);
+//                        }
+//                    }
+//                }
 //            }
 //        }
         //冲锋
@@ -715,65 +737,75 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
         return biome.getFloatTemperature();
     }
-
-    @Overwrite
-    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {
-        suppress_healing = true;
-        if (amount < 0) {
-            if (!suppress_sound) {
-                this.worldObj.playSoundAtEntity(this, "imported.random.level_drain");
-            }
-        } else if (amount > 0) {
-            this.addScore(amount);
-            if (!suppress_sound) {
-                this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
-            }
-            ItemStack holding = this.getHeldItemStack();
-            if(holding != null && willRepair(holding)){
-                for(;this.getHeldItemStack().getItemDamage() >= 4 && amount > 0;amount --){
-                    this.getHeldItemStack().setItemDamage(holding.getItemDamage() - 4);
-                }
+    @Inject(method = "addExperience(IZZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/FoodStats;setNutrition(IZ)V", ordinal = 0))
+    private void updateWater(int amount, boolean suppress_healing, boolean suppress_sound, CallbackInfo ci) {
+        this.addWater(0);
+    }
+    @ModifyVariable(method = "addExperience(IZZ)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/EntityPlayer;addScore(I)V", ordinal = 0), ordinal = 0)
+    private int performMending(int par00000, int amount, boolean suppress_healing, boolean suppress_sound) {
+        ItemStack holding = this.getHeldItemStack();
+        if(holding != null && willRepair(holding)){
+            for(;this.getHeldItemStack().getItemDamage() >= 4 && amount > 0;amount --){
+                this.getHeldItemStack().setItemDamage(holding.getItemDamage() - 4);
             }
         }
-        float health_limit_before = this.getHealthLimit();
-        int level_before = this.getExperienceLevel();
-        this.experience += amount;
-        if (this.experience < getExperienceRequired(-40)) {
-            this.experience = getExperienceRequired(-40);
-        }
-
-        int level_after = this.getExperienceLevel();
-        int level_change = level_after - level_before;
-        if (level_change < 0) {
-            this.setHealth(this.getHealth());
-            this.foodStats.setSatiation(this.foodStats.getSatiation(), true);
-            this.foodStats.setNutrition(this.foodStats.getNutrition(), true);
-            this.addWater(0);
-        } else if (level_change > 0) {
-            if (this.getHealthLimit() > health_limit_before && (float)this.field_82249_h < (float)this.ticksExisted - 100.0F) {
-                float volume = level_after > 30 ? 1.0F : (float)level_after / 30.0F;
-                if (!suppress_sound) {
-                    this.worldObj.playSoundAtEntity(this, "random.levelup", volume * 0.75F, 1.0F);
-                }
-
-                this.field_82249_h = this.ticksExisted;
-            }
-
-            if (!suppress_healing) {
-                this.setHealth(this.getHealth() + this.getHealthLimit() - health_limit_before);
-            }
-        }
-
-        if (level_change != 0 && !this.worldObj.isRemote) {
-            MinecraftServer.a(MinecraftServer.F()).sendPlayerInfoToAllPlayers(true);
-        }
-
+        return amount;
+    }
+    @Shadow
+    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {}
+//    @Overwrite
+//    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {
+//        suppress_healing = true;
+//        if (amount < 0) {
+//            if (!suppress_sound) {
+//                this.worldObj.playSoundAtEntity(this, "imported.random.level_drain");
+//            }
+//        } else if (amount > 0) {
+//            this.addScore(amount);
+//            if (!suppress_sound) {
+//                this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
+//            }
+//
+//        }
+//        float health_limit_before = this.getHealthLimit();
+//        int level_before = this.getExperienceLevel();
+//        this.experience += amount;
+//        if (this.experience < getExperienceRequired(-40)) {
+//            this.experience = getExperienceRequired(-40);
+//        }
+//
+//        int level_after = this.getExperienceLevel();
+//        int level_change = level_after - level_before;
+//        if (level_change < 0) {
+//            this.setHealth(this.getHealth());
+//            this.foodStats.setSatiation(this.foodStats.getSatiation(), true);
+//            this.foodStats.setNutrition(this.foodStats.getNutrition(), true);
+//            this.addWater(0);
+//        } else if (level_change > 0) {
+//            if (this.getHealthLimit() > health_limit_before && (float)this.field_82249_h < (float)this.ticksExisted - 100.0F) {
+//                float volume = level_after > 30 ? 1.0F : (float)level_after / 30.0F;
+//                if (!suppress_sound) {
+//                    this.worldObj.playSoundAtEntity(this, "random.levelup", volume * 0.75F, 1.0F);
+//                }
+//
+//                this.field_82249_h = this.ticksExisted;
+//            }
+//
+//            if (!suppress_healing) {
+//                this.setHealth(this.getHealth() + this.getHealthLimit() - health_limit_before);
+//            }
+//        }
+//
+//        if (level_change != 0 && !this.worldObj.isRemote) {
+//            MinecraftServer.a(MinecraftServer.F()).sendPlayerInfoToAllPlayers(true);
+//        }
+//
 //        if (this.getAsPlayer() instanceof ServerPlayer && DedicatedServer.tournament_type == EnumTournamentType.score) {
 //            DedicatedServer.getOrCreateTournamentStanding(this.getAsPlayer()).experience = this.experience;
 //            DedicatedServer.updateTournamentScoreOnClient(this.getAsPlayer(), true);
 //        }
-
-    }
+//
+//    }
     public FoodMetaData getFoodStats(){
     return foodStats;
 }
@@ -783,30 +815,30 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
     public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
     }
-    @Overwrite
-    public EnumQuality getMaxCraftingQuality(float unadjusted_crafting_difficulty_to_produce, Item item, int[] applicable_skillsets) {
-        if (!this.worldObj.areSkillsEnabled()) {
-            applicable_skillsets = null;
-        }
-
-        if (this.experience <= 0) {
-            return this.getMinCraftingQuality(item, applicable_skillsets);
-        } else if (applicable_skillsets != null && !this.hasAnyOfTheseSkillsets(applicable_skillsets)) {
-            return this.getMinCraftingQuality(item, applicable_skillsets);
-        } else {
-            if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
-                Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
-            }
-
-            for(int i = item.getMaxQuality().ordinal(); i > EnumQuality.average.ordinal(); --i) {
-                if (this.getCraftingExperienceCost(CraftingResult.getQualityAdjustedDifficulty(unadjusted_crafting_difficulty_to_produce, EnumQuality.values()[i])) <= this.experience) {
-                    return EnumQuality.values()[i];
-                }
-            }
-
-            return this.getMinCraftingQuality(item, applicable_skillsets);
-        }
-    }
+//    @Overwrite
+//    public EnumQuality getMaxCraftingQuality(float unadjusted_crafting_difficulty_to_produce, Item item, int[] applicable_skillsets) {
+//        if (!this.worldObj.areSkillsEnabled()) {
+//            applicable_skillsets = null;
+//        }
+//
+//        if (this.experience <= 0) {
+//            return this.getMinCraftingQuality(item, applicable_skillsets);
+//        } else if (applicable_skillsets != null && !this.hasAnyOfTheseSkillsets(applicable_skillsets)) {
+//            return this.getMinCraftingQuality(item, applicable_skillsets);
+//        } else {
+//            if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
+//                Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
+//            }
+//
+//            for(int i = item.getMaxQuality().ordinal(); i > EnumQuality.average.ordinal(); --i) {
+//                if (this.getCraftingExperienceCost(CraftingResult.getQualityAdjustedDifficulty(unadjusted_crafting_difficulty_to_produce, EnumQuality.values()[i])) <= this.experience) {
+//                    return EnumQuality.values()[i];
+//                }
+//            }
+//
+//            return this.getMinCraftingQuality(item, applicable_skillsets);
+//        }
+//    }
 
     @Overwrite
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
@@ -857,6 +889,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         par1NBTTagCompound.setInteger("FreezingWarning",this.FreezingWarning);
         par1NBTTagCompound.setInteger("DrunkDuration",this.drunk_duration);
         par1NBTTagCompound.setInteger("HeatResistance",this.HeatResistance);
+
         par1NBTTagCompound.setInteger("experience", this.experience);
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setTag("Inventory", this.inventory.writeToNBT(new NBTTagList()));

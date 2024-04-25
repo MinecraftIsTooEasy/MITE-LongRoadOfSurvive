@@ -44,6 +44,7 @@ public class EntityTypesMixin {
         addMapping(EntityGhost.class,"EntityGhost",557,9539985, 6629376);
         addMapping(EntityEvil.class,"EntityEvil",558,9539985, 14008320);
         addMapping(EntityUndeadGuard.class, "EntityUndeadGuard",559,12698049, 4802889);
+        addMapping(EntityAgarician.class,"EntityAgarician",560,10489616, 12040119);
         addMapping(EntityUnknown.class, "null",1895);
     }
 

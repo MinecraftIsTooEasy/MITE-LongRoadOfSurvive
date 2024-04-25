@@ -11,15 +11,19 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 @Mixin(EntityArrow.class)
-public class EntityArrowMixin extends Entity{
+public abstract class EntityArrowMixin extends Entity{
     public EntityArrowMixin(World par1World) {
         super(par1World);
     }
-    @Shadow
-    protected void entityInit() {
-    }
+//    @Shadow
+//    protected void entityInit() {
+//    }
     @Shadow
     public Entity shootingEntity;
     @Shadow
@@ -28,48 +32,76 @@ public class EntityArrowMixin extends Entity{
     private ItemStack getLauncher() {
         return null;
     }
-    @Shadow
-    public void readEntityFromNBT(NBTTagCompound nbtTagCompound) {
+//    @Shadow
+//    public void readEntityFromNBT(NBTTagCompound nbtTagCompound) {
+//    }
+//
+//    @Shadow
+//    public void writeEntityToNBT(NBTTagCompound nbtTagCompound) {
+//    }
+//    @Inject(method = "setThrowableHeading(DDDFF)V", at = @At(ordinal = 2, value = "INVOKE", shift = At.Shift.AFTER, target = "Ljava/util/Random;nextBoolean()Z"))
+//    public void tungstenBowApply(double par1, double par3, double par5, float velocity, float par8, CallbackInfo callbackInfo){
+//        ItemStack launcher = this.getLauncher();
+//        if (launcher != null && launcher.getItem() == Items.bowTungsten && this.shootingEntity instanceof EntityPlayer) {
+//            velocity *= 1.35F;
+//        }
+//    }
+    @ModifyVariable(method = "setThrowableHeading", at = @At(ordinal = 0, value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/EntityArrow;getLauncher()Lnet/minecraft/ItemStack;"), ordinal = 0)
+    private float extendVelocity(float par00000, double par1, double par3, double par5, float velocity, float par8) {
+        ItemStack launcher = getLauncher();
+        if (launcher != null && launcher.getItem() == Items.bowTungsten && this.shootingEntity instanceof net.minecraft.EntityPlayer)
+           velocity *= 1.35F;
+        return velocity;
     }
-
-    @Shadow
-    public void writeEntityToNBT(NBTTagCompound nbtTagCompound) {
+    @ModifyVariable(method = "setThrowableHeading", at = @At(value = "HEAD"), ordinal = 1)
+    private float motionImpactWander(float par00000, double par1, double par3, double par5, float velocity, float par8) {
+        double motionX = this.shootingEntity.motionX;
+        double motionY = this.shootingEntity.motionY;
+        double motionZ = this.shootingEntity.motionZ;
+        boolean onGround = this.shootingEntity.onGround;
+        double var9 = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
+        var9 *= onGround ? 2.5D : 6D;
+        return (float) (par8 * var9);
     }
-    @Overwrite
-    public void setThrowableHeading(double par1, double par3, double par5, float velocity, float par8) {
-        ItemStack launcher = this.getLauncher();
-
-
-        if (launcher != null && launcher.getItem() == Items.bowTungsten && this.shootingEntity instanceof EntityPlayer) {
-            velocity *= 1.35F;
-        }
-
-        if (launcher != null && launcher.getItem() == Item.bowMithril && this.shootingEntity instanceof EntityPlayer) {
-            velocity *= 1.25F;
-        }
-
-        if (launcher != null && launcher.getItem() == Item.bowAncientMetal && this.shootingEntity instanceof EntityPlayer) {
-            velocity *= 1.1F;
-        }
-
-        float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
-        par1 /= var9;
-        par3 /= var9;
-        par5 /= var9;
-        par1 += super.rand.nextGaussian() * (double)(super.rand.nextBoolean() ? -1 : 1) * 1.856746317E-314D * (double)par8;
-        par3 += super.rand.nextGaussian() * (double)(super.rand.nextBoolean() ? -1 : 1) * 1.856746317E-314D * (double)par8;
-        par5 += super.rand.nextGaussian() * (double)(super.rand.nextBoolean() ? -1 : 1) * 1.856746317E-314D * (double)par8;
-        par1 *= velocity;
-        par3 *= velocity;
-        par5 *= velocity;
-        super.motionX = par1;
-        super.motionY = par3;
-        super.motionZ = par5;
-        float var10 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
-        super.prevRotationYaw = super.rotationYaw = (float)(Math.atan2(par1, par5) * 0.0D / 6.984873503E-315D);
-        super.prevRotationPitch = super.rotationPitch = (float)(Math.atan2(par3, var10) * 0.0D / 6.984873503E-315D);
-        this.ticksInGround = 0;
-    }
+//    @Redirect(method = "setThrowableHeading", at = @At(value = "FIELD", ordinal = 0, target = "Lnet/minecraft/Entity;motionX:D"))
+//    private void movingInfluenceVelocity(Entity entity) {
+//        entity.motionX += this.shootingEntity.motionX;
+//    }
+//    @Overwrite
+//    public void setThrowableHeading(double par1, double par3, double par5, float velocity, float par8) {
+//        ItemStack launcher = this.getLauncher();
+//
+//
+//        if (launcher != null && launcher.getItem() == Items.bowTungsten && this.shootingEntity instanceof EntityPlayer) {
+//            velocity *= 1.35F;
+//        }
+//
+//        if (launcher != null && launcher.getItem() == Item.bowMithril && this.shootingEntity instanceof EntityPlayer) {
+//            velocity *= 1.25F;
+//        }
+//
+//        if (launcher != null && launcher.getItem() == Item.bowAncientMetal && this.shootingEntity instanceof EntityPlayer) {
+//            velocity *= 1.1F;
+//        }
+//
+//        float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
+//        par1 /= var9;
+//        par3 /= var9;
+//        par5 /= var9;
+//        par1 += super.rand.nextGaussian() * (double)(super.rand.nextBoolean() ? -1 : 1) * 1.856746317E-314D * (double)par8;
+//        par3 += super.rand.nextGaussian() * (double)(super.rand.nextBoolean() ? -1 : 1) * 1.856746317E-314D * (double)par8;
+//        par5 += super.rand.nextGaussian() * (double)(super.rand.nextBoolean() ? -1 : 1) * 1.856746317E-314D * (double)par8;
+//        par1 *= velocity;
+//        par3 *= velocity;
+//        par5 *= velocity;
+//        super.motionX = par1;
+//        super.motionY = par3;
+//        super.motionZ = par5;
+//        float var10 = MathHelper.sqrt_double(par1 * par1 + par5 * par5);
+//        super.prevRotationYaw = super.rotationYaw = (float)(Math.atan2(par1, par5) * 0.0D / 6.984873503E-315D);
+//        super.prevRotationPitch = super.rotationPitch = (float)(Math.atan2(par3, var10) * 0.0D / 6.984873503E-315D);
+//        this.ticksInGround = 0;
+//    }
     @Redirect(method = "onUpdate",at = @At(ordinal = 0, value = "INVOKE",target = "Lnet/minecraft/ItemArrow;getDamage()F"))
     public float SPSkeletonExtraDamage(ItemArrow itemArrow) {
         float dummy = 0.0F;

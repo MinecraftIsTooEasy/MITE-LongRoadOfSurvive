@@ -12,7 +12,7 @@ public class EntityUnknown extends EntityZombie {
     }
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(GenericAttributes.followRange).setAttribute(999);
+        this.getEntityAttribute(GenericAttributes.followRange).setAttribute(64);
         this.getEntityAttribute(GenericAttributes.movementSpeed).setAttribute(0.23000000417232513);
         this.getEntityAttribute(GenericAttributes.attackDamage).setAttribute(1.0);
     }

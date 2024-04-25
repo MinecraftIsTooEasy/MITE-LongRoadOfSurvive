@@ -83,10 +83,15 @@ public class EntitySpiderKing extends EntityArachnid {
                 while (i.hasNext()){
                     EntityArachnid spiders = (EntityArachnid) i.next();
                     if(spiders != this){
+                        if(this.getTarget() != null){
+                            spiders.setTarget(this.getTarget());
+                        }
                         spiders.setFrenzied_counter(200);
                         if(spiders.getHealthFraction() < 1.0F){
                             spiders.healByPercentage(0.2F);
                             spiders.entityFX(EnumEntityFX.repair);
+                            spiders.addPotionEffect((new MobEffect(MobEffectList.damageBoost.id, (int) 200, 0, true)));
+                            spiders.addPotionEffect((new MobEffect(MobEffectList.moveSpeed.id, (int) 200, 0, true)));
                         }
                     }
                 }

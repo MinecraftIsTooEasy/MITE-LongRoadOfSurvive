@@ -1,23 +1,24 @@
 package net.oilcake.mitelros.mixins.entity;
 
-import net.minecraft.EntityArachnid;
-import net.minecraft.EntityMonster;
-import net.minecraft.NBTTagCompound;
-import net.minecraft.World;
-import org.lwjgl.Sys;
+import net.minecraft.*;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EntityArachnid.class)
-public class EntityArachnidMixin extends EntityMonster {
-    private int frenzied_counter;
+@Mixin(EntityPigZombie.class)
+public class EntityPigZombieMixin extends EntityMonster {
+    private int frenzied_counter = 0;
 
-    public EntityArachnidMixin(World par1World) {
+    public EntityPigZombieMixin(World par1World) {
         super(par1World);
     }
 
+    @Shadow
+    private void becomeAngryAt(Entity par1Entity) {
+
+    }
     @Inject(method = "readEntityFromNBT", at = @At("RETURN"))
     public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
         this.frenzied_counter = par1NBTTagCompound.getInteger("frenzied_counter");
@@ -32,8 +33,9 @@ public class EntityArachnidMixin extends EntityMonster {
             --this.frenzied_counter;
         }
     }
-    public void setFrenzied_counter(int counter){
-        this.frenzied_counter = counter;
+    public void respondCallingToAttack(Entity par1Entity){
+        this.becomeAngryAt(par1Entity);
+        this.frenzied_counter = 600;
     }
     @Override
     public boolean isFrenzied() {

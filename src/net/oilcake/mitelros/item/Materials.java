@@ -45,34 +45,10 @@ public class Materials extends Material {
     }
 
     public float getDamageVsEntity() {
-        if (this == wood) {
-            return 0.0F;
-        } else if (this == flint) {
-            return 1.0F;
-        } else if (this == obsidian) {
+        if (this == vibranium) {
             return 2.0F;
-        } else if (this == rusted_iron) {
-            return 2.0F;
-        } else if (this == vibranium) {
-            return 2.0F;
-        } else if (this == copper) {
-            return 3.0F;
-        } else if (this == silver) {
-            return 3.0F;
-        } else if (this == gold) {
-            return 2.0F;
-        } else if (this == iron) {
-            return 4.0F;
-        } else if (this == ancient_metal) {
-            return 4.0F;
-        } else if (this == mithril) {
-            return 5.0F;
-        } else if (this == adamantium) {
-            return 6.0F;
         } else if (this == uru) {
             return 6.0F;
-        } else if (this == diamond) {
-            return 4.0F;
         } else if (this == nickel) {
             return 4.0F;
         } else if (this == tungsten){

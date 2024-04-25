@@ -65,7 +65,7 @@ public class Blocks extends Block {
     public static final Block blockReceiver = new BlockReceiver(Constant.getNextBlockID()).setBlockHardness(2.5F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockSulphur = new BlockOre(Constant.getNextBlockID(),Materials.sulphur,1).setBlockHardness(1.2F).setExplosionResistance(10.0F).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockAzuriteLantern = (ReflectHelper.createInstance(BlockAzuriteLantern.class, new Class[] {int.class,Material.class}, Constant.getNextBlockID(), Materials.circuits)).setUnlocalizedName("lantern").setStepSound_(Block.soundMetalFootstep);
-//    public static final Block invisibleLight = new BlockInvisibleLight(160).setBlockLightLevel(0.5F);
+    public static final Block invisibleLight = new BlockInvisibleLight(Constant.getNextBlockID()).setBlockLightLevel(0.75F);
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
