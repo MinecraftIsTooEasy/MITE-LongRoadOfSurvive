@@ -6,7 +6,6 @@ import net.oilcake.mitelros.util.ExperimentalConfig;
 public class BlockSmoker extends BlockFurnace{
     protected BlockSmoker(int par1, boolean par2) {
         super(par1, Material.stone, par2);
-        this.setCreativeTab(CreativeModeTab.tabDecorations);
     }
 
     @Override

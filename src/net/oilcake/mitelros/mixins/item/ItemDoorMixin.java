@@ -8,32 +8,27 @@ import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemDoor.class)
 public class ItemDoorMixin {
-    @Overwrite
-    public Block getBlock() {
-        if (this.door_material == Material.wood) {
-            return Block.doorWood;
-        } else if (this.door_material == Material.copper) {
-            return Block.doorCopper;
-        } else if (this.door_material == Material.silver) {
-            return Block.doorSilver;
-        } else if (this.door_material == Material.gold) {
-            return Block.doorGold;
-        } else if (this.door_material == Material.iron) {
-            return Block.doorIron;
-        } else if (this.door_material == Material.mithril) {
-            return Block.doorMithril;
-        } else if (this.door_material == Material.adamantium) {
-            return Block.doorAdamantium;
-        } else if (this.door_material == Materials.nickel) {
-            return Blocks.doorNickel;
-        } else if (this.door_material == Materials.tungsten) {
-            return Blocks.doorTungsten;
-        }
-        else {
-            return this.door_material == Material.ancient_metal ? Block.doorAncientMetal : null;
+    @Inject(method = "getBlock", at = @At("HEAD"), cancellable = true)
+    private void injectNewDoor(CallbackInfoReturnable<Block> callbackInfoReturnable) {
+        Block block = callbackInfoReturnable.getReturnValue();
+        if(block == null){
+            if (this.door_material == Materials.nickel) {
+                callbackInfoReturnable.setReturnValue(Blocks.doorNickel);
+                callbackInfoReturnable.cancel();
+            } else if (this.door_material == Materials.tungsten) {
+                callbackInfoReturnable.setReturnValue(Blocks.doorTungsten);
+                callbackInfoReturnable.cancel();
+            } else {
+                callbackInfoReturnable.setReturnValue(null);
+            }
+        }else {
+            callbackInfoReturnable.setReturnValue(null);
         }
     }
     @Shadow

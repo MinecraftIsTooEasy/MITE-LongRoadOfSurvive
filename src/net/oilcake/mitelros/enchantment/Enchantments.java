@@ -24,11 +24,12 @@ public class Enchantments {
     public static final Enchantment enchantmentThresher = new EnchantmentThresher(Constant.getNextEnchantmentID(),yq.c, 10);
     public static final Enchantment enchantmentSweeping = new EnchantmentSweeping(Constant.getNextEnchantmentID(),yq.c,10);
     public static final Enchantment enchantmentMending = new EnchantmentMending(Constant.getNextEnchantmentID(),EnchantmentLevel.Ultimate, 20);
+    public static final Enchantment enchantmentCallofAntarctic = new EnchantmentCallOfAntarctic(Constant.getNextEnchantmentID(),yq.b,10);
 //    public static final Enchantment enchantmentProtectFire = new EnchantmentProtectFire(Constant.getNextEnchantmentID(), yq.b,15);
 
     public static List<Enchantment> enchantmentsListC = new ArrayList<>();
     public static void registerEnchantments(){
-        Enchantments.registerEnchantmentsUnsafe(enchantmentMelting, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether,enchantmentInfinity,enchantmentArrogance,enchantmentThresher,enchantmentSweeping,enchantmentMending);
+        Enchantments.registerEnchantmentsUnsafe(enchantmentMelting, enchantmentAbsorb, enchantmentVanishing, enchantmentDestroying,enchantmentCallofNether,enchantmentInfinity,enchantmentArrogance,enchantmentThresher,enchantmentSweeping,enchantmentMending,enchantmentCallofAntarctic);
     }
     public static void registerEnchantmentsUnsafe(Enchantment... enchantments) {
         for (int i = 80, bLength = enchantmentsList.length; i < bLength; i++) {

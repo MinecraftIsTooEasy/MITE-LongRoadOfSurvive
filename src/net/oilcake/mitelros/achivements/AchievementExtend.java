@@ -27,6 +27,7 @@ public class AchievementExtend {
     public static Achievement pull;
     public static Achievement lichHunter;
     public static Achievement decimator;
+    public static Achievement onburnt;
 
     public AchievementExtend() {
     }
@@ -52,7 +53,7 @@ public class AchievementExtend {
         stormStriker = (new Achievement(getNextAchievementID(),"StormStriker",9,16,new ItemStack(Block.skull, 1, 3),AchievementList.theEnd2)).registerAchievement().setSpecial();
         cheatdeath = (new Achievement(getNextAchievementID(),"DeathCheater",-3,14,Items.totemoffecund,AchievementList.potion)).registerAchievement();
         pull = (new Achievement(getNextAchievementID(),"Pull",-3,-5,Item.manure,AchievementExtend.mashedCactus)).registerAchievement();
-
+        onburnt = (new Achievement(getNextAchievementID(), "OnBurnt", -6, 2, Item.blazePowder,AchievementExtend.hypothermia)).registerAchievement();
 
     }
 

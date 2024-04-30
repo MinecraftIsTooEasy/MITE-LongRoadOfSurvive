@@ -6,6 +6,7 @@ import net.oilcake.mitelros.entity.EntityWandFireball;
 import net.oilcake.mitelros.entity.EntityWandIceBall;
 import net.oilcake.mitelros.entity.EntityWandShockWave;
 import net.oilcake.mitelros.network.PacketEnchantReserverInfo;
+import net.oilcake.mitelros.network.PacketUpdateTemperature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -181,6 +182,9 @@ public class NetClientHandlerMixin extends ConnectionMixin{
             this.h.h.vision_dimming = par1Packet8UpdateHealth.vision_dimming;
         }
 
+    }
+    public void handleUpdateTemperature(PacketUpdateTemperature packet){
+        this.h.h.setTemperaturePoint(packet.getTemperaturePoint());
     }
 //    public void handleReadFreezingCoolDown(PacketReadFreezeCooldown par1PacketReadFreezeCooldown){
 //        this.h.h.setFreezingCooldown(par1PacketReadFreezeCooldown.GetFreezingCooldown());

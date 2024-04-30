@@ -2,8 +2,8 @@ package net.oilcake.mitelros.enchantment;
 
 import net.minecraft.*;
 
-public class EnchantmentCallofNether extends Enchantment {
-    protected EnchantmentCallofNether(int id, yq rarity, int difficulty) {
+public class EnchantmentCallOfAntarctic extends Enchantment {
+    protected EnchantmentCallOfAntarctic(int id, yq rarity, int difficulty) {
         super(id, rarity, difficulty);
     }
 
@@ -13,7 +13,7 @@ public class EnchantmentCallofNether extends Enchantment {
     }
     @Override
     public String getNameSuffix() {
-        return "callofnether";
+        return "callofantarctic";
     }
 
     @Override

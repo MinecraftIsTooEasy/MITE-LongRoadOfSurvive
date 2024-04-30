@@ -17,7 +17,7 @@ public class Constant {
     public static int nextEnchantmentID = 96;
     public static int nextAchievementID = 136;
     public static int nextBiomeID = 27;
-    public static int nextPacketID = 109;
+    public static int nextPacketID = 180;
     public static int getNextItemID(){
         return nextItemID++;
     }
@@ -61,12 +61,12 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagNoWeatherPredict.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagInstinctSurvival.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagInvisibleFollower.ConfigValue) Diff += 1;
-        if(StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue) Diff += 1;
+//        if(StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagEternalRaining.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagUnstableConvection.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagDryDilemma.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue) Diff += 2;
-        if(StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue) Diff += 1;
+//        if(StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagApocalypse.ConfigValue) Diff += 3;
         if(StuckTagConfig.TagConfig.TagWorshipDark.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagMiracleDisaster.ConfigValue) Diff += 1;
@@ -74,6 +74,7 @@ public class Constant {
         if(StuckTagConfig.TagConfig.TagPseudovision.ConfigValue) Diff += 1;
         if(StuckTagConfig.TagConfig.TagRejection.ConfigValue) Diff += 2;
         if(StuckTagConfig.TagConfig.TagUnderAlliance.ConfigValue) Diff += 1;
+        if(StuckTagConfig.TagConfig.TagTempSensitivity.ConfigValue) Diff += 2;
 
         if(StuckTagConfig.TagConfig.TagArmament.ConfigValue) Diff -= 2;
         if(StuckTagConfig.TagConfig.TagDistortion.ConfigValue) Diff -= 2;

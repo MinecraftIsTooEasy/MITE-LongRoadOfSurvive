@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
@@ -31,36 +32,48 @@ public class ItemArrowMixin extends Item{
     }
 
 
-    @Overwrite
+    @Shadow
     public float getChanceOfRecovery() {
-        if (dyCast(this) == arrowFlint) {
-            return 0.3F;
-        }else if (dyCast(this) == Item.arrowObsidian) {
-            return 0.4F;
-        }else if (dyCast(this) == Item.arrowCopper) {
-            return 0.6F;
-        }else if (dyCast(this) == Item.arrowSilver) {
-            return 0.6F;
-        }else if (dyCast(this) == Item.arrowGold) {
-            return 0.5F;
-        }else if (dyCast(this) == Item.arrowRustedIron) {
-            return 0.5F;
-        }else if (dyCast(this) == Item.arrowIron) {
-            return 0.7F;
-        }else if (dyCast(this) == Items.arrowNickel) {
-            return 0.7F;
-        }else if (dyCast(this) == Item.arrowMithril) {
-            return 0.8F;
-        }else if (dyCast(this) == Items.arrowAncientMetal) {
-            return 0.8F;
+        return 0;
+    }
+//        if (dyCast(this) == arrowFlint) {
+//            return 0.3F;
+//        }else if (dyCast(this) == Item.arrowObsidian) {
+//            return 0.4F;
+//        }else if (dyCast(this) == Item.arrowCopper) {
+//            return 0.6F;
+//        }else if (dyCast(this) == Item.arrowSilver) {
+//            return 0.6F;
+//        }else if (dyCast(this) == Item.arrowGold) {
+//            return 0.5F;
+//        }else if (dyCast(this) == Item.arrowRustedIron) {
+//            return 0.5F;
+//        }else if (dyCast(this) == Item.arrowIron) {
+//            return 0.7F;
+//        }else if (dyCast(this) == Items.arrowNickel) {
+//            return 0.7F;
+//        }else if (dyCast(this) == Item.arrowMithril) {
+//            return 0.8F;
+//        }else if (dyCast(this) == Items.arrowAncientMetal) {
+//            return 0.8F;
+//        }else if (dyCast(this) == Items.arrowTungsten) {
+//            return 0.9F;
+//        }else if (dyCast(this) == Item.arrowAdamantium) {
+//            return 0.9F;
+//        }else if (dyCast(this) == Items.arrowMagical) {
+//            return 0.0F;
+//        }else {
+//            return 0.7F;
+//        }
+//    }
+    @Inject(method = "getChanceOfRecovery", at = @At(value = "HEAD"),cancellable = true)
+    private void InjectChanceOfRecovery(CallbackInfoReturnable<Float> callbackInfo){
+        if (dyCast(this) == Items.arrowNickel) {
+            callbackInfo.setReturnValue(0.7F);
         }else if (dyCast(this) == Items.arrowTungsten) {
-            return 0.9F;
-        }else if (dyCast(this) == Item.arrowAdamantium) {
-            return 0.9F;
+            callbackInfo.setReturnValue(0.9F);
         }else if (dyCast(this) == Items.arrowMagical) {
-            return 0.0F;
-        }else {
-            return 0.7F;
+            callbackInfo.setReturnValue(0.0F);
         }
     }
     @Shadow

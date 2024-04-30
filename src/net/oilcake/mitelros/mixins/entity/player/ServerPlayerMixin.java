@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.oilcake.mitelros.achivements.AchievementExtend;
 import net.oilcake.mitelros.block.enchantreserver.ContainerEnchantReserver;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
+import net.oilcake.mitelros.network.PacketUpdateTemperature;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.StuckTagConfig;
 import net.xiaoyu233.fml.util.ReflectHelper;
@@ -35,6 +36,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
     private int last_phytonutrients;
     private int last_protein;
     private float last_heal_progress;
+    private int last_temperaturePoint;
     @Inject(method = "onDeath", at = @At("INVOKE"))
     public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
@@ -61,6 +63,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                     }
                 }
             }
+
             if(!this.is_cursed && StuckTagConfig.TagConfig.TagRejection.ConfigValue){
                 EntityWitch temp = new EntityWitch(this.worldObj);
                 int username_hash = 0;
@@ -72,6 +75,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.worldObj.getAsWorldServer().addCurse(this.getAsEntityPlayerMP(),temp,Curse.getRandomCurse(new Random((long)(this.rand.nextInt() + username_hash))), 0);
                 this.learnCurseEffect();
             }
+
             float health = this.getHealth();
             int satiation = this.getSatiation();
             int nutrition = this.getNutrition();
@@ -81,14 +85,11 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming));
                 Packet8UpdateHealth updateWater = new Packet8UpdateHealth(health, satiation, nutrition, this.vision_dimming);
                 updateWater.setWater(water);
-//                updateWater.setFreezingCooldown(FreezingCooldown);
                 updateWater.setPhytonutrients(this.phytonutrients);
                 updateWater.setProtein(this.protein);
-                this.playerNetServerHandler.sendPacket(updateWater);
                 updateWater.setHealProgress(this.getFoodStats().getHeal_progress());
-//              PacketReadFreezeCooldown updateFreezingCooldown = new PacketReadFreezeCooldown();
-//              updateFreezingCooldown.setFreezingCooldown(FreezingCooldown);
-//              this.playerNetServerHandler.sendPacket(updateFreezingCooldown);
+                this.playerNetServerHandler.sendPacket(updateWater);
+
                 this.last_water = water;
                 this.last_FreezingCooldown = FreezingCooldown;
                 this.lastHealth = health;
@@ -98,6 +99,17 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
                 this.last_phytonutrients = phytonutrients;
                 this.last_protein = protein;
                 this.last_heal_progress = this.getFoodStats().getHeal_progress();
+            }
+
+            int temperaturePoint = this.getTemperature();
+            if (temperaturePoint != this.last_temperaturePoint){
+//                System.out.println("Processed Packet TP, last_tp = " + this.last_temperaturePoint + ", " + "next_tp = " + temperaturePoint + ".");
+                this.playerNetServerHandler.sendPacket(new PacketUpdateTemperature(temperaturePoint));
+                PacketUpdateTemperature updateTemperature = new PacketUpdateTemperature(temperaturePoint);
+                updateTemperature.setTemperaturePoint(temperaturePoint);
+                this.playerNetServerHandler.sendPacket(updateTemperature);
+
+                this.last_temperaturePoint = temperaturePoint;
             }
 
             if (this.getHealth() + this.getAbsorptionAmount() != this.field_130068_bO) {

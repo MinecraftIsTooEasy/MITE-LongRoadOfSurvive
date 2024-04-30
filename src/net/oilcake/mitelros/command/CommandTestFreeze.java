@@ -23,12 +23,6 @@ public class CommandTestFreeze extends CommandAbstract {
     public void processCommand(ICommandListener iCommandListener, String[] strings) {
         EntityPlayer player = getCommandSenderAsPlayer(iCommandListener);
         BiomeBase biome = player.worldObj.getBiomeGenForCoords(player.getBlockPosX(), player.getBlockPosZ());
-
-        if(player.InFreeze()){
-            iCommandListener.sendChatToPlayer(ChatMessage.createFromText("当前温度为:"+biome.temperature+"，玩家寒冷度为"+player.getFreezingCooldown()+"，玩家受到寒冷影响").setColor(EnumChatFormat.WHITE));
-        }
-        else{
-            iCommandListener.sendChatToPlayer(ChatMessage.createFromText("当前温度为:"+biome.temperature+"，玩家寒冷度为"+player.getFreezingCooldown()+"，玩家未受到寒冷影响").setColor(EnumChatFormat.WHITE));
-        }
+        iCommandListener.sendChatToPlayer(ChatMessage.createFromText("当前温度为:"+biome.temperature+"，玩家体温为"+player.BodyTemperature + ".").setColor(EnumChatFormat.WHITE));
     }
 }

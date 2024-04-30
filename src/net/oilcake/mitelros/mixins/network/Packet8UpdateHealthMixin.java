@@ -17,26 +17,18 @@ import java.io.IOException;
 import static net.xiaoyu233.fml.util.ReflectHelper.dyCast;
 
 @Mixin(Packet8UpdateHealth.class)
-public class Packet8UpdateHealthMixin extends Packet {
+public abstract class Packet8UpdateHealthMixin extends Packet {
     public int water;
-    public int FreezingCooldown;
     public int phytonutrients;
     public int protein;
     public float heal_progress;
-    public Packet8UpdateHealthMixin(float health, int satiation, int nutrition, float vision_dimming) {
-        this.healthMP = health;
-        this.satiation = satiation;
-        this.nutrition = nutrition;
-        this.vision_dimming = vision_dimming;
+    public Packet8UpdateHealthMixin() {
     }
     public int setWater(int water) {
         return this.water = water;
     }
     public void setHealProgress(float heal_progress){
         this.heal_progress = heal_progress;
-    }
-    public int setFreezingCooldown(int FreezingCooldown) {
-        return this.FreezingCooldown = FreezingCooldown;
     }
 
     @Inject(method = "readPacketData",
@@ -63,36 +55,8 @@ public class Packet8UpdateHealthMixin extends Packet {
     public void setProtein(int protein) {
         this.protein = protein;
     }
-
-
-    @Shadow
-    public float healthMP;
-    @Shadow
-    public int nutrition;
-    @Shadow
-    public int satiation;
-    @Shadow
-    public float vision_dimming;
-    @Shadow
-    public boolean containsSameEntityIDAs(Packet par1Packet) {
-        return true;
-    }
     @Overwrite
     public int getPacketSize() {
         return 22;
-    }
-    @Shadow
-    public boolean isRealPacket() {
-        return true;
-    }
-    @Shadow
-    public void processPacket(Connection par1NetHandler) {
-        par1NetHandler.handleUpdateHealth(dyCast(this));
-    }
-    @Shadow
-    public void readPacketData(DataInput dataInput) throws IOException {
-    }
-    @Shadow
-    public void writePacketData(DataOutput dataOutput) throws IOException {
     }
 }

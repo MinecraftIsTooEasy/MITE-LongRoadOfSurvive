@@ -1,10 +1,12 @@
 package net.oilcake.mitelros.mixins.render;
 
+import jdk.nashorn.internal.codegen.CompilerConstants;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.apache.commons.lang3.StringUtils;
+import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,11 +22,11 @@ import java.util.Random;
 
 @Mixin(GuiIngame.class)
 public class GuiIngameMixin extends avk {
-
-
-
-
-
+    @Shadow
+    @Final
+    private static bjo b;
+    @Shadow
+    public float a = 1.0F;
     @Overwrite
     private void a(int par1, int par2) {
         boolean var3 = this.g.h.hurtResistantTime / 3 % 2 == 1;
@@ -430,5 +432,68 @@ public class GuiIngameMixin extends avk {
             at = @At(value = "INVOKE",target = "Lnet/minecraft/AttributeInstance;getAttributeValue()D"))
     private double redirectHealthLimit(AttributeInstance att){
         return this.g.h.getHealthLimit();
+    }
+    @Inject(method = "a(FZII)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/GuiIngame;a(FII)V"))
+    private void injectNewVignette(float par1, boolean par2, int par3, int par4, CallbackInfo callbackInfo){
+        awf var5 = new awf(this.g.u, this.g.d, this.g.e);
+        int var6 = var5.a();
+        int var7 = var5.b();
+
+        int temperatureDelta = Math.abs(this.g.h.getTemperaturePoint() - 96000);
+        float renderStrength = Math.min(1.0F, ((float) temperatureDelta - 4000F) / 16000F);
+
+        if(this.g.h.getTemperaturePoint() < 92000){
+            this.renderFreezingVignette(renderStrength, var6, var7);
+        }else if(this.g.h.getTemperaturePoint() > 100000){
+            this.renderHeatingVignette(renderStrength, var6, var7);
+        }
+    }
+    private void renderHeatingVignette(float par1, int par2, int par3)
+    {
+        this.a = (float)((double)this.a + (double)(par1 - this.a) * 0.01);
+        if (this.g.f.provider.drawGuiVignette()) {
+            GL11.glDisable(2929);
+            GL11.glDepthMask(false);
+            GL11.glBlendFunc(0, 769);
+            GL11.glColor4f(0F, par1, par1, 1.0F);
+            this.g.J().a(b);
+            bfq var4 = bfq.a;
+            var4.b();
+            var4.a(0.0, (double)par3, -90.0, 0.0, 1.0);
+            var4.a((double)par2, (double)par3, -90.0, 1.0, 1.0);
+            var4.a((double)par2, 0.0, -90.0, 1.0, 0.0);
+            var4.a(0.0, 0.0, -90.0, 0.0, 0.0);
+            var4.a();
+        } else {
+            this.a = 1.0F;
+        }
+        GL11.glDepthMask(true);
+        GL11.glEnable(2929);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glBlendFunc(770, 771);
+    }
+    private void renderFreezingVignette(float par1, int par2, int par3)
+    {
+        this.a = (float)((double)this.a + (double)(par1 - this.a) * 0.01);
+        if (this.g.f.provider.drawGuiVignette()) {
+            GL11.glDisable(2929);
+            GL11.glDepthMask(false);
+            GL11.glBlendFunc(0, 769);
+            GL11.glColor4f(par1, par1 * 0.5F, 0F, 1.0F);
+            this.g.J().a(b);
+            bfq var4 = bfq.a;
+            var4.b();
+            var4.a(0.0, (double)par3, -90.0, 0.0, 1.0);
+            var4.a((double)par2, (double)par3, -90.0, 1.0, 1.0);
+            var4.a((double)par2, 0.0, -90.0, 1.0, 0.0);
+            var4.a(0.0, 0.0, -90.0, 0.0, 0.0);
+            var4.a();
+        } else {
+            this.a = 1.0F;
+        }
+        GL11.glDepthMask(true);
+        GL11.glEnable(2929);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glBlendFunc(770, 771);
     }
 }

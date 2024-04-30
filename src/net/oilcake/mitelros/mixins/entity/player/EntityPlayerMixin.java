@@ -305,30 +305,66 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         return this.experience < 2300 && Arro;
     }
 
-    public boolean InFreeze(){
-        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+//    public boolean InFreeze(){
+//        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+//        ItemStack wearingItemStack = this.getCuirass();
+//        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
+//            return false;
+//        }
+//        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && (this.isOutdoors() || (this.worldObj.provider.dimensionId == -2 && StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue))){
+//            if(this.getHelmet() != null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
+//                    this.getCuirass() != null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
+//                    this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
+//                    this.getBoots() != null && this.getBoots().itemID == Items.WolfBoots.itemID){
+//                return false;
+//            } else{
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//    public boolean InHeat(){
+//        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+//        return biome.temperature >= 1.50F && StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue;
+//    }
+    public int getTemperatureOutcome(float env_temperature, long daytime){
         ItemStack wearingItemStack = this.getCuirass();
-        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
-            return false;
+        daytime = daytime % 24000;
+        float best_temp = 1.0F;
+
+        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofAntarctic)) {
+            best_temp += 0.8F;
         }
-        if (biome.temperature <= (this.worldObj.getWorldSeason() == 3 ? 1.0F : 0.16F) && (this.isOutdoors() || (this.worldObj.provider.dimensionId == -2 && StuckTagConfig.TagConfig.TagDeadgeothermy.ConfigValue))){
-            if(this.getHelmet() != null && this.getHelmet().itemID == Items.WolfHelmet.itemID &&
-                    this.getCuirass() != null && this.getCuirass().itemID == Items.WolfChestplate.itemID &&
-                    this.getLeggings() != null && this.getLeggings().itemID == Items.WolfLeggings.itemID &&
-                    this.getBoots() != null && this.getBoots().itemID == Items.WolfBoots.itemID){
-                return false;
-            } else{
-                return true;
+        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
+            best_temp -= 0.6F;
+        }
+
+        best_temp -= this.getReduce_weight() * 0.05F;
+
+        if(this.getWorld().isOverworld()){
+            env_temperature -= (daytime > 0 && daytime < 12000) ? 0.0F : 0.1F;
+            if(this.getWorld().getWorldSeason() == 3){
+                env_temperature -= 0.6F;
             }
         }
-        return false;
+
+        env_temperature += 0.2F * ((96.0F - (float) this.getBlockPosY()) / 256.0F);
+        if(env_temperature >= best_temp + 0.3F){
+            return 192000;
+        }
+        if(env_temperature <= best_temp - 0.3F){
+            return 0;
+        }
+        return 96000;
+    }
+    public void modifyTemperature(int tp){
+        this.temperaturePoint += tp;
+    }
+    public int getTemperature(){
+        return this.temperaturePoint;
     }
     public boolean willRepair(ItemStack holding){
         return EnchantmentManager.hasEnchantment(holding, Enchantments.enchantmentMending);
-    }
-    public boolean InHeat(){
-        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
-        return biome.temperature >= 1.50F && StuckTagConfig.TagConfig.TagHeatStorm.ConfigValue;
     }
     private void activeNegativeUndying() {
         this.clearActivePotions();
@@ -374,6 +410,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     private int FreezingWarning;
     private int reduce_weight;
     public float BodyTemperature = 37.2F;
+    private int temperaturePoint = 96000;
     private double dry_resist;
     public boolean Hasdrunked = false;
     private int drunk_duration = 0;
@@ -524,6 +561,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             if(this.isPotionActive(PotionExtend.dehydration)){
                 dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.dehydration).getAmplifier() + 1) * 20D);
             }
+            if(this.isPotionActive(PotionExtend.heat_stroke)){
+                dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.heat_stroke).getAmplifier() + 1) * 5D);
+            }
             if(this.isPotionActive(PotionExtend.thirsty)){
                 dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.thirsty).getAmplifier() + 1) * 10D);
             }
@@ -536,47 +576,81 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 this.drunk_duration = 6000;
                 this.Hasdrunked = false;
             }
-            //寒冷惩罚
-            int freezeunit = max(FreezingCooldown - (1500 * getReduce_weight()), 0);
-            BodyTemperature = 37.2F - (0.000125F * freezeunit);
-            int freezelevel = max(freezeunit/12000, 0);
-            if(freezeunit > 12000 && this.InFreeze()){
-                if(freezelevel >= 1){
-                    if (freezelevel >= 4) {
-                        ++FreezingWarning;
-                        this.triggerAchievement(AchievementExtend.hypothermia);
+
+            //实时控温
+            int targetTemp = this.getTemperatureOutcome(biome.temperature,this.getWorld().getTotalWorldTime());
+            if(!this.isOutdoors() && this.getWorld().isOverworld()){
+                targetTemp = MathHelper.clamp_int(targetTemp, 84000, 128000);
+            }
+            for(int i = 0; i <= (StuckTagConfig.TagConfig.TagTempSensitivity.ConfigValue ? 1 : 0); i++){
+                if(this.temperaturePoint < targetTemp){
+                    ++this.temperaturePoint;
+                }else if(this.temperaturePoint > targetTemp){
+                    if(this.drunk_duration > 0){
+                        --this.temperaturePoint;
                     }
-                    if (FreezingWarning > 500) {
-                        this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 4.0F));
-                        FreezingWarning = 0;
-                    }
-                    this.addPotionEffect(new MobEffect(PotionExtend.freeze.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
+                    --this.temperaturePoint;
                 }
             }
-            //炎热惩罚
-            if(this.HeatResistance > 3200 - (getReduce_weight() * 50)){
-                this.addPotionEffect(new MobEffect(MobEffectList.confusion.id, 1600, 1));
-                this.HeatResistance = 0;
+            if(this.isInFire()){
+                this.temperaturePoint += 50;
             }
-            if(this.InHeat()){
-                this.HeatResistance++;
+            if(this.isInWater() && this.temperaturePoint > 88000){
+                this.temperaturePoint -= 50;
+                this.removePotionEffect(PotionExtend.heat_stroke.id);
             }
-            //叠加寒冷惩罚
-            if(this.InFreeze() || this.drunk_duration > 0){
-                FreezingCooldown += StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1;
-                FreezingCooldown += this.drunk_duration > 0 ? StuckTagConfig.TagConfig.TagLegendFreeze.ConfigValue ? 3 : 1 : 0;
-            }
-            else{
-                if(FreezingCooldown > 0){
-                    --FreezingCooldown;
+            this.BodyTemperature = 37.2F + (float) (0.000125D * (double) (this.temperaturePoint - 96000));
+            if(this.temperaturePoint < 84000){
+                this.removePotionEffect(PotionExtend.heat_stroke.id);
+                int freezeunit = 96000 - this.temperaturePoint;
+                int freezelevel = max(freezeunit/12000, 0);
+                if (freezelevel >= 4) {
+                    ++FreezingWarning;
+                    this.triggerAchievement(AchievementExtend.hypothermia);
                 }
+                if (FreezingWarning > 500) {
+                    this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 4.0F));
+                    FreezingWarning = 0;
+                }
+                this.addPotionEffect(new MobEffect(PotionExtend.freeze.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
+            }
+            if(this.temperaturePoint > 108000){
+                this.removePotionEffect(PotionExtend.freeze.id);
+                int heatunit = this.temperaturePoint - 96000;
+                int heatlevel = max(heatunit/12000, 0);
+                if (heatlevel >= 2) {
+                    this.triggerAchievement(AchievementExtend.onburnt);
+                }
+                this.addPotionEffect(new MobEffect(PotionExtend.heat_stroke.id, heatunit, heatlevel - 1));
             }
             //调用喝酒翻倍计算时间
             if(this.drunk_duration > 0){
                 drunk_duration--;
             }
+            //低血量视觉黑暗（真实体验）
             if(this.getHealth() < 5.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue){
                 this.vision_dimming = Math.max(this.vision_dimming,(1.0F - this.getHealthFraction()));
+            }
+            //傲慢惩罚
+            if(this.UnderArrogance()){
+                this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
+            }
+            //实验性经验修补
+            ItemStack holding = this.getHeldItemStack();
+            if(holding != null && willRepair(holding)){
+                if((float) holding.getRemainingDurability() / holding.getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * holding.getItem().getHardestMetalMaterial().getMinHarvestLevel()){
+                    this.addExperience(-holding.getMaxDamage() / 32, false, true);
+                    holding.setItemDamage(holding.getItemDamage() - holding.getMaxDamage() / 8);
+                }
+            }
+            ItemStack[] item_stack_to_repair = this.getWornItems();
+            for(int n = 0;n < item_stack_to_repair.length;n++){
+                if(item_stack_to_repair[n] != null && willRepair(item_stack_to_repair[n])){
+                    if((float) item_stack_to_repair[n].getRemainingDurability() / item_stack_to_repair[n].getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * item_stack_to_repair[n].getItem().getHardestMetalMaterial().getMinHarvestLevel()){
+                        this.addExperience(-50, false, true);
+                        item_stack_to_repair[n].setItemDamage(item_stack_to_repair[n].getItemDamage() - 1);
+                    }
+                }
             }
         }
         //成就奖励
@@ -596,10 +670,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             worldObj.spawnEntityInWorld(RewardingRecord);
             RewardingRecord.entityFX(EnumEntityFX.summoned);
         }
-        //傲慢惩罚
-        if(this.UnderArrogance()){
-            this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
-        }
+
         //幻听
 //        if(StuckTagConfig.TagConfig.TagAcousma.ConfigValue){
 //            if(this.worldObj.isOverworld()){
@@ -701,23 +772,6 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 //        if(this.isForwarding()){
 //            List <Entity>targets = this.getNearbyEntities(4.0F, 4.0F);
 //        }
-        //实验性经验修补
-        ItemStack holding = this.getHeldItemStack();
-        if(holding != null && willRepair(holding)){
-            if((float) holding.getRemainingDurability() / holding.getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * holding.getItem().getHardestMetalMaterial().getMinHarvestLevel()){
-                this.addExperience(-holding.getMaxDamage() / 32, false, true);
-                holding.setItemDamage(holding.getItemDamage() - holding.getMaxDamage() / 8);
-            }
-        }
-        ItemStack[] item_stack_to_repair = this.getWornItems();
-        for(int n = 0;n < item_stack_to_repair.length;n++){
-            if(item_stack_to_repair[n] != null && willRepair(item_stack_to_repair[n])){
-                if((float) item_stack_to_repair[n].getRemainingDurability() / item_stack_to_repair[n].getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * item_stack_to_repair[n].getItem().getHardestMetalMaterial().getMinHarvestLevel()){
-                    this.addExperience(-50, false, true);
-                    item_stack_to_repair[n].setItemDamage(item_stack_to_repair[n].getItemDamage() - 1);
-                }
-            }
-        }
     }
 
     public int getFreezingCooldown() {
@@ -848,6 +902,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         this.isNewPlayer = par1NBTTagCompound.getBoolean("isNewPlayer");
         this.FreezingCooldown = par1NBTTagCompound.getInteger("FreezingCooldown");
         this.FreezingWarning = par1NBTTagCompound.getInteger("FreezingWarning");
+        this.temperaturePoint = par1NBTTagCompound.getInteger("Temperature");
         this.drunk_duration = par1NBTTagCompound.getInteger("DrunkDuration");
         this.HeatResistance = par1NBTTagCompound.getInteger("HeatResistance");
         this.experience = par1NBTTagCompound.getInteger("experience");
@@ -887,6 +942,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         par1NBTTagCompound.setBoolean("isNewPlayer", this.isNewPlayer);
         par1NBTTagCompound.setInteger("FreezingCooldown",this.FreezingCooldown);
         par1NBTTagCompound.setInteger("FreezingWarning",this.FreezingWarning);
+        par1NBTTagCompound.setInteger("Temperature",this.temperaturePoint);
         par1NBTTagCompound.setInteger("DrunkDuration",this.drunk_duration);
         par1NBTTagCompound.setInteger("HeatResistance",this.HeatResistance);
 
@@ -907,7 +963,18 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         par1NBTTagCompound.setTag("EnderItems", this.theInventoryEnderChest.saveInventoryToNBT());
         par1NBTTagCompound.setFloat("vision_dimming", this.vision_dimming);
     }
-
+    @Overwrite
+    public boolean canEatAndDrink() {
+        if (this.isInsideOfMaterial(Material.water) && !this.canBreatheUnderwater()) {
+            return false;
+        } else if(this.isPotionActive(MobEffectList.confusion)){
+            return false;
+        } else if(this.isPotionActive(PotionExtend.heat_stroke)){
+            return this.isPotionActive(MobEffectList.fireResistance);
+        } else {
+            return true;
+        }
+    }
     @Overwrite
     private void checkForArmorAchievements() {
         boolean wearing_leather = false;

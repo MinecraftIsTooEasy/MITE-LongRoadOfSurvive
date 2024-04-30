@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import net.minecraft.*;
 import net.oilcake.mitelros.item.ItemGuideBook;
 import net.oilcake.mitelros.item.Items;
+import net.oilcake.mitelros.network.PacketUpdateTemperature;
 import net.oilcake.mitelros.util.Constant;
 import net.oilcake.mitelros.network.PacketDecreaseWater;
 import net.oilcake.mitelros.network.PacketEnchantReserverInfo;
@@ -36,12 +37,7 @@ public class ITFEvent {
         }
         if (par2Str.startsWith("tpt") && !Minecraft.inDevMode()) {
             BiomeBase biome = player.worldObj.getBiomeGenForCoords(player.getBlockPosX(), player.getBlockPosZ());
-            if(player.InFreeze()){
-                player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+player.BodyTemperature+"℃，玩家受到寒冷影响").setColor(EnumChatFormat.WHITE));
-            }
-            else{
-                player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+player.BodyTemperature+"℃，玩家未受到寒冷影响").setColor(EnumChatFormat.WHITE));
-            }
+            player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+player.BodyTemperature+"℃。").setColor(EnumChatFormat.WHITE));
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("yay")){
@@ -75,8 +71,9 @@ public class ITFEvent {
 
     @Subscribe
     public void onPacketRegister(PacketRegisterEvent event){
-        event.register(180, true, true, PacketEnchantReserverInfo.class);
-        event.register(181, false, true, PacketDecreaseWater.class);
+        event.register(Constant.getNextPacketID(), true, true, PacketEnchantReserverInfo.class);
+        event.register(Constant.getNextPacketID(), false, true, PacketDecreaseWater.class);
+        event.register(Constant.getNextPacketID(), true,true, PacketUpdateTemperature.class);
 //        event.register(182,true,true, PacketReadFreezeCooldown.class);
     }
 

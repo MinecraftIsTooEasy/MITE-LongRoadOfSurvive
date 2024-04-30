@@ -398,12 +398,6 @@ public class ItemBucketMixin extends ItemVessel {
     private Material classifyMaterialForm(Material material){
         return material.classifyMaterialForm(material);
     }
-
-//    @Overwrite
-//    public float getChanceOfMeltingWhenFilledWithLava() {
-//        Material material = this.getVesselMaterial();
-//        return material == Material.adamantium ? 0.0F : (material == Material.gold ? 0.2F : 0.01F * (Material.mithril.getDurability() / material.getDurability()));
-//    }
     @Shadow
     public ItemVessel getPeerForContents(Material material) {
         return null;

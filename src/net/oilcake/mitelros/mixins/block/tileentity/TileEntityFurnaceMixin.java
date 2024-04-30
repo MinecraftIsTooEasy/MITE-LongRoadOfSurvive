@@ -83,22 +83,6 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public boolean isSmoker(){
         return this.getFurnaceBlock() instanceof BlockSmoker;
     }
-
-    //getCookProgressScaled
-//    @Overwrite
-//    public int d(int par1) {
-//        return this.furnaceCookTime * par1 / 200;
-//    }
-
-//    @Overwrite
-//    public int d(int par1) {
-//        //return this.furnaceBurnTime * par1 / 10;
-//        if (this.isItemValid() && this.getFurnaceBlock() instanceof BlockBlastFurnace) {
-//            return this.furnaceItemStacks[0] == null ? this.furnaceCookTime * par1 / 200 : this.furnaceCookTime * par1 / (200 / Math.max(this.heat_level, 1));
-//        }else {
-//            return this.furnaceCookTime * par1 / 200;
-//        }
-//    }
     public boolean canBurnbyItself(){
         return this.getFuelHeatLevel() > 2;
     }
@@ -281,26 +265,6 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
     public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
         par1NBTTagCompound.setBoolean("activated", this.activated);
     }
-
-
-//    @Overwrite
-//    public int e(int par1) {
-//        if (this.currentItemBurnTime == 0) {
-//            this.currentItemBurnTime = 200;
-//        }
-//        int i = 0;
-//        if (this.isItemValid() && this.getFurnaceBlock() instanceof BlockBlastFurnace) {
-//            if (this.getFurnaceBlock().blockMaterial == Material.stone) {
-//                i = this.furnaceBurnTime * par1 * 10 / currentItemBurnTime ;
-//            } else if (this.getFurnaceBlock().blockMaterial == Material.obsidian) {
-//                i = this.furnaceBurnTime * par1 * 15 / currentItemBurnTime;
-//            } else if (this.getFurnaceBlock().blockMaterial == Material.netherrack) {
-//                i = this.furnaceBurnTime * par1 * 20 / currentItemBurnTime;
-//            }
-//        }
-//        return i;
-//    }
-
     @Shadow
     public BlockFurnace getFurnaceBlock() {
         return null;

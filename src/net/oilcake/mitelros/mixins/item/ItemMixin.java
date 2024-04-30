@@ -4,6 +4,7 @@ import net.minecraft.*;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.xiaoyu233.fml.util.ReflectHelper;
+import org.lwjgl.Sys;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -156,6 +157,29 @@ public class ItemMixin{
         }
     }
     @Shadow
+    public Material getMaterialForRepairs() {
+        return null;
+    }
+    @Overwrite
+    public Material getExclusiveMaterial() {
+        System.out.println("EXCLUSIVE " + this);
+        if (this.materials.size() == 0) {
+            Minecraft.setErrorMessage("getExclusiveMaterial: no material defined for " + this);
+            return null;
+        } else if (this.materials.size() > 1) {
+            Minecraft.setErrorMessage("getExclusiveMaterial: multiple materials defined for " + this);
+            return null;
+        } else {
+            return this.getMaterial(0);
+        }
+    }
+    @Shadow
+    public Material getMaterial(int index) {
+        return null;
+    }
+    @Shadow
+    protected List materials;
+    @Shadow
     private List crafting_products_this_is_component_of;
     @Shadow
     protected Item setPotionEffect(String par1Str) {
@@ -173,10 +197,6 @@ public class ItemMixin{
     private boolean has_essential_fats;
     @Shadow
     private boolean has_phytonutrients;
-    @Shadow
-    public Material getMaterialForRepairs() {
-        return null;
-    }
     @Shadow
     private String potionEffect;
     public String getResourceLocationPrefix() {

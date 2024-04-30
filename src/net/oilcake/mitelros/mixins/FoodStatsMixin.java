@@ -53,16 +53,6 @@ public class FoodStatsMixin {
     public void injectaddFoodValue(Item item, CallbackInfo callbackInfo) {
         this.addWater(item.getWater());
     }
-//    @Overwrite
-//    public void addFoodValue(Item item) {
-//        this.addSatiation(item.getSatiation(this.player));
-//        this.addNutrition(item.getNutrition());
-//        this.addWater(item.getWater());
-//        if (this.player instanceof ServerPlayer) {
-//            this.player.getAsEntityPlayerMP().addInsulinResistance(item.getInsulinResponse());
-//            this.player.getAsEntityPlayerMP().addNutrients(item);
-//        }
-//    }
 
 
     public void setSatiationWater(int water, boolean check_limit) {
@@ -125,25 +115,6 @@ public class FoodStatsMixin {
         }
     }
 
-//    @Overwrite
-//    private void addHunger(float hunger) {
-//        if (!this.player.capabilities.isCreativeMode && !this.player.capabilities.disableDamage && !this.player.isGhost() && !this.player.isZevimrgvInTournament()) {
-//            hunger *= this.global_hunger_rate;
-//            this.hunger = Math.min(this.hunger + hunger, 40.0F);
-//
-//            if(this.hunger > 20){
-//                System.out.println("hunger: " + this.hunger);
-//            }
-//
-//            if (this.player.worldObj.isRemote && this.hunger > 0.2F) {
-//                Minecraft.w().h.netClientHandler.c(new Packet82AddHunger(this.hunger));
-//                //Minecraft.w().h.netClientHandler.c(new PacketDecreaseWater(this.water));
-//                //System.out.println("OMHunger");
-//                this.hunger = 0.0F;
-//            }
-//
-//        }
-//    }
     public void decreaseWaterClientSide(float water)
     {
         if (!this.player.worldObj.isRemote)

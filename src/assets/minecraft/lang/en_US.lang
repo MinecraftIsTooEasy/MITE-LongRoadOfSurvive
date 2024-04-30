@@ -39,6 +39,8 @@ achievement.LichHunter=Bio-experiment
 achievement.LichHunter.desc=Familiar, but beyond words.
 achievement.Decimator=Decimator
 achievement.Decimator.desc=Nothing can stop u now.
+achievement.OnBurnt=Sauna Time
+achievement.OnBurnt.desc=Any fireproof please?
 
 curse.fearOfDarkness.name=Fear of Darkness
 curse.fearOfDarkness.desc=The darkness keeps you from moving.
@@ -49,6 +51,7 @@ potion.extend.freeze=Freeze
 potion.extend.dehydration=Dehydration
 potion.extend.thirsty=Thirsty
 potion.extend.stunning=Stunned
+potion.extend.heatstroke=Heatstroke
 
 generator.default_1_1=Large Biomes(Old)
 
@@ -74,6 +77,7 @@ enchantment.melting=Melting
 enchantment.absorb=Absorb
 enchantment.destroying=Destroying
 enchantment.callofnether=Call of Nether
+enchantment.callofantarctic=Call of Antarctic
 enchantment.infinity=Infinity
 enchantment.arrogance=Curse Of Arrogance
 enchantment.sweeping=Sweeping

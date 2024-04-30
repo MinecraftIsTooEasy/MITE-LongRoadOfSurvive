@@ -39,6 +39,8 @@ achievement.LichHunter=生物实验
 achievement.LichHunter.desc=你在它身上见到了很多怪物的影子
 achievement.Decimator=降频数位滤波器
 achievement.Decimator.desc=熔岩、虚空、雷击、魔法
+achievement.OnBurnt=红温
+achievement.OnBurnt.desc=我需要冷却液！重复一遍！我需要冷却液！
 
 curse.fearOfDarkness.name=黑暗恐惧
 curse.fearOfDarkness.desc=你在黑暗中只能摸索前进
@@ -49,6 +51,7 @@ potion.extend.freeze=霜冻
 potion.extend.dehydration=腹泻
 potion.extend.thirsty=干渴
 potion.extend.stunning=晕眩
+potion.extend.heatstroke=热损伤
 
 generator.default_1_1=旧巨型生物群系
 
@@ -74,6 +77,7 @@ enchantment.melting=熔毁
 enchantment.absorb=汲取
 enchantment.destroying=毁灭
 enchantment.callofnether=下界呼唤
+enchantment.callofantarctic=极地呼唤
 enchantment.infinity=无限
 enchantment.arrogance=傲慢诅咒
 enchantment.sweeping=横扫

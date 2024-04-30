@@ -1,5 +1,6 @@
 package net.oilcake.mitelros.mixins.block;
 
+import net.minecraft.Block;
 import net.minecraft.BlockLongGrass;
 import net.minecraft.IBlockAccess;
 import net.oilcake.mitelros.util.SeasonColorizer;
@@ -18,5 +19,9 @@ public class BlockLongGrassMixin {
         int FinalColor = 65535 & OriColor;
         FinalColor += MixedColor << 16;
         return FinalColor;
+    }
+    @Overwrite
+    public boolean showDestructionParticlesWhenReplacedBy(int metadata, Block other_block, int other_block_metadata) {
+        return false;
     }
 }

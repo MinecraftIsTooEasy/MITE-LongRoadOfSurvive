@@ -30,7 +30,7 @@ public class Blocks extends Block {
     public static final Block blastFurnaceNetherrackBurning = new BlockBlastFurnace(Constant.getNextBlockID(), Material.netherrack, true)
             .setBlockHardness(153.6F).setExplosionResistance(80.0f).setStepSound_(Block.soundStoneFootstep).setBlockLightLevel(0.875F);
     public static final Block blockSmokerIdle = new BlockSmoker(Constant.getNextBlockID(), false)
-            .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep);
+            .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep).setCreativeTab(CreativeModeTab.tabDecorations);
     public static final Block blockSmokerBurning = new BlockSmoker(Constant.getNextBlockID(), true)
             .setBlockHardness(2.0F).setExplosionResistance(20.0f).setStepSound_(Block.soundStoneFootstep).setBlockLightLevel(0.875F);
     public static final BlockAnvil anvilNickel = createInstance(BlockAnvil.class, new Class[]{int.class, Material.class}, Constant.getNextBlockID(), Materials.nickel);
@@ -121,7 +121,7 @@ public class Blocks extends Block {
         registerItemBlock("torch_off",torchWoodExtinguished);
         registerItemBlock("sulphur",blockSulphur);
         registerItemBlock("lantern",blockAzuriteLantern);
-//        registerItemBlock("invisible",invisibleLight);
+        registerItemBlock("invisible",invisibleLight);
 
     }
 

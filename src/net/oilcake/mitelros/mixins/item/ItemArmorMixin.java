@@ -25,19 +25,6 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
         this.is_leather = this.effective_material == Material.leather || this.effective_material == Materials.wolf_fur;
         this.setCraftingDifficultyAsComponent(this.effective_material.getDurability() * 100.0F * this.getNumComponentsForDurability());
     }
-//    @Overwrite
-//    public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
-//        if (extended_info) {
-//            info.add("");
-//            float protection = this.getProtectionAfterDamageFactor(item_stack, player);
-//            int decimal_places = 3;
-//            info.add(EnumChatFormat.BLUE + Translator.getFormatted("item.tooltip.protectionBonus", new Object[]{StringHelper.formatFloat(protection, decimal_places, decimal_places)}));
-//
-//            if (item_stack != null && item_stack.getMaterialForRepairs() == Materials.nickel) {
-//                info.add(EnumChatFormat.LIGHT_GRAY + Translator.getFormatted("itemarmor.tooltip.slimeresistance"));
-//            }
-//        }
-//    }
     @Inject(method = "addInformation", at = @At(value = "TAIL"))
     private void InjectInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot,CallbackInfo callbackInfo){
         if (extended_info) {
@@ -46,18 +33,6 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
             }
         }
     }
-
-//    @Overwrite
-//    public final int getMultipliedDurability() {
-//        float durability = (float)this.getNumComponentsForDurability() * this.effective_material.getDurability();
-//        if (!this.is_chain_mail) {
-//            durability *= 2.0F;
-//        }
-//        if(durability < 1.0F){
-//            durability = 1.0F;
-//        }
-//        return (int)durability;
-//    }
     @Inject(method = "getMultipliedDurability", at = @At(value = "RETURN"), cancellable = true)
     private void InjectFixDurability(CallbackInfoReturnable<Integer> callbackInfo){
         int a = callbackInfo.getReturnValue();
@@ -98,41 +73,6 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
             callbackInfo.cancel();
         }
     }
-//    @Overwrite
-//    public int getMaterialProtection() {
-//        int protection;
-//        if(this.effective_material == Materials.custom_a || this.effective_material == Materials.custom_b){
-//            protection = 0;
-//        } else if (this.effective_material == Material.leather) {
-//            protection = 2;
-//        } else if(this.effective_material == Materials.wolf_fur){
-//            protection = 3;
-//        } else if (this.effective_material == Material.rusted_iron || this.effective_material == Materials.vibranium || this.effective_material == Material.gold) {
-//            protection = 6;
-//        } else if (this.effective_material == Material.copper || this.effective_material == Material.silver) {
-//            protection = 7;
-//        } else if (this.effective_material == Materials.uru) {
-//            protection = 10;
-//        } else if (this.effective_material != Material.iron && this.effective_material != Material.ancient_metal && this.effective_material != Materials.nickel) {
-//            if (this.effective_material == Material.mithril || this.effective_material == Materials.tungsten || this.effective_material == Materials.ancient_metal_sacred) {
-//                protection = 9;
-//            } else {
-//                if (this.effective_material != Material.adamantium) {
-//                    return 0;
-//                }
-//
-//                protection = 10;
-//            }
-//        } else {
-//            protection = 8;
-//        }
-//
-//        if (this.is_chain_mail) {
-//            protection -= 2;
-//        }
-//
-//        return protection;
-//    }
     @Overwrite
     public final float getDamageFactor(ItemStack item_stack, EntityLiving owner) {
         if (owner != null && !owner.isEntityPlayer()) {

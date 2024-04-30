@@ -583,46 +583,24 @@ public class Items extends Item {
 
     }
     public static void registerArmorRecipe(RecipeRegister register,Item item, Material material){
-            if(item instanceof ItemChain){
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemHelmet.class,material,true)),true,
-                        "AAA",
-                        "A A",
-                        'A',item);
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemCuirass.class,material,true)),true,
-                        "A A",
-                        "AAA",
-                        "AAA",
-                        'A',item);
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemLeggings.class,material,true)),true,
-                        "AAA",
-                        "A A",
-                        "A A",
-                        'A',item);
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemBoots.class,material,true)),true,
-                        "A A",
-                        "A A",
-                        'A',item);
-            }else {
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemHelmet.class,material,false)),true,
-                        "AAA",
-                        "A A",
-                        'A',item);
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemCuirass.class,material,false)),true,
-                        "A A",
-                        "AAA",
-                        "AAA",
-                        'A',item);
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemLeggings.class,material,false)),true,
-                        "AAA",
-                        "A A",
-                        "A A",
-                        'A',item);
-                register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemBoots.class,material,false)),true,
-                        "A A",
-                        "A A",
-                        'A',item);
-            }
-
+            register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemHelmet.class,material,item instanceof ItemChain)),true,
+                    "AAA",
+                    "A A",
+                    'A',item);
+            register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemCuirass.class,material,item instanceof ItemChain)),true,
+                    "A A",
+                    "AAA",
+                    "AAA",
+                    'A',item);
+            register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemLeggings.class,material,item instanceof ItemChain)),true,
+                    "AAA",
+                    "A A",
+                    "A A",
+                    'A',item);
+            register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemBoots.class,material,item instanceof ItemChain)),true,
+                    "A A",
+                    "A A",
+                    'A',item);
     }
     public static void registerFullMetalToolRecipe(RecipeRegister register, Material material){
             registerBasicToolRecipes(register,material);
