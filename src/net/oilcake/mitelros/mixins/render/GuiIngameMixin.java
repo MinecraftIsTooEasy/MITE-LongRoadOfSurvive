@@ -440,7 +440,7 @@ public class GuiIngameMixin extends avk {
         int var7 = var5.b();
 
         int temperatureDelta = Math.abs(this.g.h.getTemperaturePoint() - 96000);
-        float renderStrength = Math.min(1.0F, ((float) temperatureDelta - 4000F) / 16000F);
+        float renderStrength = Math.min(1.0F, ((float) temperatureDelta - 8000F) / 4000F);
 
         if(this.g.h.getTemperaturePoint() < 92000){
             this.renderFreezingVignette(renderStrength, var6, var7);
@@ -455,7 +455,7 @@ public class GuiIngameMixin extends avk {
             GL11.glDisable(2929);
             GL11.glDepthMask(false);
             GL11.glBlendFunc(0, 769);
-            GL11.glColor4f(0F, par1, par1, 1.0F);
+            GL11.glColor4f(0F, par1 * 0.4F, par1, 1.0F);
             this.g.J().a(b);
             bfq var4 = bfq.a;
             var4.b();
@@ -479,7 +479,7 @@ public class GuiIngameMixin extends avk {
             GL11.glDisable(2929);
             GL11.glDepthMask(false);
             GL11.glBlendFunc(0, 769);
-            GL11.glColor4f(par1, par1 * 0.5F, 0F, 1.0F);
+            GL11.glColor4f(par1, par1 * 0.4F, 0F, 1.0F);
             this.g.J().a(b);
             bfq var4 = bfq.a;
             var4.b();

@@ -135,9 +135,6 @@ public class Items extends Item {
     public static final ItemWand FreezeWand = new ItemWand(Constant.getNextItemID(),Materials.nickel,"wandfreeze");
     public static final ItemWand ShockWand = new ItemWand(Constant.getNextItemID(),Material.ancient_metal,"wandshock");
     public static final Item ExperimentalPotion = (new ItemPotionExperimental(Constant.getNextItemID())).setUnlocalizedName("experimentalPotion").setCreativeTab(CreativeModeTab.tabMisc);
-    public static final ItemShardAT shardDiamond = (ItemShardAT) new ItemShardAT(862, Material.diamond).setUnlocalizedName("shardDiamond").setXPReward(4);
-    public static final ItemShardAT shardEmerald = (ItemShardAT) (new ItemShardAT(861, Material.emerald)).setUnlocalizedName("shardEmerald").setXPReward(3);
-    public static final ItemShardAT shardNetherQuartz = (ItemShardAT) (new ItemShardAT(863, Material.quartz)).setUnlocalizedName("shardNetherQuartz").setXPReward(2);
     public static final ItemRecordExtend recordDamnation = (ItemRecordExtend) new ItemRecordExtend(2024, "imported.damnation", "record_damnation", "Damnation", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
     public static final ItemRecordExtend recordConnected = (ItemRecordExtend) new ItemRecordExtend(2025, "imported.connected", "record_connected", "Connected", "Mwk feat. Hatsune Miku").setUnlocalizedName("record");
     public static final ItemArmor VibraniumHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.vibranium,false);

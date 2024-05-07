@@ -48,6 +48,7 @@ public class ExperimentalConfig {
         public static ConfigItem <Boolean> Realistic = new ConfigItem<>("Realistic",false,"真实状态模拟");
         public static ConfigItem <Boolean> TagMovingV2 = new ConfigItem<>("MovingV2", true, "新移动模式");
         public static ConfigItem <Boolean> TagNewRenderPlayer = new ConfigItem<>("NewRenderPlayer", false, "1.8玩家模型");
+        public static ConfigItem <Boolean> TagTorchExtinguish = new ConfigItem<>("TorchExtinguish", false, "火把自然熄灭");
 //        public static ConfigItem <Boolean> NewVersion = new ConfigItem<>("NewVersion", false, "启用未完成的版本内容");
         //*这个有问题*//
 
@@ -64,6 +65,7 @@ public class ExperimentalConfig {
         Tags.put("Realistic", TagConfig.Realistic);
         Tags.put("MovingV2", TagConfig.TagMovingV2);
         Tags.put("NewRenderPlayer", TagConfig.TagNewRenderPlayer);
+        Tags.put("TorchExtinguish", TagConfig.TagTorchExtinguish);
 //        Tags.put("NewVersion", TagConfig.NewVersion);
 //      Tags.put("NoWeatherPredict",TagConfig.TagNoWeatherPredict);
 

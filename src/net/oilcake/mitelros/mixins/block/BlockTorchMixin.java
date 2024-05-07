@@ -2,6 +2,7 @@ package net.oilcake.mitelros.mixins.block;
 
 import net.minecraft.*;
 import net.oilcake.mitelros.block.Blocks;
+import net.oilcake.mitelros.util.ExperimentalConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -34,7 +35,7 @@ public abstract class BlockTorchMixin extends BlockMounted{
             return false;
         } else {
             int ran = random.nextInt(512);
-            if(ran == 0 && world.getBlockId(x,y,z) == Block.torchWood.blockID){
+            if(ran == (ExperimentalConfig.TagConfig.TagTorchExtinguish.ConfigValue ? 0 : -1) && world.getBlockId(x,y,z) == Block.torchWood.blockID){
                 world.setBlock(x, y, z, Blocks.torchWoodIdle.blockID, world.getBlockMetadata(x,y,z), 2);
             }
             return false;

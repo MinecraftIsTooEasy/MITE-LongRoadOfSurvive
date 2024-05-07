@@ -160,19 +160,19 @@ public class ItemMixin{
     public Material getMaterialForRepairs() {
         return null;
     }
-    @Overwrite
-    public Material getExclusiveMaterial() {
-        System.out.println("EXCLUSIVE " + this);
-        if (this.materials.size() == 0) {
-            Minecraft.setErrorMessage("getExclusiveMaterial: no material defined for " + this);
-            return null;
-        } else if (this.materials.size() > 1) {
-            Minecraft.setErrorMessage("getExclusiveMaterial: multiple materials defined for " + this);
-            return null;
-        } else {
-            return this.getMaterial(0);
-        }
-    }
+//    @Overwrite
+//    public Material getExclusiveMaterial() {
+//        System.out.println("EXCLUSIVE " + this);
+//        if (this.materials.size() == 0) {
+//            Minecraft.setErrorMessage("getExclusiveMaterial: no material defined for " + this);
+//            return null;
+//        } else if (this.materials.size() > 1) {
+//            Minecraft.setErrorMessage("getExclusiveMaterial: multiple materials defined for " + this);
+//            return null;
+//        } else {
+//            return this.getMaterial(0);
+//        }
+//    }
     @Shadow
     public Material getMaterial(int index) {
         return null;

@@ -37,7 +37,7 @@ public class ITFEvent {
         }
         if (par2Str.startsWith("tpt") && !Minecraft.inDevMode()) {
             BiomeBase biome = player.worldObj.getBiomeGenForCoords(player.getBlockPosX(), player.getBlockPosZ());
-            player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+player.BodyTemperature+"℃。").setColor(EnumChatFormat.WHITE));
+            player.sendChatToPlayer(ChatMessage.createFromText("玩家当前体温为"+ StringHelper.formatFloat(player.BodyTemperature, 1, 1) + "℃，玩家目前可接受温度范围为：" + player.getTemperatureTolerance()[0] + " " + player.getTemperatureTolerance()[1] + "，环境温度为" + player.getEnvironmentTemperature(biome.temperature,player.getWorld().getTotalWorldTime()) + "℃。").setColor(EnumChatFormat.WHITE));
             event.setExecuteSuccess(true);
         }
         if (par2Str.startsWith("yay")){

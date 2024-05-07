@@ -357,6 +357,33 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         }
         return 96000;
     }
+    public String getEnvironmentTemperature(float base_temperature, long daytime){
+        float env_temperature = base_temperature;
+        if(this.getWorld().isOverworld()){
+            env_temperature -= (daytime > 0 && daytime < 12000) ? 0.0F : 0.1F;
+            if(this.getWorld().getWorldSeason() == 3){
+                env_temperature -= 0.6F;
+            }
+        }
+        env_temperature += 0.2F * ((96.0F - (float) this.getBlockPosY()) / 256.0F);
+        return StringHelper.formatFloat(-4F + 30F * env_temperature, 1, 1);
+
+    }
+    public String[] getTemperatureTolerance(){
+        ItemStack wearingItemStack = this.getCuirass();
+        float best_temp = 1.0F;
+
+        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofAntarctic)) {
+            best_temp += 0.8F;
+        }
+        if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
+            best_temp -= 0.6F;
+        }
+        best_temp -= this.getReduce_weight() * 0.05F;
+        String highest_temp = StringHelper.formatFloat((best_temp + 0.3F) * 30F - 4.0F, 1, 1);
+        String lowest_temp = StringHelper.formatFloat((best_temp - 0.3F) * 30F - 4.0F, 1, 1);
+        return new String[]{lowest_temp,highest_temp};
+    }
     public void modifyTemperature(int tp){
         this.temperaturePoint += tp;
     }
@@ -593,10 +620,14 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                 }
             }
             if(this.isInFire()){
-                this.temperaturePoint += 50;
+                this.temperaturePoint += 100;
+            }
+            if(this.worldObj.getSavedLightValue(EnumSkyBlock.Block, this.getBlockPosX(), this.getBlockPosY() + 1, this.getBlockPosZ()) > 12 && this.temperaturePoint < 104000){
+                this.temperaturePoint += 25;
+                this.removePotionEffect(PotionExtend.freeze.id);
             }
             if(this.isInWater() && this.temperaturePoint > 88000){
-                this.temperaturePoint -= 50;
+                this.temperaturePoint -= 25;
                 this.removePotionEffect(PotionExtend.heat_stroke.id);
             }
             this.BodyTemperature = 37.2F + (float) (0.000125D * (double) (this.temperaturePoint - 96000));
