@@ -1,7 +1,9 @@
 package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockMetalbench;
 import net.oilcake.mitelros.block.BlockTorchIdle;
+import net.oilcake.mitelros.block.BlockWoodbench;
 import net.oilcake.mitelros.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -28,6 +30,19 @@ public class ItemBlockMixin extends Item{
             id = Item.flowerPot.itemID;
         }
         return id;
+    }
+    @Overwrite
+    public String getItemDisplayName(ItemStack item_stack)
+    {
+        if(item_stack != null && this.getBlock() == Block.workbench){
+            return Translator.get("tile.toolbench." + BlockWorkbench.getToolMaterial(item_stack.getItemSubtype()).getName() + ".name");
+        }else if(item_stack != null && this.getBlock() == Blocks.metalbench){
+            return Translator.get("tile.toolbench." + BlockMetalbench.getToolMaterial(item_stack.getItemSubtype()).getName() + ".name");
+        }else if(item_stack != null && this.getBlock() == Blocks.woodbench){
+            return Translator.get("tile.toolbench." + BlockWoodbench.getToolMaterial(item_stack.getItemSubtype()).getName() + ".name");
+        }else {
+            return super.getItemDisplayName(item_stack);
+        }
     }
     @Overwrite
     public int getBurnTime(ItemStack item_stack) {

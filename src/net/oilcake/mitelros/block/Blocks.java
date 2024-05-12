@@ -66,6 +66,8 @@ public class Blocks extends Block {
     public static final Block blockSulphur = new BlockOre(Constant.getNextBlockID(),Materials.sulphur,1).setBlockHardness(1.2F).setExplosionResistance(10.0F).setStepSound_(Block.soundStoneFootstep);
     public static final Block blockAzuriteLantern = (ReflectHelper.createInstance(BlockAzuriteLantern.class, new Class[] {int.class,Material.class}, Constant.getNextBlockID(), Materials.circuits)).setUnlocalizedName("lantern").setStepSound_(Block.soundMetalFootstep);
     public static final Block invisibleLight = new BlockInvisibleLight(Constant.getNextBlockID()).setBlockLightLevel(0.75F);
+    public static final Block metalbench = (new BlockMetalbench(Constant.getNextBlockID())).setStepSound_(soundWoodFootstep).setUnlocalizedName("workbench");
+    public static final Block woodbench = (new BlockWoodbench(Constant.getNextBlockID())).setStepSound_(soundWoodFootstep).setUnlocalizedName("workbench");
 
     protected Blocks(int par1, Material par2Material, BlockConstants constants) {
         super(par1, par2Material, constants);
@@ -122,7 +124,8 @@ public class Blocks extends Block {
         registerItemBlock("sulphur",blockSulphur);
         registerItemBlock("lantern",blockAzuriteLantern);
         registerItemBlock("invisible",invisibleLight);
-
+        registerItemBlock("toolbench",metalbench);
+        registerItemBlock("toolbench",woodbench);
     }
 
     public static void registerRecipes(RecipeRegister register) {
@@ -216,6 +219,28 @@ public class Blocks extends Block {
 //                "XX ",
 //                "XX ",
 //                'X',Items.tungstenIngot);
+
+        for (int plank_subtype = 0; plank_subtype < 4; ++plank_subtype)
+        {
+            for (int bench_subtype = 0; bench_subtype < Blocks.metalbench.getNumSubBlocks(); bench_subtype++){
+                Material tool_material = BlockMetalbench.getToolMaterial(bench_subtype);
+                register.registerShapedRecipe(new ItemStack(Blocks.metalbench, 1, bench_subtype),true,
+                        "IL", "s#", 'I', ItemIngot.getMatchingItem(ItemIngot.class, tool_material), 'L', Item.leather, 's', Item.stick, '#', new ItemStack(Block.planks, 1, plank_subtype));
+            }
+        }
+
+        for (int bench_subtype = 0; bench_subtype < Blocks.woodbench.getNumSubBlocks(); bench_subtype++){
+            Material tool_material = BlockWoodbench.getToolMaterial(bench_subtype);
+            register.registerShapedRecipe(new ItemStack(Blocks.woodbench, 1, bench_subtype),true,
+                    "IL", "s#", 'I', (bench_subtype < 4 ? Item.flint : Block.obsidian), 'L', Item.sinew, 's', Item.stick, '#', new ItemStack(Block.wood, 1, bench_subtype % 4));
+            register.registerShapedRecipe(new ItemStack(Blocks.woodbench, 1, bench_subtype),true,
+                    "IL", "s#", 'I', (bench_subtype < 4 ? Item.flint : Block.obsidian), 'L', Item.silk, 's', Item.stick, '#', new ItemStack(Block.wood, 1, bench_subtype % 4));
+            register.registerShapedRecipe(new ItemStack(Blocks.woodbench, 1, bench_subtype),true,
+                    "I","#",'I',(bench_subtype < 4 ? Item.knifeFlint : Item.knifeObsidian),'#', new ItemStack(Block.wood, 1, bench_subtype % 4));
+            register.registerShapelessRecipe(new ItemStack(bench_subtype < 4 ? Item.knifeFlint : Item.knifeObsidian, 1), false, new ItemStack(Blocks.woodbench, 1, bench_subtype)).resetDifficulty(25);
+        }
+
+
 
         ItemNugget[] nuggets = new ItemNugget[]{Item.copperNugget,Item.silverNugget,Item.goldNugget,Item.ironNugget,Items.nickelNugget,Item.ancientMetalNugget,Item.mithrilNugget,Items.tungstenNugget,Item.adamantiumNugget};
         for(int i = 0;i < nuggets.length;i++){

@@ -25,7 +25,7 @@ public class PotionExtend extends MobEffectList{
         if (!par1EntityLivingBase.onClient()) {
             if (this.id == dehydration.id && par1EntityLivingBase instanceof EntityPlayer) {
                 if (!par1EntityLivingBase.worldObj.isRemote) {
-                    ((EntityPlayer)par1EntityLivingBase).getFoodStats().addHungerServerSide(0.05F * (float)(par2 + 1));
+                    ((EntityPlayer)par1EntityLivingBase).getFoodStats().addHungerServerSide(0.025F * (float)(par2 + 1));
                 }
             }
         }

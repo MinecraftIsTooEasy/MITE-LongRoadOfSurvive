@@ -1,6 +1,9 @@
 package net.oilcake.mitelros.mixins.entity.player;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockMetalbench;
+import net.oilcake.mitelros.block.BlockWoodbench;
+import net.oilcake.mitelros.block.EnumBenchType;
 import net.oilcake.mitelros.block.enchantreserver.EnchantReserverSlots;
 import net.oilcake.mitelros.block.enchantreserver.GuiEnchantReserver;
 import net.oilcake.mitelros.item.Materials;
@@ -43,7 +46,19 @@ public abstract class EntityPlayerSPMixin extends beu{
             Item item = item_stack == null ? null : item_stack.getItem();
             aah recipe = container_workbench.getRecipe();
             Material material_to_check_tool_bench_hardness_against = recipe == null ? item.getHardestMetalMaterial() : recipe.getMaterialToCheckToolBenchHardnessAgainst();
-            Material tool_material = BlockWorkbench.getToolMaterial(container_workbench.getBlockMetadata());
+
+            int metadata = container_workbench.getBlockMetadata();
+            int benchType = container_workbench.benchType;
+            Material tool_material;
+            if(benchType == EnumBenchType.WOOD.ordinal()){
+                tool_material = BlockWoodbench.getToolMaterial(metadata);
+            }else if(benchType == EnumBenchType.METAL.ordinal()){
+                tool_material = BlockMetalbench.getToolMaterial(metadata);
+            }else{
+                tool_material = BlockWorkbench.getToolMaterial(metadata);
+            }
+
+
             if (material_to_check_tool_bench_hardness_against == null) {
                 return (tool_material != Material.flint || tool_material != Material.obsidian) ? 0.25F :
                        (tool_material != Material.copper || tool_material != Material.silver || tool_material != Material.gold) ? 0.4F :

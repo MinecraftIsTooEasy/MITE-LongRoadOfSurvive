@@ -1,6 +1,8 @@
 package net.oilcake.mitelros.mixins.item.recipes;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.BlockMetalbench;
+import net.oilcake.mitelros.block.BlockWoodbench;
 import net.oilcake.mitelros.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -101,13 +103,51 @@ public class RecipeHelperMixin {
             }else if (output_item.itemID == Blocks.blockAzurite.blockID || output_item.itemID == Blocks.azuriteCluster.blockID) {
                 recipe.setMaterialToCheckToolBenchHardnessAgainst(Material.copper);
             } else if (output_item.itemID == Block.workbench.blockID) {
+
                 Material tool_material = BlockWorkbench.getToolMaterial(output_item_stack.getItemSubtype());
+
                 if (tool_material.isMetal()) {
                     Material next_strongest_material = null;
                     highest_durability_that_is_less_than_tool_material = 0.0F;
 
                     for(int i = 0; i < BlockWorkbench.tool_materials.length; ++i) {
                         Material material = BlockWorkbench.tool_materials[i];
+                        if (material != Material.obsidian && material.getDurability() < tool_material.getDurability() && material.getDurability() > highest_durability_that_is_less_than_tool_material) {
+                            next_strongest_material = material;
+                            highest_durability_that_is_less_than_tool_material = material.getDurability();
+                        }
+                    }
+
+                    recipe.setMaterialToCheckToolBenchHardnessAgainst(next_strongest_material);
+                }
+            } else if (output_item.itemID == Blocks.woodbench.blockID) {
+
+                Material tool_material = BlockWoodbench.getToolMaterial(output_item_stack.getItemSubtype());
+
+                if (tool_material.isMetal()) {
+                    Material next_strongest_material = null;
+                    highest_durability_that_is_less_than_tool_material = 0.0F;
+
+                    for(int i = 0; i < BlockWoodbench.tool_materials.length; ++i) {
+                        Material material = BlockWoodbench.tool_materials[i];
+                        if (material != Material.obsidian && material.getDurability() < tool_material.getDurability() && material.getDurability() > highest_durability_that_is_less_than_tool_material) {
+                            next_strongest_material = material;
+                            highest_durability_that_is_less_than_tool_material = material.getDurability();
+                        }
+                    }
+
+                    recipe.setMaterialToCheckToolBenchHardnessAgainst(next_strongest_material);
+                }
+            } else if (output_item.itemID == Blocks.metalbench.blockID) {
+
+                Material tool_material = BlockMetalbench.getToolMaterial(output_item_stack.getItemSubtype());
+
+                if (tool_material.isMetal()) {
+                    Material next_strongest_material = null;
+                    highest_durability_that_is_less_than_tool_material = 0.0F;
+
+                    for(int i = 0; i < BlockMetalbench.tool_materials.length; ++i) {
+                        Material material = BlockMetalbench.tool_materials[i];
                         if (material != Material.obsidian && material.getDurability() < tool_material.getDurability() && material.getDurability() > highest_durability_that_is_less_than_tool_material) {
                             next_strongest_material = material;
                             highest_durability_that_is_less_than_tool_material = material.getDurability();

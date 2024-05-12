@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.entity.EntityLichShadow;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -57,7 +58,7 @@ public class EntityLivingMixin extends Entity{
     }
     @Inject(method = "onDeathUpdate",at = @At(value = "FIELD",shift = At.Shift.AFTER,target = "Lnet/minecraft/EntityLiving;deathTime:I",ordinal = 1))
     private void injectTick(CallbackInfo callbackInfo){
-        if(this.getAsEntityLivingBase() instanceof EntityCubic || this.getAsEntityLivingBase() instanceof EntityWight || this.getAsEntityLivingBase() instanceof EntityInvisibleStalker){
+        if(this.getAsEntityLivingBase() instanceof EntityCubic || this.getAsEntityLivingBase() instanceof EntityWight || this.getAsEntityLivingBase() instanceof EntityInvisibleStalker || this.getAsEntityLivingBase() instanceof EntityLichShadow){
             this.deathTime = 20;
         }
     }

@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.item;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ItemKnife.class)
@@ -19,7 +20,7 @@ public class ItemKnifeMixin extends ItemDagger{
         } else {
             if (rc.getBlockHit() == Block.wood && this.getToolMaterial() == Material.flint && player.getHeldItemStack().getItemDamage() == 0) {
                 if (player.onServer()) {
-                    rc.world.setBlock(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z,Block.workbench.blockID,rc.world.getBlockMetadata(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z) & 3,2);
+                    rc.world.setBlock(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z, Blocks.woodbench.blockID,rc.world.getBlockMetadata(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z) & 3,2);
                 }
                 if (player.onClient()) {
                     player.swingArm();
@@ -31,7 +32,7 @@ public class ItemKnifeMixin extends ItemDagger{
                 return true;
             }else if (rc.getBlockHit() == Block.wood && this.getToolMaterial() == Material.obsidian && player.getHeldItemStack().getItemDamage() == 0) {
                 if (player.onServer()) {
-                    rc.world.setBlock(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z,Block.workbench.blockID,(rc.world.getBlockMetadata(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z) & 3) + 13,2);
+                    rc.world.setBlock(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z, Blocks.woodbench.blockID,(rc.world.getBlockMetadata(rc.block_hit_x, rc.block_hit_y, rc.block_hit_z) & 3) + 4,2);
                 }
                 if (player.onClient()) {
                     player.swingArm();

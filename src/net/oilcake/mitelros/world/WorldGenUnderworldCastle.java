@@ -11,6 +11,9 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
     private static final StructurePieceTreasure[] chest_contents_for_underworld_castle;
     @Override
     public boolean generate(World par1World, Random random, int x, int y, int z) {
+        if(Math.abs(x) < 16384 && Math.abs(z) < 16384){
+            return false;
+        }
         while ((par1World.isAirBlock(x, y, z) && y > 144) || y > 160)
         {
             --y;

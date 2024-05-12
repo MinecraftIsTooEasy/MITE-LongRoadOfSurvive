@@ -3,6 +3,7 @@ package net.oilcake.mitelros.mixins.block;
 import net.minecraft.*;
 import net.oilcake.mitelros.block.BlockFlowerExtend;
 import net.oilcake.mitelros.block.Blocks;
+import org.lwjgl.Sys;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -44,7 +45,14 @@ public abstract class BlockMixin{
         }
         return matching_block;
     }
-
+    @Shadow
+    public boolean isValidMetadata(int metadata) {
+        return false;
+    }
+    @Shadow
+    public int getItemSubtype(int metadata) {
+        return 0;
+    }
     public Block block;
 
     @Shadow protected Block setResistance(float par1){
