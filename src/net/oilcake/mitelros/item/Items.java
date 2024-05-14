@@ -108,13 +108,13 @@ public class Items extends Item {
     public static final ItemBucket mithrilBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.mithril,Materials.dangerous_water).setContainerItem(bucketMithrilEmpty);
     public static final ItemBucket tungstenBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(), Materials.tungsten, Materials.dangerous_water).setContainerItem(tungstenBucket);
     public static final ItemBucket adamantiumBucketWaterSwampland = (ItemBucket) new ItemBucket(Constant.getNextItemID(),Material.adamantium,Materials.dangerous_water).setContainerItem(bucketAdamantiumEmpty);
-    public static final Item Wolf_fur = createInstance(ItemNugget.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.wolf_fur).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
+    public static final Item Wolf_fur = createInstance(ItemChain.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.wolf_fur).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
     public static final Item horse_meat = (new ItemMeat(Constant.getNextItemID(),6,6,true,false,"horse_meat"));
     public static final Item horse_meat_cooked = (new ItemMeat(Constant.getNextItemID(),12,12,true,true,"horse_meat_cooked"));
-    public static final ItemArmor WolfHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.wolf_fur,false);
-    public static final ItemArmor WolfChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,false);
-    public static final ItemArmor WolfLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
-    public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor WolfHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.wolf_fur,true);
+    public static final ItemArmor WolfChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,true);
+    public static final ItemArmor WolfLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,true);
+    public static final ItemArmor WolfBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,true);
     public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden")/*.setPotionEffectC("+0+1+2-3+13&4-4")*/;
     public static final Item Goldenapplelegend = (ItemGoldenAppleLegend)(new ItemGoldenAppleLegend(Constant.getNextItemID(),2,1, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
     public static final ItemBowl bowlLemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
@@ -229,6 +229,11 @@ public class Items extends Item {
     public static final Item detectorEmerald = new ItemDetector(Constant.getNextItemID(),Material.emerald,"emerald").setUnlocalizedName("detector");
     public static final Item detectorDiamond = new ItemDetector(Constant.getNextItemID(),Material.diamond,"diamond").setUnlocalizedName("detector");
     public static final Item sulphur = new ItemStandard(Constant.getNextItemID(),Materials.sulphur,"sulphur_sphere").setMaxStackSize(16);
+    public static final Item hellhoundFur = createInstance(ItemIngot.class, new Class[]{int.class,Material.class},Constant.getNextItemID(),Materials.wolf_fur).setCraftingDifficultyAsComponent(100.0F).setUnlocalizedName("small_leather").setCreativeTab(CreativeModeTab.tabMaterials).setMaxStackSize(16);
+    public static final ItemArmor HellhoundHelmet = new ItemHelmet(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor HellhoundChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor HellhoundLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemArmor HellhoundBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -451,6 +456,11 @@ public class Items extends Item {
         register("tools/detector",detectorDiamond);
         register("tools/detector_emerald",detectorEmerald);
         register("sulphur_sphere",sulphur);
+        register("wolf_fur_hellhound",hellhoundFur);
+        register("armor/hellhound_helmet", HellhoundHelmet);
+        register("armor/hellhound_jacket", HellhoundChestplate);
+        register("armor/hellhound_leggings", HellhoundLeggings);
+        register("armor/hellhound_boots", HellhoundBoots);
         Constant.initItemArray();
     }
     public static void registerBasicToolRecipes(RecipeRegister register,Material material){
@@ -599,6 +609,30 @@ public class Items extends Item {
                     "A A",
                     'A',item);
     }
+    public static void registerLeatherArmorRecipe(RecipeRegister register,Item item, Material material){
+        register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemHelmet.class,material,item instanceof ItemChain)),true,
+                "AAA",
+                "AHA",
+                'A',item,
+                'H',helmetLeather);
+        register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemCuirass.class,material,item instanceof ItemChain)),true,
+                "A A",
+                "ACA",
+                "AAA",
+                'A',item,
+                'C',plateLeather);
+        register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemLeggings.class,material,item instanceof ItemChain)),true,
+                "AAA",
+                "ALA",
+                "A A",
+                'A',item,
+                'L',Item.legsLeather);
+        register.registerShapedRecipe(new ItemStack(ItemArmor.getMatchingArmor(ItemBoots.class,material,item instanceof ItemChain)),true,
+                "ABA",
+                "A A",
+                'A',item,
+                'B',Item.bootsLeather);
+    }
     public static void registerFullMetalToolRecipe(RecipeRegister register, Material material){
             registerBasicToolRecipes(register,material);
             registerMITEToolRecipe(register,material);
@@ -614,11 +648,11 @@ public class Items extends Item {
                 Blocks.blockTungsten);
         register.registerShapelessRecipe(new ItemStack(tungstenNugget, 9), true,
                 tungstenIngot);
-        registerArmorRecipe(register,Wolf_fur,Materials.wolf_fur);
+        registerLeatherArmorRecipe(register,Wolf_fur,Materials.wolf_fur);
+        registerLeatherArmorRecipe(register,hellhoundFur,Materials.wolf_fur);
         registerITFToolRecipe(register);
         registerFullMetalToolRecipe(register,Materials.nickel);
         registerFullMetalToolRecipe(register,Materials.tungsten);
-
         register.registerShapelessRecipe(new ItemStack(Items.glowberries,1),true,
                 new ItemStack(Blocks.flowerextend,1,0));
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,7),true,
@@ -753,6 +787,9 @@ public class Items extends Item {
         );
         register.registerShapelessRecipe(new ItemStack(Item.leather,1),true,
                 Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur,Items.Wolf_fur
+        );
+        register.registerShapelessRecipe(new ItemStack(Item.leather,1),true,
+                Items.hellhoundFur,Items.hellhoundFur,Items.hellhoundFur,Items.hellhoundFur
         );
         register.registerShapelessRecipe(new ItemStack(Item.dyePowder,1,4),false,
                 Items.lapis);

@@ -16,7 +16,7 @@ public class ItemWine extends Item{
 
     public void onItemUseFinish(ItemStack item_stack, World world, EntityPlayer player) {
         if (player.onServer()) {
-            player.modifyTemperature(6000);
+            player.modifyTemperature(8000);
             player.Hasdrunked = true;
             player.addPotionEffect((new MobEffect(MobEffectList.confusion.id, 400, 0)));
             player.addPotionEffect((new MobEffect(PotionExtend.thirsty.id,2560,0)));

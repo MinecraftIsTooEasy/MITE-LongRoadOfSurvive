@@ -339,7 +339,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             best_temp -= 0.6F;
         }
 
-        best_temp -= this.getReduce_weight() * 0.05F;
+        best_temp -= (this.getReduce_weight() / 3) * 0.05F;
 
         if(this.getWorld().isOverworld()){
             env_temperature -= (daytime > 0 && daytime < 12000) ? 0.0F : 0.1F;
@@ -379,7 +379,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         if (EnchantmentManager.hasEnchantment(wearingItemStack, Enchantments.enchantmentCallofNether)) {
             best_temp -= 0.6F;
         }
-        best_temp -= this.getReduce_weight() * 0.05F;
+        best_temp -= (this.getReduce_weight() / 3) * 0.05F;
         String highest_temp = StringHelper.formatFloat((best_temp + 0.3F) * 30F - 4.0F, 1, 1);
         String lowest_temp = StringHelper.formatFloat((best_temp - 0.3F) * 30F - 4.0F, 1, 1);
         return new String[]{lowest_temp,highest_temp};
@@ -444,247 +444,256 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     private int water_duration = 0;
     public int getReduce_weight(){
         int Weight = 0;
+        if(this.getHelmet()!= null && this.getHelmet().itemID == Items.HellhoundHelmet.itemID){
+            Weight -= 14;
+        }
+        if(this.getCuirass()!= null && this.getCuirass().itemID == Items.HellhoundChestplate.itemID){
+            Weight -= 22;
+        }
+        if(this.getLeggings()!= null && this.getLeggings().itemID == Items.HellhoundLeggings.itemID){
+            Weight -= 19;
+        }
+        if(this.getBoots()!= null && this.getBoots().itemID == Items.HellhoundBoots.itemID ){
+            Weight -= 11;
+        }
         if(this.getHelmet()!= null && this.getHelmet().itemID == Items.WolfHelmet.itemID){
-            Weight += 2;
+            Weight += 5;
         }
         if(this.getCuirass()!= null && this.getCuirass().itemID == Items.WolfChestplate.itemID){
-            Weight += 2;
+            Weight += 8;
         }
         if(this.getLeggings()!= null && this.getLeggings().itemID == Items.WolfLeggings.itemID){
-            Weight += 2;
+            Weight += 7;
         }
         if(this.getBoots()!= null && this.getBoots().itemID == Items.WolfBoots.itemID ){
-            Weight += 2;
+            Weight += 4;
         }
         if(this.getHelmet()!= null && this.getHelmet().itemID == Item.helmetLeather.itemID){
-            Weight += 1;
+            Weight += 3;
         }
         if(this.getCuirass()!= null && this.getCuirass().itemID == Item.plateLeather.itemID){
-            Weight += 1;
+            Weight += 4;
         }
         if(this.getLeggings()!= null && this.getLeggings().itemID == Item.legsLeather.itemID){
-            Weight += 1;
+            Weight += 3;
         }
-        if(this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID ){
-            Weight += 1;
+        if(this.getBoots()!= null && this.getBoots().itemID == Item.bootsLeather.itemID){
+            Weight += 2;
         }
         if(this.getHelmet()!= null){
-            Weight += 2;
+            Weight += 5;
         }
         if(this.getCuirass()!= null) {
-            Weight += 2;
+            Weight += 8;
         }
         if(this.getLeggings()!= null){
-            Weight += 2;
+            Weight += 7;
         }
         if(this.getBoots()!= null){
-            Weight += 2;
+            Weight += 4;
         }
         return Weight;
     }
-    @Inject(method = "onLivingUpdate",
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/EntityLiving;onLivingUpdate()V",
-                    shift = At.Shift.AFTER))
-    private void injectTick(CallbackInfo c){
-        if (!this.worldObj.isRemote) {
-            //探测器：绿宝石
-            if(this.inventory.getHotbarSlotContainItem(Items.detectorEmerald) > 0){
-                if(detectorDelay < 80){
-                    detectorDelay ++;
-                }else {
-                    detectorDelay = 0;
-                    List <Entity>targets  = this.getNearbyEntities(16.0F, 8.0F);
-                    float range_div = Math.min(2.0F,20.0F / this.detectNearestMonstersDistance(targets));
-//                    System.out.println(range_div);
-                    if(range_div > 0.0F){
-                        this.makeSound("imported.random.warning", 0.3F, 1.0F + range_div);
-                        detectorDelay += (int) (38.0F * range_div);
-                    }
-                }
+    private Material getDetectorMaterial(){
+        if(this.inventory.getHotbarSlotContainItem(Items.detectorEmerald) > 0){
+            return Material.emerald;
+        }
+        if(this.inventory.getHotbarSlotContainItem(Items.detectorDiamond) > 0){
+            return Material.diamond;
+        }
+        return null;
+    }
+    private void detectNearbyMobs(Material material){
+        if(material == null){
+            return;
+        }
+        if(detectorDelay < 80){
+            detectorDelay ++;
+        }else {
+            detectorDelay = 0;
+            List <Entity>targets  = this.getNearbyEntities(material.getDurability() * 2.0F, material.getDurability());
+            float range_div = Math.min(2.0F, material.getDurability() * 2.5F / this.detectNearestMonstersDistance(targets));
+            if(range_div > 0.0F){
+                this.makeSound("imported.random.warning", 0.3F, 1.0F + range_div);
+                detectorDelay += (int) (38.0F * range_div);
             }
-            //探测器：钻石
-            if(this.inventory.getHotbarSlotContainItem(Items.detectorDiamond) > 0){
-                if(detectorDelay < 80){
-                    detectorDelay ++;
-                }else {
-                    detectorDelay = 0;
-                    List <Entity>targets  = this.getNearbyEntities(28.0F, 12.0F);
-                    float range_div = Math.min(2.0F,40.0F / this.detectNearestMonstersDistance(targets));
-//                    System.out.println(range_div);
-                    if(range_div > 0.0F){
-                        this.makeSound("imported.random.warning", 0.3F, 1.0F + range_div);
-                        detectorDelay += (int) (38.0F * range_div);
-                    }
-                }
+        }
+    }
+    private void produceManure(){
+        if(this.isPotionActive(PotionExtend.dehydration) && this.diarrheaCounter <= 1200){
+            ++this.diarrheaCounter;
+        }else {
+            if(this.diarrheaCounter > 0){
+                --this.diarrheaCounter;
             }
-            //拉屎！？
-            if(this.isPotionActive(PotionExtend.dehydration) && this.diarrheaCounter <= 1200){
-                ++this.diarrheaCounter;
-            }else {
-                if(this.diarrheaCounter > 0){
-                    --this.diarrheaCounter;
-                }
+        }
+        if(this.diarrheaCounter >= 1200){
+            this.dropItem(Item.manure);
+            this.triggerAchievement(AchievementExtend.pull);
+            this.diarrheaCounter = 0;
+        }
+    }
+    private void tryEnableSacrificing(){
+        if(this.hunt_counter > (this.hunt_cap ? -1 : 0)){
+            this.hunt_counter--;
+        }
+        if(this.hunt_counter % 80 == 79){
+            EntityUndeadGuard Belongings = new EntityUndeadGuard(this.worldObj);
+            Belongings.setPosition(this.posX, this.posY, this.posZ);
+            Belongings.refreshDespawnCounter(-9600);
+            this.worldObj.spawnEntityInWorld(Belongings);
+            Belongings.onSpawnWithEgg(null);
+            Belongings.entityFX(EnumEntityFX.summoned);
+        }
+        if(this.hunt_counter < 0){
+            this.attackEntityFrom(new Damage(DamageSourceExtend.sacrificed, 10000.0F));
+            this.hunt_counter = 0;
+            this.hunt_cap = false;
+        }
+    }
+    private void triggeringCurseExtend(){
+        if(this.hasCurse(CurseExtend.fear_of_light)) {
+            float light_modifier = (18 - this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ))) / 15.0F;
+            if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_light,true)){
             }
-            if(this.diarrheaCounter >= 1200){
-                this.dropItem(Item.manure);
-                this.triggerAchievement(AchievementExtend.pull);
-                this.diarrheaCounter = 0;
+        }
+        if(this.hasCurse(CurseExtend.fear_of_darkness)) {
+            float light_modifier = (this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ)) + 3) / 15.0F;
+            if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_darkness,true)){
             }
-            //拓展诅咒
-            if(this.hasCurse(CurseExtend.fear_of_light)) {
-                float light_modifier = (18 - this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ))) / 15.0F;
-                if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_light,true)){
-                }
+        }
+    }
+    private void tryDrinkWater(){
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        if(this.getBlockAtFeet()!= null && this.getBlockAtFeet().blockMaterial == Material.water && this.isSneaking()){
+            ++this.water_duration;
+        }else{
+            this.water_duration = 0;
+        }
+        if (this.water_duration > 160) {
+            this.water_duration = 0;
+            if (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland) {
+                this.getFoodStats().addWater(1);
+                this.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
+            } else if(biome == BiomeBase.river || biome == BiomeBase.desertRiver){
+                this.getFoodStats().addWater(2);
+            } else{
+                this.getFoodStats().addWater(1);
+                this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 160, 0));
             }
-            if(this.hasCurse(CurseExtend.fear_of_darkness)) {
-                float light_modifier = (this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + this.yOffset), MathHelper.floor_double(this.posZ)) + 3) / 15.0F;
-                if(light_modifier < 0.5F && this.hasCurse(CurseExtend.fear_of_darkness,true)){
-                }
-            }
-            //巡猎图腾效果
-            if(this.hunt_counter > (this.hunt_cap ? -1 : 0)){
-                this.hunt_counter--;
-            }
-            if(this.hunt_counter % 80 == 79){
-                EntityUndeadGuard Belongings = new EntityUndeadGuard(this.worldObj);
-                Belongings.setPosition(this.posX, this.posY, this.posZ);
-                Belongings.refreshDespawnCounter(-9600);
-                this.worldObj.spawnEntityInWorld(Belongings);
-                Belongings.onSpawnWithEgg(null);
-                Belongings.entityFX(EnumEntityFX.summoned);
-            }
-            if(this.hunt_counter < 0){
-                this.attackEntityFrom(new Damage(DamageSourceExtend.sacrificed, 10000.0F));
-                this.hunt_counter = 0;
-                this.hunt_cap = false;
-            }
-            //创造模式下减轻视觉黑暗
-            if(Minecraft.inDevMode() && this.vision_dimming > 0.1F && this.isPlayerInCreative()){
-                this.vision_dimming = 0.05F;
-            }
-            //站定喝水
-            BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
-            if(this.getBlockAtFeet()!= null && this.getBlockAtFeet().blockMaterial == Material.water && this.isSneaking()){
-                ++this.water_duration;
-            }else{
-                this.water_duration = 0;
-            }
-            if (this.water_duration > 160) {
-                this.water_duration = 0;
-                if (biome == BiomeBase.swampRiver || biome == BiomeBase.swampland) {
-                    this.getFoodStats().addWater(1);
-                    this.addPotionEffect(new MobEffect(MobEffectList.poison.id, 450, 0));
-                } else if(biome == BiomeBase.river || biome == BiomeBase.desertRiver){
-                    this.getFoodStats().addWater(2);
-                } else{
-                    this.getFoodStats().addWater(1);
-                    this.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, 160, 0));
-                }
-                this.triggerAchievement(AchievementExtend.mashedCactus);
-            }
-            //水分自然扣减
-            dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 2.0D : 1.0D) + (double) biome.getFloatTemperature();
-            if(this.isPotionActive(PotionExtend.dehydration)){
-                dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.dehydration).getAmplifier() + 1) * 20D);
-            }
-            if(this.isPotionActive(PotionExtend.heat_stroke)){
-                dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.heat_stroke).getAmplifier() + 1) * 5D);
-            }
-            if(this.isPotionActive(PotionExtend.thirsty)){
-                dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.thirsty).getAmplifier() + 1) * 10D);
-            }
-            if(dry_resist > 12800.0D) {
-                this.getFoodStats().addWater(-1);
-                dry_resist = 0;
-            }
-            //喝酒
-            if(this.Hasdrunked) {
-                this.drunk_duration = 6000;
-                this.Hasdrunked = false;
-            }
-
-            //实时控温
-            int targetTemp = this.getTemperatureOutcome(biome.temperature,this.getWorld().getTotalWorldTime());
-            if(!this.isOutdoors() && this.getWorld().isOverworld()){
-                targetTemp = MathHelper.clamp_int(targetTemp, 84000, 128000);
-            }
-            for(int i = 0; i <= (StuckTagConfig.TagConfig.TagTempSensitivity.ConfigValue ? 1 : 0); i++){
-                if(this.temperaturePoint < targetTemp){
-                    ++this.temperaturePoint;
-                }else if(this.temperaturePoint > targetTemp){
-                    if(this.drunk_duration > 0){
-                        --this.temperaturePoint;
-                    }
+            this.triggerAchievement(AchievementExtend.mashedCactus);
+        }
+    }
+    private void handleDecreaseWater(){
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        dry_resist += (StuckTagConfig.TagConfig.TagHeatStroke.ConfigValue ? 2.0D : 1.0D) + (double) biome.getFloatTemperature();
+        if(this.isPotionActive(PotionExtend.dehydration)){
+            dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.dehydration).getAmplifier() + 1) * 20D);
+        }
+        if(this.isPotionActive(PotionExtend.heat_stroke)){
+            dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.heat_stroke).getAmplifier() + 1) * 5D);
+        }
+        if(this.isPotionActive(PotionExtend.thirsty)){
+            dry_resist += Math.min(80.0D, (this.getActivePotionEffect(PotionExtend.thirsty).getAmplifier() + 1) * 10D);
+        }
+        if(dry_resist > 12800.0D) {
+            this.getFoodStats().addWater(-1);
+            dry_resist = 0;
+        }
+    }
+    private void handleDecreaseDrunkDuration(){
+        if(this.Hasdrunked) {
+            this.drunk_duration = 6000;
+            this.Hasdrunked = false;
+        }
+        if(this.drunk_duration > 0){
+            drunk_duration--;
+        }
+    }
+    private void handleModifyBodyTemperature(){
+        BiomeBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
+        int targetTemp = this.getTemperatureOutcome(biome.temperature,this.getWorld().getTotalWorldTime());
+        if(!this.isOutdoors() && this.getWorld().isOverworld()){
+            targetTemp = MathHelper.clamp_int(targetTemp, 84000, 128000);
+        }
+        for(int i = 0; i <= (StuckTagConfig.TagConfig.TagTempSensitivity.ConfigValue ? 1 : 0); i++){
+            if(this.temperaturePoint < targetTemp){
+                ++this.temperaturePoint;
+            }else if(this.temperaturePoint > targetTemp){
+                if(this.drunk_duration > 0){
                     --this.temperaturePoint;
                 }
+                --this.temperaturePoint;
             }
-            if(this.isInFire()){
-                this.temperaturePoint += 100;
+        }
+        if(this.isInFire()){
+            this.temperaturePoint += 100;
+        }
+        if(this.worldObj.getSavedLightValue(EnumSkyBlock.Block, this.getBlockPosX(), this.getBlockPosY() + 1, this.getBlockPosZ()) > 12 && this.temperaturePoint < Math.max(targetTemp, 104000)){
+            this.temperaturePoint += 25;
+            this.removePotionEffect(PotionExtend.freeze.id);
+        }
+        if(this.isInWater() && this.temperaturePoint > Math.min(88000, targetTemp)){
+            this.temperaturePoint -= 25;
+            this.removePotionEffect(PotionExtend.heat_stroke.id);
+        }
+        this.BodyTemperature = 37.2F + (float) (0.000125D * (double) (this.temperaturePoint - 96000));
+        if(this.temperaturePoint < 84000){
+            this.removePotionEffect(PotionExtend.heat_stroke.id);
+            int freezeunit = 96000 - this.temperaturePoint;
+            int freezelevel = max(freezeunit/12000, 0);
+            if (freezelevel >= 4) {
+                ++FreezingWarning;
+                this.triggerAchievement(AchievementExtend.hypothermia);
             }
-            if(this.worldObj.getSavedLightValue(EnumSkyBlock.Block, this.getBlockPosX(), this.getBlockPosY() + 1, this.getBlockPosZ()) > 12 && this.temperaturePoint < Math.max(targetTemp, 104000)){
-                this.temperaturePoint += 25;
-                this.removePotionEffect(PotionExtend.freeze.id);
+            if (FreezingWarning > 500) {
+                this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 4.0F));
+                FreezingWarning = 0;
             }
-            if(this.isInWater() && this.temperaturePoint > Math.min(88000, targetTemp)){
-                this.temperaturePoint -= 25;
-                this.removePotionEffect(PotionExtend.heat_stroke.id);
+            this.addPotionEffect(new MobEffect(PotionExtend.freeze.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
+        }
+        if(this.temperaturePoint > 108000){
+            this.removePotionEffect(PotionExtend.freeze.id);
+            int heatunit = this.temperaturePoint - 96000;
+            int heatlevel = max(heatunit/12000, 0);
+            if (heatlevel >= 2) {
+                this.triggerAchievement(AchievementExtend.onburnt);
             }
-            this.BodyTemperature = 37.2F + (float) (0.000125D * (double) (this.temperaturePoint - 96000));
-            if(this.temperaturePoint < 84000){
-                this.removePotionEffect(PotionExtend.heat_stroke.id);
-                int freezeunit = 96000 - this.temperaturePoint;
-                int freezelevel = max(freezeunit/12000, 0);
-                if (freezelevel >= 4) {
-                    ++FreezingWarning;
-                    this.triggerAchievement(AchievementExtend.hypothermia);
-                }
-                if (FreezingWarning > 500) {
-                    this.attackEntityFrom(new Damage(DamageSourceExtend.freeze, 4.0F));
-                    FreezingWarning = 0;
-                }
-                this.addPotionEffect(new MobEffect(PotionExtend.freeze.id, freezeunit, this.isInRain() ? freezelevel : freezelevel - 1));
+            this.addPotionEffect(new MobEffect(PotionExtend.heat_stroke.id, heatunit, heatlevel - 1));
+        }
+    }
+    private void handleArroganceUpdate(){
+        if(this.UnderArrogance()){
+            this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
+        }
+    }
+    private void handleVisionDimmingUpdate(){
+        if(Minecraft.inDevMode() && this.vision_dimming > 0.1F && this.isPlayerInCreative()){
+            this.vision_dimming = 0.05F;
+        }
+        if(this.getHealth() < 5.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue){
+            this.vision_dimming = Math.max(this.vision_dimming,(1.0F - this.getHealthFraction()));
+        }
+    }
+    private void mendToolsUsingEnchantment(){
+        ItemStack holding = this.getHeldItemStack();
+        if(holding != null && willRepair(holding)){
+            if((float) holding.getRemainingDurability() / holding.getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * holding.getItem().getHardestMetalMaterial().getMinHarvestLevel()){
+                this.addExperience(-holding.getMaxDamage() / 32, false, true);
+                holding.setItemDamage(holding.getItemDamage() - holding.getMaxDamage() / 8);
             }
-            if(this.temperaturePoint > 108000){
-                this.removePotionEffect(PotionExtend.freeze.id);
-                int heatunit = this.temperaturePoint - 96000;
-                int heatlevel = max(heatunit/12000, 0);
-                if (heatlevel >= 2) {
-                    this.triggerAchievement(AchievementExtend.onburnt);
-                }
-                this.addPotionEffect(new MobEffect(PotionExtend.heat_stroke.id, heatunit, heatlevel - 1));
-            }
-            //调用喝酒翻倍计算时间
-            if(this.drunk_duration > 0){
-                drunk_duration--;
-            }
-            //低血量视觉黑暗（真实体验）
-            if(this.getHealth() < 5.0F && ExperimentalConfig.TagConfig.Realistic.ConfigValue){
-                this.vision_dimming = Math.max(this.vision_dimming,(1.0F - this.getHealthFraction()));
-            }
-            //傲慢惩罚
-            if(this.UnderArrogance()){
-                this.addPotionEffect(new MobEffect(MobEffectList.wither.id, 100, 1));
-            }
-            //实验性经验修补
-            ItemStack holding = this.getHeldItemStack();
-            if(holding != null && willRepair(holding)){
-                if((float) holding.getRemainingDurability() / holding.getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * holding.getItem().getHardestMetalMaterial().getMinHarvestLevel()){
-                    this.addExperience(-holding.getMaxDamage() / 32, false, true);
-                    holding.setItemDamage(holding.getItemDamage() - holding.getMaxDamage() / 8);
-                }
-            }
-            ItemStack[] item_stack_to_repair = this.getWornItems();
-            for(int n = 0;n < item_stack_to_repair.length;n++){
-                if(item_stack_to_repair[n] != null && willRepair(item_stack_to_repair[n])){
-                    if((float) item_stack_to_repair[n].getRemainingDurability() / item_stack_to_repair[n].getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * item_stack_to_repair[n].getItem().getHardestMetalMaterial().getMinHarvestLevel()){
-                        this.addExperience(-50, false, true);
-                        item_stack_to_repair[n].setItemDamage(item_stack_to_repair[n].getItemDamage() - 1);
-                    }
+        }
+        ItemStack[] item_stack_to_repair = this.getWornItems();
+        for(int n = 0;n < item_stack_to_repair.length;n++){
+            if(item_stack_to_repair[n] != null && willRepair(item_stack_to_repair[n])){
+                if((float) item_stack_to_repair[n].getRemainingDurability() / item_stack_to_repair[n].getMaxDamage() < 0.5F && this.getExperienceLevel() >= 10 + 15 * item_stack_to_repair[n].getItem().getHardestMetalMaterial().getMinHarvestLevel()){
+                    this.addExperience(-50, false, true);
+                    item_stack_to_repair[n].setItemDamage(item_stack_to_repair[n].getItemDamage() - 1);
                 }
             }
         }
-        //成就奖励
+    }
+    private void tryTriggerAchievement(){
         if(Feast_trigger_sorbet &&Feast_trigger_cereal &&Feast_trigger_chestnut_soup &&Feast_trigger_chicken_soup &&Feast_trigger_beef_stew &&Feast_trigger_cream_mushroom_soup &&Feast_trigger_cream_vegetable_soup &&Feast_trigger_ice_cream &&Feast_trigger_lemonade &&Feast_trigger_mashed_potatoes &&Feast_trigger_porkchop_stew &&Feast_trigger_salad &&Feast_trigger_pumpkin_soup &&Feast_trigger_porridge &&Feast_trigger_mushroom_soup &&Feast_trigger_vegetable_soup &&Feast_trigger_salmon_soup &&Feast_trigger_beetroot_soup &&!rewarded_disc_damnation){
             this.triggerAchievement(AchievementExtend.feast);
             this.addExperience(2500);
@@ -701,108 +710,26 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             worldObj.spawnEntityInWorld(RewardingRecord);
             RewardingRecord.entityFX(EnumEntityFX.summoned);
         }
-
-        //幻听
-//        if(StuckTagConfig.TagConfig.TagAcousma.ConfigValue){
-//            if(this.worldObj.isOverworld()){
-//                if(this.ticksExisted % 600 == this.rand.nextInt(8)){
-//                    boolean temp = false;
-//                    if(this.rand.nextInt(4) == 0){
-//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 2;
-//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
-//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 2;
-//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-//                        temp = true;
-//                    }
-//                    if(this.rand.nextInt(8) == 0 && this.posY < 40){
-//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
-//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        for(int i = 0;i < (this.rand.nextInt(3) + 2);){
-//                            if(this.ticksExisted % 20 == 4) {
-//                                i++;
-//                                x_offset += Math.sin(this.rotationYaw) * this.rand.nextDouble() * 4 - 2;
-//                                y_offset += this.rand.nextDouble() * 1.5 - 0.75;
-//                                z_offset += - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 4 - 2;
-//                                this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"mob.endermen.portal", 1.0F, 1.0F);
-//                            }
-//                        }
-//                    }
-//                    if(this.rand.nextInt(64) == 0 && !temp){
-//                        this.playSound("mob.endermen.stare", 1.0F, 1.0F);
-//                    }
-//                }
-//            } else if(this.worldObj.isUnderworld()){
-//                if(this.ticksExisted % 400 == this.rand.nextInt(8)){
-//                    boolean temp = false;
-//                    if(this.rand.nextInt(4) == 0 && this.posY > 120){
-//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 2;
-//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
-//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 2;
-//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
-//                        temp = true;
-//                    }
-//                    if(this.rand.nextInt(8) == 0 && this.posY < 40){
-//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
-//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"liquid.lavapop", 0.2F + rand.nextFloat() * 0.2F, 0.9F + rand.nextFloat() * 0.15F);
-//                    }
-//                    if(this.rand.nextInt(64) == 0 && this.posY > 120 && !temp){
-//                         this.playSound("mob.endermen.stare", 1.0F, 1.0F);
-//                    }
-//                }
-//            } else{
-//                if(this.ticksExisted % 400 == this.rand.nextInt(4)){
-//                    boolean temp = false;
-//                    if(this.rand.nextInt(8) == 0){
-//                        temp = true;
-//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
-//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"imported.mob.invisiblestalker.say", 1.25F, 1.0F);
-//                    }
-//                    if(this.rand.nextInt(8) == 0 && !temp){
-//                        double x_offset = - Math.sin(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        double y_offset = - this.rand.nextDouble() * 1.5 + 3;
-//                        double z_offset = - Math.cos(this.rotationYaw) * this.rand.nextDouble() * 8;
-//                        this.worldObj.playSoundEffect(this.posX + x_offset,this.posY + y_offset,this.posZ + z_offset,"mob.zombiepig.zpigangry", 1.25F, 1.0F);
-//                    }
-//                }
-//            }
-//        }
-
-        //实验性动态光源
-//        if(this.getHeldItemStack()!=null && this.getHeldItem() instanceof ItemBlock && Block.lightValue[this.getHeldItem().getAsItemBlock().getBlock().blockID] > 0.0F){
-//            if(this.lightTick < 20){
-//                this.lightTick ++;
-//            }
-//        }else {
-//            if(this.lightTick > 0){
-//                this.lightTick --;
-//            }
-//        }
-//        if(this.lightTick == 20){
-//            if((this.worldObj.getBlock(this.getBlockPosX(), this.getEyeBlockPosY(), this.getBlockPosZ()) == null || this.worldObj.getBlock(this.getBlockPosX(), this.getEyeBlockPosY(), this.getBlockPosZ()) == Blocks.invisibleLight) && this.onGround){
-//                this.worldObj.setBlock(this.getBlockPosX(), this.getEyeBlockPosY(), this.getBlockPosZ(), Blocks.invisibleLight.blockID);
-//            }
-//        }else if(this.lightTick == 0){
-//
-//        }else {
-//            for(int dx = -2; dx <= 2; dx++){
-//                for(int dy = -2; dy <= 2; dy++){
-//                    for(int dz = -2; dz <= 2; dz++){
-//                        if(this.worldObj.getBlock(this.getBlockPosX() + dx, this.getEyeBlockPosY() + dy, this.getBlockPosZ() + dz) == Blocks.invisibleLight){
-//                            this.worldObj.setBlockToAir(this.getBlockPosX() + dx, this.getEyeBlockPosY() + dy, this.getBlockPosZ() + dz);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        //冲锋
-//        if(this.isForwarding()){
-//            List <Entity>targets = this.getNearbyEntities(4.0F, 4.0F);
-//        }
+    }
+    @Inject(method = "onLivingUpdate",
+            at = @At(value = "INVOKE",
+                    target = "Lnet/minecraft/EntityLiving;onLivingUpdate()V",
+                    shift = At.Shift.AFTER))
+    private void injectTick(CallbackInfo c){
+        if (!this.worldObj.isRemote) {
+            this.detectNearbyMobs(this.getDetectorMaterial());
+            this.produceManure();
+            this.triggeringCurseExtend();
+            this.tryEnableSacrificing();
+            this.tryDrinkWater();
+            this.handleDecreaseWater();
+            this.handleDecreaseDrunkDuration();
+            this.handleModifyBodyTemperature();
+            this.handleVisionDimmingUpdate();
+            this.handleArroganceUpdate();
+            this.mendToolsUsingEnchantment();
+        }
+        this.tryTriggerAchievement();
     }
 
     public int getFreezingCooldown() {
@@ -838,59 +765,6 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
     }
     @Shadow
     public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {}
-//    @Overwrite
-//    public void addExperience(int amount, boolean suppress_healing, boolean suppress_sound) {
-//        suppress_healing = true;
-//        if (amount < 0) {
-//            if (!suppress_sound) {
-//                this.worldObj.playSoundAtEntity(this, "imported.random.level_drain");
-//            }
-//        } else if (amount > 0) {
-//            this.addScore(amount);
-//            if (!suppress_sound) {
-//                this.worldObj.playSoundAtEntity(this, "random.orb", 0.1F, 0.5F * ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.8F));
-//            }
-//
-//        }
-//        float health_limit_before = this.getHealthLimit();
-//        int level_before = this.getExperienceLevel();
-//        this.experience += amount;
-//        if (this.experience < getExperienceRequired(-40)) {
-//            this.experience = getExperienceRequired(-40);
-//        }
-//
-//        int level_after = this.getExperienceLevel();
-//        int level_change = level_after - level_before;
-//        if (level_change < 0) {
-//            this.setHealth(this.getHealth());
-//            this.foodStats.setSatiation(this.foodStats.getSatiation(), true);
-//            this.foodStats.setNutrition(this.foodStats.getNutrition(), true);
-//            this.addWater(0);
-//        } else if (level_change > 0) {
-//            if (this.getHealthLimit() > health_limit_before && (float)this.field_82249_h < (float)this.ticksExisted - 100.0F) {
-//                float volume = level_after > 30 ? 1.0F : (float)level_after / 30.0F;
-//                if (!suppress_sound) {
-//                    this.worldObj.playSoundAtEntity(this, "random.levelup", volume * 0.75F, 1.0F);
-//                }
-//
-//                this.field_82249_h = this.ticksExisted;
-//            }
-//
-//            if (!suppress_healing) {
-//                this.setHealth(this.getHealth() + this.getHealthLimit() - health_limit_before);
-//            }
-//        }
-//
-//        if (level_change != 0 && !this.worldObj.isRemote) {
-//            MinecraftServer.a(MinecraftServer.F()).sendPlayerInfoToAllPlayers(true);
-//        }
-//
-//        if (this.getAsPlayer() instanceof ServerPlayer && DedicatedServer.tournament_type == EnumTournamentType.score) {
-//            DedicatedServer.getOrCreateTournamentStanding(this.getAsPlayer()).experience = this.experience;
-//            DedicatedServer.updateTournamentScoreOnClient(this.getAsPlayer(), true);
-//        }
-//
-//    }
     public FoodMetaData getFoodStats(){
     return foodStats;
 }
@@ -900,30 +774,6 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
 
     public void displayGUIEnchantReserver(int x, int y, int z, EnchantReserverSlots slots) {
     }
-//    @Overwrite
-//    public EnumQuality getMaxCraftingQuality(float unadjusted_crafting_difficulty_to_produce, Item item, int[] applicable_skillsets) {
-//        if (!this.worldObj.areSkillsEnabled()) {
-//            applicable_skillsets = null;
-//        }
-//
-//        if (this.experience <= 0) {
-//            return this.getMinCraftingQuality(item, applicable_skillsets);
-//        } else if (applicable_skillsets != null && !this.hasAnyOfTheseSkillsets(applicable_skillsets)) {
-//            return this.getMinCraftingQuality(item, applicable_skillsets);
-//        } else {
-//            if (item.getLowestCraftingDifficultyToProduce() == Float.MAX_VALUE) {
-//                Minecraft.setErrorMessage("getMaxCraftingQuality: item has no recipes! " + item.getItemDisplayName((ItemStack)null));
-//            }
-//
-//            for(int i = item.getMaxQuality().ordinal(); i > EnumQuality.average.ordinal(); --i) {
-//                if (this.getCraftingExperienceCost(CraftingResult.getQualityAdjustedDifficulty(unadjusted_crafting_difficulty_to_produce, EnumQuality.values()[i])) <= this.experience) {
-//                    return EnumQuality.values()[i];
-//                }
-//            }
-//
-//            return this.getMinCraftingQuality(item, applicable_skillsets);
-//        }
-//    }
 
     @Overwrite
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
@@ -1012,7 +862,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         boolean wearing_full_suit_plate = true;
         boolean wearing_full_suit_adamantium_plate = true;
         boolean wearing_full_suit_wolf_fur = true;
-
+        boolean wearing_full_suit_hellhound_fur = true;
         for(int i = 0; i < 4; ++i) {
             if (this.inventory.armorInventory[i] != null && this.inventory.armorInventory[i].getItem() instanceof ItemArmor) {
                 ItemArmor armor = (ItemArmor)this.inventory.armorInventory[i].getItem();
@@ -1029,11 +879,16 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
                     wearing_full_suit_adamantium_plate = false;
                 }
 
-                if (material != Materials.wolf_fur) {
+                if (material != Materials.wolf_fur || !armor.isChainMail()) {
                     wearing_full_suit_wolf_fur = false;
                 }
 
+                if (material != Materials.wolf_fur || armor.isChainMail()) {
+                    wearing_full_suit_hellhound_fur = false;
+                }
+
             } else {
+                wearing_full_suit_hellhound_fur = false;
                 wearing_full_suit_plate = false;
                 wearing_full_suit_adamantium_plate = false;
                 wearing_full_suit_wolf_fur = false;
@@ -1056,6 +911,9 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
             this.triggerAchievement(AchievementExtend.BravetheCold);
         }
 
+        if (wearing_full_suit_hellhound_fur) {
+            this.triggerAchievement(AchievementExtend.mindCools);
+        }
     }
     public float getNickelArmorCoverage()
     {

@@ -41,6 +41,8 @@ achievement.Decimator=Decimator
 achievement.Decimator.desc=Nothing can stop u now.
 achievement.OnBurnt=Sauna Time
 achievement.OnBurnt.desc=Any fireproof please?
+achievement.WearAllHellhoundArmor=Cerberus
+achievement.WearAllHellhoundArmor.desc=And beat heat.
 
 curse.fearOfDarkness.name=Fear of Darkness
 curse.fearOfDarkness.desc=The darkness keeps you from moving.
@@ -71,6 +73,11 @@ item.armor/wolf_helmet.name=Wolf Boarder Helmet
 item.armor/wolf_jacket.name=Wolf Boarder Coat
 item.armor/wolf_leggings.name=Wolf Boarder Leggings
 item.armor/wolf_boots.name=Wolf Boarder Boots
+
+item.armor/hellhound_helmet.name=Nether Helmet
+item.armor/hellhound_jacket.name=Nether Coat
+item.armor/hellhound_leggings.name=Nether Leggings
+item.armor/hellhound_boots.name=Nether Boots
 
 enchantment.vanishing=Curse Of Vanishing
 enchantment.melting=Melting
@@ -346,6 +353,7 @@ item.experimental_potion.name=Experimental Potion
 item.suspicious_potion.name=Natural Water Bottle
 
 item.wolf_fur.name=Wolf Fur
+item.wolf_fur_hellhound.name=Hellhound Fur
 item.ancient_metal_armor_piece.name=Gilding Ancient Metal Armor Piece
 
 item.arrows/magical_arrow.name=Magical Arrow

@@ -62,6 +62,17 @@ public class BlockEnchantReserver extends Block implements IContainer {
         super.breakBlock(world, x, y, z, block_id, metadata);
         TileEntityEnchantReserver tileEntityEnchantReserver = (TileEntityEnchantReserver) world.getBlockTileEntity(x, y, z);
         tileEntityEnchantReserver.dropAllItems();
+        int var1;
+        EntityExperienceOrb var3;
+        if (!tileEntityEnchantReserver.getWorldObj().isRemote)
+        {
+            for (var1 = Math.max(tileEntityEnchantReserver.getEXP(), 0) ; var1 > 0; tileEntityEnchantReserver.getWorldObj().spawnEntityInWorld(var3))
+            {
+                int var2 = EntityExperienceOrb.getXPSplit(var1);
+                var1 -= var2;
+                var3 = new EntityExperienceOrb(tileEntityEnchantReserver.getWorldObj(), x, y + 0.5D, z, var2);
+            }
+        }
         world.removeBlockTileEntity(x, y, z);
     }
 

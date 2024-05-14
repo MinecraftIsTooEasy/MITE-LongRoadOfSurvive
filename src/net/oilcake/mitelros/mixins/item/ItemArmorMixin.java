@@ -44,7 +44,10 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
         int protection = callbackInfo.getReturnValue();
         if(protection == 0){
             if(this.effective_material == Materials.wolf_fur){
-                protection = 3;
+                protection = 7;
+                if (this.is_chain_mail) {
+                    protection -= 2;
+                }
             } else if(this.effective_material == Materials.vibranium){
                 protection = 6;
             } else if (this.effective_material == Materials.nickel){

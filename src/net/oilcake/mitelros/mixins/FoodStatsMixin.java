@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins;
 
 import net.minecraft.*;
+import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.DamageSourceExtend;
 import net.oilcake.mitelros.network.PacketDecreaseWater;
 import org.spongepowered.asm.mixin.Mixin;
@@ -52,6 +53,9 @@ public class FoodStatsMixin {
     @Inject(method = "addFoodValue", at = @At("HEAD"))
     public void injectaddFoodValue(Item item, CallbackInfo callbackInfo) {
         this.addWater(item.getWater());
+        if(item.getWater() > 0){
+            this.player.removePotionEffect(PotionExtend.thirsty.id);
+        }
     }
 
 

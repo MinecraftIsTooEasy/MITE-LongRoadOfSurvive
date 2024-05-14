@@ -41,6 +41,8 @@ achievement.Decimator=降频数位滤波器
 achievement.Decimator.desc=熔岩、虚空、雷击、魔法
 achievement.OnBurnt=红温
 achievement.OnBurnt.desc=我需要冷却液！重复一遍！我需要冷却液！
+achievement.WearAllHellhoundArmor=三头犬
+achievement.WearAllHellhoundArmor.desc=之后抵御酷热
 
 curse.fearOfDarkness.name=黑暗恐惧
 curse.fearOfDarkness.desc=你在黑暗中只能摸索前进
@@ -71,6 +73,11 @@ item.armor/wolf_helmet.name=极地皮盔
 item.armor/wolf_jacket.name=极地皮甲
 item.armor/wolf_leggings.name=极地护腿
 item.armor/wolf_boots.name=极地皮靴
+
+item.armor/hellhound_helmet.name=下界皮盔
+item.armor/hellhound_jacket.name=下界皮甲
+item.armor/hellhound_leggings.name=下界护腿
+item.armor/hellhound_boots.name=下界皮靴
 
 enchantment.vanishing=消失诅咒
 enchantment.melting=熔毁
@@ -346,6 +353,7 @@ item.experimental_potion.name=实验的药水
 item.suspicious_potion.name=自然水瓶
 
 item.wolf_fur.name=狼的毛皮
+item.wolf_fur_hellhound.name=地狱犬的毛皮
 item.ancient_metal_armor_piece.name=镶金远古金属铠甲残片
 
 itemarrow.tooltip.disable=因为技术原因被禁用

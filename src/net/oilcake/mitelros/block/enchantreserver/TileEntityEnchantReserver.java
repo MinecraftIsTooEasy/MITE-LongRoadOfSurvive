@@ -79,32 +79,14 @@ public class TileEntityEnchantReserver extends TileEntity implements IWorldInven
             }
             ItemStack inputStack = this.slots.getInPutStack();
             if (inputStack != null) {
-//                if (inputStack.itemID == Item.diamond.itemID || inputStack.itemID == Item.dyePowder.itemID && inputStack.getItemSubtype() == 4 ||
-//                        inputStack.itemID == Item.emerald.itemID || inputStack.itemID == Item.netherQuartz.itemID) {
-//                    if (this.getEXP() < this.getMAXEXP()) {
-//                        int size = inputStack.stackSize;
-//                        this.EXP += ItemRock.getExperienceValueWhenSacrificed(inputStack) * size;
-//                        this.slots.getInPut().putStack(null);
-//                        this.slots.updateInfo();
-//                    }
-//                }
-                if (inputStack.itemID == Item.diamond.itemID && inputStack.stackSize * 500 + this.getEXP() <= this.getMAXEXP()){
+                Item rock = inputStack.getItem();
+                if(rock instanceof ItemRock){
                     int size = inputStack.stackSize;
-                        this.EXP += 500 * size;
+                    int experience = ItemRock.getExperienceValueWhenSacrificed(inputStack);
+                    if(inputStack.stackSize * experience + this.getEXP() <= this.getMAXEXP()){
+                        this.EXP += size * experience;
                         this.slots.getInPut().putStack(null);
-                } else if (inputStack.itemID == Item.emerald.itemID && inputStack.stackSize * 250 + this.getEXP() <= this.getMAXEXP()){
-                    int size = inputStack.stackSize;
-                    this.EXP += 250 * size;
-                    this.slots.getInPut().putStack(null);
-                } else if (inputStack.itemID == Item.netherQuartz.itemID && inputStack.stackSize * 50 + this.getEXP() <= this.getMAXEXP()){
-                    int size = inputStack.stackSize;
-                    this.EXP += 50 * size;
-                    this.slots.getInPut().putStack(null);
-                }
-                else if (inputStack.itemID == Items.lapis.itemID && inputStack.stackSize * 25 + this.getEXP() <= this.getMAXEXP()){
-                    int size = inputStack.stackSize;
-                    this.EXP += 25 * size;
-                    this.slots.getInPut().putStack(null);
+                    }
                 }
             }
 

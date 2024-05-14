@@ -28,7 +28,7 @@ public class AchievementExtend {
     public static Achievement lichHunter;
     public static Achievement decimator;
     public static Achievement onburnt;
-
+    public static Achievement mindCools;
     public AchievementExtend() {
     }
 
@@ -54,7 +54,7 @@ public class AchievementExtend {
         cheatdeath = (new Achievement(getNextAchievementID(),"DeathCheater",-3,14,Items.totemoffecund,AchievementList.potion)).registerAchievement();
         pull = (new Achievement(getNextAchievementID(),"Pull",-3,-5,Item.manure,AchievementExtend.mashedCactus)).registerAchievement();
         onburnt = (new Achievement(getNextAchievementID(), "OnBurnt", -6, 2, Item.blazePowder,AchievementExtend.hypothermia)).registerAchievement();
-
+        mindCools = (new Achievement(getNextAchievementID(), "WearAllHellhoundArmor", 13, -3, Items.HellhoundHelmet, AchievementExtend.BravetheCold)).registerAchievement();
     }
 
     private static int getNextAchievementID() {

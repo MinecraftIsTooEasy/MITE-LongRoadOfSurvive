@@ -29,7 +29,7 @@ public class EnumEquipmentMaterials {
     public static final EnumEquipmentMaterial nickel = newEnumEquipmentMaterial(8.0F, 30,EnumQuality.masterwork, "nickel");
     public static final EnumEquipmentMaterial tungsten = newEnumEquipmentMaterial(128.0F,50,EnumQuality.legendary,"tungsten");
     public static final EnumEquipmentMaterial uru = newEnumEquipmentMaterial(192.0F,100,EnumQuality.legendary,"uru");
-    public static final EnumEquipmentMaterial wolf_fur = newEnumEquipmentMaterial(2.0F,20,EnumQuality.excellent,"wolf_fur");
+    public static final EnumEquipmentMaterial wolf_fur = newEnumEquipmentMaterial(4.0F,20,EnumQuality.excellent,"wolf_fur");
     public static final EnumEquipmentMaterial custom_a = newEnumEquipmentMaterial(0.0625F,0,EnumQuality.average,"custom_a");
     public static final EnumEquipmentMaterial custom_b = newEnumEquipmentMaterial(0.0625F,0,EnumQuality.average,"custom_b");
     public static final EnumEquipmentMaterial vibranium = newEnumEquipmentMaterial(4.0F,0,EnumQuality.poor,"vibranium");

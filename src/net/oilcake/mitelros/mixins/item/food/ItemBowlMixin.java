@@ -92,6 +92,10 @@ public class ItemBowlMixin extends ItemVessel {
                 }
                 if(this.contains(Material.ice_cream)){
                     player.Feast_trigger_ice_cream = true;
+                    player.modifyTemperature(-8000);
+                    if(player.isPotionActive(PotionExtend.freeze)){
+                        player.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, (int) (360 * (1 + player.getRand().nextDouble())),0));
+                    }
                 }
                 if(this.contains(Materials.lemonade)){
                     player.Feast_trigger_lemonade = true;
@@ -119,6 +123,10 @@ public class ItemBowlMixin extends ItemVessel {
                 }
                 if(this.contains(Material.sorbet)){
                     player.Feast_trigger_sorbet = true;
+                    player.modifyTemperature(-8000);
+                    if(player.isPotionActive(PotionExtend.freeze)){
+                        player.addPotionEffect(new MobEffect(PotionExtend.dehydration.id, (int) (360 * (1 + player.getRand().nextDouble())),0));
+                    }
                 }
                 if(this.contains(Material.salad)){
                     player.Feast_trigger_salad = true;
