@@ -58,7 +58,11 @@ public class RecipesFurnaceMixin {
                 }else {
                     result_item_stack = (ItemStack)this.smeltingList.get(input_item_id);
                 }
-
+                if(input_item_stack.getItem().isDamageable()){
+                    if (result_item_stack != null) {
+                        result_item_stack.setItemDamage(input_item_stack.getItemDamage());
+                    }
+                }
                 return heat_level < TileEntityFurnace.getHeatLevelRequired(input_item_stack.itemID) ? null : result_item_stack;
             }
         }

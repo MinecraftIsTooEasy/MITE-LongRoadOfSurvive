@@ -325,6 +325,15 @@ item.totem/totem_of_hunting.name=巡猎图腾
 item.wither_branch.name=凋零残叶
 item.sulphur_sphere.name=硫磺
 
+item.leather_kettle.name=皮制水壶
+item.leather_kettle_sus.name=装有可疑的水的皮制水壶
+item.leather_kettle_danger.name=装有沼泽水的皮制水壶
+
+item.clay_jug.name=黏土罐
+item.hardened_clay_jug.name=陶罐
+item.hardened_clay_jug_sus.name=装有可疑的水的陶罐
+item.hardened_clay_jug_danger.name=装有沼泽水的陶罐
+
 item.ignition/wood.name=引火器
 item.ignition/copper.name=铜打火石
 item.ignition/silver.name=银打火石

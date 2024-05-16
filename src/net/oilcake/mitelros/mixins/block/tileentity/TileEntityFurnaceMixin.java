@@ -154,7 +154,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements IWorldInventor
                             this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.sizzle");
                         }
                         //烧水提示
-                        if(this.getInputItemStack()!= null && this.getOutputItemStack().getItem() == Item.bowlWater || this.getOutputItemStack().getItem() == Items.claybowlWater){
+                        if(this.getInputItemStack()!= null && this.getOutputItemStack().getItem().hasMaterial(Materials.dangerous_water, Materials.unsafe_water, Material.water)){
                             this.worldObj.playSoundEffect((double)((float)this.xCoord + 0.5F), (double)((float)this.yCoord + 0.5F), (double)((float)this.zCoord + 0.5F), "imported.random.boil");
                         }
                         var2 = true;

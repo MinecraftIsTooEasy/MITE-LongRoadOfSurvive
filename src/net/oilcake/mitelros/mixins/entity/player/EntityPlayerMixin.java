@@ -629,7 +629,7 @@ public abstract class EntityPlayerMixin extends EntityLiving implements ICommand
         if(this.isInFire()){
             this.temperaturePoint += 100;
         }
-        if(this.worldObj.getSavedLightValue(EnumSkyBlock.Block, this.getBlockPosX(), this.getBlockPosY() + 1, this.getBlockPosZ()) > 12 && this.temperaturePoint < Math.max(targetTemp, 104000)){
+        if(this.worldObj.getSavedLightValue(EnumSkyBlock.Block, this.getBlockPosX(), this.getBlockPosY() + 1, this.getBlockPosZ()) >= 14 && this.temperaturePoint < Math.max(targetTemp, 104000)){
             this.temperaturePoint += 25;
             this.removePotionEffect(PotionExtend.freeze.id);
         }

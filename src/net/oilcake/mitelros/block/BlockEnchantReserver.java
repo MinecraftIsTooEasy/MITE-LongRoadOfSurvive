@@ -66,7 +66,7 @@ public class BlockEnchantReserver extends Block implements IContainer {
         EntityExperienceOrb var3;
         if (!tileEntityEnchantReserver.getWorldObj().isRemote)
         {
-            for (var1 = Math.max(tileEntityEnchantReserver.getEXP(), 0) ; var1 > 0; tileEntityEnchantReserver.getWorldObj().spawnEntityInWorld(var3))
+            for (var1 = Math.max(tileEntityEnchantReserver.getEXP() - 2000, 0) ; var1 > 0; tileEntityEnchantReserver.getWorldObj().spawnEntityInWorld(var3))
             {
                 int var2 = EntityExperienceOrb.getXPSplit(var1);
                 var1 -= var2;

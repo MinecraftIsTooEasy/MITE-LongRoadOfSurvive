@@ -325,6 +325,15 @@ item.totem/totem_of_hunting.name=Totem of The Hunt
 item.wither_branch.name=Wither Branch
 item.sulphur_sphere.name=Sulphur
 
+item.leather_kettle.name=Leather Kettle
+item.leather_kettle_sus.name=Leather Kettle Of Suspicious Water
+item.leather_kettle_danger.name=Leather Kettle Of Swampland Water
+
+item.clay_jug.name=Clay Jug
+item.hardened_clay_jug.name=Hardened Clay Jug
+item.hardened_clay_jug_sus.name=Hardened Clay Jug Of Suspicious Water
+item.hardened_clay_jug_danger.name=Hardened Clay Jug Of Swampland Water
+
 item.ignition/wood.name=Ignition
 item.ignition/copper.name=Copper Fire Starter
 item.ignition/silver.name=Silver Fire Starter

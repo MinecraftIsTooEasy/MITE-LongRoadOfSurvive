@@ -118,7 +118,7 @@ public class Items extends Item {
     public static final ItemGoldenApple Goldenapple = (ItemGoldenApple) (new ItemGoldenApple(66, 2, 1, "VANILLA")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 0, 1.0F).setUnlocalizedName("appleGold").useVanillaTexture("apple_golden")/*.setPotionEffectC("+0+1+2-3+13&4-4")*/;
     public static final Item Goldenapplelegend = (ItemGoldenAppleLegend)(new ItemGoldenAppleLegend(Constant.getNextItemID(),2,1, "goldapple")).setAlwaysEdible().setPotionEffect(MobEffectList.regeneration.id, 30, 4, 1.0F).setUnlocalizedName("wtfk").useVanillaTexture("apple_golden_legend");
     public static final ItemBowl bowlLemonade = (ItemBowl)new ItemBowl(Constant.getNextItemID(), Materials.lemonade,"lemonade").setFoodValue(4, 1, false, true, true).setPlantProduct().setUnlocalizedName("lemonade");
-    public static final ItemBowl bowlEmpty = (ItemBowl)(new ItemBowl(25, (Material)null, "VANILLA")).setUnlocalizedName("bowl").useVanillaTexture("bowl").setMaxStackSize(4);
+    public static final ItemBowl bowlEmpty = (ItemBowl)(new ItemBowl(25, (Material)null, "VANILLA")).setUnlocalizedName("bowl").useVanillaTexture("bowl").setMaxStackSize(8);
     public static final ItemMorningStar morningStarCopper = new ItemMorningStar(Constant.getNextItemID(), Material.copper);
     public static final ItemMorningStar morningStarSilver = new ItemMorningStar(Constant.getNextItemID(), Material.silver);
     public static final ItemMorningStar morningStarGold = new ItemMorningStar(Constant.getNextItemID(), Material.gold);
@@ -174,7 +174,7 @@ public class Items extends Item {
     public static final ItemBowl bowlSalmonSoup = (ItemBowl)(new ItemBowl(Constant.getNextItemID(), Materials.fish_soup, "salmon_soup")).setFoodValue(14, 14, true, true, true).setPlantProduct().setAnimalProduct().setUnlocalizedName("salmonSoup");
     public static final ItemBowl bowlBeetrootSoup = (ItemBowl) (new ItemBowl(Constant.getNextItemID(), Materials.beetroot, "beetroot_soup")).setFoodValue(15,6,6000,false,true,true).setPlantProduct().setAnimalProduct().setUnlocalizedName("beetrootSoup");
     public static final ItemStandard claybowlRaw = (ItemStandard) new ItemStandard(Constant.getNextItemID(),Material.clay,"bowlclayRaw").setMaxStackSize(4);
-    public static final ItemBowlClay claybowlEmpty = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), null, "VANILLA")).setUnlocalizedName("bowlclay").useVanillaTexture("bowlclay").setMaxStackSize(4);
+    public static final ItemBowlClay claybowlEmpty = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), null, "VANILLA")).setUnlocalizedName("bowlclay").useVanillaTexture("bowlclay").setMaxStackSize(8);
     public static final ItemBowlClay claybowlMushroomStew = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.mushroom_stew, "mushroom_stew")).setFoodValue(2, 4, false, false, false).setPlantProduct().setUnlocalizedName("mushroomStew");
     public static final ItemBowlClay claybowlMilk = (ItemBowlClay)(new ItemBowlClay(Constant.getNextItemID(), Material.milk, "bowl_milk")).setFoodValue(0, 1, true, false, false).setAnimalProduct().setContainerItem(claybowlEmpty).setAlwaysEdible().setUnlocalizedName("bowlMilk");
     public static final ItemBowlClay claybowlWater = (ItemBowlClay) (new ItemBowlClay(Constant.getNextItemID(), Material.water, "bowl_water")).setContainerItem(claybowlEmpty).setUnlocalizedName("bowlWater");
@@ -234,6 +234,14 @@ public class Items extends Item {
     public static final ItemArmor HellhoundChestplate = new ItemCuirass(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor HellhoundLeggings = new ItemLeggings(Constant.getNextItemID(),Materials.wolf_fur,false);
     public static final ItemArmor HellhoundBoots = new ItemBoots(Constant.getNextItemID(),Materials.wolf_fur,false);
+    public static final ItemKettle leatherKettle = (ItemKettle) new ItemKettle(Constant.getNextItemID(), 13, Material.water, Material.leather).setUnlocalizedName("leather_kettle");
+    public static final ItemKettle leatherKettleSuspicious = (ItemKettle) new ItemKettle(Constant.getNextItemID(), 13, Materials.unsafe_water, Material.leather).setUnlocalizedName("leather_kettle_sus");
+    public static final ItemKettle leatherKettleSwampland = (ItemKettle) new ItemKettle(Constant.getNextItemID(), 13, Materials.dangerous_water, Material.leather).setUnlocalizedName("leather_kettle_danger");
+    public static final ItemStandard clayJug = (ItemStandard) new ItemStandard(Constant.getNextItemID(),Material.clay,"clayJug").setMaxStackSize(1);
+    public static final ItemKettle hardenedClayJug = (ItemKettle) new ItemKettle(Constant.getNextItemID(), 19, Material.water, Material.hardened_clay).setUnlocalizedName("hardened_clay_jug");
+    public static final ItemKettle hardenedClayJugSuspicious = (ItemKettle) new ItemKettle(Constant.getNextItemID(), 19, Materials.unsafe_water, Material.hardened_clay).setUnlocalizedName("hardened_clay_jug_sus");
+    public static final ItemKettle hardenedClayJugSwampland = (ItemKettle) new ItemKettle(Constant.getNextItemID(), 19, Materials.dangerous_water, Material.hardened_clay).setUnlocalizedName("hardened_clay_jug_danger");
+
     //    public static PotionBrewer potionBrewer;
 //    public static final Item test = (ItemPieces) new ItemPieces(Constant.getNextItemID(), Materials.orePieces, "pieceTungsten1").setPotionEffectC(potionBrewer.getAttackEffect());
 
@@ -461,6 +469,7 @@ public class Items extends Item {
         register("armor/hellhound_jacket", HellhoundChestplate);
         register("armor/hellhound_leggings", HellhoundLeggings);
         register("armor/hellhound_boots", HellhoundBoots);
+        register("clay_jug",clayJug);
         Constant.initItemArray();
     }
     public static void registerBasicToolRecipes(RecipeRegister register,Material material){
@@ -586,6 +595,13 @@ public class Items extends Item {
                     'C',item_nugget,
                     'F',flint
             );
+            register.registerShapedRecipe(new ItemStack(leatherKettle, 1).setItemDamage(leatherKettle.getMaxDamage() - 1), false,
+                    "#N",
+                    "JL",
+                    'J', Item.sinew,
+                    '#', Item.silk,
+                    'N', item_nugget,
+                    'L', Item.leather).resetDifficulty(2000);
         }
 
     }
@@ -673,7 +689,11 @@ public class Items extends Item {
             register.registerShapelessRecipe(new ItemStack(Item.stick,1),true,
                     new ItemStack(Blocks.torchWoodIdle,i),new ItemStack(Blocks.torchWoodExtinguished, 4 - i));
         }
-
+        register.registerShapedRecipe(new ItemStack(clayJug, 1), true,
+                " C ",
+                "C C",
+                " C ",
+                'C', clay);
         register.registerShapedRecipe(new ItemStack(bowTungsten, 1), true,
                 "#C ",
                 "#EC",
@@ -1028,7 +1048,11 @@ public class Items extends Item {
         RecipesFurnace.smelting().addSmelting(SuspiciousPotion.itemID, new ItemStack(potion,1,0));
         RecipesFurnace.smelting().addSmelting(horse_meat.itemID, new ItemStack(horse_meat_cooked));
         RecipesFurnace.smelting().addSmelting(claybowlRaw.itemID, new ItemStack(claybowlEmpty));
-
+        RecipesFurnace.smelting().addSmelting(leatherKettleSuspicious.itemID, new ItemStack(leatherKettle));
+        RecipesFurnace.smelting().addSmelting(leatherKettleSwampland.itemID, new ItemStack(leatherKettle));
+        RecipesFurnace.smelting().addSmelting(hardenedClayJugSuspicious.itemID, new ItemStack(hardenedClayJug));
+        RecipesFurnace.smelting().addSmelting(hardenedClayJugSwampland.itemID, new ItemStack(hardenedClayJug));
+        RecipesFurnace.smelting().addSmelting(clayJug.itemID, new ItemStack(hardenedClayJug).setItemDamage(hardenedClayJug.getMaxDamage() - 1));
         Class[] tools = new Class[]{ItemSword.class, ItemAxe.class,ItemPickaxe.class,ItemHoe.class, ItemShovel.class, ItemWarHammer.class, ItemBattleAxe.class, ItemScythe.class, ItemDagger.class, ItemKnife.class, ItemMorningStar.class, ItemHatchet.class, ItemShears.class, ItemMattock.class};
         Class[] armors = new Class[]{ItemHelmet.class, ItemBoots.class, ItemLeggings.class, ItemCuirass.class};
         Material[] available_material = new Material[]{Material.copper, Material.silver, Material.gold, Material.iron, Materials.nickel, Materials.tungsten, Material.ancient_metal, Material.rusted_iron};

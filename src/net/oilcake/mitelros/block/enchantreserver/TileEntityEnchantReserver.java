@@ -80,7 +80,7 @@ public class TileEntityEnchantReserver extends TileEntity implements IWorldInven
             ItemStack inputStack = this.slots.getInPutStack();
             if (inputStack != null) {
                 Item rock = inputStack.getItem();
-                if(rock instanceof ItemRock){
+                if(rock instanceof ItemRock && !(rock instanceof ItemShard)){
                     int size = inputStack.stackSize;
                     int experience = ItemRock.getExperienceValueWhenSacrificed(inputStack);
                     if(inputStack.stackSize * experience + this.getEXP() <= this.getMAXEXP()){

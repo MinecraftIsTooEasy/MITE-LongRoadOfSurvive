@@ -57,7 +57,7 @@ public class Blocks extends Block {
     public static final Block beetroots = new BlockBeetroots(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
     public static final Block beetrootsDead = new BlockBeetrootsDead(Constant.getNextBlockID()).setUnlocalizedName("beetroot");
     public static final Block flowerPotExtend = new BlockFlowerPotExtend(Constant.getNextBlockID()).setBlockHardness(0.0F).setStepSound_(soundPowderFootstep).setUnlocalizedName("flowerPot");
-    public static final Block blockAzurite = new BlockGrowableOre(Constant.getNextBlockID(), Materials.crystal, 2).setStepSound_(soundGlassFootstep).setBlockHardness(1.2F).setExplosionResistance(12.0f).setBlockLightLevel(1.0F);
+    public static final Block blockAzurite = new BlockGrowableOre(Constant.getNextBlockID(), Materials.crystal, 2).setStepSound_(soundGlassFootstep).setBlockHardness(1.2F).setExplosionResistance(12.0f).setBlockLightLevel(0.9375F);
     public static final Block azuriteCluster = new BlockCaveMisc(Constant.getNextBlockID(), Materials.crystal).setBlockLightLevel(0.75F).setBlockHardness(0.6F).setMinHarvestLevel(1).setExplosionResistance(6.0f).setStepSound_(soundGlassFootstep);
     public static final Block torchWoodIdle = (new BlockTorchIdle(Constant.getNextBlockID())).setBlockHardness(0.0F).setBlockLightLevel(0.5F).setStepSound_(soundWoodFootstep).setUnlocalizedName("torch");
     public static final Block torchWoodExtinguished = (new BlockTorchIdle(Constant.getNextBlockID())).setBlockHardness(0.0F).setBlockLightLevel(0.0F).setStepSound_(soundWoodFootstep).setUnlocalizedName("torch");

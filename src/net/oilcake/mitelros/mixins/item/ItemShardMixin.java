@@ -1,13 +1,14 @@
 package net.oilcake.mitelros.mixins.item;
 
-import net.minecraft.Item;
-import net.minecraft.ItemShard;
-import net.minecraft.Material;
+import net.minecraft.*;
+import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 @Mixin(ItemShard.class)
 public class ItemShardMixin extends Item {

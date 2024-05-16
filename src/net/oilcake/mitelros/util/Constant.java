@@ -24,13 +24,19 @@ public class Constant {
     public static int getNextBiomeID(){
         return nextBiomeID++;
     }
-    public static int getNextBlockID() {return nextBlockID++;}
+    public static int getNextBlockID() {
+        return nextBlockID++;
+    }
     public static int getNextEnchantmentID(){
         return nextEnchantmentID++;
     }
 
-    public static int getNextAchievementID() {return nextAchievementID++;}
-    public static int getNextPacketID() {return nextPacketID++;}
+    public static int getNextAchievementID() {
+        return nextAchievementID++;
+    }
+    public static int getNextPacketID() {
+        return nextPacketID++;
+    }
     public static final int Extended_Block_ID = 512;
     public static ItemArmor[] HELMETS = null;
     public static ItemArmor[] CHESTPLATES = null;
