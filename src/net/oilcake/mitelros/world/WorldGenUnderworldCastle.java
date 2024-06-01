@@ -804,7 +804,7 @@ public class WorldGenUnderworldCastle extends WorldGenerator {
                 new StructurePieceTreasure(Items.HelmetAncientmetalsacred.itemID, 0, 1, 1, 1),
                 new StructurePieceTreasure(Items.BootsAncientmetalsacred.itemID, 0, 1, 1, 1),
                 new StructurePieceTreasure(Items.LeggingsAncientmetalsacred.itemID, 0, 1, 1, 1),
-                new StructurePieceTreasure(Items.totemofknowledge.itemID, 0, 1, 1, 3),
+                new StructurePieceTreasure(Items.Goldenapplelegend.itemID, 0, 1, 1, 1),
         };
 
     }

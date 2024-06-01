@@ -274,7 +274,7 @@ public class EntityLich extends EntityBoneLord implements IBossbarEntity {
             this.dropItem(Items.AncientmetalArmorPiece.itemID, 1);
         }
         if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2){
-            this.dropItem(Items.Goldenapplelegend);
+            this.dropItem(Items.totemofknowledge);
         }
         if (recently_hit_by_player && !this.has_taken_massive_fall_damage && this.rand.nextInt(this.getBaseChanceOfRareDrop()) < 5 + looting * 2) {
             this.dropItemStack(new ItemStack(Item.skull.itemID, 1, 0), 0.0F);

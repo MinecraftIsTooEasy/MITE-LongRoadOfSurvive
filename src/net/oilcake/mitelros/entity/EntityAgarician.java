@@ -22,14 +22,20 @@ public class EntityAgarician extends EntityLivestock {
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new PathfinderGoalFloat(this));
         this.tasks.addTask(2, new PathfinderGoalBreed(this, 1.0));
+        this.tasks.addTask(3, new PathfinderGoalTempt(this, 1.25, Block.cake.blockID, false));
         this.tasks.addTask(3, new PathfinderGoalTempt(this, 1.25, Item.cake.itemID, false));
         this.tasks.addTask(4, new PathfinderGoalFollowParent(this, 1.25));
         this.tasks.addTask(5, new PathfinderGoalRandomStroll(this, 1.0));
-        this.tasks.addTask(6, new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 32.0F, 1.0, 1.3));
+        this.tasks.addTask(6, new PathfinderGoalLookAtPlayer(this, EntityPlayer.class, 6.0F));
+//        this.tasks.addTask(6, new PathfinderGoalAvoidPlayer(this, EntityPlayer.class, 32.0F, 1.0, 1.3));
         this.tasks.addTask(7, new PathfinderGoalRandomLookaround(this));
         this.tasks.addTask(1, new EntityAIFleeAttackerOrPanic(this, 1.6F, 0.5F, true));
         this.setType(type);
         this.num_mushrooms = 2;
+    }
+    protected void entityInit()
+    {
+        super.entityInit();
     }
     public void setType(int type){
         this.type = type;
@@ -216,9 +222,6 @@ public class EntityAgarician extends EntityLivestock {
             return result;
         }
     }
-    protected void entityInit()
-    {
-        super.entityInit();
-    }
+
 
 }

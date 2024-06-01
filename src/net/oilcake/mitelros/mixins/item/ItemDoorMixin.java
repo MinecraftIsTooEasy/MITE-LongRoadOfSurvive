@@ -14,18 +14,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemDoor.class)
 public class ItemDoorMixin {
-    @Inject(method = "getBlock", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getBlock", at = @At(ordinal = 8,value = "RETURN"),cancellable = true)
     private void injectNewDoor(CallbackInfoReturnable<Block> callbackInfoReturnable) {
         Block block = callbackInfoReturnable.getReturnValue();
         if(block == null){
             if (this.door_material == Materials.nickel) {
                 callbackInfoReturnable.setReturnValue(Blocks.doorNickel);
-                callbackInfoReturnable.cancel();
             } else if (this.door_material == Materials.tungsten) {
                 callbackInfoReturnable.setReturnValue(Blocks.doorTungsten);
-                callbackInfoReturnable.cancel();
-            } else {
-                callbackInfoReturnable.setReturnValue(null);
             }
         }else {
             callbackInfoReturnable.setReturnValue(null);
