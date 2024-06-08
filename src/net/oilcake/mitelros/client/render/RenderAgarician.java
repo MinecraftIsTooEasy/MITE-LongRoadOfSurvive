@@ -29,10 +29,12 @@ public class RenderAgarician extends bhe{
     protected void a(EntityLiving par1EntityLivingBase, float par2) {
         this.a((EntityAgarician) par1EntityLivingBase);
     }
-
+    protected boolean forceGlowOverride(){
+        return true;
+    }
     protected void setTextures() {
-        this.setTexture(0, "textures/entity/agarician_brown");
-        this.setTexture(1, "textures/entity/agarician_red");
-        this.setTexture(2, "textures/entity/agarician_luminescent");
+        this.setTexture(0, "textures/entity/agarician_brown", "textures/entity/agarician");
+        this.setTexture(1, "textures/entity/agarician_red", "textures/entity/agarician");
+        this.setTexture(2, "textures/entity/agarician_luminescent", "textures/entity/agarician");
     }
 }

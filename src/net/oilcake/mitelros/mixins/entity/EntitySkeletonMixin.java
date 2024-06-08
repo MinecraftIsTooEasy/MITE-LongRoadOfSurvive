@@ -230,7 +230,6 @@ public abstract class EntitySkeletonMixin extends EntityMonster implements IRang
         if (var4 > 0) {
             var3.setDamage(var3.getDamage() + (double)var4 * 0.5 + 0.5);
         }
-
         if (var5 > 0) {
             var3.setKnockbackStrength(var5);
         }
@@ -238,7 +237,25 @@ public abstract class EntitySkeletonMixin extends EntityMonster implements IRang
         if (EnchantmentManager.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItemStack()) > 0 || this.getSkeletonType() == 1 || this.isBurning() && this.rand.nextInt(3) == 0) {
             var3.setFire(100);
         }
-
+//        EntityArrow[] covering = new EntityArrow[8];
+//        for(int i = 0; i < covering.length;i ++){
+//            covering[i] = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4), this.isLongdead() ? Item.arrowAncientMetal : Item.arrowRustedIron, false);
+//            covering[i].motionX *= 1.0D + 0.25D * this.rand.nextDouble();
+//            covering[i].motionY *= 1.0D + 0.25D * this.rand.nextDouble();
+//            covering[i].motionZ *= 1.0D + 0.25D * this.rand.nextDouble();
+//            covering[i].setDamage(damage / 2);
+//            if (var4 > 0) {
+//                covering[i].setDamage(covering[i].getDamage() + (double)var4 * 0.5 + 0.5);
+//            }
+//            if (var5 > 0) {
+//                covering[i].setKnockbackStrength(var5);
+//            }
+//
+//            if (EnchantmentManager.getEnchantmentLevel(Enchantment.flame.effectId, this.getHeldItemStack()) > 0 || this.getSkeletonType() == 1 || this.isBurning() && this.rand.nextInt(3) == 0) {
+//                covering[i].setFire(100);
+//            }
+//            this.worldObj.spawnEntityInWorld(covering[i]);
+//        }
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var3);
         this.num_arrows--;

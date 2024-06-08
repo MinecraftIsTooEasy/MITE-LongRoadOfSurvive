@@ -21,7 +21,6 @@ public class BiomeHellMixin extends BiomeBase {
 
     @Inject(method = "<init>",at = @At("RETURN"))
     public void injectCtor(CallbackInfo callbackInfo) {
-        this.spawnableMonsterList.clear();
         this.spawnableMonsterList.add(new BiomeMeta(EntityInfernalCreeper.class, 20, 1, 3));
         this.spawnableMonsterList.add(new BiomeMeta(EntityDemonSpider.class, 20, 1, 4));
         this.spawnableMonsterList.add(new BiomeMeta(EntityHellhound.class, 20, 1, 4));
