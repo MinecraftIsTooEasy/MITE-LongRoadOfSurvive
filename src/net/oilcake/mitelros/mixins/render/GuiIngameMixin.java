@@ -260,9 +260,11 @@ public class GuiIngameMixin extends avk {
 
     @Inject(method = "a(FZII)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/Minecraft;inDevMode()Z", shift = At.Shift.BEFORE))
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
+//        if (!(this.g.u.ab && this.g.u.gui_mode == 0) && Minecraft.getErrorMessage() == null) {
         if (!Minecraft.inDevMode() && !(this.g.u.ab && this.g.u.gui_mode == 0) && Minecraft.getErrorMessage() == null) {
             String pos = "平面坐标: ("+ MathHelper.floor_double(this.g.h.posX) + ", " + MathHelper.floor_double(this.g.h.posZ) +") ";
-            String time = "时间: ("+this.g.h.getWorld().getHourOfDay()+":"+this.g.h.getWorld().getTotalWorldTime()%1000*60/1000+") ";
+            String moon_phase;
+            String time = "时间: (" + this.g.h.getWorld().getHourOfDay() + ":" + this.g.h.getWorld().getTotalWorldTime() % 1000 * 60 / 1000 + ") ";
             EntityPlayer player = this.g.h.getAsPlayer();
             String Weather;
             String Biome;
@@ -283,6 +285,34 @@ public class GuiIngameMixin extends avk {
                     default:
                         s = "null";
                 }
+            switch ((int) ((this.g.h.worldObj.getTotalWorldTime() + 24000L) / 24000L) % 8) {
+                case 0:
+                    moon_phase = "望";
+                    break;
+                case 1:
+                    moon_phase = "渐亏";
+                    break;
+                case 2:
+                    moon_phase = "下弦";
+                    break;
+                case 3:
+                    moon_phase = "残月";
+                    break;
+                case 4:
+                    moon_phase = "晦";
+                    break;
+                case 5:
+                    moon_phase = "狼牙";
+                    break;
+                case 6:
+                    moon_phase = "上弦";
+                    break;
+                case 7:
+                    moon_phase = "渐盈";
+                    break;
+                default:
+                    moon_phase = "null";
+            }
 
                 Biome = StringUtils.substringBefore(this.g.h.getBiome().toString(), "@").substring(19) + " ";
                 String RainSnow;
@@ -295,9 +325,14 @@ public class GuiIngameMixin extends avk {
                 WeatherEvent event = this.g.f.getCurrentWeatherEvent();
                 Random R = new Random((long)this.g.f.getDayOfWorld());
                 int ran2;
+                long end_time;
                 if (event != null) {
-                    if (this.g.f.getDayOfWorld() % 32 == 0) {
-                        Weather = "雷暴";
+                    if (event.hasStorm() && this.g.h.worldObj.getTotalWorldTime() < event.end_of_storm && this.g.h.getWorld().getTotalWorldTime() > event.start_of_storm) {
+                        if (this.g.h.getBiome().isFreezing() || this.g.h.worldObj.getWorldSeason() == 3) {
+                            Weather = "雷打雪";
+                        } else {
+                            Weather = "雷阵雨";
+                        }
                     } else {
                         ran2 = R.nextInt(3);
                         if (ran2 == 0) {
@@ -311,23 +346,29 @@ public class GuiIngameMixin extends avk {
                 } else {
                     event = this.g.f.getNextWeatherEvent(false);
                     if (event != null) {
-                        if (event.start - (long)this.g.f.getAdjustedTimeOfDay() < 2000L) {
-                            Weather = "有雨";
+                        if (event.start - this.g.h.worldObj.getTotalWorldTime() < 2400L) {
+                            Weather = "有" + RainSnow;
                         } else {
                             Weather = "阴";
                         }
                     } else {
                         ran2 = R.nextInt(3);
-                        if (ran2 == 0) {
-                            Weather = "晴";
-                        } else if (ran2 == 1) {
-                            Weather = "多云";
-                        } else {
-                            Weather = "晴转多云";
+                        if(this.g.h.worldObj.getHourOfDay() > 17 || this.g.h.worldObj.getHourOfDay() < 5){
+                            Weather = moon_phase;
+                        }else {
+                            if (ran2 == 0) {
+                                Weather = "晴";
+                            } else if (ran2 == 1) {
+                                Weather = "多云";
+                            } else {
+                                Weather = "晴转多云";
+                            }
                         }
                     }
                 }
+
             String GAinfo = " " + s + " " + Biome + " " + Weather;
+
             if (GuiIngame.server_load >= 0) {
                 awf sr = new awf(this.g.u, this.g.d, this.g.e);
                 String text = GuiIngame.server_load + "%";
@@ -351,7 +392,7 @@ public class GuiIngameMixin extends avk {
             var68.append(Weather);
 //            var68.append(GAinfo);
             var68.append("   FPS=").append(Minecraft.last_fps).append(" (");
-            this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
+            this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2 + 10 * 4, 14737632);
         }
     }
     @Inject(locals = LocalCapture.CAPTURE_FAILHARD,
