@@ -1,3 +1,4 @@
+extend.ss=这一条是用来强制启用UNICODE字符防止崩溃的（Force unicode to prevent Crashing)
 achievement.MinePieces=用力过猛
 achievement.MinePieces.desc=挖碎矿物
 achievement.WearAllWolfArmor=追逐潮流
@@ -368,6 +369,7 @@ item.ancient_metal_armor_piece.name=镶金远古金属铠甲残片
 itemarrow.tooltip.disable=因为技术原因被禁用
 itemtool.tooltip.slimeresistance=腐蚀抗性
 itemarmor.tooltip.slimeresistance=腐蚀抗性
+itemwine.tooltip.warning=未成年人禁止饮酒！
 
 item.arrows/magical_arrow.name=魔法箭
 
@@ -400,3 +402,33 @@ death.extend.attack.sacrificed=赴死如归
 
 material.nickel.name=镍
 material.tungsten.name=钨钢
+
+gui.gametitle.pos=平面坐标:
+gui.gametitle.time=时间:
+gui.gametitle.direction.north=北
+gui.gametitle.direction.south=南
+gui.gametitle.direction.east=东
+gui.gametitle.direction.west=西
+gui.gametitle.moonphase.0=望
+gui.gametitle.moonphase.1=渐亏
+gui.gametitle.moonphase.2=下弦
+gui.gametitle.moonphase.3=残月
+gui.gametitle.moonphase.4=晦
+gui.gametitle.moonphase.5=狼牙
+gui.gametitle.moonphase.6=上弦
+gui.gametitle.moonphase.7=渐盈
+gui.gametitle.rain=雨
+gui.gametitle.snow=雪
+gui.gametitle.thundershower=雷阵雨
+gui.gametitle.thundersnow=雷打雪
+gui.gametitle.light=小
+gui.gametitle.moderate=中
+gui.gametitle.heavy=大
+gui.gametitle.aboutto=有
+gui.gametitle.overcast=阴
+gui.gametitle.sunny=晴
+gui.gametitle.cloudy=多云
+gui.gametitle.clearinglate=晴转多云
+gui.gametitle.diffculty=挑战难度
+gui.gametitle.doomsday=终极难度
+gui.gametitle.casual=休闲难度

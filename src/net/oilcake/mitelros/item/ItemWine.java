@@ -38,7 +38,7 @@ public class ItemWine extends Item{
     }
     public void addInformation(ItemStack item_stack, EntityPlayer player, List info, boolean extended_info, Slot slot) {
         if (extended_info) {
-            info.add(EnumChatFormat.RED + Translator.getFormatted("未成年人禁止饮酒！", new Object[0]));
+            info.add(EnumChatFormat.RED + Translator.getFormatted("itemwine.tooltip.warning", new Object[0]));
         }
     }
 }

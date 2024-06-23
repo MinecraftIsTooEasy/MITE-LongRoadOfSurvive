@@ -262,64 +262,65 @@ public class GuiIngameMixin extends avk {
     private void injectRenderPos(float par1, boolean par2, int par3, int par4, CallbackInfo ci) {
 //        if (!(this.g.u.ab && this.g.u.gui_mode == 0) && Minecraft.getErrorMessage() == null) {
         if (!Minecraft.inDevMode() && !(this.g.u.ab && this.g.u.gui_mode == 0) && Minecraft.getErrorMessage() == null) {
-            String pos = "平面坐标: ("+ MathHelper.floor_double(this.g.h.posX) + ", " + MathHelper.floor_double(this.g.h.posZ) +") ";
+            String pos = Translator.getFormatted("gui.gametitle.pos") + "("+ MathHelper.floor_double(this.g.h.posX) + ", " + MathHelper.floor_double(this.g.h.posZ) +") ";
             String moon_phase;
-            String time = "时间: (" + this.g.h.getWorld().getHourOfDay() + ":" + this.g.h.getWorld().getTotalWorldTime() % 1000 * 60 / 1000 + ") ";
+            String time = Translator.getFormatted("gui.gametitle.time") + "(" + this.g.h.getWorld().getHourOfDay() + ":" + this.g.h.getWorld().getTotalWorldTime() % 1000 * 60 / 1000 + ") ";
             EntityPlayer player = this.g.h.getAsPlayer();
             String Weather;
             String Biome;
             String s;
                 switch (this.g.h.getDirectionFromYaw().toString()) {
                     case "EAST":
-                        s = "东";
+                        s = Translator.getFormatted("gui.gametitle.direction.east");
                         break;
                     case "WEST":
-                        s = "西";
+                        s = Translator.getFormatted("gui.gametitle.direction.west");
                         break;
                     case "NORTH":
-                        s = "北";
+                        s = Translator.getFormatted("gui.gametitle.direction.north");
                         break;
                     case "SOUTH":
-                        s = "南";
+                        s = Translator.getFormatted("gui.gametitle.direction.south");
                         break;
                     default:
                         s = "null";
                 }
-            switch ((int) ((this.g.h.worldObj.getTotalWorldTime() + 24000L) / 24000L) % 8) {
-                case 0:
-                    moon_phase = "望";
-                    break;
-                case 1:
-                    moon_phase = "渐亏";
-                    break;
-                case 2:
-                    moon_phase = "下弦";
-                    break;
-                case 3:
-                    moon_phase = "残月";
-                    break;
-                case 4:
-                    moon_phase = "晦";
-                    break;
-                case 5:
-                    moon_phase = "狼牙";
-                    break;
-                case 6:
-                    moon_phase = "上弦";
-                    break;
-                case 7:
-                    moon_phase = "渐盈";
-                    break;
-                default:
-                    moon_phase = "null";
-            }
+                moon_phase = Translator.getFormatted("gui.gametitle.moonphase." + (int) ((this.g.h.worldObj.getTotalWorldTime() + 24000L) / 24000L) % 8 );
+//            switch ((int) ((this.g.h.worldObj.getTotalWorldTime() + 24000L) / 24000L) % 8) {
+//                case 0:
+//                    moon_phase = "望";
+//                    break;
+//                case 1:
+//                    moon_phase = "渐亏";
+//                    break;
+//                case 2:
+//                    moon_phase = "下弦";
+//                    break;
+//                case 3:
+//                    moon_phase = "残月";
+//                    break;
+//                case 4:
+//                    moon_phase = "晦";
+//                    break;
+//                case 5:
+//                    moon_phase = "狼牙";
+//                    break;
+//                case 6:
+//                    moon_phase = "上弦";
+//                    break;
+//                case 7:
+//                    moon_phase = "渐盈";
+//                    break;
+//                default:
+//                    moon_phase = "null";
+//            }
 
                 Biome = StringUtils.substringBefore(this.g.h.getBiome().toString(), "@").substring(19) + " ";
                 String RainSnow;
-                if (!this.g.h.getBiome().isFreezing() || !(this.g.h.worldObj.getWorldSeason() == 3)) {
-                    RainSnow = "雨";
+                if (this.g.h.getBiome().isFreezing() || this.g.h.worldObj.getWorldSeason() == 3) {
+                    RainSnow = Translator.getFormatted("gui.gametitle.snow");
                 } else {
-                    RainSnow = "雪";
+                    RainSnow = Translator.getFormatted("gui.gametitle.rain");
                 }
 
                 WeatherEvent event = this.g.f.getCurrentWeatherEvent();
@@ -329,27 +330,27 @@ public class GuiIngameMixin extends avk {
                 if (event != null) {
                     if (event.hasStorm() && this.g.h.worldObj.getTotalWorldTime() < event.end_of_storm && this.g.h.getWorld().getTotalWorldTime() > event.start_of_storm) {
                         if (this.g.h.getBiome().isFreezing() || this.g.h.worldObj.getWorldSeason() == 3) {
-                            Weather = "雷打雪";
+                            Weather = Translator.getFormatted("gui.gametitle.thundersnow");
                         } else {
-                            Weather = "雷阵雨";
+                            Weather = Translator.getFormatted("gui.gametitle.thundershower");
                         }
                     } else {
                         ran2 = R.nextInt(3);
                         if (ran2 == 0) {
-                            Weather = "小" + RainSnow;
+                            Weather = Translator.getFormatted("gui.gametitle.light") + RainSnow;
                         } else if (ran2 == 1) {
-                            Weather = "中" + RainSnow;
+                            Weather = Translator.getFormatted("gui.gametitle.moderate") + RainSnow;
                         } else {
-                            Weather = "大" + RainSnow;
+                            Weather = Translator.getFormatted("gui.gametitle.heavy") + RainSnow;
                         }
                     }
                 } else {
                     event = this.g.f.getNextWeatherEvent(false);
                     if (event != null) {
                         if (event.start - this.g.h.worldObj.getTotalWorldTime() < 2400L) {
-                            Weather = "有" + RainSnow;
+                            Weather = Translator.getFormatted("gui.gametitle.aboutto") + RainSnow;
                         } else {
-                            Weather = "阴";
+                            Weather = Translator.getFormatted("gui.gametitle.overcast");
                         }
                     } else {
                         ran2 = R.nextInt(3);
@@ -357,11 +358,11 @@ public class GuiIngameMixin extends avk {
                             Weather = moon_phase;
                         }else {
                             if (ran2 == 0) {
-                                Weather = "晴";
+                                Weather = Translator.getFormatted("gui.gametitle.sunny");
                             } else if (ran2 == 1) {
-                                Weather = "多云";
+                                Weather = Translator.getFormatted("gui.gametitle.cloudy");
                             } else {
-                                Weather = "晴转多云";
+                                Weather = Translator.getFormatted("gui.gametitle.clearinglate");
                             }
                         }
                     }
@@ -374,13 +375,19 @@ public class GuiIngameMixin extends avk {
                 String text = GuiIngame.server_load + "%";
                 this.b(this.g.l, text, sr.a() - this.g.l.a(text) - 2, 2, 14737632);
             }
-            String t = " §c挑战难度: " + Constant.CalculateCurrentDiff() + "§r ";
+            String t = " §c" +
+                    Translator.getFormatted("gui.gametitle.diffculty") +
+                    ": " + Constant.CalculateCurrentDiff() + "§r ";
             StringBuilder var68 = (new StringBuilder()).append("MITE-ITF ");
             if(ExperimentalConfig.TagConfig.FinalChallenge.ConfigValue && Constant.CalculateCurrentDiff() == 25) {
-                t = " §4终极难度§r ";
+                t = " §4" +
+                        Translator.getFormatted("gui.gametitle.doomsday") +
+                        "§r ";
             }
             if(Constant.CalculateCurrentDiff() < 0){
-                t = " §a休闲难度§r ";
+                t = " §a" +
+                        Translator.getFormatted("gui.gametitle.casual") +
+                        "§r ";
             }
             if(player.getHeldItemStack()!=null && player.getHeldItemStack().getItem() == Item.compass)
                 var68.append(pos);
@@ -392,7 +399,7 @@ public class GuiIngameMixin extends avk {
             var68.append(Weather);
 //            var68.append(GAinfo);
             var68.append("   FPS=").append(Minecraft.last_fps).append(" (");
-            this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2 + 10 * 4, 14737632);
+            this.b(this.g.l, var68.append(Minecraft.last_fp10s).append(")").toString(), 2, 2, 14737632);
         }
     }
     @Inject(locals = LocalCapture.CAPTURE_FAILHARD,

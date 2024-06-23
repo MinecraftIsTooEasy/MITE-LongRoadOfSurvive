@@ -1,3 +1,4 @@
+extend.ss=这一条是用来强制启用UNICODE字符防止崩溃的（Force unicode to prevent Crashing)
 achievement.MinePieces=Punch too hard
 achievement.MinePieces.desc=Smash the ore block.
 achievement.WearAllWolfArmor=Famous brand
@@ -57,8 +58,8 @@ potion.extend.heatstroke=Heatstroke
 
 generator.default_1_1=Large Biomes(Old)
 
-item.tooltip.water.add=Water+%d
-item.tooltip.water.minus=Water%d
+item.tooltip.water.add=+%d Water
+item.tooltip.water.minus=%d Water
 
 item.armor/nickel_helmet.name=Nickel Helmet
 item.armor/nickel_chestplate.name=Nickel Chestplate
@@ -374,6 +375,7 @@ item.wand/thunder.name=Wand of Thunder
 itemarrow.tooltip.disable=Disabled by technical issue...
 itemtool.tooltip.slimeresistance=Bonus vs slime
 itemarmor.tooltip.slimeresistance=Bonus vs slime
+itemwine.tooltip.warning=Excessive drinking is not advisable.
 
 entity.EntityWitherBoneLord.name=Wither Bonelord
 entity.EntityWitherBodyguard.name=Wither Bodyguard
@@ -400,3 +402,33 @@ death.extend.attack.sacrificed=Burned out the life
 
 material.nickel.name=Nickel
 material.tungsten.name=Tungsten
+
+gui.gametitle.pos=Position:
+gui.gametitle.time=Time:
+gui.gametitle.direction.north=North
+gui.gametitle.direction.south=South
+gui.gametitle.direction.east=East
+gui.gametitle.direction.west=West
+gui.gametitle.moonphase.0=Full Moon
+gui.gametitle.moonphase.1=Waning Gibbous
+gui.gametitle.moonphase.2=Last Quarter
+gui.gametitle.moonphase.3=Waning Crescent
+gui.gametitle.moonphase.4=New Moon
+gui.gametitle.moonphase.5=Waxing Crescent
+gui.gametitle.moonphase.6=First Quarter
+gui.gametitle.moonphase.7=Waxing Gibbous
+gui.gametitle.rain=Rain
+gui.gametitle.snow=Snow
+gui.gametitle.thundershower=T-Storms
+gui.gametitle.thundersnow=Blizzard
+gui.gametitle.light=Light 
+gui.gametitle.moderate=Moderate 
+gui.gametitle.heavy=Heavy 
+gui.gametitle.aboutto=About to 
+gui.gametitle.overcast=Overcast
+gui.gametitle.sunny=Sunny
+gui.gametitle.cloudy=Cloudy
+gui.gametitle.clearinglate=Clearing Late
+gui.gametitle.diffculty=Diffculty
+gui.gametitle.doomsday=Doomsday
+gui.gametitle.casual=Casual
