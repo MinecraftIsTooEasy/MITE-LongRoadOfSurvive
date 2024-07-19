@@ -39,12 +39,16 @@
   },
   "custom": {
     "loom:injected_interfaces": {
+      "net/minecraft/TileEntityFurnace": ["ink/huix/iinjected/TileEntityFurnaceKt"],
       "net/minecraft/Enchantment": ["net/oilcake/mitelros/iinjected/EnchantmentII"],
       "net/minecraft/EntityPlayer": ["ink/huix/iinjected/EntityPlayerKt"],
       "net/minecraft/FoodStats": ["ink/huix/iinjected/FoodStatsKt"],
       "net/minecraft/InventoryPlayer": ["ink/huix/iinjected/InventoryPlayerKt"],
       "net/minecraft/World": ["ink/huix/iinjected/WorldKt"],
-      "net/minecraft/EntityArachnid": ["net/oilcake/mitelros/iinjected/EntityArachnidII"]
+      "net/minecraft/EntityArachnid": ["net/oilcake/mitelros/iinjected/EntityArachnidII"],
+      "net/minecraft/Item": ["net/oilcake/mitelros/iinjected/ItemII"],
+      "net/minecraft/Packet8UpdateHealth": ["ink/huix/iinjected/Packet8UpdateHealthKt"],
+      "net/minecraft/EntitySkeleton": ["net/oilcake/mitelros/iinjected/EntitySkeletonII"]
     }
   }
 

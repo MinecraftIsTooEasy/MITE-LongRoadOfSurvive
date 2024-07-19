@@ -109,6 +109,7 @@ public class FoodStatsMixin implements ink.huix.iinjected.FoodStatsKt {
    }
 
    @Unique
+   @Override
    public float getHeal_progress() {
       return this.heal_progress;
    }

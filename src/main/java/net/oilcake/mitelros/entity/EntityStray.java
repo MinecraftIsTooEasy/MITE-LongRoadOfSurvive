@@ -87,7 +87,7 @@ public class EntityStray extends EntitySkeleton {
    public void addRandomWeapon() {
       if (this.getSkeletonType() == 2 && this.rand.nextInt(8) == 0) {
          this.setHeldItemStack(new ItemStack(Items.FreezeWand));
-         this.Is_Wizard = true;
+         this.setIsWizard(true);
       } else {
          this.setHeldItemStack((new ItemStack((Item)(this.getSkeletonType() == 2 ? (this.rand.nextInt(20) == 0 ? Item.battleAxeRustedIron : Item.daggerRustedIron) : Item.bow))).randomizeForMob(this, true));
       }

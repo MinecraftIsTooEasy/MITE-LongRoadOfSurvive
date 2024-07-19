@@ -159,83 +159,83 @@ public class ItemBowlClay extends ItemVessel {
 
          if (!this.contains(Material.water) && !this.contains(Material.milk)) {
             if (this.contains(Material.beef_stew)) {
-               player.Feast_trigger_beef_stew = true;
+               player.setFeast_trigger_beef_stew(true);
             }
 
             if (this.contains(Material.chicken_soup)) {
-               player.Feast_trigger_chicken_soup = true;
+               player.setFeast_trigger_chicken_soup(true);
             }
 
             if (this.contains(Material.cereal)) {
-               player.Feast_trigger_cereal = true;
+               player.setFeast_trigger_cereal(true);
             }
 
             if (this.contains(Materials.chestnut_soup)) {
-               player.Feast_trigger_chestnut_soup = true;
+               player.setFeast_trigger_chestnut_soup(true);
             }
 
             if (this.contains(Material.ice_cream)) {
-               player.Feast_trigger_ice_cream = true;
+               player.setFeast_trigger_ice_cream(true);
                player.modifyTemperature(-8000);
             }
 
             if (this.contains(Materials.lemonade)) {
-               player.Feast_trigger_lemonade = true;
+               player.setFeast_trigger_lemonade(true);
             }
 
             if (this.contains(Material.mashed_potato)) {
-               player.Feast_trigger_mashed_potatoes = true;
+               player.setFeast_trigger_mashed_potatoes(true);
             }
 
             if (this.contains(Material.mushroom_stew)) {
-               player.Feast_trigger_mushroom_soup = true;
+               player.setFeast_trigger_mushroom_soup(true);
             }
 
             if (this.contains(Material.cream_of_mushroom_soup)) {
-               player.Feast_trigger_cream_mushroom_soup = true;
+               player.setFeast_trigger_cream_mushroom_soup(true);
             }
 
             if (this.contains(Material.cream_of_vegetable_soup)) {
-               player.Feast_trigger_cream_vegetable_soup = true;
+               player.setFeast_trigger_cream_vegetable_soup(true);
             }
 
             if (this.contains(Material.porridge)) {
-               player.Feast_trigger_porridge = true;
+               player.setFeast_trigger_porridge(true);
             }
 
             if (this.contains(Materials.porkchop_stew)) {
-               player.Feast_trigger_porkchop_stew = true;
+               player.setFeast_trigger_porkchop_stew(true);
             }
 
             if (this.contains(Material.pumpkin_soup)) {
-               player.Feast_trigger_pumpkin_soup = true;
+               player.setFeast_trigger_pumpkin_soup(true);
             }
 
             if (this.contains(Material.sorbet)) {
-               player.Feast_trigger_sorbet = true;
+               player.setFeast_trigger_sorbet(true);
                player.modifyTemperature(-8000);
             }
 
             if (this.contains(Material.salad)) {
-               player.Feast_trigger_salad = true;
+               player.setFeast_trigger_salad(true);
             }
 
             if (this.contains(Material.vegetable_soup)) {
-               player.Feast_trigger_vegetable_soup = true;
+               player.setFeast_trigger_vegetable_soup(true);
             }
 
             if (this.contains(Materials.fish_soup)) {
-               player.Feast_trigger_salmon_soup = true;
+               player.setFeast_trigger_salmon_soup(true);
             }
 
             if (this.contains(Materials.beetroot)) {
-               player.Feast_trigger_beetroot_soup = true;
+               player.setFeast_trigger_beetroot_soup(true);
             }
          }
 
          player.addFoodValue(this);
          if (this.isEatable(item_stack)) {
-            world.playSoundAtEntity(player, "random.burp", 0.5F, player.getRand().nextFloat() * 0.1F + 0.9F);
+            world.playSoundAtEntity(player, "random.burp", 0.5F, player.rand.nextFloat() * 0.1F + 0.9F);
          }
       }
 

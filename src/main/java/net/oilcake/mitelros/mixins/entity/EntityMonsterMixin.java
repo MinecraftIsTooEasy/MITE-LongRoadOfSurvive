@@ -146,7 +146,7 @@ public class EntityMonsterMixin extends EntityCreature {
                   target.setFire(fire_aspect * 4);
                }
 
-               if (attacker.isBurning() && !attacker.hasHeldItem() && attacker.getRand().nextFloat() < (float)attacker.worldObj.difficultySetting * 0.3F) {
+               if (attacker.isBurning() && !attacker.hasHeldItem() && attacker.rand.nextFloat() < (float)attacker.worldObj.difficultySetting * 0.3F) {
                   target.setFire(2 * attacker.worldObj.difficultySetting);
                }
 
@@ -156,7 +156,7 @@ public class EntityMonsterMixin extends EntityCreature {
                      Minecraft.temp_debug = "mob";
                   }
 
-                  EnchantmentThorns.func_92096_a(attacker, target.getAsEntityLivingBase(), attacker.getRand());
+                  EnchantmentThorns.func_92096_a(attacker, target.getAsEntityLivingBase(), attacker.rand);
                   int stunning = EnchantmentHelper.getStunModifier(attacker, target.getAsEntityLivingBase());
                   if ((double)stunning > Math.random() * 10.0) {
                      target.getAsEntityLivingBase().addPotionEffect(new PotionEffect(PotionExtend.stunning.id, stunning * 60, 0));

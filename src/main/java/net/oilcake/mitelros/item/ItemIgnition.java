@@ -1,5 +1,6 @@
 package net.oilcake.mitelros.item;
 
+import ink.huix.iinjected.TileEntityFurnaceKt;
 import net.minecraft.Block;
 import net.minecraft.BlockFurnace;
 import net.minecraft.BlockTNT;
@@ -23,7 +24,7 @@ import net.minecraft.TileEntityFurnace;
 public class ItemIgnition extends Item implements IDamageableItem {
    public ItemIgnition(int par1, Material material) {
       super(par1, material, "ignition");
-      this.setMaxDamage((int)(2.0F * material.getDurability() + (float)(material == Material.wood ? 3 : 0)));
+      this.setMaxDamage((int)(2.0F * material.durability + (float)(material == Material.wood ? 3 : 0)));
       this.setMaxStackSize(1);
       this.setCreativeTab(CreativeTabs.tabTools);
       this.addMaterial(new Material[]{Material.flint});

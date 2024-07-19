@@ -130,36 +130,275 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements ICom
    protected float speedOnGround;
 
    @Unique
-   public boolean Feast_trigger_salad = false;
-   public boolean Feast_trigger_porridge = false;
-   public boolean Feast_trigger_beef_stew = false;
-   public boolean Feast_trigger_cereal = false;
-   public boolean Feast_trigger_chicken_soup = false;
-   public boolean Feast_trigger_mushroom_soup = false;
-   public boolean Feast_trigger_cream_mushroom_soup = false;
-   public boolean Feast_trigger_vegetable_soup = false;
-   public boolean Feast_trigger_cream_vegetable_soup = false;
-   public boolean Feast_trigger_ice_cream = false;
-   public boolean Feast_trigger_chestnut_soup = false;
-   public boolean Feast_trigger_lemonade = false;
-   public boolean Feast_trigger_mashed_potatoes = false;
-   public boolean Feast_trigger_porkchop_stew = false;
-   public boolean Feast_trigger_pumpkin_soup = false;
-   public boolean Feast_trigger_sorbet = false;
-   public boolean Feast_trigger_salmon_soup = false;
-   public boolean Feast_trigger_beetroot_soup = false;
+   public boolean feast_trigger_salad = false;
+   @Unique
+   public boolean feast_trigger_porridge = false;
+   @Unique
+   public boolean feast_trigger_beef_stew = false;
+   @Unique
+   public boolean feast_trigger_cereal = false;
+   @Unique
+   public boolean feast_trigger_chicken_soup = false;
+   @Unique
+   public boolean feast_trigger_mushroom_soup = false;
+   @Unique
+   public boolean feast_trigger_cream_mushroom_soup = false;
+   @Unique
+   public boolean feast_trigger_vegetable_soup = false;
+   @Unique
+   public boolean feast_trigger_cream_vegetable_soup = false;
+   @Unique
+   public boolean feast_trigger_ice_cream = false;
+   @Unique
+   public boolean feast_trigger_chestnut_soup = false;
+   @Unique
+   public boolean feast_trigger_lemonade = false;
+   @Unique
+   public boolean feast_trigger_mashed_potatoes = false;
+   @Unique
+   public boolean feast_trigger_porkchop_stew = false;
+   @Unique
+   public boolean feast_trigger_pumpkin_soup = false;
+   public boolean feast_trigger_sorbet = false;
+   @Unique
+   public boolean feast_trigger_salmon_soup = false;
+   @Unique
+   public boolean feast_trigger_beetroot_soup = false;
+   @Unique
    private boolean rewarded_disc_damnation = false;
+   @Unique
    private boolean rewarded_disc_connected = false;
 
    @Unique
+   @Override
+   public boolean isFeast_trigger_salad() {
+      return feast_trigger_salad;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_salad(boolean feast_trigger_salad) {
+      this.feast_trigger_salad = feast_trigger_salad;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_porridge() {
+      return feast_trigger_porridge;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_porridge(boolean feast_trigger_porridge) {
+      this.feast_trigger_porridge = feast_trigger_porridge;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_beef_stew() {
+      return feast_trigger_beef_stew;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_beef_stew(boolean feast_trigger_beef_stew) {
+      this.feast_trigger_beef_stew = feast_trigger_beef_stew;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_cereal() {
+      return feast_trigger_cereal;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_cereal(boolean feast_trigger_cereal) {
+      this.feast_trigger_cereal = feast_trigger_cereal;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_chicken_soup() {
+      return feast_trigger_chicken_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_chicken_soup(boolean feast_trigger_chicken_soup) {
+      this.feast_trigger_chicken_soup = feast_trigger_chicken_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_mushroom_soup() {
+      return feast_trigger_mushroom_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_mushroom_soup(boolean feast_trigger_mushroom_soup) {
+      this.feast_trigger_mushroom_soup = feast_trigger_mushroom_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_cream_mushroom_soup() {
+      return feast_trigger_cream_mushroom_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_cream_mushroom_soup(boolean feast_trigger_cream_mushroom_soup) {
+      this.feast_trigger_cream_mushroom_soup = feast_trigger_cream_mushroom_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_vegetable_soup() {
+      return feast_trigger_vegetable_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_vegetable_soup(boolean feast_trigger_vegetable_soup) {
+      this.feast_trigger_vegetable_soup = feast_trigger_vegetable_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_cream_vegetable_soup() {
+      return feast_trigger_cream_vegetable_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_cream_vegetable_soup(boolean feast_trigger_cream_vegetable_soup) {
+      this.feast_trigger_cream_vegetable_soup = feast_trigger_cream_vegetable_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_ice_cream() {
+      return feast_trigger_ice_cream;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_ice_cream(boolean feast_trigger_ice_cream) {
+      this.feast_trigger_ice_cream = feast_trigger_ice_cream;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_chestnut_soup() {
+      return feast_trigger_chestnut_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_chestnut_soup(boolean feast_trigger_chestnut_soup) {
+      this.feast_trigger_chestnut_soup = feast_trigger_chestnut_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_mashed_potatoes() {
+      return feast_trigger_mashed_potatoes;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_mashed_potatoes(boolean feast_trigger_mashed_potatoes) {
+      this.feast_trigger_mashed_potatoes = feast_trigger_mashed_potatoes;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_lemonade() {
+      return feast_trigger_lemonade;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_lemonade(boolean feast_trigger_lemonade) {
+      this.feast_trigger_lemonade = feast_trigger_lemonade;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_porkchop_stew() {
+      return feast_trigger_porkchop_stew;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_porkchop_stew(boolean feast_trigger_porkchop_stew) {
+      this.feast_trigger_porkchop_stew = feast_trigger_porkchop_stew;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_pumpkin_soup() {
+      return feast_trigger_pumpkin_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_pumpkin_soup(boolean feast_trigger_pumpkin_soup) {
+      this.feast_trigger_pumpkin_soup = feast_trigger_pumpkin_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_sorbet() {
+      return feast_trigger_sorbet;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_sorbet(boolean feast_trigger_sorbet) {
+      this.feast_trigger_sorbet = feast_trigger_sorbet;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_salmon_soup() {
+      return feast_trigger_salmon_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_salmon_soup(boolean feast_trigger_salmon_soup) {
+      this.feast_trigger_salmon_soup = feast_trigger_salmon_soup;
+   }
+
+   @Unique
+   @Override
+   public boolean isFeast_trigger_beetroot_soup() {
+      return feast_trigger_beetroot_soup;
+   }
+
+   @Unique
+   @Override
+   public void setFeast_trigger_beetroot_soup(boolean feast_trigger_beetroot_soup) {
+      this.feast_trigger_beetroot_soup = feast_trigger_beetroot_soup;
+   }
+
+   @Unique
+   @Override
    public int getHunt_counter() {
       return this.hunt_counter;
    }
 
+   @Unique
+   @Override
    public void setHunt_counter(int counter) {
       this.hunt_counter = counter;
    }
 
+   @Unique
+   @Override
    public int getCurrent_insulin_resistance_lvl() {
       return this.insulin_resistance_level == null ? 0 : this.insulin_resistance_level.ordinal() + 1;
    }
@@ -348,8 +587,8 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements ICom
          Object var10 = target;
          if (target instanceof EntityDragonPart) {
             IEntityMultiPart var11 = ((EntityDragonPart)target).entityDragonObj;
-            if (var11 != null && var11 instanceof EntityLivingBase) {
-               var10 = (EntityLivingBase)var11;
+            if (var11 instanceof EntityLivingBase) {
+               var10 = var11;
             }
          }
 
@@ -379,7 +618,7 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements ICom
    )
    public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
       if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
-         ((InventoryPlayerKt) this.inventory).vanishingItems();
+         this.inventory.vanishingItems();
       }
 
    }
@@ -886,7 +1125,11 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements ICom
 
    private void tryTriggerAchievement() {
       EntityItem RewardingRecord;
-      if (this.Feast_trigger_sorbet && this.Feast_trigger_cereal && this.Feast_trigger_chestnut_soup && this.Feast_trigger_chicken_soup && this.Feast_trigger_beef_stew && this.Feast_trigger_cream_mushroom_soup && this.Feast_trigger_cream_vegetable_soup && this.Feast_trigger_ice_cream && this.Feast_trigger_lemonade && this.Feast_trigger_mashed_potatoes && this.Feast_trigger_porkchop_stew && this.Feast_trigger_salad && this.Feast_trigger_pumpkin_soup && this.Feast_trigger_porridge && this.Feast_trigger_mushroom_soup && this.Feast_trigger_vegetable_soup && this.Feast_trigger_salmon_soup && this.Feast_trigger_beetroot_soup && !this.rewarded_disc_damnation) {
+      if (this.feast_trigger_sorbet && this.feast_trigger_cereal && this.feast_trigger_chestnut_soup && this.feast_trigger_chicken_soup && this.feast_trigger_beef_stew
+              && this.feast_trigger_cream_mushroom_soup && this.feast_trigger_cream_vegetable_soup && this.feast_trigger_ice_cream
+              && this.feast_trigger_lemonade && this.feast_trigger_mashed_potatoes && this.feast_trigger_porkchop_stew && this.feast_trigger_salad
+              && this.feast_trigger_pumpkin_soup && this.feast_trigger_porridge && this.feast_trigger_mushroom_soup && this.feast_trigger_vegetable_soup
+              && this.feast_trigger_salmon_soup && this.feast_trigger_beetroot_soup && !this.rewarded_disc_damnation) {
          this.triggerAchievement(AchievementExtend.feast);
          this.addExperience(2500);
          this.rewarded_disc_damnation = true;
@@ -933,16 +1176,19 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements ICom
    }
 
    @Unique
+   @Override
    public int getFreezingCooldown() {
       return this.FreezingCooldown;
    }
 
+   @Override
    @Unique
    public void setFreezingCooldown(int iptfreezingCooldown) {
       this.FreezingCooldown = iptfreezingCooldown;
    }
 
    @Unique
+   @Override
    public void addFreezingCooldown(int dummy) {
       if (this.FreezingCooldown + dummy < 0) {
          this.FreezingCooldown = 0;
@@ -952,6 +1198,8 @@ public abstract class EntityPlayerMixin extends EntityLivingBase implements ICom
 
    }
 
+   @Unique
+   @Override
    public float getCurrentBiomeTemperature() {
       BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(this.getBlockPosX(), this.getBlockPosZ());
       return biome.getFloatTemperature();

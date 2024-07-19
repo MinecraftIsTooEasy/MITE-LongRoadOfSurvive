@@ -3,25 +3,32 @@ package net.oilcake.mitelros.mixins.network;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+
+import ink.huix.iinjected.Packet8UpdateHealthKt;
 import net.minecraft.Packet;
 import net.minecraft.Packet8UpdateHealth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({Packet8UpdateHealth.class})
-public abstract class Packet8UpdateHealthMixin extends Packet {
+@Mixin(Packet8UpdateHealth.class)
+public abstract class Packet8UpdateHealthMixin extends Packet implements Packet8UpdateHealthKt {
    public int water;
    public int phytonutrients;
    public int protein;
    public float heal_progress;
 
-   public int setWater(int water) {
-      return this.water = water;
+   @Unique
+   @Override
+   public void setWater(int water) {
+      this.water = water;
    }
 
+   @Unique
+   @Override
    public void setHealProgress(float heal_progress) {
       this.heal_progress = heal_progress;
    }
@@ -48,10 +55,14 @@ public abstract class Packet8UpdateHealthMixin extends Packet {
       par1DataOutput.writeFloat(this.heal_progress);
    }
 
+   @Unique
+   @Override
    public void setPhytonutrients(int phytonutrients) {
       this.phytonutrients = phytonutrients;
    }
 
+   @Unique
+   @Override
    public void setProtein(int protein) {
       this.protein = protein;
    }

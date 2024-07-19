@@ -1,5 +1,6 @@
 package net.oilcake.mitelros.mixins.block.tileentity;
 
+import ink.huix.iinjected.TileEntityFurnaceKt;
 import net.minecraft.Block;
 import net.minecraft.BlockFurnace;
 import net.minecraft.EntityPlayer;
@@ -25,12 +26,13 @@ import net.oilcake.mitelros.item.Materials;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({TileEntityFurnace.class})
-public class TileEntityFurnaceMixin extends TileEntity implements ISidedInventory {
+@Mixin(TileEntityFurnace.class)
+public class TileEntityFurnaceMixin extends TileEntity implements ISidedInventory, TileEntityFurnaceKt {
    @Shadow
    private ItemStack[] furnaceItemStacks = new ItemStack[3];
    @Shadow
@@ -83,7 +85,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements ISidedInventor
                return false;
             } else {
                ItemStack output_item_stack = this.getOutputItemStack();
-               return output_item_stack == null ? true : (!output_item_stack.isItemStackEqualC(var1, true, false, false, true) ? false : (output_item_stack.stackSize < this.getInventoryStackLimit() && output_item_stack.stackSize < output_item_stack.getMaxStackSize() ? true : output_item_stack.stackSize < var1.getMaxStackSize()));
+               return output_item_stack == null || (output_item_stack.isItemStackEqual(var1, true, false, false, true) && (output_item_stack.stackSize < this.getInventoryStackLimit() && output_item_stack.stackSize < output_item_stack.getMaxStackSize() || output_item_stack.stackSize < var1.getMaxStackSize()));
             }
          } else {
             return false;
@@ -91,21 +93,30 @@ public class TileEntityFurnaceMixin extends TileEntity implements ISidedInventor
       }
    }
 
+   @Unique
+   @Override
    public boolean isBlastFurnace() {
       return this.getFurnaceBlock() instanceof BlockBlastFurnace;
    }
 
+   @Unique
+   @Override
    public boolean isSmoker() {
       return this.getFurnaceBlock() instanceof BlockSmoker;
    }
 
+   @Unique
+   @Override
    public boolean canBurnbyItself() {
       return this.getFuelHeatLevel() > 2;
    }
 
+   @Unique
+   @Override
    public void activateFurnace() {
       this.activated = true;
    }
+
 
    private boolean canNormallyWork() {
       return this.activated && this.furnaceItemStacks[1] != null;
@@ -288,7 +299,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements ISidedInventor
    }
 
    @Inject(
-      method = {"readNBT"},
+      method = {"readFromNBT"},
       at = {@At("RETURN")}
    )
    public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
@@ -296,7 +307,7 @@ public class TileEntityFurnaceMixin extends TileEntity implements ISidedInventor
    }
 
    @Inject(
-      method = {"writeNBT"},
+      method = {"writeToNBT"},
       at = {@At("RETURN")}
    )
    public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {

@@ -13,13 +13,11 @@ import net.minecraft.ItemStack;
 import net.minecraft.Material;
 import net.minecraft.Slot;
 import net.minecraft.Translator;
+import net.oilcake.mitelros.iinjected.ItemII;
 import net.oilcake.mitelros.item.Items;
 import net.oilcake.mitelros.item.Materials;
 import net.xiaoyu233.fml.util.ReflectHelper;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,8 +25,8 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({Item.class})
-public class ItemMixin {
+@Mixin(Item.class)
+public class ItemMixin implements ItemII {
    private int water;
    public Item item;
    @Shadow
@@ -120,7 +118,7 @@ public class ItemMixin {
             }
 
             if (this.satiation > 0) {
-               info.add((this.sugar_content > 0 && player.isInsulinResistant() ? player.getInsulinResistanceLevel().getColorC() : EnumChatFormatting.LIGHT_GRAY) + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
+               info.add((this.sugar_content > 0 && player.isInsulinResistant() ? player.getInsulinResistanceLevel().getColor() : EnumChatFormatting.LIGHT_GRAY) + Translator.getFormatted("item.tooltip.satiation", new Object[]{satiation}));
             }
 
             if (nutrition > 0) {
@@ -139,17 +137,17 @@ public class ItemMixin {
 
    }
 
+   @Override
+   @Unique
    public final int getWater() {
       return this.water;
    }
 
+   @Override
+   @Unique
    public Item setWater(int water) {
       this.water = water;
       return this.item;
-   }
-
-   public void setPotionEffectC(String par1Str) {
-      this.setPotionEffect(par1Str);
    }
 
    @Overwrite
@@ -189,44 +187,14 @@ public class ItemMixin {
       return null;
    }
 
-   @Shadow
-   public Material getMaterial(int index) {
-      return null;
-   }
-
-   @Shadow
-   protected Item setPotionEffect(String par1Str) {
-      return this.item;
-   }
-
-   public String getResourceLocationPrefix() {
-      return "";
-   }
-
-   public float getStrVsBlock(Block block, int metadata, ItemStack itemStack, EntityPlayer user) {
-      return 0.0F;
-   }
 
    @Shadow
    public Item setCreativeTab(CreativeTabs table) {
       return null;
    }
 
-   public void setCreativeTable(CreativeTabs table) {
-      this.setCreativeTab(table);
-   }
-
    @Shadow
    public Item setMaxStackSize(int maxStackSize) {
-      return null;
-   }
-
-   public void setResourceLocation(String location) {
-      this.setTextureName(location);
-   }
-
-   @Shadow
-   public Item setTextureName(String location) {
       return null;
    }
 

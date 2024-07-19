@@ -75,7 +75,7 @@ public class DamageMixin {
             int delta = (int)(effective_protection - this.amount);
 
             for(int i = -1; i < delta; ++i) {
-               if (target.getRand().nextFloat() < 0.2F) {
+               if (target.rand.nextFloat() < 0.2F) {
                   return 0.0F;
                }
             }

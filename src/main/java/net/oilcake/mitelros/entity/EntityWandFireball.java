@@ -152,7 +152,7 @@ public class EntityWandFireball extends EntityThrowable {
 
             var3.attackEntityFrom(new Damage(DamageSource.inFire, damage));
 
-            for(int var5 = 0; var5 < 8; ++var5) {
+            for(var5 = 0; var5 < 8; ++var5) {
                this.worldObj.spawnParticle(EnumParticle.flame, this.posX, this.posY, this.posZ, 0.0, 0.0, 0.0);
             }
          } else if (rc.isEntity()) {

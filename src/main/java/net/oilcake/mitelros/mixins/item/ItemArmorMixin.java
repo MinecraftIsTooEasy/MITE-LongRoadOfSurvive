@@ -13,10 +13,7 @@ import net.minecraft.Slot;
 import net.minecraft.Translator;
 import net.oilcake.mitelros.item.Materials;
 import net.oilcake.mitelros.util.StuckTagConfig;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -24,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({ItemArmor.class})
 public abstract class ItemArmorMixin extends Item implements IDamageableItem {
+   @Mutable
    @Shadow
    @Final
    private boolean is_leather;
@@ -39,7 +37,7 @@ public abstract class ItemArmorMixin extends Item implements IDamageableItem {
    )
    public void injectCtor(CallbackInfo callbackInfo) {
       this.is_leather = this.effective_material == Material.leather || this.effective_material == Materials.wolf_fur;
-      this.setCraftingDifficultyAsComponent(this.effective_material.getDurability() * 100.0F * (float)this.getNumComponentsForDurability());
+      this.setCraftingDifficultyAsComponent(this.effective_material.durability * 100.0F * (float)this.getNumComponentsForDurability());
    }
 
    @Inject(

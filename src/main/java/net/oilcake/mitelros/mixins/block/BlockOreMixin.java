@@ -33,7 +33,6 @@ public class BlockOreMixin extends Block {
    public int dropBlockAsEntityItem(BlockBreakInfo info) {
       int metadata_dropped = -1;
       int quantity_dropped = 1;
-      int id_dropped = false;
       boolean HasAbsorb;
       int id_dropped;
       if (info.wasExploded()) {

@@ -1,6 +1,7 @@
 package net.oilcake.mitelros.mixins.entity;
 
 import java.util.Calendar;
+
 import net.minecraft.Block;
 import net.minecraft.DamageSource;
 import net.minecraft.Enchantment;
@@ -24,16 +25,19 @@ import net.minecraft.Minecraft;
 import net.minecraft.NBTTagCompound;
 import net.minecraft.SharedMonsterAttributes;
 import net.minecraft.World;
+import net.oilcake.mitelros.iinjected.EntityArachnidII;
+import net.oilcake.mitelros.iinjected.EntitySkeletonII;
 import net.oilcake.mitelros.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin({EntitySkeleton.class})
-public abstract class EntitySkeletonMixin extends EntityMob implements IRangedAttackMob {
+@Mixin(EntitySkeleton.class)
+public abstract class EntitySkeletonMixin extends EntityMob implements IRangedAttackMob, EntitySkeletonII {
    @Shadow
    private int frenzied_by_bone_lord_countdown;
    int num_arrows;
@@ -43,7 +47,19 @@ public abstract class EntitySkeletonMixin extends EntityMob implements IRangedAt
    private EntityAIAttackOnCollide aiAttackOnCollide;
    @Shadow
    public int forced_skeleton_type;
-   protected boolean Is_Wizard = false;
+   protected boolean isWizard = false;
+
+   @Override
+   @Unique
+   public boolean getIsWizard() {
+      return this.isWizard;
+   }
+
+   @Override
+   @Unique
+   public void setIsWizard(boolean isWizard) {
+      this.isWizard = isWizard;
+   }
 
    public EntitySkeletonMixin(World par1World) {
       super(par1World);
@@ -133,7 +149,7 @@ public abstract class EntitySkeletonMixin extends EntityMob implements IRangedAt
          }
 
          if (this.rand.nextInt(24) == 0) {
-            this.Is_Wizard = true;
+            this.isWizard = true;
             this.setCurrentItemOrArmor(0, (new ItemStack(Items.LavaWand)).randomizeForMob(this, false));
             this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityPlayer.class, 9.0F, 1.0, 1.0));
             this.tasks.addTask(4, this.aiArrowAttack);
@@ -250,7 +266,7 @@ public abstract class EntitySkeletonMixin extends EntityMob implements IRangedAt
       int looting = damage_source.getLootingModifier();
       int num_drops;
       int i;
-      if (this.Is_Wizard) {
+      if (this.isWizard) {
          num_drops = 1 + this.rand.nextInt(2);
          if (!recently_hit_by_player) {
             num_drops = 0;

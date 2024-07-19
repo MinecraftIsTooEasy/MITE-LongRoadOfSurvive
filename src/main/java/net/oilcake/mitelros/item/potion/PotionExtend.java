@@ -5,6 +5,7 @@ import net.minecraft.EntityPlayer;
 import net.minecraft.Potion;
 import net.minecraft.SharedMonsterAttributes;
 import net.oilcake.mitelros.util.Constant;
+import net.xiaoyu233.fml.reload.utils.IdUtil;
 
 public class PotionExtend extends Potion {
    public static final Potion dehydration = (new PotionExtend(getNextPotionID(), true, 4251856)).setIconIndex(3, 2).setPotionName("potion.extend.dehydration");
@@ -29,7 +30,7 @@ public class PotionExtend extends Potion {
    }
 
    public static int getNextPotionID() {
-      return Constant.nextPotionID++;
+      return IdUtil.getNextPotionId();
    }
 
    static {

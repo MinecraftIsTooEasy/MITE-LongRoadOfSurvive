@@ -111,8 +111,8 @@ public class BlockFlowerPotMixin extends Block {
                } else {
                   if (player.onServer()) {
                      if (metadata != 0) {
-                        BlockBreakInfo info = new BlockBreakInfo(world, x, y, z);
-                        this.dropBlockAsEntityItem(info, getPlantForMeta(metadata));
+                        BlockBreakInfo infos = new BlockBreakInfo(world, x, y, z);
+                        this.dropBlockAsEntityItem(infos, getPlantForMeta(metadata));
                         world.playSoundAtBlock(x, y, z, "random.pop", 0.1F, ((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                      }
 

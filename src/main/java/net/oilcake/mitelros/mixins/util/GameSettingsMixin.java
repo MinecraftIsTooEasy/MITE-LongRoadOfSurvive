@@ -79,7 +79,7 @@ public class GameSettingsMixin {
    @Shadow
    public float chatScale = 1.0F;
    @Shadow
-   public float F = 1.0F;
+   public float chatWidth = 1.0F;
    @Shadow
    public float chatHeightUnfocused = 0.44366196F;
    @Shadow
@@ -118,7 +118,7 @@ public class GameSettingsMixin {
 
    @Overwrite
    public float getOptionFloatValue(EnumOptions par1EnumOptions) {
-      return par1EnumOptions == EnumOptions.FOV ? this.fovSetting : (par1EnumOptions == EnumOptions.GAMMA ? this.ReportedGamma : (par1EnumOptions == EnumOptions.MUSIC ? this.musicVolume : (par1EnumOptions == EnumOptions.SOUND ? this.soundVolume : (par1EnumOptions == EnumOptions.SENSITIVITY ? this.mouseSensitivity : (par1EnumOptions == EnumOptions.CHAT_OPACITY ? this.chatOpacity : (par1EnumOptions == EnumOptions.CHAT_HEIGHT_FOCUSED ? this.chatHeightFocused : (par1EnumOptions == EnumOptions.CHAT_HEIGHT_UNFOCUSED ? this.chatHeightUnfocused : (par1EnumOptions == EnumOptions.CHAT_SCALE ? this.chatScale : (par1EnumOptions == EnumOptions.CHAT_WIDTH ? this.F : 0.0F)))))))));
+      return par1EnumOptions == EnumOptions.FOV ? this.fovSetting : (par1EnumOptions == EnumOptions.GAMMA ? this.ReportedGamma : (par1EnumOptions == EnumOptions.MUSIC ? this.musicVolume : (par1EnumOptions == EnumOptions.SOUND ? this.soundVolume : (par1EnumOptions == EnumOptions.SENSITIVITY ? this.mouseSensitivity : (par1EnumOptions == EnumOptions.CHAT_OPACITY ? this.chatOpacity : (par1EnumOptions == EnumOptions.CHAT_HEIGHT_FOCUSED ? this.chatHeightFocused : (par1EnumOptions == EnumOptions.CHAT_HEIGHT_UNFOCUSED ? this.chatHeightUnfocused : (par1EnumOptions == EnumOptions.CHAT_SCALE ? this.chatScale : (par1EnumOptions == EnumOptions.CHAT_WIDTH ? this.chatWidth : 0.0F)))))))));
    }
 
    @Overwrite
@@ -161,7 +161,7 @@ public class GameSettingsMixin {
       }
 
       if (par1EnumOptions == EnumOptions.CHAT_WIDTH) {
-         this.F = par2;
+         this.chatWidth = par2;
          this.mc.ingameGUI.getChatGUI().func_96132_b();
       }
 
@@ -355,7 +355,7 @@ public class GameSettingsMixin {
                }
 
                if (var3[0].equals("chatWidth")) {
-                  this.F = this.parseFloat(var3[1]);
+                  this.chatWidth = this.parseFloat(var3[1]);
                }
 
                for(int var4 = 0; var4 < this.keyBindings.length; ++var4) {
@@ -371,7 +371,6 @@ public class GameSettingsMixin {
          KeyBinding.resetKeyBindingArrayAndHash();
          var1.close();
       } catch (Exception var6) {
-         Exception var6 = var6;
          this.mc.getLogAgent().logWarning("Failed to load options");
          var6.printStackTrace();
       }
@@ -426,7 +425,7 @@ public class GameSettingsMixin {
          var1.println("chatHeightFocused:" + this.chatHeightFocused);
          var1.println("chatHeightUnfocused:" + this.chatHeightUnfocused);
          var1.println("chatScale:" + this.chatScale);
-         var1.println("chatWidth:" + this.F);
+         var1.println("chatWidth:" + this.chatWidth);
 
          for(int var2 = 0; var2 < this.keyBindings.length; ++var2) {
             var1.println("key_" + this.keyBindings[var2].keyDescription + ":" + this.keyBindings[var2].keyCode);
@@ -434,7 +433,6 @@ public class GameSettingsMixin {
 
          var1.close();
       } catch (Exception var3) {
-         Exception var3 = var3;
          this.mc.getLogAgent().logWarning("Failed to save options");
          var3.printStackTrace();
       }

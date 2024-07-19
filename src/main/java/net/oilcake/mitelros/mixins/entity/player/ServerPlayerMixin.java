@@ -95,7 +95,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
    protected int respawn_experience;
 
    @Inject(
-      method = {"readNBT"},
+      method = "readEntityFromNBT",
       at = {@At("RETURN")}
    )
    public void injectReadNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
@@ -103,7 +103,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
    }
 
    @Inject(
-      method = {"writeNBT"},
+      method = {"writeEntityToNBT"},
       at = {@At("RETURN")}
    )
    public void injectWriteNBT(NBTTagCompound par1NBTTagCompound, CallbackInfo callbackInfo) {
@@ -112,7 +112,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
 
    @Inject(
       method = {"onDeath(Lnet/minecraft/DamageSource;)V"},
-      at = {@At("INVOKE")}
+      at = {@At("HEAD")}
    )
    public void onDeath(DamageSource par1DamageSource, CallbackInfo callbackInfo) {
       if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
@@ -123,7 +123,7 @@ public abstract class ServerPlayerMixin extends EntityPlayer implements ICraftin
 
    @Inject(
       method = {"onUpdate()V"},
-      at = {@At("INVOKE")}
+      at = {@At("HEAD")}
    )
    public void onUpdate(CallbackInfo callbackInfo) {
       this.sendPacket((new Packet85SimpleSignal(EnumSignal.malnourished)).setInteger((this.protein <= 800000 ? 1 : 0) | (this.phytonutrients <= 800000 ? 4 : 0) | this.getCurrent_insulin_resistance_lvl() << 3 | this.getInsulinResistance() << 8));

@@ -20,6 +20,7 @@ import net.minecraft.RaycastCollision;
 import net.minecraft.World;
 import net.oilcake.mitelros.item.potion.PotionExtend;
 import net.oilcake.mitelros.util.ExperimentalConfig;
+import net.xiaoyu233.fml.api.item.IItem;
 
 public class ItemKettle extends Item implements IDamageableItem {
    public final int itemUseDuration;
@@ -36,9 +37,9 @@ public class ItemKettle extends Item implements IDamageableItem {
       this.setCreativeTab(CreativeTabs.tabTools);
       this.vessel_material = vessel_material;
       if (this.contains(Material.leather)) {
-         this.setResourceLocation("leather_kettle");
+         ((IItem) this).setItemTextureName("leather_kettle");
       } else if (this.contains(Material.hardened_clay)) {
-         this.setResourceLocation("hardened_clay_jug");
+         ((IItem) this).setItemTextureName("hardened_clay_jug");
       }
 
    }

@@ -194,7 +194,7 @@ public class ItemStackMixin {
          }
 
          SlotCrafting slot_crafting = (SlotCrafting)slot;
-         if (experience_cost == 0 && slot_crafting.getNumCraftingResultsC(par1EntityPlayer) > 1) {
+         if (experience_cost == 0 && slot_crafting.getNumCraftingResults(par1EntityPlayer) > 1) {
             var3.add("");
             Item item = this.getItem();
             if (item.hasQuality()) {
