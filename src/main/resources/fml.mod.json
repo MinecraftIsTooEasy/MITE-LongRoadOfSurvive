@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "itf",
+  "version": "${version}",
+  "name": "LongRoadOfSurvive",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Huix",
+    "Kalsey",
+    "Lee074"
+  ],
+  "contact": {
+    "sources": "https://github.com/MinecraftIsTooEasy/"
+  },
+  "license": "GUN",
+  "icon": "assets/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "preLaunch": [{
+      "adapter": "kotlin",
+      "value": "ink.huix.main.PreLaunch"
+    }],
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "ink.huix.main.IsTooFalse"
+      }
+    ]
+  },
+  "mixins": [
+    "itf.mixins.json"
+  ],
+  "depends": {
+    "fishmodloader": ">=3.3.2"
+  },
+  "suggests": {
+    "another-mod": "*",
+    "fabric-language-kotlin": ">=1.11.0+kotlin.2.0.0"
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/Enchantment": ["net/oilcake/mitelros/iinjected/EnchantmentII"],
+      "net/minecraft/EntityPlayer": ["ink/huix/iinjected/EntityPlayerKt"],
+      "net/minecraft/FoodStats": ["ink/huix/iinjected/FoodStatsKt"],
+      "net/minecraft/InventoryPlayer": ["ink/huix/iinjected/InventoryPlayerKt"],
+      "net/minecraft/World": ["ink/huix/iinjected/WorldKt"],
+      "net/minecraft/EntityArachnid": ["net/oilcake/mitelros/iinjected/EntityArachnidII"]
+    }
+  }
+
+
+}

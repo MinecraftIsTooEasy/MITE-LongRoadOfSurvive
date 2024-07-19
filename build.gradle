@@ -1,0 +1,62 @@
+plugins {
+	id 'fml-loom' version '1.4.5'
+	id "org.jetbrains.kotlin.jvm"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+
+loom {
+	accessWidenerPath = file("src/main/resources/itf.accesswidener")
+	mergedMinecraftJar()
+	setFML(file("FishModLoader-v3.3.2.jar"))
+	mods {
+		"LongRoadOfSurvive" {
+			sourceSet sourceSets.main
+		}
+	}
+
+}
+
+dependencies {
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.fmlMCPMappings()
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// FishModLoader API. And I probably want it anyway.
+	implementation files(loom.getFML().toPath())
+	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_language_kotlin_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fml.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+}
+
+compileKotlin.kotlinOptions.jvmTarget = "17"

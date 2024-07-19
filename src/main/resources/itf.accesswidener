@@ -1,0 +1,54 @@
+accessWidener v2 named
+accessible field net/minecraft/BiomeDecorator flowersPerChunk I
+accessible field net/minecraft/BiomeDecorator grassPerChunk I
+accessible field net/minecraft/BiomeDecorator treesPerChunk I
+accessible method net/minecraft/BiomeGenBase setTemperatureRainfall (FF)Lnet/minecraft/BiomeGenBase;
+accessible method net/minecraft/BiomeGenBase setDisableRain ()Lnet/minecraft/BiomeGenBase;
+accessible method net/minecraft/BiomeGenBase setMinMaxHeight (FF)Lnet/minecraft/BiomeGenBase;
+accessible field net/minecraft/BlockFurnace isActive Z
+accessible method net/minecraft/Block setHardness (F)Lnet/minecraft/Block;
+accessible method net/minecraft/Block setLightValue (F)Lnet/minecraft/Block;
+accessible method net/minecraft/Block setResistance (F)Lnet/minecraft/Block;
+accessible method net/minecraft/Block setTextureName (Ljava/lang/String;)Lnet/minecraft/Block;
+accessible method net/minecraft/Block setStepSound (Lnet/minecraft/StepSound;)Lnet/minecraft/Block;
+
+accessible method net/minecraft/Container addSlotToContainer (Lnet/minecraft/Slot;)Lnet/minecraft/Slot;
+accessible field net/minecraft/ContainerWorkbench x I
+accessible field net/minecraft/ContainerWorkbench y I
+accessible field net/minecraft/ContainerWorkbench z I
+accessible method net/minecraft/CraftingManager addRecipe (Lnet/minecraft/ItemStack;Z[Ljava/lang/Object;)Lnet/minecraft/ShapedRecipes;
+accessible method net/minecraft/CraftingManager addShapelessRecipe (Lnet/minecraft/ItemStack;Z[Ljava/lang/Object;)Lnet/minecraft/ShapelessRecipes;
+
+accessible method net/minecraft/Damage getResponsibleEntity ()Lnet/minecraft/Entity;
+accessible method net/minecraft/DamageSource setFireAspect (Z)Lnet/minecraft/DamageSource;
+
+accessible method net/minecraft/EnumInsulinResistanceLevel getColor ()Lnet/minecraft/EnumChatFormatting;
+accessible field net/minecraft/EntityDamageResult entity_was_destroyed Z
+accessible method net/minecraft/EntityLivingBase tryDamageArmor (Lnet/minecraft/DamageSource;FLnet/minecraft/EntityDamageResult;)V
+accessible field net/minecraft/Entity rand Ljava/util/Random;
+accessible field net/minecraft/EntitySkeleton frenzied_by_bone_lord_countdown I
+
+accessible method net/minecraft/GuiContainer drawCreativeTabHoveringText (Ljava/lang/String;II)V
+
+accessible method net/minecraft/ItemStack isItemStackEqual (Lnet/minecraft/ItemStack;ZZZZ)Z
+accessible field net/minecraft/ItemVessel vessel_material Lnet/minecraft/Material;
+
+accessible method net/minecraft/Potion setIconIndex (II)Lnet/minecraft/Potion;
+
+accessible field net/minecraft/Material durability F
+accessible field net/minecraft/Material name Ljava/lang/String;
+accessible field net/minecraft/Material min_harvest_level I
+accessible method net/minecraft/Material setCanDouseFire ()Lnet/minecraft/Material;
+
+accessible method net/minecraft/SlotCrafting getNumCraftingResults (Lnet/minecraft/EntityPlayer;)I
+
+accessible method net/minecraft/World chunkExistsAndIsNotEmptyFromBlockCoords (II)Z
+
+accessible field net/minecraft/WeightedRandomChestContent min_quantity I
+accessible field net/minecraft/WeightedRandomChestContent max_quantity I
+accessible field net/minecraft/WeightedRandomChestContent theItemId Lnet/minecraft/ItemStack;
+
+extendable class net/minecraft/BlockDoor
+accessible class net/minecraft/ContainerRepairINNER2
+accessible class net/minecraft/ComponentNetherBridgePiece
+accessible class net/minecraft/GuiBeaconButtonPower
